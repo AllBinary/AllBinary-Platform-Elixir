@@ -1,56 +1,87 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2011 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.logic.system.security.licensing
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2011 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.licensing
 
--module('AbeClientInformationData').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule AbeClientInformationData do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> AbeClientInformationData.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'AbeClientInformationData':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :KEY, nil)
+    JR.put(this, :NAME, nil)
+    JR.put(this, :VERSION, nil)
+    JR.put(this, :SPECIALNAME, nil)
+    JR.put(this, :LICENSEID, nil)
+    JR.put(this, :LICENSE_TYPE, nil)
+    JR.put(this, :PREVIOUSLICENSEID, nil)
+    JR.put(this, :OSNAME, nil)
+    JR.put(this, :OSARCH, nil)
+    JR.put(this, :OSVERSION, nil)
+    JR.put(this, :OS, nil)
+    JR.put(this, :HARDWARE, nil)
+    JR.put(this, :LICENSESERVERS, nil)
+    JR.put(this, :NEWLICENSE, nil)
+    JR.put(this, :ISNEW, nil)
+    JR.put(this, :SPECIAL, nil)
+        JR.put(this, :KEY, "KEY")
+        JR.put(this, :NAME, "NAME")
+        JR.put(this, :VERSION, "VERSION")
+        JR.put(this, :SPECIALNAME, "SPECIALNAME")
+        JR.put(this, :LICENSEID, "LICENSEID")
+        JR.put(this, :LICENSE_TYPE, "LICENSETYPE")
+        JR.put(this, :PREVIOUSLICENSEID, "PREVIOUSLICENSEID")
+        JR.put(this, :OSNAME, "OSNAME")
+        JR.put(this, :OSARCH, "OSARCH")
+        JR.put(this, :OSVERSION, "OSVERSION")
+        JR.put(this, :OS, "OS")
+        JR.put(this, :HARDWARE, "HARDWARE")
+        JR.put(this, :LICENSESERVERS, "LICENSESERVERS")
+        JR.put(this, :NEWLICENSE, "NEWLICENSE")
+        JR.put(this, :ISNEW, "ISNEW")
+        JR.put(this, :SPECIAL, "SPECIAL")
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'KEY'}, "KEY"),
-    put({This, 'NAME'}, "NAME"),
-    put({This, 'VERSION'}, "VERSION"),
-    put({This, 'SPECIALNAME'}, "SPECIALNAME"),
-    put({This, 'LICENSEID'}, "LICENSEID"),
-    put({This, 'LICENSE_TYPE'}, "LICENSETYPE"),
-    put({This, 'PREVIOUSLICENSEID'}, "PREVIOUSLICENSEID"),
-    put({This, 'OSNAME'}, "OSNAME"),
-    put({This, 'OSARCH'}, "OSARCH"),
-    put({This, 'OSVERSION'}, "OSVERSION"),
-    put({This, 'OS'}, "OS"),
-    put({This, 'HARDWARE'}, "HARDWARE"),
-    put({This, 'LICENSESERVERS'}, "LICENSESERVERS"),
-    put({This, 'NEWLICENSE'}, "NEWLICENSE"),
-    put({This, 'ISNEW'}, "ISNEW"),
-    put({This, 'SPECIAL'}, "SPECIAL"),
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, AbeClientInformationData.jstatic_instance()})
+    end)
+  end
 
 
-getInstance() ->
-        get({'AbeClientInformationData', instance}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
 

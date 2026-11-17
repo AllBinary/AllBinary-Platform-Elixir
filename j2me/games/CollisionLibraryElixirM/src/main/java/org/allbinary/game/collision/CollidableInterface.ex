@@ -1,41 +1,66 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.collision
-% import org.allbinary.game.layer.CollidableCompositeLayer
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.NamedInterface
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.collision
 
--module('CollidableInterface').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
-
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('NamedInterface', Function, Arguments).
+defmodule CollidableInterface do
+  def jsuper(), do: JObject
 
 
-% throws Exception
-isCollidable(This, OwnerLayer) ->
-    erlang:error({abstract_method, isCollidable}).
+  def jm_isCollidable(this, p_ownerLayer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownerLayer, p_ownerLayer)
+      throw({:jexception, JR.exception("AbstractMethodError", "isCollidable")})
+    end)
+  end
 
-% throws Exception
-isCollision(This, OwnerLayer, CollidableInterfaceCompositeInterface) ->
-    erlang:error({abstract_method, isCollision}).
 
-% throws Exception
-collide(This, OwnerLayer, CollidableInterfaceCompositeInterface) ->
-    erlang:error({abstract_method, collide}).
+  def jm_isCollision(this, p_ownerLayer, p_collidableInterfaceCompositeInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownerLayer, p_ownerLayer)
+      JR.lset(f, :collidableInterfaceCompositeInterface, p_collidableInterfaceCompositeInterface)
+      throw({:jexception, JR.exception("AbstractMethodError", "isCollision")})
+    end)
+  end
 
-getCollisionTypeWith(This, LayerInterface) ->
-    erlang:error({abstract_method, getCollisionTypeWith}).
+
+  def jm_collide(this, p_ownerLayer, p_collidableInterfaceCompositeInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownerLayer, p_ownerLayer)
+      JR.lset(f, :collidableInterfaceCompositeInterface, p_collidableInterfaceCompositeInterface)
+      throw({:jexception, JR.exception("AbstractMethodError", "collide")})
+    end)
+  end
+
+
+  def jm_getCollisionTypeWith(this, p_layerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+      throw({:jexception, JR.exception("AbstractMethodError", "getCollisionTypeWith")})
+    end)
+  end
+end
+
 

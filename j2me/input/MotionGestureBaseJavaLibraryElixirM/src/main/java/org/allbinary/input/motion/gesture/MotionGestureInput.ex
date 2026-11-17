@@ -1,38 +1,47 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion.gesture
-% import org.allbinary.game.input.Input
-% import org.allbinary.game.input.InputFactory
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture
 
--module('MotionGestureInput').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule MotionGestureInput do
+  def jsuper(), do: Input
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Input', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
 
+  def jinit(this, p_id, p_name) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :id, p_id)
+      JR.lset(f, :name, p_name)
+        Input.jinit(this, JR.lget(f, :id), JR.lget(f, :name))
+        MotionGestureInput.jinitfields(this)
+        JR.lset(f, :inputFactory, InputFactory.jm_getInstance())
+        JR.call(JR.lget(f, :inputFactory), :jm_add, [JR.call(this, :jm_getId, []), this])
+    end)
+  end
 
-new(Id, Name) when is_integer(Id), (is_list(Name) orelse Name =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Id, Name),
-    This.
+  def jnew(p_id, p_name) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_id, p_name)
+    this
+  end
+end
 
-'$init'(This, Id, Name) when is_integer(Id), (is_list(Name) orelse Name =:= undefined) ->
-        'Input':'$init'(This, Id, Name),
-        InputFactory = 'InputFactory':getInstance(),
-        (get({InputFactory, '$class'})):add(InputFactory, (get({This, '$class'})):getId(This), This).
 

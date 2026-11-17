@@ -1,107 +1,149 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.logic.string.tokens
-% import org.allbinary.TsUtil
-% import org.allbinary.logic.StdUtil
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.util.ABHashtable
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.logic.string.tokens
 
--module('Tokenizer').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule Tokenizer do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, sep}, undefined),
-    put({This, endSep}, get({'StringUtil':getInstance(), 'EMPTY_STRING'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :sep, nil)
+    JR.put(this, :endSep, nil)
+        
+        JR.put(this, :endSep, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+    nil
+  end
 
 
-new(Sep) when (is_list(Sep) orelse Sep =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Sep),
-    This.
+  def jinit(this, p_sep) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :sep, p_sep)
+      JObject.jinit(this)
+      jinitfields(this)
+        if (JR.call(TsUtil.jm_getInstance(), :jm_compareTo, [JR.lget(f, :sep), JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING)]) == 0) do
+            throw({:jexception, JR.exception("Exception", "Sep provided is not valid")})
+        end
+        JR.put(this, :sep, JR.lget(f, :sep))
+    end)
+  end
 
-'$init'(This, Sep) when (is_list(Sep) orelse Sep =:= undefined) ->
-    init_fields(This),
-        case ((fun(Target_N65837) -> (get({Target_N65837, '$class'})):compareTo(Target_N65837, Sep, get({'StringUtil':getInstance(), 'EMPTY_STRING'})) end)('TsUtil':getInstance()) =:= 0) of
-            true ->
-            erlang:error({'Exception', "Sep provided is not valid"});
-            false -> ok
-        end,
-        put({This, sep}, Sep).
+  def jnew(p_sep) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_sep)
+    this
+  end
 
-setSep(This, Sep) when (is_list(Sep) orelse Sep =:= undefined) ->
-        put({This, sep}, Sep).
 
-setEndSep(This, EndSep) when (is_list(EndSep) orelse EndSep =:= undefined) ->
-        put({This, endSep}, EndSep).
+  def jm_setSep(this, p_sep) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :sep, p_sep)
+        JR.put(this, :sep, JR.lget(f, :sep))
+    end)
+  end
 
-getInsideSep(This, String) when (is_list(String) orelse String =:= undefined) ->
-        TokenList = 'BasicArrayListD':new(),
-        put({local, index}, 0),
-        Size = string:length(String),
-        (fun Loop() -> case (get({local, index}) < Size) of true ->
-            put({local, index}, (get({String, '$class'})):indexOf(String, get({This, sep}), get({local, index}))),
-            case (get({local, index}) =/= (-1)) of
-                true ->
-                End = (get({String, '$class'})):indexOf(String, get({This, endSep}), (get({local, index}) + string:length(get({This, sep})))),
-                case (End =/= (-1)) of
-                    true ->
-                    (get({TokenList, '$class'})):add(TokenList, string:slice(String, (get({local, index}) + string:length(get({This, sep}))), ((End - ((string:length(get({This, endSep})) - 1)))) - ((get({local, index}) + string:length(get({This, sep})))))),
-                    put({local, index}, (End + string:length(get({This, endSep}))));
-                    false ->
-                    ok
-                end;
-                false ->
-                throw('$break')
-            end,
-            Loop();
-        false -> ok end end)(),
-        TokenList.
 
-getTokensFromString(This, String, TokenVector) when (is_list(String) orelse String =:= undefined) ->
-        put({local, index}, 0),
-        put({local, 'end'}, 0),
-        (fun Loop() -> case (get({local, index}) < string:length(String)) of true ->
-            put({local, 'end'}, (get({String, '$class'})):indexOf(String, get({This, sep}), get({local, index}))),
-            case (get({local, 'end'}) =/= (-1)) of
-                true ->
-                (get({TokenVector, '$class'})):add(TokenVector, string:slice(String, get({local, index}), (get({local, 'end'})) - (get({local, index})))),
-                put({local, index}, (get({local, 'end'}) + string:length(get({This, sep}))));
-                false ->
-                (get({TokenVector, '$class'})):add(TokenVector, string:slice(String, get({local, index}), (string:length(String)) - (get({local, index})))),
-                throw('$break')
-            end,
-            Loop();
-        false -> ok end end)(),
-        TokenVector.
+  def jm_setEndSep(this, p_endSep) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :endSep, p_endSep)
+        JR.put(this, :endSep, JR.lget(f, :endSep))
+    end)
+  end
 
-getTokens(This, StringVector) ->
-        TokenHashtable = (fun(Target_N67228) -> (get({Target_N67228, '$class'})):createHashtable(Target_N67228) end)('StdUtil':getInstance()),
-        put({local, string}, get({'StringUtil':getInstance(), 'EMPTY_STRING'})),
-        put({local, 'end'}, 0),
-        Size = (get({StringVector, '$class'})):size(StringVector),
-        lists:foreach(fun(Index) ->
-            put({local, string}, array:get(Index, get({StringVector, objectArray}))),
-            put({local, 'end'}, allbinary_java:index_of(get({local, string}), get({This, sep}))),
-            case (get({local, 'end'}) >= 0) of
-                true ->
-                (get({TokenHashtable, '$class'})):put(TokenHashtable, string:slice(get({local, string}), 0, (get({local, 'end'})) - (0)), string:slice(get({local, string}), (get({local, 'end'}) + 1), (string:length(get({local, string}))) - ((get({local, 'end'}) + 1))));
-                false -> ok
+
+  def jm_getInsideSep(this, p_string) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :string, p_string)
+        JR.lset(f, :tokenList, BasicArrayListD.jnew())
+        JR.lset(f, :index, 0)
+        JR.lset(f, :size, byte_size(JR.lget(f, :string)))
+        JR.jwhile(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn ->
+            JR.lset(f, :index, JR.index_of(JR.lget(f, :string), JR.get(this, :sep)))
+            if (JR.lget(f, :index) != -1) do
+                JR.lset(f, :end, JR.index_of(JR.lget(f, :string), JR.get(this, :endSep)))
+                if (JR.lget(f, :end) != -1) do
+                    JR.call(JR.lget(f, :tokenList), :jm_add, [JR.substring(JR.lget(f, :string), JR.int32(JR.lget(f, :index) + byte_size(JR.get(this, :sep))), JR.int32(JR.lget(f, :end) - (JR.int32(byte_size(JR.get(this, :endSep)) - 1))))])
+                    JR.lset(f, :index, JR.int32(JR.lget(f, :end) + byte_size(JR.get(this, :endSep))))
+                else
+                    nil
+                end
+            else
+                throw(:jbreak)
             end
-        end, lists:seq(0, Size - 1)),
-        TokenHashtable.
+        end)
+        throw({:jreturn, JR.lget(f, :tokenList)})
+    end)
+  end
+
+
+  def jm_getTokensFromString(this, p_string, p_tokenVector) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :string, p_string)
+      JR.lset(f, :tokenVector, p_tokenVector)
+        JR.lset(f, :index, 0)
+        JR.lset(f, :end, 0)
+        JR.jwhile(fn -> (JR.lget(f, :index) < byte_size(JR.lget(f, :string))) end, fn ->
+            JR.lset(f, :end, JR.index_of(JR.lget(f, :string), JR.get(this, :sep)))
+            if (JR.lget(f, :end) != -1) do
+                JR.call(JR.lget(f, :tokenVector), :jm_add, [JR.substring(JR.lget(f, :string), JR.lget(f, :index), JR.lget(f, :end))])
+                JR.lset(f, :index, JR.int32(JR.lget(f, :end) + byte_size(JR.get(this, :sep))))
+            else
+                JR.call(JR.lget(f, :tokenVector), :jm_add, [JR.substring(JR.lget(f, :string), JR.lget(f, :index), byte_size(JR.lget(f, :string)))])
+                throw(:jbreak)
+            end
+        end)
+        throw({:jreturn, JR.lget(f, :tokenVector)})
+    end)
+  end
+
+
+  def jm_getTokens(this, p_stringVector) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :stringVector, p_stringVector)
+        JR.lset(f, :tokenHashtable, JR.call(StdUtil.jm_getInstance(), :jm_createHashtable, []))
+        JR.lset(f, :string, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+        JR.lset(f, :end, 0)
+        JR.lset(f, :size, JR.call(JR.lget(f, :stringVector), :jm_size, []))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :string, JR.aget(JR.get(JR.lget(f, :stringVector), :objectArray), JR.lget(f, :index)))
+            JR.lset(f, :end, JR.index_of(JR.lget(f, :string), JR.get(this, :sep)))
+            if (JR.lget(f, :end) >= 0) do
+                JR.call(JR.lget(f, :tokenHashtable), :jm_put, [JR.substring(JR.lget(f, :string), 0, JR.lget(f, :end)), JR.substring(JR.lget(f, :string), JR.int32(JR.lget(f, :end) + 1), byte_size(JR.lget(f, :string)))])
+            end
+        end)
+        throw({:jreturn, JR.lget(f, :tokenHashtable)})
+    end)
+  end
+end
+
 

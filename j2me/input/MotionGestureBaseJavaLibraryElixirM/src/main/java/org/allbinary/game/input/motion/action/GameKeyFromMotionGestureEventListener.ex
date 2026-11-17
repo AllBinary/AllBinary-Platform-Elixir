@@ -1,74 +1,81 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.input.motion.action
-% import org.allbinary.game.input.CompleteMotionGestureInputEvent
-% import org.allbinary.game.input.CompleteMotionGestureInputEventListener
-% import org.allbinary.game.input.event.DownGameKeyEventHandler
-% import org.allbinary.game.input.event.GameKeyEvent
-% import org.allbinary.game.input.event.UpGameKeyEventHandler
-% import org.allbinary.logic.communication.log.ForcedLogUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.util.event.AllBinaryEventObject
-% import org.allbinary.logic.util.event.EventStrings
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.input.motion.action
 
--module('GameKeyFromMotionGestureEventListener').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule GameKeyFromMotionGestureEventListener do
+  def jsuper(), do: CompleteMotionGestureInputEventListener
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('CompleteMotionGestureInputEventListener', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :previousGameKeyEvent, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :previousGameKeyEvent, GameKeyEvent.jstatic_NONE())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, previousGameKeyEvent}, get({'GameKeyEvent', 'NONE'})),
-    ok.
+  def jinit(this) do
+    CompleteMotionGestureInputEventListener.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    'CompleteMotionGestureInputEventListener':'$init'(This),
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-onEvent(This, EventObject) ->
-        'ForcedLogUtil':log(get({'EventStrings':getInstance(), 'PERFORMANCE_MESSAGE'}), This).
+  def jm_onEvent(this, p_eventObject) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+        ForcedLogUtil.jm_log(JR.get(EventStrings.jm_getInstance(), :PERFORMANCE_MESSAGE), this)
+    end)
+  end
 
-onCompleteMotionGestureInputEvent(This, CompleteMotionGestureInputEvent) ->
-        try
-            GameKeyCompleteMotionGestureInputEvent = CompleteMotionGestureInputEvent,
-            GameKeyEvent = (get({GameKeyCompleteMotionGestureInputEvent, '$class'})):getGameKeyEvent(GameKeyCompleteMotionGestureInputEvent),
-            case (GameKeyEvent =/= get({This, previousGameKeyEvent})) of
-                true ->
-                case (get({This, previousGameKeyEvent}) =/= get({'GameKeyEvent', 'NONE'})) of
-                    true ->
-                    (fun(Target_N66325) -> (get({Target_N66325, '$class'})):fireEvent(Target_N66325, get({This, previousGameKeyEvent})) end)('UpGameKeyEventHandler':getInstance());
-                    false -> ok
-                end,
-                put({This, previousGameKeyEvent}, GameKeyEvent),
-                case ((GameKeyEvent =/= undefined) andalso (GameKeyEvent =/= get({'GameKeyEvent', 'NONE'}))) of
-                    true ->
-                    (fun(Target_N66464) -> (get({Target_N66464, '$class'})):fireEvent(Target_N66464, GameKeyEvent) end)('DownGameKeyEventHandler':getInstance());
-                    false -> ok
-                end;
-                false -> ok
+
+  def jm_onCompleteMotionGestureInputEvent(this, p_completeMotionGestureInputEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :completeMotionGestureInputEvent, p_completeMotionGestureInputEvent)
+        try do
+            JR.lset(f, :gameKeyCompleteMotionGestureInputEvent, JR.lget(f, :completeMotionGestureInputEvent))
+            JR.lset(f, :gameKeyEvent, JR.call(JR.lget(f, :gameKeyCompleteMotionGestureInputEvent), :jm_getGameKeyEvent, []))
+            if (JR.lget(f, :gameKeyEvent) != JR.get(this, :previousGameKeyEvent)) do
+                if (JR.get(this, :previousGameKeyEvent) != GameKeyEvent.jstatic_NONE()) do
+                    JR.call(UpGameKeyEventHandler.jm_getInstance(), :jm_fireEvent, [JR.get(this, :previousGameKeyEvent)])
+                end
+                JR.put(this, :previousGameKeyEvent, JR.lget(f, :gameKeyEvent))
+                if ((JR.lget(f, :gameKeyEvent) != nil) && (JR.lget(f, :gameKeyEvent) != GameKeyEvent.jstatic_NONE())) do
+                    JR.call(DownGameKeyEventHandler.jm_getInstance(), :jm_fireEvent, [JR.lget(f, :gameKeyEvent)])
+                end
             end
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), This, "onCompleteMotionGestureInputEvent", E)
-        end.
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, "onCompleteMotionGestureInputEvent", JR.lget(f, :e)])
+        end
+    end)
+  end
+end
+
 

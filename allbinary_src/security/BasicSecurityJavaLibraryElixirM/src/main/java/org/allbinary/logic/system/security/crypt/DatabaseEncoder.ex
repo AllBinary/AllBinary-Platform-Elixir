@@ -1,78 +1,99 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.system.security.crypt
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.communication.log.PreLogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.logic.string.tokens.Tokenizer
-% import org.allbinary.string.CommonSeps
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.crypt
 
--module('DatabaseEncoder').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule DatabaseEncoder do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-encode(Value) when (is_tuple(Value) orelse Value =:= undefined) ->
-        try
-            Array = Value,
-            StringBuffer = 'StringMaker':new(),
-            lists:foreach(fun(Index) ->
-                (get({StringBuffer, '$class'})):append(StringBuffer, (fun(Target_N65996) -> (get({Target_N65996, '$class'})):toString(Target_N65996) end)(array:get(Index, Array))),
-                case (Index < (array:size(Array) - 1)) of
-                    true ->
-                    (get({StringBuffer, '$class'})):append(StringBuffer, get({'CommonSeps':getInstance(), 'SPACE'}));
-                    false -> ok
+
+  def jm_encode(p_value) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :value, p_value)
+        try do
+            JR.lset(f, :array, JR.lget(f, :value))
+            JR.lset(f, :stringBuffer, StringMaker.jnew())
+            JR.lset(f, :index, 0)
+            JR.jfor(fn -> (JR.lget(f, :index) < JR.alength(JR.lget(f, :array))) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+                JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.aget(JR.lget(f, :array), JR.lget(f, :index)), :jm_toString, [])])
+                if (JR.lget(f, :index) < JR.int32(JR.alength(JR.lget(f, :array)) - 1)) do
+                    JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :SPACE)])
                 end
-            end, lists:seq(0, array:size(Array) - 1)),
-            (get({StringBuffer, '$class'})):toString(StringBuffer)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            'PreLogUtil':putOE(get({CommonStrings, 'EXCEPTION'}), "DatabaseEncoder", "decode", E),
-            get({'StringUtil':getInstance(), 'EMPTY_STRING'})
-        end.
+            end)
+            throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            PreLogUtil.jm_putOE(JR.get(JR.lget(f, :commonStrings), :EXCEPTION), "DatabaseEncoder", "decode", JR.lget(f, :e))
+            throw({:jreturn, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING)})
+        end
+    end)
+  end
 
-decode(Value) when (is_list(Value) orelse Value =:= undefined) ->
-        try
-            Tokenizer = 'Tokenizer':new(get({'CommonSeps':getInstance(), 'SPACE'})),
-            Vector = (get({Tokenizer, '$class'})):getTokensFromString(Tokenizer, Value, 'BasicArrayListD':new()),
-            Size = (get({Vector, '$class'})):size(Vector),
-            Decode = array:new(Size, {default, 0}),
-            put({local, byteOfData}, undefined),
-            lists:foreach(fun(Index) ->
-                put({local, byteOfData}, array:get(Index, get({Vector, objectArray}))),
-                array:set(Index, 'Byte':parseByte(get({local, byteOfData})), Decode)
-            end, lists:seq(0, Size - 1)),
-            Decode
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            'PreLogUtil':putSE(get({CommonStrings, 'EXCEPTION'}), "DatabaseEncoder", "decode", E),
-            get({'NullUtil':getInstance(), 'NULL_BYTE_ARRAY'})
-        end.
+
+  def jm_decode(p_value) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :value, p_value)
+        try do
+            JR.lset(f, :tokenizer, Tokenizer.jnew(JR.get(CommonSeps.jm_getInstance(), :SPACE)))
+            JR.lset(f, :vector, JR.call(JR.lget(f, :tokenizer), :jm_getTokensFromString, [JR.lget(f, :value), BasicArrayListD.jnew()]))
+            JR.lset(f, :size, JR.call(JR.lget(f, :vector), :jm_size, []))
+            JR.lset(f, :decode, JR.anew(JR.lget(f, :size), 0))
+            JR.lset(f, :byteOfData, nil)
+            JR.lset(f, :index, 0)
+            JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+                JR.lset(f, :byteOfData, JR.aget(JR.get(JR.lget(f, :vector), :objectArray), JR.lget(f, :index)))
+                JR.aset(JR.lget(f, :decode), JR.lget(f, :index), J.Byte.jm_parseByte(JR.lget(f, :byteOfData)))
+            end)
+            throw({:jreturn, JR.lget(f, :decode)})
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            PreLogUtil.jm_putSE(JR.get(JR.lget(f, :commonStrings), :EXCEPTION), "DatabaseEncoder", "decode", JR.lget(f, :e))
+            throw({:jreturn, JR.get(NullUtil.jm_getInstance(), :NULL_BYTE_ARRAY)})
+        end
+    end)
+  end
+end
+
 

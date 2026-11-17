@@ -1,29 +1,41 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2022 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.media.audio
-% import javax.microedition.media.MediaException
-% import javax.microedition.media.TimeBase
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
--module('TimeBaseInterface').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
+defmodule TimeBaseInterface do
+  def jsuper(), do: JObject
 
 
-getTimeBase(This) ->
-    erlang:error({abstract_method, getTimeBase}).
+  def jm_getTimeBase(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "getTimeBase")})
+    end)
+  end
 
-% throws MediaException
-setTimeBase(This, TimeBase) ->
-    erlang:error({abstract_method, setTimeBase}).
+
+  def jm_setTimeBase(this, p_timeBase) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :timeBase, p_timeBase)
+      throw({:jexception, JR.exception("AbstractMethodError", "setTimeBase")})
+    end)
+  end
+end
+
 

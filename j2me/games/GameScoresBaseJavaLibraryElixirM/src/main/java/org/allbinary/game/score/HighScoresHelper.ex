@@ -1,74 +1,94 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.score
-% import org.allbinary.util.CircularIndexUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.score
 
--module('HighScoresHelper').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule HighScoresHelper do
+  def jsuper(), do: HighScoresHelperBase
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('HighScoresHelperBase', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :circularIndexUtil, nil)
+    JR.put(this, :lastIndex, 0)
+        JR.put(this, :circularIndexUtil, CircularIndexUtil.jm_createInstanceAt(0, 0))
+        JR.put(this, :lastIndex, -1)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, circularIndexUtil}, 'CircularIndexUtil':createInstanceAt(0, 0)),
-    put({This, lastIndex}, (-1)),
-    ok.
+  def jinit(this) do
+    HighScoresHelperBase.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    'HighScoresHelperBase':'$init'(This),
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-setHighScoresArray(This, HighScoresArrayP) when (is_tuple(HighScoresArrayP) orelse HighScoresArrayP =:= undefined) ->
-        'HighScoresHelperBase':setHighScoresArray(This, HighScoresArrayP),
-        (get({get({This, circularIndexUtil}), '$class'})):setSize(get({This, circularIndexUtil}), array:size(get({This, highScoresArrayP}))).
+  def jm_setHighScoresArray(this, p_highScoresArrayP) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :highScoresArrayP, p_highScoresArrayP)
+        HighScoresHelperBase.jm_setHighScoresArray(this, JR.lget(f, :highScoresArrayP))
+        JR.call(JR.get(this, :circularIndexUtil), :jm_setSize, [JR.alength(JR.get(this, :highScoresArrayP))])
+    end)
+  end
 
-getNextHighScores(This) ->
-        put({local, highScores}, array:get((get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})), get({This, highScoresArrayP}))),
-        put({local, index}, 0),
-        (fun Loop() -> case (((((get({get({local, highScores}), '$class'})):getTotal(get({local, highScores})) < 1) orelse (get({This, lastIndex}) =:= (get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil}))))) andalso (get({local, index}) < array:size(get({This, highScoresArrayP})))) of true ->
-            (get({get({This, circularIndexUtil}), '$class'})):next(get({This, circularIndexUtil})),
-            put({local, highScores}, array:get((get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})), get({This, highScoresArrayP}))),
-            put({local, index}, get({local, index}) + 1),
-            Loop();
-        false -> ok end end)(),
-        put({This, lastIndex}, (get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil}))),
-        get({local, highScores}).
 
-isAnyHighScores(This) ->
-        try
-        case (array:size(get({This, highScoresArrayP})) < 1) of
-            true ->
-            throw({'$return', false});
-            false -> ok
-        end,
-        put({local, anyScores}, false),
-        put({local, highScores}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, highScores}, array:get(Index, get({This, highScoresArrayP}))),
-            case ((get({get({local, highScores}), '$class'})):getTotal(get({local, highScores})) > 0) of
-                true ->
-                put({local, anyScores}, true);
-                false -> ok
+  def jm_getNextHighScores(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :highScores, JR.aget(JR.get(this, :highScoresArrayP), JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, [])))
+        JR.lset(f, :index, 0)
+        JR.jwhile(fn -> ((((JR.call(JR.lget(f, :highScores), :jm_getTotal, []) < 1) || (JR.get(this, :lastIndex) == JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, [])))) && (JR.lget(f, :index) < JR.alength(JR.get(this, :highScoresArrayP)))) end, fn ->
+            JR.call(JR.get(this, :circularIndexUtil), :jm_next, [])
+            JR.lset(f, :highScores, JR.aget(JR.get(this, :highScoresArrayP), JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, [])))
+            JR.lpostinc(f, :index, 1)
+        end)
+        JR.put(this, :lastIndex, JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, []))
+        throw({:jreturn, JR.lget(f, :highScores)})
+    end)
+  end
+
+
+  def jm_isAnyHighScores(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.alength(JR.get(this, :highScoresArrayP)) < 1) do
+            throw({:jreturn, false})
+        end
+        JR.lset(f, :anyScores, false)
+        JR.lset(f, :highScores, nil)
+        JR.lset(f, :index, JR.int32(JR.alength(JR.get(this, :highScoresArrayP)) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.lset(f, :highScores, JR.aget(JR.get(this, :highScoresArrayP), JR.lget(f, :index)))
+            if (JR.call(JR.lget(f, :highScores), :jm_getTotal, []) > 0) do
+                JR.lset(f, :anyScores, true)
             end
-        end, lists:seq((array:size(get({This, highScoresArrayP})) - 1), 0, -1)),
-        get({local, anyScores})
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        end)
+        throw({:jreturn, JR.lget(f, :anyScores)})
+    end)
+  end
+end
+
 

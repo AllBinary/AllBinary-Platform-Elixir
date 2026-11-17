@@ -1,61 +1,86 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.midlet
-% import org.allbinary.canvas.Processor
-% import org.allbinary.logic.system.security.licensing.AbeClientInformationInterface
-% import org.allbinary.logic.system.security.licensing.ClientInformationFactory
-% import org.allbinary.thread.PrimaryThreadPool
-% import org.allbinary.thread.ThreadPool
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.midlet
 
--module('ProgressMidlet').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+#J2MEForJ2ME
+defmodule ProgressMidlet do
+  def jsuper(), do: AllBinaryMidlet
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AllBinaryMidlet', Function, Arguments).
-
-init_fields(This) ->
-    put({This, abeClientInformation}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :abeClientInformation, nil)
+        
+    nil
+  end
 
 
-new(ClientInformationFactory) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, ClientInformationFactory),
-    This.
+  def jinit(this, p_clientInformationFactory) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :clientInformationFactory, p_clientInformationFactory)
+      AllBinaryMidlet.jinit(this)
+      jinitfields(this)
+        JR.call(this, :jm_preInit, [])
+        JR.put(this, :abeClientInformation, JR.call(JR.lget(f, :clientInformationFactory), :jm_getInstance, []))
+    end)
+  end
 
-'$init'(This, ClientInformationFactory) ->
-    'AllBinaryMidlet':'$init'(This),
-    init_fields(This),
-        (get({This, '$class'})):preInit(This),
-        put({This, abeClientInformation}, (get({ClientInformationFactory, '$class'})):getInstance(ClientInformationFactory)).
+  def jnew(p_clientInformationFactory) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_clientInformationFactory)
+    this
+  end
 
-preInit(This) ->
-        ok.
 
-exitProgress(This, IsProgress) when is_boolean(IsProgress) ->
-        Processor = (fun(Target_N65929) -> (get({Target_N65929, '$class'})):getExitInstance(Target_N65929, This) end)('MidletExitProcessorFactory':getInstance()),
-        try
-            PrimaryThreadPool = 'PrimaryThreadPool':getInstance(),
-            Runnable = 'ExitRunnable':new(This, Processor, IsProgress),
-            (get({PrimaryThreadPool, '$class'})):runTask(PrimaryThreadPool, Runnable)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, "exit", E),
-            try
-                (get({Processor, '$class'})):process(Processor)
-            catch _:E2 when E2 =/= '$break', E2 =/= '$continue', (not is_tuple(E2) orelse element(1, E2) =/= '$return') ->
-                (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, "exit", E)
+  def jm_preInit(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_exitProgress(this, p_isProgress) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :isProgress, p_isProgress)
+        JR.lset(f, :processor, JR.call(MidletExitProcessorFactory.jm_getInstance(), :jm_getExitInstance, [this]))
+        try do
+            JR.lset(f, :primaryThreadPool, PrimaryThreadPool.jm_getInstance())
+            JR.lset(f, :runnable, ExitRunnable.jnew(this, JR.lget(f, :processor), JR.lget(f, :isProgress)))
+            JR.call(JR.lget(f, :primaryThreadPool), :jm_runTask, [JR.lget(f, :runnable)])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, "exit", JR.lget(f, :e)])
+            try do
+                JR.call(JR.lget(f, :processor), :jm_process, [])
+            catch
+                {:jexception, jexception} ->
+                    JR.lset(f, :e2, jexception)
+                JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, "exit", JR.lget(f, :e)])
             end
-        end.
+        end
+    end)
+  end
+end
+
 

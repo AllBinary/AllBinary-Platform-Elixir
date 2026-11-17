@@ -1,50 +1,68 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.part.weapon
-% import org.allbinary.game.combat.weapon.WeaponProperties
-% import org.allbinary.game.score.ScoreableInterface
-% import org.allbinary.graphics.RelativeRelationship
-% import org.allbinary.layer.AllBinaryLayer
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.part.weapon
 
--module('BasicWeaponPartCircularPool').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule BasicWeaponPartCircularPool do
+  def jsuper(), do: JObject
+def jstatic_NULL_BASIC_WEAPON_PART_CIRCULAR_POOL(), do: JR.static_get(__MODULE__, :NULL_BASIC_WEAPON_PART_CIRCULAR_POOL, fn -> BasicWeaponPartCircularPool.jnew() end)
+  def jstatic_set_NULL_BASIC_WEAPON_PART_CIRCULAR_POOL(value), do: JR.static_put(__MODULE__, :NULL_BASIC_WEAPON_PART_CIRCULAR_POOL, value)
 
-static_init() ->
-    put({?MODULE, 'NULL_BASIC_WEAPON_PART_CIRCULAR_POOL'}, 'BasicWeaponPartCircularPool':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :basicWeaponPart, nil)
+        JR.put(this, :basicWeaponPart, BasicWeaponPart.jstatic_NULL_BASIC_WEAPON_PART())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, basicWeaponPart}, get({'BasicWeaponPart', 'NULL_BASIC_WEAPON_PART'})),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-% throws Exception
-init(This, BasicWeaponPartFactoryInterface) ->
-        put({This, basicWeaponPart}, (get({BasicWeaponPartFactoryInterface, '$class'})):getInstance(BasicWeaponPartFactoryInterface)).
+  def jm_init(this, p_basicWeaponPartFactoryInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicWeaponPartFactoryInterface, p_basicWeaponPartFactoryInterface)
+        JR.put(this, :basicWeaponPart, JR.call(JR.lget(f, :basicWeaponPartFactoryInterface), :jm_getInstance, []))
+    end)
+  end
 
-% throws Exception
-getInstance(This, SourceLayerInterface, WeaponProperties, ScoreableInterface, RelativeRelationship) ->
-        (get({get({This, basicWeaponPart}), '$class'})):init(get({This, basicWeaponPart}), SourceLayerInterface, WeaponProperties, ScoreableInterface, RelativeRelationship),
-        get({This, basicWeaponPart}).
+
+  def jm_getInstance(this, p_sourceLayerInterface, p_weaponProperties, p_scoreableInterface, p_relativeRelationship) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :sourceLayerInterface, p_sourceLayerInterface)
+      JR.lset(f, :weaponProperties, p_weaponProperties)
+      JR.lset(f, :scoreableInterface, p_scoreableInterface)
+      JR.lset(f, :relativeRelationship, p_relativeRelationship)
+        JR.call(JR.get(this, :basicWeaponPart), :jm_init, [JR.lget(f, :sourceLayerInterface), JR.lget(f, :weaponProperties), JR.lget(f, :scoreableInterface), JR.lget(f, :relativeRelationship)])
+        throw({:jreturn, JR.get(this, :basicWeaponPart)})
+    end)
+  end
+end
+
 

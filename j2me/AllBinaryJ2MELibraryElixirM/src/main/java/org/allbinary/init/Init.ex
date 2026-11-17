@@ -1,38 +1,50 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.init
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.init
 
--module('Init').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements InitInterface
+defmodule Init do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :commonStrings, nil)
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-% throws Exception
-init(This) ->
-        ok.
+  def jm_init(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+end
+
 

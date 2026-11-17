@@ -1,46 +1,67 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation.transition.shake
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation.transition.shake
 
--module('ShakeEventFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule ShakeEventFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> ShakeEventFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'ShakeEventFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :MICRO, nil)
+    JR.put(this, :SMALL, nil)
+    JR.put(this, :MEDIUM, nil)
+    JR.put(this, :LARGE, nil)
+        JR.put(this, :MICRO, ShakeEvent.jnew())
+        JR.put(this, :SMALL, ShakeEvent.jnew())
+        JR.put(this, :MEDIUM, ShakeEvent.jnew())
+        JR.put(this, :LARGE, ShakeEvent.jnew())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'MICRO'}, 'ShakeEvent':new()),
-    put({This, 'SMALL'}, 'ShakeEvent':new()),
-    put({This, 'MEDIUM'}, 'ShakeEvent':new()),
-    put({This, 'LARGE'}, 'ShakeEvent':new()),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'ShakeEventFactory', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, ShakeEventFactory.jstatic_instance()})
+    end)
+  end
 
-init(This) ->
-        ok.
+
+  def jm_init(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+end
+
 

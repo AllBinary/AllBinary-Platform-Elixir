@@ -1,44 +1,65 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.system.loader
-% import org.allbinary.logic.NullUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.system.loader
 
--module('WebappClassLoaderInfo').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule WebappClassLoaderInfo do
+  def jsuper(), do: JObject
+def jstatic_classLoader(), do: JR.static_get(__MODULE__, :classLoader, fn -> JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT) end)
+  def jstatic_set_classLoader(value), do: JR.static_put(__MODULE__, :classLoader, value)
 
-static_init() ->
-    put({?MODULE, classLoader}, get({'NullUtil':getInstance(), 'NULL_OBJECT'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
+
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jm_setLoader(p_classLoader) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :classLoader, p_classLoader)
+        WebappClassLoaderInfo.jstatic_set_classLoader(JR.lget(f, :classLoader))
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
 
-setLoader(ClassLoader) ->
-        put({'WebappClassLoaderInfo', classLoader}, ClassLoader).
+  def jm_getLoader() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, WebappClassLoaderInfo.jstatic_classLoader()})
+    end)
+  end
+end
 
-getLoader() ->
-        get({'WebappClassLoaderInfo', classLoader}).
 

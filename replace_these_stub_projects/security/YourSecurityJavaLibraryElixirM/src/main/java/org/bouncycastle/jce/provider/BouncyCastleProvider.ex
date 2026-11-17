@@ -1,32 +1,47 @@
-% Generated Code Do Not Modify
-% package org.bouncycastle.jce.provider
-% import java.security.Provider
+# Generated Code Do Not Modify
+# package org.bouncycastle.jce.provider
 
--module('BouncyCastleProvider').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule BouncyCastleProvider do
+  def jsuper(), do: Provider
+def jstatic_info(), do: JR.static_get(__MODULE__, :info, fn -> "BouncyCastle Security Provider v1.41" end)
+  def jstatic_set_info(value), do: JR.static_put(__MODULE__, :info, value)
+def jstatic_PROVIDER_NAME(), do: JR.static_get(__MODULE__, :PROVIDER_NAME, fn -> "BC" end)
+  def jstatic_set_PROVIDER_NAME(value), do: JR.static_put(__MODULE__, :PROVIDER_NAME, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Provider', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, info}, "BouncyCastle Security Provider v1.41"),
-    put({?MODULE, 'PROVIDER_NAME'}, "BC"),
-    ok.
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        Provider.jinit(this, BouncyCastleProvider.jstatic_PROVIDER_NAME(), 1.41, BouncyCastleProvider.jstatic_info())
+        BouncyCastleProvider.jinitfields(this)
+    end)
+  end
 
-'$init'(This) ->
-        'Provider':'$init'(This, get({'BouncyCastleProvider', 'PROVIDER_NAME'}), 1.41, get({'BouncyCastleProvider', info})).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-setParameter(This, ParameterName, Parameter) when (is_list(ParameterName) orelse ParameterName =:= undefined) ->
-        ok.
+
+  def jm_setParameter(this, p_parameterName, p_parameter) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :parameterName, p_parameterName)
+      JR.lset(f, :parameter, p_parameter)
+        nil
+    end)
+  end
+end
+
 

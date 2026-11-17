@@ -1,50 +1,90 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.media.image
-% import javax.microedition.lcdui.Image
-% import org.allbinary.image.ImageCache
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.media.image
 
--module('ImageScaleUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule ImageScaleUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> ImageScaleUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'ImageScaleUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, ImageScaleUtil.jstatic_instance()})
+    end)
+  end
 
 
-getInstance() ->
-        get({'ImageScaleUtil', instance}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
 
-% throws Exception
-createImage2(This, ImageCache, OriginalImage, ScaleNominatorX, ScaleDenominatorX, ScaleNominatorY, ScaleDenominatorY, Cached) when is_number(ScaleNominatorX), is_number(ScaleDenominatorX), is_number(ScaleNominatorY), is_number(ScaleDenominatorY), is_boolean(Cached) ->
-        (get({This, '$class'})):createImage3(This, ImageCache, OriginalImage, ScaleNominatorX, ScaleDenominatorX, ScaleNominatorY, ScaleDenominatorY, Cached, true).
+  def jm_createImage2(this, p_imageCache, p_originalImage, p_scaleNominatorX, p_scaleDenominatorX, p_scaleNominatorY, p_scaleDenominatorY, p_cached) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :imageCache, p_imageCache)
+      JR.lset(f, :originalImage, p_originalImage)
+      JR.lset(f, :scaleNominatorX, p_scaleNominatorX)
+      JR.lset(f, :scaleDenominatorX, p_scaleDenominatorX)
+      JR.lset(f, :scaleNominatorY, p_scaleNominatorY)
+      JR.lset(f, :scaleDenominatorY, p_scaleDenominatorY)
+      JR.lset(f, :cached, p_cached)
+        throw({:jreturn, JR.call(this, :jm_createImage3, [JR.lget(f, :imageCache), JR.lget(f, :originalImage), JR.lget(f, :scaleNominatorX), JR.lget(f, :scaleDenominatorX), JR.lget(f, :scaleNominatorY), JR.lget(f, :scaleDenominatorY), JR.lget(f, :cached), true])})
+    end)
+  end
 
-% throws Exception
-createImage3(This, ImageCache, OriginalImage, ScaleNominatorX, ScaleDenominatorX, ScaleNominatorY, ScaleDenominatorY, Cached, Mutable) when is_number(ScaleNominatorX), is_number(ScaleDenominatorX), is_number(ScaleNominatorY), is_number(ScaleDenominatorY), is_boolean(Cached), is_boolean(Mutable) ->
-        OriginalImage.
+
+  def jm_createImage3(this, p_imageCache, p_originalImage, p_scaleNominatorX, p_scaleDenominatorX, p_scaleNominatorY, p_scaleDenominatorY, p_cached, p_mutable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :imageCache, p_imageCache)
+      JR.lset(f, :originalImage, p_originalImage)
+      JR.lset(f, :scaleNominatorX, p_scaleNominatorX)
+      JR.lset(f, :scaleDenominatorX, p_scaleDenominatorX)
+      JR.lset(f, :scaleNominatorY, p_scaleNominatorY)
+      JR.lset(f, :scaleDenominatorY, p_scaleDenominatorY)
+      JR.lset(f, :cached, p_cached)
+      JR.lset(f, :mutable, p_mutable)
+        throw({:jreturn, JR.lget(f, :originalImage)})
+    end)
+  end
+end
+
 

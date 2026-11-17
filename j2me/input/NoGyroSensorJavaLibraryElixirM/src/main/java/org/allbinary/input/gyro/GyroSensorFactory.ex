@@ -1,43 +1,58 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.gyro
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.gyro
 
--module('GyroSensorFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GyroSensorFactory do
+  def jsuper(), do: JObject
+def jstatic_allBinaryGyroSensor(), do: JR.static_get(__MODULE__, :allBinaryGyroSensor, fn -> AllBinaryOrientationSensor.jstatic_NULL_ALLBINARY_ORIENTATION_SENSOR() end)
+  def jstatic_set_allBinaryGyroSensor(value), do: JR.static_put(__MODULE__, :allBinaryGyroSensor, value)
 
-static_init() ->
-    put({?MODULE, allBinaryGyroSensor}, get({'AllBinaryOrientationSensor', 'NULL_ALLBINARY_ORIENTATION_SENSOR'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-% throws Exception
-init() ->
-        put({'GyroSensorFactory', allBinaryGyroSensor}, 'NoGyroSensor':new()).
+  def jm_init() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        GyroSensorFactory.jstatic_set_allBinaryGyroSensor(NoGyroSensor.jnew())
+    end)
+  end
 
-getInstance() ->
-        get({'GyroSensorFactory', allBinaryGyroSensor}).
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, GyroSensorFactory.jstatic_allBinaryGyroSensor()})
+    end)
+  end
+end
+
 

@@ -1,103 +1,128 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer
-% import java.util.Enumeration
-% import org.allbinary.graphics.GPoint
-% import org.allbinary.graphics.PointFactory
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.LayerInterfaceFactory
-% import org.allbinary.layer.LayerInterfaceVisitor
-% import org.allbinary.util.ABHashtable
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.EnumerationUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer
 
--module('LayerPlacer').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule LayerPlacer do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, enumerationUtil}, 'EnumerationUtil':getInstance()),
-    put({This, layerInterfaceVisitor}, undefined),
-    put({This, dimension}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :enumerationUtil, nil)
+    JR.put(this, :layerInterfaceVisitor, nil)
+    JR.put(this, :dimension, nil)
+        JR.put(this, :enumerationUtil, EnumerationUtil.jm_getInstance())
+        
+        
+    nil
+  end
 
 
-new(LayerInterfaceVisitor, Dimension) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, LayerInterfaceVisitor, Dimension),
-    This.
+  def jinit(this, p_layerInterfaceVisitor, p_dimension) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterfaceVisitor, p_layerInterfaceVisitor)
+      JR.lset(f, :dimension, p_dimension)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :layerInterfaceVisitor, JR.lget(f, :layerInterfaceVisitor))
+        JR.put(this, :dimension, JR.lget(f, :dimension))
+    end)
+  end
 
-'$init'(This, LayerInterfaceVisitor, Dimension) ->
-    init_fields(This),
-        put({This, layerInterfaceVisitor}, LayerInterfaceVisitor),
-        put({This, dimension}, Dimension).
+  def jnew(p_layerInterfaceVisitor, p_dimension) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_layerInterfaceVisitor, p_dimension)
+    this
+  end
 
-% throws Exception
-processList(This, List) ->
-        Size = (get({List, '$class'})):size(List),
-        put({local, layerPlacementInterface}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, layerPlacementInterface}, array:get(Index, get({List, objectArray}))),
-            (get({This, '$class'})):process(This, get({local, layerPlacementInterface}))
-        end, lists:seq(0, Size - 1)).
 
-% throws Exception
-process(This, LayerPlacementInterface) ->
-        RelativePoint = (get({This, '$class'})):getPoint(This, LayerPlacementInterface),
-        LayerInterfaceFactory = 'LayerInterfaceFactory':getInstance(),
-        Hashtable = (get({LayerPlacementInterface, '$class'})):getInstance(LayerPlacementInterface),
-        Enumeration = (get({Hashtable, '$class'})):keys(Hashtable),
-        put({local, point}, undefined),
-        put({local, layerHashtable}, undefined),
-        put({local, x}, 0),
-        put({local, y}, 0),
-        put({local, z}, 0),
-        put({local, layerInterface}, undefined),
-        (fun Loop() -> case (get({get({This, enumerationUtil}), '$class'})):hasMoreElements(get({This, enumerationUtil}), Enumeration) of true ->
-            put({local, point}, (get({get({This, enumerationUtil}), '$class'})):nextElement(get({This, enumerationUtil}), Enumeration)),
-            put({local, layerHashtable}, (get({Hashtable, '$class'})):get(Hashtable, get({local, point}))),
-            put({local, x}, ((get({get({local, point}), '$class'})):getX(get({local, point})) + (get({RelativePoint, '$class'})):getX(RelativePoint))),
-            put({local, y}, ((get({get({local, point}), '$class'})):getY(get({local, point})) + (get({RelativePoint, '$class'})):getY(RelativePoint))),
-            put({local, z}, ((get({get({local, point}), '$class'})):getZ(get({local, point})) + (get({RelativePoint, '$class'})):getZ(RelativePoint))),
-            put({local, layerInterface}, (get({LayerInterfaceFactory, '$class'})):getNexInstance(LayerInterfaceFactory, get({local, layerHashtable}), get({local, x}), get({local, y}), get({local, z}))),
-            (get({get({This, layerInterfaceVisitor}), '$class'})):visit(get({This, layerInterfaceVisitor}), get({local, layerInterface})),
-            Loop();
-        false -> ok end end)().
+  def jm_processList(this, p_list) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :list, p_list)
+        JR.lset(f, :size, JR.call(JR.lget(f, :list), :jm_size, []))
+        JR.lset(f, :layerPlacementInterface, nil)
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :layerPlacementInterface, JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index)))
+            JR.call(this, :jm_process, [JR.lget(f, :layerPlacementInterface)])
+        end)
+    end)
+  end
 
-% throws Exception
-getPoint(This, LayerPlacementInterface) ->
-        try
-        PointFactory = 'PointFactory':getInstance(),
-        LayerPlacementType = (get({LayerPlacementInterface, '$class'})):getLayerType(LayerPlacementInterface),
-        case (LayerPlacementType =:= get({'LayerPlacementTypeFactory':getInstance(), 'MAP'})) of
-            true ->
-            put({local, width}, (get({LayerPlacementInterface, '$class'})):getWidth(LayerPlacementInterface)),
-            put({local, height}, (get({LayerPlacementInterface, '$class'})):getHeight(LayerPlacementInterface)),
-            put({local, x}, (((((get({get({This, dimension}), '$class'})):getX(get({This, dimension})) - get({local, width}))) / 2))),
-            put({local, y}, (((((get({get({This, dimension}), '$class'})):getY(get({This, dimension})) - get({local, height}))) / 2))),
-            throw({'$return', (get({PointFactory, '$class'})):createXY(PointFactory, get({local, x}), get({local, y}))});
-            false ->
-            case (LayerPlacementType =:= get({'LayerPlacementTypeFactory':getInstance(), 'UP'})) of
-            true ->
-            put({local, width}, (get({LayerPlacementInterface, '$class'})):getWidth(LayerPlacementInterface)),
-            put({local, height}, (get({LayerPlacementInterface, '$class'})):getHeight(LayerPlacementInterface)),
-            put({local, x}, (((((get({get({This, dimension}), '$class'})):getX(get({This, dimension})) - get({local, width}))) / 2))),
-            put({local, y}, (-get({local, height}))),
-            throw({'$return', (get({PointFactory, '$class'})):createXY(PointFactory, get({local, x}), get({local, y}))});
-            false ->
-            erlang:error({'Exception', "PlacementType Not Recognized"})
+
+  def jm_process(this, p_layerPlacementInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerPlacementInterface, p_layerPlacementInterface)
+        JR.lset(f, :relativePoint, JR.call(this, :jm_getPoint, [JR.lget(f, :layerPlacementInterface)]))
+        JR.lset(f, :layerInterfaceFactory, LayerInterfaceFactory.jm_getInstance())
+        JR.lset(f, :hashtable, JR.call(JR.lget(f, :layerPlacementInterface), :jm_getInstance, []))
+        JR.lset(f, :enumeration, JR.call(JR.lget(f, :hashtable), :jm_keys, []))
+        JR.lset(f, :point, nil)
+        JR.lset(f, :layerHashtable, nil)
+        JR.lset(f, :x, 0)
+        JR.lset(f, :y, 0)
+        JR.lset(f, :z, 0)
+        JR.lset(f, :layerInterface, nil)
+        JR.jwhile(fn -> JR.call(JR.get(this, :enumerationUtil), :jm_hasMoreElements, [JR.lget(f, :enumeration)]) end, fn ->
+            JR.lset(f, :point, JR.call(JR.get(this, :enumerationUtil), :jm_nextElement, [JR.lget(f, :enumeration)]))
+            JR.lset(f, :layerHashtable, JR.call(JR.lget(f, :hashtable), :jm_get, [JR.lget(f, :point)]))
+            JR.lset(f, :x, (JR.call(JR.lget(f, :point), :jm_getX, []) + JR.call(JR.lget(f, :relativePoint), :jm_getX, [])))
+            JR.lset(f, :y, (JR.call(JR.lget(f, :point), :jm_getY, []) + JR.call(JR.lget(f, :relativePoint), :jm_getY, [])))
+            JR.lset(f, :z, (JR.call(JR.lget(f, :point), :jm_getZ, []) + JR.call(JR.lget(f, :relativePoint), :jm_getZ, [])))
+            JR.lset(f, :layerInterface, JR.call(JR.lget(f, :layerInterfaceFactory), :jm_getNexInstance, [JR.lget(f, :layerHashtable), JR.lget(f, :x), JR.lget(f, :y), JR.lget(f, :z)]))
+            JR.call(JR.get(this, :layerInterfaceVisitor), :jm_visit, [JR.lget(f, :layerInterface)])
+        end)
+    end)
+  end
+
+
+  def jm_getPoint(this, p_layerPlacementInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerPlacementInterface, p_layerPlacementInterface)
+        JR.lset(f, :pointFactory, PointFactory.jm_getInstance())
+        JR.lset(f, :layerPlacementType, JR.call(JR.lget(f, :layerPlacementInterface), :jm_getLayerType, []))
+        if (JR.lget(f, :layerPlacementType) == JR.get(LayerPlacementTypeFactory.jm_getInstance(), :MAP)) do
+            JR.lset(f, :width, JR.call(JR.lget(f, :layerPlacementInterface), :jm_getWidth, []))
+            JR.lset(f, :height, JR.call(JR.lget(f, :layerPlacementInterface), :jm_getHeight, []))
+            JR.lset(f, :x, ((((JR.call(JR.get(this, :dimension), :jm_getX, []) - JR.lget(f, :width))) / 2)))
+            JR.lset(f, :y, ((((JR.call(JR.get(this, :dimension), :jm_getY, []) - JR.lget(f, :height))) / 2)))
+            throw({:jreturn, JR.call(JR.lget(f, :pointFactory), :jm_createXY, [JR.lget(f, :x), JR.lget(f, :y)])})
+        else
+            if (JR.lget(f, :layerPlacementType) == JR.get(LayerPlacementTypeFactory.jm_getInstance(), :UP)) do
+            JR.lset(f, :width, JR.call(JR.lget(f, :layerPlacementInterface), :jm_getWidth, []))
+            JR.lset(f, :height, JR.call(JR.lget(f, :layerPlacementInterface), :jm_getHeight, []))
+            JR.lset(f, :x, ((((JR.call(JR.get(this, :dimension), :jm_getX, []) - JR.lget(f, :width))) / 2)))
+            JR.lset(f, :y, -JR.lget(f, :height))
+            throw({:jreturn, JR.call(JR.lget(f, :pointFactory), :jm_createXY, [JR.lget(f, :x), JR.lget(f, :y)])})
+        else
+            throw({:jexception, JR.exception("Exception", "PlacementType Not Recognized")})
         end
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
+end
+
 

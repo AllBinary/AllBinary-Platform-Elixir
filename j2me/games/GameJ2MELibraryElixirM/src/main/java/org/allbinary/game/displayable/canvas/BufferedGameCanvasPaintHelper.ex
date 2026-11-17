@@ -1,66 +1,84 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import javax.microedition.lcdui.Canvas
-% import javax.microedition.lcdui.Graphics
-% import javax.microedition.lcdui.Image
-% import javax.microedition.lcdui.NullCanvas
-% import javax.microedition.lcdui.NullImage
-% import org.allbinary.graphics.Anchor
-% import org.allbinary.graphics.displayable.MyCanvas
-% import org.allbinary.graphics.paint.ProcessPaintable
-% import org.allbinary.util.CircularIndexUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('BufferedGameCanvasPaintHelper').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule BufferedGameCanvasPaintHelper do
+  def jsuper(), do: ProcessPaintable
+def jstatic_MAX_IMAGES(), do: JR.static_get(__MODULE__, :MAX_IMAGES, fn -> 4 end)
+  def jstatic_set_MAX_IMAGES(value), do: JR.static_put(__MODULE__, :MAX_IMAGES, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ProcessPaintable', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'MAX_IMAGES'}, 4),
-    ok.
-
-init_fields(This) ->
-    put({This, gameCanvas}, get({'NullCanvas', 'NULL_CANVAS'})),
-    put({This, offScreenImage}, array:new(get({'BufferedGameCanvasPaintHelper', 'MAX_IMAGES'}), {default, undefined})),
-    put({This, previousImage}, get({'NullImage', 'NULL_IMAGE'})),
-    put({This, circularIndexUtil}, 'CircularIndexUtil':createInstance(get({'BufferedGameCanvasPaintHelper', 'MAX_IMAGES'}))),
-    put({This, drawCircularIndexUtil}, 'CircularIndexUtil':createInstanceAt((get({'BufferedGameCanvasPaintHelper', 'MAX_IMAGES'}) - 1), get({'BufferedGameCanvasPaintHelper', 'MAX_IMAGES'}))),
-    put({This, anchor}, get({'Anchor', 'TOP_LEFT'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :gameCanvas, nil)
+    JR.put(this, :offScreenImage, nil)
+    JR.put(this, :previousImage, nil)
+    JR.put(this, :circularIndexUtil, nil)
+    JR.put(this, :drawCircularIndexUtil, nil)
+    JR.put(this, :anchor, 0)
+        JR.put(this, :gameCanvas, NullCanvas.jstatic_NULL_CANVAS())
+        JR.put(this, :offScreenImage, JR.anew(BufferedGameCanvasPaintHelper.jstatic_MAX_IMAGES(), nil))
+        JR.put(this, :previousImage, NullImage.jstatic_NULL_IMAGE())
+        JR.put(this, :circularIndexUtil, CircularIndexUtil.jm_createInstance(BufferedGameCanvasPaintHelper.jstatic_MAX_IMAGES()))
+        JR.put(this, :drawCircularIndexUtil, CircularIndexUtil.jm_createInstanceAt(JR.int32(BufferedGameCanvasPaintHelper.jstatic_MAX_IMAGES() - 1), BufferedGameCanvasPaintHelper.jstatic_MAX_IMAGES()))
+        JR.put(this, :anchor, Anchor.jstatic_TOP_LEFT())
+    nil
+  end
 
 
-new(GameCanvas) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, GameCanvas),
-    This.
+  def jinit(this, p_gameCanvas) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameCanvas, p_gameCanvas)
+      ProcessPaintable.jinit(this)
+      jinitfields(this)
+        throw({:jexception, JR.exception("Exception", "No Longer Used")})
+    end)
+  end
 
-'$init'(This, GameCanvas) ->
-    'ProcessPaintable':'$init'(This),
-    init_fields(This),
-        erlang:error({'Exception', "No Longer Used"}).
+  def jnew(p_gameCanvas) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_gameCanvas)
+    this
+  end
 
-process(This) ->
-        MyCanvas = (get({This, gameCanvas})),
-        (get({MyCanvas, '$class'})):draw(MyCanvas, (fun(Target_N66370) -> (get({Target_N66370, '$class'})):getGraphics(Target_N66370) end)(array:get((get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})), get({This, offScreenImage})))),
-        (get({get({This, circularIndexUtil}), '$class'})):next(get({This, circularIndexUtil})),
-        (get({get({This, drawCircularIndexUtil}), '$class'})):next(get({This, drawCircularIndexUtil})).
 
-paint(This, Graphics) ->
-        put({This, previousImage}, array:get((get({get({This, drawCircularIndexUtil}), '$class'})):getIndex(get({This, drawCircularIndexUtil})), get({This, offScreenImage}))),
-        (get({Graphics, '$class'})):drawImage(Graphics, get({This, previousImage}), 0, 0, get({This, anchor})).
+  def jm_process(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :myCanvas, (JR.get(this, :gameCanvas)))
+        JR.call(JR.lget(f, :myCanvas), :jm_draw, [JR.call(JR.aget(JR.get(this, :offScreenImage), JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, [])), :jm_getGraphics, [])])
+        JR.call(JR.get(this, :circularIndexUtil), :jm_next, [])
+        JR.call(JR.get(this, :drawCircularIndexUtil), :jm_next, [])
+    end)
+  end
+
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.put(this, :previousImage, JR.aget(JR.get(this, :offScreenImage), JR.call(JR.get(this, :drawCircularIndexUtil), :jm_getIndex, [])))
+        JR.call(JR.lget(f, :graphics), :jm_drawImage, [JR.get(this, :previousImage), 0, 0, JR.get(this, :anchor)])
+    end)
+  end
+end
+
 

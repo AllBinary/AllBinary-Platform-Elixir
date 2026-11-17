@@ -1,44 +1,61 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.font
-% import javax.microedition.lcdui.Font
-% import javax.microedition.lcdui.Graphics
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.font
 
--module('FontDebugFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule FontDebugFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> FontDebugFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'FontDebugFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'FontDebugFactory', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, FontDebugFactory.jstatic_instance()})
+    end)
+  end
 
-setFont(This, Font, Graphics) ->
-        (get({Graphics, '$class'})):setFont(Graphics, Font).
+
+  def jm_setFont(this, p_font, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :font, p_font)
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.lget(f, :graphics), :jm_setFont, [JR.lget(f, :font)])
+    end)
+  end
+end
+
 

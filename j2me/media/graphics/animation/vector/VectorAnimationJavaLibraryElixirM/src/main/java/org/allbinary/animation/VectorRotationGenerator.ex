@@ -1,90 +1,129 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation
-% import org.allbinary.graphics.PointFactory
-% import org.allbinary.graphics.pipeline.BasicGraphicsPipeline
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.math.Angle
-% import org.allbinary.math.AngleFactory
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListS
-% import org.allbinary.vector.VectorInfo
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation
 
--module('VectorRotationGenerator').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule VectorRotationGenerator do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> VectorRotationGenerator.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'VectorRotationGenerator':new()),
-    ok.
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, vectorAnimationUtil}, 'VectorAnimationUtil':getInstance()),
-    put({This, angleFactory}, 'AngleFactory':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :vectorAnimationUtil, nil)
+    JR.put(this, :angleFactory, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :vectorAnimationUtil, VectorAnimationUtil.jm_getInstance())
+        JR.put(this, :angleFactory, AngleFactory.jm_getInstance())
+    nil
+  end
 
 
-getInstance() ->
-        get({'VectorRotationGenerator', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, VectorRotationGenerator.jstatic_instance()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-getInstance(This, VectorRotationInfo) ->
-        (get({This, '$class'})):getInstanceFrames(This, (get({VectorRotationInfo, '$class'})):getWidth(VectorRotationInfo), (get({VectorRotationInfo, '$class'})):getHeight(VectorRotationInfo), (get({VectorRotationInfo, '$class'})):getPoints(VectorRotationInfo), (get({VectorRotationInfo, '$class'})):getTotalFrames(VectorRotationInfo)).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-getInstanceFrames(This, Width, Height, Points, Frames) when is_integer(Width), is_integer(Height), (is_tuple(Points) orelse Points =:= undefined), is_integer(Frames) ->
-        try
-            TotalAngle = get({get({This, angleFactory}), 'TOTAL_ANGLE'}),
-            AngleIncrement = (TotalAngle div Frames),
-            PointsBasicArrayList = 'BasicArrayListS':new((TotalAngle div AngleIncrement)),
-            PointBasicArrayList = 'BasicArrayListS':new(array:size(Points)),
-            PointFactory = 'PointFactory':getInstance(),
-            Size = array:size(Points),
-            lists:foreach(fun(Index) ->
-                (get({PointBasicArrayList, '$class'})):add(PointBasicArrayList, (get({PointFactory, '$class'})):createXY(PointFactory, array:get(0, array:get(Index, Points)), array:get(1, array:get(Index, Points))))
-            end, lists:seq(0, Size - 1)),
-            put({local, index}, 0),
-            (fun Loop() -> case (get({local, index}) < TotalAngle) of true ->
-                (get({PointsBasicArrayList, '$class'})):add(PointsBasicArrayList, (get({This, '$class'})):getListAtAngle(This, Width, Height, PointBasicArrayList, (get({get({This, angleFactory}), '$class'})):getAt(get({This, angleFactory}), get({local, index})))),
-                put({local, index}, (get({local, index}) + AngleIncrement)),
-                Loop();
-            false -> ok end end)(),
-            NewPoints = (get({get({This, vectorAnimationUtil}), '$class'})):toAnimationArrayFromListOfPointListWithPointsPerFrame(get({This, vectorAnimationUtil}), PointsBasicArrayList, (get({PointBasicArrayList, '$class'})):size(PointBasicArrayList)),
-            NewPoints
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), This, get({CommonStrings, 'GET_INSTANCE'}), E),
-            get({'NullUtil':getInstance(), 'NULL_INT_ARRAY_ARRAY_ARRAY'})
-        end.
 
-% throws Exception
-getListAtAngle(This, Width, Height, PointBasicArrayList, Angle) when is_integer(Width), is_integer(Height) ->
-        GraphicsPipe = 'BasicGraphicsPipeline':new(PointBasicArrayList),
-        (get({GraphicsPipe, '$class'})):createMatrix(GraphicsPipe),
-        (get({GraphicsPipe, '$class'})):translate(GraphicsPipe, (-((Width bsr 1))), (-((Height bsr 1)))),
-        (get({GraphicsPipe, '$class'})):rotateToAngle(GraphicsPipe, Angle),
-        (get({GraphicsPipe, '$class'})):translate(GraphicsPipe, ((Width bsr 1)), ((Height bsr 1))),
-        (get({GraphicsPipe, '$class'})):getMatrix(GraphicsPipe).
+  def jm_getInstance(this, p_vectorRotationInfo) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :vectorRotationInfo, p_vectorRotationInfo)
+        throw({:jreturn, JR.call(this, :jm_getInstanceFrames, [JR.call(JR.lget(f, :vectorRotationInfo), :jm_getWidth, []), JR.call(JR.lget(f, :vectorRotationInfo), :jm_getHeight, []), JR.call(JR.lget(f, :vectorRotationInfo), :jm_getPoints, []), JR.call(JR.lget(f, :vectorRotationInfo), :jm_getTotalFrames, [])])})
+    end)
+  end
+
+
+  def jm_getInstanceFrames(this, p_width, p_height, p_points, p_frames) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+      JR.lset(f, :points, p_points)
+      JR.lset(f, :frames, p_frames)
+        try do
+            JR.lset(f, :totalAngle, JR.get(JR.get(this, :angleFactory), :TOTAL_ANGLE))
+            JR.lset(f, :angleIncrement, div(JR.int32(JR.lget(f, :totalAngle)), JR.lget(f, :frames)))
+            JR.lset(f, :pointsBasicArrayList, BasicArrayListS.jnew(div(JR.int32(JR.lget(f, :totalAngle)), JR.lget(f, :angleIncrement))))
+            JR.lset(f, :pointBasicArrayList, BasicArrayListS.jnew(JR.alength(JR.lget(f, :points))))
+            JR.lset(f, :pointFactory, PointFactory.jm_getInstance())
+            JR.lset(f, :size, JR.alength(JR.lget(f, :points)))
+            JR.lset(f, :index, 0)
+            JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+                JR.call(JR.lget(f, :pointBasicArrayList), :jm_add, [JR.call(JR.lget(f, :pointFactory), :jm_createXY, [JR.aget(JR.aget(JR.lget(f, :points), JR.lget(f, :index)), 0), JR.aget(JR.aget(JR.lget(f, :points), JR.lget(f, :index)), 1)])])
+            end)
+            JR.lset(f, :index, 0)
+            JR.jwhile(fn -> (JR.lget(f, :index) < JR.int32(JR.lget(f, :totalAngle))) end, fn ->
+                JR.call(JR.lget(f, :pointsBasicArrayList), :jm_add, [JR.call(this, :jm_getListAtAngle, [JR.lget(f, :width), JR.lget(f, :height), JR.lget(f, :pointBasicArrayList), JR.call(JR.get(this, :angleFactory), :jm_getAt, [JR.lget(f, :index)])])])
+                JR.lset(f, :index, JR.int32(JR.lget(f, :index) + JR.lget(f, :angleIncrement)))
+            end)
+            JR.lset(f, :newPoints, JR.call(JR.get(this, :vectorAnimationUtil), :jm_toAnimationArrayFromListOfPointListWithPointsPerFrame, [JR.lget(f, :pointsBasicArrayList), JR.call(JR.lget(f, :pointBasicArrayList), :jm_size, [])]))
+            throw({:jreturn, JR.lget(f, :newPoints)})
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, JR.get(JR.lget(f, :commonStrings), :GET_INSTANCE), JR.lget(f, :e)])
+            throw({:jreturn, JR.get(NullUtil.jm_getInstance(), :NULL_INT_ARRAY_ARRAY_ARRAY)})
+        end
+    end)
+  end
+
+
+  def jm_getListAtAngle(this, p_width, p_height, p_pointBasicArrayList, p_angle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+      JR.lset(f, :pointBasicArrayList, p_pointBasicArrayList)
+      JR.lset(f, :angle, p_angle)
+        JR.lset(f, :graphicsPipe, BasicGraphicsPipeline.jnew(JR.lget(f, :pointBasicArrayList)))
+        JR.call(JR.lget(f, :graphicsPipe), :jm_createMatrix, [])
+        JR.call(JR.lget(f, :graphicsPipe), :jm_translate, [-(Bitwise.bsr(JR.lget(f, :width), 1)), -(Bitwise.bsr(JR.lget(f, :height), 1))])
+        JR.call(JR.lget(f, :graphicsPipe), :jm_rotateToAngle, [JR.lget(f, :angle)])
+        JR.call(JR.lget(f, :graphicsPipe), :jm_translate, [(Bitwise.bsr(JR.lget(f, :width), 1)), (Bitwise.bsr(JR.lget(f, :height), 1))])
+        throw({:jreturn, JR.call(JR.lget(f, :graphicsPipe), :jm_getMatrix, [])})
+    end)
+  end
+end
+
 

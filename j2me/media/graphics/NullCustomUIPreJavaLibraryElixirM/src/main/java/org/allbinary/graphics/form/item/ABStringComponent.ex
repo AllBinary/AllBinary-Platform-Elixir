@@ -1,36 +1,67 @@
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.form.item
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.color.BasicColorFactory
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item
 
--module('ABStringComponent').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule ABStringComponent do
+  def jsuper(), do: JObject
+def jstatic_NULL_STRING_COMPONENT(), do: JR.static_get(__MODULE__, :NULL_STRING_COMPONENT, fn -> ABStringComponent.jnew(JR.get(BasicColorFactory.jm_getInstance(), :BLACK), JR.get(BasicColorFactory.jm_getInstance(), :WHITE)) end)
+  def jstatic_set_NULL_STRING_COMPONENT(value), do: JR.static_put(__MODULE__, :NULL_STRING_COMPONENT, value)
 
-static_init() ->
-    put({?MODULE, 'NULL_STRING_COMPONENT'}, 'ABStringComponent':new(get({'BasicColorFactory':getInstance(), 'BLACK'}), get({'BasicColorFactory':getInstance(), 'WHITE'}))),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+
+  def jm_getBackgroundBasicColor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(BasicColorFactory.jm_getInstance(), :WHITE)})
+    end)
+  end
 
 
-getBackgroundBasicColor(This) ->
-        get({'BasicColorFactory':getInstance(), 'WHITE'}).
+  def jinit(this, p_backgroundBasicColor, p_foregroundBasicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :backgroundBasicColor, p_backgroundBasicColor)
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-new(BackgroundBasicColor, ForegroundBasicColor) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, BackgroundBasicColor, ForegroundBasicColor),
-    This.
+  def jnew(p_backgroundBasicColor, p_foregroundBasicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_backgroundBasicColor, p_foregroundBasicColor)
+    this
+  end
 
-'$init'(This, BackgroundBasicColor, ForegroundBasicColor) ->
-    init_fields(This),
-        ok.
 
-getForegroundBasicColor(This) ->
-        get({'BasicColorFactory':getInstance(), 'WHITE'}).
+  def jm_getForegroundBasicColor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(BasicColorFactory.jm_getInstance(), :WHITE)})
+    end)
+  end
 
-setForegroundBasicColor(This, ForegroundBasicColor) ->
-        ok.
+
+  def jm_setForegroundBasicColor(this, p_foregroundBasicColor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+        nil
+    end)
+  end
+end
+
 

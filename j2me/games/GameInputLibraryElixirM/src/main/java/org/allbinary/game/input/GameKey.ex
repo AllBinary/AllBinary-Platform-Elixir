@@ -1,44 +1,57 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.input
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.input
 
--module('GameKey').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GameKey do
+  def jsuper(), do: Input
+def jstatic_NULL_GAME_KEY(), do: JR.static_get(__MODULE__, :NULL_GAME_KEY, fn -> GameKey.jnew(-1, JR.get(StringUtil.jm_getInstance(), :NULL_STRING)) end)
+  def jstatic_set_NULL_GAME_KEY(value), do: JR.static_put(__MODULE__, :NULL_GAME_KEY, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Input', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'NULL_GAME_KEY'}, 'GameKey':new((-1), get({'StringUtil':getInstance(), 'NULL_STRING'}))),
-    ok.
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new(Key, Name) when is_integer(Key), (is_list(Name) orelse Name =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Key, Name),
-    This.
+  def jinit(this, p_key, p_name) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :key, p_key)
+      JR.lset(f, :name, p_name)
+        Input.jinit(this, JR.lget(f, :key), JR.lget(f, :name))
+        GameKey.jinitfields(this)
+    end)
+  end
 
-'$init'(This, Key, Name) when is_integer(Key), (is_list(Name) orelse Name =:= undefined) ->
-        'Input':'$init'(This, Key, Name).
+  def jnew(p_key, p_name) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_key, p_name)
+    this
+  end
 
-toString(This) ->
-        (fun(Target_N65841) -> (get({Target_N65841, '$class'})):toString(Target_N65841) end)((fun(Target_N65848) -> (get({Target_N65848, '$class'})):append(Target_N65848, 'Input':toString(This)) end)((fun(Target_N65855) -> (get({Target_N65855, '$class'})):append(Target_N65855, "GameKey ") end)('StringMaker':new()))).
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["GameKey "]), :jm_append, [Input.jm_toString(this)]), :jm_toString, [])})
+    end)
+  end
+end
+
 

@@ -1,76 +1,117 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.android.input.motion
-% import org.allbinary.game.layer.special.CollidableDestroyableDamageableLayer
-% import org.allbinary.time.TimeDelayHelper
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.android.input.motion
 
--module('AnalogControllerHelper').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule AnalogControllerHelper do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, reduceTimeFactor}, 0),
-    put({This, 'SCALE_VALUE'}, get({'AnalogControllerConfigurationFactory':getInstance(), 'SCALE_VALUE'})),
-    put({This, rightTimeElapsedHelper}, 'TimeDelayHelper':new(0)),
-    put({This, leftTimeElapsedHelper}, 'TimeDelayHelper':new(0)),
-    put({This, downTimeElapsedHelper}, 'TimeDelayHelper':new(0)),
-    put({This, upTimeElapsedHelper}, 'TimeDelayHelper':new(0)),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :reduceTimeFactor, 0)
+    JR.put(this, :SCALE_VALUE, 0)
+    JR.put(this, :rightTimeElapsedHelper, nil)
+    JR.put(this, :leftTimeElapsedHelper, nil)
+    JR.put(this, :downTimeElapsedHelper, nil)
+    JR.put(this, :upTimeElapsedHelper, nil)
+        
+        JR.put(this, :SCALE_VALUE, JR.get(AnalogControllerConfigurationFactory.jm_getInstance(), :SCALE_VALUE))
+        JR.put(this, :rightTimeElapsedHelper, TimeDelayHelper.jnew(0))
+        JR.put(this, :leftTimeElapsedHelper, TimeDelayHelper.jnew(0))
+        JR.put(this, :downTimeElapsedHelper, TimeDelayHelper.jnew(0))
+        JR.put(this, :upTimeElapsedHelper, TimeDelayHelper.jnew(0))
+    nil
+  end
 
 
-new(ReduceTimeFactor) when is_integer(ReduceTimeFactor) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, ReduceTimeFactor),
-    This.
+  def jinit(this, p_reduceTimeFactor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :reduceTimeFactor, p_reduceTimeFactor)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :reduceTimeFactor, JR.lget(f, :reduceTimeFactor))
+    end)
+  end
 
-'$init'(This, ReduceTimeFactor) when is_integer(ReduceTimeFactor) ->
-    init_fields(This),
-        put({This, reduceTimeFactor}, ReduceTimeFactor).
+  def jnew(p_reduceTimeFactor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_reduceTimeFactor)
+    this
+  end
 
-% throws Exception
-right(This, CollidableDestroyableDamageableLayer, XAnalogValue) when is_integer(XAnalogValue) ->
-        put({get({This, rightTimeElapsedHelper}), delay}, ((((get({This, 'SCALE_VALUE'}) - XAnalogValue)) bsr get({This, reduceTimeFactor})))),
-        case (get({get({This, rightTimeElapsedHelper}), '$class'})):isTimeTNT(get({This, rightTimeElapsedHelper})) of
-            true ->
-            (get({CollidableDestroyableDamageableLayer, '$class'})):right(CollidableDestroyableDamageableLayer);
-            false -> ok
-        end.
 
-% throws Exception
-left(This, CollidableDestroyableDamageableLayer, XAnalogValue) when is_integer(XAnalogValue) ->
-        put({get({This, leftTimeElapsedHelper}), delay}, ((((get({This, 'SCALE_VALUE'}) + XAnalogValue)) bsr get({This, reduceTimeFactor})))),
-        case (get({get({This, leftTimeElapsedHelper}), '$class'})):isTimeTNT(get({This, leftTimeElapsedHelper})) of
-            true ->
-            (get({CollidableDestroyableDamageableLayer, '$class'})):left(CollidableDestroyableDamageableLayer);
-            false -> ok
-        end.
+  def jm_right(this, p_collidableDestroyableDamageableLayer, p_xAnalogValue) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :collidableDestroyableDamageableLayer, p_collidableDestroyableDamageableLayer)
+      JR.lset(f, :xAnalogValue, p_xAnalogValue)
+        JR.put(JR.get(this, :rightTimeElapsedHelper), :delay, (Bitwise.bsr((JR.int32(JR.get(this, :SCALE_VALUE) - JR.lget(f, :xAnalogValue))), JR.get(this, :reduceTimeFactor))))
+        if JR.call(JR.get(this, :rightTimeElapsedHelper), :jm_isTimeTNT, []) do
+            JR.call(JR.lget(f, :collidableDestroyableDamageableLayer), :jm_right, [])
+        end
+    end)
+  end
 
-% throws Exception
-up(This, CollidableDestroyableDamageableLayer, XAnalogValue) when is_integer(XAnalogValue) ->
-        put({get({This, upTimeElapsedHelper}), delay}, ((((get({This, 'SCALE_VALUE'}) - XAnalogValue)) bsr get({This, reduceTimeFactor})))),
-        case (get({get({This, upTimeElapsedHelper}), '$class'})):isTimeTNT(get({This, upTimeElapsedHelper})) of
-            true ->
-            (get({CollidableDestroyableDamageableLayer, '$class'})):up(CollidableDestroyableDamageableLayer);
-            false -> ok
-        end.
 
-% throws Exception
-down(This, CollidableDestroyableDamageableLayer, XAnalogValue) when is_integer(XAnalogValue) ->
-        put({get({This, downTimeElapsedHelper}), delay}, ((((get({This, 'SCALE_VALUE'}) + XAnalogValue)) bsr get({This, reduceTimeFactor})))),
-        case (get({get({This, downTimeElapsedHelper}), '$class'})):isTimeTNT(get({This, downTimeElapsedHelper})) of
-            true ->
-            (get({CollidableDestroyableDamageableLayer, '$class'})):down(CollidableDestroyableDamageableLayer);
-            false -> ok
-        end.
+  def jm_left(this, p_collidableDestroyableDamageableLayer, p_xAnalogValue) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :collidableDestroyableDamageableLayer, p_collidableDestroyableDamageableLayer)
+      JR.lset(f, :xAnalogValue, p_xAnalogValue)
+        JR.put(JR.get(this, :leftTimeElapsedHelper), :delay, (Bitwise.bsr((JR.int32(JR.get(this, :SCALE_VALUE) + JR.lget(f, :xAnalogValue))), JR.get(this, :reduceTimeFactor))))
+        if JR.call(JR.get(this, :leftTimeElapsedHelper), :jm_isTimeTNT, []) do
+            JR.call(JR.lget(f, :collidableDestroyableDamageableLayer), :jm_left, [])
+        end
+    end)
+  end
+
+
+  def jm_up(this, p_collidableDestroyableDamageableLayer, p_xAnalogValue) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :collidableDestroyableDamageableLayer, p_collidableDestroyableDamageableLayer)
+      JR.lset(f, :xAnalogValue, p_xAnalogValue)
+        JR.put(JR.get(this, :upTimeElapsedHelper), :delay, (Bitwise.bsr((JR.int32(JR.get(this, :SCALE_VALUE) - JR.lget(f, :xAnalogValue))), JR.get(this, :reduceTimeFactor))))
+        if JR.call(JR.get(this, :upTimeElapsedHelper), :jm_isTimeTNT, []) do
+            JR.call(JR.lget(f, :collidableDestroyableDamageableLayer), :jm_up, [])
+        end
+    end)
+  end
+
+
+  def jm_down(this, p_collidableDestroyableDamageableLayer, p_xAnalogValue) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :collidableDestroyableDamageableLayer, p_collidableDestroyableDamageableLayer)
+      JR.lset(f, :xAnalogValue, p_xAnalogValue)
+        JR.put(JR.get(this, :downTimeElapsedHelper), :delay, (Bitwise.bsr((JR.int32(JR.get(this, :SCALE_VALUE) + JR.lget(f, :xAnalogValue))), JR.get(this, :reduceTimeFactor))))
+        if JR.call(JR.get(this, :downTimeElapsedHelper), :jm_isTimeTNT, []) do
+            JR.call(JR.lget(f, :collidableDestroyableDamageableLayer), :jm_down, [])
+        end
+    end)
+  end
+end
+
 

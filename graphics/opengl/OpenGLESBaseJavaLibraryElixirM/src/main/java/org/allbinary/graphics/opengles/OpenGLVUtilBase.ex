@@ -1,41 +1,80 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2025 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.opengles
-% import javax.microedition.khronos.opengles.GL10
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2025 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles
 
--module('OpenGLVUtilBase').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule OpenGLVUtilBase do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-glTexEnvix(This, Gl, Target, Pname, Param) when is_integer(Target), is_integer(Pname), is_integer(Param) ->
-        ok.
+  def jm_glTexEnvix(this, p_gl, p_target, p_pname, p_param) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+      JR.lset(f, :target, p_target)
+      JR.lset(f, :pname, p_pname)
+      JR.lset(f, :param, p_param)
+        nil
+    end)
+  end
 
-glTexParameterix(This, Gl, Target, Pname, Param) when is_integer(Target), is_integer(Pname), is_integer(Param) ->
-        ok.
 
-glGenerateMipmap(This, Gl, TextureId, Target, GenerateMipMap) when is_integer(TextureId), is_integer(Target), is_boolean(GenerateMipMap) ->
-        ok.
+  def jm_glTexParameterix(this, p_gl, p_target, p_pname, p_param) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+      JR.lset(f, :target, p_target)
+      JR.lset(f, :pname, p_pname)
+      JR.lset(f, :param, p_param)
+        nil
+    end)
+  end
+
+
+  def jm_glGenerateMipmap(this, p_gl, p_textureId, p_target, p_generateMipMap) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+      JR.lset(f, :textureId, p_textureId)
+      JR.lset(f, :target, p_target)
+      JR.lset(f, :generateMipMap, p_generateMipMap)
+        nil
+    end)
+  end
+end
+
 

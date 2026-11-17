@@ -1,62 +1,87 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.ai.scroller
-% import javax.microedition.lcdui.Canvas
-% import org.allbinary.game.input.GameInput
-% import org.allbinary.game.rand.MyRandomFactory
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.AllBinaryLayerManager
-% import org.allbinary.util.ABHashtable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai.scroller
 
--module('RandomPatrolAI').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule RandomPatrolAI do
+  def jsuper(), do: BasePatrolAI
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasePatrolAI', Function, Arguments).
-
-init_fields(This) ->
-    put({This, changedDirection}, true),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :changedDirection, false)
+        JR.put(this, :changedDirection, true)
+    nil
+  end
 
 
-new(Hashtable, OwnerLayerInterface, GameInput) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Hashtable, OwnerLayerInterface, GameInput),
-    This.
+  def jinit(this, p_hashtable, p_ownerLayerInterface, p_gameInput) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :hashtable, p_hashtable)
+      JR.lset(f, :ownerLayerInterface, p_ownerLayerInterface)
+      JR.lset(f, :gameInput, p_gameInput)
+        BasePatrolAI.jinit(this, JR.lget(f, :hashtable), JR.lget(f, :ownerLayerInterface), JR.lget(f, :gameInput))
+        RandomPatrolAI.jinitfields(this)
+        JR.call(this, :jm_updateRandomDistance, [])
+    end)
+  end
 
-'$init'(This, Hashtable, OwnerLayerInterface, GameInput) ->
-        'BasePatrolAI':'$init'(This, Hashtable, OwnerLayerInterface, GameInput),
-        init_fields(This),
-        (get({This, '$class'})):updateRandomDistance(This).
+  def jnew(p_hashtable, p_ownerLayerInterface, p_gameInput) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_hashtable, p_ownerLayerInterface, p_gameInput)
+    this
+  end
 
-updateRandomDistance(This) ->
-        put({This, currentDistance}, (fun(Target_N65994) -> (get({Target_N65994, '$class'})):getAbsoluteNextInt(Target_N65994, (get({get({This, maxDistance}), '$class'})):intValue(get({This, maxDistance}))) end)('MyRandomFactory':getInstance())).
 
-% throws Exception
-processAI(This, AllBinaryLayerManager) ->
-        'BasePatrolAI':update(This),
-        'BasePatrolAI':processKeyAI(This, get({This, keyDirection})),
-        case get({This, changedDirection}) of
-            true ->
-            'BasePatrolAI':processKeyAI(This, get({'Canvas', 'KEY_NUM1'})),
-            (get({This, '$class'})):updateRandomDistance(This),
-            put({This, changedDirection}, false);
-            false -> ok
-        end.
+  def jm_updateRandomDistance(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.put(this, :currentDistance, JR.call(MyRandomFactory.jm_getInstance(), :jm_getAbsoluteNextInt, [JR.call(JR.get(this, :maxDistance), :jm_intValue, [])]))
+    end)
+  end
 
-nextDirection(This) ->
-        'BasePatrolAI':nextDirection(This),
-        put({This, changedDirection}, true).
+
+  def jm_processAI(this, p_allBinaryLayerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerManager, p_allBinaryLayerManager)
+        BasePatrolAI.jm_update(this)
+        BasePatrolAI.jm_processKeyAI(this, JR.get(this, :keyDirection))
+        if JR.get(this, :changedDirection) do
+            BasePatrolAI.jm_processKeyAI(this, Canvas.jstatic_KEY_NUM1())
+            JR.call(this, :jm_updateRandomDistance, [])
+            JR.put(this, :changedDirection, false)
+        end
+    end)
+  end
+
+
+  def jm_nextDirection(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        BasePatrolAI.jm_nextDirection(this)
+        JR.put(this, :changedDirection, true)
+    end)
+  end
+end
+
 

@@ -1,62 +1,109 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.business.init
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.business.init
 
--module('LicenseInitInfoUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule LicenseInitInfoUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> LicenseInitInfoUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'LicenseInitInfoUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :INITFILENAME, nil)
+    JR.put(this, :ABOUT, nil)
+    JR.put(this, :PRIVACY_POLICY, nil)
+    JR.put(this, :OFFICIAL_ALLBINARY_SERVICES_SERVER, nil)
+        JR.put(this, :INITFILENAME, "licenseinitdata.dat")
+        JR.put(this, :ABOUT, "about")
+        JR.put(this, :PRIVACY_POLICY, "privacy_policy")
+        JR.put(this, :OFFICIAL_ALLBINARY_SERVICES_SERVER, "https://services.allbinary.com/LicServ/serverssl.php")
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'INITFILENAME'}, "licenseinitdata.dat"),
-    put({This, 'ABOUT'}, "about"),
-    put({This, 'PRIVACY_POLICY'}, "privacy_policy"),
-    put({This, 'OFFICIAL_ALLBINARY_SERVICES_SERVER'}, "https://services.allbinary.com/LicServ/serverssl.php"),
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, LicenseInitInfoUtil.jstatic_instance()})
+    end)
+  end
 
 
-getInstance() ->
-        get({'LicenseInitInfoUtil', instance}).
+  def jm_setFilePath(this, p_filePath) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :filePath, p_filePath)
+        nil
+    end)
+  end
 
-setFilePath(This, FilePath) when (is_list(FilePath) orelse FilePath =:= undefined) ->
-        ok.
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-% throws Exception
-write(This, InitData) ->
-        ok.
 
-% throws Exception
-read(This) ->
-        (get({This, '$class'})):readAgain(This, 0).
+  def jm_write(this, p_initData) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :initData, p_initData)
+        nil
+    end)
+  end
 
-% throws Exception
-readAgain(This, InitializeCounter) when is_integer(InitializeCounter) ->
-        LicenseInitInfo = 'LicenseInitInfo':new(),
-        (get({LicenseInitInfo, '$class'})):clearServers(LicenseInitInfo),
-        (get({LicenseInitInfo, '$class'})):addServer(LicenseInitInfo, get({This, 'OFFICIAL_ALLBINARY_SERVICES_SERVER'})),
-        LicenseInitInfo.
+
+  def jm_read(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(this, :jm_readAgain, [0])})
+    end)
+  end
+
+
+  def jm_readAgain(this, p_initializeCounter) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :initializeCounter, p_initializeCounter)
+        JR.lset(f, :licenseInitInfo, LicenseInitInfo.jnew())
+        JR.call(JR.lget(f, :licenseInitInfo), :jm_clearServers, [])
+        JR.call(JR.lget(f, :licenseInitInfo), :jm_addServer, [JR.get(this, :OFFICIAL_ALLBINARY_SERVICES_SERVER)])
+        throw({:jreturn, JR.lget(f, :licenseInitInfo)})
+    end)
+  end
+end
+
 

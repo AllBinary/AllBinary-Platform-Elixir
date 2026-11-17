@@ -1,102 +1,107 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2022 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.image.sprite
-% import javax.microedition.lcdui.Image
-% import javax.microedition.lcdui.game.Sprite
-% import org.allbinary.game.layer.SpriteFactory
-% import org.allbinary.graphics.opengles.OpenGLUtil
-% import org.allbinary.image.ImageCache
-% import org.allbinary.image.ImageCacheFactory
-% import org.allbinary.image.opengles.OpenGLESImageExclusionUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.math.J2SEMath
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.media.image.ImageScaleUtil
-% import org.allbinary.string.CommonLabels
-% import org.allbinary.string.CommonStrings
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.image.sprite
 
--module('AnimationFactorySpriteScaleUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule AnimationFactorySpriteScaleUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> AnimationFactorySpriteScaleUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'AnimationFactorySpriteScaleUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :imageCache, nil)
+    JR.put(this, :imageScaleUtil, nil)
+    JR.put(this, :openGLUtil, nil)
+    JR.put(this, :j2seMath, nil)
+    JR.put(this, :openGLESImageExclusionUtil, nil)
+        JR.put(this, :imageCache, ImageCacheFactory.jm_getInstance())
+        JR.put(this, :imageScaleUtil, ImageScaleUtil.jm_getInstance())
+        JR.put(this, :openGLUtil, OpenGLUtil.jm_getInstance())
+        JR.put(this, :j2seMath, J2SEMath.jm_getInstance())
+        JR.put(this, :openGLESImageExclusionUtil, OpenGLESImageExclusionUtil.jm_getInstance())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, imageCache}, 'ImageCacheFactory':getInstance()),
-    put({This, imageScaleUtil}, 'ImageScaleUtil':getInstance()),
-    put({This, openGLUtil}, 'OpenGLUtil':getInstance()),
-    put({This, j2seMath}, 'J2SEMath':getInstance()),
-    put({This, openGLESImageExclusionUtil}, 'OpenGLESImageExclusionUtil':getInstance()),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'AnimationFactorySpriteScaleUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, AnimationFactorySpriteScaleUtil.jstatic_instance()})
+    end)
+  end
 
-% throws Exception
-createImage(This, Image, Width, Height, ScaleWidth, ScaleHeight) when is_integer(Width), is_integer(Height), is_integer(ScaleWidth), is_integer(ScaleHeight) ->
-        SpriteFactory = 'SpriteFactory':getInstance(),
-        put({local, sprite}, undefined),
-        put({local, scaledImage}, undefined),
-        case ((ScaleWidth =/= 0) andalso (ScaleHeight =/= 0)) of
-            true ->
-            put({local, scaleX}, ((float(ScaleWidth)) / (float(Width)))),
-            put({local, scaleY}, ((float(ScaleHeight)) / (float(Height)))),
-            case ((((get({local, scaleX}) == 1.0) andalso (get({local, scaleY}) == 1.0))) orelse (((get({local, scaleX}) == 0.0) orelse (get({local, scaleY}) == 0.0)))) of
-                true ->
-                put({local, scaledImage}, (get({get({This, openGLUtil}), '$class'})):addImage(get({This, openGLUtil}), Image)),
-                put({local, sprite}, (get({SpriteFactory, '$class'})):createSprite(SpriteFactory, get({local, scaledImage}), Width, Height));
-                false ->
-                case (get({get({This, openGLESImageExclusionUtil}), '$class'})):isCustomScaling(get({This, openGLESImageExclusionUtil}), Image) of
-                    true ->
-                    Width2 = (get({get({This, j2seMath}), '$class'})):round(get({This, j2seMath}), (float((ScaleWidth)) - 0.5)),
-                    Height2 = (get({get({This, j2seMath}), '$class'})):round(get({This, j2seMath}), (float((ScaleHeight)) - 0.5)),
-                    MultiplesOf16Width = (Width2 div 16),
-                    By16Width = (MultiplesOf16Width * 16),
-                    put({local, scaleX}, ((float(By16Width)) / float(Width))),
-                    MultiplesOf16Height = (Height2 div 16),
-                    By16Height = (MultiplesOf16Height * 16),
-                    put({local, scaleY}, ((float(By16Height)) / float(Height))),
-                    case (ScaleWidth < Width) of
-                        true ->
-                        put({local, scaleX}, (get({local, scaleX}) * 2.35));
-                        false -> ok
-                    end,
-                    case (ScaleHeight < Height) of
-                        true ->
-                        put({local, scaleY}, (get({local, scaleY}) * 2.35));
-                        false -> ok
-                    end;
-                    false -> ok
-                end,
-                put({local, scaledImage}, (get({get({This, imageScaleUtil}), '$class'})):createImage2(get({This, imageScaleUtil}), get({This, imageCache}), Image, get({local, scaleX}), 1.0, get({local, scaleY}), 1.0, true)),
-                put({local, sprite}, (get({SpriteFactory, '$class'})):createSprite(SpriteFactory, get({local, scaledImage}), trunc(((float(Width) * get({local, scaleX})))), trunc(((float(Height) * get({local, scaleY}))))))
-            end;
-            false ->
-            put({local, scaledImage}, (get({get({This, openGLUtil}), '$class'})):addImage(get({This, openGLUtil}), Image)),
-            put({local, sprite}, (get({SpriteFactory, '$class'})):createSprite(SpriteFactory, get({local, scaledImage}), Width, Height))
-        end,
-        get({local, sprite}).
+
+  def jm_createImage(this, p_image, p_width, p_height, p_scaleWidth, p_scaleHeight) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :image, p_image)
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+      JR.lset(f, :scaleWidth, p_scaleWidth)
+      JR.lset(f, :scaleHeight, p_scaleHeight)
+        JR.lset(f, :spriteFactory, SpriteFactory.jm_getInstance())
+        JR.lset(f, :sprite, nil)
+        JR.lset(f, :scaledImage, nil)
+        if ((JR.lget(f, :scaleWidth) != 0) && (JR.lget(f, :scaleHeight) != 0)) do
+            JR.lset(f, :scaleX, (((JR.lget(f, :scaleWidth) * 1.0)) / ((JR.lget(f, :width) * 1.0))))
+            JR.lset(f, :scaleY, (((JR.lget(f, :scaleHeight) * 1.0)) / ((JR.lget(f, :height) * 1.0))))
+            if ((((JR.lget(f, :scaleX) == 1.0) && (JR.lget(f, :scaleY) == 1.0))) || (((JR.lget(f, :scaleX) == 0.0) || (JR.lget(f, :scaleY) == 0.0)))) do
+                JR.lset(f, :scaledImage, JR.call(JR.get(this, :openGLUtil), :jm_addImage, [JR.lget(f, :image)]))
+                JR.lset(f, :sprite, JR.call(JR.lget(f, :spriteFactory), :jm_createSprite, [JR.lget(f, :scaledImage), JR.lget(f, :width), JR.lget(f, :height)]))
+            else
+                if JR.call(JR.get(this, :openGLESImageExclusionUtil), :jm_isCustomScaling, [JR.lget(f, :image)]) do
+                    JR.lset(f, :width2, JR.call(JR.get(this, :j2seMath), :jm_round, [(((JR.lget(f, :scaleWidth)) * 1.0) - 0.5)]))
+                    JR.lset(f, :height2, JR.call(JR.get(this, :j2seMath), :jm_round, [(((JR.lget(f, :scaleHeight)) * 1.0) - 0.5)]))
+                    JR.lset(f, :multiplesOf16Width, div(JR.lget(f, :width2), 16))
+                    JR.lset(f, :by16Width, JR.int32(JR.lget(f, :multiplesOf16Width) * 16))
+                    JR.lset(f, :scaleX, (((JR.lget(f, :by16Width) * 1.0)) / (JR.lget(f, :width) * 1.0)))
+                    JR.lset(f, :multiplesOf16Height, div(JR.lget(f, :height2), 16))
+                    JR.lset(f, :by16Height, JR.int32(JR.lget(f, :multiplesOf16Height) * 16))
+                    JR.lset(f, :scaleY, (((JR.lget(f, :by16Height) * 1.0)) / (JR.lget(f, :height) * 1.0)))
+                    if (JR.lget(f, :scaleWidth) < JR.lget(f, :width)) do
+                        JR.lset(f, :scaleX, (JR.lget(f, :scaleX) * 2.35))
+                    end
+                    if (JR.lget(f, :scaleHeight) < JR.lget(f, :height)) do
+                        JR.lset(f, :scaleY, (JR.lget(f, :scaleY) * 2.35))
+                    end
+                end
+                JR.lset(f, :scaledImage, JR.call(JR.get(this, :imageScaleUtil), :jm_createImage2, [JR.get(this, :imageCache), JR.lget(f, :image), JR.lget(f, :scaleX), 1.0, JR.lget(f, :scaleY), 1.0, true]))
+                JR.lset(f, :sprite, JR.call(JR.lget(f, :spriteFactory), :jm_createSprite, [JR.lget(f, :scaledImage), JR.int32(JR.d2i((((JR.lget(f, :width) * 1.0) * JR.lget(f, :scaleX))))), JR.int32(JR.d2i((((JR.lget(f, :height) * 1.0) * JR.lget(f, :scaleY)))))]))
+            end
+        else
+            JR.lset(f, :scaledImage, JR.call(JR.get(this, :openGLUtil), :jm_addImage, [JR.lget(f, :image)]))
+            JR.lset(f, :sprite, JR.call(JR.lget(f, :spriteFactory), :jm_createSprite, [JR.lget(f, :scaledImage), JR.lget(f, :width), JR.lget(f, :height)]))
+        end
+        throw({:jreturn, JR.lget(f, :sprite)})
+    end)
+  end
+end
+
 

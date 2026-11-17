@@ -1,34 +1,54 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.layer
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.layer
 
--module('LayerProcessorInterface').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
-
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicLayerProcessorInterface', Function, Arguments).
+defmodule LayerProcessorInterface do
+  def jsuper(), do: JObject
 
 
-getLayerManager(This) ->
-    erlang:error({abstract_method, getLayerManager}).
+  def jm_getLayerManager(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "getLayerManager")})
+    end)
+  end
 
-% throws Exception
-processAt(This, AllBinaryLayerManager, LayerInterface, Index) when is_integer(Index) ->
-    erlang:error({abstract_method, processAt}).
 
-% throws Exception
-isProcessorLayer(This, LayerInterface) ->
-    erlang:error({abstract_method, isProcessorLayer}).
+  def jm_processAt(this, p_allBinaryLayerManager, p_layerInterface, p_index) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerManager, p_allBinaryLayerManager)
+      JR.lset(f, :layerInterface, p_layerInterface)
+      JR.lset(f, :index, p_index)
+      throw({:jexception, JR.exception("AbstractMethodError", "processAt")})
+    end)
+  end
+
+
+  def jm_isProcessorLayer(this, p_layerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+      throw({:jexception, JR.exception("AbstractMethodError", "isProcessorLayer")})
+    end)
+  end
+end
+
 

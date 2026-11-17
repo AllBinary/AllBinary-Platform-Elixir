@@ -1,79 +1,109 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import javax.microedition.lcdui.Font
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.canvas.GameStatisticsFactory
-% import org.allbinary.graphics.color.BasicColorFactory
-% import org.allbinary.graphics.displayable.DisplayInfoSingleton
-% import org.allbinary.graphics.font.MyFontProcessor
-% import org.allbinary.graphics.font.UpdateMyFontInterface
-% import org.allbinary.graphics.font.UpdateMyFontProcessor
-% import org.allbinary.graphics.paint.InitUpdatePaintable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('GamePerformanceInitUpdatePaintable').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements UpdateMyFontInterface
+defmodule GamePerformanceInitUpdatePaintable do
+  def jsuper(), do: InitUpdatePaintable
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('InitUpdatePaintable', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :halfHeight, 0)
+    JR.put(this, :yArray, nil)
+    JR.put(this, :myFontProcessor, nil)
+    JR.put(this, :baseRefreshHelperCharArray, nil)
+    JR.put(this, :defaultStringWidth, 0)
+    JR.put(this, :RED, 0)
+        JR.put(this, :halfHeight, JR.call(DisplayInfoSingleton.jm_getInstance(), :jm_getLastHalfHeight, []))
+        JR.put(this, :yArray, JR.afrom([JR.int32(JR.get(this, :halfHeight) + 30), JR.int32(JR.get(this, :halfHeight) + 30), JR.int32(JR.int32(JR.get(this, :halfHeight) + 30) + 15), JR.int32(JR.int32(JR.get(this, :halfHeight) + 30) + 15), JR.int32(JR.int32(JR.get(this, :halfHeight) + 30) + 30), JR.int32(JR.int32(JR.get(this, :halfHeight) + 30) + 30), JR.int32(JR.int32(JR.get(this, :halfHeight) + 30) + 45), JR.int32(JR.int32(JR.get(this, :halfHeight) + 30) + 45)]))
+        JR.put(this, :myFontProcessor, UpdateMyFontProcessor.jnew(this))
+        JR.put(this, :baseRefreshHelperCharArray, JR.anew_of(0, fn -> JR.anew(0, 0) end))
+        JR.put(this, :defaultStringWidth, 0)
+        JR.put(this, :RED, JR.call(JR.get(BasicColorFactory.jm_getInstance(), :RED), :jm_intValue, []))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, halfHeight}, (fun(Target_N65888) -> (get({Target_N65888, '$class'})):getLastHalfHeight(Target_N65888) end)('DisplayInfoSingleton':getInstance())),
-    put({This, yArray}, array:from_list([(get({This, halfHeight}) + 30), (get({This, halfHeight}) + 30), ((get({This, halfHeight}) + 30) + 15), ((get({This, halfHeight}) + 30) + 15), ((get({This, halfHeight}) + 30) + 30), ((get({This, halfHeight}) + 30) + 30), ((get({This, halfHeight}) + 30) + 45), ((get({This, halfHeight}) + 30) + 45)])),
-    put({This, myFontProcessor}, 'UpdateMyFontProcessor':new(This)),
-    put({This, baseRefreshHelperCharArray}, array:new(0, {default, array:new(0, {default, 0})})),
-    put({This, defaultStringWidth}, 0),
-    put({This, 'RED'}, (fun(Target_N66655) -> (get({Target_N66655, '$class'})):intValue(Target_N66655) end)(get({'BasicColorFactory':getInstance(), 'RED'}))),
-    ok.
+  def jinit(this) do
+    InitUpdatePaintable.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    'InitUpdatePaintable':'$init'(This),
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-updateMeasurement(This, Graphics) ->
-        Font = (get({Graphics, '$class'})):getFont(Graphics),
-        put({This, defaultStringWidth}, 'MyFontProcessor':defaultStringWidth(Font, 2)),
-        put({This, myFontProcessor}, 'MyFontProcessor':getInstance()).
+  def jm_updateMeasurement(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.lset(f, :font, JR.call(JR.lget(f, :graphics), :jm_getFont, []))
+        JR.put(this, :defaultStringWidth, MyFontProcessor.jm_defaultStringWidth(JR.lget(f, :font), 2))
+        JR.put(this, :myFontProcessor, MyFontProcessor.jm_getInstance())
+    end)
+  end
 
-init(This) ->
-        ok.
 
-update(This) ->
-        put({This, baseRefreshHelperCharArray}, (fun(Target_N66578) -> (get({Target_N66578, '$class'})):to2DCharArray(Target_N66578) end)('GameStatisticsFactory':getInstance())).
+  def jm_init(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-paint(This, Graphics) ->
-        (get({get({This, myFontProcessor}), '$class'})):process(get({This, myFontProcessor}), Graphics),
-        (get({Graphics, '$class'})):setColor(Graphics, get({This, 'RED'})),
-        put({local, charArray}, undefined),
-        put({local, charArray2}, undefined),
-        put({local, size2}, 0),
-        put({local, size3}, 0),
-        Size = (array:size(get({This, baseRefreshHelperCharArray})) - 2),
-        lists:foreach(fun(Index) ->
-            put({local, charArray}, array:get(Index, get({This, baseRefreshHelperCharArray}))),
-            put({local, charArray2}, array:get((Index + 1), get({This, baseRefreshHelperCharArray}))),
-            put({local, size2}, array:size(get({local, charArray}))),
-            put({local, size3}, array:size(get({local, charArray2}))),
-            (get({Graphics, '$class'})):drawChars(Graphics, get({local, charArray}), 0, get({local, size2}), 0, array:get(Index, get({This, yArray})), 0),
-            (get({Graphics, '$class'})):drawChars(Graphics, get({local, charArray2}), 0, get({local, size3}), (get({local, size2}) * get({This, defaultStringWidth})), array:get((Index + 1), get({This, yArray})), 0)
-        end, lists:seq(Size, 0, -2)).
+
+  def jm_update(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.put(this, :baseRefreshHelperCharArray, JR.call(GameStatisticsFactory.jm_getInstance(), :jm_to2DCharArray, []))
+    end)
+  end
+
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.get(this, :myFontProcessor), :jm_process, [JR.lget(f, :graphics)])
+        JR.call(JR.lget(f, :graphics), :jm_setColor, [JR.get(this, :RED)])
+        JR.lset(f, :charArray, nil)
+        JR.lset(f, :charArray2, nil)
+        JR.lset(f, :size2, 0)
+        JR.lset(f, :size3, 0)
+        JR.lset(f, :size, JR.int32(JR.alength(JR.get(this, :baseRefreshHelperCharArray)) - 2))
+        JR.lset(f, :index, JR.lget(f, :size))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lset(f, :index, JR.int32(JR.lget(f, :index) - 2)) end, fn ->
+            JR.lset(f, :charArray, JR.aget(JR.get(this, :baseRefreshHelperCharArray), JR.lget(f, :index)))
+            JR.lset(f, :charArray2, JR.aget(JR.get(this, :baseRefreshHelperCharArray), JR.int32(JR.lget(f, :index) + 1)))
+            JR.lset(f, :size2, JR.alength(JR.lget(f, :charArray)))
+            JR.lset(f, :size3, JR.alength(JR.lget(f, :charArray2)))
+            JR.call(JR.lget(f, :graphics), :jm_drawChars, [JR.lget(f, :charArray), 0, JR.lget(f, :size2), 0, JR.aget(JR.get(this, :yArray), JR.lget(f, :index)), 0])
+            JR.call(JR.lget(f, :graphics), :jm_drawChars, [JR.lget(f, :charArray2), 0, JR.lget(f, :size3), JR.int32(JR.lget(f, :size2) * JR.get(this, :defaultStringWidth)), JR.aget(JR.get(this, :yArray), JR.int32(JR.lget(f, :index) + 1)), 0])
+        end)
+    end)
+  end
+end
+
 

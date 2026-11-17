@@ -68,7 +68,7 @@ defmodule GameTickTimeDelayHelper do
         if (JR.get(this, :lastStartTime) == J.Long.jstatic_MIN_VALUE()) do
             JR.put(this, :timeDelta, 0)
         else
-            JR.put(this, :timeDelta, (:os.system_time(:millisecond) - JR.get(this, :lastStartTime)))
+            JR.put(this, :timeDelta, JR.int64(:os.system_time(:millisecond) - JR.get(this, :lastStartTime)))
         end
     end)
   end

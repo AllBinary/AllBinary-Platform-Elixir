@@ -1,209 +1,399 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.canvas.transition.progress
-% import javax.microedition.lcdui.CommandListener
-% import javax.microedition.lcdui.Font
-% import javax.microedition.lcdui.Graphics
-% import javax.microedition.lcdui.NullCanvas
-% import javax.microedition.lcdui.NullCommandListener
-% import org.allbinary.canvas.Processor
-% import org.allbinary.canvas.RunnableCanvas
-% import org.allbinary.game.commands.GameCommandsFactory
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.displayable.CanvasStrings
-% import org.allbinary.graphics.font.MyFontProcessor
-% import org.allbinary.graphics.font.UpdateMyFontInterface
-% import org.allbinary.graphics.font.UpdateMyFontProcessor
-% import org.allbinary.graphics.form.item.ABCustomGaugeItem
-% import org.allbinary.graphics.paint.NullPaintable
-% import org.allbinary.graphics.paint.Paintable
-% import org.allbinary.graphics.paint.PaintableInterface
-% import org.allbinary.logic.communication.log.PreLogUtil
-% import org.allbinary.logic.math.SmallIntegerSingletonFactory
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.midlet.AllBinaryMidlet
-% import org.allbinary.thread.PathFindingThreadPool
-% import org.allbinary.thread.ThreadPool
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.canvas.transition.progress
 
--module('ProgressCanvas').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements PaintableInterface
-% implements UpdateMyFontInterface
+defmodule ProgressCanvas do
+  def jsuper(), do: RunnableCanvas
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('RunnableCanvas', Function, Arguments).
-
-init_fields(This) ->
-    put({This, hasPainted}, false),
-    put({This, backgroundBasicColor}, undefined),
-    put({This, 'GAUGE_PAINTABLE'}, 'ProgressPaintable':new(This)),
-    put({This, maxValue}, 100.0),
-    put({This, gauge}, undefined),
-    put({This, 'TEXT'}, get({get({This, commonStrings}), 'LOADING'})),
-    put({This, updateMyFontProcessor}, 'UpdateMyFontProcessor':new(This)),
-    put({This, myFontProcessor}, get({This, updateMyFontProcessor})),
-    put({This, allbinaryMidlet}, 'AllBinaryMidlet':getNullInstance()),
-    put({This, value}, 0.0),
-    put({This, text}, get({This, 'TEXT'})),
-    put({This, background}, true),
-    put({This, paintable}, get({This, 'GAUGE_PAINTABLE'})),
-    put({This, inProgress}, false),
-    put({This, 'IN_GAME_PROCESSOR'}, 'Processor':new() % Java anonymous class body: implement it as a module
-%         put({This, pathFindingThreadPool}, 'PathFindingThreadPool':getInstance())
-%         ok % process
-),
-    put({This, inGameProcessor}, 'Processor':getInstance()),
-    put({This, progressEndListener}, get({'ProgressEndListener', instance})),
-    put({This, backgroundLabel}, "Background AI Game Loading..."),
-    put({This, 'START_BACKGROUND'}, "startBackground"),
-    put({This, 'ADD_PORTION'}, "addPortion"),
-    put({This, 'ADD_EARLY_PORTION'}, "addEarlyPortion"),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :hasPainted, false)
+    JR.put(this, :backgroundBasicColor, nil)
+    JR.put(this, :GAUGE_PAINTABLE, nil)
+    JR.put(this, :maxValue, 0.0)
+    JR.put(this, :gauge, nil)
+    JR.put(this, :TEXT, nil)
+    JR.put(this, :updateMyFontProcessor, nil)
+    JR.put(this, :myFontProcessor, nil)
+    JR.put(this, :allbinaryMidlet, nil)
+    JR.put(this, :value, 0.0)
+    JR.put(this, :text, nil)
+    JR.put(this, :background, false)
+    JR.put(this, :paintable, nil)
+    JR.put(this, :inProgress, false)
+    JR.put(this, :IN_GAME_PROCESSOR, nil)
+    JR.put(this, :inGameProcessor, nil)
+    JR.put(this, :progressEndListener, nil)
+    JR.put(this, :backgroundLabel, nil)
+    JR.put(this, :START_BACKGROUND, nil)
+    JR.put(this, :ADD_PORTION, nil)
+    JR.put(this, :ADD_EARLY_PORTION, nil)
+        JR.put(this, :hasPainted, false)
+        
+        JR.put(this, :GAUGE_PAINTABLE, ProgressPaintable.jnew(this))
+        JR.put(this, :maxValue, 100.0)
+        
+        JR.put(this, :TEXT, JR.get(JR.get(this, :commonStrings), :LOADING))
+        JR.put(this, :updateMyFontProcessor, UpdateMyFontProcessor.jnew(this))
+        JR.put(this, :myFontProcessor, JR.get(this, :updateMyFontProcessor))
+        JR.put(this, :allbinaryMidlet, AllBinaryMidlet.jm_getNullInstance())
+        JR.put(this, :value, 0.0)
+        JR.put(this, :text, JR.get(this, :TEXT))
+        JR.put(this, :background, true)
+        JR.put(this, :paintable, JR.get(this, :GAUGE_PAINTABLE))
+        JR.put(this, :inProgress, false)
+        JR.put(this, :IN_GAME_PROCESSOR, Processor.jnew())
+        JR.put(this, :inGameProcessor, Processor.jm_getInstance())
+        JR.put(this, :progressEndListener, ProgressEndListener.jstatic_instance())
+        JR.put(this, :backgroundLabel, "Background AI Game Loading...")
+        JR.put(this, :START_BACKGROUND, "startBackground")
+        JR.put(this, :ADD_PORTION, "addPortion")
+        JR.put(this, :ADD_EARLY_PORTION, "addEarlyPortion")
+    nil
+  end
 
 
-new(Title, BackgroundBasicColor, ForegroundBasicColor) when (is_list(Title) orelse Title =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Title, BackgroundBasicColor, ForegroundBasicColor),
-    This.
+  def jinit(this, p_title, p_backgroundBasicColor, p_foregroundBasicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :title, p_title)
+      JR.lset(f, :backgroundBasicColor, p_backgroundBasicColor)
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+        RunnableCanvas.jinit(this, NullCommandListener.jstatic_NULL_COMMAND_LISTENER(), JR.get(CanvasStrings.jm_getInstance(), :EMPTY_CHILD_NAME_LIST), false)
+        ProgressCanvas.jinitfields(this)
+        JR.put(this, :backgroundBasicColor, JR.lget(f, :backgroundBasicColor))
+        JR.put(this, :gauge, ABCustomGaugeItem.jnew(JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), JR.int32(JR.d2i(JR.get(this, :maxValue))), 0, JR.lget(f, :backgroundBasicColor), JR.lget(f, :foregroundBasicColor)))
+    end)
+  end
 
-'$init'(This, Title, BackgroundBasicColor, ForegroundBasicColor) when (is_list(Title) orelse Title =:= undefined) ->
-        'RunnableCanvas':'$init'(This, get({'NullCommandListener', 'NULL_COMMAND_LISTENER'}), get({'CanvasStrings':getInstance(), 'EMPTY_CHILD_NAME_LIST'}), false),
-        init_fields(This),
-        put({This, backgroundBasicColor}, BackgroundBasicColor),
-        put({This, gauge}, 'ABCustomGaugeItem':new(get({'StringUtil':getInstance(), 'EMPTY_STRING'}), trunc(get({This, maxValue})), 0, BackgroundBasicColor, ForegroundBasicColor)).
+  def jnew(p_title, p_backgroundBasicColor, p_foregroundBasicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_title, p_backgroundBasicColor, p_foregroundBasicColor)
+    this
+  end
 
-updateMeasurement(This, Graphics) ->
-        Font = (get({Graphics, '$class'})):getFont(Graphics),
-        (get({get({This, gauge}), '$class'})):setHeight(get({This, gauge}), ((get({Font, '$class'})):getHeight(Font) + 2)),
-        put({This, myFontProcessor}, 'MyFontProcessor':getInstance()).
 
-init(This, GameMidlet) ->
-        put({This, allbinaryMidlet}, GameMidlet).
+  def jm_updateMeasurement(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.lset(f, :font, JR.call(JR.lget(f, :graphics), :jm_getFont, []))
+        JR.call(JR.get(this, :gauge), :jm_setHeight, [(JR.call(JR.lget(f, :font), :jm_getHeight, []) + 2)])
+        JR.put(this, :myFontProcessor, MyFontProcessor.jm_getInstance())
+    end)
+  end
 
-% throws Exception
-update(This, Graphics) ->
-        ok.
 
-initCommands(This, CmdListener) ->
-        ok.
+  def jm_init(this, p_gameMidlet) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameMidlet, p_gameMidlet)
+        JR.put(this, :allbinaryMidlet, JR.lget(f, :gameMidlet))
+    end)
+  end
 
-getMaxValue(This) ->
-        get({This, maxValue}).
 
-start(This) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, get({get({This, commonStrings}), 'START_METHOD_NAME'})),
-        (get({This, '$class'})):setBackground(This, true),
-        (get({get({This, gauge}), '$class'})):setHeight(get({This, gauge}), 30),
-        (get({get({This, gauge}), '$class'})):setLabel(get({This, gauge}), get({get({This, commonStrings}), 'PLEASE_WAIT'})),
-        (get({This, '$class'})):setText(This, get({This, 'TEXT'})),
-        (get({This, '$class'})):setValue(This, 0),
-        put({This, inGameProcessor}, 'Processor':getInstance()),
-        put({This, paintable}, get({This, 'GAUGE_PAINTABLE'})),
-        put({This, inProgress}, true).
+  def jm_update(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        nil
+    end)
+  end
 
-startBackground(This, Background) when is_boolean(Background) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, get({This, 'START_BACKGROUND'})),
-        (get({This, '$class'})):setBackground(This, Background),
-        put({This, myFontProcessor}, get({This, updateMyFontProcessor})),
-        (get({get({This, gauge}), '$class'})):setLabel(get({This, gauge}), get({This, backgroundLabel})),
-        (get({This, '$class'})):setText(This, get({This, 'TEXT'})),
-        (get({This, '$class'})):setValue(This, 0),
-        put({This, inGameProcessor}, 'Processor':getInstance()),
-        put({This, paintable}, get({This, 'GAUGE_PAINTABLE'})).
 
-endActual(This) ->
-        (get({get({This, allbinaryMidlet}), '$class'})):commandAction(get({This, allbinaryMidlet}), get({'GameCommandsFactory':getInstance(), 'SHOW_GAME_CANVAS'}), get({'NullCanvas', 'NULL_CANVAS'})),
-        put({This, inProgress}, false),
-        (get({This, '$class'})):inGame(This).
+  def jm_initCommands(this, p_cmdListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cmdListener, p_cmdListener)
+        nil
+    end)
+  end
 
-inGame(This) ->
-        (get({get({This, progressEndListener}), '$class'})):onEndEvent(get({This, progressEndListener})),
-        put({This, inGameProcessor}, get({This, 'IN_GAME_PROCESSOR'})).
 
-'end'(This) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, get({get({This, commonStrings}), 'END_METHOD_NAME'})),
-        (get({get({This, gauge}), '$class'})):setValue(get({This, gauge}), (get({This, '$class'})):getMaxValue(This)),
-        (get({This, '$class'})):endActual(This),
-        put({This, paintable}, 'NullPaintable':getInstance()).
+  def jm_getMaxValue(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :maxValue)})
+    end)
+  end
 
-endFromInitialLazyLoadingComplete(This) ->
-        (get({get({This, progressEndListener}), '$class'})):onEndEvent(get({This, progressEndListener})),
-        (get({get({This, gauge}), '$class'})):setValue(get({This, gauge}), (get({This, '$class'})):getMaxValue(This)),
-        put({This, inGameProcessor}, get({This, 'IN_GAME_PROCESSOR'})).
 
-isInGame(This) ->
-        try
-        case (get({This, inGameProcessor}) =:= get({This, 'IN_GAME_PROCESSOR'})) of
-            true ->
-            throw({'$return', true});
-            false -> ok
-        end,
-        false
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+  def jm_start(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, JR.get(JR.get(this, :commonStrings), :START_METHOD_NAME)])
+        JR.call(this, :jm_setBackground, [true])
+        JR.call(JR.get(this, :gauge), :jm_setHeight, [30])
+        JR.call(JR.get(this, :gauge), :jm_setLabel, [JR.get(JR.get(this, :commonStrings), :PLEASE_WAIT)])
+        JR.call(this, :jm_setText, [JR.get(this, :TEXT)])
+        JR.call(this, :jm_setValue, [0])
+        JR.put(this, :inGameProcessor, Processor.jm_getInstance())
+        JR.put(this, :paintable, JR.get(this, :GAUGE_PAINTABLE))
+        JR.put(this, :inProgress, true)
+    end)
+  end
 
-endIfPaintedSinceStart(This) ->
-        ok.
 
-addEarlyPortion(This, Value, Text, Index) when is_integer(Value), (is_list(Text) orelse Text =:= undefined), is_integer(Index) ->
-        (get({This, '$class'})):setText(This, (fun(Target_N69235) -> (get({Target_N69235, '$class'})):toString(Target_N69235) end)((fun(Target_N69242) -> (get({Target_N69242, '$class'})):append(Target_N69242, (fun(Target_N69282) -> (get({Target_N69282, '$class'})):toString(Target_N69282) end)((fun(Target_N69289) -> (get({Target_N69289, '$class'})):getAt(Target_N69289, Index) end)('SmallIntegerSingletonFactory':getInstance()))) end)((fun(Target_N69249) -> (get({Target_N69249, '$class'})):append(Target_N69249, Text) end)('StringMaker':new())))),
-        (get({get({This, gauge}), '$class'})):setValue(get({This, gauge}), ((get({get({This, gauge}), '$class'})):getValue(get({This, gauge})) + ((get({This, '$class'})):getMaxValue(This) / float(Value)))).
+  def jm_startBackground(this, p_background) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :background, p_background)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, JR.get(this, :START_BACKGROUND)])
+        JR.call(this, :jm_setBackground, [JR.lget(f, :background)])
+        JR.put(this, :myFontProcessor, JR.get(this, :updateMyFontProcessor))
+        JR.call(JR.get(this, :gauge), :jm_setLabel, [JR.get(this, :backgroundLabel)])
+        JR.call(this, :jm_setText, [JR.get(this, :TEXT)])
+        JR.call(this, :jm_setValue, [0])
+        JR.put(this, :inGameProcessor, Processor.jm_getInstance())
+        JR.put(this, :paintable, JR.get(this, :GAUGE_PAINTABLE))
+    end)
+  end
 
-addPortion(This, Value, Text, Index) when is_integer(Value), (is_list(Text) orelse Text =:= undefined), is_integer(Index) ->
-        (get({This, '$class'})):setText(This, (fun(Target_N69495) -> (get({Target_N69495, '$class'})):toString(Target_N69495) end)((fun(Target_N69502) -> (get({Target_N69502, '$class'})):append(Target_N69502, (fun(Target_N69542) -> (get({Target_N69542, '$class'})):toString(Target_N69542) end)((fun(Target_N69549) -> (get({Target_N69549, '$class'})):getAt(Target_N69549, Index) end)('SmallIntegerSingletonFactory':getInstance()))) end)((fun(Target_N69509) -> (get({Target_N69509, '$class'})):append(Target_N69509, Text) end)('StringMaker':new())))),
-        'PreLogUtil':put(get({This, text}), This, get({This, 'ADD_PORTION'})),
-        (get({get({This, gauge}), '$class'})):setValue(get({This, gauge}), ((get({get({This, gauge}), '$class'})):getValue(get({This, gauge})) + ((get({This, '$class'})):getMaxValue(This) / float(Value)))).
 
-addNormalPortion(This, Value, Text) when is_integer(Value), (is_list(Text) orelse Text =:= undefined) ->
-        case (get({This, text}) =/= Text) of
-            true ->
-            'PreLogUtil':put(Text, This, get({This, 'ADD_PORTION'}));
-            false -> ok
-        end,
-        (get({This, '$class'})):setText(This, Text),
-        (get({get({This, gauge}), '$class'})):setValue(get({This, gauge}), ((get({get({This, gauge}), '$class'})):getValue(get({This, gauge})) + ((get({This, '$class'})):getMaxValue(This) / float(Value)))).
+  def jm_endActual(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :allbinaryMidlet), :jm_commandAction, [JR.get(GameCommandsFactory.jm_getInstance(), :SHOW_GAME_CANVAS), NullCanvas.jstatic_NULL_CANVAS()])
+        JR.put(this, :inProgress, false)
+        JR.call(this, :jm_inGame, [])
+    end)
+  end
 
-setValue(This, Value) when is_integer(Value) ->
-        put({This, value}, float(Value)),
-        (get({get({This, gauge}), '$class'})):setValue(get({This, gauge}), float(Value)).
 
-paint(This, Graphics) ->
-        (get({get({This, paintable}), '$class'})):paint(get({This, paintable}), Graphics).
+  def jm_inGame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :progressEndListener), :jm_onEndEvent, [])
+        JR.put(this, :inGameProcessor, JR.get(this, :IN_GAME_PROCESSOR))
+    end)
+  end
 
-paint2(This, Graphics) ->
-        (get({get({This, myFontProcessor}), '$class'})):process(get({This, myFontProcessor}), Graphics),
-        (get({Graphics, '$class'})):setColor(Graphics, (get({get({This, backgroundBasicColor}), '$class'})):intValue(get({This, backgroundBasicColor}))),
-        (get({Graphics, '$class'})):fillRect(Graphics, 0, 0, (get({get({This, displayInfo}), '$class'})):getLastWidth(get({This, displayInfo})), (get({get({This, displayInfo}), '$class'})):getLastHeight(get({This, displayInfo}))),
-        (get({get({This, gauge}), '$class'})):paintXY(get({This, gauge}), Graphics, 0, 0),
-        put({This, hasPainted}, true).
 
-paintThreed(This, Graphics) ->
-        ok.
+  def jm_end(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, JR.get(JR.get(this, :commonStrings), :END_METHOD_NAME)])
+        JR.call(JR.get(this, :gauge), :jm_setValue, [JR.call(this, :jm_getMaxValue, [])])
+        JR.call(this, :jm_endActual, [])
+        JR.put(this, :paintable, NullPaintable.jm_getInstance())
+    end)
+  end
 
-getValue(This) ->
-        get({This, value}).
 
-setText(This, Text) when (is_list(Text) orelse Text =:= undefined) ->
-        put({This, text}, Text).
+  def jm_endFromInitialLazyLoadingComplete(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :progressEndListener), :jm_onEndEvent, [])
+        JR.call(JR.get(this, :gauge), :jm_setValue, [JR.call(this, :jm_getMaxValue, [])])
+        JR.put(this, :inGameProcessor, JR.get(this, :IN_GAME_PROCESSOR))
+    end)
+  end
 
-getText(This) ->
-        get({This, text}).
 
-setBackground(This, Background) when is_boolean(Background) ->
-        put({This, background}, Background).
+  def jm_isInGame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.get(this, :inGameProcessor) == JR.get(this, :IN_GAME_PROCESSOR)) do
+            throw({:jreturn, true})
+        end
+        throw({:jreturn, false})
+    end)
+  end
 
-isBackground(This) ->
-        get({This, background}).
+
+  def jm_endIfPaintedSinceStart(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_addEarlyPortion(this, p_value, p_text, p_index) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :value, p_value)
+      JR.lset(f, :text, p_text)
+      JR.lset(f, :index, p_index)
+        JR.call(this, :jm_setText, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.lget(f, :text)]), :jm_append, [JR.call(JR.call(SmallIntegerSingletonFactory.jm_getInstance(), :jm_getAt, [JR.lget(f, :index)]), :jm_toString, [])]), :jm_toString, [])])
+        JR.call(JR.get(this, :gauge), :jm_setValue, [(JR.call(JR.get(this, :gauge), :jm_getValue, []) + (JR.call(this, :jm_getMaxValue, []) / (JR.lget(f, :value) * 1.0)))])
+    end)
+  end
+
+
+  def jm_addPortion(this, p_value, p_text, p_index) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :value, p_value)
+      JR.lset(f, :text, p_text)
+      JR.lset(f, :index, p_index)
+        JR.call(this, :jm_setText, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.lget(f, :text)]), :jm_append, [JR.call(JR.call(SmallIntegerSingletonFactory.jm_getInstance(), :jm_getAt, [JR.lget(f, :index)]), :jm_toString, [])]), :jm_toString, [])])
+        PreLogUtil.jm_put(JR.get(this, :text), this, JR.get(this, :ADD_PORTION))
+        JR.call(JR.get(this, :gauge), :jm_setValue, [(JR.call(JR.get(this, :gauge), :jm_getValue, []) + (JR.call(this, :jm_getMaxValue, []) / (JR.lget(f, :value) * 1.0)))])
+    end)
+  end
+
+
+  def jm_addNormalPortion(this, p_value, p_text) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :value, p_value)
+      JR.lset(f, :text, p_text)
+        if (JR.get(this, :text) != JR.lget(f, :text)) do
+            PreLogUtil.jm_put(JR.lget(f, :text), this, JR.get(this, :ADD_PORTION))
+        end
+        JR.call(this, :jm_setText, [JR.lget(f, :text)])
+        JR.call(JR.get(this, :gauge), :jm_setValue, [(JR.call(JR.get(this, :gauge), :jm_getValue, []) + (JR.call(this, :jm_getMaxValue, []) / (JR.lget(f, :value) * 1.0)))])
+    end)
+  end
+
+
+  def jm_setValue(this, p_value) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :value, p_value)
+        JR.put(this, :value, (JR.lget(f, :value) * 1.0))
+        JR.call(JR.get(this, :gauge), :jm_setValue, [(JR.lget(f, :value) * 1.0)])
+    end)
+  end
+
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.get(this, :paintable), :jm_paint, [JR.lget(f, :graphics)])
+    end)
+  end
+
+
+  def jm_paint2(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.get(this, :myFontProcessor), :jm_process, [JR.lget(f, :graphics)])
+        JR.call(JR.lget(f, :graphics), :jm_setColor, [JR.call(JR.get(this, :backgroundBasicColor), :jm_intValue, [])])
+        JR.call(JR.lget(f, :graphics), :jm_fillRect, [0, 0, JR.call(JR.get(this, :displayInfo), :jm_getLastWidth, []), JR.call(JR.get(this, :displayInfo), :jm_getLastHeight, [])])
+        JR.call(JR.get(this, :gauge), :jm_paintXY, [JR.lget(f, :graphics), 0, 0])
+        JR.put(this, :hasPainted, true)
+    end)
+  end
+
+
+  def jm_paintThreed(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        nil
+    end)
+  end
+
+
+  def jm_getValue(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :value)})
+    end)
+  end
+
+
+  def jm_setText(this, p_text) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :text, p_text)
+        JR.put(this, :text, JR.lget(f, :text))
+    end)
+  end
+
+
+  def jm_getText(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :text)})
+    end)
+  end
+
+
+  def jm_setBackground(this, p_background) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :background, p_background)
+        JR.put(this, :background, JR.lget(f, :background))
+    end)
+  end
+
+
+  def jm_isBackground(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :background)})
+    end)
+  end
+end
+
 

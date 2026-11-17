@@ -1,22 +1,36 @@
-% Generated Code Do Not Modify
-% package org.allbinary.graph
+# Generated Code Do Not Modify
+# package org.allbinary.graph
 
--module('V').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule V do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getId(This) ->
-        0.
+  def jm_getId(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0})
+    end)
+  end
+end
+
 

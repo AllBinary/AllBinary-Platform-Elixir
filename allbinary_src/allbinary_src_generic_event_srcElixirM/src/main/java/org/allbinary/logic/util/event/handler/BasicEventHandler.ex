@@ -1,116 +1,183 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.util.event.handler
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.logic.util.event.AllBinaryEventObject
-% import org.allbinary.logic.util.event.EventListenerInterface
-% import org.allbinary.logic.util.event.EventStrings
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.util.event.handler
 
--module('BasicEventHandler').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements BasicEventHandlerInterface
+defmodule BasicEventHandler do
+  def jsuper(), do: JObject
+def jstatic_PERFORMANCE_MESSAGE(), do: JR.static_get(__MODULE__, :PERFORMANCE_MESSAGE, fn -> "Use Custom onEvent Methods for needed optimization" end)
+  def jstatic_set_PERFORMANCE_MESSAGE(value), do: JR.static_put(__MODULE__, :PERFORMANCE_MESSAGE, value)
 
-static_init() ->
-    put({?MODULE, 'PERFORMANCE_MESSAGE'}, "Use Custom onEvent Methods for needed optimization"),
-    ok.
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, eventListenerInterfaceList}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :eventListenerInterfaceList, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :eventListenerInterfaceList, BasicArrayListD.jnew())
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        put({This, eventListenerInterfaceList}, 'BasicArrayListD':new()).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-toString(This) ->
-        StringBuffer = 'StringMaker':new(),
-        LISTENER = " Listener: ",
-        (get({StringBuffer, '$class'})):append(StringBuffer, "Total Listeners: "),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, (get({get({This, eventListenerInterfaceList}), '$class'})):size(get({This, eventListenerInterfaceList}))),
-        put({local, eventListenerInterface}, undefined),
-        put({local, index}, 0),
-        (fun Loop() -> case (get({local, index}) < (get({get({This, eventListenerInterfaceList}), '$class'})):size(get({This, eventListenerInterfaceList}))) of true ->
-            try
-                put({local, eventListenerInterface}, array:get(get({local, index}), get({get({This, eventListenerInterfaceList}), objectArray}))),
-                (get({StringBuffer, '$class'})):append(StringBuffer, LISTENER),
-                (get({StringBuffer, '$class'})):append(StringBuffer, (fun(Target_N66401) -> (get({Target_N66401, '$class'})):toString(Target_N66401, get({local, eventListenerInterface})) end)('StringUtil':getInstance()))
-            catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-                CommonStrings = 'CommonStrings':getInstance(),
-                (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), This, get({CommonStrings, 'TOSTRING'}), E)
-            end,
-            put({local, index}, get({local, index}) + 1),
-            Loop();
-        false -> ok end end)(),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
 
-removeAllListeners(This) ->
-        put({This, eventListenerInterfaceList}, 'BasicArrayListD':new()).
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.lset(f, :LISTENER, " Listener: ")
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["Total Listeners: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.call(JR.get(this, :eventListenerInterfaceList), :jm_size, [])])
+        JR.lset(f, :eventListenerInterface, nil)
+        JR.lset(f, :index, 0)
+        JR.jwhile(fn -> (JR.lget(f, :index) < JR.call(JR.get(this, :eventListenerInterfaceList), :jm_size, [])) end, fn ->
+            try do
+                JR.lset(f, :eventListenerInterface, JR.aget(JR.get(JR.get(this, :eventListenerInterfaceList), :objectArray), JR.lget(f, :index)))
+                JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.lget(f, :LISTENER)])
+                JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(StringUtil.jm_getInstance(), :jm_toString, [JR.lget(f, :eventListenerInterface)])])
+            catch
+                {:jexception, jexception} ->
+                    JR.lset(f, :e, jexception)
+                JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+                JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, JR.get(JR.lget(f, :commonStrings), :TOSTRING), JR.lget(f, :e)])
+            end
+            JR.lpostinc(f, :index, 1)
+        end)
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
 
-addListenerSingleThreaded(This, EventListenerInterface) ->
-        case (not (get({get({This, eventListenerInterfaceList}), '$class'})):contains(get({This, eventListenerInterfaceList}), EventListenerInterface)) of
-            true ->
-            (get({get({This, eventListenerInterfaceList}), '$class'})):add(get({This, eventListenerInterfaceList}), EventListenerInterface);
-            false -> ok
-        end.
 
-addListenerInterface(This, EventListenerInterface) ->
-        case (not (get({get({This, eventListenerInterfaceList}), '$class'})):contains(get({This, eventListenerInterfaceList}), EventListenerInterface)) of
-            true ->
-            (get({get({This, eventListenerInterfaceList}), '$class'})):add(get({This, eventListenerInterfaceList}), EventListenerInterface);
-            false -> ok
-        end.
+  def jm_removeAllListeners(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.put(this, :eventListenerInterfaceList, BasicArrayListD.jnew())
+    end)
+  end
 
-removeListenerSingleThreaded(This, EventListenerInterface) ->
-        (get({get({This, eventListenerInterfaceList}), '$class'})):remove(get({This, eventListenerInterfaceList}), EventListenerInterface).
 
-removeListener(This, EventListenerInterface) ->
-        (get({get({This, eventListenerInterfaceList}), '$class'})):remove(get({This, eventListenerInterfaceList}), EventListenerInterface).
+  def jm_addListenerSingleThreaded(this, p_eventListenerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventListenerInterface, p_eventListenerInterface)
+        if !JR.call(JR.get(this, :eventListenerInterfaceList), :jm_contains, [JR.lget(f, :eventListenerInterface)]) do
+            JR.call(JR.get(this, :eventListenerInterfaceList), :jm_add, [JR.lget(f, :eventListenerInterface)])
+        end
+    end)
+  end
 
-% throws Exception
-fireEvent(This, EventObject) ->
-        put({local, index}, 0),
-        put({local, eventListenerInterface}, undefined),
-        (fun Loop() -> case (get({local, index}) < (get({get({This, eventListenerInterfaceList}), '$class'})):size(get({This, eventListenerInterfaceList}))) of true ->
-            try
-                put({local, eventListenerInterface}, array:get(get({local, index}), get({get({This, eventListenerInterfaceList}), objectArray}))),
-                (get({This, '$class'})):process(This, EventObject, get({local, eventListenerInterface}))
-            catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-                CommonStrings = 'CommonStrings':getInstance(),
-                (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), This, get({'EventStrings':getInstance(), 'FIRE_EVENT'}), E)
-            end,
-            put({local, index}, get({local, index}) + 1),
-            Loop();
-        false -> ok end end)().
 
-% throws Exception
-process(This, EventObject, EventListenerInterface) ->
-        (get({EventListenerInterface, '$class'})):onEvent(EventListenerInterface, EventObject).
+  def jm_addListenerInterface(this, p_eventListenerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventListenerInterface, p_eventListenerInterface)
+        if !JR.call(JR.get(this, :eventListenerInterfaceList), :jm_contains, [JR.lget(f, :eventListenerInterface)]) do
+            JR.call(JR.get(this, :eventListenerInterfaceList), :jm_add, [JR.lget(f, :eventListenerInterface)])
+        end
+    end)
+  end
 
-getEventListenerInterfaceListP(This) ->
-        get({This, eventListenerInterfaceList}).
+
+  def jm_removeListenerSingleThreaded(this, p_eventListenerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventListenerInterface, p_eventListenerInterface)
+        JR.call(JR.get(this, :eventListenerInterfaceList), :jm_remove, [JR.lget(f, :eventListenerInterface)])
+    end)
+  end
+
+
+  def jm_removeListener(this, p_eventListenerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventListenerInterface, p_eventListenerInterface)
+        JR.call(JR.get(this, :eventListenerInterfaceList), :jm_remove, [JR.lget(f, :eventListenerInterface)])
+    end)
+  end
+
+
+  def jm_fireEvent(this, p_eventObject) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+        JR.lset(f, :index, 0)
+        JR.lset(f, :eventListenerInterface, nil)
+        JR.jwhile(fn -> (JR.lget(f, :index) < JR.call(JR.get(this, :eventListenerInterfaceList), :jm_size, [])) end, fn ->
+            try do
+                JR.lset(f, :eventListenerInterface, JR.aget(JR.get(JR.get(this, :eventListenerInterfaceList), :objectArray), JR.lget(f, :index)))
+                JR.call(this, :jm_process, [JR.lget(f, :eventObject), JR.lget(f, :eventListenerInterface)])
+            catch
+                {:jexception, jexception} ->
+                    JR.lset(f, :e, jexception)
+                JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+                JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, JR.get(EventStrings.jm_getInstance(), :FIRE_EVENT), JR.lget(f, :e)])
+            end
+            JR.lpostinc(f, :index, 1)
+        end)
+    end)
+  end
+
+
+  def jm_process(this, p_eventObject, p_eventListenerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+      JR.lset(f, :eventListenerInterface, p_eventListenerInterface)
+        JR.call(JR.lget(f, :eventListenerInterface), :jm_onEvent, [JR.lget(f, :eventObject)])
+    end)
+  end
+
+
+  def jm_getEventListenerInterfaceListP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :eventListenerInterfaceList)})
+    end)
+  end
+end
+
 

@@ -1,29 +1,31 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.ai
-% import org.allbinary.graphics.IdentifierInterface
-% import org.allbinary.layer.AllBinaryLayerManager
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.ai
 
--module('ArtificialIntelligenceInterface').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
-
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('IdentifierInterface', Function, Arguments).
+defmodule ArtificialIntelligenceInterface do
+  def jsuper(), do: JObject
 
 
-% throws Exception
-processAI(This, LayerManager) ->
-    erlang:error({abstract_method, processAI}).
+  def jm_processAI(this, p_layerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerManager, p_layerManager)
+      throw({:jexception, JR.exception("AbstractMethodError", "processAI")})
+    end)
+  end
+end
+
 

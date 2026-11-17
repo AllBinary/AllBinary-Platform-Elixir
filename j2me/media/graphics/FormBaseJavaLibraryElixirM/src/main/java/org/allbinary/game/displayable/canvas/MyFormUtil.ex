@@ -1,72 +1,87 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import javax.microedition.lcdui.Font
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.game.configuration.feature.Features
-% import org.allbinary.graphics.PointFactory
-% import org.allbinary.graphics.Rectangle
-% import org.allbinary.graphics.RectangleFactory
-% import org.allbinary.graphics.displayable.DisplayInfoSingleton
-% import org.allbinary.graphics.font.MyFontProcessor
-% import org.allbinary.graphics.opengles.OpenGLFeatureFactory
-% import org.allbinary.graphics.threed.SWTJOGLProcessor
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('MyFormUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule MyFormUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> MyFormUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'MyFormUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :popupMenuRectangle, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        JR.put(this, :popupMenuRectangle, RectangleFactory.jstatic_SINGLETON())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, popupMenuRectangle}, get({'RectangleFactory', 'SINGLETON'})),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'MyFormUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, MyFormUtil.jstatic_instance()})
+    end)
+  end
 
-updateMeasurement(This, Graphics) ->
-        Font = (get({Graphics, '$class'})):getFont(Graphics),
-        DisplayInfo = 'DisplayInfoSingleton':getInstance(),
-        Features = 'Features':getInstance(),
-        IsOpenGL = (get({Features, '$class'})):isDefault(Features, get({'OpenGLFeatureFactory':getInstance(), 'OPENGL'})),
-        TOTAL_CHAR_WIDTH = case ((fun(Target_N66438) -> (get({Target_N66438, '$class'})):isJOGL(Target_N66438) end)('SWTJOGLProcessor':getInstance()) andalso IsOpenGL) of true -> 2; false -> 3 end,
-        Width = 'MyFontProcessor':defaultStringWidth(Font, TOTAL_CHAR_WIDTH),
-        PointFactory = 'PointFactory':getInstance(),
-        case ((get({DisplayInfo, '$class'})):getLastHeight(DisplayInfo) < 320) of
-            true ->
-            put({This, popupMenuRectangle}, 'Rectangle':new((get({PointFactory, '$class'})):createXY(PointFactory, 0, 25), Width, ((((get({Font, '$class'})):getHeight(Font) * 4)) + 2)));
-            false ->
-            put({This, popupMenuRectangle}, 'Rectangle':new((get({PointFactory, '$class'})):createXY(PointFactory, 0, ((get({DisplayInfo, '$class'})):getLastHalfHeight(DisplayInfo) - 70)), Width, (((get({Font, '$class'})):getHeight(Font) * 5))))
-        end.
 
-getPopupMenuRectangle(This) ->
-        get({This, popupMenuRectangle}).
+  def jm_updateMeasurement(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.lset(f, :font, JR.call(JR.lget(f, :graphics), :jm_getFont, []))
+        JR.lset(f, :displayInfo, DisplayInfoSingleton.jm_getInstance())
+        JR.lset(f, :features, Features.jm_getInstance())
+        JR.lset(f, :isOpenGL, JR.call(JR.lget(f, :features), :jm_isDefault, [JR.get(OpenGLFeatureFactory.jm_getInstance(), :OPENGL)]))
+        JR.lset(f, :TOTAL_CHAR_WIDTH, (if (JR.call(SWTJOGLProcessor.jm_getInstance(), :jm_isJOGL, []) && JR.lget(f, :isOpenGL)), do: 2, else: 3))
+        JR.lset(f, :width, MyFontProcessor.jm_defaultStringWidth(JR.lget(f, :font), JR.lget(f, :TOTAL_CHAR_WIDTH)))
+        JR.lset(f, :pointFactory, PointFactory.jm_getInstance())
+        if (JR.call(JR.lget(f, :displayInfo), :jm_getLastHeight, []) < 320) do
+            JR.put(this, :popupMenuRectangle, Rectangle.jnew(JR.call(JR.lget(f, :pointFactory), :jm_createXY, [0, 25]), JR.lget(f, :width), (((JR.call(JR.lget(f, :font), :jm_getHeight, []) * 4)) + 2)))
+        else
+            JR.put(this, :popupMenuRectangle, Rectangle.jnew(JR.call(JR.lget(f, :pointFactory), :jm_createXY, [0, (JR.call(JR.lget(f, :displayInfo), :jm_getLastHalfHeight, []) - 70)]), JR.lget(f, :width), ((JR.call(JR.lget(f, :font), :jm_getHeight, []) * 5))))
+        end
+    end)
+  end
+
+
+  def jm_getPopupMenuRectangle(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :popupMenuRectangle)})
+    end)
+  end
+end
+
 

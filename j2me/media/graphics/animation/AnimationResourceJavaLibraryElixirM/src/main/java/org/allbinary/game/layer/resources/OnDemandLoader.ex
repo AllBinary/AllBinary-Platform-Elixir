@@ -1,104 +1,126 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer.resources
-% import org.allbinary.animation.resource.BaseResourceAnimationInterfaceFactoryInterfaceFactory
-% import org.allbinary.game.configuration.feature.Features
-% import org.allbinary.game.configuration.feature.MainFeatureFactory
-% import org.allbinary.game.layer.GameLayerPlacementInterfaceBasicArrayListFactoryInterfaceFactory
-% import org.allbinary.game.layer.LayerPlacementInterfaceBasicArrayListFactoryInterface
-% import org.allbinary.game.resource.ResourceLoadingLevelFactory
-% import org.allbinary.image.ImageCache
-% import org.allbinary.logic.communication.log.PreLogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer.resources
 
--module('OnDemandLoader').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule OnDemandLoader do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, onDemandResourcesFactory}, undefined),
-    put({This, gameLayerPlacementInterfaceBasicArrayListFactoryInterfaceFactory}, undefined),
-    put({This, resourceAnimationInterfaceFactoryInterfaceFactory}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :onDemandResourcesFactory, nil)
+    JR.put(this, :gameLayerPlacementInterfaceBasicArrayListFactoryInterfaceFactory, nil)
+    JR.put(this, :resourceAnimationInterfaceFactoryInterfaceFactory, nil)
+        
+        
+        
+    nil
+  end
 
 
-new(OnDemandResourcesFactory, GameLayerPlacementInterfaceBasicArrayListFactoryInterfaceFactory, ResourceAnimationInterfaceFactoryInterfaceFactory) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, OnDemandResourcesFactory, GameLayerPlacementInterfaceBasicArrayListFactoryInterfaceFactory, ResourceAnimationInterfaceFactoryInterfaceFactory),
-    This.
+  def jinit(this, p_onDemandResourcesFactory, p_gameLayerPlacementInterfaceBasicArrayListFactoryInterfaceFactory, p_resourceAnimationInterfaceFactoryInterfaceFactory) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :onDemandResourcesFactory, p_onDemandResourcesFactory)
+      JR.lset(f, :gameLayerPlacementInterfaceBasicArrayListFactoryInterfaceFactory, p_gameLayerPlacementInterfaceBasicArrayListFactoryInterfaceFactory)
+      JR.lset(f, :resourceAnimationInterfaceFactoryInterfaceFactory, p_resourceAnimationInterfaceFactoryInterfaceFactory)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :onDemandResourcesFactory, JR.lget(f, :onDemandResourcesFactory))
+        JR.put(this, :gameLayerPlacementInterfaceBasicArrayListFactoryInterfaceFactory, JR.lget(f, :gameLayerPlacementInterfaceBasicArrayListFactoryInterfaceFactory))
+        JR.put(this, :resourceAnimationInterfaceFactoryInterfaceFactory, JR.lget(f, :resourceAnimationInterfaceFactoryInterfaceFactory))
+    end)
+  end
 
-'$init'(This, OnDemandResourcesFactory, GameLayerPlacementInterfaceBasicArrayListFactoryInterfaceFactory, ResourceAnimationInterfaceFactoryInterfaceFactory) ->
-    init_fields(This),
-        put({This, onDemandResourcesFactory}, OnDemandResourcesFactory),
-        put({This, gameLayerPlacementInterfaceBasicArrayListFactoryInterfaceFactory}, GameLayerPlacementInterfaceBasicArrayListFactoryInterfaceFactory),
-        put({This, resourceAnimationInterfaceFactoryInterfaceFactory}, ResourceAnimationInterfaceFactoryInterfaceFactory).
+  def jnew(p_onDemandResourcesFactory, p_gameLayerPlacementInterfaceBasicArrayListFactoryInterfaceFactory, p_resourceAnimationInterfaceFactoryInterfaceFactory) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_onDemandResourcesFactory, p_gameLayerPlacementInterfaceBasicArrayListFactoryInterfaceFactory, p_resourceAnimationInterfaceFactoryInterfaceFactory)
+    this
+  end
 
-% throws Exception
-init(This, ImageCache, Level, LoadingString) when is_integer(Level), (is_list(LoadingString) orelse LoadingString =:= undefined) ->
-        try
-        ResourceLoadingLevelFactory = 'ResourceLoadingLevelFactory':getInstance(),
-        case (fun(Target_N66220) -> (get({Target_N66220, '$class'})):isFeature(Target_N66220, get({'MainFeatureFactory':getInstance(), 'LOAD_ALL'})) end)('Features':getInstance()) of
-            true ->
-            case (get({get({This, resourceAnimationInterfaceFactoryInterfaceFactory}), '$class'})):isInitialized(get({This, resourceAnimationInterfaceFactoryInterfaceFactory})) of
-                true ->
-                throw({'$return', ok});
-                false -> ok
-            end,
-            (get({This, '$class'})):initAll(This, ImageCache, LoadingString);
-            false ->
-            case (Level =/= (get({get({ResourceLoadingLevelFactory, 'LOAD_ALL'}), '$class'})):getLevel(get({ResourceLoadingLevelFactory, 'LOAD_ALL'}))) of
-            true ->
-            LayerPlacementInterfaceBasicArrayListFactoryInterface = (get({get({This, gameLayerPlacementInterfaceBasicArrayListFactoryInterfaceFactory}), '$class'})):getInstance(get({This, gameLayerPlacementInterfaceBasicArrayListFactoryInterfaceFactory}), Level),
-            (get({This, '$class'})):initLevel(This, LayerPlacementInterfaceBasicArrayListFactoryInterface, ImageCache, Level, LoadingString);
-            false -> ok
+
+  def jm_init(this, p_imageCache, p_level, p_loadingString) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :imageCache, p_imageCache)
+      JR.lset(f, :level, p_level)
+      JR.lset(f, :loadingString, p_loadingString)
+        JR.lset(f, :resourceLoadingLevelFactory, ResourceLoadingLevelFactory.jm_getInstance())
+        if JR.call(Features.jm_getInstance(), :jm_isFeature, [JR.get(MainFeatureFactory.jm_getInstance(), :LOAD_ALL)]) do
+            if JR.call(JR.get(this, :resourceAnimationInterfaceFactoryInterfaceFactory), :jm_isInitialized, []) do
+                throw({:jreturn, nil})
+            end
+            JR.call(this, :jm_initAll, [JR.lget(f, :imageCache), JR.lget(f, :loadingString)])
+        else
+            if (JR.lget(f, :level) != JR.call(JR.get(JR.lget(f, :resourceLoadingLevelFactory), :LOAD_ALL), :jm_getLevel, [])) do
+            JR.lset(f, :layerPlacementInterfaceBasicArrayListFactoryInterface, JR.call(JR.get(this, :gameLayerPlacementInterfaceBasicArrayListFactoryInterfaceFactory), :jm_getInstance, [JR.lget(f, :level)]))
+            JR.call(this, :jm_initLevel, [JR.lget(f, :layerPlacementInterfaceBasicArrayListFactoryInterface), JR.lget(f, :imageCache), JR.lget(f, :level), JR.lget(f, :loadingString)])
         end
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-% throws Exception
-initAll(This, ImageCache, LoadingString) when (is_list(LoadingString) orelse LoadingString =:= undefined) ->
-        put({local, index}, 0),
-        Portion = 120,
-        put({local, onDemandResources}, undefined),
-        put({local, onDemandIndex}, (get({get({This, onDemandResourcesFactory}), '$class'})):size(get({This, onDemandResourcesFactory}))),
-        (fun Loop() -> case (begin put({local, onDemandIndex}, get({local, onDemandIndex}) - 1), get({local, onDemandIndex}) end >= 0) of true ->
-            put({local, onDemandResources}, (get({get({This, onDemandResourcesFactory}), '$class'})):remove(get({This, onDemandResourcesFactory}), get({local, onDemandIndex}))),
-            case (get({local, onDemandResources}) =/= get({'OnDemandResources', 'NULL_ON_DEMAND_RESOURCES'})) of
-                true ->
-                put({local, index}, (get({get({local, onDemandResources}), '$class'})):initAt(get({local, onDemandResources}), ImageCache, get({This, resourceAnimationInterfaceFactoryInterfaceFactory}), Portion, LoadingString, get({local, index})));
-                false -> ok
-            end,
-            Loop();
-        false -> ok end end)().
 
-% throws Exception
-initLevel(This, LayerPlacementInterfaceBasicArrayListFactoryInterface, ImageCache, Level, LoadingString) when is_integer(Level), (is_list(LoadingString) orelse LoadingString =:= undefined) ->
-        CommonStrings = 'CommonStrings':getInstance(),
-        Portion = 120,
-        put({local, index}, 0),
-        OnDemandArray = (get({LayerPlacementInterfaceBasicArrayListFactoryInterface, '$class'})):getOnDemandResources(LayerPlacementInterfaceBasicArrayListFactoryInterface),
-        'PreLogUtil':put((fun(Target_N67216) -> (get({Target_N67216, '$class'})):toString(Target_N67216) end)((fun(Target_N67223) -> (get({Target_N67223, '$class'})):appendint(Target_N67223, array:size(OnDemandArray)) end)((fun(Target_N67230) -> (get({Target_N67230, '$class'})):append(Target_N67230, get({CommonStrings, 'START'})) end)('StringMaker':new()))), This, "initLevel"),
-        put({local, onDemandResources}, undefined),
-        put({local, onDemandIndex}, array:size(OnDemandArray)),
-        (fun Loop() -> case (begin put({local, onDemandIndex}, get({local, onDemandIndex}) - 1), get({local, onDemandIndex}) end >= 0) of true ->
-            put({local, onDemandResources}, (get({get({This, onDemandResourcesFactory}), '$class'})):remove(get({This, onDemandResourcesFactory}), array:get(get({local, onDemandIndex}), OnDemandArray))),
-            case (get({local, onDemandResources}) =/= get({'OnDemandResources', 'NULL_ON_DEMAND_RESOURCES'})) of
-                true ->
-                put({local, index}, (get({get({local, onDemandResources}), '$class'})):initAt(get({local, onDemandResources}), ImageCache, get({This, resourceAnimationInterfaceFactoryInterfaceFactory}), Portion, LoadingString, get({local, index})));
-                false -> ok
-            end,
-            Loop();
-        false -> ok end end)().
+  def jm_initAll(this, p_imageCache, p_loadingString) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :imageCache, p_imageCache)
+      JR.lset(f, :loadingString, p_loadingString)
+        JR.lset(f, :index, 0)
+        JR.lset(f, :portion, 120)
+        JR.lset(f, :onDemandResources, nil)
+        JR.lset(f, :onDemandIndex, JR.call(JR.get(this, :onDemandResourcesFactory), :jm_size, []))
+        JR.jfor(fn -> (JR.lpreinc(f, :onDemandIndex, -1) >= 0) end, fn -> nil end, fn ->
+            JR.lset(f, :onDemandResources, JR.call(JR.get(this, :onDemandResourcesFactory), :jm_remove, [JR.lget(f, :onDemandIndex)]))
+            if (JR.lget(f, :onDemandResources) != OnDemandResources.jstatic_NULL_ON_DEMAND_RESOURCES()) do
+                JR.lset(f, :index, JR.call(JR.lget(f, :onDemandResources), :jm_initAt, [JR.lget(f, :imageCache), JR.get(this, :resourceAnimationInterfaceFactoryInterfaceFactory), JR.lget(f, :portion), JR.lget(f, :loadingString), JR.lget(f, :index)]))
+            end
+        end)
+    end)
+  end
+
+
+  def jm_initLevel(this, p_layerPlacementInterfaceBasicArrayListFactoryInterface, p_imageCache, p_level, p_loadingString) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerPlacementInterfaceBasicArrayListFactoryInterface, p_layerPlacementInterfaceBasicArrayListFactoryInterface)
+      JR.lset(f, :imageCache, p_imageCache)
+      JR.lset(f, :level, p_level)
+      JR.lset(f, :loadingString, p_loadingString)
+        JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+        JR.lset(f, :portion, 120)
+        JR.lset(f, :index, 0)
+        JR.lset(f, :onDemandArray, JR.call(JR.lget(f, :layerPlacementInterfaceBasicArrayListFactoryInterface), :jm_getOnDemandResources, []))
+        PreLogUtil.jm_put(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.lget(f, :commonStrings), :START)]), :jm_appendint, [JR.alength(JR.lget(f, :onDemandArray))]), :jm_toString, []), this, "initLevel")
+        JR.lset(f, :onDemandResources, nil)
+        JR.lset(f, :onDemandIndex, JR.alength(JR.lget(f, :onDemandArray)))
+        JR.jfor(fn -> (JR.lpreinc(f, :onDemandIndex, -1) >= 0) end, fn -> nil end, fn ->
+            JR.lset(f, :onDemandResources, JR.call(JR.get(this, :onDemandResourcesFactory), :jm_remove, [JR.aget(JR.lget(f, :onDemandArray), JR.lget(f, :onDemandIndex))]))
+            if (JR.lget(f, :onDemandResources) != OnDemandResources.jstatic_NULL_ON_DEMAND_RESOURCES()) do
+                JR.lset(f, :index, JR.call(JR.lget(f, :onDemandResources), :jm_initAt, [JR.lget(f, :imageCache), JR.get(this, :resourceAnimationInterfaceFactoryInterfaceFactory), JR.lget(f, :portion), JR.lget(f, :loadingString), JR.lget(f, :index)]))
+            end
+        end)
+    end)
+  end
+end
+
 

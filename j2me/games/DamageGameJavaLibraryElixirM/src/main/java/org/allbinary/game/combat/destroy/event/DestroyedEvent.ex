@@ -1,65 +1,107 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.combat.destroy.event
-% import org.allbinary.game.displayable.canvas.AllBinaryGameCanvas
-% import org.allbinary.game.displayable.canvas.NullGameCanvas
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.logic.util.event.AllBinaryEventObject
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.combat.destroy.event
 
--module('DestroyedEvent').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule DestroyedEvent do
+  def jsuper(), do: AllBinaryEventObject
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AllBinaryEventObject', Function, Arguments).
-
-init_fields(This) ->
-    put({This, allBinaryGameCanvas}, 'NullGameCanvas':getInstance()),
-    put({This, allBinaryLayerInterface}, get({'AllBinaryLayer', 'NULL_ALLBINARY_LAYER'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :allBinaryGameCanvas, nil)
+    JR.put(this, :allBinaryLayerInterface, nil)
+        JR.put(this, :allBinaryGameCanvas, NullGameCanvas.jm_getInstance())
+        JR.put(this, :allBinaryLayerInterface, AllBinaryLayer.jstatic_NULL_ALLBINARY_LAYER())
+    nil
+  end
 
 
-new(CombatGameCanvas) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, CombatGameCanvas),
-    This.
+  def jinit(this, p_combatGameCanvas) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :combatGameCanvas, p_combatGameCanvas)
+        AllBinaryEventObject.jinit(this, DestroyedEventHandler.jm_getInstance())
+        DestroyedEvent.jinitfields(this)
+        JR.call(this, :jm_setAllBinaryGameCanvas, [JR.lget(f, :combatGameCanvas)])
+    end)
+  end
 
-'$init'(This, CombatGameCanvas) ->
-        'AllBinaryEventObject':'$init'(This, 'DestroyedEventHandler':getInstance()),
-        init_fields(This),
-        (get({This, '$class'})):setAllBinaryGameCanvas(This, CombatGameCanvas).
+  def jnew(p_combatGameCanvas) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_combatGameCanvas)
+    this
+  end
 
-getAllBinaryGameCanvas(This) ->
-        get({This, allBinaryGameCanvas}).
 
-getLayerInterface(This) ->
-        get({This, allBinaryLayerInterface}).
+  def jm_getAllBinaryGameCanvas(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :allBinaryGameCanvas)})
+    end)
+  end
 
-setAllBinaryGameCanvas(This, AllBinaryGameCanvas) ->
-        put({This, allBinaryGameCanvas}, AllBinaryGameCanvas).
 
-setLayerInterfaceForCircularStaticPool(This, AllBinaryLayerInterface) ->
-        put({This, allBinaryLayerInterface}, AllBinaryLayerInterface).
+  def jm_getLayerInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :allBinaryLayerInterface)})
+    end)
+  end
 
-toString(This) ->
-        StringBuffer = 'StringMaker':new(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "DestroyedEvent: \n"),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "AllBinaryLayerInterface: "),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({get({This, allBinaryLayerInterface}), '$class'})):toString(get({This, allBinaryLayerInterface}))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "\nAllBinaryGameCanvas: "),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (fun(Target_N66432) -> (get({Target_N66432, '$class'})):toString(Target_N66432, (get({This, '$class'})):getAllBinaryGameCanvas(This)) end)('StringUtil':getInstance())),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+
+  def jm_setAllBinaryGameCanvas(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        JR.put(this, :allBinaryGameCanvas, JR.lget(f, :allBinaryGameCanvas))
+    end)
+  end
+
+
+  def jm_setLayerInterfaceForCircularStaticPool(this, p_allBinaryLayerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerInterface, p_allBinaryLayerInterface)
+        JR.put(this, :allBinaryLayerInterface, JR.lget(f, :allBinaryLayerInterface))
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["DestroyedEvent: \n"])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["AllBinaryLayerInterface: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(this, :allBinaryLayerInterface), :jm_toString, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["\nAllBinaryGameCanvas: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(StringUtil.jm_getInstance(), :jm_toString, [JR.call(this, :jm_getAllBinaryGameCanvas, [])])])
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+end
+
 

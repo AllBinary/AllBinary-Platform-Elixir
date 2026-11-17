@@ -1,32 +1,54 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.physics.movement
-% import org.allbinary.game.layer.AllBinaryGameLayer
-% import org.allbinary.logic.math.BasicDecimal
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.physics.movement
 
--module('MovementInterface').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
+defmodule MovementInterface do
+  def jsuper(), do: JObject
 
 
-init(This, SpeedBasicDecimal, Angle, OtherAngle) when is_integer(Angle), is_integer(OtherAngle) ->
-    erlang:error({abstract_method, init}).
+  def jm_init(this, p_speedBasicDecimal, p_angle, p_otherAngle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :speedBasicDecimal, p_speedBasicDecimal)
+      JR.lset(f, :angle, p_angle)
+      JR.lset(f, :otherAngle, p_otherAngle)
+      throw({:jexception, JR.exception("AbstractMethodError", "init")})
+    end)
+  end
 
-% throws Exception
-process(This, Layer) ->
-    erlang:error({abstract_method, process}).
 
-stop(This) ->
-    erlang:error({abstract_method, stop}).
+  def jm_process(this, p_layer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layer, p_layer)
+      throw({:jexception, JR.exception("AbstractMethodError", "process")})
+    end)
+  end
+
+
+  def jm_stop(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "stop")})
+    end)
+  end
+end
+
 

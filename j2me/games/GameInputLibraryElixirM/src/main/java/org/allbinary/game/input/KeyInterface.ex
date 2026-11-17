@@ -1,32 +1,66 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2025 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.game.input
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2025 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.game.input
 
--module('KeyInterface').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
+defmodule KeyInterface do
+  def jsuper(), do: JObject
 
 
-keyPressed(This, KeyCode) when is_integer(KeyCode) ->
-    erlang:error({abstract_method, keyPressed}).
+  def jm_keyPressed(this, p_keyCode) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+      throw({:jexception, JR.exception("AbstractMethodError", "keyPressed")})
+    end)
+  end
 
-keyReleased(This, KeyCode) when is_integer(KeyCode) ->
-    erlang:error({abstract_method, keyReleased}).
 
-keyPressedByDevice(This, KeyCode, DeviceId) when is_integer(KeyCode), is_integer(DeviceId) ->
-    erlang:error({abstract_method, keyPressedByDevice}).
+  def jm_keyReleased(this, p_keyCode) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+      throw({:jexception, JR.exception("AbstractMethodError", "keyReleased")})
+    end)
+  end
 
-keyReleasedByDevice(This, KeyCode, DeviceId) when is_integer(KeyCode), is_integer(DeviceId) ->
-    erlang:error({abstract_method, keyReleasedByDevice}).
+
+  def jm_keyPressedByDevice(this, p_keyCode, p_deviceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+      JR.lset(f, :deviceId, p_deviceId)
+      throw({:jexception, JR.exception("AbstractMethodError", "keyPressedByDevice")})
+    end)
+  end
+
+
+  def jm_keyReleasedByDevice(this, p_keyCode, p_deviceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+      JR.lset(f, :deviceId, p_deviceId)
+      throw({:jexception, JR.exception("AbstractMethodError", "keyReleasedByDevice")})
+    end)
+  end
+end
+
 

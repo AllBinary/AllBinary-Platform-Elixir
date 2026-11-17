@@ -1,52 +1,92 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.score
-% import org.allbinary.logic.math.SmallIntegerSingletonFactory
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.score
 
--module('Scoreable').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements ScoreableInterface
+defmodule Scoreable do
+  def jsuper(), do: JObject
+def jstatic_ID(), do: JR.static_get(__MODULE__, :ID, fn -> JR.call(SmallIntegerSingletonFactory.jm_getInstance(), :jm_getAt, [3]) end)
+  def jstatic_set_ID(value), do: JR.static_put(__MODULE__, :ID, value)
 
-static_init() ->
-    put({?MODULE, 'ID'}, (fun(Target_N65643) -> (get({Target_N65643, '$class'})):getAt(Target_N65643, 3) end)('SmallIntegerSingletonFactory':getInstance())),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :points, 0)
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, points}, 0),
-    ok.
+
+  def jinit(this, p_points) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :points, p_points)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :points, JR.lget(f, :points))
+    end)
+  end
+
+  def jnew(p_points) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_points)
+    this
+  end
 
 
-new(Points) when is_integer(Points) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Points),
-    This.
+  def jm_addPoints(this, p_points) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :points, p_points)
+        JR.put(this, :points, JR.int32(JR.get(this, :points) + JR.lget(f, :points)))
+    end)
+  end
 
-'$init'(This, Points) when is_integer(Points) ->
-    init_fields(This),
-        put({This, points}, Points).
 
-addPoints(This, Points) when is_integer(Points) ->
-        put({This, points}, (get({This, points}) + Points)).
+  def jm_removePoints(this, p_points) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :points, p_points)
+        JR.put(this, :points, JR.int32(JR.get(this, :points) - JR.lget(f, :points)))
+    end)
+  end
 
-removePoints(This, Points) when is_integer(Points) ->
-        put({This, points}, (get({This, points}) - Points)).
 
-setPoints(This, Points) when is_integer(Points) ->
-        put({This, points}, Points).
+  def jm_setPoints(this, p_points) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :points, p_points)
+        JR.put(this, :points, JR.lget(f, :points))
+    end)
+  end
 
-getPoints(This) ->
-        get({This, points}).
+
+  def jm_getPoints(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :points)})
+    end)
+  end
+end
+
 

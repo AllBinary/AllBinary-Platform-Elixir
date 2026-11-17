@@ -1,72 +1,151 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.input
-% import org.allbinary.logic.NullUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.input
 
--module('PlatformKeyFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule PlatformKeyFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT) end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, get({'NullUtil':getInstance(), 'NULL_OBJECT'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        case (get({'PlatformKeyFactory', instance}) =:= get({'NullUtil':getInstance(), 'NULL_OBJECT'})) of
-            true ->
-            put({'PlatformKeyFactory', instance}, 'PlatformKeyFactory':new());
-            false -> ok
-        end,
-        get({'PlatformKeyFactory', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        if (PlatformKeyFactory.jstatic_instance() == JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)) do
+            PlatformKeyFactory.jstatic_set_instance(PlatformKeyFactory.jnew())
+        end
+        throw({:jreturn, PlatformKeyFactory.jstatic_instance()})
+    end)
+  end
 
-getString(This, KeyCode) when is_integer(KeyCode) ->
-        'PCGameKey':getString(KeyCode).
 
-isSubmission(This, Input) ->
-        (fun(Target_N65917) -> (get({Target_N65917, '$class'})):isSubmission(Target_N65917, Input) end)('PCKeyFactory':getInstance()).
+  def jm_getString(this, p_keyCode) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+        throw({:jreturn, PCGameKey.jm_getString(JR.lget(f, :keyCode))})
+    end)
+  end
 
-isDelete(This, Input) ->
-        (fun(Target_N66002) -> (get({Target_N66002, '$class'})):isDelete(Target_N66002, Input) end)('PCKeyFactory':getInstance()).
 
-isBackSpace(This, Input) ->
-        (fun(Target_N66087) -> (get({Target_N66087, '$class'})):isBackSpace(Target_N66087, Input) end)('PCKeyFactory':getInstance()).
+  def jm_isSubmission(this, p_input) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :input, p_input)
+        throw({:jreturn, JR.call(PCKeyFactory.jm_getInstance(), :jm_isSubmission, [JR.lget(f, :input)])})
+    end)
+  end
 
-isUp(This, Input) ->
-        (fun(Target_N66172) -> (get({Target_N66172, '$class'})):isUp(Target_N66172, Input) end)('PCKeyFactory':getInstance()).
 
-isDown(This, Input) ->
-        (fun(Target_N66257) -> (get({Target_N66257, '$class'})):isDown(Target_N66257, Input) end)('PCKeyFactory':getInstance()).
+  def jm_isDelete(this, p_input) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :input, p_input)
+        throw({:jreturn, JR.call(PCKeyFactory.jm_getInstance(), :jm_isDelete, [JR.lget(f, :input)])})
+    end)
+  end
 
-isEnter(This, Input) ->
-        (fun(Target_N66342) -> (get({Target_N66342, '$class'})):isEnter(Target_N66342, Input) end)('PCKeyFactory':getInstance()).
 
-isLeft(This, Input) ->
-        (fun(Target_N66427) -> (get({Target_N66427, '$class'})):isLeft(Target_N66427, Input) end)('PCKeyFactory':getInstance()).
+  def jm_isBackSpace(this, p_input) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :input, p_input)
+        throw({:jreturn, JR.call(PCKeyFactory.jm_getInstance(), :jm_isBackSpace, [JR.lget(f, :input)])})
+    end)
+  end
 
-isRight(This, Input) ->
-        (fun(Target_N66512) -> (get({Target_N66512, '$class'})):isRight(Target_N66512, Input) end)('PCKeyFactory':getInstance()).
+
+  def jm_isUp(this, p_input) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :input, p_input)
+        throw({:jreturn, JR.call(PCKeyFactory.jm_getInstance(), :jm_isUp, [JR.lget(f, :input)])})
+    end)
+  end
+
+
+  def jm_isDown(this, p_input) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :input, p_input)
+        throw({:jreturn, JR.call(PCKeyFactory.jm_getInstance(), :jm_isDown, [JR.lget(f, :input)])})
+    end)
+  end
+
+
+  def jm_isEnter(this, p_input) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :input, p_input)
+        throw({:jreturn, JR.call(PCKeyFactory.jm_getInstance(), :jm_isEnter, [JR.lget(f, :input)])})
+    end)
+  end
+
+
+  def jm_isLeft(this, p_input) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :input, p_input)
+        throw({:jreturn, JR.call(PCKeyFactory.jm_getInstance(), :jm_isLeft, [JR.lget(f, :input)])})
+    end)
+  end
+
+
+  def jm_isRight(this, p_input) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :input, p_input)
+        throw({:jreturn, JR.call(PCKeyFactory.jm_getInstance(), :jm_isRight, [JR.lget(f, :input)])})
+    end)
+  end
+end
+
 

@@ -1,40 +1,58 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2025 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.opengles.shader
-% import javax.microedition.khronos.opengles.GL10
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2025 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles.shader
 
--module('UniformLightPositionOpenGLProcessor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule UniformLightPositionOpenGLProcessor do
+  def jsuper(), do: OpenGLObject3dProcessor
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('OpenGLObject3dProcessor', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+
+  def jinit(this, p_shaderComposite, p_handleIndex) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :shaderComposite, p_shaderComposite)
+      JR.lset(f, :handleIndex, p_handleIndex)
+      OpenGLObject3dProcessor.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
+
+  def jnew(p_shaderComposite, p_handleIndex) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_shaderComposite, p_handleIndex)
+    this
+  end
 
 
-new(ShaderComposite, HandleIndex) when is_integer(HandleIndex) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, ShaderComposite, HandleIndex),
-    This.
+  def jm_process(this, p_gl, p_unused) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+      JR.lset(f, :unused, p_unused)
+        nil
+    end)
+  end
+end
 
-'$init'(This, ShaderComposite, HandleIndex) when is_integer(HandleIndex) ->
-    'OpenGLObject3dProcessor':'$init'(This),
-    init_fields(This),
-        ok.
-
-process(This, Gl, Unused) ->
-        ok.
 

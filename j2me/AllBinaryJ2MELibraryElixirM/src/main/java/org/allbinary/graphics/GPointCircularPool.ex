@@ -1,42 +1,50 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics
-% import org.allbinary.logic.util.cache.BaseCircularPool
-% import org.allbinary.util.CircularIndexUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics
 
--module('GPointCircularPool').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule GPointCircularPool do
+  def jsuper(), do: BaseCircularPool
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BaseCircularPool', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
 
+  def jinit(this, p_size) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :size, p_size)
+      BaseCircularPool.jinit(this)
+      jinitfields(this)
+        JR.put(this, :circularIndexUtil, CircularIndexUtil.jm_createInstance(JR.lget(f, :size)))
+        JR.put(this, :OBJECT_ARRAY, JR.anew(JR.lget(f, :size), nil))
+        JR.lset(f, :index, JR.int32(JR.lget(f, :size) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.aset(JR.get(this, :OBJECT_ARRAY), JR.lget(f, :index), CustomGPoint.jm_getInstance3(0, 0))
+        end)
+    end)
+  end
 
-new(Size) when is_integer(Size) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Size),
-    This.
+  def jnew(p_size) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_size)
+    this
+  end
+end
 
-'$init'(This, Size) when is_integer(Size) ->
-    'BaseCircularPool':'$init'(This),
-    init_fields(This),
-        put({This, circularIndexUtil}, 'CircularIndexUtil':createInstance(Size)),
-        put({This, 'OBJECT_ARRAY'}, array:new(Size, {default, undefined})),
-        lists:foreach(fun(Index) ->
-            put({This, 'OBJECT_ARRAY'}, array:set(Index, 'CustomGPoint':getInstance3(0, 0), get({This, 'OBJECT_ARRAY'})))
-        end, lists:seq((Size - 1), 0, -1)).
 

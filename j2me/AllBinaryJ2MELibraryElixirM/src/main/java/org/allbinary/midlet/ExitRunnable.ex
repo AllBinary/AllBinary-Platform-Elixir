@@ -1,61 +1,87 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.midlet
-% import javax.microedition.lcdui.NullCanvas
-% import org.allbinary.canvas.Processor
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.midlet
 
--module('ExitRunnable').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements Runnable
+defmodule ExitRunnable do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, midlet}, undefined),
-    put({This, processor}, undefined),
-    put({This, isProgress}, false),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :midlet, nil)
+    JR.put(this, :processor, nil)
+    JR.put(this, :isProgress, false)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        
+        
+        
+    nil
+  end
 
 
-new(Midlet, Processor, IsProgress) when is_boolean(IsProgress) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Midlet, Processor, IsProgress),
-    This.
+  def jinit(this, p_midlet, p_processor, p_isProgress) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :midlet, p_midlet)
+      JR.lset(f, :processor, p_processor)
+      JR.lset(f, :isProgress, p_isProgress)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :midlet, JR.lget(f, :midlet))
+        JR.put(this, :isProgress, JR.lget(f, :isProgress))
+        JR.put(this, :processor, JR.lget(f, :processor))
+    end)
+  end
 
-'$init'(This, Midlet, Processor, IsProgress) when is_boolean(IsProgress) ->
-    init_fields(This),
-        put({This, midlet}, Midlet),
-        put({This, isProgress}, IsProgress),
-        put({This, processor}, Processor).
+  def jnew(p_midlet, p_processor, p_isProgress) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_midlet, p_processor, p_isProgress)
+    this
+  end
 
-run(This) ->
-        try
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START_RUNNABLE'}), This, get({get({This, commonStrings}), 'RUN'})),
-            (get({get({This, midlet}), '$class'})):destroyAppInRunnable(get({This, midlet}), false, get({This, isProgress})),
-            (get({get({This, midlet}), '$class'})):setDisplay(get({This, midlet}), get({'NullCanvas', 'NULL_CANVAS'})),
-            (get({get({This, midlet}), '$class'})):notifyDestroyed(get({This, midlet})),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'END_RUNNABLE'}), This, get({get({This, commonStrings}), 'RUN'})),
-            (get({get({This, processor}), '$class'})):process(get({This, processor}))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'RUN'}), E),
-            try
-                (get({get({This, processor}), '$class'})):process(get({This, processor}))
-            catch _:E2 when E2 =/= '$break', E2 =/= '$continue', (not is_tuple(E2) orelse element(1, E2) =/= '$return') ->
-                (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'RUN'}), E)
+
+  def jm_run(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START_RUNNABLE), this, JR.get(JR.get(this, :commonStrings), :RUN)])
+            JR.call(JR.get(this, :midlet), :jm_destroyAppInRunnable, [false, JR.get(this, :isProgress)])
+            JR.call(JR.get(this, :midlet), :jm_setDisplay, [NullCanvas.jstatic_NULL_CANVAS()])
+            JR.call(JR.get(this, :midlet), :jm_notifyDestroyed, [])
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :END_RUNNABLE), this, JR.get(JR.get(this, :commonStrings), :RUN)])
+            JR.call(JR.get(this, :processor), :jm_process, [])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :RUN), JR.lget(f, :e)])
+            try do
+                JR.call(JR.get(this, :processor), :jm_process, [])
+            catch
+                {:jexception, jexception} ->
+                    JR.lset(f, :e2, jexception)
+                JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :RUN), JR.lget(f, :e)])
             end
-        end.
+        end
+    end)
+  end
+end
+
 

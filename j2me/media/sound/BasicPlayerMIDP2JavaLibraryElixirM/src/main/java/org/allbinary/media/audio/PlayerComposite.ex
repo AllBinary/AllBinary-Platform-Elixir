@@ -1,138 +1,300 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.media.audio
-% import javax.microedition.media.Control
-% import javax.microedition.media.Controllable
-% import javax.microedition.media.MediaException
-% import javax.microedition.media.Player
-% import javax.microedition.media.PlayerListener
-% import javax.microedition.media.TimeBase
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.time.GameTickTimeDelayHelper
-% import org.allbinary.time.GameTickTimeDelayHelperFactory
-% import org.allbinary.time.TimeDelayHelper
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
--module('PlayerComposite').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements Controllable
-% implements Player
+#BasicPlayerMIDP2
+defmodule PlayerComposite do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, player}, undefined),
-    put({This, timeElapsedHelper}, 'TimeDelayHelper':new(0)),
-    put({This, gameTickTimeDelayHelper}, 'GameTickTimeDelayHelperFactory':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :player, nil)
+    JR.put(this, :timeElapsedHelper, nil)
+    JR.put(this, :gameTickTimeDelayHelper, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        
+        JR.put(this, :timeElapsedHelper, TimeDelayHelper.jnew(0))
+        JR.put(this, :gameTickTimeDelayHelper, GameTickTimeDelayHelperFactory.jm_getInstance())
+    nil
+  end
 
 
-new(Player, RepeatTime) when is_integer(RepeatTime) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Player, RepeatTime),
-    This.
+  def jinit(this, p_player, p_repeatTime) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :player, p_player)
+      JR.lset(f, :repeatTime, p_repeatTime)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :player, JR.lget(f, :player))
+        JR.put(JR.get(this, :timeElapsedHelper), :delay, JR.lget(f, :repeatTime))
+    end)
+  end
 
-'$init'(This, Player, RepeatTime) when is_integer(RepeatTime) ->
-    init_fields(This),
-        put({This, player}, Player),
-        put({get({This, timeElapsedHelper}), delay}, RepeatTime).
+  def jnew(p_player, p_repeatTime) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_player, p_repeatTime)
+    this
+  end
 
-addPlayerListener(This, PlayerListener) ->
-        (get({get({This, player}), '$class'})):addPlayerListener(get({This, player}), PlayerListener).
 
-removePlayerListener(This, PlayerListener) ->
-        (get({get({This, player}), '$class'})):removePlayerListener(get({This, player}), PlayerListener).
+  def jm_addPlayerListener(this, p_playerListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :playerListener, p_playerListener)
+        JR.call(JR.get(this, :player), :jm_addPlayerListener, [JR.lget(f, :playerListener)])
+    end)
+  end
 
-close(This) ->
-        (get({get({This, player}), '$class'})):close(get({This, player})).
 
-deallocate(This) ->
-        (get({get({This, player}), '$class'})):deallocate(get({This, player})).
+  def jm_removePlayerListener(this, p_playerListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :playerListener, p_playerListener)
+        JR.call(JR.get(this, :player), :jm_removePlayerListener, [JR.lget(f, :playerListener)])
+    end)
+  end
 
-getContentType(This) ->
-        (get({get({This, player}), '$class'})):getContentType(get({This, player})).
 
-getDuration(This) ->
-        (get({get({This, player}), '$class'})):getDuration(get({This, player})).
+  def jm_close(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :player), :jm_close, [])
+    end)
+  end
 
-getMediaTime(This) ->
-        (get({get({This, player}), '$class'})):getMediaTime(get({This, player})).
 
-getTimeBase(This) ->
-        (get({(get({This, player})), '$class'})):getTimeBase((get({This, player}))).
+  def jm_deallocate(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :player), :jm_deallocate, [])
+    end)
+  end
 
-% throws MediaException
-setTimeBase(This, TimeBase) ->
-        (get({(get({This, player})), '$class'})):setTimeBase((get({This, player})), TimeBase).
 
-prefetch(This) ->
-        try
-            (get({get({This, player}), '$class'})):prefetch(get({This, player}))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, "prefetch", E)
-        end.
+  def jm_getContentType(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.get(this, :player), :jm_getContentType, [])})
+    end)
+  end
 
-realize(This) ->
-        try
-            (get({get({This, player}), '$class'})):realize(get({This, player}))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, "realize", E)
-        end.
 
-getState(This) ->
-        (get({get({This, player}), '$class'})):getState(get({This, player})).
+  def jm_getDuration(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.get(this, :player), :jm_getDuration, [])})
+    end)
+  end
 
-setLoopCount(This, Count) when is_integer(Count) ->
-        (get({get({This, player}), '$class'})):setLoopCount(get({This, player}), Count).
 
-setMediaTime(This, Now) when is_integer(Now) ->
-        try
-            (get({get({This, player}), '$class'})):setMediaTime(get({This, player}), Now)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, "setMediaTime", E),
-            (-1)
-        end.
+  def jm_getMediaTime(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.get(this, :player), :jm_getMediaTime, [])})
+    end)
+  end
 
-start(This) ->
-        try
-            case (get({get({This, timeElapsedHelper}), '$class'})):isTime(get({This, timeElapsedHelper}), get({get({This, gameTickTimeDelayHelper}), startTime})) of
-                true ->
-                (get({get({This, player}), '$class'})):start(get({This, player}));
-                false -> ok
+
+  def jm_getTimeBase(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call((JR.get(this, :player)), :jm_getTimeBase, [])})
+    end)
+  end
+
+
+  def jm_setTimeBase(this, p_timeBase) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :timeBase, p_timeBase)
+        JR.call((JR.get(this, :player)), :jm_setTimeBase, [JR.lget(f, :timeBase)])
+    end)
+  end
+
+
+  def jm_prefetch(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            JR.call(JR.get(this, :player), :jm_prefetch, [])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, "prefetch", JR.lget(f, :e)])
+        end
+    end)
+  end
+
+
+  def jm_realize(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            JR.call(JR.get(this, :player), :jm_realize, [])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, "realize", JR.lget(f, :e)])
+        end
+    end)
+  end
+
+
+  def jm_getState(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.get(this, :player), :jm_getState, [])})
+    end)
+  end
+
+
+  def jm_setLoopCount(this, p_count) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :count, p_count)
+        JR.call(JR.get(this, :player), :jm_setLoopCount, [JR.lget(f, :count)])
+    end)
+  end
+
+
+  def jm_setMediaTime(this, p_now) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :now, p_now)
+        try do
+            throw({:jreturn, JR.call(JR.get(this, :player), :jm_setMediaTime, [JR.lget(f, :now)])})
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, "setMediaTime", JR.lget(f, :e)])
+            throw({:jreturn, -1})
+        end
+    end)
+  end
+
+
+  def jm_start(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            if JR.call(JR.get(this, :timeElapsedHelper), :jm_isTime, [JR.get(JR.get(this, :gameTickTimeDelayHelper), :startTime)]) do
+                JR.call(JR.get(this, :player), :jm_start, [])
             end
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'START_METHOD_NAME'}), E)
-        end.
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :START_METHOD_NAME), JR.lget(f, :e)])
+        end
+    end)
+  end
 
-stop(This) ->
-        try
-            (get({get({This, player}), '$class'})):stop(get({This, player}))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, "stop", E)
-        end.
 
-getControl(This, ControlType) when (is_list(ControlType) orelse ControlType =:= undefined) ->
-        (get({get({This, player}), '$class'})):getControl(get({This, player}), ControlType).
+  def jm_stop(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            JR.call(JR.get(this, :player), :jm_stop, [])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, "stop", JR.lget(f, :e)])
+        end
+    end)
+  end
 
-getControls(This) ->
-        erlang:error({'RuntimeException'}).
 
-setVolume(This, LeftVolume, RightVolume) when is_integer(LeftVolume), is_integer(RightVolume) ->
-        Controllable2 = (get({This, player})),
-        (get({Controllable2, '$class'})):setVolume(Controllable2, LeftVolume, RightVolume).
+  def jm_getControl(this, p_controlType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :controlType, p_controlType)
+        throw({:jreturn, JR.call(JR.get(this, :player), :jm_getControl, [JR.lget(f, :controlType)])})
+    end)
+  end
 
-getPlayerP(This) ->
-        get({This, player}).
+
+  def jm_getControls(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jexception, JR.exception("RuntimeException", "")})
+    end)
+  end
+
+
+  def jm_setVolume(this, p_leftVolume, p_rightVolume) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :leftVolume, p_leftVolume)
+      JR.lset(f, :rightVolume, p_rightVolume)
+        JR.lset(f, :controllable2, (JR.get(this, :player)))
+        JR.call(JR.lget(f, :controllable2), :jm_setVolume, [JR.lget(f, :leftVolume), JR.lget(f, :rightVolume)])
+    end)
+  end
+
+
+  def jm_getPlayerP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :player)})
+    end)
+  end
+end
+
 

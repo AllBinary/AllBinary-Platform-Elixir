@@ -1,48 +1,90 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation
-% import org.allbinary.media.ScaleProperties
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation
 
--module('BaseAnimationInterfaceFactoryInterfaceComposite').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements AnimationInterfaceFactoryInterface
+defmodule BaseAnimationInterfaceFactoryInterfaceComposite do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, basicAnimationInterfaceFactoryInterfaceArray}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :basicAnimationInterfaceFactoryInterfaceArray, nil)
+        
+    nil
+  end
 
 
-new(BasicAnimationInterfaceFactoryInterfaceArray) when (is_tuple(BasicAnimationInterfaceFactoryInterfaceArray) orelse BasicAnimationInterfaceFactoryInterfaceArray =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, BasicAnimationInterfaceFactoryInterfaceArray),
-    This.
+  def jinit(this, p_basicAnimationInterfaceFactoryInterfaceArray) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicAnimationInterfaceFactoryInterfaceArray, p_basicAnimationInterfaceFactoryInterfaceArray)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :basicAnimationInterfaceFactoryInterfaceArray, JR.lget(f, :basicAnimationInterfaceFactoryInterfaceArray))
+    end)
+  end
 
-'$init'(This, BasicAnimationInterfaceFactoryInterfaceArray) when (is_tuple(BasicAnimationInterfaceFactoryInterfaceArray) orelse BasicAnimationInterfaceFactoryInterfaceArray =:= undefined) ->
-    init_fields(This),
-        put({This, basicAnimationInterfaceFactoryInterfaceArray}, BasicAnimationInterfaceFactoryInterfaceArray).
+  def jnew(p_basicAnimationInterfaceFactoryInterfaceArray) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_basicAnimationInterfaceFactoryInterfaceArray)
+    this
+  end
 
-% throws Exception
-getInstance(This, InstanceId) when is_integer(InstanceId) ->
-        (fun(Target_N65735) -> (get({Target_N65735, '$class'})):getInstance(Target_N65735, 0) end)('NullAnimationFactory':getFactoryInstance()).
 
-getBasicAnimationInterfaceFactoryInterfaceArray(This) ->
-        get({This, basicAnimationInterfaceFactoryInterfaceArray}).
+  def jm_getInstance(this, p_instanceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :instanceId, p_instanceId)
+        throw({:jreturn, JR.call(NullAnimationFactory.jm_getFactoryInstance(), :jm_getInstance, [0])})
+    end)
+  end
 
-setBasicAnimationInterfaceFactoryInterfaceArray(This, BasicAnimationInterfaceFactoryInterfaceArray) when (is_tuple(BasicAnimationInterfaceFactoryInterfaceArray) orelse BasicAnimationInterfaceFactoryInterfaceArray =:= undefined) ->
-        put({This, basicAnimationInterfaceFactoryInterfaceArray}, BasicAnimationInterfaceFactoryInterfaceArray).
 
-setInitialScale(This, ScaleProperties) ->
-        ok.
+  def jm_getBasicAnimationInterfaceFactoryInterfaceArray(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :basicAnimationInterfaceFactoryInterfaceArray)})
+    end)
+  end
+
+
+  def jm_setBasicAnimationInterfaceFactoryInterfaceArray(this, p_basicAnimationInterfaceFactoryInterfaceArray) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicAnimationInterfaceFactoryInterfaceArray, p_basicAnimationInterfaceFactoryInterfaceArray)
+        JR.put(this, :basicAnimationInterfaceFactoryInterfaceArray, JR.lget(f, :basicAnimationInterfaceFactoryInterfaceArray))
+    end)
+  end
+
+
+  def jm_setInitialScale(this, p_scaleProperties) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :scaleProperties, p_scaleProperties)
+        nil
+    end)
+  end
+end
+
 

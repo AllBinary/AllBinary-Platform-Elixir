@@ -1,56 +1,59 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.ai
-% import org.allbinary.ai.ArtificialIntelligenceInterface
-% import org.allbinary.bounds.TopULayerBounds
-% import org.allbinary.game.ai.ArtificialIntelligenceInterfaceFactoryInterface
-% import org.allbinary.game.input.GameInput
-% import org.allbinary.game.physics.velocity.VelocityInterface
-% import org.allbinary.game.physics.velocity.VelocityInterfaceCompositeInterface
-% import org.allbinary.graphics.GPoint
-% import org.allbinary.graphics.PointFactory
-% import org.allbinary.graphics.Rectangle
-% import org.allbinary.graphics.displayable.DisplayInfoSingleton
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.util.ABHashtable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
--module('TopUBoundBounceAIFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements ArtificialIntelligenceInterfaceFactoryInterface
+defmodule TopUBoundBounceAIFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-% throws Exception
-getInstance(This, Hashtable, OwnerLayerInterface, GameInput) ->
-        VelocityInterfaceCompositeInterface = OwnerLayerInterface,
-        VelocityInterface = (get({VelocityInterfaceCompositeInterface, '$class'})):getVelocityProperties(VelocityInterfaceCompositeInterface),
-        MaxDistancePerTick = (((get({VelocityInterface, '$class'})):getMaxForwardVelocity(VelocityInterface) bsr (fun(Target_N66099) -> (get({Target_N66099, '$class'})):getScaledFactor(Target_N66099) end)((get({VelocityInterface, '$class'})):getVelocityXBasicDecimalP(VelocityInterface)))),
-        HalfWidth = ((((get({OwnerLayerInterface, '$class'})):getWidth(OwnerLayerInterface) * 2) + MaxDistancePerTick) + 1),
-        HalfHeight = ((((get({OwnerLayerInterface, '$class'})):getHeight(OwnerLayerInterface) * 2) + MaxDistancePerTick) + 1),
-        Point = (fun(Target_N66317) -> (get({Target_N66317, '$class'})):createXY(Target_N66317, HalfWidth, (HalfHeight + 60)) end)('PointFactory':getInstance()),
-        DisplayInfo = 'DisplayInfoSingleton':getInstance(),
-        Rectangle = 'Rectangle':new(Point, ((((get({DisplayInfo, '$class'})):getLastWidth(DisplayInfo) - HalfWidth) - (get({Point, '$class'})):getX(Point))), ((((get({DisplayInfo, '$class'})):getLastHeight(DisplayInfo) - HalfHeight) - (get({Point, '$class'})):getY(Point)))),
-        'BoundBounceAI':new(OwnerLayerInterface, GameInput, 'TopULayerBounds':new(Rectangle), 'ReverseVelocityBoundsVisitor':new(OwnerLayerInterface)).
+  def jm_getInstance(this, p_hashtable, p_ownerLayerInterface, p_gameInput) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :hashtable, p_hashtable)
+      JR.lset(f, :ownerLayerInterface, p_ownerLayerInterface)
+      JR.lset(f, :gameInput, p_gameInput)
+        JR.lset(f, :velocityInterfaceCompositeInterface, JR.lget(f, :ownerLayerInterface))
+        JR.lset(f, :velocityInterface, JR.call(JR.lget(f, :velocityInterfaceCompositeInterface), :jm_getVelocityProperties, []))
+        JR.lset(f, :maxDistancePerTick, (Bitwise.bsr(JR.call(JR.lget(f, :velocityInterface), :jm_getMaxForwardVelocity, []), JR.call(JR.call(JR.lget(f, :velocityInterface), :jm_getVelocityXBasicDecimalP, []), :jm_getScaledFactor, []))))
+        JR.lset(f, :halfWidth, (((JR.call(JR.lget(f, :ownerLayerInterface), :jm_getWidth, []) * 2) + JR.lget(f, :maxDistancePerTick)) + 1))
+        JR.lset(f, :halfHeight, (((JR.call(JR.lget(f, :ownerLayerInterface), :jm_getHeight, []) * 2) + JR.lget(f, :maxDistancePerTick)) + 1))
+        JR.lset(f, :point, JR.call(PointFactory.jm_getInstance(), :jm_createXY, [JR.lget(f, :halfWidth), JR.int32(JR.lget(f, :halfHeight) + 60)]))
+        JR.lset(f, :displayInfo, DisplayInfoSingleton.jm_getInstance())
+        JR.lset(f, :rectangle, Rectangle.jnew(JR.lget(f, :point), (((JR.call(JR.lget(f, :displayInfo), :jm_getLastWidth, []) - JR.lget(f, :halfWidth)) - JR.call(JR.lget(f, :point), :jm_getX, []))), (((JR.call(JR.lget(f, :displayInfo), :jm_getLastHeight, []) - JR.lget(f, :halfHeight)) - JR.call(JR.lget(f, :point), :jm_getY, [])))))
+        throw({:jreturn, BoundBounceAI.jnew(JR.lget(f, :ownerLayerInterface), JR.lget(f, :gameInput), TopULayerBounds.jnew(JR.lget(f, :rectangle)), ReverseVelocityBoundsVisitor.jnew(JR.lget(f, :ownerLayerInterface)))})
+    end)
+  end
+end
+
 

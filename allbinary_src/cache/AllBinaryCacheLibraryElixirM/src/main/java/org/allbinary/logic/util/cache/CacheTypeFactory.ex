@@ -1,32 +1,45 @@
-% Generated Code Do Not Modify
-% package org.allbinary.logic.util.cache
-% import org.allbinary.logic.string.StringUtil
+# Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
--module('CacheTypeFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule CacheTypeFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> CacheTypeFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'CacheTypeFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :NO_CACHE, nil)
+    JR.put(this, :CACHE, nil)
+    JR.put(this, :SET, nil)
+    JR.put(this, :CACHE_VECTOR, nil)
+        JR.put(this, :NO_CACHE, CacheType.jnew(JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING)))
+        JR.put(this, :CACHE, CacheType.jnew(JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING)))
+        JR.put(this, :SET, CacheType.jnew(JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), "Set"))
+        JR.put(this, :CACHE_VECTOR, CacheType.jnew(JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING)))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'NO_CACHE'}, 'CacheType':new(get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'StringUtil':getInstance(), 'EMPTY_STRING'}))),
-    put({This, 'CACHE'}, 'CacheType':new(get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'StringUtil':getInstance(), 'EMPTY_STRING'}))),
-    put({This, 'SET'}, 'CacheType':new(get({'StringUtil':getInstance(), 'EMPTY_STRING'}), "Set")),
-    put({This, 'CACHE_VECTOR'}, 'CacheType':new(get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'StringUtil':getInstance(), 'EMPTY_STRING'}))),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'CacheTypeFactory', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, CacheTypeFactory.jstatic_instance()})
+    end)
+  end
+end
+
 

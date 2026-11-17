@@ -1,44 +1,65 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2022 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.animation
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.animation
 
--module('IndexedAnimationBehavior').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule IndexedAnimationBehavior do
+  def jsuper(), do: AnimationBehavior
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AnimationBehavior', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :frameDelayTime, 0)
+    JR.put(this, :loopTotal, 0)
+    JR.put(this, :elapsedTime, 0)
+    JR.put(this, :loopIndex, 0)
+        
+        
+        JR.put(this, :elapsedTime, 0)
+        JR.put(this, :loopIndex, 0)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, frameDelayTime}, 0),
-    put({This, loopTotal}, 0),
-    put({This, elapsedTime}, 0),
-    put({This, loopIndex}, 0),
-    ok.
+
+  def jinit(this, p_loopTotal, p_frameDelayTime) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :loopTotal, p_loopTotal)
+      JR.lset(f, :frameDelayTime, p_frameDelayTime)
+      AnimationBehavior.jinit(this)
+      jinitfields(this)
+        JR.put(this, :loopTotal, JR.lget(f, :loopTotal))
+        JR.put(this, :frameDelayTime, JR.lget(f, :frameDelayTime))
+    end)
+  end
+
+  def jnew(p_loopTotal, p_frameDelayTime) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_loopTotal, p_frameDelayTime)
+    this
+  end
 
 
-new(LoopTotal, FrameDelayTime) when is_integer(LoopTotal), is_integer(FrameDelayTime) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, LoopTotal, FrameDelayTime),
-    This.
+  def jm_reset(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.put(this, :loopIndex, 0)
+    end)
+  end
+end
 
-'$init'(This, LoopTotal, FrameDelayTime) when is_integer(LoopTotal), is_integer(FrameDelayTime) ->
-    'AnimationBehavior':'$init'(This),
-    init_fields(This),
-        put({This, loopTotal}, LoopTotal),
-        put({This, frameDelayTime}, FrameDelayTime).
-
-reset(This) ->
-        put({This, loopIndex}, 0).
 

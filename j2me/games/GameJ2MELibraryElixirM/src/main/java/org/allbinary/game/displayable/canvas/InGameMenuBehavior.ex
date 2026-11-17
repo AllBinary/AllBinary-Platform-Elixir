@@ -1,66 +1,116 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2022 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import org.allbinary.graphics.displayable.event.DisplayChangeEvent
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('InGameMenuBehavior').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule InGameMenuBehavior do
+  def jsuper(), do: BaseMenuBehavior
+def jstatic_instanceC(), do: JR.static_get(__MODULE__, :instanceC, fn -> InGameMenuBehavior.jnew() end)
+  def jstatic_set_instanceC(value), do: JR.static_put(__MODULE__, :instanceC, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BaseMenuBehavior', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-static_init() ->
-    put({?MODULE, instanceC}, 'InGameMenuBehavior':new()),
-    ok.
+  def jinit(this) do
+    BaseMenuBehavior.jinit(this)
+    jinitfields(this)
+  end
 
-init_fields(This) ->
-    ok.
-
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    'BaseMenuBehavior':'$init'(This),
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'InGameMenuBehavior', instanceC}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, InGameMenuBehavior.jstatic_instanceC()})
+    end)
+  end
 
-% throws Exception
-onDisplayChangeEvent(This, AllBinaryGameCanvas, DisplayChangeEvent) ->
-        (get({AllBinaryGameCanvas, '$class'})):updateMenuFromEvent(AllBinaryGameCanvas, DisplayChangeEvent).
 
-initSpecialPaint(This, AllBinaryGameCanvas) ->
-        (get({AllBinaryGameCanvas, '$class'})):setNonBotPaintableP(AllBinaryGameCanvas, 'GameCanvasNonBotPaintable':new(AllBinaryGameCanvas)).
+  def jm_onDisplayChangeEvent(this, p_allBinaryGameCanvas, p_displayChangeEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+      JR.lset(f, :displayChangeEvent, p_displayChangeEvent)
+        JR.call(JR.lget(f, :allBinaryGameCanvas), :jm_updateMenuFromEvent, [JR.lget(f, :displayChangeEvent)])
+    end)
+  end
 
-% throws Exception
-initMenu(This, AllBinaryGameCanvas) ->
-        (get({AllBinaryGameCanvas, '$class'})):initMenu2(AllBinaryGameCanvas).
 
-% throws Exception
-updateMenu(This, AllBinaryGameCanvas) ->
-        (get({AllBinaryGameCanvas, '$class'})):initMenu2(AllBinaryGameCanvas).
+  def jm_initSpecialPaint(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        JR.call(JR.lget(f, :allBinaryGameCanvas), :jm_setNonBotPaintableP, [GameCanvasNonBotPaintable.jnew(JR.lget(f, :allBinaryGameCanvas))])
+    end)
+  end
 
-% throws Exception
-popupMenu(This, AllBinaryGameCanvas) ->
-        (get({AllBinaryGameCanvas, '$class'})):popupMenu2(AllBinaryGameCanvas).
 
-closeMenu(This, AllBinaryGameCanvas) ->
-        (get({AllBinaryGameCanvas, '$class'})):closeMenu2(AllBinaryGameCanvas).
+  def jm_initMenu(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        JR.call(JR.lget(f, :allBinaryGameCanvas), :jm_initMenu2, [])
+    end)
+  end
+
+
+  def jm_updateMenu(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        JR.call(JR.lget(f, :allBinaryGameCanvas), :jm_initMenu2, [])
+    end)
+  end
+
+
+  def jm_popupMenu(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        JR.call(JR.lget(f, :allBinaryGameCanvas), :jm_popupMenu2, [])
+    end)
+  end
+
+
+  def jm_closeMenu(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        JR.call(JR.lget(f, :allBinaryGameCanvas), :jm_closeMenu2, [])
+    end)
+  end
+end
+
 

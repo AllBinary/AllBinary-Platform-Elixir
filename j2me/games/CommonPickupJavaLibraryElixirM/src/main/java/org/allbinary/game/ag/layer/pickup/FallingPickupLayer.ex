@@ -1,55 +1,67 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.layer.pickup
-% import org.allbinary.animation.NullAnimationFactory
-% import org.allbinary.game.layer.pickup.CountedPickedUpLayerInterfaceFactory
-% import org.allbinary.game.layer.pickup.PickupLayer
-% import org.allbinary.game.multiplayer.layer.RemoteInfo
-% import org.allbinary.game.tick.TickableInterface
-% import org.allbinary.graphics.PointFactory
-% import org.allbinary.graphics.Rectangle
-% import org.allbinary.layer.AllBinaryLayerManager
-% import org.allbinary.view.ViewPosition
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.pickup
 
--module('FallingPickupLayer').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements TickableInterface
+defmodule FallingPickupLayer do
+  def jsuper(), do: PickupLayer
+def jstatic_NAME(), do: JR.static_get(__MODULE__, :NAME, fn -> "FallingPickupLayer" end)
+  def jstatic_set_NAME(value), do: JR.static_put(__MODULE__, :NAME, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('PickupLayer', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'NAME'}, "FallingPickupLayer"),
-    ok.
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new(RemoteInfo) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, RemoteInfo),
-    This.
+  def jinit(this, p_remoteInfo) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :remoteInfo, p_remoteInfo)
+        PickupLayer.jinit(this, FallingPickupLayer.jstatic_NAME(), JR.lget(f, :remoteInfo), 0, CountedPickedUpLayerInterfaceFactory.jstatic_NULL_COUNTED_PICKUP_LAYER_FACTORY(), JR.call(NullAnimationFactory.jm_getFactoryInstance(), :jm_getInstance, [0]), Rectangle.jnew(JR.get(PointFactory.jm_getInstance(), :ZERO_ZERO), 0, 0), ViewPosition.jm_getInstanceD())
+        FallingPickupLayer.jinitfields(this)
+    end)
+  end
 
-'$init'(This, RemoteInfo) ->
-        'PickupLayer':'$init'(This, get({'FallingPickupLayer', 'NAME'}), RemoteInfo, 0, get({'CountedPickedUpLayerInterfaceFactory', 'NULL_COUNTED_PICKUP_LAYER_FACTORY'}), (fun(Target_N65975) -> (get({Target_N65975, '$class'})):getInstance(Target_N65975, 0) end)('NullAnimationFactory':getFactoryInstance()), 'Rectangle':new(get({'PointFactory':getInstance(), 'ZERO_ZERO'}), 0, 0), 'ViewPosition':getInstanceD()).
+  def jnew(p_remoteInfo) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_remoteInfo)
+    this
+  end
 
-processTick(This, AllBinaryLayerManager) ->
-        (get({This, '$class'})):setPosition(This, get({This, x}), (get({This, y}) + 1), get({This, z})).
 
-implmentsTickableInterface(This) ->
-        true.
+  def jm_processTick(this, p_allBinaryLayerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerManager, p_allBinaryLayerManager)
+        JR.call(this, :jm_setPosition, [JR.get(this, :x), (JR.get(this, :y) + 1), JR.get(this, :z)])
+    end)
+  end
+
+
+  def jm_implmentsTickableInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, true})
+    end)
+  end
+end
+
 

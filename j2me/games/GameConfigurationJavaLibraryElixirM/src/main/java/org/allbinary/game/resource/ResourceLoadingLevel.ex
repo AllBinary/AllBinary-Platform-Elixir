@@ -1,41 +1,71 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.resource
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.resource
 
--module('ResourceLoadingLevel').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule ResourceLoadingLevel do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, name}, undefined),
-    put({This, level}, 0),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :name, nil)
+    JR.put(this, :level, 0)
+        
+        
+    nil
+  end
 
 
-new(Name, Level) when (is_list(Name) orelse Name =:= undefined), is_integer(Level) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Name, Level),
-    This.
+  def jinit(this, p_name, p_level) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :level, p_level)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :name, JR.lget(f, :name))
+        JR.put(this, :level, JR.lget(f, :level))
+    end)
+  end
 
-'$init'(This, Name, Level) when (is_list(Name) orelse Name =:= undefined), is_integer(Level) ->
-    init_fields(This),
-        put({This, name}, Name),
-        put({This, level}, Level).
+  def jnew(p_name, p_level) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_name, p_level)
+    this
+  end
 
-getLevel(This) ->
-        get({This, level}).
 
-getName(This) ->
-        get({This, name}).
+  def jm_getLevel(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :level)})
+    end)
+  end
+
+
+  def jm_getName(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :name)})
+    end)
+  end
+end
+
 

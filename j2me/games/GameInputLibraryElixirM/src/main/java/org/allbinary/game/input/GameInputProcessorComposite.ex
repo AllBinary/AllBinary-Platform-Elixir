@@ -1,55 +1,80 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.input
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.input
 
--module('GameInputProcessorComposite').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule GameInputProcessorComposite do
+  def jsuper(), do: PlayerGameInput
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('PlayerGameInput', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :name, nil)
+    JR.put(this, :gameInputProcessorInterface, nil)
+    JR.put(this, :NAME_LABEL, nil)
+        
+        
+        JR.put(this, :NAME_LABEL, " GameInputProcessorInterface: ")
+    nil
+  end
 
-init_fields(This) ->
-    put({This, name}, undefined),
-    put({This, gameInputProcessorInterface}, undefined),
-    put({This, 'NAME_LABEL'}, " GameInputProcessorInterface: "),
-    ok.
+
+  def jinit(this, p_name, p_gameInputProcessorInterface) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :gameInputProcessorInterface, p_gameInputProcessorInterface)
+        PlayerGameInput.jinit(this, BasicArrayListD.jnew(), BasicArrayListD.jnew(), -1)
+        GameInputProcessorComposite.jinitfields(this)
+        JR.put(this, :name, JR.lget(f, :name))
+        JR.put(this, :gameInputProcessorInterface, JR.lget(f, :gameInputProcessorInterface))
+    end)
+  end
+
+  def jnew(p_name, p_gameInputProcessorInterface) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_name, p_gameInputProcessorInterface)
+    this
+  end
 
 
-new(Name, GameInputProcessorInterface) when (is_list(Name) orelse Name =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Name, GameInputProcessorInterface),
-    This.
+  def jm_update(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            JR.lset(f, :list, JR.call(this, :jm_getGameKeyEventList, []))
+            JR.call(JR.get(this, :gameInputProcessorInterface), :jm_onInput, [JR.lget(f, :list)])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :UPDATE), JR.lget(f, :e)])
+        end
+    end)
+  end
 
-'$init'(This, Name, GameInputProcessorInterface) when (is_list(Name) orelse Name =:= undefined) ->
-        'PlayerGameInput':'$init'(This, 'BasicArrayListD':new(), 'BasicArrayListD':new(), (-1)),
-        init_fields(This),
-        put({This, name}, Name),
-        put({This, gameInputProcessorInterface}, GameInputProcessorInterface).
 
-update(This) ->
-        try
-            List = (get({This, '$class'})):getGameKeyEventList(This),
-            (get({get({This, gameInputProcessorInterface}), '$class'})):onInput(get({This, gameInputProcessorInterface}), List)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'UPDATE'}), E)
-        end.
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [PlayerGameInput.jm_toString(this)]), :jm_append, [JR.get(this, :NAME_LABEL)]), :jm_append, [JR.get(this, :name)]), :jm_toString, [])})
+    end)
+  end
+end
 
-toString(This) ->
-        (fun(Target_N66211) -> (get({Target_N66211, '$class'})):toString(Target_N66211) end)((fun(Target_N66218) -> (get({Target_N66218, '$class'})):append(Target_N66218, get({This, name})) end)((fun(Target_N66225) -> (get({Target_N66225, '$class'})):append(Target_N66225, get({This, 'NAME_LABEL'})) end)((fun(Target_N66232) -> (get({Target_N66232, '$class'})):append(Target_N66232, 'PlayerGameInput':toString(This)) end)('StringMaker':new())))).
 

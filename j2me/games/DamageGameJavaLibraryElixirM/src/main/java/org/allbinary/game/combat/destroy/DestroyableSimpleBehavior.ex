@@ -1,50 +1,73 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.combat.destroy
-% import org.allbinary.game.layer.CollidableCompositeLayer
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.combat.destroy
 
--module('DestroyableSimpleBehavior').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule DestroyableSimpleBehavior do
+  def jsuper(), do: DestroyableBaseBehavior
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('DestroyableBaseBehavior', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :ownerLayer, nil)
+    JR.put(this, :destroyed, false)
+        
+        JR.put(this, :destroyed, false)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, ownerLayer}, undefined),
-    put({This, destroyed}, false),
-    ok.
+
+  def jinit(this, p_ownerLayer) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownerLayer, p_ownerLayer)
+      DestroyableBaseBehavior.jinit(this)
+      jinitfields(this)
+        JR.put(this, :ownerLayer, JR.lget(f, :ownerLayer))
+    end)
+  end
+
+  def jnew(p_ownerLayer) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_ownerLayer)
+    this
+  end
 
 
-new(OwnerLayer) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, OwnerLayer),
-    This.
+  def jm_isDestroyed(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :destroyed)})
+    end)
+  end
 
-'$init'(This, OwnerLayer) ->
-    'DestroyableBaseBehavior':'$init'(This),
-    init_fields(This),
-        put({This, ownerLayer}, OwnerLayer).
 
-isDestroyed(This) ->
-        get({This, destroyed}).
+  def jm_setDestroyed(this, p_destroyed) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :destroyed, p_destroyed)
+        JR.put(this, :destroyed, JR.lget(f, :destroyed))
+        if JR.call(this, :jm_isDestroyed, []) do
+            JR.call(DestroyedLayerProcessor.jm_getInstance(), :jm_add, [JR.get(this, :ownerLayer)])
+        end
+    end)
+  end
+end
 
-setDestroyed(This, Destroyed) when is_boolean(Destroyed) ->
-        put({This, destroyed}, Destroyed),
-        case (get({This, '$class'})):isDestroyed(This) of
-            true ->
-            (fun(Target_N65873) -> (get({Target_N65873, '$class'})):add(Target_N65873, get({This, ownerLayer})) end)('DestroyedLayerProcessor':getInstance());
-            false -> ok
-        end.
 

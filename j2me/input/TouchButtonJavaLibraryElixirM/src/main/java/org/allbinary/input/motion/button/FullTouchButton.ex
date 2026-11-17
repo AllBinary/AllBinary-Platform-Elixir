@@ -1,58 +1,88 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion.button
-% import org.allbinary.animation.Animation
-% import org.allbinary.animation.FeaturedAnimationInterfaceFactoryInterfaceFactory
-% import org.allbinary.graphics.CellPosition
-% import org.allbinary.graphics.GPoint
-% import org.allbinary.graphics.PointFactory
-% import org.allbinary.graphics.Rectangle
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
--module('FullTouchButton').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule FullTouchButton do
+  def jsuper(), do: TouchButton
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('TouchButton', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-% throws Exception
-createButton(TouchButtonInput, TouchButtonResource, RawRectangle, CellPosition, XBorder, YBorder) when is_integer(XBorder), is_integer(YBorder) ->
-        'FullTouchButton':new(TouchButtonInput, (fun(Target_N65781) -> (get({Target_N65781, '$class'})):getInstance(Target_N65781, 0) end)((fun(Target_N65788) -> (get({Target_N65788, '$class'})):get(Target_N65788, get({TouchButtonResource, 'RESOURCE'})) end)('FeaturedAnimationInterfaceFactoryInterfaceFactory':getInstance())), (fun(Target_N65839) -> (get({Target_N65839, '$class'})):getInstance(Target_N65839, 0) end)((fun(Target_N65846) -> (get({Target_N65846, '$class'})):get(Target_N65846, get({TouchButtonResource, 'HINT'})) end)('FeaturedAnimationInterfaceFactoryInterfaceFactory':getInstance())), RawRectangle, CellPosition, XBorder, YBorder).
+  def jm_createButton(p_touchButtonInput, p_touchButtonResource, p_rawRectangle, p_cellPosition, p_xBorder, p_yBorder) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :touchButtonInput, p_touchButtonInput)
+      JR.lset(f, :touchButtonResource, p_touchButtonResource)
+      JR.lset(f, :rawRectangle, p_rawRectangle)
+      JR.lset(f, :cellPosition, p_cellPosition)
+      JR.lset(f, :xBorder, p_xBorder)
+      JR.lset(f, :yBorder, p_yBorder)
+        throw({:jreturn, FullTouchButton.jnew(JR.lget(f, :touchButtonInput), JR.call(JR.call(FeaturedAnimationInterfaceFactoryInterfaceFactory.jm_getInstance(), :jm_get, [JR.get(JR.lget(f, :touchButtonResource), :RESOURCE)]), :jm_getInstance, [0]), JR.call(JR.call(FeaturedAnimationInterfaceFactoryInterfaceFactory.jm_getInstance(), :jm_get, [JR.get(JR.lget(f, :touchButtonResource), :HINT)]), :jm_getInstance, [0]), JR.lget(f, :rawRectangle), JR.lget(f, :cellPosition), JR.lget(f, :xBorder), JR.lget(f, :yBorder))})
+    end)
+  end
 
-new(TouchButtonInput, AnimationInterface, HintAnimationInterface, RawRectangle, CellPosition, XBorder, YBorder) when is_integer(XBorder), is_integer(YBorder) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, TouchButtonInput, AnimationInterface, HintAnimationInterface, RawRectangle, CellPosition, XBorder, YBorder),
-    This.
 
-'$init'(This, TouchButtonInput, AnimationInterface, HintAnimationInterface, RawRectangle, CellPosition, XBorder, YBorder) when is_integer(XBorder), is_integer(YBorder) ->
-        'TouchButton':'$init'(This, TouchButtonInput, AnimationInterface, HintAnimationInterface, RawRectangle, CellPosition, XBorder, YBorder).
+  def jinit(this, p_touchButtonInput, p_animationInterface, p_hintAnimationInterface, p_rawRectangle, p_cellPosition, p_xBorder, p_yBorder) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :touchButtonInput, p_touchButtonInput)
+      JR.lset(f, :animationInterface, p_animationInterface)
+      JR.lset(f, :hintAnimationInterface, p_hintAnimationInterface)
+      JR.lset(f, :rawRectangle, p_rawRectangle)
+      JR.lset(f, :cellPosition, p_cellPosition)
+      JR.lset(f, :xBorder, p_xBorder)
+      JR.lset(f, :yBorder, p_yBorder)
+        TouchButton.jinit(this, JR.lget(f, :touchButtonInput), JR.lget(f, :animationInterface), JR.lget(f, :hintAnimationInterface), JR.lget(f, :rawRectangle), JR.lget(f, :cellPosition), JR.lget(f, :xBorder), JR.lget(f, :yBorder))
+        FullTouchButton.jinitfields(this)
+    end)
+  end
 
-updateRectangle(This) ->
-        try
-            PointFactory = 'PointFactory':getInstance(),
-            X = ((get({get({This, rawRectangle}), '$class'})):getWidth(get({This, rawRectangle})) * (get({get({This, cellPositionP}), '$class'})):getColumn(get({This, cellPositionP}))),
-            Y = ((get({get({This, rawRectangle}), '$class'})):getHeight(get({This, rawRectangle})) * (get({get({This, cellPositionP}), '$class'})):getRow(get({This, cellPositionP}))),
-            put({This, rectangleP}, 'Rectangle':new((get({PointFactory, '$class'})):createXY(PointFactory, X, Y), ((get({get({This, rawRectangle}), '$class'})):getWidth(get({This, rawRectangle})) + ((2 * get({This, xBorder})))), ((get({get({This, rawRectangle}), '$class'})):getHeight(get({This, rawRectangle})) + ((2 * get({This, yBorder})))))),
-            Point = (get({get({This, rectangleP}), '$class'})):getPoint(get({This, rectangleP})),
-            put({This, animationX}, ((get({Point, '$class'})):getX(Point) + get({This, xBorder}))),
-            put({This, animationY}, ((get({Point, '$class'})):getY(Point) + get({This, yBorder}))),
-            put({This, hintAnimationY}, ((get({This, animationY}) - (get({get({This, rectangleP}), '$class'})):getHeight(get({This, rectangleP}))) bsr 1))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, "updateRectangle", E)
-        end.
+  def jnew(p_touchButtonInput, p_animationInterface, p_hintAnimationInterface, p_rawRectangle, p_cellPosition, p_xBorder, p_yBorder) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_touchButtonInput, p_animationInterface, p_hintAnimationInterface, p_rawRectangle, p_cellPosition, p_xBorder, p_yBorder)
+    this
+  end
+
+
+  def jm_updateRectangle(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            JR.lset(f, :pointFactory, PointFactory.jm_getInstance())
+            JR.lset(f, :x, (JR.call(JR.get(this, :rawRectangle), :jm_getWidth, []) * JR.call(JR.get(this, :cellPositionP), :jm_getColumn, [])))
+            JR.lset(f, :y, (JR.call(JR.get(this, :rawRectangle), :jm_getHeight, []) * JR.call(JR.get(this, :cellPositionP), :jm_getRow, [])))
+            JR.put(this, :rectangleP, Rectangle.jnew(JR.call(JR.lget(f, :pointFactory), :jm_createXY, [JR.lget(f, :x), JR.lget(f, :y)]), (JR.call(JR.get(this, :rawRectangle), :jm_getWidth, []) + ((2 * JR.get(this, :xBorder)))), (JR.call(JR.get(this, :rawRectangle), :jm_getHeight, []) + ((2 * JR.get(this, :yBorder))))))
+            JR.lset(f, :point, JR.call(JR.get(this, :rectangleP), :jm_getPoint, []))
+            JR.put(this, :animationX, (JR.call(JR.lget(f, :point), :jm_getX, []) + JR.get(this, :xBorder)))
+            JR.put(this, :animationY, (JR.call(JR.lget(f, :point), :jm_getY, []) + JR.get(this, :yBorder)))
+            JR.put(this, :hintAnimationY, Bitwise.bsr((JR.get(this, :animationY) - JR.call(JR.get(this, :rectangleP), :jm_getHeight, [])), 1))
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, "updateRectangle", JR.lget(f, :e)])
+        end
+    end)
+  end
+end
+
 

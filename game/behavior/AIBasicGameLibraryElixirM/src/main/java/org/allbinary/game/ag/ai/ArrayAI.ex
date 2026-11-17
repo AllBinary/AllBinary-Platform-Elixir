@@ -1,52 +1,74 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.ai
-% import org.allbinary.ai.ArtificialIntelligenceInterface
-% import org.allbinary.game.input.GameInput
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.AllBinaryLayerManager
-% import org.allbinary.game.ai.BasicAI
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
--module('ArrayAI').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule ArrayAI do
+  def jsuper(), do: BasicAI
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicAI', Function, Arguments).
-
-init_fields(This) ->
-    put({This, artificialIntelligenceInterfaceArray}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :artificialIntelligenceInterfaceArray, nil)
+        
+    nil
+  end
 
 
-new(ArtificialIntelligenceInterface, OwnerLayerInterface, GameInput) when (is_tuple(ArtificialIntelligenceInterface) orelse ArtificialIntelligenceInterface =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, ArtificialIntelligenceInterface, OwnerLayerInterface, GameInput),
-    This.
+  def jinit(this, p_artificialIntelligenceInterface, p_ownerLayerInterface, p_gameInput) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :artificialIntelligenceInterface, p_artificialIntelligenceInterface)
+      JR.lset(f, :ownerLayerInterface, p_ownerLayerInterface)
+      JR.lset(f, :gameInput, p_gameInput)
+        BasicAI.jinit(this, JR.lget(f, :ownerLayerInterface), JR.lget(f, :gameInput))
+        ArrayAI.jinitfields(this)
+        JR.put(this, :artificialIntelligenceInterfaceArray, JR.lget(f, :artificialIntelligenceInterface))
+    end)
+  end
 
-'$init'(This, ArtificialIntelligenceInterface, OwnerLayerInterface, GameInput) when (is_tuple(ArtificialIntelligenceInterface) orelse ArtificialIntelligenceInterface =:= undefined) ->
-        'BasicAI':'$init'(This, OwnerLayerInterface, GameInput),
-        init_fields(This),
-        put({This, artificialIntelligenceInterfaceArray}, ArtificialIntelligenceInterface).
+  def jnew(p_artificialIntelligenceInterface, p_ownerLayerInterface, p_gameInput) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_artificialIntelligenceInterface, p_ownerLayerInterface, p_gameInput)
+    this
+  end
 
-% throws Exception
-processAI(This, AllBinaryLayerManager) ->
-        Size = array:size(get({This, artificialIntelligenceInterfaceArray})),
-        lists:foreach(fun(Index) ->
-            (fun(Target_N65967) -> (get({Target_N65967, '$class'})):processAI(Target_N65967, AllBinaryLayerManager) end)(array:get(Index, get({This, artificialIntelligenceInterfaceArray})))
-        end, lists:seq(0, Size - 1)).
 
-getArtificialIntelligenceInterface(This) ->
-        get({This, artificialIntelligenceInterfaceArray}).
+  def jm_processAI(this, p_allBinaryLayerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerManager, p_allBinaryLayerManager)
+        JR.lset(f, :size, JR.alength(JR.get(this, :artificialIntelligenceInterfaceArray)))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.call(JR.aget(JR.get(this, :artificialIntelligenceInterfaceArray), JR.lget(f, :index)), :jm_processAI, [JR.lget(f, :allBinaryLayerManager)])
+        end)
+    end)
+  end
+
+
+  def jm_getArtificialIntelligenceInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :artificialIntelligenceInterfaceArray)})
+    end)
+  end
+end
+
 

@@ -1,118 +1,256 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.media.audio
-% import javax.microedition.media.Control
-% import javax.microedition.media.MediaException
-% import javax.microedition.media.Player
-% import javax.microedition.media.PlayerListener
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
--module('BasicPlayer').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements Player
-% implements Controllable2
+#BasicPlayerJavaLibrary
+defmodule BasicPlayer do
+  def jsuper(), do: JObject
+def jstatic_CONTROL_TYPE(), do: JR.static_get(__MODULE__, :CONTROL_TYPE, fn -> "ToneControl" end)
+  def jstatic_set_CONTROL_TYPE(value), do: JR.static_put(__MODULE__, :CONTROL_TYPE, value)
 
-static_init() ->
-    put({?MODULE, 'CONTROL_TYPE'}, "ToneControl"),
-    ok.
-
-init_fields(This) ->
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, listenersList}, 'BasicArrayListD':new()),
-    put({This, stateP}, 0),
-    put({This, loopCountP}, 0),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :listenersList, nil)
+    JR.put(this, :stateP, 0)
+    JR.put(this, :loopCountP, 0)
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        JR.put(this, :listenersList, BasicArrayListD.jnew())
+        JR.put(this, :stateP, 0)
+        JR.put(this, :loopCountP, 0)
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.call(this, :jm_setLoopCount, [0])
+        JR.call(this, :jm_setState, [Player.jstatic_UNREALIZED()])
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        (get({This, '$class'})):setLoopCount(This, 0),
-        (get({This, '$class'})):setState(This, get({'Player', 'UNREALIZED'})).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-getContentType(This) ->
-        get({'StringUtil':getInstance(), 'EMPTY_STRING'}).
 
-getControl(This, ControlType) when (is_list(ControlType) orelse ControlType =:= undefined) ->
-        'NullControl':new().
+  def jm_getContentType(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING)})
+    end)
+  end
 
-getControls(This) ->
-        array:new(0, {default, undefined}).
 
-close(This) ->
-        ok.
+  def jm_getControl(this, p_controlType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :controlType, p_controlType)
+        throw({:jreturn, NullControl.jnew()})
+    end)
+  end
 
-addPlayerListener(This, PlayerListener) ->
-        case (not (get({get({This, listenersList}), '$class'})):contains(get({This, listenersList}), PlayerListener)) of
-            true ->
-            (get({get({This, listenersList}), '$class'})):add(get({This, listenersList}), PlayerListener);
-            false -> ok
-        end.
 
-removePlayerListener(This, PlayerListener) ->
-        (get({get({This, listenersList}), '$class'})):remove(get({This, listenersList}), PlayerListener).
+  def jm_getControls(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.anew(0, nil)})
+    end)
+  end
 
-getState(This) ->
-        get({This, stateP}).
 
-setState(This, State) when is_integer(State) ->
-        put({This, stateP}, State).
+  def jm_close(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-getDuration(This) ->
-        0.
 
-getMediaTime(This) ->
-        0.
+  def jm_addPlayerListener(this, p_playerListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :playerListener, p_playerListener)
+        if !JR.call(JR.get(this, :listenersList), :jm_contains, [JR.lget(f, :playerListener)]) do
+            JR.call(JR.get(this, :listenersList), :jm_add, [JR.lget(f, :playerListener)])
+        end
+    end)
+  end
 
-deallocate(This) ->
-        ok.
 
-% throws MediaException
-prefetch(This) ->
-        ok.
+  def jm_removePlayerListener(this, p_playerListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :playerListener, p_playerListener)
+        JR.call(JR.get(this, :listenersList), :jm_remove, [JR.lget(f, :playerListener)])
+    end)
+  end
 
-% throws MediaException
-realize(This) ->
-        ok.
 
-setLoopCount(This, Count) when is_integer(Count) ->
-        put({This, loopCountP}, Count).
+  def jm_getState(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :stateP)})
+    end)
+  end
 
-getLoopCount(This) ->
-        get({This, loopCountP}).
 
-% throws MediaException
-setMediaTime(This, Now) when is_integer(Now) ->
-        0.
+  def jm_setState(this, p_state) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :state, p_state)
+        JR.put(this, :stateP, JR.lget(f, :state))
+    end)
+  end
 
-% throws MediaException
-start(This) ->
-        (get({This, '$class'})):setState(This, get({'Player', 'STARTED'})).
 
-% throws MediaException
-stop(This) ->
-        (get({This, '$class'})):setState(This, get({'Player', 'PREFETCHED'})).
+  def jm_getDuration(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0})
+    end)
+  end
 
-setVolume(This, LeftVolume, RightVolume) when is_integer(LeftVolume), is_integer(RightVolume) ->
-        ok.
+
+  def jm_getMediaTime(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0})
+    end)
+  end
+
+
+  def jm_deallocate(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_prefetch(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_realize(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_setLoopCount(this, p_count) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :count, p_count)
+        JR.put(this, :loopCountP, JR.lget(f, :count))
+    end)
+  end
+
+
+  def jm_getLoopCount(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :loopCountP)})
+    end)
+  end
+
+
+  def jm_setMediaTime(this, p_now) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :now, p_now)
+        throw({:jreturn, 0})
+    end)
+  end
+
+
+  def jm_start(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_setState, [Player.jstatic_STARTED()])
+    end)
+  end
+
+
+  def jm_stop(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_setState, [Player.jstatic_PREFETCHED()])
+    end)
+  end
+
+
+  def jm_setVolume(this, p_leftVolume, p_rightVolume) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :leftVolume, p_leftVolume)
+      JR.lset(f, :rightVolume, p_rightVolume)
+        nil
+    end)
+  end
+end
+
 

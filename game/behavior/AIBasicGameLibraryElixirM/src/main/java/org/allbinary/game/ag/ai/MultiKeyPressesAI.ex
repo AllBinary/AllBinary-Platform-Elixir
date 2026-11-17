@@ -1,102 +1,130 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.ai
-% import org.allbinary.game.input.GameInput
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.AllBinaryLayerManager
-% import org.allbinary.time.GameTickTimeDelayHelper
-% import org.allbinary.time.GameTickTimeDelayHelperFactory
-% import org.allbinary.time.TimeDelayHelper
-% import org.allbinary.util.ABHashtable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
--module('MultiKeyPressesAI').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule MultiKeyPressesAI do
+  def jsuper(), do: KeyPressesAI
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('KeyPressesAI', Function, Arguments).
-
-init_fields(This) ->
-    put({This, toggleTimeHelper}, 'TimeDelayHelper':new(600)),
-    put({This, gameTickTimeDelayHelper}, 'GameTickTimeDelayHelperFactory':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :toggleTimeHelper, nil)
+    JR.put(this, :gameTickTimeDelayHelper, nil)
+        JR.put(this, :toggleTimeHelper, TimeDelayHelper.jnew(600))
+        JR.put(this, :gameTickTimeDelayHelper, GameTickTimeDelayHelperFactory.jm_getInstance())
+    nil
+  end
 
 
-new(Hashtable, OwnerLayerInterface, GameInput) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Hashtable, OwnerLayerInterface, GameInput),
-    This.
+  def jinit(this, p_hashtable, p_ownerLayerInterface, p_gameInput) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :hashtable, p_hashtable)
+      JR.lset(f, :ownerLayerInterface, p_ownerLayerInterface)
+      JR.lset(f, :gameInput, p_gameInput)
+        KeyPressesAI.jinit(this, JR.lget(f, :hashtable), JR.lget(f, :ownerLayerInterface), JR.lget(f, :gameInput))
+        MultiKeyPressesAI.jinitfields(this)
+        JR.call(this, :jm_update, [])
+    end)
+  end
 
-'$init'(This, Hashtable, OwnerLayerInterface, GameInput) ->
-        'KeyPressesAI':'$init'(This, Hashtable, OwnerLayerInterface, GameInput),
-        init_fields(This),
-        (get({This, '$class'})):update(This).
+  def jnew(p_hashtable, p_ownerLayerInterface, p_gameInput) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_hashtable, p_ownerLayerInterface, p_gameInput)
+    this
+  end
 
-% throws Exception
-processAI(This, AllBinaryLayerManager) ->
-        ok.
 
-% throws Exception
-update(This) ->
-        GameInput = (get({This, '$class'})):getGameInput(This),
-        Keys = get({This, keys}),
-        Size = array:size(Keys),
-        case (get({This, '$class'})):isOn(This) of
-            true ->
-            lists:foreach(fun(Index) ->
-                put({local, key}, (fun(Target_N66527) -> (get({Target_N66527, '$class'})):intValue(Target_N66527) end)(array:get(Index, Keys))),
-                case (get({local, key}) =/= (-1)) of
-                    true ->
-                    (get({GameInput, '$class'})):add(GameInput, (get({get({This, gameKeyEventFactory}), '$class'})):getInstanceForKey(get({This, gameKeyEventFactory}), This, get({local, key})));
-                    false -> ok
+  def jm_processAI(this, p_allBinaryLayerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerManager, p_allBinaryLayerManager)
+        nil
+    end)
+  end
+
+
+  def jm_update(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :gameInput, JR.call(this, :jm_getGameInput, []))
+        JR.lset(f, :keys, JR.get(this, :keys))
+        JR.lset(f, :size, JR.alength(JR.lget(f, :keys)))
+        if JR.call(this, :jm_isOn, []) do
+            JR.lset(f, :index, 0)
+            JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+                JR.lset(f, :key, JR.call(JR.aget(JR.lget(f, :keys), JR.lget(f, :index)), :jm_intValue, []))
+                if (JR.lget(f, :key) != -1) do
+                    JR.call(JR.lget(f, :gameInput), :jm_add, [JR.call(JR.get(this, :gameKeyEventFactory), :jm_getInstanceForKey, [this, JR.lget(f, :key)])])
                 end
-            end, lists:seq(0, Size - 1));
-            false ->
-            lists:foreach(fun(Index) ->
-                put({local, key}, (fun(Target_N66306) -> (get({Target_N66306, '$class'})):intValue(Target_N66306) end)(array:get(Index, Keys))),
-                case (get({local, key}) =/= (-1)) of
-                    true ->
-                    (get({GameInput, '$class'})):addForRemoval(GameInput, (get({get({This, gameKeyEventFactory}), '$class'})):getInstanceForKey(get({This, gameKeyEventFactory}), This, get({local, key})));
-                    false -> ok
+            end)
+        else
+            JR.lset(f, :index, 0)
+            JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+                JR.lset(f, :key, JR.call(JR.aget(JR.lget(f, :keys), JR.lget(f, :index)), :jm_intValue, []))
+                if (JR.lget(f, :key) != -1) do
+                    JR.call(JR.lget(f, :gameInput), :jm_addForRemoval, [JR.call(JR.get(this, :gameKeyEventFactory), :jm_getInstanceForKey, [this, JR.lget(f, :key)])])
                 end
-            end, lists:seq(0, Size - 1))
-        end.
+            end)
+        end
+    end)
+  end
 
-% throws Exception
-toggle(This) ->
-        case (get({get({This, toggleTimeHelper}), '$class'})):isTime(get({This, toggleTimeHelper}), get({get({This, gameTickTimeDelayHelper}), startTime})) of
-            true ->
-            'KeyPressesAI':toggle(This),
-            (get({This, '$class'})):update(This);
-            false -> ok
-        end.
 
-% throws Exception
-disable(This) ->
-        case (get({get({This, toggleTimeHelper}), '$class'})):isTime(get({This, toggleTimeHelper}), get({get({This, gameTickTimeDelayHelper}), startTime})) of
-            true ->
-            'KeyPressesAI':disable(This),
-            (get({This, '$class'})):update(This);
-            false -> ok
-        end.
+  def jm_toggle(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if JR.call(JR.get(this, :toggleTimeHelper), :jm_isTime, [JR.get(JR.get(this, :gameTickTimeDelayHelper), :startTime)]) do
+            KeyPressesAI.jm_toggle(this)
+            JR.call(this, :jm_update, [])
+        end
+    end)
+  end
 
-% throws Exception
-enable(This) ->
-        case (get({get({This, toggleTimeHelper}), '$class'})):isTime(get({This, toggleTimeHelper}), get({get({This, gameTickTimeDelayHelper}), startTime})) of
-            true ->
-            'KeyPressesAI':enable(This),
-            (get({This, '$class'})):update(This);
-            false -> ok
-        end.
+
+  def jm_disable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if JR.call(JR.get(this, :toggleTimeHelper), :jm_isTime, [JR.get(JR.get(this, :gameTickTimeDelayHelper), :startTime)]) do
+            KeyPressesAI.jm_disable(this)
+            JR.call(this, :jm_update, [])
+        end
+    end)
+  end
+
+
+  def jm_enable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if JR.call(JR.get(this, :toggleTimeHelper), :jm_isTime, [JR.get(JR.get(this, :gameTickTimeDelayHelper), :startTime)]) do
+            KeyPressesAI.jm_enable(this)
+            JR.call(this, :jm_update, [])
+        end
+    end)
+  end
+end
+
 

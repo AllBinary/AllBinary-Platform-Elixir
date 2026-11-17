@@ -1,55 +1,82 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.score
-% import org.allbinary.game.GameInfo
-% import org.allbinary.logic.communication.log.LogUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.score
 
--module('NoHighScoresFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule NoHighScoresFactory do
+  def jsuper(), do: HighScoresBase
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> NoHighScoresFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('HighScoresBase', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, instance}, 'NoHighScoresFactory':new()),
-    ok.
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, 'NO_HIGH_SCORES'}, array:new(0, {default, undefined})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :NO_HIGH_SCORES, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :NO_HIGH_SCORES, JR.anew(0, nil))
+    nil
+  end
 
 
-getInstance() ->
-        get({'NoHighScoresFactory', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, NoHighScoresFactory.jstatic_instance()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-    'HighScoresBase':'$init'(This),
-    init_fields(This),
-        ok.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      HighScoresBase.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-fetchHighScores(This, GameInfo, HighScoresResultsListener) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), "Getting No HighScores", This, "fetchHighScores"),
-        (get({HighScoresResultsListener, '$class'})):setHighScoresArray(HighScoresResultsListener, get({This, 'NO_HIGH_SCORES'})).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-createHighScoresHelper(This) ->
-        'HighScoresHelperBase':new().
+
+  def jm_fetchHighScores(this, p_gameInfo, p_highScoresResultsListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameInfo, p_gameInfo)
+      JR.lset(f, :highScoresResultsListener, p_highScoresResultsListener)
+        JR.call(JR.get(this, :logUtil), :jm_putF, ["Getting No HighScores", this, "fetchHighScores"])
+        JR.call(JR.lget(f, :highScoresResultsListener), :jm_setHighScoresArray, [JR.get(this, :NO_HIGH_SCORES)])
+    end)
+  end
+
+
+  def jm_createHighScoresHelper(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, HighScoresHelperBase.jnew()})
+    end)
+  end
+end
+
 

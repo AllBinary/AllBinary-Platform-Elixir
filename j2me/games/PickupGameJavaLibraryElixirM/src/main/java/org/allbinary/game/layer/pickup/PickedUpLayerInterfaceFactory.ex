@@ -1,52 +1,85 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer.pickup
-% import org.allbinary.animation.Animation
-% import org.allbinary.layer.AllBinaryLayer
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer.pickup
 
--module('PickedUpLayerInterfaceFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule PickedUpLayerInterfaceFactory do
+  def jsuper(), do: PickedUpLayerInterfaceFactoryBase
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('PickedUpLayerInterfaceFactoryBase', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :pickedUpLayerType, nil)
+    JR.put(this, :iconLayer, nil)
+    JR.put(this, :animationInterface, nil)
+        
+        
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, pickedUpLayerType}, undefined),
-    put({This, iconLayer}, undefined),
-    put({This, animationInterface}, undefined),
-    ok.
+
+  def jinit(this, p_pickeUpLayerType, p_iconLayer, p_animationInterface) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :pickeUpLayerType, p_pickeUpLayerType)
+      JR.lset(f, :iconLayer, p_iconLayer)
+      JR.lset(f, :animationInterface, p_animationInterface)
+      PickedUpLayerInterfaceFactoryBase.jinit(this)
+      jinitfields(this)
+        JR.put(this, :pickedUpLayerType, JR.lget(f, :pickeUpLayerType))
+        JR.put(this, :animationInterface, JR.lget(f, :animationInterface))
+        JR.put(this, :iconLayer, JR.lget(f, :iconLayer))
+    end)
+  end
+
+  def jnew(p_pickeUpLayerType, p_iconLayer, p_animationInterface) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_pickeUpLayerType, p_iconLayer, p_animationInterface)
+    this
+  end
 
 
-new(PickeUpLayerType, IconLayer, AnimationInterface) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, PickeUpLayerType, IconLayer, AnimationInterface),
-    This.
+  def jm_getIconLayer(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :iconLayer)})
+    end)
+  end
 
-'$init'(This, PickeUpLayerType, IconLayer, AnimationInterface) ->
-    'PickedUpLayerInterfaceFactoryBase':'$init'(This),
-    init_fields(This),
-        put({This, pickedUpLayerType}, PickeUpLayerType),
-        put({This, animationInterface}, AnimationInterface),
-        put({This, iconLayer}, IconLayer).
 
-getIconLayer(This) ->
-        get({This, iconLayer}).
+  def jm_getAnimationInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :animationInterface)})
+    end)
+  end
 
-getAnimationInterface(This) ->
-        get({This, animationInterface}).
 
-getPickedUpLayerType(This) ->
-        get({This, pickedUpLayerType}).
+  def jm_getPickedUpLayerType(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :pickedUpLayerType)})
+    end)
+  end
+end
+
 

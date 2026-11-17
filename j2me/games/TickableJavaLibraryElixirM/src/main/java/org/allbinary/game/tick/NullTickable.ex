@@ -1,49 +1,72 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.tick
-% import org.allbinary.layer.AllBinaryLayerManager
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.tick
 
--module('NullTickable').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements TickableInterface
+defmodule NullTickable do
+  def jsuper(), do: JObject
+def jstatic_SINGLETON(), do: JR.static_get(__MODULE__, :SINGLETON, fn -> NullTickable.jnew() end)
+  def jstatic_set_SINGLETON(value), do: JR.static_put(__MODULE__, :SINGLETON, value)
 
-static_init() ->
-    put({?MODULE, 'SINGLETON'}, 'NullTickable':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :NAME, nil)
+        JR.put(this, :NAME, "NulLTickable")
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'NAME'}, "NulLTickable"),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'NullTickable', 'SINGLETON'}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, NullTickable.jstatic_SINGLETON()})
+    end)
+  end
 
-% throws Exception
-processTick(This, AllBinaryLayerManager) ->
-        ok.
 
-getName(This) ->
-        get({This, 'NAME'}).
+  def jm_processTick(this, p_allBinaryLayerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerManager, p_allBinaryLayerManager)
+        nil
+    end)
+  end
+
+
+  def jm_getName(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :NAME)})
+    end)
+  end
+end
+
 

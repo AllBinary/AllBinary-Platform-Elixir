@@ -1,46 +1,67 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.audio
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.audio
 
--module('AudioContentTypeDataFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule AudioContentTypeDataFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> AudioContentTypeDataFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'AudioContentTypeDataFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :MIME_AUDIO_TONE, nil)
+    JR.put(this, :MIME_AUDIO_AMR, nil)
+    JR.put(this, :MIME_AUDIO_AMR_WB, nil)
+    JR.put(this, :MIME_AUDIO_WAV, nil)
+    JR.put(this, :MIME_AUDIO_MIDI, nil)
+    JR.put(this, :MIME_AUDIO_SP_MIDI, nil)
+        JR.put(this, :MIME_AUDIO_TONE, AudioContentTypeData.jnew("audio/x-tone-seq"))
+        JR.put(this, :MIME_AUDIO_AMR, AudioContentTypeData.jnew("audio/amr"))
+        JR.put(this, :MIME_AUDIO_AMR_WB, AudioContentTypeData.jnew("audio/amr-wb"))
+        JR.put(this, :MIME_AUDIO_WAV, AudioContentTypeData.jnew("audio/x-wav"))
+        JR.put(this, :MIME_AUDIO_MIDI, AudioContentTypeData.jnew("audio/midi"))
+        JR.put(this, :MIME_AUDIO_SP_MIDI, AudioContentTypeData.jnew("audio/sp-midi"))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'MIME_AUDIO_TONE'}, 'AudioContentTypeData':new("audio/x-tone-seq")),
-    put({This, 'MIME_AUDIO_AMR'}, 'AudioContentTypeData':new("audio/amr")),
-    put({This, 'MIME_AUDIO_AMR_WB'}, 'AudioContentTypeData':new("audio/amr-wb")),
-    put({This, 'MIME_AUDIO_WAV'}, 'AudioContentTypeData':new("audio/x-wav")),
-    put({This, 'MIME_AUDIO_MIDI'}, 'AudioContentTypeData':new("audio/midi")),
-    put({This, 'MIME_AUDIO_SP_MIDI'}, 'AudioContentTypeData':new("audio/sp-midi")),
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, AudioContentTypeDataFactory.jstatic_instance()})
+    end)
+  end
 
 
-getInstance() ->
-        get({'AudioContentTypeDataFactory', instance}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
 

@@ -1,59 +1,102 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.configuration
-% import org.allbinary.logic.StdUtil
-% import org.allbinary.util.ABHashtable
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.configuration
 
--module('GameConfigurationSingleton').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GameConfigurationSingleton do
+  def jsuper(), do: JObject
+def jstatic_SINGLETON(), do: JR.static_get(__MODULE__, :SINGLETON, fn -> GameConfigurationSingleton.jnew() end)
+  def jstatic_set_SINGLETON(value), do: JR.static_put(__MODULE__, :SINGLETON, value)
 
-static_init() ->
-    put({?MODULE, 'SINGLETON'}, 'GameConfigurationSingleton':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :list, nil)
+    JR.put(this, :hashtable, nil)
+        
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, list}, undefined),
-    put({This, hashtable}, undefined),
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, GameConfigurationSingleton.jstatic_SINGLETON()})
+    end)
+  end
 
 
-getInstance() ->
-        get({'GameConfigurationSingleton', 'SINGLETON'}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :list, BasicArrayListD.jnew())
+        JR.put(this, :hashtable, JR.call(StdUtil.jm_getInstance(), :jm_createHashtable, []))
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        put({This, list}, 'BasicArrayListD':new()),
-        put({This, hashtable}, (fun(Target_N65920) -> (get({Target_N65920, '$class'})):createHashtable(Target_N65920) end)('StdUtil':getInstance())).
 
-getInstanceByName(This, Name) when (is_list(Name) orelse Name =:= undefined) ->
-        (get({get({This, hashtable}), '$class'})):get(get({This, hashtable}), Name).
+  def jm_getInstanceByName(this, p_name) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+        throw({:jreturn, JR.call(JR.get(this, :hashtable), :jm_get, [JR.lget(f, :name)])})
+    end)
+  end
 
-getOptionsBasicArrayList(This) ->
-        get({This, list}).
 
-add(This, GameConfiguration) ->
-        (get({get({This, list}), '$class'})):add(get({This, list}), GameConfiguration).
+  def jm_getOptionsBasicArrayList(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :list)})
+    end)
+  end
 
-getHashtable(This) ->
-        get({This, hashtable}).
+
+  def jm_add(this, p_gameConfiguration) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameConfiguration, p_gameConfiguration)
+        JR.call(JR.get(this, :list), :jm_add, [JR.lget(f, :gameConfiguration)])
+    end)
+  end
+
+
+  def jm_getHashtable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :hashtable)})
+    end)
+  end
+end
+
 

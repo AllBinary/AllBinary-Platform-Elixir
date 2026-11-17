@@ -1,57 +1,97 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.util.cache
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
--module('AbstractArrayListPool').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements PoolInterface
+defmodule AbstractArrayListPool do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, buffers}, 'BasicArrayListD':new()),
-    put({This, cacheableInterfaceFactoryInterface}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :buffers, nil)
+    JR.put(this, :cacheableInterfaceFactoryInterface, nil)
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        JR.put(this, :buffers, BasicArrayListD.jnew())
+        
+    nil
+  end
 
 
-new(CacheableInterfaceFactoryInterface) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, CacheableInterfaceFactoryInterface),
-    This.
+  def jinit(this, p_cacheableInterfaceFactoryInterface) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cacheableInterfaceFactoryInterface, p_cacheableInterfaceFactoryInterface)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :cacheableInterfaceFactoryInterface, JR.lget(f, :cacheableInterfaceFactoryInterface))
+    end)
+  end
 
-'$init'(This, CacheableInterfaceFactoryInterface) ->
-    init_fields(This),
-        put({This, cacheableInterfaceFactoryInterface}, CacheableInterfaceFactoryInterface).
+  def jnew(p_cacheableInterfaceFactoryInterface) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_cacheableInterfaceFactoryInterface)
+    this
+  end
 
-% throws Exception
-clear(This) ->
-        erlang:error({'Exception', get({get({This, commonStrings}), 'NOT_IMPLEMENTED'})}).
 
-% throws Exception
-remove(This, Key) ->
-        erlang:error({'Exception', get({get({This, commonStrings}), 'NOT_IMPLEMENTED'})}).
+  def jm_clear(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jexception, JR.exception("Exception", JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED))})
+    end)
+  end
 
-% throws Exception
-add(This, CacheableInterface) ->
-        (get({get({This, buffers}), '$class'})):add(get({This, buffers}), CacheableInterface).
 
-% throws Exception
-addArray(This, CacheableInterfaces) when (is_tuple(CacheableInterfaces) orelse CacheableInterfaces =:= undefined) ->
-        lists:foreach(fun(Index) ->
-            (get({get({This, buffers}), '$class'})):add(get({This, buffers}), array:get(Index, CacheableInterfaces))
-        end, lists:seq(0, array:size(CacheableInterfaces) - 1)).
+  def jm_remove(this, p_key) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :key, p_key)
+        throw({:jexception, JR.exception("Exception", JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED))})
+    end)
+  end
+
+
+  def jm_add(this, p_cacheableInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cacheableInterface, p_cacheableInterface)
+        JR.call(JR.get(this, :buffers), :jm_add, [JR.lget(f, :cacheableInterface)])
+    end)
+  end
+
+
+  def jm_addArray(this, p_cacheableInterfaces) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cacheableInterfaces, p_cacheableInterfaces)
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.alength(JR.lget(f, :cacheableInterfaces))) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.call(JR.get(this, :buffers), :jm_add, [JR.aget(JR.lget(f, :cacheableInterfaces), JR.lget(f, :index))])
+        end)
+    end)
+  end
+end
+
 

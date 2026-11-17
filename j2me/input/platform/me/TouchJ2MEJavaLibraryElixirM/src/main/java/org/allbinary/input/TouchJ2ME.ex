@@ -1,66 +1,109 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input
-% import org.allbinary.input.motion.AllMotionRecognizer
-% import org.allbinary.input.motion.gesture.observer.BasicMotionGesturesHandler
-% import org.allbinary.input.motion.gesture.observer.GameMotionGestureListener
-% import org.allbinary.input.motion.gesture.observer.MotionGestureReceiveInterfaceFactory
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input
 
--module('TouchJ2ME').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+#TouchJ2ME
+defmodule TouchJ2ME do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, 'DEVICE_ID'}, 0),
-    put({This, motionRecognizer}, 'AllMotionRecognizer':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :DEVICE_ID, 0)
+    JR.put(this, :motionRecognizer, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :DEVICE_ID, 0)
+        JR.put(this, :motionRecognizer, AllMotionRecognizer.jnew())
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.lset(f, :motionGesturesHandler, JR.call(JR.call(JR.get(this, :motionRecognizer), :jm_getMotionGestureRecognizer, []), :jm_getMotionGesturesHandler, []))
+        JR.call(JR.lget(f, :motionGesturesHandler), :jm_addListenerInterface, [GameMotionGestureListener.jnew(MotionGestureReceiveInterfaceFactory.jm_getInstance())])
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        MotionGesturesHandler = (fun(Target_N65937) -> (get({Target_N65937, '$class'})):getMotionGesturesHandler(Target_N65937) end)((get({get({This, motionRecognizer}), '$class'})):getMotionGestureRecognizer(get({This, motionRecognizer}))),
-        (get({MotionGesturesHandler, '$class'})):addListenerInterface(MotionGesturesHandler, 'GameMotionGestureListener':new('MotionGestureReceiveInterfaceFactory':getInstance())).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-pointerDragged(This, X, Y) when is_integer(X), is_integer(Y) ->
-        try
-            (get({get({This, motionRecognizer}), '$class'})):processDraggedMotionEvent(get({This, motionRecognizer}), X, Y, get({This, 'DEVICE_ID'}), 0)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), This, "pointerDragged", E)
-        end.
 
-pointerPressed(This, X, Y) when is_integer(X), is_integer(Y) ->
-        try
-            (get({get({This, motionRecognizer}), '$class'})):processStartMotionEvent(get({This, motionRecognizer}), X, Y, get({This, 'DEVICE_ID'}), 0)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), This, "pointerPressed", E)
-        end.
+  def jm_pointerDragged(this, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        try do
+            JR.call(JR.get(this, :motionRecognizer), :jm_processDraggedMotionEvent, [JR.lget(f, :x), JR.lget(f, :y), JR.get(this, :DEVICE_ID), 0])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, "pointerDragged", JR.lget(f, :e)])
+        end
+    end)
+  end
 
-pointerReleased(This, X, Y) when is_integer(X), is_integer(Y) ->
-        try
-            (get({get({This, motionRecognizer}), '$class'})):processEndMotionEvent(get({This, motionRecognizer}), X, Y, get({This, 'DEVICE_ID'}), 0)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), This, "pointerReleased", E)
-        end.
+
+  def jm_pointerPressed(this, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        try do
+            JR.call(JR.get(this, :motionRecognizer), :jm_processStartMotionEvent, [JR.lget(f, :x), JR.lget(f, :y), JR.get(this, :DEVICE_ID), 0])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, "pointerPressed", JR.lget(f, :e)])
+        end
+    end)
+  end
+
+
+  def jm_pointerReleased(this, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        try do
+            JR.call(JR.get(this, :motionRecognizer), :jm_processEndMotionEvent, [JR.lget(f, :x), JR.lget(f, :y), JR.get(this, :DEVICE_ID), 0])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, "pointerReleased", JR.lget(f, :e)])
+        end
+    end)
+  end
+end
+
 

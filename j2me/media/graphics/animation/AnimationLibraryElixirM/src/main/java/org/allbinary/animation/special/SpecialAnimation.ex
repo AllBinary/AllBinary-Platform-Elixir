@@ -1,65 +1,116 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation.special
-% import org.allbinary.animation.AnimationBehavior
-% import org.allbinary.animation.IndexedAnimation
-% import org.allbinary.animation.IndexedAnimationBehavior
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation.special
 
--module('SpecialAnimation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements SpecialAnimationInterface
+defmodule SpecialAnimation do
+  def jsuper(), do: IndexedAnimation
+def jstatic_NULL_SPECIAL_ANIMATION(), do: JR.static_get(__MODULE__, :NULL_SPECIAL_ANIMATION, fn -> SpecialAnimation.jnew(IndexedAnimationBehavior.jnew(1, 250)) end)
+  def jstatic_set_NULL_SPECIAL_ANIMATION(value), do: JR.static_put(__MODULE__, :NULL_SPECIAL_ANIMATION, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('IndexedAnimation', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'NULL_SPECIAL_ANIMATION'}, 'SpecialAnimation':new('IndexedAnimationBehavior':new(1, 250))),
-    ok.
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-getInstance() ->
-        get({'SpecialAnimation', 'NULL_SPECIAL_ANIMATION'}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, SpecialAnimation.jstatic_NULL_SPECIAL_ANIMATION()})
+    end)
+  end
 
-new(AnimationBehavior) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, AnimationBehavior),
-    This.
 
-'$init'(This, AnimationBehavior) ->
-        'IndexedAnimation':'$init'(This, AnimationBehavior).
+  def jinit(this, p_animationBehavior) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :animationBehavior, p_animationBehavior)
+        IndexedAnimation.jinit(this, JR.lget(f, :animationBehavior))
+        SpecialAnimation.jinitfields(this)
+    end)
+  end
 
-nextFrame(This) ->
-        IndexedAnimationBehavior = (get({This, animationBehaviorP})),
-        put({IndexedAnimationBehavior, loopIndex}, get({IndexedAnimationBehavior, loopIndex}) + 1).
+  def jnew(p_animationBehavior) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_animationBehavior)
+    this
+  end
 
-setLastFrame(This) ->
-        ok.
 
-isComplete(This) ->
-        false.
+  def jm_nextFrame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :indexedAnimationBehavior, (JR.get(this, :animationBehaviorP)))
+        JR.postinc(JR.lget(f, :indexedAnimationBehavior), :loopIndex, 1)
+    end)
+  end
 
-open(This) ->
-        ok.
 
-close(This) ->
-        ok.
+  def jm_setLastFrame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-process(This) ->
-        ok.
+
+  def jm_isComplete(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
+
+
+  def jm_open(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_close(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_process(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+end
+
 

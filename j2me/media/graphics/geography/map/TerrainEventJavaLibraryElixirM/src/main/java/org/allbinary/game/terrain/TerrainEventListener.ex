@@ -1,36 +1,61 @@
-% Generated Code Do Not Modify
-% package org.allbinary.game.terrain
-% import org.allbinary.logic.communication.log.ForcedLogUtil
-% import org.allbinary.logic.util.event.AllBinaryEventObject
-% import org.allbinary.logic.util.event.EventStrings
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+# Generated Code Do Not Modify
+# package org.allbinary.game.terrain
 
--module('TerrainEventListener').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements TerrainEventListenerInterface
+defmodule TerrainEventListener do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, list}, 'BasicArrayListD':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :list, nil)
+        JR.put(this, :list, BasicArrayListD.jnew())
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-onEvent(This, EventObject) ->
-        'ForcedLogUtil':log(get({'EventStrings':getInstance(), 'PERFORMANCE_MESSAGE'}), This).
+  def jm_onEvent(this, p_eventObject) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+        ForcedLogUtil.jm_log(JR.get(EventStrings.jm_getInstance(), :PERFORMANCE_MESSAGE), this)
+    end)
+  end
 
-onTerrainEvent(This, TerrainEvent) ->
-        (get({get({This, list}), '$class'})):clear(get({This, list})),
-        (get({get({This, list}), '$class'})):add(get({This, list}), TerrainEvent).
 
-getList(This) ->
-        get({This, list}).
+  def jm_onTerrainEvent(this, p_terrainEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :terrainEvent, p_terrainEvent)
+        JR.call(JR.get(this, :list), :jm_clear, [])
+        JR.call(JR.get(this, :list), :jm_add, [JR.lget(f, :terrainEvent)])
+    end)
+  end
+
+
+  def jm_getList(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :list)})
+    end)
+  end
+end
+
 

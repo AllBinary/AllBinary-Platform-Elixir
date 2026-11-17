@@ -1,55 +1,92 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.configuration.feature
-% import org.allbinary.game.configuration.event.ChangedGameFeatureListener
-% import org.allbinary.logic.StdUtil
-% import org.allbinary.util.ABHashtable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.configuration.feature
 
--module('Feature').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule Feature do
+  def jsuper(), do: JObject
+def jstatic_hashtable(), do: JR.static_get(__MODULE__, :hashtable, fn -> JR.call(StdUtil.jm_getInstance(), :jm_createHashtable, []) end)
+  def jstatic_set_hashtable(value), do: JR.static_put(__MODULE__, :hashtable, value)
 
-static_init() ->
-    put({?MODULE, hashtable}, (fun(Target_N65692) -> (get({Target_N65692, '$class'})):createHashtable(Target_N65692) end)('StdUtil':getInstance())),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :name, nil)
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, name}, undefined),
-    ok.
+
+  def jinit(this, p_name) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :name, JR.lget(f, :name))
+        Feature.jm_add(JR.lget(f, :name), this)
+        JR.call(ChangedGameFeatureListener.jm_getInstance(), :jm_add, [this])
+    end)
+  end
+
+  def jnew(p_name) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_name)
+    this
+  end
 
 
-new(Name) when (is_list(Name) orelse Name =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Name),
-    This.
+  def jm_getInstance(p_name) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+        throw({:jreturn, JR.call(Feature.jstatic_hashtable(), :jm_get, [JR.lget(f, :name)])})
+    end)
+  end
 
-'$init'(This, Name) when (is_list(Name) orelse Name =:= undefined) ->
-    init_fields(This),
-        put({This, name}, Name),
-        'Feature':add(Name, This),
-        (fun(Target_N65857) -> (get({Target_N65857, '$class'})):add(Target_N65857, This) end)('ChangedGameFeatureListener':getInstance()).
 
-getInstance(Name) when (is_list(Name) orelse Name =:= undefined) ->
-        (get({get({'Feature', hashtable}), '$class'})):get(get({'Feature', hashtable}), Name).
+  def jm_add(p_name, p_gameFeature) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :gameFeature, p_gameFeature)
+        JR.call(Feature.jstatic_hashtable(), :jm_put, [JR.lget(f, :name), JR.lget(f, :gameFeature)])
+    end)
+  end
 
-add(Name, GameFeature) when (is_list(Name) orelse Name =:= undefined) ->
-        (get({get({'Feature', hashtable}), '$class'})):put(get({'Feature', hashtable}), Name, GameFeature).
 
-toString(This) ->
-        (get({This, '$class'})):getName(This).
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(this, :jm_getName, [])})
+    end)
+  end
 
-getName(This) ->
-        get({This, name}).
+
+  def jm_getName(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :name)})
+    end)
+  end
+end
+
 

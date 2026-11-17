@@ -1,78 +1,83 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.ai
-% import org.allbinary.ai.ArtificialIntelligenceInterface
-% import org.allbinary.game.input.GameInput
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.ABHashtable
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
--module('NumberOnOwnGroupSequenceAIFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule NumberOnOwnGroupSequenceAIFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-% throws Exception
-getInstance(This, Hashtable, ArtificialIntelligenceInterface, OwnerLayerInterface, GameInput) when (is_tuple(ArtificialIntelligenceInterface) orelse ArtificialIntelligenceInterface =:= undefined) ->
-        IntegerArray = get({'NumberInSameGroupSequence':getInstance(), 'NUMBER_ON_SAME_TEAM_SEQUENCE'}),
-        List = 'BasicArrayListD':new(),
-        lists:foreach(fun(Index) ->
-            IntegerCanBeNull = (get({Hashtable, '$class'})):get(Hashtable, array:get(Index, IntegerArray)),
-            case (IntegerCanBeNull =:= undefined) of
-                true ->
-                throw('$break');
-                false -> ok
-            end,
-            (get({List, '$class'})):add(List, IntegerCanBeNull)
-        end, lists:seq(0, array:size(IntegerArray) - 1)),
-        StringBuffer = 'StringMaker':new(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "Total AI Properties: "),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, (get({List, '$class'})):size(List)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, " == Total AI: "),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, array:size(ArtificialIntelligenceInterface)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, " + 1"),
-        CommonStrings = 'CommonStrings':getInstance(),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({StringBuffer, '$class'})):toString(StringBuffer), This, get({CommonStrings, 'GET_INSTANCE'})),
-        case ((array:size(ArtificialIntelligenceInterface) - 1) > (get({List, '$class'})):size(List)) of
-            true ->
-            erlang:error({'Exception', "Not enough AI properties."});
-            false -> ok
-        end,
-        case ((array:size(ArtificialIntelligenceInterface) - 1) < (get({List, '$class'})):size(List)) of
-            true ->
-            erlang:error({'Exception', "Too Many AI properties."});
-            false -> ok
-        end,
-        NumberOnSameTeam = array:new((get({List, '$class'})):size(List), {default, undefined}),
-        lists:foreach(fun(Index) ->
-            array:set(Index, array:get(Index, get({List, objectArray})), NumberOnSameTeam)
-        end, lists:seq(0, array:size(NumberOnSameTeam) - 1)),
-        'NumberOnOwnGroupSequenceAI':new(NumberOnSameTeam, ArtificialIntelligenceInterface, OwnerLayerInterface, GameInput).
+  def jm_getInstance(this, p_hashtable, p_artificialIntelligenceInterface, p_ownerLayerInterface, p_gameInput) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :hashtable, p_hashtable)
+      JR.lset(f, :artificialIntelligenceInterface, p_artificialIntelligenceInterface)
+      JR.lset(f, :ownerLayerInterface, p_ownerLayerInterface)
+      JR.lset(f, :gameInput, p_gameInput)
+        JR.lset(f, :integerArray, JR.get(NumberInSameGroupSequence.jm_getInstance(), :NUMBER_ON_SAME_TEAM_SEQUENCE))
+        JR.lset(f, :list, BasicArrayListD.jnew())
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.alength(JR.lget(f, :integerArray))) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :integerCanBeNull, JR.call(JR.lget(f, :hashtable), :jm_get, [JR.aget(JR.lget(f, :integerArray), JR.lget(f, :index))]))
+            if (JR.lget(f, :integerCanBeNull) == nil) do
+                throw(:jbreak)
+            end
+            JR.call(JR.lget(f, :list), :jm_add, [JR.lget(f, :integerCanBeNull)])
+        end)
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["Total AI Properties: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.call(JR.lget(f, :list), :jm_size, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [" == Total AI: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.alength(JR.lget(f, :artificialIntelligenceInterface))])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [" + 1"])
+        JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :stringBuffer), :jm_toString, []), this, JR.get(JR.lget(f, :commonStrings), :GET_INSTANCE)])
+        if (JR.int32(JR.alength(JR.lget(f, :artificialIntelligenceInterface)) - 1) > JR.call(JR.lget(f, :list), :jm_size, [])) do
+            throw({:jexception, JR.exception("Exception", "Not enough AI properties.")})
+        end
+        if (JR.int32(JR.alength(JR.lget(f, :artificialIntelligenceInterface)) - 1) < JR.call(JR.lget(f, :list), :jm_size, [])) do
+            throw({:jexception, JR.exception("Exception", "Too Many AI properties.")})
+        end
+        JR.lset(f, :numberOnSameTeam, JR.anew(JR.call(JR.lget(f, :list), :jm_size, []), nil))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.alength(JR.lget(f, :numberOnSameTeam))) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.aset(JR.lget(f, :numberOnSameTeam), JR.lget(f, :index), JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index)))
+        end)
+        throw({:jreturn, NumberOnOwnGroupSequenceAI.jnew(JR.lget(f, :numberOnSameTeam), JR.lget(f, :artificialIntelligenceInterface), JR.lget(f, :ownerLayerInterface), JR.lget(f, :gameInput))})
+    end)
+  end
+end
+
 

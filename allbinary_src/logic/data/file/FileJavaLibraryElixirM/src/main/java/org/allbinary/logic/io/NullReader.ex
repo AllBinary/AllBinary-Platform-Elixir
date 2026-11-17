@@ -1,61 +1,94 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2025 AllBinary 
-% 
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-% 
-% Created By: Travis Berthelot 
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.io
-% import java.io.IOException
-% import java.io.Reader
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2025 AllBinary 
+# 
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+# 
+# Created By: Travis Berthelot 
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
--module('NullReader').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule NullReader do
+  def jsuper(), do: Reader
+def jstatic_NULL_READER(), do: JR.static_get(__MODULE__, :NULL_READER, fn -> NullReader.jnew() end)
+  def jstatic_set_NULL_READER(value), do: JR.static_put(__MODULE__, :NULL_READER, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Reader', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-static_init() ->
-    put({?MODULE, 'NULL_READER'}, 'NullReader':new()),
-    ok.
+  def jinit(this) do
+    Reader.jinit(this)
+    jinitfields(this)
+  end
 
-init_fields(This) ->
-    ok.
-
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    'Reader':'$init'(This),
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-% throws IOException
-read(This) ->
-        (-1).
+  def jm_read(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, -1})
+    end)
+  end
 
-% throws IOException
-read(This, Cbuf, Off, Len) when (is_tuple(Cbuf) orelse Cbuf =:= undefined), is_integer(Off), is_integer(Len) ->
-        (-1).
 
-% throws IOException
-ready(This) ->
-        false.
+  def jm_read(this, p_cbuf, p_off, p_len) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cbuf, p_cbuf)
+      JR.lset(f, :off, p_off)
+      JR.lset(f, :len, p_len)
+        throw({:jreturn, -1})
+    end)
+  end
 
-% throws IOException
-skip(This, N) when is_integer(N) ->
-        0.
 
-close(This) ->
-        ok.
+  def jm_ready(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
+
+
+  def jm_skip(this, p_n) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :n, p_n)
+        throw({:jreturn, 0})
+    end)
+  end
+
+
+  def jm_close(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+end
+
 

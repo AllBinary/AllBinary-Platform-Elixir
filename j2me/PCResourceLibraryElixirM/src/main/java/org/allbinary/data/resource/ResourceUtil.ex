@@ -1,90 +1,134 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.data.resource
-% import java.io.ByteArrayInputStream
-% import java.io.ByteArrayOutputStream
-% import java.io.FileInputStream
-% import java.io.InputStream
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.io.StreamUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.data.resource
 
--module('ResourceUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+#J2SE - PC
+defmodule ResourceUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> ResourceUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'ResourceUtil':new()),
-    ok.
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, path}, get({'StringUtil':getInstance(), 'EMPTY_STRING'})),
-    put({This, ext}, get({'StringUtil':getInstance(), 'EMPTY_STRING'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :path, nil)
+    JR.put(this, :ext, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :path, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+        JR.put(this, :ext, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+    nil
+  end
 
 
-getInstance() ->
-        get({'ResourceUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, ResourceUtil.jstatic_instance()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-setLoadingPaths(This, Path, Ext) when (is_list(Path) orelse Path =:= undefined), (is_list(Ext) orelse Ext =:= undefined) ->
-        put({This, path}, Path),
-        put({This, ext}, Ext).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-setClassLoader(This, ClassLoader) ->
-        ok.
 
-% throws Exception
-getResourceAsStream(This, Resource) when (is_list(Resource) orelse Resource =:= undefined) ->
-        put({local, inputStream}, (get({This, '$class'})):getResourceAsStreamAtStart(This, Resource, 2)),
-        case (get({local, inputStream}) =:= undefined) of
-            true ->
-            put({local, inputStream}, (get({This, '$class'})):getResourceAsStreamAtStart(This, Resource, 1)),
-            case (get({local, inputStream}) =:= undefined) of
-                true ->
-                erlang:error({'Exception', (fun(Target_N66410) -> (get({Target_N66410, '$class'})):toString(Target_N66410) end)((fun(Target_N66417) -> (get({Target_N66417, '$class'})):append(Target_N66417, Resource) end)((fun(Target_N66424) -> (get({Target_N66424, '$class'})):append(Target_N66424, "Unable to obtain: ") end)('StringMaker':new())))});
-                false -> ok
-            end;
-            false -> ok
-        end,
-        get({local, inputStream}).
+  def jm_setLoadingPaths(this, p_path, p_ext) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :path, p_path)
+      JR.lset(f, :ext, p_ext)
+        JR.put(this, :path, JR.lget(f, :path))
+        JR.put(this, :ext, JR.lget(f, :ext))
+    end)
+  end
 
-% throws Exception
-getResourceAsStreamAtStart(This, Resource, StartIndex) when (is_list(Resource) orelse Resource =:= undefined), is_integer(StartIndex) ->
-        try
-        InputStream = 'FileInputStream':new((fun(Target_N66581) -> (get({Target_N66581, '$class'})):toString(Target_N66581) end)((fun(Target_N66588) -> (get({Target_N66588, '$class'})):append(Target_N66588, get({This, ext})) end)((fun(Target_N66595) -> (get({Target_N66595, '$class'})):append(Target_N66595, Resource) end)((fun(Target_N66602) -> (get({Target_N66602, '$class'})):append(Target_N66602, get({This, path})) end)('StringMaker':new()))))),
-        case (InputStream =/= undefined) of
-            true ->
-            ByteArray = array:new((get({InputStream, '$class'})):available(InputStream), {default, 0}),
-            (fun(Target_N66783) -> (get({Target_N66783, '$class'})):getByteArray(Target_N66783, InputStream, 'ByteArrayOutputStream':new(), ByteArray) end)('StreamUtil':getInstance()),
-            throw({'$return', 'ByteArrayInputStream':new(ByteArray)});
-            false -> ok
-        end,
-        InputStream
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
 
-addResource(This, Resource, Value) when (is_list(Resource) orelse Resource =:= undefined) ->
-        ok.
+  def jm_setClassLoader(this, p_classLoader) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :classLoader, p_classLoader)
+        nil
+    end)
+  end
+
+
+  def jm_getResourceAsStream(this, p_resource) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :resource, p_resource)
+        JR.lset(f, :inputStream, JR.call(this, :jm_getResourceAsStreamAtStart, [JR.lget(f, :resource), 2]))
+        if (JR.lget(f, :inputStream) == nil) do
+            JR.lset(f, :inputStream, JR.call(this, :jm_getResourceAsStreamAtStart, [JR.lget(f, :resource), 1]))
+            if (JR.lget(f, :inputStream) == nil) do
+                throw({:jexception, JR.exception("Exception", JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["Unable to obtain: "]), :jm_append, [JR.lget(f, :resource)]), :jm_toString, []))})
+            end
+        end
+        throw({:jreturn, JR.lget(f, :inputStream)})
+    end)
+  end
+
+
+  def jm_getResourceAsStreamAtStart(this, p_resource, p_startIndex) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :resource, p_resource)
+      JR.lset(f, :startIndex, p_startIndex)
+        JR.lset(f, :inputStream, FileInputStream.jnew(JR.call(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(this, :path)]), :jm_append, [JR.lget(f, :resource)]), :jm_append, [JR.get(this, :ext)]), :jm_toString, [])))
+        if (JR.lget(f, :inputStream) != nil) do
+            JR.lset(f, :byteArray, JR.anew(JR.call(JR.lget(f, :inputStream), :jm_available, []), 0))
+            JR.call(StreamUtil.jm_getInstance(), :jm_getByteArray, [JR.lget(f, :inputStream), J.ByteArrayOutputStream.jnew(), JR.lget(f, :byteArray)])
+            throw({:jreturn, ByteArrayInputStream.jnew(JR.lget(f, :byteArray))})
+        end
+        throw({:jreturn, JR.lget(f, :inputStream)})
+    end)
+  end
+
+
+  def jm_addResource(this, p_resource, p_value) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :resource, p_resource)
+      JR.lset(f, :value, p_value)
+        nil
+    end)
+  end
+end
+
 

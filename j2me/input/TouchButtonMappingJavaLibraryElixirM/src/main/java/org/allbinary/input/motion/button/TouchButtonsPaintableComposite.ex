@@ -1,108 +1,126 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion.button
-% import org.allbinary.game.input.CompleteMotionGestureInputEvent
-% import org.allbinary.game.input.CompleteMotionGestureInputEventHandler
-% import org.allbinary.game.input.CompleteMotionGestureInputEventListenerInterface
-% import org.allbinary.game.input.GameKey
-% import org.allbinary.game.input.mapping.InputMappingInterface
-% import org.allbinary.game.input.motion.action.GameKeyCompleteMotionGestureInputEvent
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.paint.ProcessPaintable
-% import org.allbinary.input.motion.gesture.MotionGestureInput
-% import org.allbinary.input.motion.gesture.TouchMotionGestureFactory
-% import org.allbinary.logic.communication.log.ForcedLogUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.logic.util.event.AllBinaryEventObject
-% import org.allbinary.logic.util.event.EventStrings
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.time.TimeDelayHelper
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
--module('TouchButtonsPaintableComposite').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements CompleteMotionGestureInputEventListenerInterface
+defmodule TouchButtonsPaintableComposite do
+  def jsuper(), do: ProcessPaintable
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ProcessPaintable', Function, Arguments).
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, inputMappingInterface}, undefined),
-    put({This, touchButtonsPaintable}, undefined),
-    put({This, timeHelper}, 'TimeDelayHelper':new(250)),
-    put({This, released}, true),
-    put({This, 'METHOD_NAME'}, "onCompleteMotionGestureInputEvent"),
-    put({This, 'RELEASE'}, "Ignoring: MotionGestureInput Release"),
-    put({This, 'FAST_REPEAT'}, "Ignoring: MotionGestureInput Repeated To Quickly"),
-    put({This, 'IGNORE'}, "Ignoring: Until Released"),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :inputMappingInterface, nil)
+    JR.put(this, :touchButtonsPaintable, nil)
+    JR.put(this, :timeHelper, nil)
+    JR.put(this, :released, false)
+    JR.put(this, :METHOD_NAME, nil)
+    JR.put(this, :RELEASE, nil)
+    JR.put(this, :FAST_REPEAT, nil)
+    JR.put(this, :IGNORE, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        
+        
+        JR.put(this, :timeHelper, TimeDelayHelper.jnew(250))
+        JR.put(this, :released, true)
+        JR.put(this, :METHOD_NAME, "onCompleteMotionGestureInputEvent")
+        JR.put(this, :RELEASE, "Ignoring: MotionGestureInput Release")
+        JR.put(this, :FAST_REPEAT, "Ignoring: MotionGestureInput Repeated To Quickly")
+        JR.put(this, :IGNORE, "Ignoring: Until Released")
+    nil
+  end
 
 
-new(InputMappingInterface, BasicColor) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, InputMappingInterface, BasicColor),
-    This.
+  def jinit(this, p_inputMappingInterface, p_basicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :inputMappingInterface, p_inputMappingInterface)
+      JR.lset(f, :basicColor, p_basicColor)
+      ProcessPaintable.jinit(this)
+      jinitfields(this)
+        JR.put(this, :inputMappingInterface, JR.lget(f, :inputMappingInterface))
+        JR.call(CompleteMotionGestureInputEventHandler.jm_getInstance(), :jm_addListenerInterface, [this])
+        JR.put(this, :touchButtonsPaintable, TouchButtonsMappingPaintable.jnew(JR.lget(f, :basicColor)))
+    end)
+  end
 
-'$init'(This, InputMappingInterface, BasicColor) ->
-    'ProcessPaintable':'$init'(This),
-    init_fields(This),
-        put({This, inputMappingInterface}, InputMappingInterface),
-        (fun(Target_N66467) -> (get({Target_N66467, '$class'})):addListenerInterface(Target_N66467, This) end)('CompleteMotionGestureInputEventHandler':getInstance()),
-        put({This, touchButtonsPaintable}, 'TouchButtonsMappingPaintable':new(BasicColor)).
+  def jnew(p_inputMappingInterface, p_basicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_inputMappingInterface, p_basicColor)
+    this
+  end
 
-onEvent(This, EventObject) ->
-        'ForcedLogUtil':log(get({'EventStrings':getInstance(), 'PERFORMANCE_MESSAGE'}), This).
 
-onCompleteMotionGestureInputEvent(This, CompleteMotionGestureInputEvent) ->
-        try
-        try
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, "onCompleteMotionGestureInputEvent"),
-            TouchMotionGestureFactory = 'TouchMotionGestureFactory':getInstance(),
-            GameKeyCompleteMotionGestureInputEvent = CompleteMotionGestureInputEvent,
-            GameKey = (get({GameKeyCompleteMotionGestureInputEvent, '$class'})):getGameKey(GameKeyCompleteMotionGestureInputEvent),
-            MotionGestureInput = (get({CompleteMotionGestureInputEvent, '$class'})):getMotionGestureInput(CompleteMotionGestureInputEvent),
-            case (MotionGestureInput =:= get({TouchMotionGestureFactory, 'RELEASED'})) of
-                true ->
-                (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({This, 'RELEASE'}), This, get({This, 'METHOD_NAME'})),
-                put({This, released}, true),
-                throw({'$return', ok});
-                false -> ok
-            end,
-            case ((MotionGestureInput =:= get({'TouchMotionGestureFactory':getInstance(), 'NO_MOTION'})) andalso (not (get({get({This, timeHelper}), '$class'})):isTimeTNT(get({This, timeHelper})))) of
-                true ->
-                (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({This, 'FAST_REPEAT'}), This, get({This, 'METHOD_NAME'})),
-                throw({'$return', ok});
-                false -> ok
-            end,
-            case (not get({This, released})) of
-                true ->
-                (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({This, 'IGNORE'}), This, get({This, 'METHOD_NAME'})),
-                throw({'$return', ok});
-                false -> ok
-            end,
-            put({This, released}, false),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N67532) -> (get({Target_N67532, '$class'})):toString(Target_N67532) end)((fun(Target_N67539) -> (get({Target_N67539, '$class'})):append(Target_N67539, (fun(Target_N67636) -> (get({Target_N67636, '$class'})):toString(Target_N67636, MotionGestureInput) end)('StringUtil':getInstance())) end)((fun(Target_N67546) -> (get({Target_N67546, '$class'})):append(Target_N67546, " MotionGestureInput: ") end)((fun(Target_N67553) -> (get({Target_N67553, '$class'})):append(Target_N67553, (fun(Target_N67589) -> (get({Target_N67589, '$class'})):toString(Target_N67589, GameKey) end)('StringUtil':getInstance())) end)((fun(Target_N67560) -> (get({Target_N67560, '$class'})):append(Target_N67560, "GameKey: ") end)('StringMaker':new()))))), This, get({This, 'METHOD_NAME'})),
-            (get({get({This, inputMappingInterface}), '$class'})):processInputMapping(get({This, inputMappingInterface}), GameKey, MotionGestureInput)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({This, 'METHOD_NAME'}), E)
+  def jm_onEvent(this, p_eventObject) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+        ForcedLogUtil.jm_log(JR.get(EventStrings.jm_getInstance(), :PERFORMANCE_MESSAGE), this)
+    end)
+  end
+
+
+  def jm_onCompleteMotionGestureInputEvent(this, p_completeMotionGestureInputEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :completeMotionGestureInputEvent, p_completeMotionGestureInputEvent)
+        try do
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, "onCompleteMotionGestureInputEvent"])
+            JR.lset(f, :touchMotionGestureFactory, TouchMotionGestureFactory.jm_getInstance())
+            JR.lset(f, :gameKeyCompleteMotionGestureInputEvent, JR.lget(f, :completeMotionGestureInputEvent))
+            JR.lset(f, :gameKey, JR.call(JR.lget(f, :gameKeyCompleteMotionGestureInputEvent), :jm_getGameKey, []))
+            JR.lset(f, :motionGestureInput, JR.call(JR.lget(f, :completeMotionGestureInputEvent), :jm_getMotionGestureInput, []))
+            if (JR.lget(f, :motionGestureInput) == JR.get(JR.lget(f, :touchMotionGestureFactory), :RELEASED)) do
+                JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(this, :RELEASE), this, JR.get(this, :METHOD_NAME)])
+                JR.put(this, :released, true)
+                throw({:jreturn, nil})
+            end
+            if ((JR.lget(f, :motionGestureInput) == JR.get(TouchMotionGestureFactory.jm_getInstance(), :NO_MOTION)) && !JR.call(JR.get(this, :timeHelper), :jm_isTimeTNT, [])) do
+                JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(this, :FAST_REPEAT), this, JR.get(this, :METHOD_NAME)])
+                throw({:jreturn, nil})
+            end
+            if !JR.get(this, :released) do
+                JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(this, :IGNORE), this, JR.get(this, :METHOD_NAME)])
+                throw({:jreturn, nil})
+            end
+            JR.put(this, :released, false)
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["GameKey: "]), :jm_append, [JR.call(StringUtil.jm_getInstance(), :jm_toString, [JR.lget(f, :gameKey)])]), :jm_append, [" MotionGestureInput: "]), :jm_append, [JR.call(StringUtil.jm_getInstance(), :jm_toString, [JR.lget(f, :motionGestureInput)])]), :jm_toString, []), this, JR.get(this, :METHOD_NAME)])
+            JR.call(JR.get(this, :inputMappingInterface), :jm_processInputMapping, [JR.lget(f, :gameKey), JR.lget(f, :motionGestureInput)])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(this, :METHOD_NAME), JR.lget(f, :e)])
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-process(This) ->
-        (fun(Target_N67900) -> (get({Target_N67900, '$class'})):removeListener(Target_N67900, This) end)('CompleteMotionGestureInputEventHandler':getInstance()).
+
+  def jm_process(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(CompleteMotionGestureInputEventHandler.jm_getInstance(), :jm_removeListener, [this])
+    end)
+  end
+end
+
 

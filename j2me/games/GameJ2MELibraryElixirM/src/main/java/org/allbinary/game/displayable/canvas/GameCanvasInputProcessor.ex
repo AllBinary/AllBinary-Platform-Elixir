@@ -1,98 +1,133 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import javax.microedition.lcdui.Canvas
-% import org.allbinary.game.input.GameKey
-% import org.allbinary.game.input.GameKeyEventSourceInterface
-% import org.allbinary.game.input.GameKeyFactory
-% import org.allbinary.game.input.InputProcessor
-% import org.allbinary.game.input.PlatformInputMappingFactory
-% import org.allbinary.game.input.event.DownGameKeyEventHandler
-% import org.allbinary.game.input.event.DownKeyEventHandler
-% import org.allbinary.game.input.event.GameKeyEvent
-% import org.allbinary.game.input.event.GameKeyEventFactory
-% import org.allbinary.game.input.event.UpGameKeyEventHandler
-% import org.allbinary.game.input.mapping.InputToGameKeyMapping
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.math.SmallIntegerSingletonFactory
-% import org.allbinary.logic.string.StringMaker
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('GameCanvasInputProcessor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule GameCanvasInputProcessor do
+  def jsuper(), do: InputProcessor
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('InputProcessor', Function, Arguments).
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, allBinaryGameCanvas}, undefined),
-    put({This, downGameKeyEventHandler}, 'DownGameKeyEventHandler':getInstance()),
-    put({This, upGameKeyEventHandler}, 'UpGameKeyEventHandler':getInstance()),
-    put({This, downKeyEventHandler}, 'DownKeyEventHandler':getInstance()),
-    put({This, smallIntegerSingletonFactory}, 'SmallIntegerSingletonFactory':getInstance()),
-    put({This, inputToGameKeyMapping}, (fun(Target_N66382) -> (get({Target_N66382, '$class'})):getInputMapping(Target_N66382) end)((fun(Target_N66389) -> (get({Target_N66389, '$class'})):getPersistentInputMappingInstance(Target_N66389) end)('PlatformInputMappingFactory':getInstance()))),
-    put({This, 'NONE'}, get({'GameKeyFactory':getInstance(), 'NONE'})),
-    put({This, gameKeyEventFactory}, 'GameKeyEventFactory':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :allBinaryGameCanvas, nil)
+    JR.put(this, :downGameKeyEventHandler, nil)
+    JR.put(this, :upGameKeyEventHandler, nil)
+    JR.put(this, :downKeyEventHandler, nil)
+    JR.put(this, :smallIntegerSingletonFactory, nil)
+    JR.put(this, :inputToGameKeyMapping, nil)
+    JR.put(this, :NONE, nil)
+    JR.put(this, :gameKeyEventFactory, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        
+        JR.put(this, :downGameKeyEventHandler, DownGameKeyEventHandler.jm_getInstance())
+        JR.put(this, :upGameKeyEventHandler, UpGameKeyEventHandler.jm_getInstance())
+        JR.put(this, :downKeyEventHandler, DownKeyEventHandler.jm_getInstance())
+        JR.put(this, :smallIntegerSingletonFactory, SmallIntegerSingletonFactory.jm_getInstance())
+        JR.put(this, :inputToGameKeyMapping, JR.call(JR.call(PlatformInputMappingFactory.jm_getInstance(), :jm_getPersistentInputMappingInstance, []), :jm_getInputMapping, []))
+        JR.put(this, :NONE, JR.get(GameKeyFactory.jm_getInstance(), :NONE))
+        JR.put(this, :gameKeyEventFactory, GameKeyEventFactory.jm_getInstance())
+    nil
+  end
 
 
-new(AllBinaryGameCanvas) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, AllBinaryGameCanvas),
-    This.
+  def jinit(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+      InputProcessor.jinit(this)
+      jinitfields(this)
+        JR.put(this, :allBinaryGameCanvas, JR.lget(f, :allBinaryGameCanvas))
+        JR.call(JR.get(this, :inputToGameKeyMapping), :jm_init, [JR.get(this, :allBinaryGameCanvas)])
+    end)
+  end
 
-'$init'(This, AllBinaryGameCanvas) ->
-    'InputProcessor':'$init'(This),
-    init_fields(This),
-        put({This, allBinaryGameCanvas}, AllBinaryGameCanvas),
-        (get({get({This, inputToGameKeyMapping}), '$class'})):init(get({This, inputToGameKeyMapping}), get({This, allBinaryGameCanvas})).
+  def jnew(p_allBinaryGameCanvas) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_allBinaryGameCanvas)
+    this
+  end
 
-keyPressedByDevice(This, KeyCode, DeviceId) when is_integer(KeyCode), is_integer(DeviceId) ->
-        try
-            GameKey = (get({get({This, inputToGameKeyMapping}), '$class'})):getInstanceForCanvas(get({This, inputToGameKeyMapping}), get({This, allBinaryGameCanvas}), KeyCode),
-            case (GameKey =/= get({This, 'NONE'})) of
-                true ->
-                GameKeyEvent = (get({get({This, gameKeyEventFactory}), '$class'})):getInstanceForInput(get({This, gameKeyEventFactory}), get({This, allBinaryGameCanvas}), GameKey),
-                (get({get({This, downGameKeyEventHandler}), '$class'})):fireEvent(get({This, downGameKeyEventHandler}), GameKeyEvent),
-                (fun(Target_N67018) -> (get({Target_N67018, '$class'})):fireEvent(Target_N67018, GameKeyEvent) end)((get({get({This, downGameKeyEventHandler}), '$class'})):getInstanceForDevice(get({This, downGameKeyEventHandler}), DeviceId));
-                false ->
-                (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N66801) -> (get({Target_N66801, '$class'})):toString(Target_N66801) end)((fun(Target_N66808) -> (get({Target_N66808, '$class'})):appendint(Target_N66808, KeyCode) end)((fun(Target_N66815) -> (get({Target_N66815, '$class'})):append(Target_N66815, get({get({This, gameInputStrings}), 'NO_KEY'})) end)('StringMaker':new()))), This, get({get({This, gameInputStrings}), 'ADD_KEY_EVENT'}))
-            end,
-            KeyCodeAsInteger = (get({get({This, smallIntegerSingletonFactory}), '$class'})):getAtNoThrow(get({This, smallIntegerSingletonFactory}), KeyCode),
-            (get({get({This, downKeyEventHandler}), '$class'})):fireEventI(get({This, downKeyEventHandler}), KeyCodeAsInteger),
-            (fun(Target_N67172) -> (get({Target_N67172, '$class'})):fireEventI(Target_N67172, KeyCodeAsInteger) end)((get({get({This, downKeyEventHandler}), '$class'})):getInstanceForDevice(get({This, downKeyEventHandler}), DeviceId))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), "Key Event Error", This, get({get({This, gameInputStrings}), 'ADD_KEY_EVENT'}), E)
-        end.
 
-keyReleasedByDevice(This, Canvas, KeyCode, DeviceId) when is_integer(KeyCode), is_integer(DeviceId) ->
-        (get({This, '$class'})):removeGameKeyEvent(This, Canvas, KeyCode, DeviceId, false).
-
-removeGameKeyEvent(This, Canvas, KeyCode, DeviceId, Repeated) when is_integer(KeyCode), is_integer(DeviceId), is_boolean(Repeated) ->
-        try
-            GameKey = (get({get({This, inputToGameKeyMapping}), '$class'})):getInstanceForCanvas(get({This, inputToGameKeyMapping}), Canvas, KeyCode),
-            case (GameKey =/= get({This, 'NONE'})) of
-                true ->
-                GameKeyEventSourceInterface = Canvas,
-                GameKeyEvent = (get({get({This, gameKeyEventFactory}), '$class'})):getInstanceForInput(get({This, gameKeyEventFactory}), GameKeyEventSourceInterface, GameKey),
-                (get({get({This, upGameKeyEventHandler}), '$class'})):fireEvent(get({This, upGameKeyEventHandler}), GameKeyEvent),
-                (fun(Target_N67959) -> (get({Target_N67959, '$class'})):fireEvent(Target_N67959, GameKeyEvent) end)((get({get({This, upGameKeyEventHandler}), '$class'})):getInstanceForDevice(get({This, upGameKeyEventHandler}), DeviceId));
-                false ->
-                (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N67687) -> (get({Target_N67687, '$class'})):toString(Target_N67687) end)((fun(Target_N67694) -> (get({Target_N67694, '$class'})):appendint(Target_N67694, KeyCode) end)((fun(Target_N67701) -> (get({Target_N67701, '$class'})):append(Target_N67701, get({get({This, gameInputStrings}), 'NO_KEY'})) end)('StringMaker':new()))), This, get({get({This, gameInputStrings}), 'REMOVE_KEY_EVENT'}))
+  def jm_keyPressedByDevice(this, p_keyCode, p_deviceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+      JR.lset(f, :deviceId, p_deviceId)
+        try do
+            JR.lset(f, :gameKey, JR.call(JR.get(this, :inputToGameKeyMapping), :jm_getInstanceForCanvas, [JR.get(this, :allBinaryGameCanvas), JR.lget(f, :keyCode)]))
+            if (JR.lget(f, :gameKey) != JR.get(this, :NONE)) do
+                JR.lset(f, :gameKeyEvent, JR.call(JR.get(this, :gameKeyEventFactory), :jm_getInstanceForInput, [JR.get(this, :allBinaryGameCanvas), JR.lget(f, :gameKey)]))
+                JR.call(JR.get(this, :downGameKeyEventHandler), :jm_fireEvent, [JR.lget(f, :gameKeyEvent)])
+                JR.call(JR.call(JR.get(this, :downGameKeyEventHandler), :jm_getInstanceForDevice, [JR.lget(f, :deviceId)]), :jm_fireEvent, [JR.lget(f, :gameKeyEvent)])
+            else
+                JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :gameInputStrings), :NO_KEY)]), :jm_appendint, [JR.lget(f, :keyCode)]), :jm_toString, []), this, JR.get(JR.get(this, :gameInputStrings), :ADD_KEY_EVENT)])
             end
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), "Key Event Error", This, get({get({This, gameInputStrings}), 'REMOVE_KEY_EVENT'}), E)
-        end.
+            JR.lset(f, :keyCodeAsInteger, JR.call(JR.get(this, :smallIntegerSingletonFactory), :jm_getAtNoThrow, [JR.lget(f, :keyCode)]))
+            JR.call(JR.get(this, :downKeyEventHandler), :jm_fireEventI, [JR.lget(f, :keyCodeAsInteger)])
+            JR.call(JR.call(JR.get(this, :downKeyEventHandler), :jm_getInstanceForDevice, [JR.lget(f, :deviceId)]), :jm_fireEventI, [JR.lget(f, :keyCodeAsInteger)])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, ["Key Event Error", this, JR.get(JR.get(this, :gameInputStrings), :ADD_KEY_EVENT), JR.lget(f, :e)])
+        end
+    end)
+  end
+
+
+  def jm_keyReleasedByDevice(this, p_canvas, p_keyCode, p_deviceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :canvas, p_canvas)
+      JR.lset(f, :keyCode, p_keyCode)
+      JR.lset(f, :deviceId, p_deviceId)
+        JR.call(this, :jm_removeGameKeyEvent, [JR.lget(f, :canvas), JR.lget(f, :keyCode), JR.lget(f, :deviceId), false])
+    end)
+  end
+
+
+  def jm_removeGameKeyEvent(this, p_canvas, p_keyCode, p_deviceId, p_repeated) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :canvas, p_canvas)
+      JR.lset(f, :keyCode, p_keyCode)
+      JR.lset(f, :deviceId, p_deviceId)
+      JR.lset(f, :repeated, p_repeated)
+        try do
+            JR.lset(f, :gameKey, JR.call(JR.get(this, :inputToGameKeyMapping), :jm_getInstanceForCanvas, [JR.lget(f, :canvas), JR.lget(f, :keyCode)]))
+            if (JR.lget(f, :gameKey) != JR.get(this, :NONE)) do
+                JR.lset(f, :gameKeyEventSourceInterface, JR.lget(f, :canvas))
+                JR.lset(f, :gameKeyEvent, JR.call(JR.get(this, :gameKeyEventFactory), :jm_getInstanceForInput, [JR.lget(f, :gameKeyEventSourceInterface), JR.lget(f, :gameKey)]))
+                JR.call(JR.get(this, :upGameKeyEventHandler), :jm_fireEvent, [JR.lget(f, :gameKeyEvent)])
+                JR.call(JR.call(JR.get(this, :upGameKeyEventHandler), :jm_getInstanceForDevice, [JR.lget(f, :deviceId)]), :jm_fireEvent, [JR.lget(f, :gameKeyEvent)])
+            else
+                JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :gameInputStrings), :NO_KEY)]), :jm_appendint, [JR.lget(f, :keyCode)]), :jm_toString, []), this, JR.get(JR.get(this, :gameInputStrings), :REMOVE_KEY_EVENT)])
+            end
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, ["Key Event Error", this, JR.get(JR.get(this, :gameInputStrings), :REMOVE_KEY_EVENT), JR.lget(f, :e)])
+        end
+    end)
+  end
+end
+
 

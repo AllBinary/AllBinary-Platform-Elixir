@@ -1,23 +1,26 @@
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.form
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
--module('CustomScreen').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule CustomScreen do
+  def jsuper(), do: CustomDisplayable
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('CustomDisplayable', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    CustomDisplayable.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    'CustomDisplayable':'$init'(This),
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+end
 
 

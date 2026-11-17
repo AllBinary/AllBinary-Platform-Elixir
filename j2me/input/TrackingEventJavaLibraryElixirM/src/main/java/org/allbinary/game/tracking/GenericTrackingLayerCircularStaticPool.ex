@@ -1,45 +1,55 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.tracking
-% import org.allbinary.layer.AllBinaryLayerCircularPool
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.tracking
 
--module('GenericTrackingLayerCircularStaticPool').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GenericTrackingLayerCircularStaticPool do
+  def jsuper(), do: AllBinaryLayerCircularPool
+def jstatic_SINGLETON(), do: JR.static_get(__MODULE__, :SINGLETON, fn -> GenericTrackingLayerCircularStaticPool.jnew() end)
+  def jstatic_set_SINGLETON(value), do: JR.static_put(__MODULE__, :SINGLETON, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AllBinaryLayerCircularPool', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'SINGLETON'}, 'GenericTrackingLayerCircularStaticPool':new()),
-    ok.
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      AllBinaryLayerCircularPool.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    'AllBinaryLayerCircularPool':'$init'(This),
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-getInstance() ->
-        get({'GenericTrackingLayerCircularStaticPool', 'SINGLETON'}).
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, GenericTrackingLayerCircularStaticPool.jstatic_SINGLETON()})
+    end)
+  end
+end
+
 

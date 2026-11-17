@@ -1,93 +1,191 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.math.PrimitiveIntUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation
 
--module('IndexedAnimation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements IndexedAnimationInterface
+defmodule IndexedAnimation do
+  def jsuper(), do: Animation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Animation', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :animationBehaviorP, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, animationBehaviorP}, undefined),
-    ok.
+
+  def jinit(this, p_animationBehavior) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :animationBehavior, p_animationBehavior)
+      Animation.jinit(this)
+      jinitfields(this)
+        JR.put(this, :animationBehaviorP, JR.lget(f, :animationBehavior))
+    end)
+  end
+
+  def jnew(p_animationBehavior) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_animationBehavior)
+    this
+  end
 
 
-new(AnimationBehavior) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, AnimationBehavior),
-    This.
+  def jm_getAnimationBehavior(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :animationBehaviorP)})
+    end)
+  end
 
-'$init'(This, AnimationBehavior) ->
-    'Animation':'$init'(This),
-    init_fields(This),
-        put({This, animationBehaviorP}, AnimationBehavior).
 
-getAnimationBehavior(This) ->
-        get({This, animationBehaviorP}).
+  def jm_reset(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :animationBehaviorP), :jm_reset, [])
+        JR.call(this, :jm_setFrame, [0])
+    end)
+  end
 
-reset(This) ->
-        (get({get({This, animationBehaviorP}), '$class'})):reset(get({This, animationBehaviorP})),
-        (get({This, '$class'})):setFrame(This, 0).
 
-setFrame(This, Index) when is_integer(Index) ->
-        ok.
+  def jm_setFrame(this, p_index) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :index, p_index)
+        nil
+    end)
+  end
 
-getFrame(This) ->
-        0.
 
-% throws Exception
-getAnimationSize(This) ->
-        erlang:error({'Exception', get({get({This, commonStrings}), 'NOT_IMPLEMENTED'})}).
+  def jm_getFrame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0})
+    end)
+  end
 
-getSize(This) ->
-        0.
 
-previousFrame(This) ->
-        ok.
+  def jm_getAnimationSize(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jexception, JR.exception("Exception", JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED))})
+    end)
+  end
 
-isLastFrame(This) ->
-        try
-        case ((get({This, '$class'})):getFrame(This) =:= ((get({This, '$class'})):getSize(This) - 1)) of
-            true ->
-            throw({'$return', true});
-            false ->
-            throw({'$return', false})
+
+  def jm_getSize(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0})
+    end)
+  end
+
+
+  def jm_previousFrame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_isLastFrame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.call(this, :jm_getFrame, []) == JR.int32(JR.call(this, :jm_getSize, []) - 1)) do
+            throw({:jreturn, true})
+        else
+            throw({:jreturn, false})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-setSequence(This, Sequence) when (is_tuple(Sequence) orelse Sequence =:= undefined) ->
-        ok.
 
-getSequence(This) ->
-        'PrimitiveIntUtil':getArrayInstance().
+  def jm_setSequence(this, p_sequence) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :sequence, p_sequence)
+        nil
+    end)
+  end
 
-setState(This, IndexedAnimation) ->
-        (get({This, '$class'})):setFrame(This, (get({IndexedAnimation, '$class'})):getFrame(IndexedAnimation)),
-        (get({This, '$class'})):setDx(This, (get({IndexedAnimation, '$class'})):getDx(IndexedAnimation)),
-        (get({This, '$class'})):setDy(This, (get({IndexedAnimation, '$class'})):getDy(IndexedAnimation)).
 
-getWidth(This) ->
-        0.
+  def jm_getSequence(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, PrimitiveIntUtil.jm_getArrayInstance()})
+    end)
+  end
 
-getHeight(This) ->
-        0.
+
+  def jm_setState(this, p_indexedAnimation) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :indexedAnimation, p_indexedAnimation)
+        JR.call(this, :jm_setFrame, [JR.call(JR.lget(f, :indexedAnimation), :jm_getFrame, [])])
+        JR.call(this, :jm_setDx, [JR.call(JR.lget(f, :indexedAnimation), :jm_getDx, [])])
+        JR.call(this, :jm_setDy, [JR.call(JR.lget(f, :indexedAnimation), :jm_getDy, [])])
+    end)
+  end
+
+
+  def jm_getWidth(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0})
+    end)
+  end
+
+
+  def jm_getHeight(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0})
+    end)
+  end
+end
+
 

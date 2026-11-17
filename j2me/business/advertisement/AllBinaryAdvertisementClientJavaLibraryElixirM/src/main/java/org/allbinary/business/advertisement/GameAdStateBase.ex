@@ -1,106 +1,271 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2025 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.business.advertisement
-% import org.allbinary.game.GameType
-% import org.allbinary.game.state.GameState
-% import org.allbinary.logic.communication.log.ForcedLogUtil
-% import org.allbinary.logic.util.event.AllBinaryEventObject
-% import org.allbinary.logic.util.event.EventStrings
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2025 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.business.advertisement
 
--module('GameAdStateBase').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule GameAdStateBase do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, adConfigurationP}, undefined),
-    put({This, advertisementsP}, 'Advertisements':new()),
-    put({This, okayToShowAdsP}, false),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :adConfigurationP, nil)
+    JR.put(this, :advertisementsP, nil)
+    JR.put(this, :okayToShowAdsP, false)
+        
+        JR.put(this, :advertisementsP, Advertisements.jnew())
+        JR.put(this, :okayToShowAdsP, false)
+    nil
+  end
 
 
-new(AdConfiguration) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, AdConfiguration),
-    This.
+  def jinit(this, p_adConfiguration) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :adConfiguration, p_adConfiguration)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :adConfigurationP, JR.lget(f, :adConfiguration))
+    end)
+  end
 
-'$init'(This, AdConfiguration) ->
-    init_fields(This),
-        put({This, adConfigurationP}, AdConfiguration).
+  def jnew(p_adConfiguration) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_adConfiguration)
+    this
+  end
 
-initViewArray(This, ViewArray) when (is_tuple(ViewArray) orelse ViewArray =:= undefined) ->
-        ok.
 
-onStart(This, AnyType) ->
-        (get({This, '$class'})):init(This).
+  def jm_initViewArray(this, p_viewArray) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :viewArray, p_viewArray)
+        nil
+    end)
+  end
 
-init(This) ->
-        ok.
 
-isShowingAtLocation(This, Location) when is_integer(Location) ->
-        false.
+  def jm_onStart(this, p_anyType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+        JR.call(this, :jm_init, [])
+    end)
+  end
 
-isShowingAt(This) ->
-        false.
 
-show(This) ->
-        ok.
+  def jm_init(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-hide(This) ->
-        ok.
 
-onEvent(This, EventObject) ->
-        'ForcedLogUtil':log(get({'EventStrings':getInstance(), 'PERFORMANCE_MESSAGE'}), This).
+  def jm_isShowingAtLocation(this, p_location) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :location, p_location)
+        throw({:jreturn, false})
+    end)
+  end
 
-processAdState(This, GameState, GameType) ->
-        ok.
 
-processPageAdState(This) ->
-        ok.
+  def jm_isShowingAt(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
 
-% throws Exception
-playingAdState(This) ->
-        ok.
 
-% throws Exception
-playingAdStateWH(This, Width, Height) when is_integer(Width), is_integer(Height) ->
-        ok.
+  def jm_show(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-% throws Exception
-notPlayingAdState(This) ->
-        ok.
 
-setGameIsReady(This, GameIsReady) when is_boolean(GameIsReady) ->
-        ok.
+  def jm_hide(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-isGameIsReady(This) ->
-        false.
 
-getAdvertisements(This) ->
-        get({This, advertisementsP}).
+  def jm_onEvent(this, p_eventObject) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+        ForcedLogUtil.jm_log(JR.get(EventStrings.jm_getInstance(), :PERFORMANCE_MESSAGE), this)
+    end)
+  end
 
-getAdConfiguration(This) ->
-        get({This, adConfigurationP}).
 
-isOkayToShowPageAd(This) ->
-        false.
+  def jm_processAdState(this, p_gameState, p_gameType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameState, p_gameState)
+      JR.lset(f, :gameType, p_gameType)
+        nil
+    end)
+  end
 
-setOkayToShowAds(This, OkayToShowAds) when is_boolean(OkayToShowAds) ->
-        put({This, okayToShowAdsP}, OkayToShowAds).
 
-isOkayToShowAds(This) ->
-        get({This, okayToShowAdsP}).
+  def jm_processPageAdState(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-isEnabled(This) ->
-        false.
+
+  def jm_playingAdState(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_playingAdStateWH(this, p_width, p_height) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+        nil
+    end)
+  end
+
+
+  def jm_notPlayingAdState(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_setGameIsReady(this, p_gameIsReady) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameIsReady, p_gameIsReady)
+        nil
+    end)
+  end
+
+
+  def jm_isGameIsReady(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
+
+
+  def jm_getAdvertisements(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :advertisementsP)})
+    end)
+  end
+
+
+  def jm_getAdConfiguration(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :adConfigurationP)})
+    end)
+  end
+
+
+  def jm_isOkayToShowPageAd(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
+
+
+  def jm_setOkayToShowAds(this, p_okayToShowAds) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :okayToShowAds, p_okayToShowAds)
+        JR.put(this, :okayToShowAdsP, JR.lget(f, :okayToShowAds))
+    end)
+  end
+
+
+  def jm_isOkayToShowAds(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :okayToShowAdsP)})
+    end)
+  end
+
+
+  def jm_isEnabled(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
+end
+
 

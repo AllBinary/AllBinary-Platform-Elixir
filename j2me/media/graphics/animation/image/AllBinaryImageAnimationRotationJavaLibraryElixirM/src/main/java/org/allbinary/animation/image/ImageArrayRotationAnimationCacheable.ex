@@ -1,45 +1,65 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation.image
-% import org.allbinary.animation.AnimationBehavior
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.logic.util.cache.CacheableInterface
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
--module('ImageArrayRotationAnimationCacheable').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements CacheableInterface
+defmodule ImageArrayRotationAnimationCacheable do
+  def jsuper(), do: AdjustedImageArrayRotationAnimation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AdjustedImageArrayRotationAnimation', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new(AnyType, AnimationBehavior) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, AnyType, AnimationBehavior),
-    This.
+  def jinit(this, p_anyType, p_animationBehavior) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+      JR.lset(f, :animationBehavior, p_animationBehavior)
+        AdjustedImageArrayRotationAnimation.jinit(this, JR.call((JR.lget(f, :anyType)), :jm_getImageArray, []), JR.call((JR.lget(f, :anyType)), :jm_getAngleInfoP, []), JR.call((JR.lget(f, :anyType)), :jm_getTotalAngle, []), JR.call((JR.lget(f, :anyType)), :jm_getDx, []), JR.call((JR.lget(f, :anyType)), :jm_getDy, []), JR.lget(f, :animationBehavior))
+        ImageArrayRotationAnimationCacheable.jinitfields(this)
+    end)
+  end
 
-'$init'(This, AnyType, AnimationBehavior) ->
-        'AdjustedImageArrayRotationAnimation':'$init'(This, (get({(AnyType), '$class'})):getImageArray((AnyType)), (get({(AnyType), '$class'})):getAngleInfoP((AnyType)), (get({(AnyType), '$class'})):getTotalAngle((AnyType)), (get({(AnyType), '$class'})):getDx((AnyType)), (get({(AnyType), '$class'})):getDy((AnyType)), AnimationBehavior).
+  def jnew(p_anyType, p_animationBehavior) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_anyType, p_animationBehavior)
+    this
+  end
 
-getKey(This) ->
-        get({'NullUtil':getInstance(), 'NULL_OBJECT'}).
 
-toString(This) ->
-        get({'StringUtil':getInstance(), 'EMPTY_STRING'}).
+  def jm_getKey(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)})
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING)})
+    end)
+  end
+end
+
 

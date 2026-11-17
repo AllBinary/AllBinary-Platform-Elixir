@@ -1,40 +1,57 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.combat.destroy.event
-% import org.allbinary.game.displayable.canvas.AllBinaryGameCanvas
-% import org.allbinary.logic.util.event.AllBinaryEventObject
-% import org.allbinary.logic.util.event.AllBinaryEventObjectFactoryInterface
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.combat.destroy.event
 
--module('DestroyEventFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements AllBinaryEventObjectFactoryInterface
+defmodule DestroyEventFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, combatGameCanvas}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :combatGameCanvas, nil)
+        
+    nil
+  end
 
 
-new(CombatGameCanvas) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, CombatGameCanvas),
-    This.
+  def jinit(this, p_combatGameCanvas) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :combatGameCanvas, p_combatGameCanvas)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :combatGameCanvas, JR.lget(f, :combatGameCanvas))
+    end)
+  end
 
-'$init'(This, CombatGameCanvas) ->
-    init_fields(This),
-        put({This, combatGameCanvas}, CombatGameCanvas).
+  def jnew(p_combatGameCanvas) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_combatGameCanvas)
+    this
+  end
 
-getInstance(This) ->
-        'DestroyedEvent':new(get({This, combatGameCanvas})).
+
+  def jm_getInstance(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, DestroyedEvent.jnew(JR.get(this, :combatGameCanvas))})
+    end)
+  end
+end
+
 

@@ -1,113 +1,239 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2011 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.layer
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.graphics.displayable.CanvasStrings
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.math.SmallIntegerSingletonFactory
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonStrings
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2011 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.layer
 
--module('Layer').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule Layer do
+  def jsuper(), do: JObject
+def jstatic_ID(), do: JR.static_get(__MODULE__, :ID, fn -> JR.call(SmallIntegerSingletonFactory.jm_getInstance(), :jm_getAt, [0]) end)
+  def jstatic_set_ID(value), do: JR.static_put(__MODULE__, :ID, value)
 
-static_init() ->
-    put({?MODULE, 'ID'}, (fun(Target_N65830) -> (get({Target_N65830, '$class'})):getAt(Target_N65830, 0) end)('SmallIntegerSingletonFactory':getInstance())),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :x, 0)
+    JR.put(this, :y, 0)
+    JR.put(this, :z, 0)
+    JR.put(this, :width, 0)
+    JR.put(this, :height, 0)
+    JR.put(this, :visible, false)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :x, 0)
+        JR.put(this, :y, 0)
+        JR.put(this, :z, 3)
+        JR.put(this, :width, 0)
+        JR.put(this, :height, 0)
+        JR.put(this, :visible, true)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, x}, 0),
-    put({This, y}, 0),
-    put({This, z}, 3),
-    put({This, width}, 0),
-    put({This, height}, 0),
-    put({This, visible}, true),
-    ok.
+
+  def jinit(this, p_width, p_height) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.call(this, :jm_setLayerWidth, [JR.lget(f, :width)])
+        JR.call(this, :jm_setLayerHeight, [JR.lget(f, :height)])
+    end)
+  end
+
+  def jnew(p_width, p_height) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_width, p_height)
+    this
+  end
 
 
-new(Width, Height) when is_integer(Width), is_integer(Height) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Width, Height),
-    This.
+  def jm_setPosition(this, p_x, p_y, p_z) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :z, p_z)
+        JR.put(this, :x, JR.lget(f, :x))
+        JR.put(this, :y, JR.lget(f, :y))
+        JR.put(this, :z, JR.lget(f, :z))
+    end)
+  end
 
-'$init'(This, Width, Height) when is_integer(Width), is_integer(Height) ->
-    init_fields(This),
-        (get({This, '$class'})):setLayerWidth(This, Width),
-        (get({This, '$class'})):setLayerHeight(This, Height).
 
-setPosition(This, X, Y, Z) when is_integer(X), is_integer(Y), is_integer(Z) ->
-        put({This, x}, X),
-        put({This, y}, Y),
-        put({This, z}, Z).
+  def jm_moveDXY(this, p_dx, p_dy) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :dx, p_dx)
+      JR.lset(f, :dy, p_dy)
+        JR.put(this, :x, JR.int32(JR.get(this, :x) + JR.lget(f, :dx)))
+        JR.put(this, :y, JR.int32(JR.get(this, :y) + JR.lget(f, :dy)))
+    end)
+  end
 
-moveDXY(This, Dx, Dy) when is_integer(Dx), is_integer(Dy) ->
-        put({This, x}, (get({This, x}) + Dx)),
-        put({This, y}, (get({This, y}) + Dy)).
 
-moveDXYZ(This, Dx, Dy, Dz) when is_integer(Dx), is_integer(Dy), is_integer(Dz) ->
-        put({This, x}, (get({This, x}) + Dx)),
-        put({This, y}, (get({This, y}) + Dy)),
-        put({This, z}, (get({This, z}) + Dz)).
+  def jm_moveDXYZ(this, p_dx, p_dy, p_dz) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :dx, p_dx)
+      JR.lset(f, :dy, p_dy)
+      JR.lset(f, :dz, p_dz)
+        JR.put(this, :x, JR.int32(JR.get(this, :x) + JR.lget(f, :dx)))
+        JR.put(this, :y, JR.int32(JR.get(this, :y) + JR.lget(f, :dy)))
+        JR.put(this, :z, JR.int32(JR.get(this, :z) + JR.lget(f, :dz)))
+    end)
+  end
 
-getXP(This) ->
-        get({This, x}).
 
-getYP(This) ->
-        get({This, y}).
+  def jm_getXP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :x)})
+    end)
+  end
 
-getZP(This) ->
-        get({This, z}).
 
-getWidth(This) ->
-        get({This, width}).
+  def jm_getYP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :y)})
+    end)
+  end
 
-getHeight(This) ->
-        get({This, height}).
 
-getDepth(This) ->
-        0.
+  def jm_getZP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :z)})
+    end)
+  end
 
-setVisible(This, Visible) when is_boolean(Visible) ->
-        put({This, visible}, Visible).
 
-isVisible(This) ->
-        get({This, visible}).
+  def jm_getWidth(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :width)})
+    end)
+  end
 
-paint(This, Graphics) ->
-        CommonStrings = 'CommonStrings':getInstance(),
-        CanvasStrings = 'CanvasStrings':getInstance(),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({CommonStrings, 'NOT_IMPLEMENTED'}), This, get({CanvasStrings, 'PAINT'})).
 
-setLayerWidth(This, Width) when is_integer(Width) ->
-        case (Width < 0) of
-            true ->
-            erlang:error({'IllegalArgumentException'});
-            false -> ok
-        end,
-        put({This, width}, Width).
+  def jm_getHeight(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :height)})
+    end)
+  end
 
-setLayerHeight(This, Height) when is_integer(Height) ->
-        case (Height < 0) of
-            true ->
-            erlang:error({'IllegalArgumentException'});
-            false -> ok
-        end,
-        put({This, height}, Height).
 
-toStringAppend(This, StringBuffer) ->
-        ok.
+  def jm_getDepth(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0})
+    end)
+  end
+
+
+  def jm_setVisible(this, p_visible) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :visible, p_visible)
+        JR.put(this, :visible, JR.lget(f, :visible))
+    end)
+  end
+
+
+  def jm_isVisible(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :visible)})
+    end)
+  end
+
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+        JR.lset(f, :canvasStrings, CanvasStrings.jm_getInstance())
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.lget(f, :commonStrings), :NOT_IMPLEMENTED), this, JR.get(JR.lget(f, :canvasStrings), :PAINT)])
+    end)
+  end
+
+
+  def jm_setLayerWidth(this, p_width) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :width, p_width)
+        if (JR.lget(f, :width) < 0) do
+            throw({:jexception, JR.exception("IllegalArgumentException", "")})
+        end
+        JR.put(this, :width, JR.lget(f, :width))
+    end)
+  end
+
+
+  def jm_setLayerHeight(this, p_height) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :height, p_height)
+        if (JR.lget(f, :height) < 0) do
+            throw({:jexception, JR.exception("IllegalArgumentException", "")})
+        end
+        JR.put(this, :height, JR.lget(f, :height))
+    end)
+  end
+
+
+  def jm_toStringAppend(this, p_stringBuffer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :stringBuffer, p_stringBuffer)
+        nil
+    end)
+  end
+end
+
 

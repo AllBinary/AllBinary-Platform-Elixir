@@ -1,42 +1,61 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.system.security.licensing
-% import org.allbinary.thirdparty.store.LongArrayIdentifierInterface
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.licensing
 
--module('StoreAppClientInformation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements LongArrayIdentifierInterface
+defmodule StoreAppClientInformation do
+  def jsuper(), do: AbeClientInformation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AbeClientInformation', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :longArrayIdentifier, nil)
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, longArrayIdentifier}, undefined),
-    ok.
+
+  def jinit(this, p_name, p_version, p_specialName, p_shortName, p_longArrayIdentifier) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :version, p_version)
+      JR.lset(f, :specialName, p_specialName)
+      JR.lset(f, :shortName, p_shortName)
+      JR.lset(f, :longArrayIdentifier, p_longArrayIdentifier)
+        AbeClientInformation.jinit(this, JR.lget(f, :name), JR.lget(f, :version), JR.lget(f, :specialName), JR.lget(f, :shortName))
+        StoreAppClientInformation.jinitfields(this)
+        JR.put(this, :longArrayIdentifier, JR.lget(f, :longArrayIdentifier))
+    end)
+  end
+
+  def jnew(p_name, p_version, p_specialName, p_shortName, p_longArrayIdentifier) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_name, p_version, p_specialName, p_shortName, p_longArrayIdentifier)
+    this
+  end
 
 
-new(Name, Version, SpecialName, ShortName, LongArrayIdentifier) when (is_list(Name) orelse Name =:= undefined), (is_list(Version) orelse Version =:= undefined), (is_list(SpecialName) orelse SpecialName =:= undefined), (is_list(ShortName) orelse ShortName =:= undefined), (is_tuple(LongArrayIdentifier) orelse LongArrayIdentifier =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Name, Version, SpecialName, ShortName, LongArrayIdentifier),
-    This.
+  def jm_getLongArrayIdentifier(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :longArrayIdentifier)})
+    end)
+  end
+end
 
-'$init'(This, Name, Version, SpecialName, ShortName, LongArrayIdentifier) when (is_list(Name) orelse Name =:= undefined), (is_list(Version) orelse Version =:= undefined), (is_list(SpecialName) orelse SpecialName =:= undefined), (is_list(ShortName) orelse ShortName =:= undefined), (is_tuple(LongArrayIdentifier) orelse LongArrayIdentifier =:= undefined) ->
-        'AbeClientInformation':'$init'(This, Name, Version, SpecialName, ShortName),
-        init_fields(This),
-        put({This, longArrayIdentifier}, LongArrayIdentifier).
-
-getLongArrayIdentifier(This) ->
-        get({This, longArrayIdentifier}).
 

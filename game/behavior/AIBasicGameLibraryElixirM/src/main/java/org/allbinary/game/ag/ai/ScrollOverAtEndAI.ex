@@ -1,68 +1,73 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.ai
-% import org.allbinary.game.ai.BasicAI
-% import org.allbinary.game.input.GameInput
-% import org.allbinary.graphics.displayable.DisplayInfoSingleton
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.AllBinaryLayerManager
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
--module('ScrollOverAtEndAI').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule ScrollOverAtEndAI do
+  def jsuper(), do: BasicAI
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicAI', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new(OwnerLayerInterface, GameInput) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, OwnerLayerInterface, GameInput),
-    This.
+  def jinit(this, p_ownerLayerInterface, p_gameInput) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownerLayerInterface, p_ownerLayerInterface)
+      JR.lset(f, :gameInput, p_gameInput)
+        BasicAI.jinit(this, JR.lget(f, :ownerLayerInterface), JR.lget(f, :gameInput))
+        ScrollOverAtEndAI.jinitfields(this)
+    end)
+  end
 
-'$init'(This, OwnerLayerInterface, GameInput) ->
-        'BasicAI':'$init'(This, OwnerLayerInterface, GameInput).
+  def jnew(p_ownerLayerInterface, p_gameInput) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_ownerLayerInterface, p_gameInput)
+    this
+  end
 
-% throws Exception
-processAI(This, AllBinaryLayerManager) ->
-        OwnerLayerInterface = (get({This, '$class'})):getOwnerLayerInterface(This),
-        X = (get({OwnerLayerInterface, '$class'})):getXP(OwnerLayerInterface),
-        Y = (get({OwnerLayerInterface, '$class'})):getYP(OwnerLayerInterface),
-        Width = (get({OwnerLayerInterface, '$class'})):getWidth(OwnerLayerInterface),
-        Height = (get({OwnerLayerInterface, '$class'})):getHeight(OwnerLayerInterface),
-        DisplayInfo = 'DisplayInfoSingleton':getInstance(),
-        case (X > (get({DisplayInfo, '$class'})):getLastWidth(DisplayInfo)) of
-            true ->
-            (get({OwnerLayerInterface, '$class'})):setPosition(OwnerLayerInterface, 0, Y, (get({OwnerLayerInterface, '$class'})):getZP(OwnerLayerInterface));
-            false -> ok
-        end,
-        case (Y > (get({DisplayInfo, '$class'})):getLastHeight(DisplayInfo)) of
-            true ->
-            (get({OwnerLayerInterface, '$class'})):setPosition(OwnerLayerInterface, X, 0, (get({OwnerLayerInterface, '$class'})):getZP(OwnerLayerInterface));
-            false -> ok
-        end,
-        case (X < (-Width)) of
-            true ->
-            (get({OwnerLayerInterface, '$class'})):setPosition(OwnerLayerInterface, ((get({DisplayInfo, '$class'})):getLastWidth(DisplayInfo) - Width), Y, (get({OwnerLayerInterface, '$class'})):getZP(OwnerLayerInterface));
-            false -> ok
-        end,
-        case (Y < (-Height)) of
-            true ->
-            (get({OwnerLayerInterface, '$class'})):setPosition(OwnerLayerInterface, X, ((get({DisplayInfo, '$class'})):getLastHeight(DisplayInfo) - Height), (get({OwnerLayerInterface, '$class'})):getZP(OwnerLayerInterface));
-            false -> ok
-        end.
+
+  def jm_processAI(this, p_allBinaryLayerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerManager, p_allBinaryLayerManager)
+        JR.lset(f, :ownerLayerInterface, JR.call(this, :jm_getOwnerLayerInterface, []))
+        JR.lset(f, :x, JR.call(JR.lget(f, :ownerLayerInterface), :jm_getXP, []))
+        JR.lset(f, :y, JR.call(JR.lget(f, :ownerLayerInterface), :jm_getYP, []))
+        JR.lset(f, :width, JR.call(JR.lget(f, :ownerLayerInterface), :jm_getWidth, []))
+        JR.lset(f, :height, JR.call(JR.lget(f, :ownerLayerInterface), :jm_getHeight, []))
+        JR.lset(f, :displayInfo, DisplayInfoSingleton.jm_getInstance())
+        if (JR.lget(f, :x) > JR.call(JR.lget(f, :displayInfo), :jm_getLastWidth, [])) do
+            JR.call(JR.lget(f, :ownerLayerInterface), :jm_setPosition, [0, JR.lget(f, :y), JR.call(JR.lget(f, :ownerLayerInterface), :jm_getZP, [])])
+        end
+        if (JR.lget(f, :y) > JR.call(JR.lget(f, :displayInfo), :jm_getLastHeight, [])) do
+            JR.call(JR.lget(f, :ownerLayerInterface), :jm_setPosition, [JR.lget(f, :x), 0, JR.call(JR.lget(f, :ownerLayerInterface), :jm_getZP, [])])
+        end
+        if (JR.lget(f, :x) < -JR.lget(f, :width)) do
+            JR.call(JR.lget(f, :ownerLayerInterface), :jm_setPosition, [(JR.call(JR.lget(f, :displayInfo), :jm_getLastWidth, []) - JR.lget(f, :width)), JR.lget(f, :y), JR.call(JR.lget(f, :ownerLayerInterface), :jm_getZP, [])])
+        end
+        if (JR.lget(f, :y) < -JR.lget(f, :height)) do
+            JR.call(JR.lget(f, :ownerLayerInterface), :jm_setPosition, [JR.lget(f, :x), (JR.call(JR.lget(f, :displayInfo), :jm_getLastHeight, []) - JR.lget(f, :height)), JR.call(JR.lget(f, :ownerLayerInterface), :jm_getZP, [])])
+        end
+    end)
+  end
+end
+
 

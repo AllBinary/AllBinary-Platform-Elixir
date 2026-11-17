@@ -1,57 +1,76 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation.image.sprite
-% import javax.microedition.lcdui.Image
-% import javax.microedition.lcdui.game.Sprite
-% import org.allbinary.animation.Animation
-% import org.allbinary.animation.AnimationBehaviorFactory
-% import org.allbinary.animation.ProceduralAnimationInterfaceFactoryInterface
-% import org.allbinary.animation.image.BaseImageAnimationFactory
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.image.sprite.AnimationFactorySpriteScaleUtil
-% import org.allbinary.logic.math.PrimitiveIntUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation.image.sprite
 
--module('ColorCompositeSpriteIndexedAnimationFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements ProceduralAnimationInterfaceFactoryInterface
+defmodule ColorCompositeSpriteIndexedAnimationFactory do
+  def jsuper(), do: BaseImageAnimationFactory
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BaseImageAnimationFactory', Function, Arguments).
-
-init_fields(This) ->
-    put({This, animationFactorySpriteScaleUtil}, 'AnimationFactorySpriteScaleUtil':getInstance()),
-    put({This, basicColorArray}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :animationFactorySpriteScaleUtil, nil)
+    JR.put(this, :basicColorArray, nil)
+        JR.put(this, :animationFactorySpriteScaleUtil, AnimationFactorySpriteScaleUtil.jm_getInstance())
+        
+    nil
+  end
 
 
-new(Image, BasicColorArray, Width, Height, AnimationBehaviorFactory) when (is_tuple(BasicColorArray) orelse BasicColorArray =:= undefined), is_integer(Width), is_integer(Height) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Image, BasicColorArray, Width, Height, AnimationBehaviorFactory),
-    This.
+  def jinit(this, p_image, p_basicColorArray, p_width, p_height, p_animationBehaviorFactory) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :image, p_image)
+      JR.lset(f, :basicColorArray, p_basicColorArray)
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+      JR.lset(f, :animationBehaviorFactory, p_animationBehaviorFactory)
+        BaseImageAnimationFactory.jinit(this, JR.lget(f, :image), PrimitiveIntUtil.jm_getArrayInstance(), JR.lget(f, :width), JR.lget(f, :height), 0, 0, JR.lget(f, :animationBehaviorFactory))
+        ColorCompositeSpriteIndexedAnimationFactory.jinitfields(this)
+        JR.put(this, :basicColorArray, JR.lget(f, :basicColorArray))
+    end)
+  end
 
-'$init'(This, Image, BasicColorArray, Width, Height, AnimationBehaviorFactory) when (is_tuple(BasicColorArray) orelse BasicColorArray =:= undefined), is_integer(Width), is_integer(Height) ->
-        'BaseImageAnimationFactory':'$init'(This, Image, 'PrimitiveIntUtil':getArrayInstance(), Width, Height, 0, 0, AnimationBehaviorFactory),
-        init_fields(This),
-        put({This, basicColorArray}, BasicColorArray).
+  def jnew(p_image, p_basicColorArray, p_width, p_height, p_animationBehaviorFactory) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_image, p_basicColorArray, p_width, p_height, p_animationBehaviorFactory)
+    this
+  end
 
-% throws Exception
-getInstance(This, InstanceId) when is_integer(InstanceId) ->
-        Sprite = (get({get({This, animationFactorySpriteScaleUtil}), '$class'})):createImage(get({This, animationFactorySpriteScaleUtil}), (get({This, '$class'})):getImage(This), get({get({This, animationFactoryInitializationVisitor}), width}), get({get({This, animationFactoryInitializationVisitor}), height}), get({get({This, scaleProperties}), scaleWidth}), get({get({This, scaleProperties}), scaleHeight})),
-        'SpriteIndexedAnimation':new(Sprite, (get({This, '$class'})):getImage(This), get({This, basicColorArray}), (get({get({This, animationBehaviorFactory}), '$class'})):getOrCreateInstance(get({This, animationBehaviorFactory}))).
 
-% throws Exception
-getInstanceAnimation(This, AnimationInterface) ->
-        (get({This, '$class'})):getInstance(This, 0).
+  def jm_getInstance(this, p_instanceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :instanceId, p_instanceId)
+        JR.lset(f, :sprite, JR.call(JR.get(this, :animationFactorySpriteScaleUtil), :jm_createImage, [JR.call(this, :jm_getImage, []), JR.get(JR.get(this, :animationFactoryInitializationVisitor), :width), JR.get(JR.get(this, :animationFactoryInitializationVisitor), :height), JR.get(JR.get(this, :scaleProperties), :scaleWidth), JR.get(JR.get(this, :scaleProperties), :scaleHeight)]))
+        throw({:jreturn, SpriteIndexedAnimation.jnew(JR.lget(f, :sprite), JR.call(this, :jm_getImage, []), JR.get(this, :basicColorArray), JR.call(JR.get(this, :animationBehaviorFactory), :jm_getOrCreateInstance, []))})
+    end)
+  end
+
+
+  def jm_getInstanceAnimation(this, p_animationInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :animationInterface, p_animationInterface)
+        throw({:jreturn, JR.call(this, :jm_getInstance, [0])})
+    end)
+  end
+end
+
 

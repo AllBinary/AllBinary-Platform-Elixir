@@ -1,92 +1,154 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.animation.text
-% import javax.microedition.lcdui.Font
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.animation.AnimationBehavior
-% import org.allbinary.graphics.font.FontDebugFactory
-% import org.allbinary.logic.string.StringUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.animation.text
 
--module('CustomTextAnimation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements TextInterface
+defmodule CustomTextAnimation do
+  def jsuper(), do: TextAnimation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('TextAnimation', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :fontDebugFactory, nil)
+    JR.put(this, :fontSize, 0)
+    JR.put(this, :font, nil)
+    JR.put(this, :lastText, nil)
+    JR.put(this, :hasChanged, false)
+    JR.put(this, :textWidth, 0)
+        JR.put(this, :fontDebugFactory, FontDebugFactory.jm_getInstance())
+        
+        
+        JR.put(this, :lastText, JR.get(StringUtil.jm_getInstance(), :INIT_STRING))
+        JR.put(this, :hasChanged, true)
+        JR.put(this, :textWidth, 0)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, fontDebugFactory}, 'FontDebugFactory':getInstance()),
-    put({This, fontSize}, 0),
-    put({This, font}, undefined),
-    put({This, lastText}, get({'StringUtil':getInstance(), 'INIT_STRING'})),
-    put({This, hasChanged}, true),
-    put({This, textWidth}, 0),
-    ok.
+
+  def jinit(this, p_text, p_fontSize, p_animationBehavior) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :text, p_text)
+      JR.lset(f, :fontSize, p_fontSize)
+      JR.lset(f, :animationBehavior, p_animationBehavior)
+        TextAnimation.jinit(this, JR.lget(f, :text), JR.lget(f, :animationBehavior))
+        CustomTextAnimation.jinitfields(this)
+        JR.put(this, :fontSize, JR.lget(f, :fontSize))
+        JR.put(this, :font, Font.jm_getFont(Font.jstatic_FACE_SYSTEM(), Font.jstatic_STYLE_PLAIN(), JR.lget(f, :fontSize)))
+    end)
+  end
+
+  def jnew(p_text, p_fontSize, p_animationBehavior) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_text, p_fontSize, p_animationBehavior)
+    this
+  end
 
 
-new(Text, FontSize, AnimationBehavior) when (is_list(Text) orelse Text =:= undefined), is_integer(FontSize) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Text, FontSize, AnimationBehavior),
-    This.
+  def jm_paintXY(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        JR.call(JR.get(this, :myFontProcessor), :jm_process, [JR.lget(f, :graphics)])
+        JR.lset(f, :existingFont, JR.call(JR.lget(f, :graphics), :jm_getFont, []))
+        JR.call(JR.get(this, :fontDebugFactory), :jm_setFont, [JR.get(this, :font), JR.lget(f, :graphics)])
+        TextAnimation.jm_paintXYNoUpdate(this, JR.lget(f, :graphics), JR.lget(f, :x), JR.lget(f, :y))
+        JR.call(JR.get(this, :fontDebugFactory), :jm_setFont, [JR.lget(f, :existingFont), JR.lget(f, :graphics)])
+    end)
+  end
 
-'$init'(This, Text, FontSize, AnimationBehavior) when (is_list(Text) orelse Text =:= undefined), is_integer(FontSize) ->
-        'TextAnimation':'$init'(This, Text, AnimationBehavior),
-        init_fields(This),
-        put({This, fontSize}, FontSize),
-        put({This, font}, 'Font':getFont(get({'Font', 'FACE_SYSTEM'}), get({'Font', 'STYLE_PLAIN'}), FontSize)).
 
-paintXY(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-        (get({get({This, myFontProcessor}), '$class'})):process(get({This, myFontProcessor}), Graphics),
-        ExistingFont = (get({Graphics, '$class'})):getFont(Graphics),
-        (get({get({This, fontDebugFactory}), '$class'})):setFont(get({This, fontDebugFactory}), get({This, font}), Graphics),
-        'TextAnimation':paintXYNoUpdate(This, Graphics, X, Y),
-        (get({get({This, fontDebugFactory}), '$class'})):setFont(get({This, fontDebugFactory}), ExistingFont, Graphics).
+  def jm_setScale(this, p_scaleX, p_scaleY) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :scaleX, p_scaleX)
+      JR.lset(f, :scaleY, p_scaleY)
+        if (JR.lget(f, :scaleX) != JR.lget(f, :scaleY)) do
+            throw({:jexception, JR.exception("RuntimeException", "")})
+        end
+        JR.put(this, :hasChanged, true)
+        JR.put(this, :font, Font.jm_getFont(Font.jstatic_FACE_SYSTEM(), Font.jstatic_STYLE_PLAIN(), JR.int32(JR.d2i((((JR.get(this, :fontSize) * 1.0) * JR.lget(f, :scaleX)))))))
+    end)
+  end
 
-setScale(This, ScaleX, ScaleY) when is_number(ScaleX), is_number(ScaleY) ->
-        case (ScaleX /= ScaleY) of
-            true ->
-            erlang:error({'RuntimeException'});
-            false -> ok
-        end,
-        put({This, hasChanged}, true),
-        put({This, font}, 'Font':getFont(get({'Font', 'FACE_SYSTEM'}), get({'Font', 'STYLE_PLAIN'}), trunc(((float(get({This, fontSize})) * ScaleX))))).
 
-setTextWithOnMeasure(This, Text, TextChangeListener) when (is_list(Text) orelse Text =:= undefined) ->
-        'TextAnimation':setTextWithOnMeasure(This, Text, TextChangeListener).
+  def jm_setTextWithOnMeasure(this, p_text, p_textChangeListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :text, p_text)
+      JR.lset(f, :textChangeListener, p_textChangeListener)
+        TextAnimation.jm_setTextWithOnMeasure(this, JR.lget(f, :text), JR.lget(f, :textChangeListener))
+    end)
+  end
 
-setText(This, Text) when (is_list(Text) orelse Text =:= undefined) ->
-        case (get({This, lastText}) =/= Text) of
-            true ->
-            put({This, hasChanged}, true),
-            put({This, lastText}, Text),
-            'TextAnimation':setText(This, Text);
-            false -> ok
-        end.
 
-getText(This) ->
-        get({This, lastText}).
+  def jm_setText(this, p_text) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :text, p_text)
+        if (JR.get(this, :lastText) != JR.lget(f, :text)) do
+            JR.put(this, :hasChanged, true)
+            JR.put(this, :lastText, JR.lget(f, :text))
+            TextAnimation.jm_setText(this, JR.lget(f, :text))
+        end
+    end)
+  end
 
-getWidth(This) ->
-        case get({This, hasChanged}) of
-            true ->
-            put({This, textWidth}, (get({get({This, font}), '$class'})):stringWidth(get({This, font}), array:get(0, get({This, textArrayP})))),
-            put({This, hasChanged}, false);
-            false -> ok
-        end,
-        get({This, textWidth}).
 
-getFontHeight(This) ->
-        (get({get({This, font}), '$class'})):getHeight(get({This, font})).
+  def jm_getText(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :lastText)})
+    end)
+  end
+
+
+  def jm_getWidth(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if JR.get(this, :hasChanged) do
+            JR.put(this, :textWidth, JR.call(JR.get(this, :font), :jm_stringWidth, [JR.aget(JR.get(this, :textArrayP), 0)]))
+            JR.put(this, :hasChanged, false)
+        end
+        throw({:jreturn, JR.get(this, :textWidth)})
+    end)
+  end
+
+
+  def jm_getFontHeight(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.get(this, :font), :jm_getHeight, [])})
+    end)
+  end
+end
+
 

@@ -1,45 +1,57 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game
-% import org.allbinary.game.state.GameState
-% import org.allbinary.game.state.GameStateFactory
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game
 
--module('IntermissionFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule IntermissionFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> IntermissionFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'IntermissionFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :START_LEVEL_INTERMISSION_GAME_STATE, nil)
+    JR.put(this, :WAIT_LEVEL_INTERMISSION_GAME_STATE, nil)
+    JR.put(this, :SHOW_RESULTS_LEVEL_INTERMISSION_GAME_STATE, nil)
+    JR.put(this, :SHOW_HIGH_SCORE_LEVEL_INTERMISSION_GAME_STATE, nil)
+        JR.put(this, :START_LEVEL_INTERMISSION_GAME_STATE, JR.call(GameStateFactory.jm_getInstance(), :jm_createGameState, ["START_LEVEL_INTERMISSION_GAME_STATE"]))
+        JR.put(this, :WAIT_LEVEL_INTERMISSION_GAME_STATE, JR.call(GameStateFactory.jm_getInstance(), :jm_createGameState, ["WAIT_LEVEL_INTERMISSION_GAME_STATE"]))
+        JR.put(this, :SHOW_RESULTS_LEVEL_INTERMISSION_GAME_STATE, JR.call(GameStateFactory.jm_getInstance(), :jm_createGameState, ["SHOW_RESULTS_LEVEL_INTERMISSION_GAME_STATE"]))
+        JR.put(this, :SHOW_HIGH_SCORE_LEVEL_INTERMISSION_GAME_STATE, JR.call(GameStateFactory.jm_getInstance(), :jm_createGameState, ["SHOW_HIGH_SCORE_LEVEL_INTERMISSION_GAME_STATE"]))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'START_LEVEL_INTERMISSION_GAME_STATE'}, (fun(Target_N65761) -> (get({Target_N65761, '$class'})):createGameState(Target_N65761, "START_LEVEL_INTERMISSION_GAME_STATE") end)('GameStateFactory':getInstance())),
-    put({This, 'WAIT_LEVEL_INTERMISSION_GAME_STATE'}, (fun(Target_N65826) -> (get({Target_N65826, '$class'})):createGameState(Target_N65826, "WAIT_LEVEL_INTERMISSION_GAME_STATE") end)('GameStateFactory':getInstance())),
-    put({This, 'SHOW_RESULTS_LEVEL_INTERMISSION_GAME_STATE'}, (fun(Target_N65891) -> (get({Target_N65891, '$class'})):createGameState(Target_N65891, "SHOW_RESULTS_LEVEL_INTERMISSION_GAME_STATE") end)('GameStateFactory':getInstance())),
-    put({This, 'SHOW_HIGH_SCORE_LEVEL_INTERMISSION_GAME_STATE'}, (fun(Target_N65956) -> (get({Target_N65956, '$class'})):createGameState(Target_N65956, "SHOW_HIGH_SCORE_LEVEL_INTERMISSION_GAME_STATE") end)('GameStateFactory':getInstance())),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'IntermissionFactory', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, IntermissionFactory.jstatic_instance()})
+    end)
+  end
+end
+
 

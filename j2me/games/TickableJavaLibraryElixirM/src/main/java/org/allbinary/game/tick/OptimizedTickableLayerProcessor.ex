@@ -1,53 +1,72 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.tick
-% import org.allbinary.game.layer.AllBinaryGameLayer
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.AllBinaryLayerManager
-% import org.allbinary.layer.LayerProcessor
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.tick
 
--module('OptimizedTickableLayerProcessor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule OptimizedTickableLayerProcessor do
+  def jsuper(), do: LayerProcessor
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('LayerProcessor', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        LayerProcessor.jinit(this, OptimizedTickableLayerManager.jnew())
+        OptimizedTickableLayerProcessor.jinitfields(this)
+    end)
+  end
 
-'$init'(This) ->
-        'LayerProcessor':'$init'(This, 'OptimizedTickableLayerManager':new()).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-% throws Exception
-processAt(This, AllBinaryLayerManager, LayerInterface, Index) when is_integer(Index) ->
-        TickableInterface = LayerInterface,
-        (get({TickableInterface, '$class'})):processTick(TickableInterface, AllBinaryLayerManager).
 
-isProcessorLayer(This, LayerInterface) ->
-        try
-        case (get({LayerInterface, '$class'})):implmentsTickableInterface(LayerInterface) of
-            true ->
-            throw({'$return', true});
-            false ->
-            throw({'$return', false})
+  def jm_processAt(this, p_allBinaryLayerManager, p_layerInterface, p_index) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerManager, p_allBinaryLayerManager)
+      JR.lset(f, :layerInterface, p_layerInterface)
+      JR.lset(f, :index, p_index)
+        JR.lset(f, :tickableInterface, JR.lget(f, :layerInterface))
+        JR.call(JR.lget(f, :tickableInterface), :jm_processTick, [JR.lget(f, :allBinaryLayerManager)])
+    end)
+  end
+
+
+  def jm_isProcessorLayer(this, p_layerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+        if JR.call(JR.lget(f, :layerInterface), :jm_implmentsTickableInterface, []) do
+            throw({:jreturn, true})
+        else
+            throw({:jreturn, false})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
+end
+
 

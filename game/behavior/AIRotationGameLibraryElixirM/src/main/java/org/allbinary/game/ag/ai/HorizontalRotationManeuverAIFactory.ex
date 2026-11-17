@@ -1,40 +1,51 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.ai
-% import org.allbinary.ai.ArtificialIntelligenceInterface
-% import org.allbinary.game.ai.ArtificialIntelligenceInterfaceFactoryInterface
-% import org.allbinary.game.input.GameInput
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.util.ABHashtable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
--module('HorizontalRotationManeuverAIFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements ArtificialIntelligenceInterfaceFactoryInterface
+defmodule HorizontalRotationManeuverAIFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance(This, Hashtable, OwnerLayerInterface, GameInput) ->
-        'HorizontaRotationManeuverAI':new(OwnerLayerInterface, GameInput).
+  def jm_getInstance(this, p_hashtable, p_ownerLayerInterface, p_gameInput) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :hashtable, p_hashtable)
+      JR.lset(f, :ownerLayerInterface, p_ownerLayerInterface)
+      JR.lset(f, :gameInput, p_gameInput)
+        throw({:jreturn, HorizontaRotationManeuverAI.jnew(JR.lget(f, :ownerLayerInterface), JR.lget(f, :gameInput))})
+    end)
+  end
+end
+
 

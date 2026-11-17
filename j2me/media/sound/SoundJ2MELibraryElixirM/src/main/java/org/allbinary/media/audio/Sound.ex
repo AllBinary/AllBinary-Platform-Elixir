@@ -1,63 +1,117 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.media.audio
-% import javax.microedition.media.Player
-% import org.allbinary.logic.communication.log.PreLogUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
--module('Sound').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements SoundInterface
-% implements Runnable
+defmodule Sound do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, resource}, undefined),
-    put({This, player}, get({'NoPlayer', 'NO_PLAYER'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :resource, nil)
+    JR.put(this, :player, nil)
+        
+        JR.put(this, :player, NoPlayer.jstatic_NO_PLAYER())
+    nil
+  end
 
 
-new(Resource) when (is_list(Resource) orelse Resource =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Resource),
-    This.
+  def jinit(this, p_resource) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :resource, p_resource)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :resource, JR.lget(f, :resource))
+    end)
+  end
 
-'$init'(This, Resource) when (is_list(Resource) orelse Resource =:= undefined) ->
-    init_fields(This),
-        put({This, resource}, Resource).
+  def jnew(p_resource) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_resource)
+    this
+  end
 
-getResource(This) ->
-        get({This, resource}).
 
-getPlayerP(This) ->
-        get({This, player}).
+  def jm_getResource(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :resource)})
+    end)
+  end
 
-setPlayerP(This, Player) ->
-        put({This, player}, Player).
 
-% throws Exception
-init(This) ->
-        ok.
+  def jm_getPlayerP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :player)})
+    end)
+  end
 
-getDuration(This) ->
-        (-1).
 
-run(This) ->
-        try
-            (get({get({This, player}), '$class'})):start(get({This, player}))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            'PreLogUtil':put(get({CommonStrings, 'EXCEPTION'}), This, get({CommonStrings, 'RUN'}))
-        end.
+  def jm_setPlayerP(this, p_player) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :player, p_player)
+        JR.put(this, :player, JR.lget(f, :player))
+    end)
+  end
+
+
+  def jm_init(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_getDuration(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, -1})
+    end)
+  end
+
+
+  def jm_run(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            JR.call(JR.get(this, :player), :jm_start, [])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            PreLogUtil.jm_put(JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, JR.get(JR.lget(f, :commonStrings), :RUN))
+        end
+    end)
+  end
+end
+
 

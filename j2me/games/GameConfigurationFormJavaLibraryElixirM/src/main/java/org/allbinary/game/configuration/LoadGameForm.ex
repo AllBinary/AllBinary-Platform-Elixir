@@ -1,120 +1,160 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.configuration
-% import javax.microedition.lcdui.Choice
-% import javax.microedition.lcdui.ChoiceGroup
-% import javax.microedition.lcdui.CommandListener
-% import javax.microedition.lcdui.Item
-% import javax.microedition.lcdui.NullImage
-% import javax.microedition.lcdui.StringItem
-% import org.allbinary.MIDPUtil
-% import org.allbinary.game.commands.GameCommandsFactory
-% import org.allbinary.game.configuration.persistance.GamePersistanceSingleton
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.displayable.screen.CommandForm
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.util.BasicArrayList
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.configuration
 
--module('LoadGameForm').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule LoadGameForm do
+  def jsuper(), do: CommandForm
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('CommandForm', Function, Arguments).
-
-init_fields(This) ->
-    put({This, meUtil}, 'MIDPUtil':getInstance()),
-    put({This, areChoices}, false),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :meUtil, nil)
+    JR.put(this, :areChoices, false)
+        JR.put(this, :meUtil, MIDPUtil.jm_getInstance())
+        JR.put(this, :areChoices, false)
+    nil
+  end
 
 
-new(CommandListener, Title, BackgrounBasicColor, ForegroundBasicColor) when (is_list(Title) orelse Title =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, CommandListener, Title, BackgrounBasicColor, ForegroundBasicColor),
-    This.
+  def jinit(this, p_commandListener, p_title, p_backgrounBasicColor, p_foregroundBasicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :commandListener, p_commandListener)
+      JR.lset(f, :title, p_title)
+      JR.lset(f, :backgrounBasicColor, p_backgrounBasicColor)
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+        CommandForm.jinit(this, JR.lget(f, :commandListener), JR.lget(f, :title), JR.lget(f, :backgrounBasicColor), JR.lget(f, :foregroundBasicColor))
+        LoadGameForm.jinitfields(this)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, JR.get(JR.get(this, :commonStrings), :CONSTRUCTOR)])
+        JR.call(this, :jm_update, [])
+        JR.call(this, :jm_initCommands, [JR.lget(f, :commandListener)])
+    end)
+  end
 
-'$init'(This, CommandListener, Title, BackgrounBasicColor, ForegroundBasicColor) when (is_list(Title) orelse Title =:= undefined) ->
-        'CommandForm':'$init'(This, CommandListener, Title, BackgrounBasicColor, ForegroundBasicColor),
-        init_fields(This),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, get({get({This, commonStrings}), 'CONSTRUCTOR'})),
-        (get({This, '$class'})):update(This),
-        (get({This, '$class'})):initCommands(This, CommandListener).
+  def jnew(p_commandListener, p_title, p_backgrounBasicColor, p_foregroundBasicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_commandListener, p_title, p_backgrounBasicColor, p_foregroundBasicColor)
+    this
+  end
 
-initCommands(This, CmdListener) ->
-        GameCommandsFactory = 'GameCommandsFactory':getInstance(),
-        (get({This, '$class'})):removeAllCommands(This),
-        (get({This, '$class'})):addCommand(This, get({GameCommandsFactory, 'LOAD_FILE'})),
-        (get({This, '$class'})):addCommand(This, get({GameCommandsFactory, 'DELETE_FILE'})),
-        (get({This, '$class'})):addCommand(This, get({GameCommandsFactory, 'CLOSE_AND_SHOW_GAME_CANVAS'})),
-        (get({This, '$class'})):setCommandListener(This, CmdListener).
 
-% throws Exception
-update(This) ->
-        List = (fun(Target_N66617) -> (get({Target_N66617, '$class'})):getIds(Target_N66617) end)('GamePersistanceSingleton':getInstance()),
-        (get({This, '$class'})):deleteAll(This),
-        case ((get({List, '$class'})):size(List) > 0) of
-            true ->
-            (get({This, '$class'})):add(This, List, "Select A Saved Game", get({'Choice', 'EXCLUSIVE'})),
-            put({This, areChoices}, true);
-            false ->
-            (get({get({This, meUtil}), '$class'})):appendItem(get({This, meUtil}), This, 'StringItem':new("No Saved Games", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Item', 'PLAIN'}))),
-            put({This, areChoices}, false)
-        end,
-        'CommandForm':update(This).
+  def jm_initCommands(this, p_cmdListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cmdListener, p_cmdListener)
+        JR.lset(f, :gameCommandsFactory, GameCommandsFactory.jm_getInstance())
+        JR.call(this, :jm_removeAllCommands, [])
+        JR.call(this, :jm_addCommand, [JR.get(JR.lget(f, :gameCommandsFactory), :LOAD_FILE)])
+        JR.call(this, :jm_addCommand, [JR.get(JR.lget(f, :gameCommandsFactory), :DELETE_FILE)])
+        JR.call(this, :jm_addCommand, [JR.get(JR.lget(f, :gameCommandsFactory), :CLOSE_AND_SHOW_GAME_CANVAS)])
+        JR.call(this, :jm_setCommandListener, [JR.lget(f, :cmdListener)])
+    end)
+  end
 
-add(This, List, Name, Option) when (is_list(Name) orelse Name =:= undefined), is_integer(Option) ->
-        ChoiceGroup = (get({This, '$class'})):getChoiceGroup(This, List, Name, Option),
-        case ((get({List, '$class'})):size(List) > 0) of
-            true ->
-            (get({ChoiceGroup, '$class'})):setSelectedIndex(ChoiceGroup, 0, true);
-            false -> ok
-        end,
-        (get({get({This, meUtil}), '$class'})):appendItem(get({This, meUtil}), This, ChoiceGroup).
 
-getChoiceGroup(This, List, Name, Option) when (is_list(Name) orelse Name =:= undefined), is_integer(Option) ->
-        METHOD_NAME = "getChoiceGroup",
-        ADDING_CHOICE = "Adding Choice: ",
-        ChoiceGroup = 'ChoiceGroup':new(Name, Option, (fun(Target_N67347) -> (get({Target_N67347, '$class'})):getArrayInstance(Target_N67347) end)('StringUtil':getInstance()), get({'NullImage', 'NULL_IMAGE_ARRAY'})),
-        Size = (get({List, '$class'})):size(List),
-        lists:foreach(fun(Index) ->
-            AnyType = array:get(Index, get({List, objectArray})),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N67537) -> (get({Target_N67537, '$class'})):toString(Target_N67537) end)((fun(Target_N67544) -> (get({Target_N67544, '$class'})):append(Target_N67544, (get({AnyType, '$class'})):toString(AnyType)) end)((fun(Target_N67551) -> (get({Target_N67551, '$class'})):append(Target_N67551, ADDING_CHOICE) end)('StringMaker':new()))), This, METHOD_NAME),
-            (get({ChoiceGroup, '$class'})):append(ChoiceGroup, (get({AnyType, '$class'})):toString(AnyType), get({'NullImage', 'NULL_IMAGE'}))
-        end, lists:seq(0, Size - 1)),
-        ChoiceGroup.
-
-getSelectedId(This) ->
-        try
-        case get({This, areChoices}) of
-            true ->
-            ChoiceGroup = (get({This, '$class'})):get(This, 0),
-            throw({'$return', (get({ChoiceGroup, '$class'})):getSelectedIndex(ChoiceGroup)});
-            false ->
-            throw({'$return', (-1)})
+  def jm_update(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :list, JR.call(GamePersistanceSingleton.jm_getInstance(), :jm_getIds, []))
+        JR.call(this, :jm_deleteAll, [])
+        if (JR.call(JR.lget(f, :list), :jm_size, []) > 0) do
+            JR.call(this, :jm_add, [JR.lget(f, :list), "Select A Saved Game", Choice.jstatic_EXCLUSIVE()])
+            JR.put(this, :areChoices, true)
+        else
+            JR.call(JR.get(this, :meUtil), :jm_appendItem, [this, StringItem.jnew("No Saved Games", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Item.jstatic_PLAIN())])
+            JR.put(this, :areChoices, false)
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        CommandForm.jm_update(this)
+    end)
+  end
 
-getSelectedText(This) ->
-        try
-        case get({This, areChoices}) of
-            true ->
-            ChoiceGroup = (get({This, '$class'})):get(This, 0),
-            Value = (fun(Target_N68124) -> (get({Target_N68124, '$class'})):intValue(Target_N68124) end)(allbinary_java:to_string((get({ChoiceGroup, '$class'})):getString(ChoiceGroup, (get({ChoiceGroup, '$class'})):getSelectedIndex(ChoiceGroup)))),
-            throw({'$return', Value});
-            false ->
-            throw({'$return', (-1)})
+
+  def jm_add(this, p_list, p_name, p_option) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :list, p_list)
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :option, p_option)
+        JR.lset(f, :choiceGroup, JR.call(this, :jm_getChoiceGroup, [JR.lget(f, :list), JR.lget(f, :name), JR.lget(f, :option)]))
+        if (JR.call(JR.lget(f, :list), :jm_size, []) > 0) do
+            JR.call(JR.lget(f, :choiceGroup), :jm_setSelectedIndex, [0, true])
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        JR.call(JR.get(this, :meUtil), :jm_appendItem, [this, JR.lget(f, :choiceGroup)])
+    end)
+  end
+
+
+  def jm_getChoiceGroup(this, p_list, p_name, p_option) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :list, p_list)
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :option, p_option)
+        JR.lset(f, :METHOD_NAME, "getChoiceGroup")
+        JR.lset(f, :ADDING_CHOICE, "Adding Choice: ")
+        JR.lset(f, :choiceGroup, ChoiceGroup.jnew(JR.lget(f, :name), JR.lget(f, :option), JR.call(StringUtil.jm_getInstance(), :jm_getArrayInstance, []), NullImage.jstatic_NULL_IMAGE_ARRAY()))
+        JR.lset(f, :size, JR.call(JR.lget(f, :list), :jm_size, []))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :anyType, JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index)))
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.lget(f, :ADDING_CHOICE)]), :jm_append, [JR.call(JR.lget(f, :anyType), :jm_toString, [])]), :jm_toString, []), this, JR.lget(f, :METHOD_NAME)])
+            JR.call(JR.lget(f, :choiceGroup), :jm_append, [JR.call(JR.lget(f, :anyType), :jm_toString, []), NullImage.jstatic_NULL_IMAGE()])
+        end)
+        throw({:jreturn, JR.lget(f, :choiceGroup)})
+    end)
+  end
+
+
+  def jm_getSelectedId(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if JR.get(this, :areChoices) do
+            JR.lset(f, :choiceGroup, JR.call(this, :jm_get, [0]))
+            throw({:jreturn, JR.call(JR.lget(f, :choiceGroup), :jm_getSelectedIndex, [])})
+        else
+            throw({:jreturn, -1})
+        end
+    end)
+  end
+
+
+  def jm_getSelectedText(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if JR.get(this, :areChoices) do
+            JR.lset(f, :choiceGroup, JR.call(this, :jm_get, [0]))
+            JR.lset(f, :value, JR.call(JR.str(JR.call(JR.lget(f, :choiceGroup), :jm_getString, [JR.call(JR.lget(f, :choiceGroup), :jm_getSelectedIndex, [])])), :jm_intValue, []))
+            throw({:jreturn, JR.lget(f, :value)})
+        else
+            throw({:jreturn, -1})
+        end
+    end)
+  end
+end
+
 

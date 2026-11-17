@@ -1,51 +1,63 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.media.audio
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
--module('EarlySoundsFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule EarlySoundsFactory do
+  def jsuper(), do: BaseSoundsFactory
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> EarlySoundsFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BaseSoundsFactory', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-static_init() ->
-    put({?MODULE, instance}, 'EarlySoundsFactory':new()),
-    ok.
+  def jinit(this) do
+    BaseSoundsFactory.jinit(this)
+    jinitfields(this)
+  end
 
-init_fields(This) ->
-    ok.
-
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    'BaseSoundsFactory':'$init'(This),
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-% throws Exception
-getSoundInterfaceArray(This) ->
-        SoundInterfaceArray = array:new(2, {default, undefined}),
-        put({local, index}, 0),
-        array:set(allbinary_java:first(get({local, index}), put({local, index}, get({local, index}) + 1)), 'SelectSound':getInstance(), SoundInterfaceArray),
-        array:set(allbinary_java:first(get({local, index}), put({local, index}, get({local, index}) + 1)), 'ErrorSound':getInstance(), SoundInterfaceArray),
-        SoundInterfaceArray.
+  def jm_getSoundInterfaceArray(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :soundInterfaceArray, JR.anew(2, nil))
+        JR.lset(f, :index, 0)
+        JR.aset(JR.lget(f, :soundInterfaceArray), JR.lpostinc(f, :index, 1), SelectSound.jm_getInstance())
+        JR.aset(JR.lget(f, :soundInterfaceArray), JR.lpostinc(f, :index, 1), ErrorSound.jm_getInstance())
+        throw({:jreturn, JR.lget(f, :soundInterfaceArray)})
+    end)
+  end
 
-getInstance() ->
-        get({'EarlySoundsFactory', instance}).
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, EarlySoundsFactory.jstatic_instance()})
+    end)
+  end
+end
+
 

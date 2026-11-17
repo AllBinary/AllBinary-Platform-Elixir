@@ -1,48 +1,76 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.score
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.score
 
--module('NoScoreable').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule NoScoreable do
+  def jsuper(), do: Scoreable
+def jstatic_SINGLETON(), do: JR.static_get(__MODULE__, :SINGLETON, fn -> NoScoreable.jnew() end)
+  def jstatic_set_SINGLETON(value), do: JR.static_put(__MODULE__, :SINGLETON, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Scoreable', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'SINGLETON'}, 'NoScoreable':new()),
-    ok.
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-getInstance() ->
-        get({'NoScoreable', 'SINGLETON'}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, NoScoreable.jstatic_SINGLETON()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-        'Scoreable':'$init'(This, 0).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        Scoreable.jinit(this, 0)
+        NoScoreable.jinitfields(this)
+    end)
+  end
 
-addPoints(This, Points) when is_integer(Points) ->
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-removePoints(This, Points) when is_integer(Points) ->
-        ok.
+
+  def jm_addPoints(this, p_points) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :points, p_points)
+        nil
+    end)
+  end
+
+
+  def jm_removePoints(this, p_points) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :points, p_points)
+        nil
+    end)
+  end
+end
+
 

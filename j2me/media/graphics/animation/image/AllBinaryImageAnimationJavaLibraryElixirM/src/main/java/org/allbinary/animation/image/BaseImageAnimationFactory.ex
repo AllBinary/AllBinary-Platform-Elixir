@@ -1,98 +1,170 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.animation.image
-% import javax.microedition.lcdui.Image
-% import org.allbinary.animation.Animation
-% import org.allbinary.animation.AnimationBehaviorFactory
-% import org.allbinary.animation.AnimationInterfaceFactoryInterface
-% import org.allbinary.animation.NullAnimationFactory
-% import org.allbinary.image.AnimationFactoryImageScaleUtil
-% import org.allbinary.logic.communication.log.ForcedLogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.media.ScaleProperties
-% import org.allbinary.string.CommonLabels
-% import org.allbinary.string.CommonSeps
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
--module('BaseImageAnimationFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements AnimationInterfaceFactoryInterface
+defmodule BaseImageAnimationFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, animationFactoryImageScaleUtil}, 'AnimationFactoryImageScaleUtil':getInstance()),
-    put({This, image}, undefined),
-    put({This, animationBehaviorFactory}, undefined),
-    put({This, sequenceArray}, undefined),
-    put({This, animationFactoryInitializationVisitor}, undefined),
-    put({This, scaleProperties}, get({'ScaleProperties', instance})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :animationFactoryImageScaleUtil, nil)
+    JR.put(this, :image, nil)
+    JR.put(this, :animationBehaviorFactory, nil)
+    JR.put(this, :sequenceArray, nil)
+    JR.put(this, :animationFactoryInitializationVisitor, nil)
+    JR.put(this, :scaleProperties, nil)
+        JR.put(this, :animationFactoryImageScaleUtil, AnimationFactoryImageScaleUtil.jm_getInstance())
+        
+        
+        
+        
+        JR.put(this, :scaleProperties, ScaleProperties.jstatic_instance())
+    nil
+  end
 
 
-% throws Exception
-createFactoryBase(Image, SequenceArray, Width, Height, AnimationBehaviorFactory) when (is_tuple(SequenceArray) orelse SequenceArray =:= undefined), is_integer(Width), is_integer(Height) ->
-        'BaseImageAnimationFactory':new(Image, SequenceArray, Width, Height, 0, 0, AnimationBehaviorFactory).
+  def jm_createFactoryBase(p_image, p_sequenceArray, p_width, p_height, p_animationBehaviorFactory) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :image, p_image)
+      JR.lset(f, :sequenceArray, p_sequenceArray)
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+      JR.lset(f, :animationBehaviorFactory, p_animationBehaviorFactory)
+        throw({:jreturn, BaseImageAnimationFactory.jnew(JR.lget(f, :image), JR.lget(f, :sequenceArray), JR.lget(f, :width), JR.lget(f, :height), 0, 0, JR.lget(f, :animationBehaviorFactory))})
+    end)
+  end
 
-new(Image, SequenceArray, Width, Height, Dx, Dy, AnimationBehaviorFactory) when (is_tuple(SequenceArray) orelse SequenceArray =:= undefined), is_integer(Width), is_integer(Height), is_integer(Dx), is_integer(Dy) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Image, SequenceArray, Width, Height, Dx, Dy, AnimationBehaviorFactory),
-    This.
 
-'$init'(This, Image, SequenceArray, Width, Height, Dx, Dy, AnimationBehaviorFactory) when (is_tuple(SequenceArray) orelse SequenceArray =:= undefined), is_integer(Width), is_integer(Height), is_integer(Dx), is_integer(Dy) ->
-    init_fields(This),
-        put({This, animationFactoryInitializationVisitor}, 'AnimationFactoryInitializationVisitor':new()),
-        put({This, image}, Image),
-        put({get({This, animationFactoryInitializationVisitor}), width}, Width),
-        put({get({This, animationFactoryInitializationVisitor}), height}, Height),
-        put({This, animationBehaviorFactory}, AnimationBehaviorFactory),
-        put({This, sequenceArray}, SequenceArray),
-        put({get({This, animationFactoryInitializationVisitor}), dx}, Dx),
-        put({get({This, animationFactoryInitializationVisitor}), dy}, Dy).
+  def jinit(this, p_image, p_sequenceArray, p_width, p_height, p_dx, p_dy, p_animationBehaviorFactory) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :image, p_image)
+      JR.lset(f, :sequenceArray, p_sequenceArray)
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+      JR.lset(f, :dx, p_dx)
+      JR.lset(f, :dy, p_dy)
+      JR.lset(f, :animationBehaviorFactory, p_animationBehaviorFactory)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :animationFactoryInitializationVisitor, AnimationFactoryInitializationVisitor.jnew())
+        JR.put(this, :image, JR.lget(f, :image))
+        JR.put(JR.get(this, :animationFactoryInitializationVisitor), :width, JR.lget(f, :width))
+        JR.put(JR.get(this, :animationFactoryInitializationVisitor), :height, JR.lget(f, :height))
+        JR.put(this, :animationBehaviorFactory, JR.lget(f, :animationBehaviorFactory))
+        JR.put(this, :sequenceArray, JR.lget(f, :sequenceArray))
+        JR.put(JR.get(this, :animationFactoryInitializationVisitor), :dx, JR.lget(f, :dx))
+        JR.put(JR.get(this, :animationFactoryInitializationVisitor), :dy, JR.lget(f, :dy))
+    end)
+  end
 
-% throws Exception
-getInstance(This, InstanceId) when is_integer(InstanceId) ->
-        (fun(Target_N66809) -> (get({Target_N66809, '$class'})):getInstance(Target_N66809, InstanceId) end)('NullAnimationFactory':getFactoryInstance()).
+  def jnew(p_image, p_sequenceArray, p_width, p_height, p_dx, p_dy, p_animationBehaviorFactory) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_image, p_sequenceArray, p_width, p_height, p_dx, p_dy, p_animationBehaviorFactory)
+    this
+  end
 
-getImage(This) ->
-        get({This, image}).
 
-getSequenceArray(This) ->
-        get({This, sequenceArray}).
+  def jm_getInstance(this, p_instanceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :instanceId, p_instanceId)
+        throw({:jreturn, JR.call(NullAnimationFactory.jm_getFactoryInstance(), :jm_getInstance, [JR.lget(f, :instanceId)])})
+    end)
+  end
 
-setInitialScale(This, ScaleProperties) ->
-        put({This, scaleProperties}, ScaleProperties),
-        case get({get({This, scaleProperties}), shouldScale}) of
-            true ->
-            put({get({This, scaleProperties}), scaleWidth}, trunc(((get({get({This, animationFactoryInitializationVisitor}), width}) * get({get({This, scaleProperties}), scaleX}))))),
-            put({get({This, scaleProperties}), scaleHeight}, trunc(((get({get({This, animationFactoryInitializationVisitor}), height}) * get({get({This, scaleProperties}), scaleY})))));
-            false ->
-            ok
-        end.
 
-getAnimationFactoryInitializationVisitorP(This) ->
-        get({This, animationFactoryInitializationVisitor}).
+  def jm_getImage(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :image)})
+    end)
+  end
 
-getScalePropertiesP(This) ->
-        get({This, scaleProperties}).
 
-toString(This) ->
-        CommonSeps = 'CommonSeps':getInstance(),
-        CommonLabels = 'CommonLabels':getInstance(),
-        StringBuffer = 'StringMaker':new(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, lists:flatten(io_lib:format("~s@~.16b", [get({This, '$class'}), erlang:phash2(This)]))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonLabels, 'HEIGHT_LABEL'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, trunc((get({get({This, image}), '$class'})):getHeight(get({This, image})))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'SPACE'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({get({This, animationFactoryInitializationVisitor}), '$class'})):toString(get({This, animationFactoryInitializationVisitor}))),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+  def jm_getSequenceArray(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :sequenceArray)})
+    end)
+  end
+
+
+  def jm_setInitialScale(this, p_scaleProperties) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :scaleProperties, p_scaleProperties)
+        JR.put(this, :scaleProperties, JR.lget(f, :scaleProperties))
+        if JR.get(JR.get(this, :scaleProperties), :shouldScale) do
+            JR.put(JR.get(this, :scaleProperties), :scaleWidth, JR.int32(((JR.get(JR.get(this, :animationFactoryInitializationVisitor), :width) * JR.get(JR.get(this, :scaleProperties), :scaleX)))))
+            JR.put(JR.get(this, :scaleProperties), :scaleHeight, JR.int32(((JR.get(JR.get(this, :animationFactoryInitializationVisitor), :height) * JR.get(JR.get(this, :scaleProperties), :scaleY)))))
+        else
+            nil
+        end
+    end)
+  end
+
+
+  def jm_getAnimationFactoryInitializationVisitorP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :animationFactoryInitializationVisitor)})
+    end)
+  end
+
+
+  def jm_getScalePropertiesP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :scaleProperties)})
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :commonSeps, CommonSeps.jm_getInstance())
+        JR.lset(f, :commonLabels, CommonLabels.jm_getInstance())
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [.jm_toString(this)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonLabels), :HEIGHT_LABEL)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.int32(JR.call(JR.get(this, :image), :jm_getHeight, []))])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :SPACE)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(this, :animationFactoryInitializationVisitor), :jm_toString, [])])
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+end
+
 

@@ -1,45 +1,62 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2025 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.game.input.mapping.event
-% import org.allbinary.logic.util.event.AllBinaryEventObject
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2025 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.game.input.mapping.event
 
--module('NullInputMappingEventListener').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements InputMappingEventListenerInterface
+defmodule NullInputMappingEventListener do
+  def jsuper(), do: JObject
+def jstatic_NULL_INPUT_MAPPING_EVENT_LISTENER(), do: JR.static_get(__MODULE__, :NULL_INPUT_MAPPING_EVENT_LISTENER, fn -> NullInputMappingEventListener.jnew() end)
+  def jstatic_set_NULL_INPUT_MAPPING_EVENT_LISTENER(value), do: JR.static_put(__MODULE__, :NULL_INPUT_MAPPING_EVENT_LISTENER, value)
 
-static_init() ->
-    put({?MODULE, 'NULL_INPUT_MAPPING_EVENT_LISTENER'}, 'NullInputMappingEventListener':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-% throws Exception
-onInputMappingEvent(This, InputMappingEvent) ->
-        ok.
+  def jm_onInputMappingEvent(this, p_inputMappingEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :inputMappingEvent, p_inputMappingEvent)
+        nil
+    end)
+  end
 
-onEvent(This, EventObject) ->
-        ok.
+
+  def jm_onEvent(this, p_eventObject) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+        nil
+    end)
+  end
+end
+
 

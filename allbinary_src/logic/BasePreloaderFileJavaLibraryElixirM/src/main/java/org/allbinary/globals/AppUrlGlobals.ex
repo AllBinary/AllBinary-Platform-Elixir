@@ -1,63 +1,97 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.globals
-% import org.allbinary.logic.string.StringUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.globals
 
--module('AppUrlGlobals').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+#implements
+defmodule AppUrlGlobals do
+  def jsuper(), do: UrlGlobalsInterface
+def jstatic_NULL_APP_URL_GLOBALS(), do: JR.static_get(__MODULE__, :NULL_APP_URL_GLOBALS, fn -> AppUrlGlobals.jnew() end)
+  def jstatic_set_NULL_APP_URL_GLOBALS(value), do: JR.static_put(__MODULE__, :NULL_APP_URL_GLOBALS, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('UrlGlobalsInterface', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :path, nil)
+        JR.put(this, :path, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+    nil
+  end
 
-static_init() ->
-    put({?MODULE, 'NULL_APP_URL_GLOBALS'}, 'AppUrlGlobals':new()),
-    ok.
+  def jinit(this) do
+    UrlGlobalsInterface.jinit(this)
+    jinitfields(this)
+  end
 
-init_fields(This) ->
-    put({This, path}, get({'StringUtil':getInstance(), 'EMPTY_STRING'})),
-    ok.
-
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    'UrlGlobalsInterface':'$init'(This),
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-isTestingMode(This) ->
-        false.
+  def jm_isTestingMode(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
 
-getWebappPath(This) ->
-        get({This, path}).
 
-setWebappPath(This, Path) when (is_list(Path) orelse Path =:= undefined) ->
-        put({This, path}, Path),
-        case (not ((lists:suffix("\\", get({This, path})) orelse lists:suffix("/", get({This, path}))))) of
-            true ->
-            put({This, path}, lists:concat([get({This, path}), "\\"]));
-            false -> ok
-        end.
+  def jm_getWebappPath(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :path)})
+    end)
+  end
 
-getTestHtmlPath(This) ->
-        get({'StringUtil':getInstance(), 'EMPTY_STRING'}).
 
-% throws Exception
-getMainPath(This) ->
-        get({This, path}).
+  def jm_setWebappPath(this, p_path) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :path, p_path)
+        JR.put(this, :path, JR.lget(f, :path))
+        if !((String.ends_with?(JR.get(this, :path), "\\") || String.ends_with?(JR.get(this, :path), "/"))) do
+            JR.put(this, :path, JR.get(this, :path) <> "\\")
+        end
+    end)
+  end
+
+
+  def jm_getTestHtmlPath(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING)})
+    end)
+  end
+
+
+  def jm_getMainPath(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :path)})
+    end)
+  end
+end
+
 

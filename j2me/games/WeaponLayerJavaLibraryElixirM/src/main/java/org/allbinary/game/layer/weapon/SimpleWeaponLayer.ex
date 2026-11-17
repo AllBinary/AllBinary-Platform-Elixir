@@ -1,47 +1,61 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer.weapon
-% import org.allbinary.animation.Animation
-% import org.allbinary.animation.FeaturedAnimationInterfaceFactoryInterfaceFactory
-% import org.allbinary.animation.NullIndexedAnimationFactory
-% import org.allbinary.game.combat.damage.ExplosionResources
-% import org.allbinary.game.multiplayer.layer.RemoteInfo
-% import org.allbinary.graphics.Rectangle
-% import org.allbinary.physics.movement.Movement
-% import org.allbinary.view.ViewPositionBase
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer.weapon
 
--module('SimpleWeaponLayer').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule SimpleWeaponLayer do
+  def jsuper(), do: WeaponLayer
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('WeaponLayer', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-% throws Exception
-createDestroyed() ->
-        (fun(Target_N65835) -> (get({Target_N65835, '$class'})):getInstanceAnimation(Target_N65835, (fun(Target_N65895) -> (get({Target_N65895, '$class'})):getInstance(Target_N65895, 0) end)('NullIndexedAnimationFactory':getFactoryInstance())) end)((fun(Target_N65842) -> (get({Target_N65842, '$class'})):getProcedural(Target_N65842, get({'ExplosionResources':getInstance(), 'THIRD_EXPLOSION_RESOURCE'})) end)('FeaturedAnimationInterfaceFactoryInterfaceFactory':getInstance())).
+  def jm_createDestroyed() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.call(FeaturedAnimationInterfaceFactoryInterfaceFactory.jm_getInstance(), :jm_getProcedural, [JR.get(ExplosionResources.jm_getInstance(), :THIRD_EXPLOSION_RESOURCE)]), :jm_getInstanceAnimation, [JR.call(NullIndexedAnimationFactory.jm_getFactoryInstance(), :jm_getInstance, [0])])})
+    end)
+  end
 
-new(Name, RemoteInfo, MultiPlayerType, Movement, AnimationInterface, DestroyedAnimationInterface, Rectangle, ViewPosition) when (is_list(Name) orelse Name =:= undefined), is_integer(MultiPlayerType) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Name, RemoteInfo, MultiPlayerType, Movement, AnimationInterface, DestroyedAnimationInterface, Rectangle, ViewPosition),
-    This.
 
-'$init'(This, Name, RemoteInfo, MultiPlayerType, Movement, AnimationInterface, DestroyedAnimationInterface, Rectangle, ViewPosition) when (is_list(Name) orelse Name =:= undefined), is_integer(MultiPlayerType) ->
-        'WeaponLayer':'$init'(This, Name, RemoteInfo, MultiPlayerType, Movement, AnimationInterface, DestroyedAnimationInterface, Rectangle, ViewPosition),
-        (get({This, '$class'})):setCollidableInferface(This, 'CollidableWeaponBehavior':new(true)).
+  def jinit(this, p_name, p_remoteInfo, p_multiPlayerType, p_movement, p_animationInterface, p_destroyedAnimationInterface, p_rectangle, p_viewPosition) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :remoteInfo, p_remoteInfo)
+      JR.lset(f, :multiPlayerType, p_multiPlayerType)
+      JR.lset(f, :movement, p_movement)
+      JR.lset(f, :animationInterface, p_animationInterface)
+      JR.lset(f, :destroyedAnimationInterface, p_destroyedAnimationInterface)
+      JR.lset(f, :rectangle, p_rectangle)
+      JR.lset(f, :viewPosition, p_viewPosition)
+        WeaponLayer.jinit(this, JR.lget(f, :name), JR.lget(f, :remoteInfo), JR.lget(f, :multiPlayerType), JR.lget(f, :movement), JR.lget(f, :animationInterface), JR.lget(f, :destroyedAnimationInterface), JR.lget(f, :rectangle), JR.lget(f, :viewPosition))
+        SimpleWeaponLayer.jinitfields(this)
+        JR.call(this, :jm_setCollidableInferface, [CollidableWeaponBehavior.jnew(true)])
+    end)
+  end
+
+  def jnew(p_name, p_remoteInfo, p_multiPlayerType, p_movement, p_animationInterface, p_destroyedAnimationInterface, p_rectangle, p_viewPosition) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_name, p_remoteInfo, p_multiPlayerType, p_movement, p_animationInterface, p_destroyedAnimationInterface, p_rectangle, p_viewPosition)
+    this
+  end
+end
+
 

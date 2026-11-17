@@ -1,61 +1,82 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.part.weapon
-% import org.allbinary.animation.Animation
-% import org.allbinary.game.combat.weapon.WeaponProperties
-% import org.allbinary.game.layer.weapon.WeaponLayer
-% import org.allbinary.game.layer.weapon.WeaponLayerCircularPool
-% import org.allbinary.game.score.ScoreableInterface
-% import org.allbinary.graphics.RelativeRelationship
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.AllBinaryLayerManager
-% import org.allbinary.math.AngleFactory
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.part.weapon
 
--module('ArcedMultiBeamWeaponPart').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule ArcedMultiBeamWeaponPart do
+  def jsuper(), do: BasicWeaponPart
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicWeaponPart', Function, Arguments).
-
-init_fields(This) ->
-    put({This, weaponLayerCircularStaticPool}, undefined),
-    put({This, total}, 0),
-    put({This, 'TOTAL_ANGLE'}, trunc(get({'AngleFactory':getInstance(), 'TOTAL_ANGLE'}))),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :weaponLayerCircularStaticPool, nil)
+    JR.put(this, :total, 0)
+    JR.put(this, :TOTAL_ANGLE, 0)
+        
+        
+        JR.put(this, :TOTAL_ANGLE, JR.int32(JR.get(AngleFactory.jm_getInstance(), :TOTAL_ANGLE)))
+    nil
+  end
 
 
-new(AnimationInterface, SourceLayerInterface, WeaponLayerCircularStaticPool, Total, WeaponProperties, ScoreableInterface, RelativeRelationship) when is_integer(Total) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, AnimationInterface, SourceLayerInterface, WeaponLayerCircularStaticPool, Total, WeaponProperties, ScoreableInterface, RelativeRelationship),
-    This.
+  def jinit(this, p_animationInterface, p_sourceLayerInterface, p_weaponLayerCircularStaticPool, p_total, p_weaponProperties, p_scoreableInterface, p_relativeRelationship) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :animationInterface, p_animationInterface)
+      JR.lset(f, :sourceLayerInterface, p_sourceLayerInterface)
+      JR.lset(f, :weaponLayerCircularStaticPool, p_weaponLayerCircularStaticPool)
+      JR.lset(f, :total, p_total)
+      JR.lset(f, :weaponProperties, p_weaponProperties)
+      JR.lset(f, :scoreableInterface, p_scoreableInterface)
+      JR.lset(f, :relativeRelationship, p_relativeRelationship)
+        BasicWeaponPart.jinit(this, JR.lget(f, :animationInterface), JR.lget(f, :sourceLayerInterface), JR.lget(f, :weaponProperties), JR.lget(f, :scoreableInterface), JR.lget(f, :relativeRelationship))
+        ArcedMultiBeamWeaponPart.jinitfields(this)
+        JR.put(this, :total, JR.lget(f, :total))
+        JR.put(this, :weaponLayerCircularStaticPool, JR.lget(f, :weaponLayerCircularStaticPool))
+    end)
+  end
 
-'$init'(This, AnimationInterface, SourceLayerInterface, WeaponLayerCircularStaticPool, Total, WeaponProperties, ScoreableInterface, RelativeRelationship) when is_integer(Total) ->
-        'BasicWeaponPart':'$init'(This, AnimationInterface, SourceLayerInterface, WeaponProperties, ScoreableInterface, RelativeRelationship),
-        init_fields(This),
-        put({This, total}, Total),
-        put({This, weaponLayerCircularStaticPool}, WeaponLayerCircularStaticPool).
+  def jnew(p_animationInterface, p_sourceLayerInterface, p_weaponLayerCircularStaticPool, p_total, p_weaponProperties, p_scoreableInterface, p_relativeRelationship) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_animationInterface, p_sourceLayerInterface, p_weaponLayerCircularStaticPool, p_total, p_weaponProperties, p_scoreableInterface, p_relativeRelationship)
+    this
+  end
 
-% throws Exception
-processScore(This, AllbinaryLayerManager, Angle, OtherAngle, WeaponProperties, ScoreableInterface) when is_integer(Angle), is_integer(OtherAngle) ->
-        Increment = ((((get({This, total}) - 1)) div get({This, 'TOTAL_ANGLE'}))),
-        MinAngle = ((Angle - ((((Increment * get({This, total}))) bsr 1)))),
-        put({local, next}, 0),
-        put({local, weaponLayer}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, weaponLayer}, (get({get({This, weaponLayerCircularStaticPool}), '$class'})):getInstanceWeaponLayer(get({This, weaponLayerCircularStaticPool}), (get({This, '$class'})):getOwnerLayerInterface(This), (get({get({This, relativeRelationship}), '$class'})):getX(get({This, relativeRelationship})), (get({get({This, relativeRelationship}), '$class'})):getY(get({This, relativeRelationship})), 0, ((MinAngle + Increment)), OtherAngle, WeaponProperties, ScoreableInterface)),
-            (get({AllbinaryLayerManager, '$class'})):append(AllbinaryLayerManager, get({local, weaponLayer})),
-            put({local, next}, (get({local, next}) + Increment))
-        end, lists:seq(0, get({This, total}) - 1)).
+
+  def jm_processScore(this, p_allbinaryLayerManager, p_angle, p_otherAngle, p_weaponProperties, p_scoreableInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allbinaryLayerManager, p_allbinaryLayerManager)
+      JR.lset(f, :angle, p_angle)
+      JR.lset(f, :otherAngle, p_otherAngle)
+      JR.lset(f, :weaponProperties, p_weaponProperties)
+      JR.lset(f, :scoreableInterface, p_scoreableInterface)
+        JR.lset(f, :increment, JR.int16((div((JR.int32(JR.get(this, :total) - 1)), JR.get(this, :TOTAL_ANGLE)))))
+        JR.lset(f, :minAngle, JR.int16((JR.int32(JR.int32(JR.lget(f, :angle)) - (Bitwise.bsr((JR.int32(JR.int32(JR.lget(f, :increment)) * JR.get(this, :total))), 1))))))
+        JR.lset(f, :next, 0)
+        JR.lset(f, :weaponLayer, nil)
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.get(this, :total)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :weaponLayer, JR.call(JR.get(this, :weaponLayerCircularStaticPool), :jm_getInstanceWeaponLayer, [JR.call(this, :jm_getOwnerLayerInterface, []), JR.call(JR.get(this, :relativeRelationship), :jm_getX, []), JR.call(JR.get(this, :relativeRelationship), :jm_getY, []), 0, (JR.int32(JR.lget(f, :minAngle) + JR.lget(f, :increment))), JR.int32(JR.lget(f, :otherAngle)), JR.lget(f, :weaponProperties), JR.lget(f, :scoreableInterface)]))
+            JR.call(JR.lget(f, :allbinaryLayerManager), :jm_append, [JR.lget(f, :weaponLayer)])
+            JR.lset(f, :next, JR.int32(JR.lget(f, :next) + JR.int32(JR.lget(f, :increment))))
+        end)
+    end)
+  end
+end
+
 

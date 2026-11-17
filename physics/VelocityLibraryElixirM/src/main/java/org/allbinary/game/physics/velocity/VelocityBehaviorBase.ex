@@ -1,40 +1,77 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2022 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.game.physics.velocity
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.game.physics.velocity
 
--module('VelocityBehaviorBase').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule VelocityBehaviorBase do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-reduce(This, VelocityProperties, Nominator, Denominator) when is_integer(Nominator), is_integer(Denominator) ->
-        ok.
+  def jm_reduce(this, p_velocityProperties, p_nominator, p_denominator) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :velocityProperties, p_velocityProperties)
+      JR.lset(f, :nominator, p_nominator)
+      JR.lset(f, :denominator, p_denominator)
+        nil
+    end)
+  end
 
-reduceX(This, VelocityProperties, Nominator, Denominator) when is_integer(Nominator), is_integer(Denominator) ->
-        ok.
 
-reduceY(This, VelocityProperties, Nominator, Denominator) when is_integer(Nominator), is_integer(Denominator) ->
-        ok.
+  def jm_reduceX(this, p_velocityProperties, p_nominator, p_denominator) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :velocityProperties, p_velocityProperties)
+      JR.lset(f, :nominator, p_nominator)
+      JR.lset(f, :denominator, p_denominator)
+        nil
+    end)
+  end
+
+
+  def jm_reduceY(this, p_velocityProperties, p_nominator, p_denominator) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :velocityProperties, p_velocityProperties)
+      JR.lset(f, :nominator, p_nominator)
+      JR.lset(f, :denominator, p_denominator)
+        nil
+    end)
+  end
+end
+
 

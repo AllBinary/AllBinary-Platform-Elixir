@@ -1,77 +1,91 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2022 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.media.audio
-% import javax.microedition.media.Player
-% import org.allbinary.string.CommonStrings
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
--module('PlayerStateUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule PlayerStateUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> PlayerStateUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'PlayerStateUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :UNREALIZED, nil)
+    JR.put(this, :REALIZED, nil)
+    JR.put(this, :PREFETCHED, nil)
+    JR.put(this, :STARTED, nil)
+    JR.put(this, :CLOSED, nil)
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        JR.put(this, :UNREALIZED, "UNREALIZED")
+        JR.put(this, :REALIZED, "REALIZED")
+        JR.put(this, :PREFETCHED, "PREFETCHED")
+        JR.put(this, :STARTED, "STARTED")
+        JR.put(this, :CLOSED, "CLOSED")
+    nil
+  end
 
-init_fields(This) ->
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, 'UNREALIZED'}, "UNREALIZED"),
-    put({This, 'REALIZED'}, "REALIZED"),
-    put({This, 'PREFETCHED'}, "PREFETCHED"),
-    put({This, 'STARTED'}, "STARTED"),
-    put({This, 'CLOSED'}, "CLOSED"),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'PlayerStateUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, PlayerStateUtil.jstatic_instance()})
+    end)
+  end
 
-convert(This, State) when is_integer(State) ->
-        try
-        case (State =:= get({'Player', 'UNREALIZED'})) of
-            true ->
-            throw({'$return', get({This, 'UNREALIZED'})});
-            false ->
-            case (State =:= get({'Player', 'REALIZED'})) of
-            true ->
-            throw({'$return', get({This, 'REALIZED'})});
-            false ->
-            case (State =:= get({'Player', 'PREFETCHED'})) of
-            true ->
-            throw({'$return', get({This, 'PREFETCHED'})});
-            false ->
-            case (State =:= get({'Player', 'STARTED'})) of
-            true ->
-            throw({'$return', get({This, 'STARTED'})});
-            false ->
-            case (State =:= get({'Player', 'CLOSED'})) of
-            true ->
-            throw({'$return', get({This, 'CLOSED'})});
-            false -> ok
+
+  def jm_convert(this, p_state) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :state, p_state)
+        if (JR.lget(f, :state) == Player.jstatic_UNREALIZED()) do
+            throw({:jreturn, JR.get(this, :UNREALIZED)})
+        else
+            if (JR.lget(f, :state) == Player.jstatic_REALIZED()) do
+            throw({:jreturn, JR.get(this, :REALIZED)})
+        else
+            if (JR.lget(f, :state) == Player.jstatic_PREFETCHED()) do
+            throw({:jreturn, JR.get(this, :PREFETCHED)})
+        else
+            if (JR.lget(f, :state) == Player.jstatic_STARTED()) do
+            throw({:jreturn, JR.get(this, :STARTED)})
+        else
+            if (JR.lget(f, :state) == Player.jstatic_CLOSED()) do
+            throw({:jreturn, JR.get(this, :CLOSED)})
         end
         end
         end
         end
-        end,
-        get({get({This, commonStrings}), 'UNKNOWN'})
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        end
+        throw({:jreturn, JR.get(JR.get(this, :commonStrings), :UNKNOWN)})
+    end)
+  end
+end
+
 

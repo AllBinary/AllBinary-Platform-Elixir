@@ -1,90 +1,129 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation.image
-% import javax.microedition.lcdui.Graphics
-% import javax.microedition.lcdui.Image
-% import org.allbinary.animation.AnimationBehavior
-% import org.allbinary.animation.special.SpecialAnimationInterface
-% import org.allbinary.graphics.displayable.DisplayInfoSingleton
-% import org.allbinary.time.GameTickTimeDelayHelperFactory
-% import org.allbinary.time.TimeDelayHelper
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
--module('ImageArraySpecialAnimation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements SpecialAnimationInterface
+defmodule ImageArraySpecialAnimation do
+  def jsuper(), do: ImageArrayAnimation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ImageArrayAnimation', Function, Arguments).
-
-init_fields(This) ->
-    put({This, timeDelayHelper}, 'TimeDelayHelper':new(270)),
-    put({This, loopCount}, 0),
-    put({This, loopCountTotal}, 1),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :timeDelayHelper, nil)
+    JR.put(this, :loopCount, 0)
+    JR.put(this, :loopCountTotal, 0)
+        JR.put(this, :timeDelayHelper, TimeDelayHelper.jnew(270))
+        JR.put(this, :loopCount, 0)
+        JR.put(this, :loopCountTotal, 1)
+    nil
+  end
 
 
-new(ImageArray, AnimationBehavior) when (is_tuple(ImageArray) orelse ImageArray =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, ImageArray, AnimationBehavior),
-    This.
+  def jinit(this, p_imageArray, p_animationBehavior) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :imageArray, p_imageArray)
+      JR.lset(f, :animationBehavior, p_animationBehavior)
+        ImageArrayAnimation.jinit(this, JR.lget(f, :imageArray), JR.lget(f, :animationBehavior))
+        ImageArraySpecialAnimation.jinitfields(this)
+        JR.call(this, :jm_reset, [])
+    end)
+  end
 
-'$init'(This, ImageArray, AnimationBehavior) when (is_tuple(ImageArray) orelse ImageArray =:= undefined) ->
-        'ImageArrayAnimation':'$init'(This, ImageArray, AnimationBehavior),
-        init_fields(This),
-        (get({This, '$class'})):reset(This).
+  def jnew(p_imageArray, p_animationBehavior) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_imageArray, p_animationBehavior)
+    this
+  end
 
-getLoopCount(This) ->
-        get({This, loopCount}).
 
-setLastFrame(This) ->
-        (get({get({This, circularIndexUtil}), '$class'})):setIndex(get({This, circularIndexUtil}), ((get({get({This, circularIndexUtil}), '$class'})):getSize(get({This, circularIndexUtil})) - 1)).
+  def jm_getLoopCount(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :loopCount)})
+    end)
+  end
 
-reset(This) ->
-        (get({This, '$class'})):setFrame(This, ((get({This, '$class'})):getSize(This) - 1)),
-        put({This, loopCount}, 0).
 
-nextFrame(This) ->
-        case ((get({This, '$class'})):getFrame(This) > 0) of
-            true ->
-            case (get({get({This, timeDelayHelper}), '$class'})):isTime(get({This, timeDelayHelper}), get({'GameTickTimeDelayHelperFactory':getInstance(), startTime})) of
-                true ->
-                (get({This, '$class'})):previousFrame(This),
-                case ((get({This, '$class'})):getFrame(This) =:= 0) of
-                    true ->
-                    put({This, loopCount}, get({This, loopCount}) + 1);
-                    false -> ok
-                end;
-                false -> ok
-            end;
-            false -> ok
-        end.
+  def jm_setLastFrame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :circularIndexUtil), :jm_setIndex, [(JR.call(JR.get(this, :circularIndexUtil), :jm_getSize, []) - 1)])
+    end)
+  end
 
-isComplete(This) ->
-        try
-        case ((get({This, loopCount}) < get({This, loopCountTotal})) orelse ((get({This, '$class'})):getFrame(This) =/= 0)) of
-            true ->
-            throw({'$return', false});
-            false ->
-            throw({'$return', true})
+
+  def jm_reset(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_setFrame, [(JR.call(this, :jm_getSize, []) - 1)])
+        JR.put(this, :loopCount, 0)
+    end)
+  end
+
+
+  def jm_nextFrame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.call(this, :jm_getFrame, []) > 0) do
+            if JR.call(JR.get(this, :timeDelayHelper), :jm_isTime, [JR.get(GameTickTimeDelayHelperFactory.jm_getInstance(), :startTime)]) do
+                JR.call(this, :jm_previousFrame, [])
+                if (JR.call(this, :jm_getFrame, []) == 0) do
+                    JR.postinc(this, :loopCount, 1)
+                end
+            end
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-paintXY(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-        put({local, x}, X),
-        put({local, y}, Y),
-        put({local, x}, ((fun(Target_N66608) -> (get({Target_N66608, '$class'})):getLastHalfWidth(Target_N66608) end)('DisplayInfoSingleton':getInstance()) - (((fun(Target_N66639) -> (get({Target_N66639, '$class'})):getWidth(Target_N66639) end)((get({This, '$class'})):getImage(This, (get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})))) bsr 1)))),
-        put({local, y}, 5),
-        'ImageArrayAnimation':paintXY(This, Graphics, get({local, x}), get({local, y})).
+
+  def jm_isComplete(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if ((JR.get(this, :loopCount) < JR.get(this, :loopCountTotal)) || (JR.call(this, :jm_getFrame, []) != 0)) do
+            throw({:jreturn, false})
+        else
+            throw({:jreturn, true})
+        end
+    end)
+  end
+
+
+  def jm_paintXY(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        JR.lset(f, :x, (JR.call(DisplayInfoSingleton.jm_getInstance(), :jm_getLastHalfWidth, []) - (Bitwise.bsr(JR.call(JR.call(this, :jm_getImage, [JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, [])]), :jm_getWidth, []), 1))))
+        JR.lset(f, :y, 5)
+        ImageArrayAnimation.jm_paintXY(this, JR.lget(f, :graphics), JR.lget(f, :x), JR.lget(f, :y))
+    end)
+  end
+end
+
 

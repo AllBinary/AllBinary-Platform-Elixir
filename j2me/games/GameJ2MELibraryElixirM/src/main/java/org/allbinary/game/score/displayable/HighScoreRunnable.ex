@@ -1,78 +1,85 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.score.displayable
-% import org.allbinary.J2MEUtil
-% import org.allbinary.logic.ABSystemWrapper
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.thread.ARunnable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.score.displayable
 
--module('HighScoreRunnable').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule HighScoreRunnable do
+  def jsuper(), do: ARunnable
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ARunnable', Function, Arguments).
-
-init_fields(This) ->
-    put({This, highScoresCanvas}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :highScoresCanvas, nil)
+        
+    nil
+  end
 
 
-new(HighScoresCanvas) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, HighScoresCanvas),
-    This.
+  def jinit(this, p_highScoresCanvas) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :highScoresCanvas, p_highScoresCanvas)
+      ARunnable.jinit(this)
+      jinitfields(this)
+        JR.put(this, :highScoresCanvas, JR.lget(f, :highScoresCanvas))
+    end)
+  end
 
-'$init'(This, HighScoresCanvas) ->
-    'ARunnable':'$init'(This),
-    init_fields(This),
-        put({This, highScoresCanvas}, HighScoresCanvas).
+  def jnew(p_highScoresCanvas) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_highScoresCanvas)
+    this
+  end
 
-run(This) ->
-        CommonStrings = 'CommonStrings':getInstance(),
-        LogUtil = 'LogUtil':getInstance(),
-        HighScoresCanvas = get({This, highScoresCanvas}),
-        try
-            IsHTML = 'J2MEUtil':isHTML(),
-            case (not IsHTML) of
-                true ->
-                (fun Loop() -> case (not get({HighScoresCanvas, hasPainted})) of true ->
-                    ok,
-                    Loop();
-                false -> ok end end)(),
-                put({HighScoresCanvas, hasPainted}, false);
-                false -> ok
-            end,
-            StringMaker = 'StringMaker':new(),
-            SystemWrapper = 'ABSystemWrapper':getInstance(),
-            CurrentTimeMillis = (get({SystemWrapper, '$class'})):currentTimeMillis(SystemWrapper),
-            (get({LogUtil, '$class'})):putF(LogUtil, (fun(Target_N66309) -> (get({Target_N66309, '$class'})):toString(Target_N66309) end)((fun(Target_N66316) -> (get({Target_N66316, '$class'})):appendlong(Target_N66316, CurrentTimeMillis) end)((get({StringMaker, '$class'})):append(StringMaker, "HighScoresCanvas - Request repaint to be sure: "))), This, get({CommonStrings, 'RUN'})),
-            (get({get({HighScoresCanvas, repaintBehavior}), '$class'})):onChangeRepaint(get({HighScoresCanvas, repaintBehavior}), HighScoresCanvas),
-            case (not IsHTML) of
-                true ->
-                (fun Loop() -> case (not get({HighScoresCanvas, hasPainted})) of true ->
-                    ok,
-                    Loop();
-                false -> ok end end)();
-                false -> ok
-            end,
-            (get({StringMaker, '$class'})):delete(StringMaker, 0, (get({StringMaker, '$class'})):length(StringMaker)),
-            (get({LogUtil, '$class'})):putF(LogUtil, (fun(Target_N66535) -> (get({Target_N66535, '$class'})):toString(Target_N66535) end)((fun(Target_N66542) -> (get({Target_N66542, '$class'})):appendlong(Target_N66542, CurrentTimeMillis) end)((get({StringMaker, '$class'})):append(StringMaker, "HighScoresCanvas - Now that the canvas has completed repaint go ahead and fetch the scores: "))), This, get({CommonStrings, 'RUN'})),
-            (get({HighScoresCanvas, '$class'})):executeUpdate(HighScoresCanvas)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({LogUtil, '$class'})):put(LogUtil, get({CommonStrings, 'EXCEPTION'}), This, get({CommonStrings, 'RUN'}), E)
-        end.
+
+  def jm_run(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+        JR.lset(f, :logUtil, LogUtil.jm_getInstance())
+        JR.lset(f, :highScoresCanvas, JR.get(this, :highScoresCanvas))
+        try do
+            JR.lset(f, :isHTML, J2MEUtil.jm_isHTML())
+            if !JR.lget(f, :isHTML) do
+                JR.jwhile(fn -> !JR.get(JR.lget(f, :highScoresCanvas), :hasPainted) end, fn ->
+                    nil
+                end)
+                JR.put(JR.lget(f, :highScoresCanvas), :hasPainted, false)
+            end
+            JR.lset(f, :stringMaker, StringMaker.jnew())
+            JR.lset(f, :systemWrapper, ABSystemWrapper.jm_getInstance())
+            JR.lset(f, :currentTimeMillis, JR.call(JR.lget(f, :systemWrapper), :jm_currentTimeMillis, []))
+            JR.call(JR.lget(f, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(JR.lget(f, :stringMaker), :jm_append, ["HighScoresCanvas - Request repaint to be sure: "]), :jm_appendlong, [JR.lget(f, :currentTimeMillis)]), :jm_toString, []), this, JR.get(JR.lget(f, :commonStrings), :RUN)])
+            JR.call(JR.get(JR.lget(f, :highScoresCanvas), :repaintBehavior), :jm_onChangeRepaint, [JR.lget(f, :highScoresCanvas)])
+            if !JR.lget(f, :isHTML) do
+                JR.jwhile(fn -> !JR.get(JR.lget(f, :highScoresCanvas), :hasPainted) end, fn ->
+                    nil
+                end)
+            end
+            JR.call(JR.lget(f, :stringMaker), :jm_delete, [0, JR.call(JR.lget(f, :stringMaker), :jm_length, [])])
+            JR.call(JR.lget(f, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(JR.lget(f, :stringMaker), :jm_append, ["HighScoresCanvas - Now that the canvas has completed repaint go ahead and fetch the scores: "]), :jm_appendlong, [JR.lget(f, :currentTimeMillis)]), :jm_toString, []), this, JR.get(JR.lget(f, :commonStrings), :RUN)])
+            JR.call(JR.lget(f, :highScoresCanvas), :jm_executeUpdate, [])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.lget(f, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, JR.get(JR.lget(f, :commonStrings), :RUN), JR.lget(f, :e)])
+        end
+    end)
+  end
+end
+
 

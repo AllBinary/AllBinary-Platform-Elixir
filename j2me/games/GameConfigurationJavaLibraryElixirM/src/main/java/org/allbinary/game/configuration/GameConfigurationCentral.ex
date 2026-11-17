@@ -1,172 +1,222 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.configuration
-% import org.allbinary.game.configuration.persistance.GameConfigurationPersistanceSingleton
-% import org.allbinary.game.configuration.persistance.KeyValuePersistance
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.math.SmallIntegerSingletonFactory
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.system.security.licensing.AbeClientInformationInterface
-% import org.allbinary.string.CommonSeps
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.ABHashtable
-% import org.allbinary.util.BasicArrayList
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.configuration
 
--module('GameConfigurationCentral').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GameConfigurationCentral do
+  def jsuper(), do: JObject
+def jstatic_SINGLETON(), do: JR.static_get(__MODULE__, :SINGLETON, fn -> JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT) end)
+  def jstatic_set_SINGLETON(value), do: JR.static_put(__MODULE__, :SINGLETON, value)
 
-static_init() ->
-    put({?MODULE, 'SINGLETON'}, get({'NullUtil':getInstance(), 'NULL_OBJECT'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :SCALE, nil)
+    JR.put(this, :ORIENTATION, nil)
+    JR.put(this, :SENSOR_UPDATE_RATE, nil)
+    JR.put(this, :VIBRATION, nil)
+    JR.put(this, :CHALLENGE_LEVEL, nil)
+    JR.put(this, :COLLIDE_DAMAGE, nil)
+    JR.put(this, :DURABILITY_CHALLENGE_LEVEL, nil)
+    JR.put(this, :SPEED_CHALLENGE_LEVEL, nil)
+    JR.put(this, :ATTACK_CHALLENGE_LEVEL, nil)
+    JR.put(this, :CONTROL_LEVEL, nil)
+    JR.put(this, :PLAYER_INPUT_WAIT, nil)
+    JR.put(this, :SPEED, nil)
+    JR.put(this, :SOUND_VOLUME, nil)
+    JR.put(this, :MAX_GAME_OBJECTS, nil)
+    JR.put(this, :MAX_LAYERS, nil)
+    JR.put(this, :gameControlFidelity, 0)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        JR.put(this, :gameControlFidelity, 36)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, 'SCALE'}, undefined),
-    put({This, 'ORIENTATION'}, undefined),
-    put({This, 'SENSOR_UPDATE_RATE'}, undefined),
-    put({This, 'VIBRATION'}, undefined),
-    put({This, 'CHALLENGE_LEVEL'}, undefined),
-    put({This, 'COLLIDE_DAMAGE'}, undefined),
-    put({This, 'DURABILITY_CHALLENGE_LEVEL'}, undefined),
-    put({This, 'SPEED_CHALLENGE_LEVEL'}, undefined),
-    put({This, 'ATTACK_CHALLENGE_LEVEL'}, undefined),
-    put({This, 'CONTROL_LEVEL'}, undefined),
-    put({This, 'PLAYER_INPUT_WAIT'}, undefined),
-    put({This, 'SPEED'}, undefined),
-    put({This, 'SOUND_VOLUME'}, undefined),
-    put({This, 'MAX_GAME_OBJECTS'}, undefined),
-    put({This, 'MAX_LAYERS'}, undefined),
-    put({This, gameControlFidelity}, 36),
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        if (GameConfigurationCentral.jstatic_SINGLETON() == JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)) do
+            GameConfigurationCentral.jstatic_set_SINGLETON(GameConfigurationCentral.jnew())
+        end
+        throw({:jreturn, GameConfigurationCentral.jstatic_SINGLETON()})
+    end)
+  end
 
 
-getInstance() ->
-        case (get({'GameConfigurationCentral', 'SINGLETON'}) =:= get({'NullUtil':getInstance(), 'NULL_OBJECT'})) of
-            true ->
-            put({'GameConfigurationCentral', 'SINGLETON'}, 'GameConfigurationCentral':new());
-            false -> ok
-        end,
-        get({'GameConfigurationCentral', 'SINGLETON'}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.lset(f, :smallIntegerSingletonFactory, SmallIntegerSingletonFactory.jm_getInstance())
+        JR.put(this, :SCALE, GameConfiguration.jnew("Scale", JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [2]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [2]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [3])))
+        JR.put(this, :ORIENTATION, GameConfiguration.jnew("Orientation", JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [0]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [0]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [8])))
+        JR.put(this, :SENSOR_UPDATE_RATE, GameConfiguration.jnew("Sensor Update Rate", JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [0]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [0]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [3])))
+        JR.put(this, :VIBRATION, GameConfiguration.jnew("Vibration", JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [0]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [0]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [3])))
+        JR.put(this, :CHALLENGE_LEVEL, GameConfiguration.jnew("Global Challenge Level", JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [3]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [1]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [10])))
+        JR.put(this, :COLLIDE_DAMAGE, GameConfiguration.jnew("Collide Damage Challenge Level", JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [3]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [1]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [10])))
+        JR.put(this, :DURABILITY_CHALLENGE_LEVEL, GameConfiguration.jnew("Enemy Durability Challenge Level", JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [3]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [1]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [10])))
+        JR.put(this, :SPEED_CHALLENGE_LEVEL, GameConfiguration.jnew("Enemy Speed Challenge Level", JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [3]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [1]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [10])))
+        JR.put(this, :ATTACK_CHALLENGE_LEVEL, GameConfiguration.jnew("Enemy Attack Challenge Level", JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [3]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [1]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [10])))
+        JR.put(this, :CONTROL_LEVEL, GameConfiguration.jnew("Control Fidelity", JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [5]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [1]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [10])))
+        JR.put(this, :PLAYER_INPUT_WAIT, GameConfiguration.jnew("Input Wait", JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [5]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [1]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [10])))
+        JR.put(this, :SPEED, GameConfiguration.jnew("Game Speed (Device Specific)", JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [5]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [1]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [10])))
+        JR.put(this, :SOUND_VOLUME, GameConfiguration.jnew("Sound Volume", JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [6]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [0]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [10])))
+        JR.put(this, :MAX_GAME_OBJECTS, GameConfiguration.jnew("Max Game Objects", JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [20]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [1]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [50])))
+        JR.put(this, :MAX_LAYERS, GameConfiguration.jnew("Max Layers", JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [20]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [1]), JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [50])))
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        SmallIntegerSingletonFactory = 'SmallIntegerSingletonFactory':getInstance(),
-        put({This, 'SCALE'}, 'GameConfiguration':new("Scale", (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 2), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 2), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 3))),
-        put({This, 'ORIENTATION'}, 'GameConfiguration':new("Orientation", (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 0), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 0), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 8))),
-        put({This, 'SENSOR_UPDATE_RATE'}, 'GameConfiguration':new("Sensor Update Rate", (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 0), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 0), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 3))),
-        put({This, 'VIBRATION'}, 'GameConfiguration':new("Vibration", (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 0), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 0), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 3))),
-        put({This, 'CHALLENGE_LEVEL'}, 'GameConfiguration':new("Global Challenge Level", (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 3), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 1), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 10))),
-        put({This, 'COLLIDE_DAMAGE'}, 'GameConfiguration':new("Collide Damage Challenge Level", (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 3), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 1), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 10))),
-        put({This, 'DURABILITY_CHALLENGE_LEVEL'}, 'GameConfiguration':new("Enemy Durability Challenge Level", (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 3), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 1), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 10))),
-        put({This, 'SPEED_CHALLENGE_LEVEL'}, 'GameConfiguration':new("Enemy Speed Challenge Level", (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 3), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 1), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 10))),
-        put({This, 'ATTACK_CHALLENGE_LEVEL'}, 'GameConfiguration':new("Enemy Attack Challenge Level", (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 3), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 1), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 10))),
-        put({This, 'CONTROL_LEVEL'}, 'GameConfiguration':new("Control Fidelity", (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 5), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 1), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 10))),
-        put({This, 'PLAYER_INPUT_WAIT'}, 'GameConfiguration':new("Input Wait", (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 5), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 1), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 10))),
-        put({This, 'SPEED'}, 'GameConfiguration':new("Game Speed (Device Specific)", (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 5), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 1), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 10))),
-        put({This, 'SOUND_VOLUME'}, 'GameConfiguration':new("Sound Volume", (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 6), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 0), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 10))),
-        put({This, 'MAX_GAME_OBJECTS'}, 'GameConfiguration':new("Max Game Objects", (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 20), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 1), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 50))),
-        put({This, 'MAX_LAYERS'}, 'GameConfiguration':new("Max Layers", (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 20), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 1), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 50))).
 
-load(This, AbeClientInformation) ->
-        CommonStrings = 'CommonStrings':getInstance(),
-        try
-            SmallIntegerSingletonFactory = 'SmallIntegerSingletonFactory':getInstance(),
-            KeyValuePersistance = 'GameConfigurationPersistanceSingleton':getInstance(),
-            (get({KeyValuePersistance, '$class'})):clear(KeyValuePersistance),
-            (get({KeyValuePersistance, '$class'})):loadAll(KeyValuePersistance, AbeClientInformation),
-            List = (get({KeyValuePersistance, '$class'})):getIds(KeyValuePersistance),
-            case ((get({List, '$class'})):size(List) > 0) of
-                true ->
-                Hashtable = (get({KeyValuePersistance, '$class'})):get(KeyValuePersistance, 0),
-                AnyType = (get({get({This, 'SCALE'}), '$class'})):getName(get({This, 'SCALE'})),
-                Value = (get({Hashtable, '$class'})):get(Hashtable, AnyType),
-                (get({get({This, 'SCALE'}), '$class'})):setValue(get({This, 'SCALE'}), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, (fun(Target_N69046) -> (get({Target_N69046, '$class'})):intValue(Target_N69046) end)(allbinary_java:to_string(Value))));
-                false ->
-                (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), "No Game Configuration To Load", This, get({CommonStrings, 'LOAD'}))
+  def jm_load(this, p_abeClientInformation) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+        JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+        try do
+            JR.lset(f, :smallIntegerSingletonFactory, SmallIntegerSingletonFactory.jm_getInstance())
+            JR.lset(f, :keyValuePersistance, GameConfigurationPersistanceSingleton.jm_getInstance())
+            JR.call(JR.lget(f, :keyValuePersistance), :jm_clear, [])
+            JR.call(JR.lget(f, :keyValuePersistance), :jm_loadAll, [JR.lget(f, :abeClientInformation)])
+            JR.lset(f, :list, JR.call(JR.lget(f, :keyValuePersistance), :jm_getIds, []))
+            if (JR.call(JR.lget(f, :list), :jm_size, []) > 0) do
+                JR.lset(f, :hashtable, JR.call(JR.lget(f, :keyValuePersistance), :jm_get, [0]))
+                JR.lset(f, :anyType, JR.call(JR.get(this, :SCALE), :jm_getName, []))
+                JR.lset(f, :value, JR.call(JR.lget(f, :hashtable), :jm_get, [JR.lget(f, :anyType)]))
+                JR.call(JR.get(this, :SCALE), :jm_setValue, [JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [JR.call(JR.str(JR.lget(f, :value)), :jm_intValue, [])])])
+            else
+                JR.call(JR.get(this, :logUtil), :jm_putF, ["No Game Configuration To Load", this, JR.get(JR.lget(f, :commonStrings), :LOAD)])
             end
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), This, get({CommonStrings, 'LOAD'}), E)
-        end.
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, JR.get(JR.lget(f, :commonStrings), :LOAD), JR.lget(f, :e)])
+        end
+    end)
+  end
 
-setGameControlFidelity(This, GameControlFidelity) when is_integer(GameControlFidelity) ->
-        put({This, gameControlFidelity}, GameControlFidelity).
 
-getGameControlFidelity(This) ->
-        get({This, gameControlFidelity}).
+  def jm_setGameControlFidelity(this, p_gameControlFidelity) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameControlFidelity, p_gameControlFidelity)
+        JR.put(this, :gameControlFidelity, JR.lget(f, :gameControlFidelity))
+    end)
+  end
 
-toString(This) ->
-        StringBuffer = 'StringMaker':new(),
-        CommonStrings = 'CommonSeps':getInstance(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'COMMA_SEP'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({get({This, 'SCALE'}), '$class'})):getName(get({This, 'SCALE'}))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'EQUALS'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, trunc((fun(Target_N69605) -> (get({Target_N69605, '$class'})):intValue(Target_N69605) end)((get({get({This, 'SCALE'}), '$class'})):getValue(get({This, 'SCALE'}))))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'COMMA_SEP'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({get({This, 'ORIENTATION'}), '$class'})):getName(get({This, 'ORIENTATION'}))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'EQUALS'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, trunc((fun(Target_N69775) -> (get({Target_N69775, '$class'})):intValue(Target_N69775) end)((get({get({This, 'ORIENTATION'}), '$class'})):getValue(get({This, 'ORIENTATION'}))))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'COMMA_SEP'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({get({This, 'SENSOR_UPDATE_RATE'}), '$class'})):getName(get({This, 'SENSOR_UPDATE_RATE'}))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'EQUALS'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, trunc((fun(Target_N69945) -> (get({Target_N69945, '$class'})):intValue(Target_N69945) end)((get({get({This, 'SENSOR_UPDATE_RATE'}), '$class'})):getValue(get({This, 'SENSOR_UPDATE_RATE'}))))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'COMMA_SEP'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({get({This, 'VIBRATION'}), '$class'})):getName(get({This, 'VIBRATION'}))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'EQUALS'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, trunc((fun(Target_N70115) -> (get({Target_N70115, '$class'})):intValue(Target_N70115) end)((get({get({This, 'VIBRATION'}), '$class'})):getValue(get({This, 'VIBRATION'}))))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'COMMA_SEP'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({get({This, 'CHALLENGE_LEVEL'}), '$class'})):getName(get({This, 'CHALLENGE_LEVEL'}))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'EQUALS'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, trunc((fun(Target_N70285) -> (get({Target_N70285, '$class'})):intValue(Target_N70285) end)((get({get({This, 'CHALLENGE_LEVEL'}), '$class'})):getValue(get({This, 'CHALLENGE_LEVEL'}))))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'COMMA_SEP'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({get({This, 'COLLIDE_DAMAGE'}), '$class'})):getName(get({This, 'COLLIDE_DAMAGE'}))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'EQUALS'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, trunc((fun(Target_N70455) -> (get({Target_N70455, '$class'})):intValue(Target_N70455) end)((get({get({This, 'COLLIDE_DAMAGE'}), '$class'})):getValue(get({This, 'COLLIDE_DAMAGE'}))))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'COMMA_SEP'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({get({This, 'DURABILITY_CHALLENGE_LEVEL'}), '$class'})):getName(get({This, 'DURABILITY_CHALLENGE_LEVEL'}))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'EQUALS'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, trunc((fun(Target_N70625) -> (get({Target_N70625, '$class'})):intValue(Target_N70625) end)((get({get({This, 'DURABILITY_CHALLENGE_LEVEL'}), '$class'})):getValue(get({This, 'DURABILITY_CHALLENGE_LEVEL'}))))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'COMMA_SEP'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({get({This, 'SPEED_CHALLENGE_LEVEL'}), '$class'})):getName(get({This, 'SPEED_CHALLENGE_LEVEL'}))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'EQUALS'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, trunc((fun(Target_N70795) -> (get({Target_N70795, '$class'})):intValue(Target_N70795) end)((get({get({This, 'SPEED_CHALLENGE_LEVEL'}), '$class'})):getValue(get({This, 'SPEED_CHALLENGE_LEVEL'}))))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'COMMA_SEP'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({get({This, 'ATTACK_CHALLENGE_LEVEL'}), '$class'})):getName(get({This, 'ATTACK_CHALLENGE_LEVEL'}))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'EQUALS'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, trunc((fun(Target_N70965) -> (get({Target_N70965, '$class'})):intValue(Target_N70965) end)((get({get({This, 'ATTACK_CHALLENGE_LEVEL'}), '$class'})):getValue(get({This, 'ATTACK_CHALLENGE_LEVEL'}))))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'COMMA_SEP'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({get({This, 'CONTROL_LEVEL'}), '$class'})):getName(get({This, 'CONTROL_LEVEL'}))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'EQUALS'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, trunc((fun(Target_N71135) -> (get({Target_N71135, '$class'})):intValue(Target_N71135) end)((get({get({This, 'CONTROL_LEVEL'}), '$class'})):getValue(get({This, 'CONTROL_LEVEL'}))))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'COMMA_SEP'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({get({This, 'SPEED'}), '$class'})):getName(get({This, 'SPEED'}))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'EQUALS'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, trunc((fun(Target_N71305) -> (get({Target_N71305, '$class'})):intValue(Target_N71305) end)((get({get({This, 'SPEED'}), '$class'})):getValue(get({This, 'SPEED'}))))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'COMMA_SEP'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({get({This, 'MAX_GAME_OBJECTS'}), '$class'})):getName(get({This, 'MAX_GAME_OBJECTS'}))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'EQUALS'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, trunc((fun(Target_N71475) -> (get({Target_N71475, '$class'})):intValue(Target_N71475) end)((get({get({This, 'MAX_GAME_OBJECTS'}), '$class'})):getValue(get({This, 'MAX_GAME_OBJECTS'}))))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'COMMA_SEP'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({get({This, 'MAX_LAYERS'}), '$class'})):getName(get({This, 'MAX_LAYERS'}))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonStrings, 'EQUALS'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, trunc((fun(Target_N71645) -> (get({Target_N71645, '$class'})):intValue(Target_N71645) end)((get({get({This, 'MAX_LAYERS'}), '$class'})):getValue(get({This, 'MAX_LAYERS'}))))),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+
+  def jm_getGameControlFidelity(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :gameControlFidelity)})
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.lset(f, :commonStrings, CommonSeps.jm_getInstance())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :COMMA_SEP)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(this, :SCALE), :jm_getName, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :EQUALS)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.int32(JR.call(JR.call(JR.get(this, :SCALE), :jm_getValue, []), :jm_intValue, []))])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :COMMA_SEP)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(this, :ORIENTATION), :jm_getName, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :EQUALS)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.int32(JR.call(JR.call(JR.get(this, :ORIENTATION), :jm_getValue, []), :jm_intValue, []))])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :COMMA_SEP)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(this, :SENSOR_UPDATE_RATE), :jm_getName, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :EQUALS)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.int32(JR.call(JR.call(JR.get(this, :SENSOR_UPDATE_RATE), :jm_getValue, []), :jm_intValue, []))])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :COMMA_SEP)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(this, :VIBRATION), :jm_getName, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :EQUALS)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.int32(JR.call(JR.call(JR.get(this, :VIBRATION), :jm_getValue, []), :jm_intValue, []))])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :COMMA_SEP)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(this, :CHALLENGE_LEVEL), :jm_getName, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :EQUALS)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.int32(JR.call(JR.call(JR.get(this, :CHALLENGE_LEVEL), :jm_getValue, []), :jm_intValue, []))])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :COMMA_SEP)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(this, :COLLIDE_DAMAGE), :jm_getName, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :EQUALS)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.int32(JR.call(JR.call(JR.get(this, :COLLIDE_DAMAGE), :jm_getValue, []), :jm_intValue, []))])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :COMMA_SEP)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(this, :DURABILITY_CHALLENGE_LEVEL), :jm_getName, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :EQUALS)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.int32(JR.call(JR.call(JR.get(this, :DURABILITY_CHALLENGE_LEVEL), :jm_getValue, []), :jm_intValue, []))])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :COMMA_SEP)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(this, :SPEED_CHALLENGE_LEVEL), :jm_getName, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :EQUALS)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.int32(JR.call(JR.call(JR.get(this, :SPEED_CHALLENGE_LEVEL), :jm_getValue, []), :jm_intValue, []))])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :COMMA_SEP)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(this, :ATTACK_CHALLENGE_LEVEL), :jm_getName, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :EQUALS)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.int32(JR.call(JR.call(JR.get(this, :ATTACK_CHALLENGE_LEVEL), :jm_getValue, []), :jm_intValue, []))])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :COMMA_SEP)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(this, :CONTROL_LEVEL), :jm_getName, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :EQUALS)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.int32(JR.call(JR.call(JR.get(this, :CONTROL_LEVEL), :jm_getValue, []), :jm_intValue, []))])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :COMMA_SEP)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(this, :SPEED), :jm_getName, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :EQUALS)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.int32(JR.call(JR.call(JR.get(this, :SPEED), :jm_getValue, []), :jm_intValue, []))])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :COMMA_SEP)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(this, :MAX_GAME_OBJECTS), :jm_getName, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :EQUALS)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.int32(JR.call(JR.call(JR.get(this, :MAX_GAME_OBJECTS), :jm_getValue, []), :jm_intValue, []))])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :COMMA_SEP)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(this, :MAX_LAYERS), :jm_getName, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonStrings), :EQUALS)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.int32(JR.call(JR.call(JR.get(this, :MAX_LAYERS), :jm_getValue, []), :jm_intValue, []))])
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+end
+
 

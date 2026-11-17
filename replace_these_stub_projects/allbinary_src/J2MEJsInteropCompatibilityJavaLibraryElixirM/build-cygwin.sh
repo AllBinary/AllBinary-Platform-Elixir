@@ -29,20 +29,23 @@ rm -rf "$output_dir" "$object_dir"
 mkdir -p "$output_dir/src" "$output_dir/ebin" "$object_dir/ebin"
 cp -R "$source_dir/." "$output_dir/src/"
 
-files=()
-for runtime in "$runtime_dir"/*.ex; do files+=("$(cygpath -w "$runtime")"); done
+# The runtime (with its java/... folders), the dependency sources and this project's sources are copied to one folder that
+# elixirc compiles as a directory, since a list of every file is longer than the cmd.exe command line limit.
+all_dir="$object_dir/all"
+mkdir -p "$all_dir/runtime" "$all_dir/dependencies" "$all_dir/src"
+cp -R "$runtime_dir/." "$all_dir/runtime/"
 if [ -d "$dependency_dir/src" ]; then
-    while IFS= read -r file; do files+=("$(cygpath -w "$file")"); done < <(find "$dependency_dir/src" -type f -name '*.ex' | sort)
+    cp -R "$dependency_dir/src/." "$all_dir/dependencies/"
 fi
-count=0
-while IFS= read -r file; do files+=("$(cygpath -w "$file")"); count=$((count + 1)); done < <(find "$source_dir" -type f -name '*.ex' | sort)
-echo "Elixir sources: $count"
+cp -R "$source_dir/." "$all_dir/src/"
+find "$all_dir" -type f ! -name '*.ex' -delete
+echo "Elixir sources: $(find "$source_dir" -type f -name '*.ex' | wc -l)"
 
 cmd_flag="/c"
 if [ "$(uname -o)" = "Msys" ]; then
     cmd_flag="//c"
 fi
-cmd "$cmd_flag" "$compiler" "${compiler_flags[@]}" -o "$(cygpath -w "$object_dir/ebin")" "${files[@]}" < /dev/null
+cmd "$cmd_flag" "$compiler" "${compiler_flags[@]}" -o "$(cygpath -w "$object_dir/ebin")" "$(cygpath -w "$all_dir")" < /dev/null
 status=$?
 if [ "$status" = "0" ]; then
     cp "$object_dir"/ebin/*.beam "$output_dir/ebin/" 2>/dev/null

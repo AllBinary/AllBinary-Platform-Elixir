@@ -1,138 +1,230 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.midlet
-% import javax.microedition.lcdui.Command
-% import javax.microedition.lcdui.CommandListener
-% import javax.microedition.lcdui.Display
-% import javax.microedition.lcdui.Displayable
-% import javax.microedition.lcdui.NullCanvas
-% import javax.microedition.midlet.MIDlet
-% import javax.microedition.midlet.MIDletStateChangeException
-% import org.allbinary.logic.StdUtil
-% import org.allbinary.logic.communication.log.ForcedLogUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.communication.log.PreLogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.logic.util.event.EventStrings
-% import org.allbinary.string.CommonLabels
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.system.Memory
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.util.ABHashtable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.midlet
 
--module('AllBinaryMidlet').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements CommandListener
+defmodule AllBinaryMidlet do
+  def jsuper(), do: MIDlet
+def jstatic_NULL_ALLBINARY_MIDLET(), do: JR.static_get(__MODULE__, :NULL_ALLBINARY_MIDLET, fn -> JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT) end)
+  def jstatic_set_NULL_ALLBINARY_MIDLET(value), do: JR.static_put(__MODULE__, :NULL_ALLBINARY_MIDLET, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('MIDlet', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'NULL_ALLBINARY_MIDLET'}, get({'NullUtil':getInstance(), 'NULL_OBJECT'})),
-    ok.
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, 'SET_DISPLAY'}, "setDisplay"),
-    put({This, 'SETTING_'}, "Setting: "),
-    put({This, '_DISPLAY_'}, " Display: "),
-    put({This, 'SETTING_NO_TITLE'}, "Setting: No Title, Display: "),
-    put({This, hashtable}, (fun(Target_N66613) -> (get({Target_N66613, '$class'})):createHashtable(Target_N66613) end)('StdUtil':getInstance())),
-    put({This, midletDestroyed}, false),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :SET_DISPLAY, nil)
+    JR.put(this, :SETTING_, nil)
+    JR.put(this, :_DISPLAY_, nil)
+    JR.put(this, :SETTING_NO_TITLE, nil)
+    JR.put(this, :hashtable, nil)
+    JR.put(this, :midletDestroyed, false)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        JR.put(this, :SET_DISPLAY, "setDisplay")
+        JR.put(this, :SETTING_, "Setting: ")
+        JR.put(this, :_DISPLAY_, " Display: ")
+        JR.put(this, :SETTING_NO_TITLE, "Setting: No Title, Display: ")
+        JR.put(this, :hashtable, JR.call(StdUtil.jm_getInstance(), :jm_createHashtable, []))
+        JR.put(this, :midletDestroyed, false)
+    nil
+  end
 
 
-getNullInstance() ->
-        case (get({'AllBinaryMidlet', 'NULL_ALLBINARY_MIDLET'}) =:= get({'NullUtil':getInstance(), 'NULL_OBJECT'})) of
-            true ->
-            put({'AllBinaryMidlet', 'NULL_ALLBINARY_MIDLET'}, 'AllBinaryMidlet':new());
-            false -> ok
-        end,
-        get({'AllBinaryMidlet', 'NULL_ALLBINARY_MIDLET'}).
+  def jm_getNullInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        if (AllBinaryMidlet.jstatic_NULL_ALLBINARY_MIDLET() == JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)) do
+            AllBinaryMidlet.jstatic_set_NULL_ALLBINARY_MIDLET(AllBinaryMidlet.jnew())
+        end
+        throw({:jreturn, AllBinaryMidlet.jstatic_NULL_ALLBINARY_MIDLET()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-    'MIDlet':'$init'(This),
-    init_fields(This),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'CONSTRUCTOR'}), This, "AllBinaryMidlet::AllBinaryMidlet").
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      MIDlet.jinit(this)
+      jinitfields(this)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :CONSTRUCTOR), this, "AllBinaryMidlet::AllBinaryMidlet"])
+    end)
+  end
 
-setDisplay(This, NewDisplay) ->
-        put({local, title}, get({'StringUtil':getInstance(), 'EMPTY_STRING'})),
-        case (NewDisplay =/= get({'NullCanvas', 'NULL_CANVAS'})) of
-            true ->
-            put({local, title}, (get({NewDisplay, '$class'})):getTitle(NewDisplay)),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N66923) -> (get({Target_N66923, '$class'})):toString(Target_N66923) end)((fun(Target_N66930) -> (get({Target_N66930, '$class'})):append(Target_N66930, (fun(Target_N67014) -> (get({Target_N67014, '$class'})):toString(Target_N67014, NewDisplay) end)('StringUtil':getInstance())) end)((fun(Target_N66937) -> (get({Target_N66937, '$class'})):append(Target_N66937, get({This, '_DISPLAY_'})) end)((fun(Target_N66944) -> (get({Target_N66944, '$class'})):append(Target_N66944, get({local, title})) end)((fun(Target_N66951) -> (get({Target_N66951, '$class'})):append(Target_N66951, get({This, 'SETTING_'})) end)('StringMaker':new()))))), This, get({This, 'SET_DISPLAY'}));
-            false -> ok
-        end,
-        Display = (get({This, '$class'})):getDisplay(This),
-        (get({Display, '$class'})):setCurrent(Display, NewDisplay).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-getDisplay(This) ->
-        'Display':getDisplay(This).
 
-getCurrentDisplayable(This) ->
-        (fun(Target_N67263) -> (get({Target_N67263, '$class'})):getCurrent(Target_N67263) end)('Display':getDisplay(This)).
+  def jm_setDisplay(this, p_newDisplay) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :newDisplay, p_newDisplay)
+        JR.lset(f, :title, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+        if (JR.lget(f, :newDisplay) != NullCanvas.jstatic_NULL_CANVAS()) do
+            JR.lset(f, :title, JR.call(JR.lget(f, :newDisplay), :jm_getTitle, []))
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(this, :SETTING_)]), :jm_append, [JR.lget(f, :title)]), :jm_append, [JR.get(this, :_DISPLAY_)]), :jm_append, [JR.call(StringUtil.jm_getInstance(), :jm_toString, [JR.lget(f, :newDisplay)])]), :jm_toString, []), this, JR.get(this, :SET_DISPLAY)])
+        end
+        JR.lset(f, :display, JR.call(this, :jm_getDisplay, []))
+        JR.call(JR.lget(f, :display), :jm_setCurrent, [JR.lget(f, :newDisplay)])
+    end)
+  end
 
-setDestroyed(This, Destroyed) when is_boolean(Destroyed) ->
-        put({This, midletDestroyed}, Destroyed).
 
-isDestroyed(This) ->
-        get({This, midletDestroyed}).
+  def jm_getDisplay(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, Display.jm_getDisplay(this)})
+    end)
+  end
 
-% throws MIDletStateChangeException
-startApp(This) ->
-        'ForcedLogUtil':log(get({'EventStrings':getInstance(), 'PERFORMANCE_MESSAGE'}), This).
 
-pauseApp(This) ->
-        'ForcedLogUtil':log(get({'EventStrings':getInstance(), 'PERFORMANCE_MESSAGE'}), This).
+  def jm_getCurrentDisplayable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(Display.jm_getDisplay(this), :jm_getCurrent, [])})
+    end)
+  end
 
-destroyAppInRunnable(This, Unconditional, IsProgress) when is_boolean(Unconditional), is_boolean(IsProgress) ->
-        ok.
 
-destroyApp(This, Unconditional) when is_boolean(Unconditional) ->
-        METHOD_NAME = "AllBinaryMidlet::destroyApp",
-        try
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, METHOD_NAME),
-            'PreLogUtil':put('Memory':getInfo(), This, METHOD_NAME),
-            (get({This, '$class'})):setDestroyed(This, true)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, METHOD_NAME, E)
-        end.
+  def jm_setDestroyed(this, p_destroyed) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :destroyed, p_destroyed)
+        JR.put(this, :midletDestroyed, JR.lget(f, :destroyed))
+    end)
+  end
 
-% throws Exception
-setStartStateHashtable(This, Hashtable) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N68035) -> (get({Target_N68035, '$class'})):toString(Target_N68035) end)((fun(Target_N68042) -> (get({Target_N68042, '$class'})):append(Target_N68042, (fun(Target_N68098) -> (get({Target_N68098, '$class'})):toString(Target_N68098, Hashtable) end)('StringUtil':getInstance())) end)((fun(Target_N68049) -> (get({Target_N68049, '$class'})):append(Target_N68049, get({'CommonLabels':getInstance(), 'START_LABEL'})) end)('StringMaker':new()))), This, "setStartStateHashtable"),
-        put({This, hashtable}, Hashtable).
 
-% throws Exception
-getStartStateHashtable(This) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N68279) -> (get({Target_N68279, '$class'})):toString(Target_N68279) end)((fun(Target_N68286) -> (get({Target_N68286, '$class'})):append(Target_N68286, (fun(Target_N68342) -> (get({Target_N68342, '$class'})):toString(Target_N68342, get({This, hashtable})) end)('StringUtil':getInstance())) end)((fun(Target_N68293) -> (get({Target_N68293, '$class'})):append(Target_N68293, get({'CommonLabels':getInstance(), 'START_LABEL'})) end)('StringMaker':new()))), This, "getStartStateHashtable"),
-        get({This, hashtable}).
+  def jm_isDestroyed(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :midletDestroyed)})
+    end)
+  end
 
-% throws Exception
-getCurrentStateHashtable(This) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, "getStateHashtable"),
-        get({'StdUtil':getInstance(), 'NULL_TABLE'}).
 
-commandAction(This, Command, Displayable) ->
-        ok.
+  def jm_startApp(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        ForcedLogUtil.jm_log(JR.get(EventStrings.jm_getInstance(), :PERFORMANCE_MESSAGE), this)
+    end)
+  end
+
+
+  def jm_pauseApp(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        ForcedLogUtil.jm_log(JR.get(EventStrings.jm_getInstance(), :PERFORMANCE_MESSAGE), this)
+    end)
+  end
+
+
+  def jm_destroyAppInRunnable(this, p_unconditional, p_isProgress) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :unconditional, p_unconditional)
+      JR.lset(f, :isProgress, p_isProgress)
+        nil
+    end)
+  end
+
+
+  def jm_destroyApp(this, p_unconditional) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :unconditional, p_unconditional)
+        JR.lset(f, :METHOD_NAME, "AllBinaryMidlet::destroyApp")
+        try do
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, JR.lget(f, :METHOD_NAME)])
+            PreLogUtil.jm_put(Memory.jm_getInfo(), this, JR.lget(f, :METHOD_NAME))
+            JR.call(this, :jm_setDestroyed, [true])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.lget(f, :METHOD_NAME), JR.lget(f, :e)])
+        end
+    end)
+  end
+
+
+  def jm_setStartStateHashtable(this, p_hashtable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :hashtable, p_hashtable)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(CommonLabels.jm_getInstance(), :START_LABEL)]), :jm_append, [JR.call(StringUtil.jm_getInstance(), :jm_toString, [JR.lget(f, :hashtable)])]), :jm_toString, []), this, "setStartStateHashtable"])
+        JR.put(this, :hashtable, JR.lget(f, :hashtable))
+    end)
+  end
+
+
+  def jm_getStartStateHashtable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(CommonLabels.jm_getInstance(), :START_LABEL)]), :jm_append, [JR.call(StringUtil.jm_getInstance(), :jm_toString, [JR.get(this, :hashtable)])]), :jm_toString, []), this, "getStartStateHashtable"])
+        throw({:jreturn, JR.get(this, :hashtable)})
+    end)
+  end
+
+
+  def jm_getCurrentStateHashtable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, "getStateHashtable"])
+        throw({:jreturn, JR.get(StdUtil.jm_getInstance(), :NULL_TABLE)})
+    end)
+  end
+
+
+  def jm_commandAction(this, p_command, p_displayable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :command, p_command)
+      JR.lset(f, :displayable, p_displayable)
+        nil
+    end)
+  end
+end
+
 

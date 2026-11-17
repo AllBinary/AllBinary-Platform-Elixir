@@ -1,65 +1,80 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2022 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable
-% import javax.microedition.lcdui.Canvas
-% import org.allbinary.game.configuration.feature.Features
-% import org.allbinary.graphics.displayable.DisplayInfoSingleton
-% import org.allbinary.graphics.opengles.OpenGLFeatureFactory
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.thread.NullRunnable
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable
 
--module('AlwaysRepaintBehavior').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule AlwaysRepaintBehavior do
+  def jsuper(), do: RepaintBehavior
+def jstatic_instanceC(), do: JR.static_get(__MODULE__, :instanceC, fn -> AlwaysRepaintBehavior.jnew() end)
+  def jstatic_set_instanceC(value), do: JR.static_put(__MODULE__, :instanceC, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('RepaintBehavior', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :NAME, nil)
+        JR.put(this, :NAME, "AlwaysRepaintBehavior")
+    nil
+  end
 
-static_init() ->
-    put({?MODULE, instanceC}, 'AlwaysRepaintBehavior':new()),
-    ok.
+  def jinit(this) do
+    RepaintBehavior.jinit(this)
+    jinitfields(this)
+  end
 
-init_fields(This) ->
-    put({This, 'NAME'}, "AlwaysRepaintBehavior"),
-    ok.
-
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    'RepaintBehavior':'$init'(This),
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'AlwaysRepaintBehavior', instanceC}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, AlwaysRepaintBehavior.jstatic_instanceC()})
+    end)
+  end
 
-repaint(This, Canvas) ->
-        Features = 'Features':getInstance(),
-        OpenGLFeatureFactory = 'OpenGLFeatureFactory':getInstance(),
-        case (get({Features, '$class'})):isFeature(Features, get({OpenGLFeatureFactory, 'OPENGL'})) of
-            true ->
-            (fun(Target_N66213) -> (get({Target_N66213, '$class'})):process(Target_N66213) end)('DisplayInfoSingleton':getInstance());
-            false ->
-            Thread = 'Thread':new('RepaintRunnable':new(Canvas), get({This, 'NAME'})),
-            (get({Thread, '$class'})):start(Thread)
-        end.
 
-onChangeRepaint(This, Canvas) ->
-        ok.
+  def jm_repaint(this, p_canvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :canvas, p_canvas)
+        JR.lset(f, :features, Features.jm_getInstance())
+        JR.lset(f, :openGLFeatureFactory, OpenGLFeatureFactory.jm_getInstance())
+        if JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.lget(f, :openGLFeatureFactory), :OPENGL)]) do
+            JR.call(DisplayInfoSingleton.jm_getInstance(), :jm_process, [])
+        else
+            JR.lset(f, :thread, J.Thread.jnew(RepaintRunnable.jnew(JR.lget(f, :canvas)), JR.get(this, :NAME)))
+            JR.call(JR.lget(f, :thread), :jm_start, [])
+        end
+    end)
+  end
+
+
+  def jm_onChangeRepaint(this, p_canvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :canvas, p_canvas)
+        nil
+    end)
+  end
+end
+
 

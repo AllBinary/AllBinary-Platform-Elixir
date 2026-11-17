@@ -1,46 +1,75 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2025 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.image.opengles
-% import javax.microedition.khronos.opengles.GL10
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2025 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.image.opengles
 
--module('OpenGLESImageTranslate').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule OpenGLESImageTranslate do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> OpenGLESImageTranslate.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'OpenGLESImageTranslate':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'OpenGLESImageTranslate', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, OpenGLESImageTranslate.jstatic_instance()})
+    end)
+  end
 
-translate(This, Gl, OpenGLESImage, X, Y) when is_number(X), is_number(Y) ->
-        (get({get({OpenGLESImage, imageProcessor}), '$class'})):translate(get({OpenGLESImage, imageProcessor}), Gl, X, Y).
 
-translate2(This, Gl, OpenGLESImage) ->
-        ok.
+  def jm_translate(this, p_gl, p_openGLESImage, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+      JR.lset(f, :openGLESImage, p_openGLESImage)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        JR.call(JR.get(JR.lget(f, :openGLESImage), :imageProcessor), :jm_translate, [JR.lget(f, :gl), JR.lget(f, :x), JR.lget(f, :y)])
+    end)
+  end
+
+
+  def jm_translate2(this, p_gl, p_openGLESImage) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+      JR.lset(f, :openGLESImage, p_openGLESImage)
+        nil
+    end)
+  end
+end
+
 

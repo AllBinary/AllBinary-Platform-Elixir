@@ -1,52 +1,81 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2025 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.game.input
-% import org.allbinary.layer.AllBinaryLayerManager
-% import org.allbinary.logic.string.StringUtil
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2025 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.game.input
 
--module('NullPlayerGameInputComposite').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements PlayerGameInputCompositeInterface
+defmodule NullPlayerGameInputComposite do
+  def jsuper(), do: JObject
+def jstatic_NULL_PLAYER_GAME_INPUT_COMPOSITE(), do: JR.static_get(__MODULE__, :NULL_PLAYER_GAME_INPUT_COMPOSITE, fn -> NullPlayerGameInputComposite.jnew() end)
+  def jstatic_set_NULL_PLAYER_GAME_INPUT_COMPOSITE(value), do: JR.static_put(__MODULE__, :NULL_PLAYER_GAME_INPUT_COMPOSITE, value)
 
-static_init() ->
-    put({?MODULE, 'NULL_PLAYER_GAME_INPUT_COMPOSITE'}, 'NullPlayerGameInputComposite':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getName(This) ->
-        get({'StringUtil':getInstance(), 'EMPTY_STRING'}).
+  def jm_getName(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING)})
+    end)
+  end
 
-% throws Exception
-processInput(This, LayerManager) ->
-        ok.
 
-initInputProcessors(This) ->
-        ok.
+  def jm_processInput(this, p_layerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerManager, p_layerManager)
+        nil
+    end)
+  end
 
-getPlayerGameInput(This) ->
-        'NoPlayerGameInput':getInstance().
+
+  def jm_initInputProcessors(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_getPlayerGameInput(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, NoPlayerGameInput.jm_getInstance()})
+    end)
+  end
+end
+
 

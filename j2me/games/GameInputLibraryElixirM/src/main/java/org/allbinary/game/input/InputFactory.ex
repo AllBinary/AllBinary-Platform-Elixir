@@ -1,80 +1,106 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.input
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.math.SmallIntegerSingletonFactory
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.input
 
--module('InputFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule InputFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT) end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, get({'NullUtil':getInstance(), 'NULL_OBJECT'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :KEY_CODE_LABEL, nil)
+    JR.put(this, :DEVICE_ID_LABEL, nil)
+    JR.put(this, :MAX, 0)
+    JR.put(this, :inputIntegerArray, nil)
+    JR.put(this, :NO_INPUT, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        JR.put(this, :KEY_CODE_LABEL, "KeyCode: ")
+        JR.put(this, :DEVICE_ID_LABEL, "DeviceId: ")
+        JR.put(this, :MAX, JR.call(SmallIntegerSingletonFactory.jm_getInstance(), :jm_getMin, []))
+        JR.put(this, :inputIntegerArray, JR.anew(JR.get(this, :MAX), nil))
+        JR.put(this, :NO_INPUT, Input.jnew(0, JR.get(JR.get(this, :commonStrings), :UNKNOWN)))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, 'KEY_CODE_LABEL'}, "KeyCode: "),
-    put({This, 'DEVICE_ID_LABEL'}, "DeviceId: "),
-    put({This, 'MAX'}, (fun(Target_N66144) -> (get({Target_N66144, '$class'})):getMin(Target_N66144) end)('SmallIntegerSingletonFactory':getInstance())),
-    put({This, inputIntegerArray}, array:new(get({This, 'MAX'}), {default, undefined})),
-    put({This, 'NO_INPUT'}, 'Input':new(0, get({get({This, commonStrings}), 'UNKNOWN'}))),
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        if (InputFactory.jstatic_instance() == JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)) do
+            InputFactory.jstatic_set_instance(InputFactory.jnew())
+        end
+        throw({:jreturn, InputFactory.jstatic_instance()})
+    end)
+  end
 
 
-getInstance() ->
-        case (get({'InputFactory', instance}) =:= get({'NullUtil':getInstance(), 'NULL_OBJECT'})) of
-            true ->
-            put({'InputFactory', instance}, 'InputFactory':new());
-            false -> ok
-        end,
-        get({'InputFactory', instance}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.lset(f, :size, JR.alength(JR.get(this, :inputIntegerArray)))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.aset(JR.get(this, :inputIntegerArray), JR.lget(f, :index), JR.get(this, :NO_INPUT))
+        end)
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        Size = array:size(get({This, inputIntegerArray})),
-        lists:foreach(fun(Index) ->
-            put({This, inputIntegerArray}, array:set(Index, get({This, 'NO_INPUT'}), get({This, inputIntegerArray})))
-        end, lists:seq(0, Size - 1)).
 
-add(This, Id, Input) when is_integer(Id) ->
-        put({This, inputIntegerArray}, array:set(Id, Input, get({This, inputIntegerArray}))).
+  def jm_add(this, p_id, p_input) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :id, p_id)
+      JR.lset(f, :input, p_input)
+        JR.aset(JR.get(this, :inputIntegerArray), JR.lget(f, :id), JR.lget(f, :input))
+    end)
+  end
 
-getInstanceById(This, Id) when is_integer(Id) ->
-        put({local, id}, Id),
-        try
-        case (get({local, id}) < 0) of
-            true ->
-            put({local, id}, (-get({local, id})));
-            false -> ok
-        end,
-        case (get({local, id}) > array:size(get({This, inputIntegerArray}))) of
-            true ->
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N66743) -> (get({Target_N66743, '$class'})):toString(Target_N66743) end)((fun(Target_N66750) -> (get({Target_N66750, '$class'})):appendint(Target_N66750, get({local, id})) end)((fun(Target_N66757) -> (get({Target_N66757, '$class'})):append(Target_N66757, "Warning id: ") end)('StringMaker':new()))), This, get({get({This, commonStrings}), 'GET_INSTANCE'})),
-            throw({'$return', get({This, 'NO_INPUT'})});
-            false -> ok
-        end,
-        array:get(get({local, id}), get({This, inputIntegerArray}))
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+
+  def jm_getInstanceById(this, p_id) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :id, p_id)
+        if (JR.lget(f, :id) < 0) do
+            JR.lset(f, :id, -JR.lget(f, :id))
+        end
+        if (JR.lget(f, :id) > JR.alength(JR.get(this, :inputIntegerArray))) do
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["Warning id: "]), :jm_appendint, [JR.lget(f, :id)]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :GET_INSTANCE)])
+            throw({:jreturn, JR.get(this, :NO_INPUT)})
+        end
+        throw({:jreturn, JR.aget(JR.get(this, :inputIntegerArray), JR.lget(f, :id))})
+    end)
+  end
+end
+
 

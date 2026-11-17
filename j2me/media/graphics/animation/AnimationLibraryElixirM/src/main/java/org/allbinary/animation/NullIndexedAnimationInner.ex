@@ -1,38 +1,56 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-%
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-%
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-%
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation
-% import javax.microedition.lcdui.Graphics
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+#
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+#
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+#
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation
 
--module('NullIndexedAnimationInner').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule NullIndexedAnimationInner do
+  def jsuper(), do: NullIndexedAnimation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('NullIndexedAnimation', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        NullIndexedAnimation.jinit(this, IndexedAnimationBehavior.jnew(1, 250))
+        NullIndexedAnimationInner.jinitfields(this)
+    end)
+  end
+
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jm_paintXY(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        nil
+    end)
+  end
+end
 
-'$init'(This) ->
-        'NullIndexedAnimation':'$init'(This, 'IndexedAnimationBehavior':new(1, 250)).
-
-paintXY(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-        ok.
 

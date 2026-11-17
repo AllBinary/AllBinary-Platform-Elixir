@@ -1,41 +1,54 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.physics.movement
-% import org.allbinary.game.layer.AllBinaryGameLayer
-% import org.allbinary.game.physics.velocity.BasicVelocityProperties
-% import org.allbinary.logic.math.BasicDecimal
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.physics.movement
 
--module('NoBasicConstantVelocityMovement').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule NoBasicConstantVelocityMovement do
+  def jsuper(), do: BasicConstantVelocityMovement
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicConstantVelocityMovement', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        BasicConstantVelocityMovement.jinit(this, BasicDecimal.jstatic_ZERO_BIGDECIMAL(), BasicVelocityProperties.jnew())
+        NoBasicConstantVelocityMovement.jinitfields(this)
+    end)
+  end
 
-'$init'(This) ->
-        'BasicConstantVelocityMovement':'$init'(This, get({'BasicDecimal', 'ZERO_BIGDECIMAL'}), 'BasicVelocityProperties':new()).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-% throws Exception
-process(This, Layer) ->
-        ok.
+
+  def jm_process(this, p_layer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layer, p_layer)
+        nil
+    end)
+  end
+end
+
 

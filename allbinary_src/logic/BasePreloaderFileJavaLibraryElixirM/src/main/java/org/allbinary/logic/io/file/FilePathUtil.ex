@@ -1,49 +1,62 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.io.file
-% import org.allbinary.logic.io.path.AbPathData
-% import org.allbinary.logic.string.StringValidationUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.io.file
 
--module('FilePathUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+#Used to correct user input for paths
+defmodule FilePathUtil do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-adjust(Path) when (is_list(Path) orelse Path =:= undefined) ->
-        put({local, path}, Path),
-        try
-        AbPathData = 'AbPathData':getInstance(),
-        StringValidationUtil = 'StringValidationUtil':getInstance(),
-        FilePathData = 'FilePathData':getInstance(),
-        case (get({StringValidationUtil, '$class'})):isEmpty(StringValidationUtil, get({local, path})) of
-            true ->
-            throw({'$return', get({FilePathData, 'PATH_START'})});
-            false -> ok
-        end,
-        put({local, path}, (get({get({local, path}), '$class'})):replace(get({local, path}), get({AbPathData, 'SEPARATORCHAR'}), get({FilePathData, 'SEPARATORCHAR'}))),
-        get({local, path})
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+
+  def jm_adjust(p_path) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :path, p_path)
+        JR.lset(f, :abPathData, AbPathData.jm_getInstance())
+        JR.lset(f, :stringValidationUtil, StringValidationUtil.jm_getInstance())
+        JR.lset(f, :filePathData, FilePathData.jm_getInstance())
+        if JR.call(JR.lget(f, :stringValidationUtil), :jm_isEmpty, [JR.lget(f, :path)]) do
+            throw({:jreturn, JR.get(JR.lget(f, :filePathData), :PATH_START)})
+        end
+        JR.lset(f, :path, JR.call(JR.lget(f, :path), :jm_replace, [JR.get(JR.lget(f, :abPathData), :SEPARATORCHAR), JR.get(JR.lget(f, :filePathData), :SEPARATORCHAR)]))
+        throw({:jreturn, JR.lget(f, :path)})
+    end)
+  end
+end
+
 

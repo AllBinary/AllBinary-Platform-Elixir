@@ -1,88 +1,160 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.media.audio
-% import java.io.InputStream
-% import javax.microedition.media.Player
-% import org.allbinary.TsUtil
-% import org.allbinary.graphics.canvas.transition.progress.ProgressCanvasFactory
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
--module('AllBinaryMediaManager').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+#NotDeviceSpecificNoMediaMIDP1Library
+defmodule AllBinaryMediaManager do
+  def jsuper(), do: JObject
+def jstatic_THIS(), do: JR.static_get(__MODULE__, :THIS, fn -> "AllBinaryMediaManagerNoMediaMIDP1" end)
+  def jstatic_set_THIS(value), do: JR.static_put(__MODULE__, :THIS, value)
 
-static_init() ->
-    put({?MODULE, 'THIS'}, "AllBinaryMediaManagerNoMediaMIDP1"),
-    ok.
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-isMuted() ->
-        false.
 
-setMuted(AMuted) when is_boolean(AMuted) ->
-        ok.
+  def jm_isMuted() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
 
-update() ->
-        true.
 
-% throws Exception
-init(SoundsFactoryInterface) ->
-        LogUtil = 'LogUtil':getInstance(),
-        CommonString = 'CommonStrings':getInstance(),
-        (get({LogUtil, '$class'})):putF(LogUtil, get({CommonString, 'START'}), get({'AllBinaryMediaManager', 'THIS'}), get({CommonString, 'INIT'})),
-        (fun(Target_N66153) -> (get({Target_N66153, '$class'})):addNormalPortion(Target_N66153, 50, "Media Manager") end)('ProgressCanvasFactory':getInstance()),
-        (fun(Target_N66192) -> (get({Target_N66192, '$class'})):init(Target_N66192) end)('Sounds':new(SoundsFactoryInterface)).
+  def jm_setMuted(p_aMuted) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :aMuted, p_aMuted)
+        nil
+    end)
+  end
 
-% throws Exception
-shutdown(SoundsFactoryInterface) ->
-        (fun(Target_N66287) -> (get({Target_N66287, '$class'})):stopAll(Target_N66287) end)('Sounds':new(SoundsFactoryInterface)),
-        (fun(Target_N66322) -> (get({Target_N66322, '$class'})):closeAll(Target_N66322) end)('Sounds':new(SoundsFactoryInterface)),
-        (fun(Target_N66357) -> (get({Target_N66357, '$class'})):gc(Target_N66357) end)('TsUtil':getInstance()).
 
-createPlayerFromInputStream(Stream, Type) when (is_list(Type) orelse Type =:= undefined) ->
-        LogUtil = 'LogUtil':getInstance(),
-        CommonString = 'CommonStrings':getInstance(),
-        (get({LogUtil, '$class'})):putF(LogUtil, get({CommonString, 'START'}), get({'AllBinaryMediaManager', 'THIS'}), "creatPlayer(InputStream)"),
-        get({'NoPlayer', 'NO_PLAYER'}).
+  def jm_update() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, true})
+    end)
+  end
 
-createPlayer(Locator) when (is_list(Locator) orelse Locator =:= undefined) ->
-        LogUtil = 'LogUtil':getInstance(),
-        CommonString = 'CommonStrings':getInstance(),
-        (get({LogUtil, '$class'})):putF(LogUtil, get({CommonString, 'START'}), get({'AllBinaryMediaManager', 'THIS'}), "creatPlayer(locator)"),
-        get({'NoPlayer', 'NO_PLAYER'}).
 
-playTone(Frequency, Time, Volume) when is_integer(Frequency), is_integer(Time), is_integer(Volume) ->
-        ok.
+  def jm_init(p_soundsFactoryInterface) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :soundsFactoryInterface, p_soundsFactoryInterface)
+        JR.lset(f, :logUtil, LogUtil.jm_getInstance())
+        JR.lset(f, :commonString, CommonStrings.jm_getInstance())
+        JR.call(JR.lget(f, :logUtil), :jm_putF, [JR.get(JR.lget(f, :commonString), :START), AllBinaryMediaManager.jstatic_THIS(), JR.get(JR.lget(f, :commonString), :INIT)])
+        JR.call(ProgressCanvasFactory.jm_getInstance(), :jm_addNormalPortion, [50, "Media Manager"])
+        JR.call(Sounds.jnew(JR.lget(f, :soundsFactoryInterface)), :jm_init, [])
+    end)
+  end
 
-getSupportedContentTypes(Protocol) when (is_list(Protocol) orelse Protocol =:= undefined) ->
-        (fun(Target_N67023) -> (get({Target_N67023, '$class'})):getArrayInstance(Target_N67023) end)('StringUtil':getInstance()).
 
-getSupportedProtocols(Content_type) when (is_list(Content_type) orelse Content_type =:= undefined) ->
-        (fun(Target_N67110) -> (get({Target_N67110, '$class'})):getArrayInstance(Target_N67110) end)('StringUtil':getInstance()).
+  def jm_shutdown(p_soundsFactoryInterface) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :soundsFactoryInterface, p_soundsFactoryInterface)
+        JR.call(Sounds.jnew(JR.lget(f, :soundsFactoryInterface)), :jm_stopAll, [])
+        JR.call(Sounds.jnew(JR.lget(f, :soundsFactoryInterface)), :jm_closeAll, [])
+        JR.call(TsUtil.jm_getInstance(), :jm_gc, [])
+    end)
+  end
+
+
+  def jm_createPlayerFromInputStream(p_stream, p_type) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :stream, p_stream)
+      JR.lset(f, :type, p_type)
+        JR.lset(f, :logUtil, LogUtil.jm_getInstance())
+        JR.lset(f, :commonString, CommonStrings.jm_getInstance())
+        JR.call(JR.lget(f, :logUtil), :jm_putF, [JR.get(JR.lget(f, :commonString), :START), AllBinaryMediaManager.jstatic_THIS(), "creatPlayer(InputStream)"])
+        throw({:jreturn, NoPlayer.jstatic_NO_PLAYER()})
+    end)
+  end
+
+
+  def jm_createPlayer(p_locator) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :locator, p_locator)
+        JR.lset(f, :logUtil, LogUtil.jm_getInstance())
+        JR.lset(f, :commonString, CommonStrings.jm_getInstance())
+        JR.call(JR.lget(f, :logUtil), :jm_putF, [JR.get(JR.lget(f, :commonString), :START), AllBinaryMediaManager.jstatic_THIS(), "creatPlayer(locator)"])
+        throw({:jreturn, NoPlayer.jstatic_NO_PLAYER()})
+    end)
+  end
+
+
+  def jm_playTone(p_frequency, p_time, p_volume) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :frequency, p_frequency)
+      JR.lset(f, :time, p_time)
+      JR.lset(f, :volume, p_volume)
+        nil
+    end)
+  end
+
+
+  def jm_getSupportedContentTypes(p_protocol) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :protocol, p_protocol)
+        throw({:jreturn, JR.call(StringUtil.jm_getInstance(), :jm_getArrayInstance, [])})
+    end)
+  end
+
+
+  def jm_getSupportedProtocols(p_content_type) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :content_type, p_content_type)
+        throw({:jreturn, JR.call(StringUtil.jm_getInstance(), :jm_getArrayInstance, [])})
+    end)
+  end
+end
+
 

@@ -1,100 +1,163 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ai
-% import org.allbinary.ai.ArtificialIntelligence
-% import org.allbinary.game.displayable.canvas.CanvasUtil
-% import org.allbinary.game.input.GameInput
-% import org.allbinary.game.input.GameKeyEventSourceInterface
-% import org.allbinary.game.input.event.GameKeyEventFactory
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.AllBinaryLayerManager
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.math.SmallIntegerSingletonFactory
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonSeps
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ai
 
--module('BasicAI').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements GameKeyEventSourceInterface
+defmodule BasicAI do
+  def jsuper(), do: ArtificialIntelligence
+def jstatic_AI_VISITOR(), do: JR.static_get(__MODULE__, :AI_VISITOR, fn -> JR.call(SmallIntegerSingletonFactory.jm_getInstance(), :jm_getAt, [2]) end)
+  def jstatic_set_AI_VISITOR(value), do: JR.static_put(__MODULE__, :AI_VISITOR, value)
+def jstatic_ID(), do: JR.static_get(__MODULE__, :ID, fn -> JR.call(SmallIntegerSingletonFactory.jm_getInstance(), :jm_getAt, [1]) end)
+  def jstatic_set_ID(value), do: JR.static_put(__MODULE__, :ID, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ArtificialIntelligence', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'AI_VISITOR'}, (fun(Target_N65978) -> (get({Target_N65978, '$class'})):getAt(Target_N65978, 2) end)('SmallIntegerSingletonFactory':getInstance())),
-    put({?MODULE, 'ID'}, (fun(Target_N66047) -> (get({Target_N66047, '$class'})):getAt(Target_N66047, 1) end)('SmallIntegerSingletonFactory':getInstance())),
-    ok.
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, gameKeyEventFactory}, 'GameKeyEventFactory':getInstance()),
-    put({This, ownerLayerInterface}, undefined),
-    put({This, gameInput}, undefined),
-    put({This, lastKey}, (-1)),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :gameKeyEventFactory, nil)
+    JR.put(this, :ownerLayerInterface, nil)
+    JR.put(this, :gameInput, nil)
+    JR.put(this, :lastKey, 0)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        JR.put(this, :gameKeyEventFactory, GameKeyEventFactory.jm_getInstance())
+        
+        
+        JR.put(this, :lastKey, -1)
+    nil
+  end
 
 
-new(OwnerLayerInterface, GameInput) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, OwnerLayerInterface, GameInput),
-    This.
+  def jinit(this, p_ownerLayerInterface, p_gameInput) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownerLayerInterface, p_ownerLayerInterface)
+      JR.lset(f, :gameInput, p_gameInput)
+      ArtificialIntelligence.jinit(this)
+      jinitfields(this)
+        JR.put(this, :ownerLayerInterface, JR.lget(f, :ownerLayerInterface))
+        JR.put(this, :gameInput, JR.lget(f, :gameInput))
+    end)
+  end
 
-'$init'(This, OwnerLayerInterface, GameInput) ->
-    'ArtificialIntelligence':'$init'(This),
-    init_fields(This),
-        put({This, ownerLayerInterface}, OwnerLayerInterface),
-        put({This, gameInput}, GameInput).
+  def jnew(p_ownerLayerInterface, p_gameInput) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_ownerLayerInterface, p_gameInput)
+    this
+  end
 
-% throws Exception
-processAI(This, AllBinaryLayerManager) ->
-        erlang:error({'Exception', get({get({This, commonStrings}), 'NOT_IMPLEMENTED'})}).
 
-% throws Exception
-processKeyAI(This, Key) when is_integer(Key) ->
-        case (Key =/= (-1)) of
-            true ->
-            (get({get({This, gameInput}), '$class'})):add(get({This, gameInput}), (get({get({This, gameKeyEventFactory}), '$class'})):getInstanceForKey(get({This, gameKeyEventFactory}), This, Key));
-            false -> ok
-        end.
+  def jm_processAI(this, p_allBinaryLayerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerManager, p_allBinaryLayerManager)
+        throw({:jexception, JR.exception("Exception", JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED))})
+    end)
+  end
 
-setLastKey(This, LastKey) when is_integer(LastKey) ->
-        put({This, lastKey}, LastKey).
 
-getLastKey(This) ->
-        get({This, lastKey}).
+  def jm_processKeyAI(this, p_key) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :key, p_key)
+        if (JR.lget(f, :key) != -1) do
+            JR.call(JR.get(this, :gameInput), :jm_add, [JR.call(JR.get(this, :gameKeyEventFactory), :jm_getInstanceForKey, [this, JR.lget(f, :key)])])
+        end
+    end)
+  end
 
-getOwnerLayerInterface(This) ->
-        get({This, ownerLayerInterface}).
 
-getGameInput(This) ->
-        get({This, gameInput}).
+  def jm_setLastKey(this, p_lastKey) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :lastKey, p_lastKey)
+        JR.put(this, :lastKey, JR.lget(f, :lastKey))
+    end)
+  end
 
-getName(This) ->
-        atom_to_list(get({This, '$class'})).
 
-toString(This) ->
-        StringBuffer = 'StringMaker':new(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({'CommonSeps':getInstance(), 'NEW_LINE'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({This, '$class'})):getName(This)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, " LastKey: "),
-        (get({StringBuffer, '$class'})):append(StringBuffer, 'CanvasUtil':getKeyName((get({This, '$class'})):getLastKey(This))),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+  def jm_getLastKey(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :lastKey)})
+    end)
+  end
 
-getSourceId(This) ->
-        1.
+
+  def jm_getOwnerLayerInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :ownerLayerInterface)})
+    end)
+  end
+
+
+  def jm_getGameInput(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :gameInput)})
+    end)
+  end
+
+
+  def jm_getName(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.class_name(this)})
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :NEW_LINE)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(this, :jm_getName, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [" LastKey: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [CanvasUtil.jm_getKeyName(JR.call(this, :jm_getLastKey, []))])
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+
+
+  def jm_getSourceId(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 1})
+    end)
+  end
+end
+
 

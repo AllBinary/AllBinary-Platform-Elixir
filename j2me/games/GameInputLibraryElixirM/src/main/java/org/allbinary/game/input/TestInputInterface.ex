@@ -1,42 +1,80 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.input
-% import org.allbinary.graphics.paint.PaintableInterface
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.input
 
--module('TestInputInterface').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
-
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('PaintableInterface', Function, Arguments).
+defmodule TestInputInterface do
+  def jsuper(), do: JObject
 
 
-up(This) ->
-    erlang:error({abstract_method, up}).
+  def jm_up(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "up")})
+    end)
+  end
 
-down(This) ->
-    erlang:error({abstract_method, down}).
 
-left(This) ->
-    erlang:error({abstract_method, left}).
+  def jm_down(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "down")})
+    end)
+  end
 
-right(This) ->
-    erlang:error({abstract_method, right}).
 
-strafeLeft(This) ->
-    erlang:error({abstract_method, strafeLeft}).
+  def jm_left(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "left")})
+    end)
+  end
 
-strafeRight(This) ->
-    erlang:error({abstract_method, strafeRight}).
+
+  def jm_right(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "right")})
+    end)
+  end
+
+
+  def jm_strafeLeft(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "strafeLeft")})
+    end)
+  end
+
+
+  def jm_strafeRight(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "strafeRight")})
+    end)
+  end
+end
+
 

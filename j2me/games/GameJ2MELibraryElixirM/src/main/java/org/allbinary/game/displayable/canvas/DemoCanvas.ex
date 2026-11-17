@@ -1,841 +1,1294 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import javax.microedition.lcdui.Command
-% import javax.microedition.lcdui.CommandListener
-% import javax.microedition.lcdui.Graphics
-% import javax.microedition.lcdui.Item
-% import org.allbinary.J2MEUtil
-% import org.allbinary.animation.Animation
-% import org.allbinary.animation.IndexedAnimationBehavior
-% import org.allbinary.animation.special.SpecialAnimation
-% import org.allbinary.business.advertisement.GameAdStateFactory
-% import org.allbinary.canvas.BaseGameStatistics
-% import org.allbinary.canvas.CustomGameMenuUtil
-% import org.allbinary.canvas.FullScreenUtil
-% import org.allbinary.canvas.GameStatisticsFactory
-% import org.allbinary.canvas.RunnableCanvas
-% import org.allbinary.game.GameAdState
-% import org.allbinary.game.GameInfo
-% import org.allbinary.game.commands.GameCommandsFactory
-% import org.allbinary.game.configuration.event.ChangedGameFeatureListener
-% import org.allbinary.game.configuration.feature.Features
-% import org.allbinary.game.configuration.feature.GameFeatureFactory
-% import org.allbinary.game.configuration.feature.InputFeatureFactory
-% import org.allbinary.game.configuration.feature.MainFeatureFactory
-% import org.allbinary.game.init.BasicBuildGameInitializerFactory
-% import org.allbinary.game.init.GameInitializationUtil
-% import org.allbinary.game.input.GameInputStrings
-% import org.allbinary.game.input.GameKey
-% import org.allbinary.game.input.GameKeyFactory
-% import org.allbinary.game.input.PlatformInputMappingFactory
-% import org.allbinary.game.input.event.DownGameKeyEventHandler
-% import org.allbinary.game.input.event.GameKeyEvent
-% import org.allbinary.game.input.event.GameKeyEventFactory
-% import org.allbinary.game.input.event.GameKeyEventHandler
-% import org.allbinary.game.input.event.UpGameKeyEventHandler
-% import org.allbinary.game.input.mapping.InputToGameKeyMapping
-% import org.allbinary.game.layer.AllBinaryGameLayerManager
-% import org.allbinary.game.layer.SWTUtil
-% import org.allbinary.game.midlet.DemoGameMidlet
-% import org.allbinary.game.score.HighScoreCommands
-% import org.allbinary.game.score.HighScores
-% import org.allbinary.game.score.HighScoresFactoryInterface
-% import org.allbinary.game.score.HighScoresHelper
-% import org.allbinary.game.score.HighScoresHelperBase
-% import org.allbinary.game.score.HighScoresPaintable
-% import org.allbinary.game.score.NullHighScoresSingletonFactory
-% import org.allbinary.game.state.GameState
-% import org.allbinary.game.state.GameStateFactory
-% import org.allbinary.graphics.Rectangle
-% import org.allbinary.graphics.ResizableListenerHandler
-% import org.allbinary.graphics.canvas.transition.progress.ProgressCanvas
-% import org.allbinary.graphics.canvas.transition.progress.ProgressCanvasFactory
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.color.BasicColorFactory
-% import org.allbinary.graphics.displayable.command.MyCommandsFactory
-% import org.allbinary.graphics.displayable.event.DisplayChangeEvent
-% import org.allbinary.graphics.displayable.event.DisplayChangeEventHandler
-% import org.allbinary.graphics.displayable.event.DisplayChangeEventListener
-% import org.allbinary.graphics.displayable.screen.FullScreenPaintableFactory
-% import org.allbinary.graphics.form.CommandCurrentSelectionFormFactory
-% import org.allbinary.graphics.form.FormType
-% import org.allbinary.graphics.form.FormTypeFactory
-% import org.allbinary.graphics.form.ScrollSelectionForm
-% import org.allbinary.graphics.form.ScrollSelectionFormNoneFactory
-% import org.allbinary.graphics.form.item.CommandTextItemArrayFactory
-% import org.allbinary.graphics.form.item.ABCustomItem
-% import org.allbinary.graphics.opengles.CurrentDisplayableFactory
-% import org.allbinary.graphics.opengles.OpenGLFeatureFactory
-% import org.allbinary.graphics.opengles.OpenGLFeatureUtil
-% import org.allbinary.graphics.opengles.OpenGLThreadUtil
-% import org.allbinary.graphics.paint.InitUpdatePaintable
-% import org.allbinary.graphics.paint.NullPaintable
-% import org.allbinary.graphics.paint.Paintable
-% import org.allbinary.graphics.paint.PaintableInterface
-% import org.allbinary.graphics.paint.StatePaintable
-% import org.allbinary.graphics.paint.StatePaintableFactory
-% import org.allbinary.input.motion.gesture.observer.BasicMotionGesturesHandler
-% import org.allbinary.logic.communication.log.ForcedLogUtil
-% import org.allbinary.logic.communication.log.PreLogUtil
-% import org.allbinary.logic.math.SmallIntegerSingletonFactory
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.logic.system.os.OperatingSystemFactory
-% import org.allbinary.logic.system.security.licensing.AbeClientInformationInterface
-% import org.allbinary.logic.system.security.licensing.InApplicationPurchaseFactory
-% import org.allbinary.logic.system.security.licensing.LockableFeature
-% import org.allbinary.logic.system.security.licensing.LockableFeatureFactory
-% import org.allbinary.logic.util.event.AllBinaryEventObject
-% import org.allbinary.logic.util.event.EventStrings
-% import org.allbinary.media.audio.AllBinaryMediaManager
-% import org.allbinary.media.audio.EarlySoundsFactory
-% import org.allbinary.media.audio.PrimaryPlayerQueueFactory
-% import org.allbinary.media.audio.SecondaryPlayerQueueFactory
-% import org.allbinary.string.CommonSeps
-% import org.allbinary.thread.NullThread
-% import org.allbinary.thread.ThreadFactoryUtil
-% import org.allbinary.thread.ThreadUtil
-% import org.allbinary.time.TimeDelayHelper
-% import org.allbinary.util.ABHashtable
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('DemoCanvas').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements GameCanvasRunnableInterface
-% implements MenuListener
-% implements DisplayChangeEventListener
-% implements DemoPaintableInterface
+defmodule DemoCanvas do
+  def jsuper(), do: RunnableCanvas
+def jstatic_id(), do: JR.static_get(__MODULE__, :id, fn -> 0 end)
+  def jstatic_set_id(value), do: JR.static_put(__MODULE__, :id, value)
+def jstatic_BOT_GAME_STATS(), do: JR.static_get(__MODULE__, :BOT_GAME_STATS, fn -> "Bot Game Statistics: " end)
+  def jstatic_set_BOT_GAME_STATS(value), do: JR.static_put(__MODULE__, :BOT_GAME_STATS, value)
+def jstatic_TYPE(), do: JR.static_get(__MODULE__, :TYPE, fn -> 3 end)
+  def jstatic_set_TYPE(value), do: JR.static_put(__MODULE__, :TYPE, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('RunnableCanvas', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, id}, 0),
-    put({?MODULE, 'BOT_GAME_STATS'}, "Bot Game Statistics: "),
-    put({?MODULE, 'TYPE'}, 3),
-    ok.
-
-init_fields(This) ->
-    put({This, basicColorFactory}, 'BasicColorFactory':getInstance()),
-    put({This, myCommandsFactory}, 'MyCommandsFactory':getInstance()),
-    put({This, gameAdStateFactory}, 'GameAdStateFactory':getInstance()),
-    put({This, gameInputStrings}, 'GameInputStrings':getInstance()),
-    put({This, gameStateFactory}, 'GameStateFactory':getInstance()),
-    put({This, threadFactoryUtil}, 'ThreadFactoryUtil':getInstance()),
-    put({This, formUtil}, 'FormUtil':getInstance()),
-    put({This, fullscreenPaintable}, get({'FullScreenPaintableFactory':getInstance(), paintable})),
-    put({This, basicGameDemoPaintable}, 'StatePaintableFactory':getInstance()),
-    put({This, specialAnimationInterface}, 'SpecialAnimation':getInstance()),
-    put({This, paintedSpecialAnimationInterface}, 'SpecialAnimation':getInstance()),
-    put({This, fullScreenUtil}, 'FullScreenUtil':getInstance()),
-    put({This, gameCanvas}, 'NullGameCanvas':getInstance()),
-    put({This, highScoresHelper}, 'HighScoresHelper':new()),
-    put({This, realHighScoresPaintable}, 'HighScoresPaintable':new()),
-    put({This, highScoresPaintable}, 'NullPaintable':getInstance()),
-    put({This, state}, 0),
-    put({This, canvasThread}, get({'NullThread', 'NULL_THREAD'})),
-    put({This, timeDelayHelper}, 'TimeDelayHelper':new(6000)),
-    put({This, basicColor}, get({get({This, basicColorFactory}), 'RED'})),
-    put({This, abeClientInformation}, undefined),
-    put({This, highScoresFactoryInterface}, undefined),
-    put({This, menuInputProcessor}, 'NoMenuInputProcessor':getInstance()),
-    put({This, menuForm}, 'ScrollSelectionForm':getNullScrollSelectionForm()),
-    put({This, gameInitializationInterfaceFactoryInterface}, undefined),
-    put({This, initialized}, false),
-    put({This, demoGameRunnable}, undefined),
-    put({This, defaultPaintableInterface}, 'NullPaintable':getInstance()),
-    put({This, paintableInterface}, 'NullPaintable':getInstance()),
-    put({This, overlayPaintable}, undefined),
-    put({This, progressPaintable}, 'ProgressCanvasFactory':getLazyInstance()),
-    put({This, tempWait}, get({'NullWaitGameRunnable':getInstance(), 'WAIT'})),
-    put({This, inputToGameKeyMapping}, (fun(Target_N70125) -> (get({Target_N70125, '$class'})):getInputMapping(Target_N70125) end)((fun(Target_N70132) -> (get({Target_N70132, '$class'})):getPersistentInputMappingInstance(Target_N70132) end)('PlatformInputMappingFactory':getInstance()))),
-    put({This, gameRunnable}, 'NullWaitGameRunnable':getInstance()),
-    put({This, isSingleKeyRepeatableProcessing}, (fun(Target_N74960) -> (get({Target_N74960, '$class'})):isFeature(Target_N74960, get({'InputFeatureFactory':getInstance(), 'SINGLE_KEY_REPEAT_PRESS'})) end)('Features':getInstance())),
-    put({This, 'NONE'}, get({'GameKeyFactory':getInstance(), 'NONE'})),
-    put({This, gameKeyEventFactory}, 'GameKeyEventFactory':getInstance()),
-    put({This, lastKeyNotMapped}, (-1)),
-    put({This, 'SET_STATE'}, "setState"),
-    put({This, baseGameStatistics}, 'GameStatisticsFactory':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :basicColorFactory, nil)
+    JR.put(this, :myCommandsFactory, nil)
+    JR.put(this, :gameAdStateFactory, nil)
+    JR.put(this, :gameInputStrings, nil)
+    JR.put(this, :gameStateFactory, nil)
+    JR.put(this, :threadFactoryUtil, nil)
+    JR.put(this, :formUtil, nil)
+    JR.put(this, :fullscreenPaintable, nil)
+    JR.put(this, :basicGameDemoPaintable, nil)
+    JR.put(this, :specialAnimationInterface, nil)
+    JR.put(this, :paintedSpecialAnimationInterface, nil)
+    JR.put(this, :fullScreenUtil, nil)
+    JR.put(this, :gameCanvas, nil)
+    JR.put(this, :highScoresHelper, nil)
+    JR.put(this, :realHighScoresPaintable, nil)
+    JR.put(this, :highScoresPaintable, nil)
+    JR.put(this, :state, 0)
+    JR.put(this, :canvasThread, nil)
+    JR.put(this, :timeDelayHelper, nil)
+    JR.put(this, :basicColor, nil)
+    JR.put(this, :abeClientInformation, nil)
+    JR.put(this, :highScoresFactoryInterface, nil)
+    JR.put(this, :menuInputProcessor, nil)
+    JR.put(this, :menuForm, nil)
+    JR.put(this, :gameInitializationInterfaceFactoryInterface, nil)
+    JR.put(this, :initialized, false)
+    JR.put(this, :demoGameRunnable, nil)
+    JR.put(this, :defaultPaintableInterface, nil)
+    JR.put(this, :paintableInterface, nil)
+    JR.put(this, :overlayPaintable, nil)
+    JR.put(this, :progressPaintable, nil)
+    JR.put(this, :tempWait, 0)
+    JR.put(this, :inputToGameKeyMapping, nil)
+    JR.put(this, :gameRunnable, nil)
+    JR.put(this, :isSingleKeyRepeatableProcessing, false)
+    JR.put(this, :NONE, nil)
+    JR.put(this, :gameKeyEventFactory, nil)
+    JR.put(this, :lastKeyNotMapped, 0)
+    JR.put(this, :SET_STATE, nil)
+    JR.put(this, :baseGameStatistics, nil)
+        JR.put(this, :basicColorFactory, BasicColorFactory.jm_getInstance())
+        JR.put(this, :myCommandsFactory, MyCommandsFactory.jm_getInstance())
+        JR.put(this, :gameAdStateFactory, GameAdStateFactory.jm_getInstance())
+        JR.put(this, :gameInputStrings, GameInputStrings.jm_getInstance())
+        JR.put(this, :gameStateFactory, GameStateFactory.jm_getInstance())
+        JR.put(this, :threadFactoryUtil, ThreadFactoryUtil.jm_getInstance())
+        JR.put(this, :formUtil, FormUtil.jm_getInstance())
+        JR.put(this, :fullscreenPaintable, JR.get(FullScreenPaintableFactory.jm_getInstance(), :paintable))
+        JR.put(this, :basicGameDemoPaintable, StatePaintableFactory.jm_getInstance())
+        JR.put(this, :specialAnimationInterface, SpecialAnimation.jm_getInstance())
+        JR.put(this, :paintedSpecialAnimationInterface, SpecialAnimation.jm_getInstance())
+        JR.put(this, :fullScreenUtil, FullScreenUtil.jm_getInstance())
+        JR.put(this, :gameCanvas, NullGameCanvas.jm_getInstance())
+        JR.put(this, :highScoresHelper, HighScoresHelper.jnew())
+        JR.put(this, :realHighScoresPaintable, HighScoresPaintable.jnew())
+        JR.put(this, :highScoresPaintable, NullPaintable.jm_getInstance())
+        JR.put(this, :state, 0)
+        JR.put(this, :canvasThread, NullThread.jstatic_NULL_THREAD())
+        JR.put(this, :timeDelayHelper, TimeDelayHelper.jnew(6000))
+        JR.put(this, :basicColor, JR.get(JR.get(this, :basicColorFactory), :RED))
+        
+        
+        JR.put(this, :menuInputProcessor, NoMenuInputProcessor.jm_getInstance())
+        JR.put(this, :menuForm, ScrollSelectionForm.jm_getNullScrollSelectionForm())
+        
+        JR.put(this, :initialized, false)
+        
+        JR.put(this, :defaultPaintableInterface, NullPaintable.jm_getInstance())
+        JR.put(this, :paintableInterface, NullPaintable.jm_getInstance())
+        
+        JR.put(this, :progressPaintable, ProgressCanvasFactory.jm_getLazyInstance())
+        JR.put(this, :tempWait, JR.get(NullWaitGameRunnable.jm_getInstance(), :WAIT))
+        JR.put(this, :inputToGameKeyMapping, JR.call(JR.call(PlatformInputMappingFactory.jm_getInstance(), :jm_getPersistentInputMappingInstance, []), :jm_getInputMapping, []))
+        JR.put(this, :gameRunnable, NullWaitGameRunnable.jm_getInstance())
+        JR.put(this, :isSingleKeyRepeatableProcessing, JR.call(Features.jm_getInstance(), :jm_isFeature, [JR.get(InputFeatureFactory.jm_getInstance(), :SINGLE_KEY_REPEAT_PRESS)]))
+        JR.put(this, :NONE, JR.get(GameKeyFactory.jm_getInstance(), :NONE))
+        JR.put(this, :gameKeyEventFactory, GameKeyEventFactory.jm_getInstance())
+        JR.put(this, :lastKeyNotMapped, -1)
+        JR.put(this, :SET_STATE, "setState")
+        JR.put(this, :baseGameStatistics, GameStatisticsFactory.jm_getInstance())
+    nil
+  end
 
 
-new(AbeClientInformation, CommandListener, HighScoresFactoryInterface, Paintable, OverlayPaintable, GameInitializationInterfaceFactoryInterface, IsContinue) when is_boolean(IsContinue) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, AbeClientInformation, CommandListener, HighScoresFactoryInterface, Paintable, OverlayPaintable, GameInitializationInterfaceFactoryInterface, IsContinue),
-    This.
-
-'$init'(This, AbeClientInformation, CommandListener, HighScoresFactoryInterface, Paintable, OverlayPaintable, GameInitializationInterfaceFactoryInterface, IsContinue) when is_boolean(IsContinue) ->
-        'RunnableCanvas':'$init'(This, CommandListener, get({'CurrentDisplayableFactory':getInstance(), 'DEFAULT_CHILD_NAME_LIST'}), true),
-        init_fields(This),
-        put({This, abeClientInformation}, AbeClientInformation),
-        (get({This, '$class'})):setWait(This, get({'NullWaitGameRunnable':getInstance(), 'WAIT'})),
-        put({This, gameInitializationInterfaceFactoryInterface}, GameInitializationInterfaceFactoryInterface),
-        (fun(Target_N70379) -> (get({Target_N70379, '$class'})):initDemo(Target_N70379, AbeClientInformation, This, GameInitializationInterfaceFactoryInterface) end)('GameInitializationUtil':getInstance()),
-        (fun(Target_N70429) -> (get({Target_N70429, '$class'})):fireEvent(Target_N70429, false) end)('ResizableListenerHandler':getInstance()),
-        put({This, overlayPaintable}, OverlayPaintable),
-        put({This, highScoresFactoryInterface}, HighScoresFactoryInterface),
-        (get({This, '$class'})):setDefaultPaintableInterface(This, Paintable),
-        (get({This, '$class'})):setPaintableInterface(This, (get({This, '$class'})):getDefaultPaintableInterface(This)),
-        case IsContinue of
-            true ->
-            (get({This, '$class'})):addCommand(This, get({'GameCommandsFactory':getInstance(), 'CONTINUE_COMMAND'}));
-            false -> ok
-        end,
-        case (fun(Target_N70640) -> (get({Target_N70640, '$class'})):isChangedFeature(Target_N70640, get({'GameFeatureFactory':getInstance(), 'SOUND'})) end)('ChangedGameFeatureListener':getInstance()) of
-            true ->
-            (get({This, '$class'})):mediaInit(This);
-            false -> ok
-        end,
-        put({This, demoGameRunnable}, 'DemoGameStartupRunnable':new(This)),
-        (fun(Target_N70755) -> (get({Target_N70755, '$class'})):addListenerInterface(Target_N70755, This) end)('DisplayChangeEventHandler':getInstance()).
-
-onEvent(This, EventObject) ->
-        'ForcedLogUtil':log(get({'EventStrings':getInstance(), 'PERFORMANCE_MESSAGE'}), This).
-
-onDisplayChangeEvent(This, DisplayChangeEvent) ->
-        try
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N71123) -> (get({Target_N71123, '$class'})):toString(Target_N71123) end)((fun(Target_N71130) -> (get({Target_N71130, '$class'})):append(Target_N71130, (get({get({This, displayInfo}), '$class'})):toString(get({This, displayInfo}))) end)((fun(Target_N71137) -> (get({Target_N71137, '$class'})):append(Target_N71137, get({get({This, commonLabels}), 'START_LABEL'})) end)('StringMaker':new()))), This, get({get({This, canvasStrings}), 'ON_DISPLAY_CHANGE_EVENT'})),
-            ScrollSelectionForm = (get({This, '$class'})):getMenuForm(This),
-            case (ScrollSelectionForm =/= undefined) of
-                true ->
-                FormType = (fun(Target_N71319) -> (get({Target_N71319, '$class'})):getFormType(Target_N71319) end)('FormTypeFactory':getInstance()),
-                Rectangle = (get({get({This, formUtil}), '$class'})):createFormRectangle(get({This, formUtil})),
-                (get({ScrollSelectionForm, '$class'})):init(ScrollSelectionForm, Rectangle, FormType);
-                false -> ok
-            end,
-            (get({get({This, overlayPaintable}), '$class'})):init(get({This, overlayPaintable}))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, canvasStrings}), 'ON_DISPLAY_CHANGE_EVENT'}), E)
-        end.
-
-getCustomCommands(This) ->
-        try
-        GameCommandsFactory = 'GameCommandsFactory':getInstance(),
-        case 'J2MEUtil':isHTML() of
-            true ->
-            put({local, commandArray}, array:from_list([get({GameCommandsFactory, 'START_COMMAND'}), get({'HighScoreCommands':getInstance(), 'DISPLAY'}), get({'GameInputMappingCanvas', 'DISPLAY'}), get({GameCommandsFactory, 'DISPLAY_ABOUT'})])),
-            throw({'$return', get({local, commandArray})});
-            false ->
-            CommandList = 'BasicArrayListD':new(),
-            (get({CommandList, '$class'})):add(CommandList, get({GameCommandsFactory, 'START_COMMAND'})),
-            InApplicationPurchaseFactory = 'InApplicationPurchaseFactory':getInstance(),
-            case (get({InApplicationPurchaseFactory, '$class'})):isEnabled(InApplicationPurchaseFactory) of
-                true ->
-                List = (fun(Target_N71893) -> (get({Target_N71893, '$class'})):getList(Target_N71893) end)('LockableFeatureFactory':getInstance()),
-                case (((get({List, '$class'})):size(List) > 0) andalso (not (get({InApplicationPurchaseFactory, '$class'})):isPurchased(InApplicationPurchaseFactory, (get({List, '$class'})):get(List, 0)))) of
-                    true ->
-                    (get({CommandList, '$class'})):add(CommandList, get({GameCommandsFactory, 'BUY_COMMAND'}));
-                    false -> ok
-                end;
-                false -> ok
-            end,
-            (get({CommandList, '$class'})):add(CommandList, get({'HighScoreCommands':getInstance(), 'DISPLAY'})),
-            try
-                IsOverScan = (fun(Target_N72148) -> (get({Target_N72148, '$class'})):isOverScan(Target_N72148) end)((fun(Target_N72155) -> (get({Target_N72155, '$class'})):getOperatingSystemInstance(Target_N72155) end)('OperatingSystemFactory':getInstance())),
-                case get({'SWTUtil', isSWT}) of
-                    true ->
-                    (get({CommandList, '$class'})):add(CommandList, get({'GameInputMappingCanvas', 'DISPLAY'}));
-                    false ->
-                    case (not IsOverScan) of
-                    true ->
-                    (get({CommandList, '$class'})):add(CommandList, get({GameCommandsFactory, 'DISPLAY_OPTIONS'})),
-                    (get({CommandList, '$class'})):add(CommandList, get({GameCommandsFactory, 'DISPLAY_LOAD_FORM'})),
-                    (get({CommandList, '$class'})):add(CommandList, get({'GameInputMappingCanvas', 'DISPLAY'}));
-                    false -> ok
-                end
-                end
-            catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-                ok
-            end,
-            (get({CommandList, '$class'})):add(CommandList, get({GameCommandsFactory, 'DISPLAY_ABOUT'})),
-            put({local, commandArray}, (get({CommandList, '$class'})):toArray(CommandList)),
-            throw({'$return', get({local, commandArray})})
+  def jinit(this, p_abeClientInformation, p_commandListener, p_highScoresFactoryInterface, p_paintable, p_overlayPaintable, p_gameInitializationInterfaceFactoryInterface, p_isContinue) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+      JR.lset(f, :commandListener, p_commandListener)
+      JR.lset(f, :highScoresFactoryInterface, p_highScoresFactoryInterface)
+      JR.lset(f, :paintable, p_paintable)
+      JR.lset(f, :overlayPaintable, p_overlayPaintable)
+      JR.lset(f, :gameInitializationInterfaceFactoryInterface, p_gameInitializationInterfaceFactoryInterface)
+      JR.lset(f, :isContinue, p_isContinue)
+        RunnableCanvas.jinit(this, JR.lget(f, :commandListener), JR.get(CurrentDisplayableFactory.jm_getInstance(), :DEFAULT_CHILD_NAME_LIST), true)
+        DemoCanvas.jinitfields(this)
+        JR.put(this, :abeClientInformation, JR.lget(f, :abeClientInformation))
+        JR.call(this, :jm_setWait, [JR.get(NullWaitGameRunnable.jm_getInstance(), :WAIT)])
+        JR.put(this, :gameInitializationInterfaceFactoryInterface, JR.lget(f, :gameInitializationInterfaceFactoryInterface))
+        JR.call(GameInitializationUtil.jm_getInstance(), :jm_initDemo, [JR.lget(f, :abeClientInformation), this, JR.lget(f, :gameInitializationInterfaceFactoryInterface)])
+        JR.call(ResizableListenerHandler.jm_getInstance(), :jm_fireEvent, [false])
+        JR.put(this, :overlayPaintable, JR.lget(f, :overlayPaintable))
+        JR.put(this, :highScoresFactoryInterface, JR.lget(f, :highScoresFactoryInterface))
+        JR.call(this, :jm_setDefaultPaintableInterface, [JR.lget(f, :paintable)])
+        JR.call(this, :jm_setPaintableInterface, [JR.call(this, :jm_getDefaultPaintableInterface, [])])
+        if JR.lget(f, :isContinue) do
+            JR.call(this, :jm_addCommand, [JR.get(GameCommandsFactory.jm_getInstance(), :CONTINUE_COMMAND)])
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        if JR.call(ChangedGameFeatureListener.jm_getInstance(), :jm_isChangedFeature, [JR.get(GameFeatureFactory.jm_getInstance(), :SOUND)]) do
+            JR.call(this, :jm_mediaInit, [])
+        end
+        JR.put(this, :demoGameRunnable, DemoGameStartupRunnable.jnew(this))
+        JR.call(DisplayChangeEventHandler.jm_getInstance(), :jm_addListenerInterface, [this])
+    end)
+  end
 
-initCommands(This, CmdListener) ->
-        (get({This, '$class'})):removeAllCommands(This),
-        CommandArray = (get({This, '$class'})):getCustomCommands(This),
-        Size = array:size(CommandArray),
-        lists:foreach(fun(Index) ->
-            (get({This, '$class'})):addCommand(This, array:get(Index, CommandArray))
-        end, lists:seq(0, Size - 1)),
-        'CustomGameMenuUtil':add(This),
-        (get({This, '$class'})):setCommandListener(This, CmdListener).
+  def jnew(p_abeClientInformation, p_commandListener, p_highScoresFactoryInterface, p_paintable, p_overlayPaintable, p_gameInitializationInterfaceFactoryInterface, p_isContinue) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_abeClientInformation, p_commandListener, p_highScoresFactoryInterface, p_paintable, p_overlayPaintable, p_gameInitializationInterfaceFactoryInterface, p_isContinue)
+    this
+  end
 
-% throws Exception
-initPostPaint(This) ->
-        ok.
 
-% throws Exception
-mediaInit(This) ->
-        'AllBinaryMediaManager':init('EarlySoundsFactory':getInstance()).
+  def jm_onEvent(this, p_eventObject) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+        ForcedLogUtil.jm_log(JR.get(EventStrings.jm_getInstance(), :PERFORMANCE_MESSAGE), this)
+    end)
+  end
 
-itemStateChanged(This, Item) ->
-        'ForcedLogUtil':log(get({get({This, commonStrings}), 'NOT_IMPLEMENTED'}), This).
 
-% throws Exception
-initMenu(This) ->
-        (get({This, '$class'})):close(This),
-        CommandTextItemArrayFactory = (fun(Target_N73317) -> (get({Target_N73317, '$class'})):getCommandTextItemArrayFactory(Target_N73317) end)('DemoLimitedCommandTextItemArrayFactory':getInstance()),
-        Items = (get({CommandTextItemArrayFactory, '$class'})):getInstance(CommandTextItemArrayFactory, (get({This, '$class'})):getCommandStack(This), get({get({This, basicColorFactory}), 'BLACK'}), get({get({This, basicColorFactory}), 'WHITE'})),
-        FormType = (fun(Target_N73482) -> (get({Target_N73482, '$class'})):getFormType(Target_N73482) end)('FormTypeFactory':getInstance()),
-        Rectangle = (get({get({This, formUtil}), '$class'})):createFormRectangle(get({This, formUtil})),
-        'PreLogUtil':put((fun(Target_N73595) -> (get({Target_N73595, '$class'})):toString(Target_N73595) end)((fun(Target_N73602) -> (get({Target_N73602, '$class'})):append(Target_N73602, (get({get({This, displayInfo}), '$class'})):toString(get({This, displayInfo}))) end)((fun(Target_N73609) -> (get({Target_N73609, '$class'})):append(Target_N73609, get({get({This, commonLabels}), 'START_LABEL'})) end)('StringMaker':new()))), This, "initMenu"),
-        ScrollSelectionForm = 'CommandCurrentSelectionFormFactory':getInstance(get({'StringUtil':getInstance(), 'EMPTY_STRING'}), Items, Rectangle, FormType, 15, true, get({get({This, basicColorFactory}), 'BLACK'}), get({get({This, basicColorFactory}), 'WHITE'})),
-        (get({This, '$class'})):setMenuForm(This, ScrollSelectionForm),
-        FormType2 = (fun(Target_N73876) -> (get({Target_N73876, '$class'})):getFormType(Target_N73876) end)('FormTypeFactory':getInstance()),
-        Rectangle2 = (get({get({This, formUtil}), '$class'})):createFormRectangle(get({This, formUtil})),
-        (get({ScrollSelectionForm, '$class'})):init(ScrollSelectionForm, Rectangle2, FormType2),
-        case ((get({This, '$class'})):getMenuForm(This) =/= 'ScrollSelectionFormNoneFactory':getInstance()) of
-            true ->
-            (get({This, '$class'})):setMenuInputProcessor(This, 'CommandFormInputProcessor':new('BasicArrayListD':new(), (-1), This, (get({This, '$class'})):getMenuForm(This)));
-            false -> ok
-        end,
-        (get({This, '$class'})):open(This).
+  def jm_onDisplayChangeEvent(this, p_displayChangeEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :displayChangeEvent, p_displayChangeEvent)
+        try do
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :commonLabels), :START_LABEL)]), :jm_append, [JR.call(JR.get(this, :displayInfo), :jm_toString, [])]), :jm_toString, []), this, JR.get(JR.get(this, :canvasStrings), :ON_DISPLAY_CHANGE_EVENT)])
+            JR.lset(f, :scrollSelectionForm, JR.call(this, :jm_getMenuForm, []))
+            if (JR.lget(f, :scrollSelectionForm) != nil) do
+                JR.lset(f, :formType, JR.call(FormTypeFactory.jm_getInstance(), :jm_getFormType, []))
+                JR.lset(f, :rectangle, JR.call(JR.get(this, :formUtil), :jm_createFormRectangle, []))
+                JR.call(JR.lget(f, :scrollSelectionForm), :jm_init, [JR.lget(f, :rectangle), JR.lget(f, :formType)])
+            end
+            JR.call(JR.get(this, :overlayPaintable), :jm_init, [])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :canvasStrings), :ON_DISPLAY_CHANGE_EVENT), JR.lget(f, :e)])
+        end
+    end)
+  end
 
-open(This) ->
-        (fun(Target_N74177) -> (get({Target_N74177, '$class'})):addListenerInterface(Target_N74177, (get({This, '$class'})):getMenuInputProcessor(This)) end)('BasicMotionGesturesHandler':getInstance()),
-        (fun(Target_N74219) -> (get({Target_N74219, '$class'})):addListener(Target_N74219, (get({This, '$class'})):getMenuInputProcessor(This)) end)('GameKeyEventHandler':getInstance()).
 
-close(This) ->
-        (fun(Target_N74297) -> (get({Target_N74297, '$class'})):removeListener(Target_N74297, (get({This, '$class'})):getMenuInputProcessor(This)) end)('BasicMotionGesturesHandler':getInstance()),
-        (fun(Target_N74339) -> (get({Target_N74339, '$class'})):removeListener(Target_N74339, (get({This, '$class'})):getMenuInputProcessor(This)) end)('GameKeyEventHandler':getInstance()).
-
-getSourceId(This) ->
-        get({'DemoCanvas', id}).
-
-keyPressed(This, KeyCode) when is_integer(KeyCode) ->
-        (get({This, '$class'})):keyPressedByDevice(This, KeyCode, 0).
-
-keyReleased(This, KeyCode) when is_integer(KeyCode) ->
-        (get({This, '$class'})):keyReleasedByDevice(This, KeyCode, 0).
-
-keyRepeated(This, KeyCode) when is_integer(KeyCode) ->
-        (get({This, '$class'})):keyRepeatedByDevice(This, KeyCode, 0).
-
-keyPressedByDevice(This, KeyCode, DeviceId) when is_integer(KeyCode), is_integer(DeviceId) ->
-        (get({This, '$class'})):addGameKeyEvent(This, KeyCode, false).
-
-keyReleasedByDevice(This, KeyCode, DeviceId) when is_integer(KeyCode), is_integer(DeviceId) ->
-        (get({This, '$class'})):removeGameKeyEvent(This, KeyCode, false).
-
-keyRepeatedByDevice(This, KeyCode, DeviceId) when is_integer(KeyCode), is_integer(DeviceId) ->
-        case get({This, isSingleKeyRepeatableProcessing}) of
-            true ->
-            (get({This, '$class'})):addGameKeyEvent(This, KeyCode, true);
-            false -> ok
-        end.
-
-addGameKeyEvent(This, KeyCode, Repeated) when is_integer(KeyCode), is_boolean(Repeated) ->
-        try
-            GameKey = (get({get({This, inputToGameKeyMapping}), '$class'})):getInstanceForCanvas(get({This, inputToGameKeyMapping}), This, KeyCode),
-            case (GameKey =/= get({This, 'NONE'})) of
-                true ->
-                GameKeyEvent = (get({get({This, gameKeyEventFactory}), '$class'})):getInstanceForInput(get({This, gameKeyEventFactory}), This, GameKey),
-                (fun(Target_N75648) -> (get({Target_N75648, '$class'})):fireEvent(Target_N75648, GameKeyEvent) end)('DownGameKeyEventHandler':getInstance());
-                false ->
-                case (get({This, lastKeyNotMapped}) =/= KeyCode) of
-                    true ->
-                    put({This, lastKeyNotMapped}, KeyCode),
-                    (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N75481) -> (get({Target_N75481, '$class'})):toString(Target_N75481) end)((fun(Target_N75488) -> (get({Target_N75488, '$class'})):appendint(Target_N75488, KeyCode) end)((fun(Target_N75495) -> (get({Target_N75495, '$class'})):append(Target_N75495, get({get({This, gameInputStrings}), 'NO_KEY'})) end)('StringMaker':new()))), This, get({get({This, gameInputStrings}), 'ADD_KEY_EVENT'}));
-                    false -> ok
+  def jm_getCustomCommands(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :gameCommandsFactory, GameCommandsFactory.jm_getInstance())
+        if J2MEUtil.jm_isHTML() do
+            JR.lset(f, :commandArray, JR.afrom([JR.get(JR.lget(f, :gameCommandsFactory), :START_COMMAND), JR.get(HighScoreCommands.jm_getInstance(), :DISPLAY), GameInputMappingCanvas.jstatic_DISPLAY(), JR.get(JR.lget(f, :gameCommandsFactory), :DISPLAY_ABOUT)]))
+            throw({:jreturn, JR.lget(f, :commandArray)})
+        else
+            JR.lset(f, :commandList, BasicArrayListD.jnew())
+            JR.call(JR.lget(f, :commandList), :jm_add, [JR.get(JR.lget(f, :gameCommandsFactory), :START_COMMAND)])
+            JR.lset(f, :inApplicationPurchaseFactory, InApplicationPurchaseFactory.jm_getInstance())
+            if JR.call(JR.lget(f, :inApplicationPurchaseFactory), :jm_isEnabled, []) do
+                JR.lset(f, :list, JR.call(LockableFeatureFactory.jm_getInstance(), :jm_getList, []))
+                if ((JR.call(JR.lget(f, :list), :jm_size, []) > 0) && !JR.call(JR.lget(f, :inApplicationPurchaseFactory), :jm_isPurchased, [JR.call(JR.lget(f, :list), :jm_get, [0])])) do
+                    JR.call(JR.lget(f, :commandList), :jm_add, [JR.get(JR.lget(f, :gameCommandsFactory), :BUY_COMMAND)])
                 end
             end
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), "Key Event Error", This, get({get({This, gameInputStrings}), 'ADD_KEY_EVENT'}), E)
-        end.
-
-removeGameKeyEvent(This, KeyCode, Repeated) when is_integer(KeyCode), is_boolean(Repeated) ->
-        try
-            GameKey = (get({get({This, inputToGameKeyMapping}), '$class'})):getInstanceForCanvas(get({This, inputToGameKeyMapping}), This, KeyCode),
-            case (GameKey =/= get({This, 'NONE'})) of
-                true ->
-                GameKeyEvent = (get({get({This, gameKeyEventFactory}), '$class'})):getInstanceForInput(get({This, gameKeyEventFactory}), This, GameKey),
-                (fun(Target_N76134) -> (get({Target_N76134, '$class'})):fireEvent(Target_N76134, GameKeyEvent) end)('UpGameKeyEventHandler':getInstance());
-                false ->
-                (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N75970) -> (get({Target_N75970, '$class'})):toString(Target_N75970) end)((fun(Target_N75977) -> (get({Target_N75977, '$class'})):appendint(Target_N75977, KeyCode) end)((fun(Target_N75984) -> (get({Target_N75984, '$class'})):append(Target_N75984, get({get({This, gameInputStrings}), 'NO_KEY'})) end)('StringMaker':new()))), This, get({get({This, gameInputStrings}), 'REMOVE_KEY_EVENT'}))
-            end
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), "Key Event Error", This, get({get({This, gameInputStrings}), 'REMOVE_KEY_EVENT'}), E)
-        end.
-
-pause(This) ->
-        (get({This, '$class'})):close(This),
-        (get({This, '$class'})):setPaused(This, true),
-        put({This, gameRunnable}, 'NullWaitGameRunnable':getInstance()),
-        (get({get({This, gameCanvas}), '$class'})):pause(get({This, gameCanvas})).
-
-unPause(This) ->
-        (get({This, '$class'})):open(This),
-        (get({get({This, gameCanvas}), '$class'})):unPause(get({This, gameCanvas})),
-        put({This, gameRunnable}, get({get({This, gameCanvas}), gameRunnable})),
-        (get({This, '$class'})):setPaused(This, false).
-
-isPausable(This) ->
-        try
-        case ((fun(Target_N76611) -> (get({Target_N76611, '$class'})):getUsedRunnable(Target_N76611) end)('CurrentDisplayableFactory':getInstance()) =:= 'NullWaitGameRunnable':getInstance()) of
-            true ->
-            throw({'$return', true});
-            false ->
-            throw({'$return', false})
-        end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
-
-isGameOver(This) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N76747) -> (get({Target_N76747, '$class'})):toString(Target_N76747) end)((fun(Target_N76754) -> (get({Target_N76754, '$class'})):append(Target_N76754, " since not a game") end)((fun(Target_N76761) -> (get({Target_N76761, '$class'})):append(Target_N76761, get({get({This, commonStrings}), 'NOT_IMPLEMENTED'})) end)('StringMaker':new()))), This, "isGameOver"),
-        false.
-
-% throws Exception
-setLoadStateHashtable(This, Hashtable) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), "Trying to continue a demo lol - only continue a game canvas not the demo", This, "setLoadStateHashtable").
-
-% throws Exception
-getLoadStateHashtable(This) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), "Trying to continue a demo lol - only continue a game canvas not the demo", This, "getLoadStateHashtable"),
-        get({get({This, stdUtil}), 'NULL_TABLE'}).
-
-% throws Exception
-getCurrentStateHashtable(This) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), "Trying to save the AI lol", This, "getCurrentStateHashtable"),
-        get({get({This, stdUtil}), 'NULL_TABLE'}).
-
-setHighScoreSubmitted(This, IsNotUsed) when is_boolean(IsNotUsed) ->
-        ok.
-
-paint(This, Graphics) ->
-        (get({get({This, paintableInterface}), '$class'})):paint(get({This, paintableInterface}), Graphics),
-        (get({get({This, paintedSpecialAnimationInterface}), '$class'})):paintXY(get({This, paintedSpecialAnimationInterface}), Graphics, 0, 0),
-        (get({get({This, highScoresPaintable}), '$class'})):paint(get({This, highScoresPaintable}), Graphics),
-        (fun(Target_N77425) -> (get({Target_N77425, '$class'})):paint(Target_N77425, Graphics) end)((get({This, '$class'})):getBasicGameDemoPaintable(This)),
-        (get({get({This, overlayPaintable}), '$class'})):paint(get({This, overlayPaintable}), Graphics),
-        (get({get({This, fullscreenPaintable}), '$class'})):paint(get({This, fullscreenPaintable}), Graphics),
-        (get({get({This, progressPaintable}), '$class'})):paint(get({This, progressPaintable}), Graphics).
-
-paintThreed(This, Graphics) ->
-        (get({get({This, paintableInterface}), '$class'})):paintThreed(get({This, paintableInterface}), Graphics),
-        (get({get({This, paintedSpecialAnimationInterface}), '$class'})):paintThreedXYZ(get({This, paintedSpecialAnimationInterface}), Graphics, 0, 0, 0).
-
-processGameOver(This) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), "Not Implemented since not a game", This, "setGameOver").
-
-demoStateChange(This) ->
-        put({local, newState}, (get({This, state}) + 1)),
-        case (get({local, newState}) > 2) of
-            true ->
-            put({local, newState}, 0);
-            false ->
-            case (get({local, newState}) =:= 2) of
-            true ->
-            case (not (get({get({This, highScoresHelper}), '$class'})):isAnyHighScores(get({This, highScoresHelper}))) of
-                true ->
-                put({local, newState}, 0);
-                false ->
-                HighScores = (get({get({This, highScoresHelper}), '$class'})):getNextHighScores(get({This, highScoresHelper})),
-                case (HighScores =:= 'NullHighScoresSingletonFactory':getInstance()) of
-                    true ->
-                    put({local, newState}, 0);
-                    false ->
-                    (fun(Target_N78062) -> (get({Target_N78062, '$class'})):setHighScores(Target_N78062, HighScores) end)((get({This, '$class'})):getRealHighScoresPaintable(This))
+            JR.call(JR.lget(f, :commandList), :jm_add, [JR.get(HighScoreCommands.jm_getInstance(), :DISPLAY)])
+            try do
+                JR.lset(f, :isOverScan, JR.call(JR.call(OperatingSystemFactory.jm_getInstance(), :jm_getOperatingSystemInstance, []), :jm_isOverScan, []))
+                if SWTUtil.jstatic_isSWT() do
+                    JR.call(JR.lget(f, :commandList), :jm_add, [GameInputMappingCanvas.jstatic_DISPLAY()])
+                else
+                    if !JR.lget(f, :isOverScan) do
+                    JR.call(JR.lget(f, :commandList), :jm_add, [JR.get(JR.lget(f, :gameCommandsFactory), :DISPLAY_OPTIONS)])
+                    JR.call(JR.lget(f, :commandList), :jm_add, [JR.get(JR.lget(f, :gameCommandsFactory), :DISPLAY_LOAD_FORM)])
+                    JR.call(JR.lget(f, :commandList), :jm_add, [GameInputMappingCanvas.jstatic_DISPLAY()])
                 end
-            end;
-            false -> ok
-        end
-        end,
-        (get({This, '$class'})):setState(This, get({local, newState})),
-        (get({This, '$class'})):updateDemoState(This).
-
-updateDemoState(This) ->
-        'PreLogUtil':put((fun(Target_N78315) -> (get({Target_N78315, '$class'})):toString(Target_N78315) end)((fun(Target_N78322) -> (get({Target_N78322, '$class'})):createInstance(Target_N78322, get({This, state})) end)('SmallIntegerSingletonFactory':getInstance())), This, get({This, 'SET_STATE'})),
-        (fun(Target_N78381) -> (get({Target_N78381, '$class'})):setState(Target_N78381, get({This, state})) end)((get({This, '$class'})):getBasicGameDemoPaintable(This)),
-        case (get({This, state}) =:= 0) of
-            true ->
-            put({This, highScoresPaintable}, 'NullPaintable':getInstance()),
-            put({This, paintedSpecialAnimationInterface}, (get({This, '$class'})):getSpecialAnimationInterface(This)),
-            case ((not (get({get({This, demoGameRunnable}), '$class'})):isRunning(get({This, demoGameRunnable}))) andalso (get({get({This, gameCanvas}), '$class'})):isInitialized(get({This, gameCanvas}))) of
-                true ->
-                (fun(Target_N78710) -> (get({Target_N78710, '$class'})):reset(Target_N78710) end)((get({This, '$class'})):getSpecialAnimationInterface(This));
-                false -> ok
-            end;
-            false ->
-            case (get({This, state}) =:= 1) of
-            true ->
-            put({This, paintedSpecialAnimationInterface}, 'SpecialAnimation':getInstance());
-            false ->
-            case (get({This, state}) =:= 2) of
-            true ->
-            put({This, highScoresPaintable}, (get({This, '$class'})):getRealHighScoresPaintable(This));
-            false -> ok
-        end
-        end
-        end,
-        GameAdState = (get({get({This, gameAdStateFactory}), '$class'})):getCurrentInstance(get({This, gameAdStateFactory})),
-        (get({GameAdState, '$class'})):processPageAdState(GameAdState).
-
-% throws Exception
-getNextRandom(This) ->
-        erlang:error({'Exception', get({get({This, commonStrings}), 'NOT_IMPLEMENTED'})}).
-
-% throws Exception
-createGameLayerManager(This, RandomValue) when is_integer(RandomValue) ->
-        erlang:error({'Exception', get({get({This, commonStrings}), 'NOT_IMPLEMENTED'})}).
-
-% throws Exception
-createRunnable(This, RandomLevel) when is_integer(RandomLevel) ->
-        erlang:error({'Exception', get({get({This, commonStrings}), 'NOT_IMPLEMENTED'})}).
-
-% throws Exception
-create(This) ->
-        'PreLogUtil':put(get({get({This, commonStrings}), 'START'}), This, "create"),
-        put({This, highScoresPaintable}, 'NullPaintable':getInstance()),
-        RandomLevel = (get({This, '$class'})):getNextRandom(This),
-        put({This, gameCanvas}, (get({This, '$class'})):createRunnable(This, RandomLevel)),
-        put({This, basicColor}, (fun(Target_N79287) -> (get({Target_N79287, '$class'})):getForegroundBasicColor(Target_N79287) end)((get({get({This, gameCanvas}), '$class'})):getLayerManager(get({This, gameCanvas})))),
-        (fun(Target_N79319) -> (get({Target_N79319, '$class'})):setBasicColorP(Target_N79319, get({This, basicColor})) end)((get({This, '$class'})):getRealHighScoresPaintable(This)),
-        (get({get({This, gameCanvas}), '$class'})):setGameCanvasStartListener(get({This, gameCanvas}), This),
-        GameInfo = (fun(Target_N79400) -> (get({Target_N79400, '$class'})):getGameInfo(Target_N79400) end)((get({get({This, gameCanvas}), '$class'})):getLayerManager(get({This, gameCanvas}))),
-        (fun(Target_N79446) -> (get({Target_N79446, '$class'})):fetchHighScores(Target_N79446, GameInfo, get({This, highScoresHelper})) end)((get({This, '$class'})):getHighScoresFactoryInterface(This)).
-
-% throws Exception
-start(This) ->
-        GameCanvas = get({This, gameCanvas}),
-        'PreLogUtil':put((fun(Target_N79593) -> (get({Target_N79593, '$class'})):toString(Target_N79593) end)((fun(Target_N79600) -> (get({Target_N79600, '$class'})):append(Target_N79600, (get({get({This, stringUtil}), '$class'})):toString(get({This, stringUtil}), GameCanvas)) end)((fun(Target_N79607) -> (get({Target_N79607, '$class'})):append(Target_N79607, "Game Thread in DemoCanvas: ") end)('StringMaker':new()))), This, get({get({This, commonStrings}), 'START'})),
-        put({This, canvasThread}, (get({get({This, threadFactoryUtil}), '$class'})):getInstanceGameCanvasRunnable(get({This, threadFactoryUtil}), GameCanvas)),
-        (get({get({This, gameCanvas}), '$class'})):setThread(get({This, gameCanvas}), get({This, canvasThread})),
-        (get({get({This, threadFactoryUtil}), '$class'})):start(get({This, threadFactoryUtil}), get({This, canvasThread})),
-        case ((get({This, '$class'})):getWait(This) =:= get({'NullWaitGameRunnable':getInstance(), 'WAIT'})) of
-            true ->
-            (get({This, '$class'})):setWait(This, (get({This, '$class'})):getTempWait(This));
-            false -> ok
-        end.
-
-preDemoProcess(This) ->
-        case ((not (get({get({This, gameCanvas}), '$class'})):isInitialized(get({This, gameCanvas}))) orelse ((get({get({This, gameCanvas}), '$class'})):getTitle(get({This, gameCanvas})) =:= get({'NullGameCanvas', 'NO_GAME'}))) of
-            true ->
-            case 'AllBinaryMediaManager':update() of
-                true ->
-                case (not (fun(Target_N80050) -> (get({Target_N80050, '$class'})):process(Target_N80050) end)('PrimaryPlayerQueueFactory':getInstance())) of
-                    true ->
-                    (fun(Target_N80083) -> (get({Target_N80083, '$class'})):process(Target_N80083) end)('SecondaryPlayerQueueFactory':getInstance());
-                    false -> ok
-                end;
-                false -> ok
-            end;
-            false -> ok
-        end,
-        (get({get({This, overlayPaintable}), '$class'})):update(get({This, overlayPaintable})).
-
-% throws Exception
-process(This) ->
-        'RunnableCanvas':process(This),
-        (fun(Target_N80187) -> (get({Target_N80187, '$class'})):processInputList(Target_N80187) end)((get({This, '$class'})):getMenuInputProcessor(This)),
-        (get({This, '$class'})):preDemoProcess(This),
-        case (get({This, state}) =:= 0) of
-            true ->
-            IndexedAnimationBehavior = ((fun(Target_N80274) -> (get({Target_N80274, '$class'})):getAnimationBehavior(Target_N80274) end)((get({This, '$class'})):getSpecialAnimationInterface(This))),
-            case (get({IndexedAnimationBehavior, loopIndex}) < 1) of
-                true ->
-                (get({get({This, timeDelayHelper}), '$class'})):setStartTimeTNT(get({This, timeDelayHelper}));
-                false -> ok
-            end,
-            DemoGameMidlet = (get({This, '$class'})):getCustomCommandListener(This),
-            case ((get({This, gameCanvas}) =/= 'NullGameCanvas':getInstance()) andalso (get({get({This, gameCanvas}), '$class'})):isGameOver(get({This, gameCanvas}))) of
-                true ->
-                (get({This, '$class'})):stopGameDemo(This),
-                RandomLevel = (get({This, '$class'})):getNextRandom(This),
-                GameInfo = (fun(Target_N80847) -> (get({Target_N80847, '$class'})):getGameInfo(Target_N80847) end)((get({get({This, gameCanvas}), '$class'})):getLayerManager(get({This, gameCanvas}))),
-                (get({GameInfo, '$class'})):setCurrentLevel(GameInfo, RandomLevel),
-                (get({get({This, gameCanvas}), '$class'})):setGameOver(get({This, gameCanvas}), false),
-                (get({This, '$class'})):start(This);
-                false ->
-                case ((get({This, gameCanvas}) =:= 'NullGameCanvas':getInstance()) andalso (get({DemoGameMidlet, '$class'})):isReady(DemoGameMidlet)) of
-                true ->
-                case (not (get({get({This, demoGameRunnable}), '$class'})):isRunning(get({This, demoGameRunnable}))) of
-                    true ->
-                    (get({This, '$class'})):startDemoGame(This),
-                    (get({get({This, demoGameRunnable}), '$class'})):setRunning(get({This, demoGameRunnable}), true),
-                    Thread = (get({get({This, threadFactoryUtil}), '$class'})):getInstanceForRunnable(get({This, threadFactoryUtil}), get({This, demoGameRunnable})),
-                    (get({get({This, demoGameRunnable}), '$class'})):setThread(get({This, demoGameRunnable}), Thread),
-                    (get({get({This, threadFactoryUtil}), '$class'})):start(get({This, threadFactoryUtil}), Thread);
-                    false -> ok
-                end;
-                false -> ok
+                end
+            catch
+                {:jexception, jexception} ->
+                    JR.lset(f, :e, jexception)
+                nil
             end
-            end;
-            false -> ok
-        end.
+            JR.call(JR.lget(f, :commandList), :jm_add, [JR.get(JR.lget(f, :gameCommandsFactory), :DISPLAY_ABOUT)])
+            JR.lset(f, :commandArray, JR.call(JR.lget(f, :commandList), :jm_toArray, []))
+            throw({:jreturn, JR.lget(f, :commandArray)})
+        end
+    end)
+  end
 
-% throws Exception
-startDemoGame(This) ->
-        'DemoCanvasProgressUtil':showProgress(This).
 
-% throws Exception
-stopGameDemo(This) ->
-        case (get({This, gameCanvas}) =/= 'NullGameCanvas':getInstance()) of
-            true ->
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), "Set Running False", This, "stopGameDemo"),
-            (get({get({This, gameCanvas}), '$class'})):setRunning(get({This, gameCanvas}), false);
-            false -> ok
-        end,
-        (fun(Target_N81218) -> (get({Target_N81218, '$class'})):join(Target_N81218, get({This, canvasThread})) end)('ThreadUtil':getInstance()).
+  def jm_initCommands(this, p_cmdListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cmdListener, p_cmdListener)
+        JR.call(this, :jm_removeAllCommands, [])
+        JR.lset(f, :commandArray, JR.call(this, :jm_getCustomCommands, []))
+        JR.lset(f, :size, JR.alength(JR.lget(f, :commandArray)))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.call(this, :jm_addCommand, [JR.aget(JR.lget(f, :commandArray), JR.lget(f, :index))])
+        end)
+        CustomGameMenuUtil.jm_add(this)
+        JR.call(this, :jm_setCommandListener, [JR.lget(f, :cmdListener)])
+    end)
+  end
 
-showGamePaintable(This) ->
-        METHOD_NAME = "showGamePaintable",
-        'PreLogUtil':put(get({get({This, commonStrings}), 'START'}), This, METHOD_NAME),
-        IsDefault = 'J2MEUtil':isHTML(),
-        case (((get({This, gameCanvas}) =/= 'NullGameCanvas':getInstance()) andalso ((((get({get({This, gameCanvas}), '$class'})):isRunning(get({This, gameCanvas})) orelse IsDefault) orelse get({'SWTUtil', isSWT})))) andalso (not (((get({get({This, gameCanvas}), '$class'})):getType(get({This, gameCanvas})) =:= get({'NullGameCanvas', 'TYPE'}))))) of
-            true ->
-            put({This, gameRunnable}, get({get({This, gameCanvas}), gameRunnable})),
-            'PreLogUtil':put("Showing Game", This, METHOD_NAME),
-            (get({This, '$class'})):setPaintableInterface(This, get({This, gameCanvas}));
-            false ->
-            put({This, gameRunnable}, 'NullWaitGameRunnable':getInstance()),
-            'PreLogUtil':put("Not Showing Game", This, METHOD_NAME),
-            (get({This, '$class'})):setPaintableInterface(This, (get({This, '$class'})):getDefaultPaintableInterface(This))
-        end.
 
-isReadyForStateChange(This) ->
-        ((not (get({get({This, demoGameRunnable}), '$class'})):isRunning(get({This, demoGameRunnable}))) andalso (get({get({This, gameCanvas}), '$class'})):isInitialized(get({This, gameCanvas}))).
+  def jm_initPostPaint(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-% throws Exception
-processGame(This) ->
-        (get({get({This, gameRunnable}), '$class'})):run(get({This, gameRunnable})),
-        case ((not (get({get({This, specialAnimationInterface}), '$class'})):isComplete(get({This, specialAnimationInterface}))) andalso (get({This, '$class'})):isReadyForStateChange(This)) of
-            true ->
-            (get({get({This, specialAnimationInterface}), '$class'})):nextFrame(get({This, specialAnimationInterface}));
-            false -> ok
-        end,
-        case ((get({get({This, timeDelayHelper}), '$class'})):isTimeTNT(get({This, timeDelayHelper})) andalso (get({This, '$class'})):isReadyForStateChange(This)) of
-            true ->
-            (get({This, '$class'})):demoStateChange(This);
-            false ->
-            (get({This, '$class'})):process(This)
-        end.
 
-run(This) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START_RUNNABLE'}), This, get({get({This, commonStrings}), 'RUN'})),
-        try
-            ProgressCanvas = 'ProgressCanvasFactory':getInstance(),
-            Features = 'Features':getInstance(),
-            OpenGLFeatureFactory = 'OpenGLFeatureFactory':getInstance(),
-            (get({ProgressCanvas, '$class'})):addNormalPortion(ProgressCanvas, 50, "Demo Thread"),
-            (get({This, '$class'})):setCurrentThread(This),
-            (get({This, '$class'})):setRunning(This, true),
-            case (get({Features, '$class'})):isFeature(Features, get({'MainFeatureFactory':getInstance(), 'LOAD_ONDEMAND'})) of
-                true ->
-                (get({ProgressCanvas, '$class'})):'end'(ProgressCanvas);
-                false ->
-                (get({ProgressCanvas, '$class'})):addNormalPortion(ProgressCanvas, 50, "Demo Thread Running")
-            end,
-            (get({get({This, fullScreenUtil}), '$class'})):initOnRun(get({This, fullScreenUtil}), This, (get({This, '$class'})):getCustomCommandListener(This)),
-            (get({This, '$class'})):initMenu(This),
-            (get({This, '$class'})):initPostPaint(This),
-            (get({This, '$class'})):updateDemoState(This),
-            case (get({Features, '$class'})):isDefault(Features, get({OpenGLFeatureFactory, 'OPENGL_AS_GAME_THREAD'})) of
-                true ->
-                (fun Loop() -> case ((get({This, gameCanvas}) =:= 'NullGameCanvas':getInstance()) orelse (not (get({get({This, gameCanvas}), '$class'})):isInitialized(get({This, gameCanvas})))) of true ->
-                    (get({get({This, loopTimeHelper}), '$class'})):setStartTimeTNT(get({This, loopTimeHelper})),
-                    (get({This, '$class'})):processGame(This),
-                    (get({This, '$class'})):processLoopSleep(This),
-                    Loop();
-                false -> ok end end)(),
-                put({local, demoGameRunnable}, 'DemoGameRunnable':new(This)),
-                put({local, currentDisplayableFactory}, 'CurrentDisplayableFactory':getInstance()),
-                (get({get({local, currentDisplayableFactory}), '$class'})):setRunnable(get({local, currentDisplayableFactory}), get({local, demoGameRunnable})),
-                (get({get({local, currentDisplayableFactory}), '$class'})):setMyCanvas(get({local, currentDisplayableFactory}), This),
-                (fun(Target_N82987) -> (get({Target_N82987, '$class'})):onResume(Target_N82987) end)('OpenGLThreadUtil':getInstance());
-                false -> ok
-            end,
-            case ((get({Features, '$class'})):isDefault(Features, get({OpenGLFeatureFactory, 'OPENGL_AS_GAME_THREAD'})) orelse 'J2MEUtil':isHTML()) of
-                true ->
-                put({local, demoGameRunnable}, 'DemoGameRunnable':new(This)),
-                put({local, currentDisplayableFactory}, 'CurrentDisplayableFactory':getInstance()),
-                (get({get({local, currentDisplayableFactory}), '$class'})):setRunnable(get({local, currentDisplayableFactory}), get({local, demoGameRunnable})),
-                (get({get({local, currentDisplayableFactory}), '$class'})):setMyCanvas(get({local, currentDisplayableFactory}), This);
-                false ->
-                (fun Loop() -> case (get({This, '$class'})):isRunning(This) of true ->
-                    (get({This, '$class'})):run3(This),
-                    Loop();
-                false -> ok end end)(),
-                (get({This, '$class'})):'end'(This)
-            end
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'RUN'}), E)
-        end,
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'END_RUNNABLE'}), This, get({get({This, commonStrings}), 'RUN'})).
+  def jm_mediaInit(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        AllBinaryMediaManager.jm_init(EarlySoundsFactory.jm_getInstance())
+    end)
+  end
 
-% throws Exception
-run3(This) ->
-        (get({get({This, loopTimeHelper}), '$class'})):setStartTimeTNT(get({This, loopTimeHelper})),
-        (get({This, '$class'})):processGame(This),
-        (get({This, '$class'})):processLoopSleep(This).
 
-setRunning(This, Running) when is_boolean(Running) ->
-        'RunnableCanvas':setRunning(This, Running),
-        try
-            Features = 'Features':getInstance(),
-            OpenGLFeatureFactory = 'OpenGLFeatureFactory':getInstance(),
-            case Running of
-                true ->
-                ok;
-                false ->
-                case ((((get({Features, '$class'})):isDefault(Features, get({OpenGLFeatureFactory, 'OPENGL'})) orelse 'J2MEUtil':isHTML())) orelse get({'SWTUtil', isSWT})) of
-                    true ->
-                    CurrentDisplayableFactory = 'CurrentDisplayableFactory':getInstance(),
-                    (get({CurrentDisplayableFactory, '$class'})):clearRunnable(CurrentDisplayableFactory),
-                    (get({This, '$class'})):'end'(This);
-                    false -> ok
+  def jm_itemStateChanged(this, p_item) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :item, p_item)
+        ForcedLogUtil.jm_log(JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED), this)
+    end)
+  end
+
+
+  def jm_initMenu(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_close, [])
+        JR.lset(f, :commandTextItemArrayFactory, JR.call(DemoLimitedCommandTextItemArrayFactory.jm_getInstance(), :jm_getCommandTextItemArrayFactory, []))
+        JR.lset(f, :items, JR.call(JR.lget(f, :commandTextItemArrayFactory), :jm_getInstance, [JR.call(this, :jm_getCommandStack, []), JR.get(JR.get(this, :basicColorFactory), :BLACK), JR.get(JR.get(this, :basicColorFactory), :WHITE)]))
+        JR.lset(f, :formType, JR.call(FormTypeFactory.jm_getInstance(), :jm_getFormType, []))
+        JR.lset(f, :rectangle, JR.call(JR.get(this, :formUtil), :jm_createFormRectangle, []))
+        PreLogUtil.jm_put(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :commonLabels), :START_LABEL)]), :jm_append, [JR.call(JR.get(this, :displayInfo), :jm_toString, [])]), :jm_toString, []), this, "initMenu")
+        JR.lset(f, :scrollSelectionForm, CommandCurrentSelectionFormFactory.jm_getInstance(JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), JR.lget(f, :items), JR.lget(f, :rectangle), JR.lget(f, :formType), 15, true, JR.get(JR.get(this, :basicColorFactory), :BLACK), JR.get(JR.get(this, :basicColorFactory), :WHITE)))
+        JR.call(this, :jm_setMenuForm, [JR.lget(f, :scrollSelectionForm)])
+        JR.lset(f, :formType2, JR.call(FormTypeFactory.jm_getInstance(), :jm_getFormType, []))
+        JR.lset(f, :rectangle2, JR.call(JR.get(this, :formUtil), :jm_createFormRectangle, []))
+        JR.call(JR.lget(f, :scrollSelectionForm), :jm_init, [JR.lget(f, :rectangle2), JR.lget(f, :formType2)])
+        if (JR.call(this, :jm_getMenuForm, []) != ScrollSelectionFormNoneFactory.jm_getInstance()) do
+            JR.call(this, :jm_setMenuInputProcessor, [CommandFormInputProcessor.jnew(BasicArrayListD.jnew(), -1, this, JR.call(this, :jm_getMenuForm, []))])
+        end
+        JR.call(this, :jm_open, [])
+    end)
+  end
+
+
+  def jm_open(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(BasicMotionGesturesHandler.jm_getInstance(), :jm_addListenerInterface, [JR.call(this, :jm_getMenuInputProcessor, [])])
+        JR.call(GameKeyEventHandler.jm_getInstance(), :jm_addListener, [JR.call(this, :jm_getMenuInputProcessor, [])])
+    end)
+  end
+
+
+  def jm_close(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(BasicMotionGesturesHandler.jm_getInstance(), :jm_removeListener, [JR.call(this, :jm_getMenuInputProcessor, [])])
+        JR.call(GameKeyEventHandler.jm_getInstance(), :jm_removeListener, [JR.call(this, :jm_getMenuInputProcessor, [])])
+    end)
+  end
+
+
+  def jm_getSourceId(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, DemoCanvas.jstatic_id()})
+    end)
+  end
+
+
+  def jm_keyPressed(this, p_keyCode) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+        JR.call(this, :jm_keyPressedByDevice, [JR.lget(f, :keyCode), 0])
+    end)
+  end
+
+
+  def jm_keyReleased(this, p_keyCode) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+        JR.call(this, :jm_keyReleasedByDevice, [JR.lget(f, :keyCode), 0])
+    end)
+  end
+
+
+  def jm_keyRepeated(this, p_keyCode) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+        JR.call(this, :jm_keyRepeatedByDevice, [JR.lget(f, :keyCode), 0])
+    end)
+  end
+
+
+  def jm_keyPressedByDevice(this, p_keyCode, p_deviceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+      JR.lset(f, :deviceId, p_deviceId)
+        JR.call(this, :jm_addGameKeyEvent, [JR.lget(f, :keyCode), false])
+    end)
+  end
+
+
+  def jm_keyReleasedByDevice(this, p_keyCode, p_deviceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+      JR.lset(f, :deviceId, p_deviceId)
+        JR.call(this, :jm_removeGameKeyEvent, [JR.lget(f, :keyCode), false])
+    end)
+  end
+
+
+  def jm_keyRepeatedByDevice(this, p_keyCode, p_deviceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+      JR.lset(f, :deviceId, p_deviceId)
+        if JR.get(this, :isSingleKeyRepeatableProcessing) do
+            JR.call(this, :jm_addGameKeyEvent, [JR.lget(f, :keyCode), true])
+        end
+    end)
+  end
+
+
+  def jm_addGameKeyEvent(this, p_keyCode, p_repeated) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+      JR.lset(f, :repeated, p_repeated)
+        try do
+            JR.lset(f, :gameKey, JR.call(JR.get(this, :inputToGameKeyMapping), :jm_getInstanceForCanvas, [this, JR.lget(f, :keyCode)]))
+            if (JR.lget(f, :gameKey) != JR.get(this, :NONE)) do
+                JR.lset(f, :gameKeyEvent, JR.call(JR.get(this, :gameKeyEventFactory), :jm_getInstanceForInput, [this, JR.lget(f, :gameKey)]))
+                JR.call(DownGameKeyEventHandler.jm_getInstance(), :jm_fireEvent, [JR.lget(f, :gameKeyEvent)])
+            else
+                if (JR.get(this, :lastKeyNotMapped) != JR.lget(f, :keyCode)) do
+                    JR.put(this, :lastKeyNotMapped, JR.lget(f, :keyCode))
+                    JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :gameInputStrings), :NO_KEY)]), :jm_appendint, [JR.lget(f, :keyCode)]), :jm_toString, []), this, JR.get(JR.get(this, :gameInputStrings), :ADD_KEY_EVENT)])
                 end
             end
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({This, 'SET_RUNNING'}), E)
-        end.
-
-% throws Exception
-'end'(This) ->
-        ProgressCanvas = 'ProgressCanvasFactory':getInstance(),
-        Features = 'Features':getInstance(),
-        (get({get({This, baseGameStatistics}), '$class'})):add(get({This, baseGameStatistics}), (fun(Target_N84326) -> (get({Target_N84326, '$class'})):toString(Target_N84326) end)((fun(Target_N84333) -> (get({Target_N84333, '$class'})):append(Target_N84333, get({'CommonSeps':getInstance(), 'NEW_LINE'})) end)((fun(Target_N84340) -> (get({Target_N84340, '$class'})):append(Target_N84340, (get({get({This, baseGameStatistics}), '$class'})):toString(get({This, baseGameStatistics}))) end)((fun(Target_N84347) -> (get({Target_N84347, '$class'})):append(Target_N84347, get({'DemoCanvas', 'BOT_GAME_STATS'})) end)('StringMaker':new()))))),
-        (get({get({This, baseGameStatistics}), '$class'})):init(get({This, baseGameStatistics})),
-        case (get({Features, '$class'})):isFeature(Features, get({'MainFeatureFactory':getInstance(), 'LOAD_ONDEMAND'})) of
-            true ->
-            (get({ProgressCanvas, '$class'})):start(ProgressCanvas);
-            false -> ok
-        end,
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), "Demo End", This, get({get({This, commonStrings}), 'RUN'})),
-        (get({This, '$class'})):close(This),
-        (fun(Target_N84608) -> (get({Target_N84608, '$class'})):removeListener(Target_N84608, This) end)('DisplayChangeEventHandler':getInstance()),
-        (get({This, '$class'})):stopGameDemo(This).
-
-setGameState(This, GameState) ->
-        ok.
-
-getGameState(This) ->
-        get({get({This, gameStateFactory}), 'PLAYING_GAME_STATE'}).
-
-getGameCanvasRunnableInterface(This) ->
-        get({This, gameCanvas}).
-
-isDemoLoading(This) ->
-        try
-        GameCanvas = get({This, gameCanvas}),
-        case (GameCanvas =:= 'NullGameCanvas':getInstance()) of
-            true ->
-            throw({'$return', true});
-            false ->
-            case (get({GameCanvas, '$class'})):isInitialized(GameCanvas) of
-            true ->
-            throw({'$return', false});
-            false -> ok
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, ["Key Event Error", this, JR.get(JR.get(this, :gameInputStrings), :ADD_KEY_EVENT), JR.lget(f, :e)])
         end
-        end,
-        true
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-getState(This) ->
-        get({This, state}).
 
-setState(This, State) when is_integer(State) ->
-        put({This, state}, State).
-
-isHighScoreSubmitted(This) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), "Wow the AI got a high score!", This, "isHighScoreSubmitted"),
-        false.
-
-getRealHighScoresPaintable(This) ->
-        get({This, realHighScoresPaintable}).
-
-setSpecialAnimationInterface(This, SpecialAnimationInterface) ->
-        (get({SpecialAnimationInterface, '$class'})):setFrame(SpecialAnimationInterface, 0),
-        put({This, specialAnimationInterface}, SpecialAnimationInterface).
-
-getSpecialAnimationInterface(This) ->
-        get({This, specialAnimationInterface}).
-
-setPaintableInterface(This, PaintableInterface) ->
-        put({This, paintableInterface}, PaintableInterface).
-
-getPaintableInterface(This) ->
-        get({This, paintableInterface}).
-
-setDefaultPaintableInterface(This, DefaultPaintableInterface) ->
-        put({This, defaultPaintableInterface}, DefaultPaintableInterface).
-
-getDefaultPaintableInterface(This) ->
-        get({This, defaultPaintableInterface}).
-
-getHighScoresFactoryInterface(This) ->
-        get({This, highScoresFactoryInterface}).
-
-setMenuInputProcessor(This, MenuInputProcessor) ->
-        put({This, menuInputProcessor}, MenuInputProcessor).
-
-getMenuInputProcessor(This) ->
-        get({This, menuInputProcessor}).
-
-getMenuForm(This) ->
-        get({This, menuForm}).
-
-setMenuForm(This, MenuForm) ->
-        put({This, menuForm}, MenuForm).
-
-isInitialized(This) ->
-        get({This, initialized}).
-
-getOverlayPaintable(This) ->
-        get({This, overlayPaintable}).
-
-setBasicGameDemoPaintable(This, BasicGameDemoPaintable) ->
-        put({This, basicGameDemoPaintable}, BasicGameDemoPaintable).
-
-getBasicGameDemoPaintable(This) ->
-        get({This, basicGameDemoPaintable}).
-
-setTempWait(This, TempWait) when is_integer(TempWait) ->
-        put({This, tempWait}, TempWait).
-
-getTempWait(This) ->
-        get({This, tempWait}).
-
-isSingleThread(This) ->
-        ((fun(Target_N86257) -> (get({Target_N86257, '$class'})):isAnyThreed(Target_N86257) end)('OpenGLFeatureUtil':getInstance()) orelse get({'SWTUtil', isSWT})).
-
-isRunningInAnotherThread(This) ->
-        try
-        Features = 'Features':getInstance(),
-        OpenGLFeatureFactory = 'OpenGLFeatureFactory':getInstance(),
-        case (get({Features, '$class'})):isDefault(Features, get({OpenGLFeatureFactory, 'OPENGL_AS_GAME_THREAD'})) of
-            true ->
-            throw({'$return', true});
-            false ->
-            throw({'$return', (get({This, '$class'})):isRunning(This)})
+  def jm_removeGameKeyEvent(this, p_keyCode, p_repeated) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+      JR.lset(f, :repeated, p_repeated)
+        try do
+            JR.lset(f, :gameKey, JR.call(JR.get(this, :inputToGameKeyMapping), :jm_getInstanceForCanvas, [this, JR.lget(f, :keyCode)]))
+            if (JR.lget(f, :gameKey) != JR.get(this, :NONE)) do
+                JR.lset(f, :gameKeyEvent, JR.call(JR.get(this, :gameKeyEventFactory), :jm_getInstanceForInput, [this, JR.lget(f, :gameKey)]))
+                JR.call(UpGameKeyEventHandler.jm_getInstance(), :jm_fireEvent, [JR.lget(f, :gameKeyEvent)])
+            else
+                JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :gameInputStrings), :NO_KEY)]), :jm_appendint, [JR.lget(f, :keyCode)]), :jm_toString, []), this, JR.get(JR.get(this, :gameInputStrings), :REMOVE_KEY_EVENT)])
+            end
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, ["Key Event Error", this, JR.get(JR.get(this, :gameInputStrings), :REMOVE_KEY_EVENT), JR.lget(f, :e)])
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-getGameInitializationInterfaceFactoryInterface(This) ->
-        get({This, gameInitializationInterfaceFactoryInterface}).
 
-getType(This) ->
-        get({'DemoCanvas', 'TYPE'}).
+  def jm_pause(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_close, [])
+        JR.call(this, :jm_setPaused, [true])
+        JR.put(this, :gameRunnable, NullWaitGameRunnable.jm_getInstance())
+        JR.call(JR.get(this, :gameCanvas), :jm_pause, [])
+    end)
+  end
 
-getTitle(This) ->
-        'RunnableCanvas':getTitle(This).
 
-isPaused(This) ->
-        'RunnableCanvas':isPaused(This).
+  def jm_unPause(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_open, [])
+        JR.call(JR.get(this, :gameCanvas), :jm_unPause, [])
+        JR.put(this, :gameRunnable, JR.get(JR.get(this, :gameCanvas), :gameRunnable))
+        JR.call(this, :jm_setPaused, [false])
+    end)
+  end
+
+
+  def jm_isPausable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.call(CurrentDisplayableFactory.jm_getInstance(), :jm_getUsedRunnable, []) == NullWaitGameRunnable.jm_getInstance()) do
+            throw({:jreturn, true})
+        else
+            throw({:jreturn, false})
+        end
+    end)
+  end
+
+
+  def jm_isGameOver(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED)]), :jm_append, [" since not a game"]), :jm_toString, []), this, "isGameOver"])
+        throw({:jreturn, false})
+    end)
+  end
+
+
+  def jm_setLoadStateHashtable(this, p_hashtable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :hashtable, p_hashtable)
+        JR.call(JR.get(this, :logUtil), :jm_putF, ["Trying to continue a demo lol - only continue a game canvas not the demo", this, "setLoadStateHashtable"])
+    end)
+  end
+
+
+  def jm_getLoadStateHashtable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :logUtil), :jm_putF, ["Trying to continue a demo lol - only continue a game canvas not the demo", this, "getLoadStateHashtable"])
+        throw({:jreturn, JR.get(JR.get(this, :stdUtil), :NULL_TABLE)})
+    end)
+  end
+
+
+  def jm_getCurrentStateHashtable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :logUtil), :jm_putF, ["Trying to save the AI lol", this, "getCurrentStateHashtable"])
+        throw({:jreturn, JR.get(JR.get(this, :stdUtil), :NULL_TABLE)})
+    end)
+  end
+
+
+  def jm_setHighScoreSubmitted(this, p_isNotUsed) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :isNotUsed, p_isNotUsed)
+        nil
+    end)
+  end
+
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.get(this, :paintableInterface), :jm_paint, [JR.lget(f, :graphics)])
+        JR.call(JR.get(this, :paintedSpecialAnimationInterface), :jm_paintXY, [JR.lget(f, :graphics), 0, 0])
+        JR.call(JR.get(this, :highScoresPaintable), :jm_paint, [JR.lget(f, :graphics)])
+        JR.call(JR.call(this, :jm_getBasicGameDemoPaintable, []), :jm_paint, [JR.lget(f, :graphics)])
+        JR.call(JR.get(this, :overlayPaintable), :jm_paint, [JR.lget(f, :graphics)])
+        JR.call(JR.get(this, :fullscreenPaintable), :jm_paint, [JR.lget(f, :graphics)])
+        JR.call(JR.get(this, :progressPaintable), :jm_paint, [JR.lget(f, :graphics)])
+    end)
+  end
+
+
+  def jm_paintThreed(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.get(this, :paintableInterface), :jm_paintThreed, [JR.lget(f, :graphics)])
+        JR.call(JR.get(this, :paintedSpecialAnimationInterface), :jm_paintThreedXYZ, [JR.lget(f, :graphics), 0, 0, 0])
+    end)
+  end
+
+
+  def jm_processGameOver(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :logUtil), :jm_putF, ["Not Implemented since not a game", this, "setGameOver"])
+    end)
+  end
+
+
+  def jm_demoStateChange(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :newState, JR.int32(JR.get(this, :state) + 1))
+        if (JR.lget(f, :newState) > 2) do
+            JR.lset(f, :newState, 0)
+        else
+            if (JR.lget(f, :newState) == 2) do
+            if !JR.call(JR.get(this, :highScoresHelper), :jm_isAnyHighScores, []) do
+                JR.lset(f, :newState, 0)
+            else
+                JR.lset(f, :highScores, JR.call(JR.get(this, :highScoresHelper), :jm_getNextHighScores, []))
+                if (JR.lget(f, :highScores) == NullHighScoresSingletonFactory.jm_getInstance()) do
+                    JR.lset(f, :newState, 0)
+                else
+                    JR.call(JR.call(this, :jm_getRealHighScoresPaintable, []), :jm_setHighScores, [JR.lget(f, :highScores)])
+                end
+            end
+        end
+        end
+        JR.call(this, :jm_setState, [JR.lget(f, :newState)])
+        JR.call(this, :jm_updateDemoState, [])
+    end)
+  end
+
+
+  def jm_updateDemoState(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        PreLogUtil.jm_put(JR.call(JR.call(SmallIntegerSingletonFactory.jm_getInstance(), :jm_createInstance, [JR.get(this, :state)]), :jm_toString, []), this, JR.get(this, :SET_STATE))
+        JR.call(JR.call(this, :jm_getBasicGameDemoPaintable, []), :jm_setState, [JR.get(this, :state)])
+        if (JR.get(this, :state) == 0) do
+            JR.put(this, :highScoresPaintable, NullPaintable.jm_getInstance())
+            JR.put(this, :paintedSpecialAnimationInterface, JR.call(this, :jm_getSpecialAnimationInterface, []))
+            if (!JR.call(JR.get(this, :demoGameRunnable), :jm_isRunning, []) && JR.call(JR.get(this, :gameCanvas), :jm_isInitialized, [])) do
+                JR.call(JR.call(this, :jm_getSpecialAnimationInterface, []), :jm_reset, [])
+            end
+        else
+            if (JR.get(this, :state) == 1) do
+            JR.put(this, :paintedSpecialAnimationInterface, SpecialAnimation.jm_getInstance())
+        else
+            if (JR.get(this, :state) == 2) do
+            JR.put(this, :highScoresPaintable, JR.call(this, :jm_getRealHighScoresPaintable, []))
+        end
+        end
+        end
+        JR.lset(f, :gameAdState, JR.call(JR.get(this, :gameAdStateFactory), :jm_getCurrentInstance, []))
+        JR.call(JR.lget(f, :gameAdState), :jm_processPageAdState, [])
+    end)
+  end
+
+
+  def jm_getNextRandom(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jexception, JR.exception("Exception", JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED))})
+    end)
+  end
+
+
+  def jm_createGameLayerManager(this, p_randomValue) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :randomValue, p_randomValue)
+        throw({:jexception, JR.exception("Exception", JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED))})
+    end)
+  end
+
+
+  def jm_createRunnable(this, p_randomLevel) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :randomLevel, p_randomLevel)
+        throw({:jexception, JR.exception("Exception", JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED))})
+    end)
+  end
+
+
+  def jm_create(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        PreLogUtil.jm_put(JR.get(JR.get(this, :commonStrings), :START), this, "create")
+        JR.put(this, :highScoresPaintable, NullPaintable.jm_getInstance())
+        JR.lset(f, :randomLevel, JR.call(this, :jm_getNextRandom, []))
+        JR.put(this, :gameCanvas, JR.call(this, :jm_createRunnable, [JR.lget(f, :randomLevel)]))
+        JR.put(this, :basicColor, JR.call(JR.call(JR.get(this, :gameCanvas), :jm_getLayerManager, []), :jm_getForegroundBasicColor, []))
+        JR.call(JR.call(this, :jm_getRealHighScoresPaintable, []), :jm_setBasicColorP, [JR.get(this, :basicColor)])
+        JR.call(JR.get(this, :gameCanvas), :jm_setGameCanvasStartListener, [this])
+        JR.lset(f, :gameInfo, JR.call(JR.call(JR.get(this, :gameCanvas), :jm_getLayerManager, []), :jm_getGameInfo, []))
+        JR.call(JR.call(this, :jm_getHighScoresFactoryInterface, []), :jm_fetchHighScores, [JR.lget(f, :gameInfo), JR.get(this, :highScoresHelper)])
+    end)
+  end
+
+
+  def jm_start(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :gameCanvas, JR.get(this, :gameCanvas))
+        PreLogUtil.jm_put(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["Game Thread in DemoCanvas: "]), :jm_append, [JR.call(JR.get(this, :stringUtil), :jm_toString, [JR.lget(f, :gameCanvas)])]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :START))
+        JR.put(this, :canvasThread, JR.call(JR.get(this, :threadFactoryUtil), :jm_getInstanceGameCanvasRunnable, [JR.lget(f, :gameCanvas)]))
+        JR.call(JR.get(this, :gameCanvas), :jm_setThread, [JR.get(this, :canvasThread)])
+        JR.call(JR.get(this, :threadFactoryUtil), :jm_start, [JR.get(this, :canvasThread)])
+        if (JR.call(this, :jm_getWait, []) == JR.get(NullWaitGameRunnable.jm_getInstance(), :WAIT)) do
+            JR.call(this, :jm_setWait, [JR.call(this, :jm_getTempWait, [])])
+        end
+    end)
+  end
+
+
+  def jm_preDemoProcess(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (!JR.call(JR.get(this, :gameCanvas), :jm_isInitialized, []) || (JR.call(JR.get(this, :gameCanvas), :jm_getTitle, []) == NullGameCanvas.jstatic_NO_GAME())) do
+            if AllBinaryMediaManager.jm_update() do
+                if !JR.call(PrimaryPlayerQueueFactory.jm_getInstance(), :jm_process, []) do
+                    JR.call(SecondaryPlayerQueueFactory.jm_getInstance(), :jm_process, [])
+                end
+            end
+        end
+        JR.call(JR.get(this, :overlayPaintable), :jm_update, [])
+    end)
+  end
+
+
+  def jm_process(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        RunnableCanvas.jm_process(this)
+        JR.call(JR.call(this, :jm_getMenuInputProcessor, []), :jm_processInputList, [])
+        JR.call(this, :jm_preDemoProcess, [])
+        if (JR.get(this, :state) == 0) do
+            JR.lset(f, :indexedAnimationBehavior, (JR.call(JR.call(this, :jm_getSpecialAnimationInterface, []), :jm_getAnimationBehavior, [])))
+            if (JR.get(JR.lget(f, :indexedAnimationBehavior), :loopIndex) < 1) do
+                JR.call(JR.get(this, :timeDelayHelper), :jm_setStartTimeTNT, [])
+            end
+            JR.lset(f, :demoGameMidlet, JR.call(this, :jm_getCustomCommandListener, []))
+            if ((JR.get(this, :gameCanvas) != NullGameCanvas.jm_getInstance()) && JR.call(JR.get(this, :gameCanvas), :jm_isGameOver, [])) do
+                JR.call(this, :jm_stopGameDemo, [])
+                JR.lset(f, :randomLevel, JR.call(this, :jm_getNextRandom, []))
+                JR.lset(f, :gameInfo, JR.call(JR.call(JR.get(this, :gameCanvas), :jm_getLayerManager, []), :jm_getGameInfo, []))
+                JR.call(JR.lget(f, :gameInfo), :jm_setCurrentLevel, [JR.lget(f, :randomLevel)])
+                JR.call(JR.get(this, :gameCanvas), :jm_setGameOver, [false])
+                JR.call(this, :jm_start, [])
+            else
+                if ((JR.get(this, :gameCanvas) == NullGameCanvas.jm_getInstance()) && JR.call(JR.lget(f, :demoGameMidlet), :jm_isReady, [])) do
+                if !JR.call(JR.get(this, :demoGameRunnable), :jm_isRunning, []) do
+                    JR.call(this, :jm_startDemoGame, [])
+                    JR.call(JR.get(this, :demoGameRunnable), :jm_setRunning, [true])
+                    JR.lset(f, :thread, JR.call(JR.get(this, :threadFactoryUtil), :jm_getInstanceForRunnable, [JR.get(this, :demoGameRunnable)]))
+                    JR.call(JR.get(this, :demoGameRunnable), :jm_setThread, [JR.lget(f, :thread)])
+                    JR.call(JR.get(this, :threadFactoryUtil), :jm_start, [JR.lget(f, :thread)])
+                end
+            end
+            end
+        end
+    end)
+  end
+
+
+  def jm_startDemoGame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        DemoCanvasProgressUtil.jm_showProgress(this)
+    end)
+  end
+
+
+  def jm_stopGameDemo(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.get(this, :gameCanvas) != NullGameCanvas.jm_getInstance()) do
+            JR.call(JR.get(this, :logUtil), :jm_putF, ["Set Running False", this, "stopGameDemo"])
+            JR.call(JR.get(this, :gameCanvas), :jm_setRunning, [false])
+        end
+        JR.call(ThreadUtil.jm_getInstance(), :jm_join, [JR.get(this, :canvasThread)])
+    end)
+  end
+
+
+  def jm_showGamePaintable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :METHOD_NAME, "showGamePaintable")
+        PreLogUtil.jm_put(JR.get(JR.get(this, :commonStrings), :START), this, JR.lget(f, :METHOD_NAME))
+        JR.lset(f, :isDefault, J2MEUtil.jm_isHTML())
+        if (((JR.get(this, :gameCanvas) != NullGameCanvas.jm_getInstance()) && (((JR.call(JR.get(this, :gameCanvas), :jm_isRunning, []) || JR.lget(f, :isDefault)) || SWTUtil.jstatic_isSWT()))) && !((JR.call(JR.get(this, :gameCanvas), :jm_getType, []) == NullGameCanvas.jstatic_TYPE()))) do
+            JR.put(this, :gameRunnable, JR.get(JR.get(this, :gameCanvas), :gameRunnable))
+            PreLogUtil.jm_put("Showing Game", this, JR.lget(f, :METHOD_NAME))
+            JR.call(this, :jm_setPaintableInterface, [JR.get(this, :gameCanvas)])
+        else
+            JR.put(this, :gameRunnable, NullWaitGameRunnable.jm_getInstance())
+            PreLogUtil.jm_put("Not Showing Game", this, JR.lget(f, :METHOD_NAME))
+            JR.call(this, :jm_setPaintableInterface, [JR.call(this, :jm_getDefaultPaintableInterface, [])])
+        end
+    end)
+  end
+
+
+  def jm_isReadyForStateChange(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, (!JR.call(JR.get(this, :demoGameRunnable), :jm_isRunning, []) && JR.call(JR.get(this, :gameCanvas), :jm_isInitialized, []))})
+    end)
+  end
+
+
+  def jm_processGame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :gameRunnable), :jm_run, [])
+        if (!JR.call(JR.get(this, :specialAnimationInterface), :jm_isComplete, []) && JR.call(this, :jm_isReadyForStateChange, [])) do
+            JR.call(JR.get(this, :specialAnimationInterface), :jm_nextFrame, [])
+        end
+        if (JR.call(JR.get(this, :timeDelayHelper), :jm_isTimeTNT, []) && JR.call(this, :jm_isReadyForStateChange, [])) do
+            JR.call(this, :jm_demoStateChange, [])
+        else
+            JR.call(this, :jm_process, [])
+        end
+    end)
+  end
+
+
+  def jm_run(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START_RUNNABLE), this, JR.get(JR.get(this, :commonStrings), :RUN)])
+        try do
+            JR.lset(f, :progressCanvas, ProgressCanvasFactory.jm_getInstance())
+            JR.lset(f, :features, Features.jm_getInstance())
+            JR.lset(f, :openGLFeatureFactory, OpenGLFeatureFactory.jm_getInstance())
+            JR.call(JR.lget(f, :progressCanvas), :jm_addNormalPortion, [50, "Demo Thread"])
+            JR.call(this, :jm_setCurrentThread, [])
+            JR.call(this, :jm_setRunning, [true])
+            if JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(MainFeatureFactory.jm_getInstance(), :LOAD_ONDEMAND)]) do
+                JR.call(JR.lget(f, :progressCanvas), :jm_end, [])
+            else
+                JR.call(JR.lget(f, :progressCanvas), :jm_addNormalPortion, [50, "Demo Thread Running"])
+            end
+            JR.call(JR.get(this, :fullScreenUtil), :jm_initOnRun, [this, JR.call(this, :jm_getCustomCommandListener, [])])
+            JR.call(this, :jm_initMenu, [])
+            JR.call(this, :jm_initPostPaint, [])
+            JR.call(this, :jm_updateDemoState, [])
+            if JR.call(JR.lget(f, :features), :jm_isDefault, [JR.get(JR.lget(f, :openGLFeatureFactory), :OPENGL_AS_GAME_THREAD)]) do
+                JR.jwhile(fn -> ((JR.get(this, :gameCanvas) == NullGameCanvas.jm_getInstance()) || !JR.call(JR.get(this, :gameCanvas), :jm_isInitialized, [])) end, fn ->
+                    JR.call(JR.get(this, :loopTimeHelper), :jm_setStartTimeTNT, [])
+                    JR.call(this, :jm_processGame, [])
+                    JR.call(this, :jm_processLoopSleep, [])
+                end)
+                JR.lset(f, :demoGameRunnable, DemoGameRunnable.jnew(this))
+                JR.lset(f, :currentDisplayableFactory, CurrentDisplayableFactory.jm_getInstance())
+                JR.call(JR.lget(f, :currentDisplayableFactory), :jm_setRunnable, [JR.lget(f, :demoGameRunnable)])
+                JR.call(JR.lget(f, :currentDisplayableFactory), :jm_setMyCanvas, [this])
+                JR.call(OpenGLThreadUtil.jm_getInstance(), :jm_onResume, [])
+            end
+            if (JR.call(JR.lget(f, :features), :jm_isDefault, [JR.get(JR.lget(f, :openGLFeatureFactory), :OPENGL_AS_GAME_THREAD)]) || J2MEUtil.jm_isHTML()) do
+                JR.lset(f, :demoGameRunnable, DemoGameRunnable.jnew(this))
+                JR.lset(f, :currentDisplayableFactory, CurrentDisplayableFactory.jm_getInstance())
+                JR.call(JR.lget(f, :currentDisplayableFactory), :jm_setRunnable, [JR.lget(f, :demoGameRunnable)])
+                JR.call(JR.lget(f, :currentDisplayableFactory), :jm_setMyCanvas, [this])
+            else
+                JR.jwhile(fn -> JR.call(this, :jm_isRunning, []) end, fn ->
+                    JR.call(this, :jm_run3, [])
+                end)
+                JR.call(this, :jm_end, [])
+            end
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :RUN), JR.lget(f, :e)])
+        end
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :END_RUNNABLE), this, JR.get(JR.get(this, :commonStrings), :RUN)])
+    end)
+  end
+
+
+  def jm_run3(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :loopTimeHelper), :jm_setStartTimeTNT, [])
+        JR.call(this, :jm_processGame, [])
+        JR.call(this, :jm_processLoopSleep, [])
+    end)
+  end
+
+
+  def jm_setRunning(this, p_running) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :running, p_running)
+        RunnableCanvas.jm_setRunning(this, JR.lget(f, :running))
+        try do
+            JR.lset(f, :features, Features.jm_getInstance())
+            JR.lset(f, :openGLFeatureFactory, OpenGLFeatureFactory.jm_getInstance())
+            if JR.lget(f, :running) do
+                nil
+            else
+                if (((JR.call(JR.lget(f, :features), :jm_isDefault, [JR.get(JR.lget(f, :openGLFeatureFactory), :OPENGL)]) || J2MEUtil.jm_isHTML())) || SWTUtil.jstatic_isSWT()) do
+                    JR.lset(f, :currentDisplayableFactory, CurrentDisplayableFactory.jm_getInstance())
+                    JR.call(JR.lget(f, :currentDisplayableFactory), :jm_clearRunnable, [])
+                    JR.call(this, :jm_end, [])
+                end
+            end
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(this, :SET_RUNNING), JR.lget(f, :e)])
+        end
+    end)
+  end
+
+
+  def jm_end(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :progressCanvas, ProgressCanvasFactory.jm_getInstance())
+        JR.lset(f, :features, Features.jm_getInstance())
+        JR.call(JR.get(this, :baseGameStatistics), :jm_add, [JR.call(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [DemoCanvas.jstatic_BOT_GAME_STATS()]), :jm_append, [JR.call(JR.get(this, :baseGameStatistics), :jm_toString, [])]), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :NEW_LINE)]), :jm_toString, [])])
+        JR.call(JR.get(this, :baseGameStatistics), :jm_init, [])
+        if JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(MainFeatureFactory.jm_getInstance(), :LOAD_ONDEMAND)]) do
+            JR.call(JR.lget(f, :progressCanvas), :jm_start, [])
+        end
+        JR.call(JR.get(this, :logUtil), :jm_putF, ["Demo End", this, JR.get(JR.get(this, :commonStrings), :RUN)])
+        JR.call(this, :jm_close, [])
+        JR.call(DisplayChangeEventHandler.jm_getInstance(), :jm_removeListener, [this])
+        JR.call(this, :jm_stopGameDemo, [])
+    end)
+  end
+
+
+  def jm_setGameState(this, p_gameState) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameState, p_gameState)
+        nil
+    end)
+  end
+
+
+  def jm_getGameState(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(JR.get(this, :gameStateFactory), :PLAYING_GAME_STATE)})
+    end)
+  end
+
+
+  def jm_getGameCanvasRunnableInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :gameCanvas)})
+    end)
+  end
+
+
+  def jm_isDemoLoading(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :gameCanvas, JR.get(this, :gameCanvas))
+        if (JR.lget(f, :gameCanvas) == NullGameCanvas.jm_getInstance()) do
+            throw({:jreturn, true})
+        else
+            if JR.call(JR.lget(f, :gameCanvas), :jm_isInitialized, []) do
+            throw({:jreturn, false})
+        end
+        end
+        throw({:jreturn, true})
+    end)
+  end
+
+
+  def jm_getState(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :state)})
+    end)
+  end
+
+
+  def jm_setState(this, p_state) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :state, p_state)
+        JR.put(this, :state, JR.lget(f, :state))
+    end)
+  end
+
+
+  def jm_isHighScoreSubmitted(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :logUtil), :jm_putF, ["Wow the AI got a high score!", this, "isHighScoreSubmitted"])
+        throw({:jreturn, false})
+    end)
+  end
+
+
+  def jm_getRealHighScoresPaintable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :realHighScoresPaintable)})
+    end)
+  end
+
+
+  def jm_setSpecialAnimationInterface(this, p_specialAnimationInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :specialAnimationInterface, p_specialAnimationInterface)
+        JR.call(JR.lget(f, :specialAnimationInterface), :jm_setFrame, [0])
+        JR.put(this, :specialAnimationInterface, JR.lget(f, :specialAnimationInterface))
+    end)
+  end
+
+
+  def jm_getSpecialAnimationInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :specialAnimationInterface)})
+    end)
+  end
+
+
+  def jm_setPaintableInterface(this, p_paintableInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :paintableInterface, p_paintableInterface)
+        JR.put(this, :paintableInterface, JR.lget(f, :paintableInterface))
+    end)
+  end
+
+
+  def jm_getPaintableInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :paintableInterface)})
+    end)
+  end
+
+
+  def jm_setDefaultPaintableInterface(this, p_defaultPaintableInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :defaultPaintableInterface, p_defaultPaintableInterface)
+        JR.put(this, :defaultPaintableInterface, JR.lget(f, :defaultPaintableInterface))
+    end)
+  end
+
+
+  def jm_getDefaultPaintableInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :defaultPaintableInterface)})
+    end)
+  end
+
+
+  def jm_getHighScoresFactoryInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :highScoresFactoryInterface)})
+    end)
+  end
+
+
+  def jm_setMenuInputProcessor(this, p_menuInputProcessor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :menuInputProcessor, p_menuInputProcessor)
+        JR.put(this, :menuInputProcessor, JR.lget(f, :menuInputProcessor))
+    end)
+  end
+
+
+  def jm_getMenuInputProcessor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :menuInputProcessor)})
+    end)
+  end
+
+
+  def jm_getMenuForm(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :menuForm)})
+    end)
+  end
+
+
+  def jm_setMenuForm(this, p_menuForm) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :menuForm, p_menuForm)
+        JR.put(this, :menuForm, JR.lget(f, :menuForm))
+    end)
+  end
+
+
+  def jm_isInitialized(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :initialized)})
+    end)
+  end
+
+
+  def jm_getOverlayPaintable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :overlayPaintable)})
+    end)
+  end
+
+
+  def jm_setBasicGameDemoPaintable(this, p_basicGameDemoPaintable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicGameDemoPaintable, p_basicGameDemoPaintable)
+        JR.put(this, :basicGameDemoPaintable, JR.lget(f, :basicGameDemoPaintable))
+    end)
+  end
+
+
+  def jm_getBasicGameDemoPaintable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :basicGameDemoPaintable)})
+    end)
+  end
+
+
+  def jm_setTempWait(this, p_tempWait) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :tempWait, p_tempWait)
+        JR.put(this, :tempWait, JR.lget(f, :tempWait))
+    end)
+  end
+
+
+  def jm_getTempWait(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :tempWait)})
+    end)
+  end
+
+
+  def jm_isSingleThread(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, (JR.call(OpenGLFeatureUtil.jm_getInstance(), :jm_isAnyThreed, []) || SWTUtil.jstatic_isSWT())})
+    end)
+  end
+
+
+  def jm_isRunningInAnotherThread(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :features, Features.jm_getInstance())
+        JR.lset(f, :openGLFeatureFactory, OpenGLFeatureFactory.jm_getInstance())
+        if JR.call(JR.lget(f, :features), :jm_isDefault, [JR.get(JR.lget(f, :openGLFeatureFactory), :OPENGL_AS_GAME_THREAD)]) do
+            throw({:jreturn, true})
+        else
+            throw({:jreturn, JR.call(this, :jm_isRunning, [])})
+        end
+    end)
+  end
+
+
+  def jm_getGameInitializationInterfaceFactoryInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :gameInitializationInterfaceFactoryInterface)})
+    end)
+  end
+
+
+  def jm_getType(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, DemoCanvas.jstatic_TYPE()})
+    end)
+  end
+
+
+  def jm_getTitle(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, RunnableCanvas.jm_getTitle(this)})
+    end)
+  end
+
+
+  def jm_isPaused(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, RunnableCanvas.jm_isPaused(this)})
+    end)
+  end
+end
+
 

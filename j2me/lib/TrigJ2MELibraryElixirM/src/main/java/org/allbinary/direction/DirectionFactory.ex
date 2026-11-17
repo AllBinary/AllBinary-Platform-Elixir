@@ -1,65 +1,91 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.direction
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonPhoneStrings
-% import org.allbinary.string.CommonSeps
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.direction
 
--module('DirectionFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule DirectionFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> DirectionFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'DirectionFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :NAME, nil)
+    JR.put(this, :LEFT, nil)
+    JR.put(this, :RIGHT, nil)
+    JR.put(this, :DOWN, nil)
+    JR.put(this, :UP, nil)
+    JR.put(this, :UP_LEFT, nil)
+    JR.put(this, :UP_RIGHT, nil)
+    JR.put(this, :DOWN_LEFT, nil)
+    JR.put(this, :DOWN_RIGHT, nil)
+    JR.put(this, :NOT_BORDERED_WITH, nil)
+    JR.put(this, :NO_DIRECTION, nil)
+    JR.put(this, :TOP, nil)
+    JR.put(this, :BOTTOM, nil)
+    JR.put(this, :ALL_DIRECTION, nil)
+        JR.put(this, :NAME, "DIRECTION")
+        JR.put(this, :LEFT, Direction.jnew(JR.get(CommonPhoneStrings.jm_getInstance(), :LEFT), "WEST", 0, 1))
+        JR.put(this, :RIGHT, Direction.jnew(JR.get(CommonPhoneStrings.jm_getInstance(), :RIGHT), "EAST", 1, 0))
+        JR.put(this, :DOWN, Direction.jnew(JR.get(CommonPhoneStrings.jm_getInstance(), :DOWN), "SOUTH", 2, 0))
+        JR.put(this, :UP, Direction.jnew(JR.get(CommonPhoneStrings.jm_getInstance(), :UP), "NORTH", 3, 0))
+        
+        
+        
+        
+        JR.put(this, :NOT_BORDERED_WITH, Direction.jnew("NOT_BORDERED_WITH", "NOT_BORDERED_WITH", 8, 0))
+        JR.put(this, :NO_DIRECTION, Direction.jnew("NO_DIRECTION", "NO_DIRECTION", 9, 0))
+        JR.put(this, :TOP, Direction.jnew("TOP", "TOP", 10, 0))
+        JR.put(this, :BOTTOM, Direction.jnew("BOTTOM", "BOTTOM", 11, 0))
+        JR.put(this, :ALL_DIRECTION, Direction.jnew("ALL_DIRECTION", "ALL_DIRECTION", 12, 0))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'NAME'}, "DIRECTION"),
-    put({This, 'LEFT'}, 'Direction':new(get({'CommonPhoneStrings':getInstance(), 'LEFT'}), "WEST", 0, 1)),
-    put({This, 'RIGHT'}, 'Direction':new(get({'CommonPhoneStrings':getInstance(), 'RIGHT'}), "EAST", 1, 0)),
-    put({This, 'DOWN'}, 'Direction':new(get({'CommonPhoneStrings':getInstance(), 'DOWN'}), "SOUTH", 2, 0)),
-    put({This, 'UP'}, 'Direction':new(get({'CommonPhoneStrings':getInstance(), 'UP'}), "NORTH", 3, 0)),
-    put({This, 'UP_LEFT'}, undefined),
-    put({This, 'UP_RIGHT'}, undefined),
-    put({This, 'DOWN_LEFT'}, undefined),
-    put({This, 'DOWN_RIGHT'}, undefined),
-    put({This, 'NOT_BORDERED_WITH'}, 'Direction':new("NOT_BORDERED_WITH", "NOT_BORDERED_WITH", 8, 0)),
-    put({This, 'NO_DIRECTION'}, 'Direction':new("NO_DIRECTION", "NO_DIRECTION", 9, 0)),
-    put({This, 'TOP'}, 'Direction':new("TOP", "TOP", 10, 0)),
-    put({This, 'BOTTOM'}, 'Direction':new("BOTTOM", "BOTTOM", 11, 0)),
-    put({This, 'ALL_DIRECTION'}, 'Direction':new("ALL_DIRECTION", "ALL_DIRECTION", 12, 0)),
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, DirectionFactory.jstatic_instance()})
+    end)
+  end
 
 
-getInstance() ->
-        get({'DirectionFactory', instance}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.lset(f, :commonSeps, CommonSeps.jm_getInstance())
+        JR.put(this, :UP_LEFT, Direction.jnew("UP LEFT", JR.call(JR.call(JR.call(JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(this, :UP), :jm_getOtherName, [])]), :jm_append, [JR.get(JR.lget(f, :commonSeps), :SPACE)]), :jm_append, [JR.call(JR.get(this, :LEFT), :jm_getOtherName, [])]), :jm_toString, []), 4, 0))
+        JR.call(JR.lget(f, :stringBuffer), :jm_delete, [0, JR.call(JR.lget(f, :stringBuffer), :jm_length, [])])
+        JR.put(this, :UP_RIGHT, Direction.jnew("UP RIGHT", JR.call(JR.call(JR.call(JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(this, :UP), :jm_getOtherName, [])]), :jm_append, [JR.get(JR.lget(f, :commonSeps), :SPACE)]), :jm_append, [JR.call(JR.get(this, :RIGHT), :jm_getOtherName, [])]), :jm_toString, []), 5, 0))
+        JR.call(JR.lget(f, :stringBuffer), :jm_delete, [0, JR.call(JR.lget(f, :stringBuffer), :jm_length, [])])
+        JR.put(this, :DOWN_LEFT, Direction.jnew("DOWN LEFT", JR.call(JR.call(JR.call(JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(this, :DOWN), :jm_getOtherName, [])]), :jm_append, [JR.get(JR.lget(f, :commonSeps), :SPACE)]), :jm_append, [JR.call(JR.get(this, :LEFT), :jm_getOtherName, [])]), :jm_toString, []), 6, 0))
+        JR.call(JR.lget(f, :stringBuffer), :jm_delete, [0, JR.call(JR.lget(f, :stringBuffer), :jm_length, [])])
+        JR.put(this, :DOWN_RIGHT, Direction.jnew("DOWN RIGHT", JR.call(JR.call(JR.call(JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(this, :DOWN), :jm_getOtherName, [])]), :jm_append, [JR.get(JR.lget(f, :commonSeps), :SPACE)]), :jm_append, [JR.call(JR.get(this, :RIGHT), :jm_getOtherName, [])]), :jm_toString, []), 7, 0))
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+end
 
-'$init'(This) ->
-    init_fields(This),
-        StringBuffer = 'StringMaker':new(),
-        CommonSeps = 'CommonSeps':getInstance(),
-        put({This, 'UP_LEFT'}, 'Direction':new("UP LEFT", (fun(Target_N66726) -> (get({Target_N66726, '$class'})):toString(Target_N66726) end)((fun(Target_N66733) -> (get({Target_N66733, '$class'})):append(Target_N66733, (get({get({This, 'LEFT'}), '$class'})):getOtherName(get({This, 'LEFT'}))) end)((fun(Target_N66740) -> (get({Target_N66740, '$class'})):append(Target_N66740, get({CommonSeps, 'SPACE'})) end)((get({StringBuffer, '$class'})):append(StringBuffer, (get({get({This, 'UP'}), '$class'})):getOtherName(get({This, 'UP'})))))), 4, 0)),
-        (get({StringBuffer, '$class'})):delete(StringBuffer, 0, (get({StringBuffer, '$class'})):length(StringBuffer)),
-        put({This, 'UP_RIGHT'}, 'Direction':new("UP RIGHT", (fun(Target_N66919) -> (get({Target_N66919, '$class'})):toString(Target_N66919) end)((fun(Target_N66926) -> (get({Target_N66926, '$class'})):append(Target_N66926, (get({get({This, 'RIGHT'}), '$class'})):getOtherName(get({This, 'RIGHT'}))) end)((fun(Target_N66933) -> (get({Target_N66933, '$class'})):append(Target_N66933, get({CommonSeps, 'SPACE'})) end)((get({StringBuffer, '$class'})):append(StringBuffer, (get({get({This, 'UP'}), '$class'})):getOtherName(get({This, 'UP'})))))), 5, 0)),
-        (get({StringBuffer, '$class'})):delete(StringBuffer, 0, (get({StringBuffer, '$class'})):length(StringBuffer)),
-        put({This, 'DOWN_LEFT'}, 'Direction':new("DOWN LEFT", (fun(Target_N67112) -> (get({Target_N67112, '$class'})):toString(Target_N67112) end)((fun(Target_N67119) -> (get({Target_N67119, '$class'})):append(Target_N67119, (get({get({This, 'LEFT'}), '$class'})):getOtherName(get({This, 'LEFT'}))) end)((fun(Target_N67126) -> (get({Target_N67126, '$class'})):append(Target_N67126, get({CommonSeps, 'SPACE'})) end)((get({StringBuffer, '$class'})):append(StringBuffer, (get({get({This, 'DOWN'}), '$class'})):getOtherName(get({This, 'DOWN'})))))), 6, 0)),
-        (get({StringBuffer, '$class'})):delete(StringBuffer, 0, (get({StringBuffer, '$class'})):length(StringBuffer)),
-        put({This, 'DOWN_RIGHT'}, 'Direction':new("DOWN RIGHT", (fun(Target_N67305) -> (get({Target_N67305, '$class'})):toString(Target_N67305) end)((fun(Target_N67312) -> (get({Target_N67312, '$class'})):append(Target_N67312, (get({get({This, 'RIGHT'}), '$class'})):getOtherName(get({This, 'RIGHT'}))) end)((fun(Target_N67319) -> (get({Target_N67319, '$class'})):append(Target_N67319, get({CommonSeps, 'SPACE'})) end)((get({StringBuffer, '$class'})):append(StringBuffer, (get({get({This, 'DOWN'}), '$class'})):getOtherName(get({This, 'DOWN'})))))), 7, 0)).
 

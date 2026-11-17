@@ -1,54 +1,103 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.layer.event
-% import org.allbinary.logic.util.event.AllBinaryEventObject
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.layer.event
 
--module('ScrollMapEvent').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule ScrollMapEvent do
+  def jsuper(), do: AllBinaryEventObject
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AllBinaryEventObject', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :dx, 0)
+    JR.put(this, :dy, 0)
+        JR.put(this, :dx, 0)
+        JR.put(this, :dy, 0)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, dx}, 0),
-    put({This, dy}, 0),
-    ok.
+
+  def jinit(this, p_anyType) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+        AllBinaryEventObject.jinit(this, JR.lget(f, :anyType))
+        ScrollMapEvent.jinitfields(this)
+    end)
+  end
+
+  def jnew(p_anyType) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_anyType)
+    this
+  end
 
 
-new(AnyType) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, AnyType),
-    This.
+  def jm_setDx(this, p_dx) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :dx, p_dx)
+        JR.put(this, :dx, JR.lget(f, :dx))
+    end)
+  end
 
-'$init'(This, AnyType) ->
-        'AllBinaryEventObject':'$init'(This, AnyType),
-        init_fields(This).
 
-setDx(This, Dx) when is_integer(Dx) ->
-        put({This, dx}, Dx).
+  def jm_getDx(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :dx)})
+    end)
+  end
 
-getDx(This) ->
-        get({This, dx}).
 
-setDy(This, Dy) when is_integer(Dy) ->
-        put({This, dy}, Dy).
+  def jm_setDy(this, p_dy) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :dy, p_dy)
+        JR.put(this, :dy, JR.lget(f, :dy))
+    end)
+  end
 
-getDy(This) ->
-        get({This, dy}).
 
-setDxDy(This, Dx, Dy) when is_integer(Dx), is_integer(Dy) ->
-        put({This, dx}, Dx),
-        put({This, dy}, Dy).
+  def jm_getDy(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :dy)})
+    end)
+  end
+
+
+  def jm_setDxDy(this, p_dx, p_dy) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :dx, p_dx)
+      JR.lset(f, :dy, p_dy)
+        JR.put(this, :dx, JR.lget(f, :dx))
+        JR.put(this, :dy, JR.lget(f, :dy))
+    end)
+  end
+end
+
 

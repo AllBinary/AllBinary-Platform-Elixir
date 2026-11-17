@@ -1,30 +1,40 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer.pickup
-% import org.allbinary.layer.LayerInterface
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer.pickup
 
--module('PickedUpLayerInterface').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
-
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('LayerInterface', Function, Arguments).
+defmodule PickedUpLayerInterface do
+  def jsuper(), do: JObject
 
 
-getPickedUpLayerInterfaceFactoryInterface(This) ->
-    erlang:error({abstract_method, getPickedUpLayerInterfaceFactoryInterface}).
+  def jm_getPickedUpLayerInterfaceFactoryInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "getPickedUpLayerInterfaceFactoryInterface")})
+    end)
+  end
 
-setPickedUp(This) ->
-    erlang:error({abstract_method, setPickedUp}).
+
+  def jm_setPickedUp(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "setPickedUp")})
+    end)
+  end
+end
+
 

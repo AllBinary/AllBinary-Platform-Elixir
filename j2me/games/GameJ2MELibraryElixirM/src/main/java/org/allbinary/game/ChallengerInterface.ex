@@ -1,15 +1,23 @@
-% 
-% To change this license header, choose License Headers in Project Properties. 
-% To change this template file, choose Tools | Templates 
-% and open the template in the editor.  
-% Generated Code Do Not Modify
-% package org.allbinary.game
+# 
+# To change this license header, choose License Headers in Project Properties. 
+# To change this template file, choose Tools | Templates 
+# and open the template in the editor.  
+# Generated Code Do Not Modify
+# package org.allbinary.game
 
--module('ChallengerInterface').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
+defmodule ChallengerInterface do
+  def jsuper(), do: JObject
 
 
-setWinner(This, IsWinner) when is_boolean(IsWinner) ->
-    erlang:error({abstract_method, setWinner}).
+  def jm_setWinner(this, p_isWinner) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :isWinner, p_isWinner)
+      throw({:jexception, JR.exception("AbstractMethodError", "setWinner")})
+    end)
+  end
+end
+
 

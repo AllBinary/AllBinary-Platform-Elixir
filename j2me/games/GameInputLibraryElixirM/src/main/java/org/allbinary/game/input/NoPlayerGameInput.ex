@@ -1,50 +1,76 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.input
-% import org.allbinary.game.input.event.GameKeyEvent
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.input
 
--module('NoPlayerGameInput').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule NoPlayerGameInput do
+  def jsuper(), do: PlayerGameInput
+def jstatic_SINGLETON(), do: JR.static_get(__MODULE__, :SINGLETON, fn -> NoPlayerGameInput.jnew() end)
+  def jstatic_set_SINGLETON(value), do: JR.static_put(__MODULE__, :SINGLETON, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('PlayerGameInput', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'SINGLETON'}, 'NoPlayerGameInput':new()),
-    ok.
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-getInstance() ->
-        get({'NoPlayerGameInput', 'SINGLETON'}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, NoPlayerGameInput.jstatic_SINGLETON()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-        'PlayerGameInput':'$init'(This, 'BasicArrayListD':new(), 'BasicArrayListD':new(), (-1)).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        PlayerGameInput.jinit(this, BasicArrayListD.jnew(), BasicArrayListD.jnew(), -1)
+        NoPlayerGameInput.jinitfields(this)
+    end)
+  end
 
-onDownGameKeyEvent(This, GameKeyEvent) ->
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-onUpGameKeyEvent(This, GameKeyEvent) ->
-        ok.
+
+  def jm_onDownGameKeyEvent(this, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        nil
+    end)
+  end
+
+
+  def jm_onUpGameKeyEvent(this, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        nil
+    end)
+  end
+end
+
 

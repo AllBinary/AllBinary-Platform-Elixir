@@ -1,45 +1,71 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.form.item
-% import javax.microedition.lcdui.Command
-% import org.allbinary.graphics.color.BasicColor
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item
 
--module('CommandTextItem').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule CommandTextItem do
+  def jsuper(), do: ABTextItem
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ABTextItem', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :command, nil)
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, command}, undefined),
-    ok.
+
+  def jinit(this, p_command, p_layout, p_altText, p_backgroundBasicColor, p_foregroundBasicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :command, p_command)
+      JR.lset(f, :layout, p_layout)
+      JR.lset(f, :altText, p_altText)
+      JR.lset(f, :backgroundBasicColor, p_backgroundBasicColor)
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+        ABTextItem.jinit(this, JR.call(JR.lget(f, :command), :jm_getLabel, []), JR.lget(f, :layout), JR.lget(f, :altText), JR.lget(f, :backgroundBasicColor), JR.lget(f, :foregroundBasicColor))
+        CommandTextItem.jinitfields(this)
+        JR.put(this, :command, JR.lget(f, :command))
+    end)
+  end
+
+  def jnew(p_command, p_layout, p_altText, p_backgroundBasicColor, p_foregroundBasicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_command, p_layout, p_altText, p_backgroundBasicColor, p_foregroundBasicColor)
+    this
+  end
 
 
-new(Command, Layout, AltText, BackgroundBasicColor, ForegroundBasicColor) when is_integer(Layout), (is_list(AltText) orelse AltText =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Command, Layout, AltText, BackgroundBasicColor, ForegroundBasicColor),
-    This.
+  def jm_isFocusable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, true})
+    end)
+  end
 
-'$init'(This, Command, Layout, AltText, BackgroundBasicColor, ForegroundBasicColor) when is_integer(Layout), (is_list(AltText) orelse AltText =:= undefined) ->
-        'ABTextItem':'$init'(This, (get({Command, '$class'})):getLabel(Command), Layout, AltText, BackgroundBasicColor, ForegroundBasicColor),
-        init_fields(This),
-        put({This, command}, Command).
 
-isFocusable(This) ->
-        true.
+  def jm_getCommand(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :command)})
+    end)
+  end
+end
 
-getCommand(This) ->
-        get({This, command}).
 

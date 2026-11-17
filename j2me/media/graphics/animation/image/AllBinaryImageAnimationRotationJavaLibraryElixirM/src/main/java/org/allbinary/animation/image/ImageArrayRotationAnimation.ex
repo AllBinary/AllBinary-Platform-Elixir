@@ -1,59 +1,91 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation.image
-% import javax.microedition.lcdui.Image
-% import org.allbinary.animation.AnimationBehavior
-% import org.allbinary.math.AngleInfo
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
--module('ImageArrayRotationAnimation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule ImageArrayRotationAnimation do
+  def jsuper(), do: ImageArrayBaseRotationAnimation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ImageArrayBaseRotationAnimation', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :expectedTotalFrames, 0)
+        JR.put(this, :expectedTotalFrames, 0)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, expectedTotalFrames}, 0),
-    ok.
+
+  def jm_createAnimation(p_anyType, p_animationBehavior) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+      JR.lset(f, :animationBehavior, p_animationBehavior)
+        JR.lset(f, :imageRotationAnimationInfo, JR.lget(f, :anyType))
+        throw({:jreturn, ImageArrayRotationAnimation.jnew(JR.call(JR.lget(f, :imageRotationAnimationInfo), :jm_getImageArray, []), JR.call(JR.lget(f, :imageRotationAnimationInfo), :jm_getAngleInfoP, []), JR.call(JR.lget(f, :imageRotationAnimationInfo), :jm_getTotalAngle, []), JR.lget(f, :animationBehavior))})
+    end)
+  end
 
 
-% throws Exception
-createAnimation(AnyType, AnimationBehavior) ->
-        ImageRotationAnimationInfo = AnyType,
-        'ImageArrayRotationAnimation':new((get({ImageRotationAnimationInfo, '$class'})):getImageArray(ImageRotationAnimationInfo), (get({ImageRotationAnimationInfo, '$class'})):getAngleInfoP(ImageRotationAnimationInfo), (get({ImageRotationAnimationInfo, '$class'})):getTotalAngle(ImageRotationAnimationInfo), AnimationBehavior).
+  def jinit(this, p_imageArray, p_angleInfo, p_totalAngle, p_animationBehavior) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :imageArray, p_imageArray)
+      JR.lset(f, :angleInfo, p_angleInfo)
+      JR.lset(f, :totalAngle, p_totalAngle)
+      JR.lset(f, :animationBehavior, p_animationBehavior)
+        ImageArrayBaseRotationAnimation.jinit(this, JR.lget(f, :imageArray), JR.lget(f, :angleInfo), JR.lget(f, :animationBehavior))
+        ImageArrayRotationAnimation.jinitfields(this)
+        JR.call(this, :jm_initImageArray, [JR.lget(f, :imageArray), JR.lget(f, :angleInfo), JR.lget(f, :totalAngle)])
+    end)
+  end
 
-new(ImageArray, AngleInfo, TotalAngle, AnimationBehavior) when (is_tuple(ImageArray) orelse ImageArray =:= undefined), is_integer(TotalAngle) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, ImageArray, AngleInfo, TotalAngle, AnimationBehavior),
-    This.
+  def jnew(p_imageArray, p_angleInfo, p_totalAngle, p_animationBehavior) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_imageArray, p_angleInfo, p_totalAngle, p_animationBehavior)
+    this
+  end
 
-'$init'(This, ImageArray, AngleInfo, TotalAngle, AnimationBehavior) when (is_tuple(ImageArray) orelse ImageArray =:= undefined), is_integer(TotalAngle) ->
-        'ImageArrayBaseRotationAnimation':'$init'(This, ImageArray, AngleInfo, AnimationBehavior),
-        init_fields(This),
-        (get({This, '$class'})):initImageArray(This, ImageArray, AngleInfo, TotalAngle).
 
-% throws Exception
-initImageArray(This, ImageArray, AngleInfo, TotalAngle) when (is_tuple(ImageArray) orelse ImageArray =:= undefined), is_integer(TotalAngle) ->
-        put({This, expectedTotalFrames}, (TotalAngle / (fun(Target_N66173) -> (get({Target_N66173, '$class'})):getAngleIncrement(Target_N66173) end)((get({get({This, angleInfo}), '$class'})):getAngleIncrementInfo(get({This, angleInfo}))))),
-        (get({get({This, angleInfo}), '$class'})):adjustAngle(get({This, angleInfo}), 0),
-        case (get({This, expectedTotalFrames}) =/= (get({This, '$class'})):getSize(This)) of
-            true ->
-            erlang:error({'Exception', "Wrong Number of Frames"});
-            false -> ok
-        end.
+  def jm_initImageArray(this, p_imageArray, p_angleInfo, p_totalAngle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :imageArray, p_imageArray)
+      JR.lset(f, :angleInfo, p_angleInfo)
+      JR.lset(f, :totalAngle, p_totalAngle)
+        JR.put(this, :expectedTotalFrames, (JR.lget(f, :totalAngle) / JR.call(JR.call(JR.get(this, :angleInfo), :jm_getAngleIncrementInfo, []), :jm_getAngleIncrement, [])))
+        JR.call(JR.get(this, :angleInfo), :jm_adjustAngle, [0])
+        if (JR.get(this, :expectedTotalFrames) != JR.call(this, :jm_getSize, [])) do
+            throw({:jexception, JR.exception("Exception", "Wrong Number of Frames")})
+        end
+    end)
+  end
 
-setImageArray(This, ImageArray) when (is_tuple(ImageArray) orelse ImageArray =:= undefined) ->
-        'ImageArrayBaseRotationAnimation':setImageArray(This, ImageArray),
-        (get({get({This, angleInfo}), '$class'})):adjustAngle(get({This, angleInfo}), 0).
+
+  def jm_setImageArray(this, p_imageArray) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :imageArray, p_imageArray)
+        ImageArrayBaseRotationAnimation.jm_setImageArray(this, JR.lget(f, :imageArray))
+        JR.call(JR.get(this, :angleInfo), :jm_adjustAngle, [0])
+    end)
+  end
+end
+
 

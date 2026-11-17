@@ -1,56 +1,78 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.ai
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.bounds.BoundsVisitorInterface
-% import org.allbinary.bounds.LayerBounds
-% import org.allbinary.game.ai.BasicAI
-% import org.allbinary.game.input.GameInput
-% import org.allbinary.graphics.Rectangle
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.AllBinaryLayerManager
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
--module('BoundBounceAI').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule BoundBounceAI do
+  def jsuper(), do: BasicAI
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicAI', Function, Arguments).
-
-init_fields(This) ->
-    put({This, currentRelativeAngle}, 0),
-    put({This, layerBounds}, undefined),
-    put({This, boundsVisitorInterface}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :currentRelativeAngle, 0)
+    JR.put(this, :layerBounds, nil)
+    JR.put(this, :boundsVisitorInterface, nil)
+        JR.put(this, :currentRelativeAngle, 0)
+        
+        
+    nil
+  end
 
 
-new(OwnerLayerInterface, GameInput, LayerBounds, BoundsVisitorInterface) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, OwnerLayerInterface, GameInput, LayerBounds, BoundsVisitorInterface),
-    This.
+  def jinit(this, p_ownerLayerInterface, p_gameInput, p_layerBounds, p_boundsVisitorInterface) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownerLayerInterface, p_ownerLayerInterface)
+      JR.lset(f, :gameInput, p_gameInput)
+      JR.lset(f, :layerBounds, p_layerBounds)
+      JR.lset(f, :boundsVisitorInterface, p_boundsVisitorInterface)
+        BasicAI.jinit(this, JR.lget(f, :ownerLayerInterface), JR.lget(f, :gameInput))
+        BoundBounceAI.jinitfields(this)
+        JR.put(this, :layerBounds, JR.lget(f, :layerBounds))
+        JR.put(this, :boundsVisitorInterface, JR.lget(f, :boundsVisitorInterface))
+    end)
+  end
 
-'$init'(This, OwnerLayerInterface, GameInput, LayerBounds, BoundsVisitorInterface) ->
-        'BasicAI':'$init'(This, OwnerLayerInterface, GameInput),
-        init_fields(This),
-        put({This, layerBounds}, LayerBounds),
-        put({This, boundsVisitorInterface}, BoundsVisitorInterface).
+  def jnew(p_ownerLayerInterface, p_gameInput, p_layerBounds, p_boundsVisitorInterface) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_ownerLayerInterface, p_gameInput, p_layerBounds, p_boundsVisitorInterface)
+    this
+  end
 
-paint(This, Graphics) ->
-        Rectange = (get({get({This, layerBounds}), '$class'})):getRectangleP(get({This, layerBounds})),
-        (get({Graphics, '$class'})):drawRect(Graphics, (fun(Target_N66168) -> (get({Target_N66168, '$class'})):getX(Target_N66168) end)((get({Rectange, '$class'})):getPoint(Rectange)), (fun(Target_N66192) -> (get({Target_N66192, '$class'})):getY(Target_N66192) end)((get({Rectange, '$class'})):getPoint(Rectange)), (get({Rectange, '$class'})):getWidth(Rectange), (get({Rectange, '$class'})):getHeight(Rectange)).
 
-% throws Exception
-processAI(This, AllBinaryLayerManager) ->
-        (get({get({This, layerBounds}), '$class'})):visit(get({This, layerBounds}), get({This, boundsVisitorInterface})).
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.lset(f, :rectange, JR.call(JR.get(this, :layerBounds), :jm_getRectangleP, []))
+        JR.call(JR.lget(f, :graphics), :jm_drawRect, [JR.call(JR.call(JR.lget(f, :rectange), :jm_getPoint, []), :jm_getX, []), JR.call(JR.call(JR.lget(f, :rectange), :jm_getPoint, []), :jm_getY, []), JR.call(JR.lget(f, :rectange), :jm_getWidth, []), JR.call(JR.lget(f, :rectange), :jm_getHeight, [])])
+    end)
+  end
+
+
+  def jm_processAI(this, p_allBinaryLayerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerManager, p_allBinaryLayerManager)
+        JR.call(JR.get(this, :layerBounds), :jm_visit, [JR.get(this, :boundsVisitorInterface)])
+    end)
+  end
+end
+
 

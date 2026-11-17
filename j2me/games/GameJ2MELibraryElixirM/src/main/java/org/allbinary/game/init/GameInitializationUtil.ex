@@ -1,85 +1,100 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.init
-% import org.allbinary.game.configuration.event.ChangedGameFeatureListener
-% import org.allbinary.game.configuration.event.GameInitializedEvent
-% import org.allbinary.game.configuration.event.GameInitializedEventHandler
-% import org.allbinary.game.configuration.feature.Features
-% import org.allbinary.game.configuration.feature.MainFeatureFactory
-% import org.allbinary.game.resource.ResourceLoadingLevelFactory
-% import org.allbinary.graphics.displayable.MyCanvas
-% import org.allbinary.logic.system.security.licensing.AbeClientInformationInterface
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.init
 
--module('GameInitializationUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GameInitializationUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> GameInitializationUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'GameInitializationUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :EVENT, nil)
+        JR.put(this, :EVENT, GameInitializedEvent.jnew(this))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'EVENT'}, 'GameInitializedEvent':new(This)),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-% throws Exception
-initDemo(This, AbeClientInformation, Canvas, GameInitializationInterfaceFactoryInterface) ->
-        MainFeatureFactory = 'MainFeatureFactory':getInstance(),
-        case (fun(Target_N66021) -> (get({Target_N66021, '$class'})):isChangedFeature(Target_N66021, get({MainFeatureFactory, 'STATIC'})) end)('ChangedGameFeatureListener':getInstance()) of
-            true ->
-            GameInitializationInterface = (get({GameInitializationInterfaceFactoryInterface, '$class'})):getInstance(GameInitializationInterfaceFactoryInterface),
-            Features = 'Features':getInstance(),
-            case (get({Features, '$class'})):isFeature(Features, get({MainFeatureFactory, 'LOAD_ALL'})) of
-                true ->
-                (get({This, '$class'})):initGame(This, AbeClientInformation, Canvas, GameInitializationInterfaceFactoryInterface);
-                false ->
-                case (get({Features, '$class'})):isFeature(Features, get({MainFeatureFactory, 'LOAD_ONDEMAND'})) of
-                true ->
-                ResourceLoadingLevelFactory = 'ResourceLoadingLevelFactory':getInstance(),
-                (get({GameInitializationInterface, '$class'})):init(GameInitializationInterface, AbeClientInformation, (get({Canvas, '$class'})):getCustomCommandListener(Canvas), (get({get({ResourceLoadingLevelFactory, 'LOAD_EARLY'}), '$class'})):getLevel(get({ResourceLoadingLevelFactory, 'LOAD_EARLY'}))),
-                (get({get({This, 'EVENT'}), '$class'})):setResourceLoadingLevel(get({This, 'EVENT'}), get({ResourceLoadingLevelFactory, 'LOAD_EARLY'}));
-                false ->
-                erlang:error({'Exception', "No Loading Feature Available"})
+  def jm_initDemo(this, p_abeClientInformation, p_canvas, p_gameInitializationInterfaceFactoryInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+      JR.lset(f, :canvas, p_canvas)
+      JR.lset(f, :gameInitializationInterfaceFactoryInterface, p_gameInitializationInterfaceFactoryInterface)
+        JR.lset(f, :mainFeatureFactory, MainFeatureFactory.jm_getInstance())
+        if JR.call(ChangedGameFeatureListener.jm_getInstance(), :jm_isChangedFeature, [JR.get(JR.lget(f, :mainFeatureFactory), :STATIC)]) do
+            JR.lset(f, :gameInitializationInterface, JR.call(JR.lget(f, :gameInitializationInterfaceFactoryInterface), :jm_getInstance, []))
+            JR.lset(f, :features, Features.jm_getInstance())
+            if JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.lget(f, :mainFeatureFactory), :LOAD_ALL)]) do
+                JR.call(this, :jm_initGame, [JR.lget(f, :abeClientInformation), JR.lget(f, :canvas), JR.lget(f, :gameInitializationInterfaceFactoryInterface)])
+            else
+                if JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.lget(f, :mainFeatureFactory), :LOAD_ONDEMAND)]) do
+                JR.lset(f, :resourceLoadingLevelFactory, ResourceLoadingLevelFactory.jm_getInstance())
+                JR.call(JR.lget(f, :gameInitializationInterface), :jm_init, [JR.lget(f, :abeClientInformation), JR.call(JR.lget(f, :canvas), :jm_getCustomCommandListener, []), JR.call(JR.get(JR.lget(f, :resourceLoadingLevelFactory), :LOAD_EARLY), :jm_getLevel, [])])
+                JR.call(JR.get(this, :EVENT), :jm_setResourceLoadingLevel, [JR.get(JR.lget(f, :resourceLoadingLevelFactory), :LOAD_EARLY)])
+            else
+                throw({:jexception, JR.exception("Exception", "No Loading Feature Available")})
             end
-            end,
-            (fun(Target_N66482) -> (get({Target_N66482, '$class'})):fireEvent(Target_N66482, get({This, 'EVENT'})) end)('GameInitializedEventHandler':getInstance());
-            false -> ok
-        end.
+            end
+            JR.call(GameInitializedEventHandler.jm_getInstance(), :jm_fireEvent, [JR.get(this, :EVENT)])
+        end
+    end)
+  end
 
-% throws Exception
-initGame(This, AbeClientInformation, Canvas, GameInitializationInterfaceFactoryInterface) ->
-        case (fun(Target_N66642) -> (get({Target_N66642, '$class'})):isChangedFeature(Target_N66642, get({'MainFeatureFactory':getInstance(), 'STATIC'})) end)('ChangedGameFeatureListener':getInstance()) of
-            true ->
-            GameInitializationInterface = (get({GameInitializationInterfaceFactoryInterface, '$class'})):getInstance(GameInitializationInterfaceFactoryInterface),
-            ResourceLoadingLevelFactory = 'ResourceLoadingLevelFactory':getInstance(),
-            (get({GameInitializationInterface, '$class'})):init(GameInitializationInterface, AbeClientInformation, (get({Canvas, '$class'})):getCustomCommandListener(Canvas), (get({get({ResourceLoadingLevelFactory, 'LOAD_ALL'}), '$class'})):getLevel(get({ResourceLoadingLevelFactory, 'LOAD_ALL'}))),
-            (get({get({This, 'EVENT'}), '$class'})):setResourceLoadingLevel(get({This, 'EVENT'}), get({ResourceLoadingLevelFactory, 'LOAD_ALL'})),
-            (fun(Target_N66900) -> (get({Target_N66900, '$class'})):fireEvent(Target_N66900, get({This, 'EVENT'})) end)('GameInitializedEventHandler':getInstance()),
-            (fun(Target_N66942) -> (get({Target_N66942, '$class'})):remove(Target_N66942, get({'MainFeatureFactory':getInstance(), 'STATIC'})) end)('ChangedGameFeatureListener':getInstance());
-            false -> ok
-        end.
 
-getInstance() ->
-        get({'GameInitializationUtil', instance}).
+  def jm_initGame(this, p_abeClientInformation, p_canvas, p_gameInitializationInterfaceFactoryInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+      JR.lset(f, :canvas, p_canvas)
+      JR.lset(f, :gameInitializationInterfaceFactoryInterface, p_gameInitializationInterfaceFactoryInterface)
+        if JR.call(ChangedGameFeatureListener.jm_getInstance(), :jm_isChangedFeature, [JR.get(MainFeatureFactory.jm_getInstance(), :STATIC)]) do
+            JR.lset(f, :gameInitializationInterface, JR.call(JR.lget(f, :gameInitializationInterfaceFactoryInterface), :jm_getInstance, []))
+            JR.lset(f, :resourceLoadingLevelFactory, ResourceLoadingLevelFactory.jm_getInstance())
+            JR.call(JR.lget(f, :gameInitializationInterface), :jm_init, [JR.lget(f, :abeClientInformation), JR.call(JR.lget(f, :canvas), :jm_getCustomCommandListener, []), JR.call(JR.get(JR.lget(f, :resourceLoadingLevelFactory), :LOAD_ALL), :jm_getLevel, [])])
+            JR.call(JR.get(this, :EVENT), :jm_setResourceLoadingLevel, [JR.get(JR.lget(f, :resourceLoadingLevelFactory), :LOAD_ALL)])
+            JR.call(GameInitializedEventHandler.jm_getInstance(), :jm_fireEvent, [JR.get(this, :EVENT)])
+            JR.call(ChangedGameFeatureListener.jm_getInstance(), :jm_remove, [JR.get(MainFeatureFactory.jm_getInstance(), :STATIC)])
+        end
+    end)
+  end
+
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, GameInitializationUtil.jstatic_instance()})
+    end)
+  end
+end
+
 

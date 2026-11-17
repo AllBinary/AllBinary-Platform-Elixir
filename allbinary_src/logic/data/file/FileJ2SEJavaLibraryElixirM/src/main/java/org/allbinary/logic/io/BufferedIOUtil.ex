@@ -1,51 +1,57 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.io
-% import java.io.BufferedReader
-% import java.io.BufferedWriter
-% import java.io.FileReader
-% import java.io.FileWriter
-% import org.allbinary.logic.io.file.AbFile
-% import org.allbinary.logic.io.file.AbFileNativeUtil
-% import org.allbinary.logic.string.StringUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
--module('BufferedIOUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule BufferedIOUtil do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-% throws Exception
-copy(BackupFile, BackupFileBak) ->
-        put({local, line}, get({'StringUtil':getInstance(), 'EMPTY_STRING'})),
-        TmpOut = 'BufferedWriter':new('FileWriter':new('AbFileNativeUtil':get(BackupFileBak))),
-        TmpIn = 'BufferedReader':new('FileReader':new('AbFileNativeUtil':get(BackupFile))),
-        (fun Loop() -> case (get({TmpIn, '$class'})):ready(TmpIn) of true ->
-            put({local, line}, (get({TmpIn, '$class'})):readLine(TmpIn)),
-            (get({TmpOut, '$class'})):write(TmpOut, get({local, line}), 0, string:length(get({local, line}))),
-            (get({TmpOut, '$class'})):newLine(TmpOut),
-            Loop();
-        false -> ok end end)(),
-        (get({TmpOut, '$class'})):flush(TmpOut).
+  def jm_copy(p_backupFile, p_backupFileBak) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :backupFile, p_backupFile)
+      JR.lset(f, :backupFileBak, p_backupFileBak)
+        JR.lset(f, :line, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+        JR.lset(f, :tmpOut, BufferedWriter.jnew(FileWriter.jnew(AbFileNativeUtil.jm_get(JR.lget(f, :backupFileBak)))))
+        JR.lset(f, :tmpIn, BufferedReader.jnew(FileReader.jnew(AbFileNativeUtil.jm_get(JR.lget(f, :backupFile)))))
+        JR.jwhile(fn -> JR.call(JR.lget(f, :tmpIn), :jm_ready, []) end, fn ->
+            JR.lset(f, :line, JR.call(JR.lget(f, :tmpIn), :jm_readLine, []))
+            JR.call(JR.lget(f, :tmpOut), :jm_write, [JR.lget(f, :line), 0, byte_size(JR.lget(f, :line))])
+            JR.call(JR.lget(f, :tmpOut), :jm_newLine, [])
+        end)
+        JR.call(JR.lget(f, :tmpOut), :jm_flush, [])
+    end)
+  end
+end
+
 

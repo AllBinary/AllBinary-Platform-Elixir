@@ -1,50 +1,70 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.animation.compound
-% import org.allbinary.animation.Animation
-% import org.allbinary.animation.AnimationBehaviorFactory
-% import org.allbinary.animation.AnimationInterfaceFactoryInterface
-% import org.allbinary.animation.RotationAnimation
-% import org.allbinary.logic.communication.log.ForcedLogUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.animation.compound
 
--module('SimultaneousCompoundRotationAnimationInterfaceFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule SimultaneousCompoundRotationAnimationInterfaceFactory do
+  def jsuper(), do: CompoundAnimationInterfaceFactory
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('CompoundAnimationInterfaceFactory', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new(BasicAnimationInterfaceFactoryInterfaceArray, AnimationBehaviorFactory) when (is_tuple(BasicAnimationInterfaceFactoryInterfaceArray) orelse BasicAnimationInterfaceFactoryInterfaceArray =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, BasicAnimationInterfaceFactoryInterfaceArray, AnimationBehaviorFactory),
-    This.
+  def jinit(this, p_basicAnimationInterfaceFactoryInterfaceArray, p_animationBehaviorFactory) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicAnimationInterfaceFactoryInterfaceArray, p_basicAnimationInterfaceFactoryInterfaceArray)
+      JR.lset(f, :animationBehaviorFactory, p_animationBehaviorFactory)
+        CompoundAnimationInterfaceFactory.jinit(this, JR.lget(f, :basicAnimationInterfaceFactoryInterfaceArray), JR.lget(f, :animationBehaviorFactory))
+        SimultaneousCompoundRotationAnimationInterfaceFactory.jinitfields(this)
+        if (JR.lget(f, :animationBehaviorFactory) == AnimationBehaviorFactory.jm_getInstance()) do
+            ForcedLogUtil.jm_log("Using default AnimationBehaviorFactory with IndexedAnimationFactory", this)
+        end
+    end)
+  end
 
-'$init'(This, BasicAnimationInterfaceFactoryInterfaceArray, AnimationBehaviorFactory) when (is_tuple(BasicAnimationInterfaceFactoryInterfaceArray) orelse BasicAnimationInterfaceFactoryInterfaceArray =:= undefined) ->
-        'CompoundAnimationInterfaceFactory':'$init'(This, BasicAnimationInterfaceFactoryInterfaceArray, AnimationBehaviorFactory),
-        case (AnimationBehaviorFactory =:= 'AnimationBehaviorFactory':getInstance()) of
-            true ->
-            'ForcedLogUtil':log("Using default AnimationBehaviorFactory with IndexedAnimationFactory", This);
-            false -> ok
-        end.
+  def jnew(p_basicAnimationInterfaceFactoryInterfaceArray, p_animationBehaviorFactory) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_basicAnimationInterfaceFactoryInterfaceArray, p_animationBehaviorFactory)
+    this
+  end
 
-createArray(This, Size) when is_integer(Size) ->
-        array:new(Size, {default, undefined}).
 
-createAnimation(This, AnimationInterfaceArray) when (is_tuple(AnimationInterfaceArray) orelse AnimationInterfaceArray =:= undefined) ->
-        'SimultaneousCompoundRotationAnimation':new(AnimationInterfaceArray, (get({get({This, animationBehaviorFactory}), '$class'})):getOrCreateInstance(get({This, animationBehaviorFactory}))).
+  def jm_createArray(this, p_size) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :size, p_size)
+        throw({:jreturn, JR.anew(JR.lget(f, :size), nil)})
+    end)
+  end
+
+
+  def jm_createAnimation(this, p_animationInterfaceArray) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :animationInterfaceArray, p_animationInterfaceArray)
+        throw({:jreturn, SimultaneousCompoundRotationAnimation.jnew(JR.lget(f, :animationInterfaceArray), JR.call(JR.get(this, :animationBehaviorFactory), :jm_getOrCreateInstance, []))})
+    end)
+  end
+end
+
 

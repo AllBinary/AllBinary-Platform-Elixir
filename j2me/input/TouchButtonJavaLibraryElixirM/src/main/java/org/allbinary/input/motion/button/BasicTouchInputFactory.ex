@@ -1,117 +1,169 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion.button
-% import org.allbinary.game.input.InputFactory
-% import org.allbinary.game.input.mapping.InputToGameKeyMapping
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonLabels
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
--module('BasicTouchInputFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule BasicTouchInputFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT) end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, get({'NullUtil':getInstance(), 'NULL_OBJECT'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :SPECIAL_BUTTON_SEVEN_TESTING_ONLY, nil)
+    JR.put(this, :SPECIAL_BUTTON_EIGHT_TESTING_ONLY, nil)
+    JR.put(this, :SPECIAL_BUTTON_SIX, nil)
+    JR.put(this, :SPECIAL_BUTTON_FIVE, nil)
+    JR.put(this, :SPECIAL_BUTTON_FOUR, nil)
+    JR.put(this, :SPECIAL_BUTTON_THREE, nil)
+    JR.put(this, :SPECIAL_BUTTON_TWO, nil)
+    JR.put(this, :SPECIAL_BUTTON_ONE, nil)
+    JR.put(this, :UP, nil)
+    JR.put(this, :LEFT, nil)
+    JR.put(this, :RIGHT, nil)
+    JR.put(this, :DOWN, nil)
+    JR.put(this, :NONE, nil)
+    JR.put(this, :initialized, false)
+    JR.put(this, :list, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        JR.put(this, :initialized, false)
+        JR.put(this, :list, BasicArrayListD.jnew())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, 'SPECIAL_BUTTON_SEVEN_TESTING_ONLY'}, undefined),
-    put({This, 'SPECIAL_BUTTON_EIGHT_TESTING_ONLY'}, undefined),
-    put({This, 'SPECIAL_BUTTON_SIX'}, undefined),
-    put({This, 'SPECIAL_BUTTON_FIVE'}, undefined),
-    put({This, 'SPECIAL_BUTTON_FOUR'}, undefined),
-    put({This, 'SPECIAL_BUTTON_THREE'}, undefined),
-    put({This, 'SPECIAL_BUTTON_TWO'}, undefined),
-    put({This, 'SPECIAL_BUTTON_ONE'}, undefined),
-    put({This, 'UP'}, undefined),
-    put({This, 'LEFT'}, undefined),
-    put({This, 'RIGHT'}, undefined),
-    put({This, 'DOWN'}, undefined),
-    put({This, 'NONE'}, undefined),
-    put({This, initialized}, false),
-    put({This, list}, 'BasicArrayListD':new()),
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        if (BasicTouchInputFactory.jstatic_instance() == JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)) do
+            BasicTouchInputFactory.jstatic_set_instance(BasicTouchInputFactory.jnew())
+        end
+        throw({:jreturn, BasicTouchInputFactory.jstatic_instance()})
+    end)
+  end
 
 
-getInstance() ->
-        case (get({'BasicTouchInputFactory', instance}) =:= get({'NullUtil':getInstance(), 'NULL_OBJECT'})) of
-            true ->
-            put({'BasicTouchInputFactory', instance}, 'BasicTouchInputFactory':new());
-            false -> ok
-        end,
-        get({'BasicTouchInputFactory', instance}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.lset(f, :MAX, JR.get(InputFactory.jm_getInstance(), :MAX))
+        JR.put(this, :SPECIAL_BUTTON_SEVEN_TESTING_ONLY, TouchButtonInput.jnew(JR.int32(JR.lget(f, :MAX) - 41), "Button 7 - Testing Only May Cross Over Key Values"))
+        JR.put(this, :SPECIAL_BUTTON_EIGHT_TESTING_ONLY, TouchButtonInput.jnew(JR.int32(JR.lget(f, :MAX) - 42), "Button 8 - Testing Only May Cross Over Key Values"))
+        JR.put(this, :SPECIAL_BUTTON_SIX, TouchButtonInput.jnew(JR.int32(JR.lget(f, :MAX) - 30), "Button 6"))
+        JR.put(this, :SPECIAL_BUTTON_FIVE, TouchButtonInput.jnew(JR.int32(JR.lget(f, :MAX) - 31), "Button 5"))
+        JR.put(this, :SPECIAL_BUTTON_FOUR, TouchButtonInput.jnew(JR.int32(JR.lget(f, :MAX) - 32), "Button 4"))
+        JR.put(this, :SPECIAL_BUTTON_THREE, TouchButtonInput.jnew(JR.int32(JR.lget(f, :MAX) - 33), "Button 3"))
+        JR.put(this, :SPECIAL_BUTTON_TWO, TouchButtonInput.jnew(JR.int32(JR.lget(f, :MAX) - 34), "Button 2"))
+        JR.put(this, :SPECIAL_BUTTON_ONE, TouchButtonInput.jnew(JR.int32(JR.lget(f, :MAX) - 35), "Button 1"))
+        JR.put(this, :UP, TouchButtonInput.jnew(JR.int32(JR.lget(f, :MAX) - 36), "Up Button"))
+        JR.put(this, :LEFT, TouchButtonInput.jnew(JR.int32(JR.lget(f, :MAX) - 37), "Left Button"))
+        JR.put(this, :RIGHT, TouchButtonInput.jnew(JR.int32(JR.lget(f, :MAX) - 38), "Right Button"))
+        JR.put(this, :DOWN, TouchButtonInput.jnew(JR.int32(JR.lget(f, :MAX) - 39), "Down Button"))
+        JR.put(this, :NONE, TouchButtonInput.jnew(JR.int32(JR.lget(f, :MAX) - 40), "No Button"))
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        MAX = get({'InputFactory':getInstance(), 'MAX'}),
-        put({This, 'SPECIAL_BUTTON_SEVEN_TESTING_ONLY'}, 'TouchButtonInput':new((MAX - 41), "Button 7 - Testing Only May Cross Over Key Values")),
-        put({This, 'SPECIAL_BUTTON_EIGHT_TESTING_ONLY'}, 'TouchButtonInput':new((MAX - 42), "Button 8 - Testing Only May Cross Over Key Values")),
-        put({This, 'SPECIAL_BUTTON_SIX'}, 'TouchButtonInput':new((MAX - 30), "Button 6")),
-        put({This, 'SPECIAL_BUTTON_FIVE'}, 'TouchButtonInput':new((MAX - 31), "Button 5")),
-        put({This, 'SPECIAL_BUTTON_FOUR'}, 'TouchButtonInput':new((MAX - 32), "Button 4")),
-        put({This, 'SPECIAL_BUTTON_THREE'}, 'TouchButtonInput':new((MAX - 33), "Button 3")),
-        put({This, 'SPECIAL_BUTTON_TWO'}, 'TouchButtonInput':new((MAX - 34), "Button 2")),
-        put({This, 'SPECIAL_BUTTON_ONE'}, 'TouchButtonInput':new((MAX - 35), "Button 1")),
-        put({This, 'UP'}, 'TouchButtonInput':new((MAX - 36), "Up Button")),
-        put({This, 'LEFT'}, 'TouchButtonInput':new((MAX - 37), "Left Button")),
-        put({This, 'RIGHT'}, 'TouchButtonInput':new((MAX - 38), "Right Button")),
-        put({This, 'DOWN'}, 'TouchButtonInput':new((MAX - 39), "Down Button")),
-        put({This, 'NONE'}, 'TouchButtonInput':new((MAX - 40), "No Button")).
 
-init(This, InputToGameKeyMapping) ->
-        case (not get({This, initialized})) of
-            true ->
-            put({This, initialized}, true),
-            (get({get({This, list}), '$class'})):add(get({This, list}), get({This, 'UP'})),
-            (get({get({This, list}), '$class'})):add(get({This, list}), get({This, 'LEFT'})),
-            (get({get({This, list}), '$class'})):add(get({This, list}), get({This, 'RIGHT'})),
-            (get({get({This, list}), '$class'})):add(get({This, list}), get({This, 'DOWN'})),
-            (get({get({This, list}), '$class'})):add(get({This, list}), get({This, 'SPECIAL_BUTTON_TWO'})),
-            (get({get({This, list}), '$class'})):add(get({This, list}), get({This, 'SPECIAL_BUTTON_FOUR'})),
-            (get({get({This, list}), '$class'})):add(get({This, list}), get({This, 'SPECIAL_BUTTON_THREE'})),
-            (get({get({This, list}), '$class'})):add(get({This, list}), get({This, 'SPECIAL_BUTTON_ONE'})),
-            (get({get({This, list}), '$class'})):add(get({This, list}), get({This, 'SPECIAL_BUTTON_FIVE'})),
-            (get({get({This, list}), '$class'})):add(get({This, list}), get({This, 'SPECIAL_BUTTON_SIX'})),
-            (get({get({This, list}), '$class'})):add(get({This, list}), get({This, 'SPECIAL_BUTTON_SIX'})),
-            (get({get({This, list}), '$class'})):add(get({This, list}), get({This, 'SPECIAL_BUTTON_SEVEN_TESTING_ONLY'})),
-            (get({get({This, list}), '$class'})):add(get({This, list}), get({This, 'SPECIAL_BUTTON_EIGHT_TESTING_ONLY'})),
-            (get({This, '$class'})):updateAllFromList(This, get({This, list}), InputToGameKeyMapping);
-            false -> ok
-        end.
+  def jm_init(this, p_inputToGameKeyMapping) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :inputToGameKeyMapping, p_inputToGameKeyMapping)
+        if !JR.get(this, :initialized) do
+            JR.put(this, :initialized, true)
+            JR.call(JR.get(this, :list), :jm_add, [JR.get(this, :UP)])
+            JR.call(JR.get(this, :list), :jm_add, [JR.get(this, :LEFT)])
+            JR.call(JR.get(this, :list), :jm_add, [JR.get(this, :RIGHT)])
+            JR.call(JR.get(this, :list), :jm_add, [JR.get(this, :DOWN)])
+            JR.call(JR.get(this, :list), :jm_add, [JR.get(this, :SPECIAL_BUTTON_TWO)])
+            JR.call(JR.get(this, :list), :jm_add, [JR.get(this, :SPECIAL_BUTTON_FOUR)])
+            JR.call(JR.get(this, :list), :jm_add, [JR.get(this, :SPECIAL_BUTTON_THREE)])
+            JR.call(JR.get(this, :list), :jm_add, [JR.get(this, :SPECIAL_BUTTON_ONE)])
+            JR.call(JR.get(this, :list), :jm_add, [JR.get(this, :SPECIAL_BUTTON_FIVE)])
+            JR.call(JR.get(this, :list), :jm_add, [JR.get(this, :SPECIAL_BUTTON_SIX)])
+            JR.call(JR.get(this, :list), :jm_add, [JR.get(this, :SPECIAL_BUTTON_SIX)])
+            JR.call(JR.get(this, :list), :jm_add, [JR.get(this, :SPECIAL_BUTTON_SEVEN_TESTING_ONLY)])
+            JR.call(JR.get(this, :list), :jm_add, [JR.get(this, :SPECIAL_BUTTON_EIGHT_TESTING_ONLY)])
+            JR.call(this, :jm_updateAllFromList, [JR.get(this, :list), JR.lget(f, :inputToGameKeyMapping)])
+        end
+    end)
+  end
 
-updateAll(This, InputToGameKeyMapping) ->
-        (get({This, '$class'})):updateAllFromList(This, get({This, list}), InputToGameKeyMapping).
 
-updateAllFromList(This, List, InputToGameKeyMapping) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N68149) -> (get({Target_N68149, '$class'})):toString(Target_N68149) end)((fun(Target_N68156) -> (get({Target_N68156, '$class'})):appendint(Target_N68156, (get({List, '$class'})):size(List)) end)((fun(Target_N68163) -> (get({Target_N68163, '$class'})):append(Target_N68163, get({'CommonLabels':getInstance(), 'START_LABEL'})) end)('StringMaker':new()))), This, "updateAll"),
-        put({local, touchButtonInput}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, touchButtonInput}, array:get(Index, get({List, objectArray}))),
-            (get({get({local, touchButtonInput}), '$class'})):update(get({local, touchButtonInput}), InputToGameKeyMapping)
-        end, lists:seq(((get({List, '$class'})):size(List) - 1), 0, -1)).
+  def jm_updateAll(this, p_inputToGameKeyMapping) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :inputToGameKeyMapping, p_inputToGameKeyMapping)
+        JR.call(this, :jm_updateAllFromList, [JR.get(this, :list), JR.lget(f, :inputToGameKeyMapping)])
+    end)
+  end
 
-getList(This) ->
-        get({This, list}).
+
+  def jm_updateAllFromList(this, p_list, p_inputToGameKeyMapping) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :list, p_list)
+      JR.lset(f, :inputToGameKeyMapping, p_inputToGameKeyMapping)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(CommonLabels.jm_getInstance(), :START_LABEL)]), :jm_appendint, [JR.call(JR.lget(f, :list), :jm_size, [])]), :jm_toString, []), this, "updateAll"])
+        JR.lset(f, :touchButtonInput, nil)
+        JR.lset(f, :index, JR.int32(JR.call(JR.lget(f, :list), :jm_size, []) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.lset(f, :touchButtonInput, JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index)))
+            JR.call(JR.lget(f, :touchButtonInput), :jm_update, [JR.lget(f, :inputToGameKeyMapping)])
+        end)
+    end)
+  end
+
+
+  def jm_getList(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :list)})
+    end)
+  end
+end
+
 

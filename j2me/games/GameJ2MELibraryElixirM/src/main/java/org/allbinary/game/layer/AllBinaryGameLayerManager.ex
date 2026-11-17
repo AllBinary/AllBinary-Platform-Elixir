@@ -1,110 +1,199 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer
-% import org.allbinary.game.GameInfo
-% import org.allbinary.game.input.NullPlayerGameInputComposite
-% import org.allbinary.game.input.PlayerGameInputCompositeInterface
-% import org.allbinary.graphics.ItemColorFactory
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.color.BasicColorFactory
-% import org.allbinary.layer.AllBinaryLayerManager
-% import org.allbinary.layer.LayerProcessor
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.math.SmallIntegerSingletonFactory
-% import org.allbinary.util.BasicArrayList
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer
 
--module('AllBinaryGameLayerManager').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule AllBinaryGameLayerManager do
+  def jsuper(), do: AllBinaryLayerManager
+def jstatic_NULL_ALLBINARY_LAYER_MANAGER(), do: JR.static_get(__MODULE__, :NULL_ALLBINARY_LAYER_MANAGER, fn -> JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT) end)
+  def jstatic_set_NULL_ALLBINARY_LAYER_MANAGER(value), do: JR.static_put(__MODULE__, :NULL_ALLBINARY_LAYER_MANAGER, value)
+def jstatic_ID(), do: JR.static_get(__MODULE__, :ID, fn -> JR.call(SmallIntegerSingletonFactory.jm_getInstance(), :jm_getAt, [22]) end)
+  def jstatic_set_ID(value), do: JR.static_put(__MODULE__, :ID, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AllBinaryLayerManager', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'NULL_ALLBINARY_LAYER_MANAGER'}, get({'NullUtil':getInstance(), 'NULL_OBJECT'})),
-    put({?MODULE, 'ID'}, (fun(Target_N66205) -> (get({Target_N66205, '$class'})):getAt(Target_N66205, 22) end)('SmallIntegerSingletonFactory':getInstance())),
-    ok.
-
-init_fields(This) ->
-    put({This, backgroundBasicColor}, undefined),
-    put({This, foregroundBasicColor}, undefined),
-    put({This, gameInfo}, undefined),
-    put({This, playerGameInputCompositeInterface}, get({'NullPlayerGameInputComposite', 'NULL_PLAYER_GAME_INPUT_COMPOSITE'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :backgroundBasicColor, nil)
+    JR.put(this, :foregroundBasicColor, nil)
+    JR.put(this, :gameInfo, nil)
+    JR.put(this, :playerGameInputCompositeInterface, nil)
+        
+        
+        
+        JR.put(this, :playerGameInputCompositeInterface, NullPlayerGameInputComposite.jstatic_NULL_PLAYER_GAME_INPUT_COMPOSITE())
+    nil
+  end
 
 
-getNullInstance() ->
-        case (get({'AllBinaryGameLayerManager', 'NULL_ALLBINARY_LAYER_MANAGER'}) =:= get({'NullUtil':getInstance(), 'NULL_OBJECT'})) of
-            true ->
-            put({'AllBinaryGameLayerManager', 'NULL_ALLBINARY_LAYER_MANAGER'}, 'AllBinaryGameLayerManager':new(get({'BasicColorFactory':getInstance(), 'BLACK'}), get({'BasicColorFactory':getInstance(), 'WHITE'}), get({'GameInfo', 'NONE'})));
-            false -> ok
-        end,
-        get({'AllBinaryGameLayerManager', 'NULL_ALLBINARY_LAYER_MANAGER'}).
+  def jm_getNullInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        if (AllBinaryGameLayerManager.jstatic_NULL_ALLBINARY_LAYER_MANAGER() == JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)) do
+            AllBinaryGameLayerManager.jstatic_set_NULL_ALLBINARY_LAYER_MANAGER(AllBinaryGameLayerManager.jnew(JR.get(BasicColorFactory.jm_getInstance(), :BLACK), JR.get(BasicColorFactory.jm_getInstance(), :WHITE), GameInfo.jstatic_NONE()))
+        end
+        throw({:jreturn, AllBinaryGameLayerManager.jstatic_NULL_ALLBINARY_LAYER_MANAGER()})
+    end)
+  end
 
-new(BackgroundBasicColor, ForegroundBasicColor, GameInfo) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, BackgroundBasicColor, ForegroundBasicColor, GameInfo),
-    This.
 
-'$init'(This, BackgroundBasicColor, ForegroundBasicColor, GameInfo) ->
-    'AllBinaryLayerManager':'$init'(This),
-    init_fields(This),
-        put({This, backgroundBasicColor}, BackgroundBasicColor),
-        put({This, foregroundBasicColor}, ForegroundBasicColor),
-        ItemColorFactory = 'ItemColorFactory':getInstance(),
-        put({ItemColorFactory, 'INVERT_PAINT'}, (get({get({This, backgroundBasicColor}), '$class'})):intValue(get({This, backgroundBasicColor}))),
-        put({ItemColorFactory, 'PAINT'}, (get({get({This, foregroundBasicColor}), '$class'})):intValue(get({This, foregroundBasicColor}))),
-        put({This, gameInfo}, GameInfo).
+  def jinit(this, p_backgroundBasicColor, p_foregroundBasicColor, p_gameInfo) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :backgroundBasicColor, p_backgroundBasicColor)
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+      JR.lset(f, :gameInfo, p_gameInfo)
+      AllBinaryLayerManager.jinit(this)
+      jinitfields(this)
+        JR.put(this, :backgroundBasicColor, JR.lget(f, :backgroundBasicColor))
+        JR.put(this, :foregroundBasicColor, JR.lget(f, :foregroundBasicColor))
+        JR.lset(f, :itemColorFactory, ItemColorFactory.jm_getInstance())
+        JR.put(JR.lget(f, :itemColorFactory), :INVERT_PAINT, JR.call(JR.get(this, :backgroundBasicColor), :jm_intValue, []))
+        JR.put(JR.lget(f, :itemColorFactory), :PAINT, JR.call(JR.get(this, :foregroundBasicColor), :jm_intValue, []))
+        JR.put(this, :gameInfo, JR.lget(f, :gameInfo))
+    end)
+  end
 
-getLayerManager(This) ->
-        This.
+  def jnew(p_backgroundBasicColor, p_foregroundBasicColor, p_gameInfo) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_backgroundBasicColor, p_foregroundBasicColor, p_gameInfo)
+    this
+  end
 
-init(This) ->
-        ok.
 
-getBackgroundBasicColor(This) ->
-        get({This, backgroundBasicColor}).
+  def jm_getLayerManager(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, this})
+    end)
+  end
 
-setBackgroundBasicColor(This, BackgroundBasicColor) ->
-        put({This, backgroundBasicColor}, BackgroundBasicColor),
-        put({'ItemColorFactory':getInstance(), 'INVERT_PAINT'}, (get({get({This, backgroundBasicColor}), '$class'})):intValue(get({This, backgroundBasicColor}))).
 
-getForegroundBasicColor(This) ->
-        get({This, foregroundBasicColor}).
+  def jm_init(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-setForegroundBasicColor(This, ForegroundBasicColor) ->
-        put({This, foregroundBasicColor}, ForegroundBasicColor),
-        put({'ItemColorFactory':getInstance(), 'PAINT'}, (get({get({This, foregroundBasicColor}), '$class'})):intValue(get({This, foregroundBasicColor}))).
 
-getGameInfo(This) ->
-        get({This, gameInfo}).
+  def jm_getBackgroundBasicColor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :backgroundBasicColor)})
+    end)
+  end
 
-setGameInfo(This, GameInfo) ->
-        put({This, gameInfo}, GameInfo).
 
-setLayerProcessorList(This, List) ->
-        LayerProcessorInterfaceArray = array:new((get({List, '$class'})):size(List), {default, undefined}),
-        Size = array:size(LayerProcessorInterfaceArray),
-        lists:foreach(fun(Index) ->
-            array:set(Index, array:get(Index, get({List, objectArray})), LayerProcessorInterfaceArray)
-        end, lists:seq(0, Size - 1)),
-        (get({This, '$class'})):setLayerProcessorArray(This, LayerProcessorInterfaceArray).
+  def jm_setBackgroundBasicColor(this, p_backgroundBasicColor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :backgroundBasicColor, p_backgroundBasicColor)
+        JR.put(this, :backgroundBasicColor, JR.lget(f, :backgroundBasicColor))
+        JR.put(ItemColorFactory.jm_getInstance(), :INVERT_PAINT, JR.call(JR.get(this, :backgroundBasicColor), :jm_intValue, []))
+    end)
+  end
 
-setPlayerGameInputCompositeInterface(This, PlayerGameInputCompositeInterface) ->
-        put({This, playerGameInputCompositeInterface}, PlayerGameInputCompositeInterface).
 
-getPlayerGameInputCompositeInterface(This) ->
-        get({This, playerGameInputCompositeInterface}).
+  def jm_getForegroundBasicColor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :foregroundBasicColor)})
+    end)
+  end
+
+
+  def jm_setForegroundBasicColor(this, p_foregroundBasicColor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+        JR.put(this, :foregroundBasicColor, JR.lget(f, :foregroundBasicColor))
+        JR.put(ItemColorFactory.jm_getInstance(), :PAINT, JR.call(JR.get(this, :foregroundBasicColor), :jm_intValue, []))
+    end)
+  end
+
+
+  def jm_getGameInfo(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :gameInfo)})
+    end)
+  end
+
+
+  def jm_setGameInfo(this, p_gameInfo) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameInfo, p_gameInfo)
+        JR.put(this, :gameInfo, JR.lget(f, :gameInfo))
+    end)
+  end
+
+
+  def jm_setLayerProcessorList(this, p_list) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :list, p_list)
+        JR.lset(f, :layerProcessorInterfaceArray, JR.anew(JR.call(JR.lget(f, :list), :jm_size, []), nil))
+        JR.lset(f, :size, JR.alength(JR.lget(f, :layerProcessorInterfaceArray)))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.aset(JR.lget(f, :layerProcessorInterfaceArray), JR.lget(f, :index), JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index)))
+        end)
+        JR.call(this, :jm_setLayerProcessorArray, [JR.lget(f, :layerProcessorInterfaceArray)])
+    end)
+  end
+
+
+  def jm_setPlayerGameInputCompositeInterface(this, p_playerGameInputCompositeInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :playerGameInputCompositeInterface, p_playerGameInputCompositeInterface)
+        JR.put(this, :playerGameInputCompositeInterface, JR.lget(f, :playerGameInputCompositeInterface))
+    end)
+  end
+
+
+  def jm_getPlayerGameInputCompositeInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :playerGameInputCompositeInterface)})
+    end)
+  end
+end
+
 

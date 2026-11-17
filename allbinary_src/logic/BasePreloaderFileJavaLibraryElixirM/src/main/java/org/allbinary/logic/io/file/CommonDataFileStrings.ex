@@ -1,228 +1,427 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2026 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.logic.io.file
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2026 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.logic.io.file
 
--module('CommonDataFileStrings').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule CommonDataFileStrings do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> CommonDataFileStrings.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'CommonDataFileStrings':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :XML, nil)
+    JR.put(this, :_XML, nil)
+    JR.put(this, :JSON, nil)
+    JR.put(this, :_JSON, nil)
+    JR.put(this, :XSL, nil)
+    JR.put(this, :_XSL, nil)
+    JR.put(this, :JAVA, nil)
+    JR.put(this, :_JAVA, nil)
+    JR.put(this, :KT, nil)
+    JR.put(this, :_KT, nil)
+    JR.put(this, :TS, nil)
+    JR.put(this, :_TS, nil)
+    JR.put(this, :JS, nil)
+    JR.put(this, :_JS, nil)
+    JR.put(this, :CPP, nil)
+    JR.put(this, :_CPP, nil)
+    JR.put(this, :H, nil)
+    JR.put(this, :_H, nil)
+    JR.put(this, :PY, nil)
+    JR.put(this, :_PY, nil)
+    JR.put(this, :GO, nil)
+    JR.put(this, :_GO, nil)
+    JR.put(this, :CS, nil)
+    JR.put(this, :_CS, nil)
+    JR.put(this, :ADB, nil)
+    JR.put(this, :_ADB, nil)
+    JR.put(this, :ADS, nil)
+    JR.put(this, :_ADS, nil)
+    JR.put(this, :ADA, nil)
+    JR.put(this, :_ADA, nil)
+    JR.put(this, :RUST, nil)
+    JR.put(this, :_RUST, nil)
+    JR.put(this, :C, nil)
+    JR.put(this, :_C, nil)
+    JR.put(this, :CSHARP, nil)
+    JR.put(this, :_CSHARP, nil)
+    JR.put(this, :ERL, nil)
+    JR.put(this, :_ERL, nil)
+    JR.put(this, :HS, nil)
+    JR.put(this, :_HS, nil)
+    JR.put(this, :HX, nil)
+    JR.put(this, :_HX, nil)
+    JR.put(this, :LUA, nil)
+    JR.put(this, :_LUA, nil)
+    JR.put(this, :PAS, nil)
+    JR.put(this, :_PAS, nil)
+    JR.put(this, :ML, nil)
+    JR.put(this, :_ML, nil)
+    JR.put(this, :PL, nil)
+    JR.put(this, :_PL, nil)
+    JR.put(this, :RB, nil)
+    JR.put(this, :_RB, nil)
+    JR.put(this, :ZIG, nil)
+    JR.put(this, :_ZIG, nil)
+    JR.put(this, :PM, nil)
+    JR.put(this, :_PM, nil)
+    JR.put(this, :KTS, nil)
+    JR.put(this, :_KTS, nil)
+    JR.put(this, :CBL, nil)
+    JR.put(this, :_CBL, nil)
+    JR.put(this, :COB, nil)
+    JR.put(this, :_COB, nil)
+    JR.put(this, :F90, nil)
+    JR.put(this, :_F90, nil)
+    JR.put(this, :F, nil)
+    JR.put(this, :_F, nil)
+    JR.put(this, :DART, nil)
+    JR.put(this, :_DART, nil)
+    JR.put(this, :EX, nil)
+    JR.put(this, :_EX, nil)
+    JR.put(this, :EXS, nil)
+    JR.put(this, :_EXS, nil)
+    JR.put(this, :M, nil)
+    JR.put(this, :_M, nil)
+    JR.put(this, :SWIFT, nil)
+    JR.put(this, :_SWIFT, nil)
+    JR.put(this, :ASM, nil)
+    JR.put(this, :_ASM, nil)
+    JR.put(this, :S, nil)
+    JR.put(this, :_S, nil)
+    JR.put(this, :NIM, nil)
+    JR.put(this, :_NIM, nil)
+    JR.put(this, :VALA, nil)
+    JR.put(this, :_VALA, nil)
+    JR.put(this, :LISP, nil)
+    JR.put(this, :_LISP, nil)
+    JR.put(this, :RKT, nil)
+    JR.put(this, :_RKT, nil)
+    JR.put(this, :SCM, nil)
+    JR.put(this, :_SCM, nil)
+    JR.put(this, :AS, nil)
+    JR.put(this, :_AS, nil)
+    JR.put(this, :OBX, nil)
+    JR.put(this, :_OBX, nil)
+    JR.put(this, :SCALA, nil)
+    JR.put(this, :_SCALA, nil)
+    JR.put(this, :GROOVY, nil)
+    JR.put(this, :_GROOVY, nil)
+    JR.put(this, :JL, nil)
+    JR.put(this, :_JL, nil)
+    JR.put(this, :TCL, nil)
+    JR.put(this, :_TCL, nil)
+    JR.put(this, :WREN, nil)
+    JR.put(this, :_WREN, nil)
+    JR.put(this, :JANET, nil)
+    JR.put(this, :_JANET, nil)
+    JR.put(this, :GR, nil)
+    JR.put(this, :_GR, nil)
+    JR.put(this, :ELM, nil)
+    JR.put(this, :_ELM, nil)
+    JR.put(this, :KOTLIN, nil)
+    JR.put(this, :TYPESCRIPT, nil)
+    JR.put(this, :JAVASCRIPT, nil)
+    JR.put(this, :C_PLUS_PLUS, nil)
+    JR.put(this, :PYTHON, nil)
+    JR.put(this, :C_SHARP, nil)
+    JR.put(this, :RUST_NAME, nil)
+    JR.put(this, :RUBY, nil)
+    JR.put(this, :PERL, nil)
+    JR.put(this, :OBJECT_PASCAL, nil)
+    JR.put(this, :OCAML, nil)
+    JR.put(this, :HASKELL, nil)
+    JR.put(this, :HAXE, nil)
+    JR.put(this, :ERLANG, nil)
+    JR.put(this, :COBOL, nil)
+    JR.put(this, :FORTRAN, nil)
+    JR.put(this, :ELIXIR, nil)
+    JR.put(this, :OBJECTIVE_C, nil)
+    JR.put(this, :RACKET, nil)
+    JR.put(this, :SCHEME, nil)
+    JR.put(this, :ACTIONSCRIPT, nil)
+    JR.put(this, :OBERON_PLUS, nil)
+    JR.put(this, :JULIA, nil)
+    JR.put(this, :GRAIN, nil)
+    JR.put(this, :CPLUSPLUS, nil)
+    JR.put(this, :GOLANG, nil)
+    JR.put(this, :CSHARP_ALIAS, nil)
+    JR.put(this, :C23, nil)
+    JR.put(this, :PASCAL, nil)
+    JR.put(this, :OBJECT_PASCAL_ALIAS, nil)
+    JR.put(this, :OBJC, nil)
+    JR.put(this, :OBJECTIVE_C_ALIAS, nil)
+    JR.put(this, :ASSEMBLY, nil)
+    JR.put(this, :COMMON_LISP, nil)
+    JR.put(this, :OBERON, nil)
+    JR.put(this, :OBERON_PLUS_ALIAS, nil)
+    JR.put(this, :KT_SHORT_NAME, nil)
+    JR.put(this, :TS_SHORT_NAME, nil)
+    JR.put(this, :JS_SHORT_NAME, nil)
+    JR.put(this, :CPP_SHORT_NAME, nil)
+    JR.put(this, :PY_SHORT_NAME, nil)
+    JR.put(this, :GO_SHORT_NAME, nil)
+    JR.put(this, :CS_SHORT_NAME, nil)
+    JR.put(this, :ADA_SHORT_NAME, nil)
+    JR.put(this, :RUST_SHORT_NAME, nil)
+    JR.put(this, :LUA_SHORT_NAME, nil)
+    JR.put(this, :C_SHORT_NAME, nil)
+    JR.put(this, :ZIG_SHORT_NAME, nil)
+    JR.put(this, :RB_SHORT_NAME, nil)
+    JR.put(this, :PL_SHORT_NAME, nil)
+    JR.put(this, :PAS_SHORT_NAME, nil)
+    JR.put(this, :ML_SHORT_NAME, nil)
+    JR.put(this, :HS_SHORT_NAME, nil)
+    JR.put(this, :HX_SHORT_NAME, nil)
+    JR.put(this, :ERL_SHORT_NAME, nil)
+    JR.put(this, :CBL_SHORT_NAME, nil)
+    JR.put(this, :F90_SHORT_NAME, nil)
+    JR.put(this, :DART_SHORT_NAME, nil)
+    JR.put(this, :EX_SHORT_NAME, nil)
+    JR.put(this, :OBJC_SHORT_NAME, nil)
+    JR.put(this, :SWIFT_SHORT_NAME, nil)
+    JR.put(this, :ASM_SHORT_NAME, nil)
+    JR.put(this, :NIM_SHORT_NAME, nil)
+    JR.put(this, :VALA_SHORT_NAME, nil)
+    JR.put(this, :LISP_SHORT_NAME, nil)
+    JR.put(this, :RKT_SHORT_NAME, nil)
+    JR.put(this, :SCM_SHORT_NAME, nil)
+    JR.put(this, :AS_SHORT_NAME, nil)
+    JR.put(this, :OBX_SHORT_NAME, nil)
+    JR.put(this, :SCALA_SHORT_NAME, nil)
+    JR.put(this, :GROOVY_SHORT_NAME, nil)
+    JR.put(this, :JL_SHORT_NAME, nil)
+    JR.put(this, :TCL_SHORT_NAME, nil)
+    JR.put(this, :WREN_SHORT_NAME, nil)
+    JR.put(this, :JANET_SHORT_NAME, nil)
+    JR.put(this, :GR_SHORT_NAME, nil)
+    JR.put(this, :ELM_SHORT_NAME, nil)
+    JR.put(this, :UNCRYPTED_EXTENSION, nil)
+    JR.put(this, :ENCRYPTED_EXTENSION, nil)
+        JR.put(this, :XML, "xml")
+        JR.put(this, :_XML, ".xml")
+        JR.put(this, :JSON, "json")
+        JR.put(this, :_JSON, ".json")
+        JR.put(this, :XSL, "xsl")
+        JR.put(this, :_XSL, ".xsl")
+        JR.put(this, :JAVA, "java")
+        JR.put(this, :_JAVA, ".java")
+        JR.put(this, :KT, "kt")
+        JR.put(this, :_KT, ".kt")
+        JR.put(this, :TS, "ts")
+        JR.put(this, :_TS, ".ts")
+        JR.put(this, :JS, "js")
+        JR.put(this, :_JS, ".js")
+        JR.put(this, :CPP, "cpp")
+        JR.put(this, :_CPP, ".cpp")
+        JR.put(this, :H, "h")
+        JR.put(this, :_H, ".h")
+        JR.put(this, :PY, "py")
+        JR.put(this, :_PY, ".py")
+        JR.put(this, :GO, "go")
+        JR.put(this, :_GO, ".go")
+        JR.put(this, :CS, "cs")
+        JR.put(this, :_CS, ".cs")
+        JR.put(this, :ADB, "adb")
+        JR.put(this, :_ADB, ".adb")
+        JR.put(this, :ADS, "ads")
+        JR.put(this, :_ADS, ".ads")
+        JR.put(this, :ADA, "ada")
+        JR.put(this, :_ADA, ".ada")
+        JR.put(this, :RUST, "rs")
+        JR.put(this, :_RUST, ".rs")
+        JR.put(this, :C, "c")
+        JR.put(this, :_C, ".c")
+        JR.put(this, :CSHARP, "cs")
+        JR.put(this, :_CSHARP, ".cs")
+        JR.put(this, :ERL, "erl")
+        JR.put(this, :_ERL, ".erl")
+        JR.put(this, :HS, "hs")
+        JR.put(this, :_HS, ".hs")
+        JR.put(this, :HX, "hx")
+        JR.put(this, :_HX, ".hx")
+        JR.put(this, :LUA, "lua")
+        JR.put(this, :_LUA, ".lua")
+        JR.put(this, :PAS, "pas")
+        JR.put(this, :_PAS, ".pas")
+        JR.put(this, :ML, "ml")
+        JR.put(this, :_ML, ".ml")
+        JR.put(this, :PL, "pl")
+        JR.put(this, :_PL, ".pl")
+        JR.put(this, :RB, "rb")
+        JR.put(this, :_RB, ".rb")
+        JR.put(this, :ZIG, "zig")
+        JR.put(this, :_ZIG, ".zig")
+        JR.put(this, :PM, "pm")
+        JR.put(this, :_PM, ".pm")
+        JR.put(this, :KTS, "kts")
+        JR.put(this, :_KTS, ".kts")
+        JR.put(this, :CBL, "cbl")
+        JR.put(this, :_CBL, ".cbl")
+        JR.put(this, :COB, "cob")
+        JR.put(this, :_COB, ".cob")
+        JR.put(this, :F90, "f90")
+        JR.put(this, :_F90, ".f90")
+        JR.put(this, :F, "f")
+        JR.put(this, :_F, ".f")
+        JR.put(this, :DART, "dart")
+        JR.put(this, :_DART, ".dart")
+        JR.put(this, :EX, "ex")
+        JR.put(this, :_EX, ".ex")
+        JR.put(this, :EXS, "exs")
+        JR.put(this, :_EXS, ".exs")
+        JR.put(this, :M, "m")
+        JR.put(this, :_M, ".m")
+        JR.put(this, :SWIFT, "swift")
+        JR.put(this, :_SWIFT, ".swift")
+        JR.put(this, :ASM, "asm")
+        JR.put(this, :_ASM, ".asm")
+        JR.put(this, :S, "s")
+        JR.put(this, :_S, ".s")
+        JR.put(this, :NIM, "nim")
+        JR.put(this, :_NIM, ".nim")
+        JR.put(this, :VALA, "vala")
+        JR.put(this, :_VALA, ".vala")
+        JR.put(this, :LISP, "lisp")
+        JR.put(this, :_LISP, ".lisp")
+        JR.put(this, :RKT, "rkt")
+        JR.put(this, :_RKT, ".rkt")
+        JR.put(this, :SCM, "scm")
+        JR.put(this, :_SCM, ".scm")
+        JR.put(this, :AS, "as")
+        JR.put(this, :_AS, ".as")
+        JR.put(this, :OBX, "obx")
+        JR.put(this, :_OBX, ".obx")
+        JR.put(this, :SCALA, "scala")
+        JR.put(this, :_SCALA, ".scala")
+        JR.put(this, :GROOVY, "groovy")
+        JR.put(this, :_GROOVY, ".groovy")
+        JR.put(this, :JL, "jl")
+        JR.put(this, :_JL, ".jl")
+        JR.put(this, :TCL, "tcl")
+        JR.put(this, :_TCL, ".tcl")
+        JR.put(this, :WREN, "wren")
+        JR.put(this, :_WREN, ".wren")
+        JR.put(this, :JANET, "janet")
+        JR.put(this, :_JANET, ".janet")
+        JR.put(this, :GR, "gr")
+        JR.put(this, :_GR, ".gr")
+        JR.put(this, :ELM, "elm")
+        JR.put(this, :_ELM, ".elm")
+        JR.put(this, :KOTLIN, "kotlin")
+        JR.put(this, :TYPESCRIPT, "typescript")
+        JR.put(this, :JAVASCRIPT, "javascript")
+        JR.put(this, :C_PLUS_PLUS, "c++")
+        JR.put(this, :PYTHON, "python")
+        JR.put(this, :C_SHARP, "c\#")
+        JR.put(this, :RUST_NAME, "rust")
+        JR.put(this, :RUBY, "ruby")
+        JR.put(this, :PERL, "perl")
+        JR.put(this, :OBJECT_PASCAL, "objectpascal")
+        JR.put(this, :OCAML, "ocaml")
+        JR.put(this, :HASKELL, "haskell")
+        JR.put(this, :HAXE, "haxe")
+        JR.put(this, :ERLANG, "erlang")
+        JR.put(this, :COBOL, "cobol")
+        JR.put(this, :FORTRAN, "fortran")
+        JR.put(this, :ELIXIR, "elixir")
+        JR.put(this, :OBJECTIVE_C, "objective-c")
+        JR.put(this, :RACKET, "racket")
+        JR.put(this, :SCHEME, "scheme")
+        JR.put(this, :ACTIONSCRIPT, "actionscript")
+        JR.put(this, :OBERON_PLUS, "oberon+")
+        JR.put(this, :JULIA, "julia")
+        JR.put(this, :GRAIN, "grain")
+        JR.put(this, :CPLUSPLUS, "cplusplus")
+        JR.put(this, :GOLANG, "golang")
+        JR.put(this, :CSHARP_ALIAS, "csharp")
+        JR.put(this, :C23, "c23")
+        JR.put(this, :PASCAL, "pascal")
+        JR.put(this, :OBJECT_PASCAL_ALIAS, "object pascal")
+        JR.put(this, :OBJC, "objc")
+        JR.put(this, :OBJECTIVE_C_ALIAS, "objectivec")
+        JR.put(this, :ASSEMBLY, "assembly")
+        JR.put(this, :COMMON_LISP, "common lisp")
+        JR.put(this, :OBERON, "oberon")
+        JR.put(this, :OBERON_PLUS_ALIAS, "oberonplus")
+        JR.put(this, :KT_SHORT_NAME, "Kt")
+        JR.put(this, :TS_SHORT_NAME, "Ts")
+        JR.put(this, :JS_SHORT_NAME, "Js")
+        JR.put(this, :CPP_SHORT_NAME, "Cpp")
+        JR.put(this, :PY_SHORT_NAME, "Py")
+        JR.put(this, :GO_SHORT_NAME, "Go")
+        JR.put(this, :CS_SHORT_NAME, "Cs")
+        JR.put(this, :ADA_SHORT_NAME, "Ada")
+        JR.put(this, :RUST_SHORT_NAME, "Rust")
+        JR.put(this, :LUA_SHORT_NAME, "Lua")
+        JR.put(this, :C_SHORT_NAME, "C")
+        JR.put(this, :ZIG_SHORT_NAME, "Zig")
+        JR.put(this, :RB_SHORT_NAME, "Rb")
+        JR.put(this, :PL_SHORT_NAME, "Pl")
+        JR.put(this, :PAS_SHORT_NAME, "Pas")
+        JR.put(this, :ML_SHORT_NAME, "Ml")
+        JR.put(this, :HS_SHORT_NAME, "Hs")
+        JR.put(this, :HX_SHORT_NAME, "Hx")
+        JR.put(this, :ERL_SHORT_NAME, "Erl")
+        JR.put(this, :CBL_SHORT_NAME, "Cbl")
+        JR.put(this, :F90_SHORT_NAME, "F90")
+        JR.put(this, :DART_SHORT_NAME, "Dart")
+        JR.put(this, :EX_SHORT_NAME, "Ex")
+        JR.put(this, :OBJC_SHORT_NAME, "ObjC")
+        JR.put(this, :SWIFT_SHORT_NAME, "Swift")
+        JR.put(this, :ASM_SHORT_NAME, "Asm")
+        JR.put(this, :NIM_SHORT_NAME, "Nim")
+        JR.put(this, :VALA_SHORT_NAME, "Vala")
+        JR.put(this, :LISP_SHORT_NAME, "Lisp")
+        JR.put(this, :RKT_SHORT_NAME, "Rkt")
+        JR.put(this, :SCM_SHORT_NAME, "Scm")
+        JR.put(this, :AS_SHORT_NAME, "As")
+        JR.put(this, :OBX_SHORT_NAME, "Obx")
+        JR.put(this, :SCALA_SHORT_NAME, "Scala")
+        JR.put(this, :GROOVY_SHORT_NAME, "Groovy")
+        JR.put(this, :JL_SHORT_NAME, "Jl")
+        JR.put(this, :TCL_SHORT_NAME, "Tcl")
+        JR.put(this, :WREN_SHORT_NAME, "Wren")
+        JR.put(this, :JANET_SHORT_NAME, "Janet")
+        JR.put(this, :GR_SHORT_NAME, "Gr")
+        JR.put(this, :ELM_SHORT_NAME, "Elm")
+        JR.put(this, :UNCRYPTED_EXTENSION, JR.get(this, :XML))
+        JR.put(this, :ENCRYPTED_EXTENSION, "abd")
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'XML'}, "xml"),
-    put({This, '_XML'}, ".xml"),
-    put({This, 'JSON'}, "json"),
-    put({This, '_JSON'}, ".json"),
-    put({This, 'XSL'}, "xsl"),
-    put({This, '_XSL'}, ".xsl"),
-    put({This, 'JAVA'}, "java"),
-    put({This, '_JAVA'}, ".java"),
-    put({This, 'KT'}, "kt"),
-    put({This, '_KT'}, ".kt"),
-    put({This, 'TS'}, "ts"),
-    put({This, '_TS'}, ".ts"),
-    put({This, 'JS'}, "js"),
-    put({This, '_JS'}, ".js"),
-    put({This, 'CPP'}, "cpp"),
-    put({This, '_CPP'}, ".cpp"),
-    put({This, 'H'}, "h"),
-    put({This, '_H'}, ".h"),
-    put({This, 'PY'}, "py"),
-    put({This, '_PY'}, ".py"),
-    put({This, 'GO'}, "go"),
-    put({This, '_GO'}, ".go"),
-    put({This, 'CS'}, "cs"),
-    put({This, '_CS'}, ".cs"),
-    put({This, 'ADB'}, "adb"),
-    put({This, '_ADB'}, ".adb"),
-    put({This, 'ADS'}, "ads"),
-    put({This, '_ADS'}, ".ads"),
-    put({This, 'ADA'}, "ada"),
-    put({This, '_ADA'}, ".ada"),
-    put({This, 'RUST'}, "rs"),
-    put({This, '_RUST'}, ".rs"),
-    put({This, 'C'}, "c"),
-    put({This, '_C'}, ".c"),
-    put({This, 'CSHARP'}, "cs"),
-    put({This, '_CSHARP'}, ".cs"),
-    put({This, 'ERL'}, "erl"),
-    put({This, '_ERL'}, ".erl"),
-    put({This, 'HS'}, "hs"),
-    put({This, '_HS'}, ".hs"),
-    put({This, 'HX'}, "hx"),
-    put({This, '_HX'}, ".hx"),
-    put({This, 'LUA'}, "lua"),
-    put({This, '_LUA'}, ".lua"),
-    put({This, 'PAS'}, "pas"),
-    put({This, '_PAS'}, ".pas"),
-    put({This, 'ML'}, "ml"),
-    put({This, '_ML'}, ".ml"),
-    put({This, 'PL'}, "pl"),
-    put({This, '_PL'}, ".pl"),
-    put({This, 'RB'}, "rb"),
-    put({This, '_RB'}, ".rb"),
-    put({This, 'ZIG'}, "zig"),
-    put({This, '_ZIG'}, ".zig"),
-    put({This, 'PM'}, "pm"),
-    put({This, '_PM'}, ".pm"),
-    put({This, 'KTS'}, "kts"),
-    put({This, '_KTS'}, ".kts"),
-    put({This, 'CBL'}, "cbl"),
-    put({This, '_CBL'}, ".cbl"),
-    put({This, 'COB'}, "cob"),
-    put({This, '_COB'}, ".cob"),
-    put({This, 'F90'}, "f90"),
-    put({This, '_F90'}, ".f90"),
-    put({This, 'F'}, "f"),
-    put({This, '_F'}, ".f"),
-    put({This, 'DART'}, "dart"),
-    put({This, '_DART'}, ".dart"),
-    put({This, 'EX'}, "ex"),
-    put({This, '_EX'}, ".ex"),
-    put({This, 'EXS'}, "exs"),
-    put({This, '_EXS'}, ".exs"),
-    put({This, 'M'}, "m"),
-    put({This, '_M'}, ".m"),
-    put({This, 'SWIFT'}, "swift"),
-    put({This, '_SWIFT'}, ".swift"),
-    put({This, 'ASM'}, "asm"),
-    put({This, '_ASM'}, ".asm"),
-    put({This, 'S'}, "s"),
-    put({This, '_S'}, ".s"),
-    put({This, 'NIM'}, "nim"),
-    put({This, '_NIM'}, ".nim"),
-    put({This, 'VALA'}, "vala"),
-    put({This, '_VALA'}, ".vala"),
-    put({This, 'LISP'}, "lisp"),
-    put({This, '_LISP'}, ".lisp"),
-    put({This, 'RKT'}, "rkt"),
-    put({This, '_RKT'}, ".rkt"),
-    put({This, 'SCM'}, "scm"),
-    put({This, '_SCM'}, ".scm"),
-    put({This, 'AS'}, "as"),
-    put({This, '_AS'}, ".as"),
-    put({This, 'OBX'}, "obx"),
-    put({This, '_OBX'}, ".obx"),
-    put({This, 'SCALA'}, "scala"),
-    put({This, '_SCALA'}, ".scala"),
-    put({This, 'GROOVY'}, "groovy"),
-    put({This, '_GROOVY'}, ".groovy"),
-    put({This, 'JL'}, "jl"),
-    put({This, '_JL'}, ".jl"),
-    put({This, 'TCL'}, "tcl"),
-    put({This, '_TCL'}, ".tcl"),
-    put({This, 'WREN'}, "wren"),
-    put({This, '_WREN'}, ".wren"),
-    put({This, 'JANET'}, "janet"),
-    put({This, '_JANET'}, ".janet"),
-    put({This, 'GR'}, "gr"),
-    put({This, '_GR'}, ".gr"),
-    put({This, 'ELM'}, "elm"),
-    put({This, '_ELM'}, ".elm"),
-    put({This, 'KOTLIN'}, "kotlin"),
-    put({This, 'TYPESCRIPT'}, "typescript"),
-    put({This, 'JAVASCRIPT'}, "javascript"),
-    put({This, 'C_PLUS_PLUS'}, "c++"),
-    put({This, 'PYTHON'}, "python"),
-    put({This, 'C_SHARP'}, "c#"),
-    put({This, 'RUST_NAME'}, "rust"),
-    put({This, 'RUBY'}, "ruby"),
-    put({This, 'PERL'}, "perl"),
-    put({This, 'OBJECT_PASCAL'}, "objectpascal"),
-    put({This, 'OCAML'}, "ocaml"),
-    put({This, 'HASKELL'}, "haskell"),
-    put({This, 'HAXE'}, "haxe"),
-    put({This, 'ERLANG'}, "erlang"),
-    put({This, 'COBOL'}, "cobol"),
-    put({This, 'FORTRAN'}, "fortran"),
-    put({This, 'ELIXIR'}, "elixir"),
-    put({This, 'OBJECTIVE_C'}, "objective-c"),
-    put({This, 'RACKET'}, "racket"),
-    put({This, 'SCHEME'}, "scheme"),
-    put({This, 'ACTIONSCRIPT'}, "actionscript"),
-    put({This, 'OBERON_PLUS'}, "oberon+"),
-    put({This, 'JULIA'}, "julia"),
-    put({This, 'GRAIN'}, "grain"),
-    put({This, 'CPLUSPLUS'}, "cplusplus"),
-    put({This, 'GOLANG'}, "golang"),
-    put({This, 'CSHARP_ALIAS'}, "csharp"),
-    put({This, 'C23'}, "c23"),
-    put({This, 'PASCAL'}, "pascal"),
-    put({This, 'OBJECT_PASCAL_ALIAS'}, "object pascal"),
-    put({This, 'OBJC'}, "objc"),
-    put({This, 'OBJECTIVE_C_ALIAS'}, "objectivec"),
-    put({This, 'ASSEMBLY'}, "assembly"),
-    put({This, 'COMMON_LISP'}, "common lisp"),
-    put({This, 'OBERON'}, "oberon"),
-    put({This, 'OBERON_PLUS_ALIAS'}, "oberonplus"),
-    put({This, 'KT_SHORT_NAME'}, "Kt"),
-    put({This, 'TS_SHORT_NAME'}, "Ts"),
-    put({This, 'JS_SHORT_NAME'}, "Js"),
-    put({This, 'CPP_SHORT_NAME'}, "Cpp"),
-    put({This, 'PY_SHORT_NAME'}, "Py"),
-    put({This, 'GO_SHORT_NAME'}, "Go"),
-    put({This, 'CS_SHORT_NAME'}, "Cs"),
-    put({This, 'ADA_SHORT_NAME'}, "Ada"),
-    put({This, 'RUST_SHORT_NAME'}, "Rust"),
-    put({This, 'LUA_SHORT_NAME'}, "Lua"),
-    put({This, 'C_SHORT_NAME'}, "C"),
-    put({This, 'ZIG_SHORT_NAME'}, "Zig"),
-    put({This, 'RB_SHORT_NAME'}, "Rb"),
-    put({This, 'PL_SHORT_NAME'}, "Pl"),
-    put({This, 'PAS_SHORT_NAME'}, "Pas"),
-    put({This, 'ML_SHORT_NAME'}, "Ml"),
-    put({This, 'HS_SHORT_NAME'}, "Hs"),
-    put({This, 'HX_SHORT_NAME'}, "Hx"),
-    put({This, 'ERL_SHORT_NAME'}, "Erl"),
-    put({This, 'CBL_SHORT_NAME'}, "Cbl"),
-    put({This, 'F90_SHORT_NAME'}, "F90"),
-    put({This, 'DART_SHORT_NAME'}, "Dart"),
-    put({This, 'EX_SHORT_NAME'}, "Ex"),
-    put({This, 'OBJC_SHORT_NAME'}, "ObjC"),
-    put({This, 'SWIFT_SHORT_NAME'}, "Swift"),
-    put({This, 'ASM_SHORT_NAME'}, "Asm"),
-    put({This, 'NIM_SHORT_NAME'}, "Nim"),
-    put({This, 'VALA_SHORT_NAME'}, "Vala"),
-    put({This, 'LISP_SHORT_NAME'}, "Lisp"),
-    put({This, 'RKT_SHORT_NAME'}, "Rkt"),
-    put({This, 'SCM_SHORT_NAME'}, "Scm"),
-    put({This, 'AS_SHORT_NAME'}, "As"),
-    put({This, 'OBX_SHORT_NAME'}, "Obx"),
-    put({This, 'SCALA_SHORT_NAME'}, "Scala"),
-    put({This, 'GROOVY_SHORT_NAME'}, "Groovy"),
-    put({This, 'JL_SHORT_NAME'}, "Jl"),
-    put({This, 'TCL_SHORT_NAME'}, "Tcl"),
-    put({This, 'WREN_SHORT_NAME'}, "Wren"),
-    put({This, 'JANET_SHORT_NAME'}, "Janet"),
-    put({This, 'GR_SHORT_NAME'}, "Gr"),
-    put({This, 'ELM_SHORT_NAME'}, "Elm"),
-    put({This, 'UNCRYPTED_EXTENSION'}, get({This, 'XML'})),
-    put({This, 'ENCRYPTED_EXTENSION'}, "abd"),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'CommonDataFileStrings', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, CommonDataFileStrings.jstatic_instance()})
+    end)
+  end
+end
+
 

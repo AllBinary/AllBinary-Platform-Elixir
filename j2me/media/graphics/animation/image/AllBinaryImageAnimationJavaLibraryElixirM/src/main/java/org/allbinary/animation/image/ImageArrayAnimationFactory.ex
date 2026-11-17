@@ -1,61 +1,85 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation.image
-% import javax.microedition.lcdui.Image
-% import org.allbinary.animation.Animation
-% import org.allbinary.animation.AnimationBehavior
-% import org.allbinary.animation.AnimationBehaviorFactory
-% import org.allbinary.animation.AnimationInterfaceFactoryInterface
-% import org.allbinary.logic.communication.log.ForcedLogUtil
-% import org.allbinary.media.ScaleProperties
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
--module('ImageArrayAnimationFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements AnimationInterfaceFactoryInterface
+defmodule ImageArrayAnimationFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, dx}, 0),
-    put({This, dy}, 0),
-    put({This, imageArray}, undefined),
-    put({This, animationBehaviorFactory}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :dx, 0)
+    JR.put(this, :dy, 0)
+    JR.put(this, :imageArray, nil)
+    JR.put(this, :animationBehaviorFactory, nil)
+        JR.put(this, :dx, 0)
+        JR.put(this, :dy, 0)
+        
+        
+    nil
+  end
 
 
-new(ImageArray, Dx, Dy, AnimationBehaviorFactory) when (is_tuple(ImageArray) orelse ImageArray =:= undefined), is_integer(Dx), is_integer(Dy) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, ImageArray, Dx, Dy, AnimationBehaviorFactory),
-    This.
+  def jinit(this, p_imageArray, p_dx, p_dy, p_animationBehaviorFactory) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :imageArray, p_imageArray)
+      JR.lset(f, :dx, p_dx)
+      JR.lset(f, :dy, p_dy)
+      JR.lset(f, :animationBehaviorFactory, p_animationBehaviorFactory)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :imageArray, JR.lget(f, :imageArray))
+        JR.put(this, :animationBehaviorFactory, JR.lget(f, :animationBehaviorFactory))
+        JR.put(this, :dx, JR.lget(f, :dx))
+        JR.put(this, :dy, JR.lget(f, :dy))
+    end)
+  end
 
-'$init'(This, ImageArray, Dx, Dy, AnimationBehaviorFactory) when (is_tuple(ImageArray) orelse ImageArray =:= undefined), is_integer(Dx), is_integer(Dy) ->
-    init_fields(This),
-        put({This, imageArray}, ImageArray),
-        put({This, animationBehaviorFactory}, AnimationBehaviorFactory),
-        put({This, dx}, Dx),
-        put({This, dy}, Dy).
+  def jnew(p_imageArray, p_dx, p_dy, p_animationBehaviorFactory) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_imageArray, p_dx, p_dy, p_animationBehaviorFactory)
+    this
+  end
 
-% throws Exception
-getInstance(This, InstanceId) when is_integer(InstanceId) ->
-        try
-        case ((get({This, dx}) =/= 0) orelse (get({This, dy}) =/= 0)) of
-            true ->
-            throw({'$return', 'AdjustedImageArrayAnimation':new(get({This, imageArray}), get({This, dx}), get({This, dy}), (get({get({This, animationBehaviorFactory}), '$class'})):getOrCreateInstance(get({This, animationBehaviorFactory})))});
-            false ->
-            throw({'$return', 'ImageArrayAnimation':new(get({This, imageArray}), 'AnimationBehavior':getInstance())})
+
+  def jm_getInstance(this, p_instanceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :instanceId, p_instanceId)
+        if ((JR.get(this, :dx) != 0) || (JR.get(this, :dy) != 0)) do
+            throw({:jreturn, AdjustedImageArrayAnimation.jnew(JR.get(this, :imageArray), JR.get(this, :dx), JR.get(this, :dy), JR.call(JR.get(this, :animationBehaviorFactory), :jm_getOrCreateInstance, []))})
+        else
+            throw({:jreturn, ImageArrayAnimation.jnew(JR.get(this, :imageArray), AnimationBehavior.jm_getInstance())})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-setInitialScale(This, ScaleProperties) ->
-        ok.
+
+  def jm_setInitialScale(this, p_scaleProperties) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :scaleProperties, p_scaleProperties)
+        nil
+    end)
+  end
+end
+
 

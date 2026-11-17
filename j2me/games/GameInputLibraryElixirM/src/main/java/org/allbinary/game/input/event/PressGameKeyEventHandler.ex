@@ -1,87 +1,128 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.input.event
-% import org.allbinary.game.input.PlayerGameInput
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.util.event.AllBinaryEventObject
-% import org.allbinary.logic.util.event.EventListenerInterface
-% import org.allbinary.logic.util.event.EventStrings
-% import org.allbinary.logic.util.event.handler.BasicEventHandler
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.input.event
 
--module('PressGameKeyEventHandler').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule PressGameKeyEventHandler do
+  def jsuper(), do: BasicEventHandler
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> PressGameKeyEventHandler.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicEventHandler', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, instance}, 'PressGameKeyEventHandler':new()),
-    ok.
-
-init_fields(This) ->
-    put({This, list}, 'BasicArrayListD':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :list, nil)
+        JR.put(this, :list, BasicArrayListD.jnew())
+    nil
+  end
 
 
-getInstance() ->
-        get({'PressGameKeyEventHandler', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, PressGameKeyEventHandler.jstatic_instance()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-    'BasicEventHandler':'$init'(This),
-    init_fields(This),
-        ok.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      BasicEventHandler.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-addListener(This, PlayerGameInput) ->
-        case (not (get({get({This, list}), '$class'})):contains(get({This, list}), PlayerGameInput)) of
-            true ->
-            (get({get({This, list}), '$class'})):add(get({This, list}), PlayerGameInput);
-            false -> ok
-        end.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-removeAllListeners(This) ->
-        (get({get({This, list}), '$class'})):clear(get({This, list})),
-        'BasicEventHandler':removeAllListeners(This).
 
-removeListener(This, EventListenerInterface) ->
-        (get({get({This, list}), '$class'})):remove(get({This, list}), EventListenerInterface),
-        'BasicEventHandler':removeListener(This, EventListenerInterface).
+  def jm_addListener(this, p_playerGameInput) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :playerGameInput, p_playerGameInput)
+        if !JR.call(JR.get(this, :list), :jm_contains, [JR.lget(f, :playerGameInput)]) do
+            JR.call(JR.get(this, :list), :jm_add, [JR.lget(f, :playerGameInput)])
+        end
+    end)
+  end
 
-% throws Exception
-fireEvent(This, EventObject) ->
-        put({local, index}, (get({get({This, list}), '$class'})):size(get({This, list}))),
-        (fun Loop() -> case (begin put({local, index}, get({local, index}) - 1), get({local, index}) end >= 0) of true ->
-            try
-                PlayerGameInput = array:get(get({local, index}), get({get({This, list}), objectArray})),
-                (get({PlayerGameInput, '$class'})):onPressGameKeyEvent(PlayerGameInput, EventObject)
-            catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-                (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({'EventStrings':getInstance(), 'FIRE_EVENT'}), E)
-            end,
-            Loop();
-        false -> ok end end)(),
-        'BasicEventHandler':fireEvent(This, EventObject).
 
-% throws Exception
-process(This, EventObject, EventListenerInterface) ->
-        PressGameKeyEventListenerInterface = (EventListenerInterface),
-        (get({PressGameKeyEventListenerInterface, '$class'})):onPressGameKeyEvent(PressGameKeyEventListenerInterface, EventObject).
+  def jm_removeAllListeners(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :list), :jm_clear, [])
+        BasicEventHandler.jm_removeAllListeners(this)
+    end)
+  end
+
+
+  def jm_removeListener(this, p_eventListenerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventListenerInterface, p_eventListenerInterface)
+        JR.call(JR.get(this, :list), :jm_remove, [JR.lget(f, :eventListenerInterface)])
+        BasicEventHandler.jm_removeListener(this, JR.lget(f, :eventListenerInterface))
+    end)
+  end
+
+
+  def jm_fireEvent(this, p_eventObject) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+        JR.lset(f, :index, JR.call(JR.get(this, :list), :jm_size, []))
+        JR.jfor(fn -> (JR.lpreinc(f, :index, -1) >= 0) end, fn -> nil end, fn ->
+            try do
+                JR.lset(f, :playerGameInput, JR.aget(JR.get(JR.get(this, :list), :objectArray), JR.lget(f, :index)))
+                JR.call(JR.lget(f, :playerGameInput), :jm_onPressGameKeyEvent, [JR.lget(f, :eventObject)])
+            catch
+                {:jexception, jexception} ->
+                    JR.lset(f, :e, jexception)
+                JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(EventStrings.jm_getInstance(), :FIRE_EVENT), JR.lget(f, :e)])
+            end
+        end)
+        BasicEventHandler.jm_fireEvent(this, JR.lget(f, :eventObject))
+    end)
+  end
+
+
+  def jm_process(this, p_eventObject, p_eventListenerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+      JR.lset(f, :eventListenerInterface, p_eventListenerInterface)
+        JR.lset(f, :pressGameKeyEventListenerInterface, (JR.lget(f, :eventListenerInterface)))
+        JR.call(JR.lget(f, :pressGameKeyEventListenerInterface), :jm_onPressGameKeyEvent, [JR.lget(f, :eventObject)])
+    end)
+  end
+end
+
 

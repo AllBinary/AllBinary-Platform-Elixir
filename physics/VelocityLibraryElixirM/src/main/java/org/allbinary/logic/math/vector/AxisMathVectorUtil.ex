@@ -1,50 +1,87 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.math.vector
-% import org.allbinary.math.NoDecimalTrigTable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.math.vector
 
--module('AxisMathVectorUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule AxisMathVectorUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> AxisMathVectorUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'AxisMathVectorUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :noDecimalTrigTable, nil)
+        JR.put(this, :noDecimalTrigTable, NoDecimalTrigTable.jm_getInstance())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, noDecimalTrigTable}, 'NoDecimalTrigTable':getInstance()),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'AxisMathVectorUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, AxisMathVectorUtil.jstatic_instance()})
+    end)
+  end
 
-calculateX(This, Magnitude, Angle) when is_integer(Magnitude), is_integer(Angle) ->
-        ((Magnitude * (get({get({This, noDecimalTrigTable}), '$class'})):cos(get({This, noDecimalTrigTable}), Angle)) / 10).
 
-calculateY(This, Magnitude, Angle) when is_integer(Magnitude), is_integer(Angle) ->
-        ((Magnitude * (get({get({This, noDecimalTrigTable}), '$class'})):sin(get({This, noDecimalTrigTable}), Angle)) / 10).
+  def jm_calculateX(this, p_magnitude, p_angle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :magnitude, p_magnitude)
+      JR.lset(f, :angle, p_angle)
+        throw({:jreturn, ((JR.lget(f, :magnitude) * JR.call(JR.get(this, :noDecimalTrigTable), :jm_cos, [JR.lget(f, :angle)])) / 10)})
+    end)
+  end
 
-calculateZ(This, Magnitude, OtherAngle) when is_integer(Magnitude), is_integer(OtherAngle) ->
-        ((Magnitude * (get({get({This, noDecimalTrigTable}), '$class'})):sin(get({This, noDecimalTrigTable}), OtherAngle)) / 10).
+
+  def jm_calculateY(this, p_magnitude, p_angle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :magnitude, p_magnitude)
+      JR.lset(f, :angle, p_angle)
+        throw({:jreturn, ((JR.lget(f, :magnitude) * JR.call(JR.get(this, :noDecimalTrigTable), :jm_sin, [JR.lget(f, :angle)])) / 10)})
+    end)
+  end
+
+
+  def jm_calculateZ(this, p_magnitude, p_otherAngle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :magnitude, p_magnitude)
+      JR.lset(f, :otherAngle, p_otherAngle)
+        throw({:jreturn, ((JR.lget(f, :magnitude) * JR.call(JR.get(this, :noDecimalTrigTable), :jm_sin, [JR.lget(f, :otherAngle)])) / 10)})
+    end)
+  end
+end
+
 

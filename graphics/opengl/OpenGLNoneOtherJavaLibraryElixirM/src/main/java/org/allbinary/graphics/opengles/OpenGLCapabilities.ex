@@ -1,71 +1,141 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.opengles
-% import org.allbinary.logic.string.StringUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles
 
--module('OpenGLCapabilities').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule OpenGLCapabilities do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> OpenGLCapabilities.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'OpenGLCapabilities':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :CUSTOM_GL_SURFACE_VIEW, false)
+    JR.put(this, :VERSION_1_0, nil)
+    JR.put(this, :VERSION_1_1, nil)
+    JR.put(this, :VERSION_2_0, nil)
+    JR.put(this, :VERSION_3_0, nil)
+    JR.put(this, :VERSION_3_1, nil)
+    JR.put(this, :VERSION_3_2, nil)
+    JR.put(this, :VERSION_HIGHER_THAN_EXISTS, nil)
+    JR.put(this, :glVersion, nil)
+    JR.put(this, :shaderVersion, 0)
+    JR.put(this, :glInstanceVersion, nil)
+    JR.put(this, :maxTextureSize, 0)
+        JR.put(this, :CUSTOM_GL_SURFACE_VIEW, true)
+        JR.put(this, :VERSION_1_0, "1.0")
+        JR.put(this, :VERSION_1_1, "1.1")
+        JR.put(this, :VERSION_2_0, "2.0")
+        JR.put(this, :VERSION_3_0, "3.0")
+        JR.put(this, :VERSION_3_1, "3.1")
+        JR.put(this, :VERSION_3_2, "3.2")
+        JR.put(this, :VERSION_HIGHER_THAN_EXISTS, "999.999")
+        JR.put(this, :glVersion, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+        JR.put(this, :shaderVersion, 0)
+        JR.put(this, :glInstanceVersion, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+        JR.put(this, :maxTextureSize, 64)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'CUSTOM_GL_SURFACE_VIEW'}, true),
-    put({This, 'VERSION_1_0'}, "1.0"),
-    put({This, 'VERSION_1_1'}, "1.1"),
-    put({This, 'VERSION_2_0'}, "2.0"),
-    put({This, 'VERSION_3_0'}, "3.0"),
-    put({This, 'VERSION_3_1'}, "3.1"),
-    put({This, 'VERSION_3_2'}, "3.2"),
-    put({This, 'VERSION_HIGHER_THAN_EXISTS'}, "999.999"),
-    put({This, glVersion}, get({'StringUtil':getInstance(), 'EMPTY_STRING'})),
-    put({This, shaderVersion}, 0),
-    put({This, glInstanceVersion}, get({'StringUtil':getInstance(), 'EMPTY_STRING'})),
-    put({This, maxTextureSize}, 64),
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, OpenGLCapabilities.jstatic_instance()})
+    end)
+  end
 
 
-getInstance() ->
-        get({'OpenGLCapabilities', instance}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
 
-isInitialized(This) ->
-        true.
+  def jm_isInitialized(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, true})
+    end)
+  end
 
-initCapabilities(This, Gl) ->
-        ok.
 
-isGlExtensionDrawTexture(This) ->
-        false.
+  def jm_initCapabilities(this, p_gl) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+        nil
+    end)
+  end
 
-getGlVersion(This) ->
-        get({This, glVersion}).
 
-isVertexBufferObjectSupport(This) ->
-        false.
+  def jm_isGlExtensionDrawTexture(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
 
-isTextureSizeValid(This, WidthAndHeight) when is_integer(WidthAndHeight) ->
-        true.
+
+  def jm_getGlVersion(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :glVersion)})
+    end)
+  end
+
+
+  def jm_isVertexBufferObjectSupport(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
+
+
+  def jm_isTextureSizeValid(this, p_widthAndHeight) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :widthAndHeight, p_widthAndHeight)
+        throw({:jreturn, true})
+    end)
+  end
+end
+
 

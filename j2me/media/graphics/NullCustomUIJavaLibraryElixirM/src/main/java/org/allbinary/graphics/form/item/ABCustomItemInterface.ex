@@ -1,24 +1,64 @@
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.form.item
-% import javax.microedition.lcdui.Graphics
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item
 
--module('ABCustomItemInterface').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
+defmodule ABCustomItemInterface do
+  def jsuper(), do: JObject
 
 
-getMinimumWidth(This) ->
-    erlang:error({abstract_method, getMinimumWidth}).
+  def jm_getMinimumWidth(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "getMinimumWidth")})
+    end)
+  end
 
-getMinimumHeight(This) ->
-    erlang:error({abstract_method, getMinimumHeight}).
 
-getLabel(This) ->
-    erlang:error({abstract_method, getLabel}).
+  def jm_getMinimumHeight(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "getMinimumHeight")})
+    end)
+  end
 
-paintXY(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-    erlang:error({abstract_method, paintXY}).
 
-paintUnselected(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-    erlang:error({abstract_method, paintUnselected}).
+  def jm_getLabel(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "getLabel")})
+    end)
+  end
+
+
+  def jm_paintXY(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      throw({:jexception, JR.exception("AbstractMethodError", "paintXY")})
+    end)
+  end
+
+
+  def jm_paintUnselected(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      throw({:jexception, JR.exception("AbstractMethodError", "paintUnselected")})
+    end)
+  end
+end
+
 

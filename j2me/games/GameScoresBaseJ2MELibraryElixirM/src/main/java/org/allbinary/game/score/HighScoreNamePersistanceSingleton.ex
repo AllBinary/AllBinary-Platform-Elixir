@@ -1,175 +1,228 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.score
-% import java.io.ByteArrayInputStream
-% import java.io.ByteArrayOutputStream
-% import java.io.DataInputStream
-% import java.io.DataOutputStream
-% import javax.microedition.rms.RecordEnumeration
-% import javax.microedition.rms.RecordStore
-% import javax.microedition.rms.RecordStoreException
-% import org.allbinary.TsUtil
-% import org.allbinary.game.GameInfo
-% import org.allbinary.game.configuration.persistance.NullRecordComparator
-% import org.allbinary.game.configuration.persistance.NullRecordFilter
-% import org.allbinary.game.configuration.persistance.NullRecordStore
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.communication.log.PreLogUtil
-% import org.allbinary.logic.java.exception.ExceptionUtil
-% import org.allbinary.logic.math.SmallIntegerSingletonFactory
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.logic.system.security.licensing.AbeClientInformationInterface
-% import org.allbinary.persistance.PlatformRecordIdUtil
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.score
 
--module('HighScoreNamePersistanceSingleton').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule HighScoreNamePersistanceSingleton do
+  def jsuper(), do: JObject
+def jstatic_SINGLETON(), do: JR.static_get(__MODULE__, :SINGLETON, fn -> HighScoreNamePersistanceSingleton.jnew() end)
+  def jstatic_set_SINGLETON(value), do: JR.static_put(__MODULE__, :SINGLETON, value)
 
-static_init() ->
-    put({?MODULE, 'SINGLETON'}, 'HighScoreNamePersistanceSingleton':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :tsUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :platformRecordIdUtil, nil)
+    JR.put(this, :RECORD_ID, nil)
+    JR.put(this, :name, nil)
+    JR.put(this, :nameBasicArrayList, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :tsUtil, TsUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        JR.put(this, :platformRecordIdUtil, PlatformRecordIdUtil.jm_getInstance())
+        JR.put(this, :RECORD_ID, "_SN")
+        JR.put(this, :name, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+        JR.put(this, :nameBasicArrayList, BasicArrayListD.jnew())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, tsUtil}, 'TsUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, platformRecordIdUtil}, 'PlatformRecordIdUtil':getInstance()),
-    put({This, 'RECORD_ID'}, "_SN"),
-    put({This, name}, get({'StringUtil':getInstance(), 'EMPTY_STRING'})),
-    put({This, nameBasicArrayList}, 'BasicArrayListD':new()),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'HighScoreNamePersistanceSingleton', 'SINGLETON'}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, HighScoreNamePersistanceSingleton.jstatic_SINGLETON()})
+    end)
+  end
 
-clear(This) ->
-        put({This, name}, get({'StringUtil':getInstance(), 'EMPTY_STRING'})).
 
-% throws Exception
-deleteAll(This, AbeClientInformation, GameInfo) ->
-        Size = (get({get({This, nameBasicArrayList}), '$class'})):size(get({This, nameBasicArrayList})),
-        lists:foreach(fun(Index) ->
-            Integer = array:get(Index, get({get({This, nameBasicArrayList}), objectArray})),
-            (get({This, '$class'})):delete(This, AbeClientInformation, GameInfo, (get({Integer, '$class'})):intValue(Integer))
-        end, lists:seq(0, Size - 1)),
-        (get({This, '$class'})):clear(This).
+  def jm_clear(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.put(this, :name, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+    end)
+  end
 
-getRecordId(This, AbeClientInformation) ->
-        (get({get({This, platformRecordIdUtil}), '$class'})):getRecordId(get({This, platformRecordIdUtil}), AbeClientInformation, get({This, 'RECORD_ID'})).
 
-% throws Exception
-delete(This, AbeClientInformation, GameInfo, DeleteId) when is_integer(DeleteId) ->
-        put({local, recordStore}, get({'NullRecordStore', 'NULL_RECORD_STORE'})),
-        try
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N67366) -> (get({Target_N67366, '$class'})):toString(Target_N67366) end)((fun(Target_N67373) -> (get({Target_N67373, '$class'})):appendint(Target_N67373, DeleteId) end)((fun(Target_N67380) -> (get({Target_N67380, '$class'})):append(Target_N67380, "Deleting: ") end)('StringMaker':new()))), This, get({get({This, commonStrings}), delete})),
-            put({local, recordStore}, 'RecordStore':openRecordStore((get({This, '$class'})):getRecordId(This, AbeClientInformation), true)),
-            (get({get({local, recordStore}), '$class'})):deleteRecord(get({local, recordStore}), DeleteId)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            erlang:error(E)
+  def jm_deleteAll(this, p_abeClientInformation, p_gameInfo) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+      JR.lset(f, :gameInfo, p_gameInfo)
+        JR.lset(f, :size, JR.call(JR.get(this, :nameBasicArrayList), :jm_size, []))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :integer, JR.aget(JR.get(JR.get(this, :nameBasicArrayList), :objectArray), JR.lget(f, :index)))
+            JR.call(this, :jm_delete, [JR.lget(f, :abeClientInformation), JR.lget(f, :gameInfo), JR.call(JR.lget(f, :integer), :jm_intValue, [])])
+        end)
+        JR.call(this, :jm_clear, [])
+    end)
+  end
+
+
+  def jm_getRecordId(this, p_abeClientInformation) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+        throw({:jreturn, JR.call(JR.get(this, :platformRecordIdUtil), :jm_getRecordId, [JR.lget(f, :abeClientInformation), JR.get(this, :RECORD_ID)])})
+    end)
+  end
+
+
+  def jm_delete(this, p_abeClientInformation, p_gameInfo, p_deleteId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+      JR.lset(f, :gameInfo, p_gameInfo)
+      JR.lset(f, :deleteId, p_deleteId)
+        JR.lset(f, :recordStore, NullRecordStore.jstatic_NULL_RECORD_STORE())
+        try do
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["Deleting: "]), :jm_appendint, [JR.lget(f, :deleteId)]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :delete)])
+            JR.lset(f, :recordStore, RecordStore.jm_openRecordStore(JR.call(this, :jm_getRecordId, [JR.lget(f, :abeClientInformation)]), true))
+            JR.call(JR.lget(f, :recordStore), :jm_deleteRecord, [JR.lget(f, :deleteId)])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            throw({:jexception, JR.lget(f, :e)})
         after
-            case (get({local, recordStore}) =/= undefined) of
-                true ->
-                'PreLogUtil':put("Closing RecordStore", This, get({get({This, commonStrings}), delete})),
-                (get({get({local, recordStore}), '$class'})):closeRecordStore(get({local, recordStore}));
-                false -> ok
+            if (JR.lget(f, :recordStore) != nil) do
+                PreLogUtil.jm_put("Closing RecordStore", this, JR.get(JR.get(this, :commonStrings), :delete))
+                JR.call(JR.lget(f, :recordStore), :jm_closeRecordStore, [])
             end
-        end.
+        end
+    end)
+  end
 
-getIds(This) ->
-        get({This, nameBasicArrayList}).
 
-load(This, AbeClientInformation, GameInfo) ->
-        put({local, recordStore}, get({'NullRecordStore', 'NULL_RECORD_STORE'})),
-        try
-            case (get({This, name}) =:= get({'StringUtil':getInstance(), 'EMPTY_STRING'})) of
-                true ->
-                LOADING_ID = "Loading id: ",
-                put({local, recordStore}, 'RecordStore':openRecordStore((get({This, '$class'})):getRecordId(This, AbeClientInformation), true)),
-                RecordEnum = (get({get({local, recordStore}), '$class'})):enumerateRecords(get({local, recordStore}), get({'NullRecordFilter', 'NULL_RECORD_FILTER'}), get({'NullRecordComparator', 'NULL_RECORD_COMPARATOR'}), true),
-                SmallIntegerSingletonFactory = 'SmallIntegerSingletonFactory':getInstance(),
-                put({local, recordAsBytes}, undefined),
-                put({local, byteArrayInputStream}, undefined),
-                put({local, inputStream}, undefined),
-                (fun Loop() -> case (get({RecordEnum, '$class'})):hasNextElement(RecordEnum) of true ->
-                    Id = (get({RecordEnum, '$class'})):nextRecordId(RecordEnum),
-                    (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N68453) -> (get({Target_N68453, '$class'})):toString(Target_N68453) end)((fun(Target_N68460) -> (get({Target_N68460, '$class'})):appendint(Target_N68460, Id) end)((fun(Target_N68467) -> (get({Target_N68467, '$class'})):append(Target_N68467, LOADING_ID) end)('StringMaker':new()))), This, get({get({This, commonStrings}), 'LOAD'})),
-                    put({local, recordAsBytes}, (get({get({This, tsUtil}), '$class'})):getRecord(get({This, tsUtil}), get({local, recordStore}), Id)),
-                    put({local, byteArrayInputStream}, 'ByteArrayInputStream':new(get({local, recordAsBytes}))),
-                    put({local, inputStream}, 'DataInputStream':new(get({local, byteArrayInputStream}))),
-                    (fun Loop() -> case ((get({get({local, inputStream}), '$class'})):available(get({local, inputStream})) > 0) of true ->
-                        put({This, name}, (get({get({local, inputStream}), '$class'})):readUTF(get({local, inputStream}))),
-                        Loop();
-                    false -> ok end end)(),
-                    (get({get({This, nameBasicArrayList}), '$class'})):add(get({This, nameBasicArrayList}), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, Id)),
-                    Loop();
-                false -> ok end end)();
-                false -> ok
+  def jm_getIds(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :nameBasicArrayList)})
+    end)
+  end
+
+
+  def jm_load(this, p_abeClientInformation, p_gameInfo) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+      JR.lset(f, :gameInfo, p_gameInfo)
+        JR.lset(f, :recordStore, NullRecordStore.jstatic_NULL_RECORD_STORE())
+        try do
+            if (JR.get(this, :name) == JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING)) do
+                JR.lset(f, :LOADING_ID, "Loading id: ")
+                JR.lset(f, :recordStore, RecordStore.jm_openRecordStore(JR.call(this, :jm_getRecordId, [JR.lget(f, :abeClientInformation)]), true))
+                JR.lset(f, :recordEnum, JR.call(JR.lget(f, :recordStore), :jm_enumerateRecords, [NullRecordFilter.jstatic_NULL_RECORD_FILTER(), NullRecordComparator.jstatic_NULL_RECORD_COMPARATOR(), true]))
+                JR.lset(f, :smallIntegerSingletonFactory, SmallIntegerSingletonFactory.jm_getInstance())
+                JR.lset(f, :recordAsBytes, nil)
+                JR.lset(f, :byteArrayInputStream, nil)
+                JR.lset(f, :inputStream, nil)
+                JR.jwhile(fn -> JR.call(JR.lget(f, :recordEnum), :jm_hasNextElement, []) end, fn ->
+                    JR.lset(f, :id, JR.call(JR.lget(f, :recordEnum), :jm_nextRecordId, []))
+                    JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.lget(f, :LOADING_ID)]), :jm_appendint, [JR.lget(f, :id)]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :LOAD)])
+                    JR.lset(f, :recordAsBytes, JR.call(JR.get(this, :tsUtil), :jm_getRecord, [JR.lget(f, :recordStore), JR.lget(f, :id)]))
+                    JR.lset(f, :byteArrayInputStream, ByteArrayInputStream.jnew(JR.lget(f, :recordAsBytes)))
+                    JR.lset(f, :inputStream, DataInputStream.jnew(JR.lget(f, :byteArrayInputStream)))
+                    JR.jwhile(fn -> (JR.call(JR.lget(f, :inputStream), :jm_available, []) > 0) end, fn ->
+                        JR.put(this, :name, JR.call(JR.lget(f, :inputStream), :jm_readUTF, []))
+                    end)
+                    JR.call(JR.get(this, :nameBasicArrayList), :jm_add, [JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [JR.lget(f, :id)])])
+                end)
             end
-        catch _:E_N68830 when E_N68830 =/= '$break', E_N68830 =/= '$continue', (not is_tuple(E_N68830) orelse element(1, E_N68830) =/= '$return') ->
-            (get({This, '$class'})):save(This, AbeClientInformation, GameInfo, get({This, name})),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N68906) -> (get({Target_N68906, '$class'})):toString(Target_N68906) end)((fun(Target_N68913) -> (get({Target_N68913, '$class'})):append(Target_N68913, (fun(Target_N68964) -> (get({Target_N68964, '$class'})):getStackTrace(Target_N68964, E_N68830) end)('ExceptionUtil':getInstance())) end)((fun(Target_N68920) -> (get({Target_N68920, '$class'})):append(Target_N68920, get({get({This, commonStrings}), 'EXCEPTION_LABEL'})) end)('StringMaker':new()))), This, get({get({This, commonStrings}), 'LOAD'}))
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(this, :jm_save, [JR.lget(f, :abeClientInformation), JR.lget(f, :gameInfo), JR.get(this, :name)])
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :commonStrings), :EXCEPTION_LABEL)]), :jm_append, [JR.call(ExceptionUtil.jm_getInstance(), :jm_getStackTrace, [JR.lget(f, :e)])]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :LOAD)])
         after
-            try
-                case (get({local, recordStore}) =/= undefined) of
-                    true ->
-                    'PreLogUtil':put("Closing RecordStore", This, get({get({This, commonStrings}), 'LOAD'})),
-                    (get({get({local, recordStore}), '$class'})):closeRecordStore(get({local, recordStore}));
-                    false -> ok
+            try do
+                if (JR.lget(f, :recordStore) != nil) do
+                    PreLogUtil.jm_put("Closing RecordStore", this, JR.get(JR.get(this, :commonStrings), :LOAD))
+                    JR.call(JR.lget(f, :recordStore), :jm_closeRecordStore, [])
                 end
-            catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-                (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'LOAD'}), E)
+            catch
+                {:jexception, jexception} ->
+                    JR.lset(f, :e, jexception)
+                JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :LOAD), JR.lget(f, :e)])
             end
-        end,
-        get({This, name}).
+        end
+        throw({:jreturn, JR.get(this, :name)})
+    end)
+  end
 
-save(This, AbeClientInformation, GameInfo, Name) when (is_list(Name) orelse Name =:= undefined) ->
-        put({local, recordStore}, get({'NullRecordStore', 'NULL_RECORD_STORE'})),
-        try
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N69439) -> (get({Target_N69439, '$class'})):toString(Target_N69439) end)((fun(Target_N69446) -> (get({Target_N69446, '$class'})):append(Target_N69446, Name) end)((fun(Target_N69453) -> (get({Target_N69453, '$class'})):append(Target_N69453, "Saving: ") end)('StringMaker':new()))), This, get({get({This, commonStrings}), 'SAVE'})),
-            put({local, recordStore}, 'RecordStore':openRecordStore((get({This, '$class'})):getRecordId(This, AbeClientInformation), true)),
-            ByteArrayOutputStream = 'ByteArrayOutputStream':new(),
-            OutputStream = 'DataOutputStream':new(ByteArrayOutputStream),
-            (get({OutputStream, '$class'})):writeUTF(OutputStream, Name),
-            SavedGameBytes = (get({ByteArrayOutputStream, '$class'})):toByteArray(ByteArrayOutputStream),
-            (get({get({local, recordStore}), '$class'})):addRecord(get({local, recordStore}), SavedGameBytes, 0, array:size(SavedGameBytes)),
-            put({This, name}, Name)
-        catch _:E_N69852 when E_N69852 =/= '$break', E_N69852 =/= '$continue', (not is_tuple(E_N69852) orelse element(1, E_N69852) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'SAVE'}), E_N69852)
+
+  def jm_save(this, p_abeClientInformation, p_gameInfo, p_name) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+      JR.lset(f, :gameInfo, p_gameInfo)
+      JR.lset(f, :name, p_name)
+        JR.lset(f, :recordStore, NullRecordStore.jstatic_NULL_RECORD_STORE())
+        try do
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["Saving: "]), :jm_append, [JR.lget(f, :name)]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :SAVE)])
+            JR.lset(f, :recordStore, RecordStore.jm_openRecordStore(JR.call(this, :jm_getRecordId, [JR.lget(f, :abeClientInformation)]), true))
+            JR.lset(f, :byteArrayOutputStream, J.ByteArrayOutputStream.jnew())
+            JR.lset(f, :outputStream, DataOutputStream.jnew(JR.lget(f, :byteArrayOutputStream)))
+            JR.call(JR.lget(f, :outputStream), :jm_writeUTF, [JR.lget(f, :name)])
+            JR.lset(f, :savedGameBytes, JR.call(JR.lget(f, :byteArrayOutputStream), :jm_toByteArray, []))
+            JR.call(JR.lget(f, :recordStore), :jm_addRecord, [JR.lget(f, :savedGameBytes), 0, JR.alength(JR.lget(f, :savedGameBytes))])
+            JR.put(this, :name, JR.lget(f, :name))
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :SAVE), JR.lget(f, :e)])
         after
-            try
-                case (get({local, recordStore}) =/= undefined) of
-                    true ->
-                    'PreLogUtil':put("Closing RecordStore", This, get({get({This, commonStrings}), 'SAVE'})),
-                    (get({get({local, recordStore}), '$class'})):closeRecordStore(get({local, recordStore}));
-                    false -> ok
+            try do
+                if (JR.lget(f, :recordStore) != nil) do
+                    PreLogUtil.jm_put("Closing RecordStore", this, JR.get(JR.get(this, :commonStrings), :SAVE))
+                    JR.call(JR.lget(f, :recordStore), :jm_closeRecordStore, [])
                 end
-            catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-                (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'SAVE'}), E)
+            catch
+                {:jexception, jexception} ->
+                    JR.lset(f, :e, jexception)
+                JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :SAVE), JR.lget(f, :e)])
             end
-        end.
+        end
+    end)
+  end
+end
+
 

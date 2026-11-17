@@ -1,127 +1,216 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation.image
-% import javax.microedition.lcdui.Graphics
-% import javax.microedition.lcdui.Image
-% import javax.microedition.lcdui.NullImage
-% import org.allbinary.DisposalUtil
-% import org.allbinary.animation.AnimationBehavior
-% import org.allbinary.animation.RotationAnimation
-% import org.allbinary.graphics.Anchor
-% import org.allbinary.logic.math.PrimitiveIntUtil
-% import org.allbinary.math.AngleInfo
-% import org.allbinary.media.image.ImageModifierUtil
-% import org.allbinary.util.CircularIndexUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
--module('ImageArrayBaseRotationAnimation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule ImageArrayBaseRotationAnimation do
+  def jsuper(), do: RotationAnimation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('RotationAnimation', Function, Arguments).
-
-init_fields(This) ->
-    put({This, imageModifierUtil}, 'ImageModifierUtil':getInstanceOrCreate()),
-    put({This, originalImageArray}, undefined),
-    put({This, imageArray}, get({'NullImage', 'NULL_IMAGE_ARRAY'})),
-    put({This, currentImage}, undefined),
-    put({This, totalFrames}, 0),
-    put({This, anchor}, get({'Anchor', 'TOP_LEFT'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :imageModifierUtil, nil)
+    JR.put(this, :originalImageArray, nil)
+    JR.put(this, :imageArray, nil)
+    JR.put(this, :currentImage, nil)
+    JR.put(this, :totalFrames, 0)
+    JR.put(this, :anchor, 0)
+        JR.put(this, :imageModifierUtil, ImageModifierUtil.jm_getInstanceOrCreate())
+        
+        JR.put(this, :imageArray, NullImage.jstatic_NULL_IMAGE_ARRAY())
+        
+        JR.put(this, :totalFrames, 0)
+        JR.put(this, :anchor, Anchor.jstatic_TOP_LEFT())
+    nil
+  end
 
 
-new(OriginalImageArray, AngleInfo, AnimationBehavior) when (is_tuple(OriginalImageArray) orelse OriginalImageArray =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, OriginalImageArray, AngleInfo, AnimationBehavior),
-    This.
+  def jinit(this, p_originalImageArray, p_angleInfo, p_animationBehavior) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :originalImageArray, p_originalImageArray)
+      JR.lset(f, :angleInfo, p_angleInfo)
+      JR.lset(f, :animationBehavior, p_animationBehavior)
+        RotationAnimation.jinit(this, JR.lget(f, :angleInfo), CircularIndexUtil.jm_createInstance((360 / JR.call(JR.call(JR.lget(f, :angleInfo), :jm_getAngleIncrementInfo, []), :jm_getAngleIncrement, []))), JR.lget(f, :animationBehavior))
+        ImageArrayBaseRotationAnimation.jinitfields(this)
+        JR.put(this, :originalImageArray, JR.lget(f, :originalImageArray))
+        JR.call(this, :jm_setImageArray, [JR.call(JR.get(this, :imageModifierUtil), :jm_getImageArray, [JR.lget(f, :originalImageArray)])])
+        JR.put(this, :currentImage, JR.aget(JR.get(this, :imageArray), JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, [])))
+    end)
+  end
 
-'$init'(This, OriginalImageArray, AngleInfo, AnimationBehavior) when (is_tuple(OriginalImageArray) orelse OriginalImageArray =:= undefined) ->
-        'RotationAnimation':'$init'(This, AngleInfo, 'CircularIndexUtil':createInstance((360 / (fun(Target_N66130) -> (get({Target_N66130, '$class'})):getAngleIncrement(Target_N66130) end)((get({AngleInfo, '$class'})):getAngleIncrementInfo(AngleInfo)))), AnimationBehavior),
-        init_fields(This),
-        put({This, originalImageArray}, OriginalImageArray),
-        (get({This, '$class'})):setImageArray(This, (get({get({This, imageModifierUtil}), '$class'})):getImageArray(get({This, imageModifierUtil}), OriginalImageArray)),
-        put({This, currentImage}, array:get((get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})), get({This, imageArray}))).
+  def jnew(p_originalImageArray, p_angleInfo, p_animationBehavior) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_originalImageArray, p_angleInfo, p_animationBehavior)
+    this
+  end
 
-% throws Exception
-getAnimationSize(This) ->
-        (get({This, '$class'})):getSize(This).
 
-setAlpha(This, Alpha) when is_integer(Alpha) ->
-        case (get({This, alphaP}) =/= Alpha) of
-            true ->
-            'RotationAnimation':setAlpha(This, Alpha),
-            (get({get({This, imageModifierUtil}), '$class'})):reset(get({This, imageModifierUtil})),
-            Index = (get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})),
-            (get({get({This, imageModifierUtil}), '$class'})):setAlpha(get({This, imageModifierUtil}), array:get(Index, get({This, originalImageArray})), array:get(Index, get({This, imageArray})), Index, get({This, alphaP}));
-            false -> ok
-        end.
+  def jm_getAnimationSize(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(this, :jm_getSize, [])})
+    end)
+  end
 
-nextRotation(This) ->
-        'RotationAnimation':nextRotation(This),
-        Index = (get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})),
-        (get({get({This, imageModifierUtil}), '$class'})):setAlpha(get({This, imageModifierUtil}), array:get(Index, get({This, originalImageArray})), array:get(Index, get({This, imageArray})), Index, get({This, alphaP})),
-        put({This, currentImage}, array:get(Index, get({This, imageArray}))).
 
-previousRotation(This) ->
-        'RotationAnimation':previousRotation(This),
-        Index = (get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})),
-        (get({get({This, imageModifierUtil}), '$class'})):setAlpha(get({This, imageModifierUtil}), array:get(Index, get({This, originalImageArray})), array:get(Index, get({This, imageArray})), Index, get({This, alphaP})),
-        put({This, currentImage}, array:get(Index, get({This, imageArray}))).
+  def jm_setAlpha(this, p_alpha) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :alpha, p_alpha)
+        if (JR.get(this, :alphaP) != JR.lget(f, :alpha)) do
+            RotationAnimation.jm_setAlpha(this, JR.lget(f, :alpha))
+            JR.call(JR.get(this, :imageModifierUtil), :jm_reset, [])
+            JR.lset(f, :index, JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, []))
+            JR.call(JR.get(this, :imageModifierUtil), :jm_setAlpha, [JR.aget(JR.get(this, :originalImageArray), JR.lget(f, :index)), JR.aget(JR.get(this, :imageArray), JR.lget(f, :index)), JR.lget(f, :index), JR.get(this, :alphaP)])
+        end
+    end)
+  end
 
-setFrame(This, Index2) when is_integer(Index2) ->
-        'RotationAnimation':setFrame(This, Index2),
-        Index = (get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})),
-        (get({get({This, imageModifierUtil}), '$class'})):setAlpha(get({This, imageModifierUtil}), array:get(Index, get({This, originalImageArray})), array:get(Index, get({This, imageArray})), Index, get({This, alphaP})),
-        put({This, currentImage}, array:get(Index, get({This, imageArray}))).
 
-setSequence(This, Sequence) when (is_tuple(Sequence) orelse Sequence =:= undefined) ->
-        ok.
+  def jm_nextRotation(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        RotationAnimation.jm_nextRotation(this)
+        JR.lset(f, :index, JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, []))
+        JR.call(JR.get(this, :imageModifierUtil), :jm_setAlpha, [JR.aget(JR.get(this, :originalImageArray), JR.lget(f, :index)), JR.aget(JR.get(this, :imageArray), JR.lget(f, :index)), JR.lget(f, :index), JR.get(this, :alphaP)])
+        JR.put(this, :currentImage, JR.aget(JR.get(this, :imageArray), JR.lget(f, :index)))
+    end)
+  end
 
-getSequence(This) ->
-        'PrimitiveIntUtil':getArrayInstance().
 
-setImageArray(This, ImageArray) when (is_tuple(ImageArray) orelse ImageArray =:= undefined) ->
-        put({This, imageArray}, ImageArray),
-        put({This, totalFrames}, array:size(ImageArray)),
-        put({This, circularIndexUtil}, 'CircularIndexUtil':createInstance(get({This, totalFrames}))).
+  def jm_previousRotation(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        RotationAnimation.jm_previousRotation(this)
+        JR.lset(f, :index, JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, []))
+        JR.call(JR.get(this, :imageModifierUtil), :jm_setAlpha, [JR.aget(JR.get(this, :originalImageArray), JR.lget(f, :index)), JR.aget(JR.get(this, :imageArray), JR.lget(f, :index)), JR.lget(f, :index), JR.get(this, :alphaP)])
+        JR.put(this, :currentImage, JR.aget(JR.get(this, :imageArray), JR.lget(f, :index)))
+    end)
+  end
 
-paintXY(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-        (get({Graphics, '$class'})):drawImage(Graphics, get({This, currentImage}), X, Y, get({This, anchor})).
 
-% throws Exception
-close(This) ->
-        DisposalUtil = 'DisposalUtil':getInstance(),
-        Size2 = array:size(get({This, imageArray})),
-        lists:foreach(fun(Index) ->
-            (get({DisposalUtil, '$class'})):disposeImage(DisposalUtil, array:get(Index, get({This, imageArray})))
-        end, lists:seq(0, Size2 - 1)),
-        Size = array:size(get({This, originalImageArray})),
-        lists:foreach(fun(Index) ->
-            (get({DisposalUtil, '$class'})):disposeImage(DisposalUtil, array:get(Index, get({This, originalImageArray})))
-        end, lists:seq(0, Size - 1)),
-        (get({DisposalUtil, '$class'})):disposeImage(DisposalUtil, get({This, currentImage})).
+  def jm_setFrame(this, p_index2) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :index2, p_index2)
+        RotationAnimation.jm_setFrame(this, JR.lget(f, :index2))
+        JR.lset(f, :index, JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, []))
+        JR.call(JR.get(this, :imageModifierUtil), :jm_setAlpha, [JR.aget(JR.get(this, :originalImageArray), JR.lget(f, :index)), JR.aget(JR.get(this, :imageArray), JR.lget(f, :index)), JR.lget(f, :index), JR.get(this, :alphaP)])
+        JR.put(this, :currentImage, JR.aget(JR.get(this, :imageArray), JR.lget(f, :index)))
+    end)
+  end
 
-% throws Throwable
-finalize(This) ->
-        DisposalUtil = 'DisposalUtil':getInstance(),
-        Size2 = array:size(get({This, imageArray})),
-        lists:foreach(fun(Index) ->
-            (get({DisposalUtil, '$class'})):disposeImage(DisposalUtil, array:get(Index, get({This, imageArray})))
-        end, lists:seq(0, Size2 - 1)),
-        Size = array:size(get({This, originalImageArray})),
-        lists:foreach(fun(Index) ->
-            (get({DisposalUtil, '$class'})):disposeImage(DisposalUtil, array:get(Index, get({This, originalImageArray})))
-        end, lists:seq(0, Size - 1)),
-        (get({DisposalUtil, '$class'})):disposeImage(DisposalUtil, get({This, currentImage})).
+
+  def jm_setSequence(this, p_sequence) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :sequence, p_sequence)
+        nil
+    end)
+  end
+
+
+  def jm_getSequence(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, PrimitiveIntUtil.jm_getArrayInstance()})
+    end)
+  end
+
+
+  def jm_setImageArray(this, p_imageArray) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :imageArray, p_imageArray)
+        JR.put(this, :imageArray, JR.lget(f, :imageArray))
+        JR.put(this, :totalFrames, JR.alength(JR.lget(f, :imageArray)))
+        JR.put(this, :circularIndexUtil, CircularIndexUtil.jm_createInstance(JR.get(this, :totalFrames)))
+    end)
+  end
+
+
+  def jm_paintXY(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        JR.call(JR.lget(f, :graphics), :jm_drawImage, [JR.get(this, :currentImage), JR.lget(f, :x), JR.lget(f, :y), JR.get(this, :anchor)])
+    end)
+  end
+
+
+  def jm_close(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :disposalUtil, DisposalUtil.jm_getInstance())
+        JR.lset(f, :size2, JR.alength(JR.get(this, :imageArray)))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size2)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.call(JR.lget(f, :disposalUtil), :jm_disposeImage, [JR.aget(JR.get(this, :imageArray), JR.lget(f, :index))])
+        end)
+        JR.lset(f, :size, JR.alength(JR.get(this, :originalImageArray)))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.call(JR.lget(f, :disposalUtil), :jm_disposeImage, [JR.aget(JR.get(this, :originalImageArray), JR.lget(f, :index))])
+        end)
+        JR.call(JR.lget(f, :disposalUtil), :jm_disposeImage, [JR.get(this, :currentImage)])
+    end)
+  end
+
+
+  def jm_finalize(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :disposalUtil, DisposalUtil.jm_getInstance())
+        JR.lset(f, :size2, JR.alength(JR.get(this, :imageArray)))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size2)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.call(JR.lget(f, :disposalUtil), :jm_disposeImage, [JR.aget(JR.get(this, :imageArray), JR.lget(f, :index))])
+        end)
+        JR.lset(f, :size, JR.alength(JR.get(this, :originalImageArray)))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.call(JR.lget(f, :disposalUtil), :jm_disposeImage, [JR.aget(JR.get(this, :originalImageArray), JR.lget(f, :index))])
+        end)
+        JR.call(JR.lget(f, :disposalUtil), :jm_disposeImage, [JR.get(this, :currentImage)])
+    end)
+  end
+end
+
 

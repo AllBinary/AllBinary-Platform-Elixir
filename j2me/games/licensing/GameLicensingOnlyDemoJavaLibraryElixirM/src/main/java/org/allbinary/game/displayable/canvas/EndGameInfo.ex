@@ -1,61 +1,108 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import org.allbinary.game.GameInfo
-% import org.allbinary.graphics.displayable.MyCanvas
-% import org.allbinary.logic.string.StringUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('EndGameInfo').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule EndGameInfo do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, 'NORMAL_GAME_OVER_WIN'}, "You Won"),
-    put({This, 'TEASER_DEMO_GAME_END_LAST_LEVEL'}, "End of Demo."),
-    put({This, 'TEASER_DEMO_GAME_END'}, "Demo Game Over."),
-    put({This, gameOverStr}, get({'StringUtil':getInstance(), 'EMPTY_STRING'})),
-    put({This, winStr}, get({This, gameOverStr})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :NORMAL_GAME_OVER_WIN, nil)
+    JR.put(this, :TEASER_DEMO_GAME_END_LAST_LEVEL, nil)
+    JR.put(this, :TEASER_DEMO_GAME_END, nil)
+    JR.put(this, :gameOverStr, nil)
+    JR.put(this, :winStr, nil)
+        JR.put(this, :NORMAL_GAME_OVER_WIN, "You Won")
+        JR.put(this, :TEASER_DEMO_GAME_END_LAST_LEVEL, "End of Demo.")
+        JR.put(this, :TEASER_DEMO_GAME_END, "Demo Game Over.")
+        JR.put(this, :gameOverStr, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+        JR.put(this, :winStr, JR.get(this, :gameOverStr))
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-update(This, GameInfo, MyCanvas) ->
-        case (get({GameInfo, '$class'})):isLastLevel(GameInfo) of
-            true ->
-            (get({This, '$class'})):setWinStr(This, get({This, 'TEASER_DEMO_GAME_END_LAST_LEVEL'})),
-            (get({This, '$class'})):setGameOverStr(This, get({This, 'TEASER_DEMO_GAME_END_LAST_LEVEL'}));
-            false ->
-            (get({This, '$class'})):setWinStr(This, get({This, 'NORMAL_GAME_OVER_WIN'})),
-            (get({This, '$class'})):setGameOverStr(This, get({This, 'TEASER_DEMO_GAME_END'}))
-        end.
+  def jm_update(this, p_gameInfo, p_myCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameInfo, p_gameInfo)
+      JR.lset(f, :myCanvas, p_myCanvas)
+        if JR.call(JR.lget(f, :gameInfo), :jm_isLastLevel, []) do
+            JR.call(this, :jm_setWinStr, [JR.get(this, :TEASER_DEMO_GAME_END_LAST_LEVEL)])
+            JR.call(this, :jm_setGameOverStr, [JR.get(this, :TEASER_DEMO_GAME_END_LAST_LEVEL)])
+        else
+            JR.call(this, :jm_setWinStr, [JR.get(this, :NORMAL_GAME_OVER_WIN)])
+            JR.call(this, :jm_setGameOverStr, [JR.get(this, :TEASER_DEMO_GAME_END)])
+        end
+    end)
+  end
 
-getGameOverStr(This) ->
-        get({This, gameOverStr}).
 
-setGameOverStr(This, GameOverStr) when (is_list(GameOverStr) orelse GameOverStr =:= undefined) ->
-        put({This, gameOverStr}, GameOverStr).
+  def jm_getGameOverStr(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :gameOverStr)})
+    end)
+  end
 
-getWinStr(This) ->
-        get({This, winStr}).
 
-setWinStr(This, WinStr) when (is_list(WinStr) orelse WinStr =:= undefined) ->
-        put({This, winStr}, WinStr).
+  def jm_setGameOverStr(this, p_gameOverStr) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameOverStr, p_gameOverStr)
+        JR.put(this, :gameOverStr, JR.lget(f, :gameOverStr))
+    end)
+  end
+
+
+  def jm_getWinStr(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :winStr)})
+    end)
+  end
+
+
+  def jm_setWinStr(this, p_winStr) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :winStr, p_winStr)
+        JR.put(this, :winStr, JR.lget(f, :winStr))
+    end)
+  end
+end
+
 

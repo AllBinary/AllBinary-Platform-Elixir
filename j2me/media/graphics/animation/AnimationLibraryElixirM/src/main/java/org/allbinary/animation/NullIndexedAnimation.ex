@@ -1,26 +1,42 @@
-% Generated Code Do Not Modify
-% package org.allbinary.animation
+# Generated Code Do Not Modify
+# package org.allbinary.animation
 
--module('NullIndexedAnimation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule NullIndexedAnimation do
+  def jsuper(), do: IndexedAnimation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('IndexedAnimation', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+
+  def jinit(this, p_animationBehavior) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :animationBehavior, p_animationBehavior)
+        IndexedAnimation.jinit(this, JR.lget(f, :animationBehavior))
+        NullIndexedAnimation.jinitfields(this)
+    end)
+  end
+
+  def jnew(p_animationBehavior) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_animationBehavior)
+    this
+  end
 
 
-new(AnimationBehavior) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, AnimationBehavior),
-    This.
+  def jm_getAnimationSize(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0})
+    end)
+  end
+end
 
-'$init'(This, AnimationBehavior) ->
-        'IndexedAnimation':'$init'(This, AnimationBehavior).
-
-% throws Exception
-getAnimationSize(This) ->
-        0.
 

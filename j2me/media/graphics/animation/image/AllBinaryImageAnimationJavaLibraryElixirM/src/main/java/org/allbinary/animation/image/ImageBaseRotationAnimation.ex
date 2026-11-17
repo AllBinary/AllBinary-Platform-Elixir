@@ -1,77 +1,146 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation.image
-% import javax.microedition.lcdui.Graphics
-% import javax.microedition.lcdui.Image
-% import org.allbinary.DisposalUtil
-% import org.allbinary.animation.AnimationBehavior
-% import org.allbinary.animation.RotationAnimation
-% import org.allbinary.graphics.Anchor
-% import org.allbinary.logic.math.PrimitiveIntUtil
-% import org.allbinary.math.AngleInfo
-% import org.allbinary.util.CircularIndexUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
--module('ImageBaseRotationAnimation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule ImageBaseRotationAnimation do
+  def jsuper(), do: RotationAnimation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('RotationAnimation', Function, Arguments).
-
-init_fields(This) ->
-    put({This, image}, undefined),
-    put({This, anchor}, get({'Anchor', 'TOP_LEFT'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :image, nil)
+    JR.put(this, :anchor, 0)
+        
+        JR.put(this, :anchor, Anchor.jstatic_TOP_LEFT())
+    nil
+  end
 
 
-new(Image, AngleInfo, TotalAngle, AnimationBehavior) when is_integer(TotalAngle) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Image, AngleInfo, TotalAngle, AnimationBehavior),
-    This.
+  def jinit(this, p_image, p_angleInfo, p_totalAngle, p_animationBehavior) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :image, p_image)
+      JR.lset(f, :angleInfo, p_angleInfo)
+      JR.lset(f, :totalAngle, p_totalAngle)
+      JR.lset(f, :animationBehavior, p_animationBehavior)
+        RotationAnimation.jinit(this, JR.lget(f, :angleInfo), CircularIndexUtil.jm_createInstance((JR.lget(f, :totalAngle) / JR.call(JR.call(JR.lget(f, :angleInfo), :jm_getAngleIncrementInfo, []), :jm_getAngleIncrement, []))), JR.lget(f, :animationBehavior))
+        ImageBaseRotationAnimation.jinitfields(this)
+        JR.put(this, :image, JR.lget(f, :image))
+    end)
+  end
 
-'$init'(This, Image, AngleInfo, TotalAngle, AnimationBehavior) when is_integer(TotalAngle) ->
-        'RotationAnimation':'$init'(This, AngleInfo, 'CircularIndexUtil':createInstance((TotalAngle / (fun(Target_N65913) -> (get({Target_N65913, '$class'})):getAngleIncrement(Target_N65913) end)((get({AngleInfo, '$class'})):getAngleIncrementInfo(AngleInfo)))), AnimationBehavior),
-        init_fields(This),
-        put({This, image}, Image).
+  def jnew(p_image, p_angleInfo, p_totalAngle, p_animationBehavior) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_image, p_angleInfo, p_totalAngle, p_animationBehavior)
+    this
+  end
 
-% throws Exception
-getAnimationSize(This) ->
-        (get({This, '$class'})):getSize(This).
 
-setSequence(This, Sequence) when (is_tuple(Sequence) orelse Sequence =:= undefined) ->
-        ok.
+  def jm_getAnimationSize(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(this, :jm_getSize, [])})
+    end)
+  end
 
-getSequence(This) ->
-        'PrimitiveIntUtil':getArrayInstance().
 
-paintXY(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-        (get({Graphics, '$class'})):drawImage(Graphics, get({This, image}), X, Y, get({This, anchor})).
+  def jm_setSequence(this, p_sequence) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :sequence, p_sequence)
+        nil
+    end)
+  end
 
-getImage(This) ->
-        get({This, image}).
 
-getWidth(This) ->
-        (get({get({This, image}), '$class'})):getWidth(get({This, image})).
+  def jm_getSequence(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, PrimitiveIntUtil.jm_getArrayInstance()})
+    end)
+  end
 
-getHeight(This) ->
-        (get({get({This, image}), '$class'})):getHeight(get({This, image})).
 
-% throws Exception
-close(This) ->
-        (fun(Target_N66666) -> (get({Target_N66666, '$class'})):disposeImage(Target_N66666, get({This, image})) end)('DisposalUtil':getInstance()).
+  def jm_paintXY(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        JR.call(JR.lget(f, :graphics), :jm_drawImage, [JR.get(this, :image), JR.lget(f, :x), JR.lget(f, :y), JR.get(this, :anchor)])
+    end)
+  end
 
-% throws Throwable
-finalize(This) ->
-        (fun(Target_N66748) -> (get({Target_N66748, '$class'})):disposeImage(Target_N66748, get({This, image})) end)('DisposalUtil':getInstance()).
+
+  def jm_getImage(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :image)})
+    end)
+  end
+
+
+  def jm_getWidth(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.get(this, :image), :jm_getWidth, [])})
+    end)
+  end
+
+
+  def jm_getHeight(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.get(this, :image), :jm_getHeight, [])})
+    end)
+  end
+
+
+  def jm_close(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(DisposalUtil.jm_getInstance(), :jm_disposeImage, [JR.get(this, :image)])
+    end)
+  end
+
+
+  def jm_finalize(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(DisposalUtil.jm_getInstance(), :jm_disposeImage, [JR.get(this, :image)])
+    end)
+  end
+end
+
 

@@ -1,52 +1,66 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2022 AllBinary 
-% 
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-% 
-% Created By: Travis Berthelot 
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable
-% import javax.microedition.lcdui.Canvas
-% import org.allbinary.graphics.displayable.DisplayInfoSingleton
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.thread.ARunnable
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+# 
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+# 
+# Created By: Travis Berthelot 
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable
 
--module('RepaintRunnable').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule RepaintRunnable do
+  def jsuper(), do: ARunnable
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ARunnable', Function, Arguments).
-
-init_fields(This) ->
-    put({This, canvas}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :canvas, nil)
+        
+    nil
+  end
 
 
-new(Canvas) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Canvas),
-    This.
+  def jinit(this, p_canvas) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :canvas, p_canvas)
+      ARunnable.jinit(this)
+      jinitfields(this)
+        JR.put(this, :canvas, JR.lget(f, :canvas))
+    end)
+  end
 
-'$init'(This, Canvas) ->
-    'ARunnable':'$init'(This),
-    init_fields(This),
-        put({This, canvas}, Canvas).
+  def jnew(p_canvas) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_canvas)
+    this
+  end
 
-run(This) ->
-        try
-            (get({get({This, canvas}), '$class'})):repaint(get({This, canvas})),
-            (fun(Target_N65895) -> (get({Target_N65895, '$class'})):process(Target_N65895) end)('DisplayInfoSingleton':getInstance())
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            LogUtil = 'LogUtil':getInstance(),
-            (get({LogUtil, '$class'})):put(LogUtil, get({CommonStrings, 'EXCEPTION'}), This, get({CommonStrings, 'RUN'}), E)
-        end.
+
+  def jm_run(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            JR.call(JR.get(this, :canvas), :jm_repaint, [])
+            JR.call(DisplayInfoSingleton.jm_getInstance(), :jm_process, [])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.lset(f, :logUtil, LogUtil.jm_getInstance())
+            JR.call(JR.lget(f, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, JR.get(JR.lget(f, :commonStrings), :RUN), JR.lget(f, :e)])
+        end
+    end)
+  end
+end
+
 

@@ -1,51 +1,90 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.multiplayer.layer
-% import org.allbinary.game.identification.Group
-% import org.allbinary.game.layer.special.CollidableDestroyableDamageableLayer
-% import org.allbinary.graphics.Rectangle
-% import org.allbinary.view.ViewPositionBase
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.multiplayer.layer
 
--module('MultiPlayerGameLayer').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements MultiPlayerGameLayerInterface
+defmodule MultiPlayerGameLayer do
+  def jsuper(), do: CollidableDestroyableDamageableLayer
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('CollidableDestroyableDamageableLayer', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new(RemoteInfo, GroupInterface, Name, LayerInfo, ViewPosition) when (is_tuple(GroupInterface) orelse GroupInterface =:= undefined), (is_list(Name) orelse Name =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, RemoteInfo, GroupInterface, Name, LayerInfo, ViewPosition),
-    This.
+  def jinit(this, p_remoteInfo, p_groupInterface, p_name, p_layerInfo, p_viewPosition) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :remoteInfo, p_remoteInfo)
+      JR.lset(f, :groupInterface, p_groupInterface)
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :layerInfo, p_layerInfo)
+      JR.lset(f, :viewPosition, p_viewPosition)
+        CollidableDestroyableDamageableLayer.jinit(this, JR.lget(f, :groupInterface), JR.lget(f, :name), JR.lget(f, :layerInfo), JR.lget(f, :viewPosition))
+        MultiPlayerGameLayer.jinitfields(this)
+    end)
+  end
 
-'$init'(This, RemoteInfo, GroupInterface, Name, LayerInfo, ViewPosition) when (is_tuple(GroupInterface) orelse GroupInterface =:= undefined), (is_list(Name) orelse Name =:= undefined) ->
-        'CollidableDestroyableDamageableLayer':'$init'(This, GroupInterface, Name, LayerInfo, ViewPosition).
+  def jnew(p_remoteInfo, p_groupInterface, p_name, p_layerInfo, p_viewPosition) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_remoteInfo, p_groupInterface, p_name, p_layerInfo, p_viewPosition)
+    this
+  end
 
-getMultiplayerBehavior(This) ->
-        get({'MultiplayerBehavior', 'NULL_MULTIPLAYER_BEHAVIOR'}).
 
-setPingInfo(This, Show) when is_boolean(Show) ->
-        ok.
+  def jm_getMultiplayerBehavior(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, MultiplayerBehavior.jstatic_NULL_MULTIPLAYER_BEHAVIOR()})
+    end)
+  end
 
-setFiring(This, Firing) when is_integer(Firing) ->
-        ok.
 
-getFiring(This) ->
-        0.
+  def jm_setPingInfo(this, p_show) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :show, p_show)
+        nil
+    end)
+  end
+
+
+  def jm_setFiring(this, p_firing) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :firing, p_firing)
+        nil
+    end)
+  end
+
+
+  def jm_getFiring(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0})
+    end)
+  end
+end
+
 

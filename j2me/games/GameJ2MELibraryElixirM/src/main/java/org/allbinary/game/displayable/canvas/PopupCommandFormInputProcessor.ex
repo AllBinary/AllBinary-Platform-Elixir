@@ -1,46 +1,70 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import org.allbinary.graphics.displayable.MyCanvas
-% import org.allbinary.graphics.form.ScrollSelectionForm
-% import org.allbinary.input.motion.gesture.observer.MotionGestureEvent
-% import org.allbinary.util.BasicArrayList
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('PopupCommandFormInputProcessor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule PopupCommandFormInputProcessor do
+  def jsuper(), do: CommandFormInputProcessor
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('CommandFormInputProcessor', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new(GameKeyEventList, PlayerInputId, GameCanvas, Form, PopupMenuInputProcessor) when is_integer(PlayerInputId) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, GameKeyEventList, PlayerInputId, GameCanvas, Form, PopupMenuInputProcessor),
-    This.
+  def jinit(this, p_gameKeyEventList, p_playerInputId, p_gameCanvas, p_form, p_popupMenuInputProcessor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEventList, p_gameKeyEventList)
+      JR.lset(f, :playerInputId, p_playerInputId)
+      JR.lset(f, :gameCanvas, p_gameCanvas)
+      JR.lset(f, :form, p_form)
+      JR.lset(f, :popupMenuInputProcessor, p_popupMenuInputProcessor)
+        CommandFormInputProcessor.jinit(this, JR.lget(f, :gameKeyEventList), JR.lget(f, :playerInputId), JR.lget(f, :gameCanvas), JR.lget(f, :form))
+        PopupCommandFormInputProcessor.jinitfields(this)
+    end)
+  end
 
-'$init'(This, GameKeyEventList, PlayerInputId, GameCanvas, Form, PopupMenuInputProcessor) when is_integer(PlayerInputId) ->
-        'CommandFormInputProcessor':'$init'(This, GameKeyEventList, PlayerInputId, GameCanvas, Form).
+  def jnew(p_gameKeyEventList, p_playerInputId, p_gameCanvas, p_form, p_popupMenuInputProcessor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_gameKeyEventList, p_playerInputId, p_gameCanvas, p_form, p_popupMenuInputProcessor)
+    this
+  end
 
-% throws Exception
-processInput(This, Key) when is_integer(Key) ->
-        'CommandFormInputProcessor':processInput(This, Key).
 
-% throws Exception
-processMotionInput(This, MotionGestureEvent) ->
-        'CommandFormInputProcessor':processMotionInput(This, MotionGestureEvent).
+  def jm_processInput(this, p_key) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :key, p_key)
+        throw({:jreturn, CommandFormInputProcessor.jm_processInput(this, JR.lget(f, :key))})
+    end)
+  end
+
+
+  def jm_processMotionInput(this, p_motionGestureEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :motionGestureEvent, p_motionGestureEvent)
+        CommandFormInputProcessor.jm_processMotionInput(this, JR.lget(f, :motionGestureEvent))
+    end)
+  end
+end
+
 

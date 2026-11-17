@@ -1,37 +1,59 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game
 
--module('GameInfoCopyFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule GameInfoCopyFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstanceMaxLevel(GameInfo, MaxLevel) when is_integer(MaxLevel) ->
-        'GameInfo':new((get({GameInfo, '$class'})):getGameType(GameInfo), (get({GameInfo, '$class'})):getGameMode(GameInfo), (get({GameInfo, '$class'})):getPlayerType(GameInfo), MaxLevel, (get({GameInfo, '$class'})):getCurrentLevel(GameInfo)).
+  def jm_getInstanceMaxLevel(p_gameInfo, p_maxLevel) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameInfo, p_gameInfo)
+      JR.lset(f, :maxLevel, p_maxLevel)
+        throw({:jreturn, GameInfo.jnew(JR.call(JR.lget(f, :gameInfo), :jm_getGameType, []), JR.call(JR.lget(f, :gameInfo), :jm_getGameMode, []), JR.call(JR.lget(f, :gameInfo), :jm_getPlayerType, []), JR.lget(f, :maxLevel), JR.call(JR.lget(f, :gameInfo), :jm_getCurrentLevel, []))})
+    end)
+  end
 
-getInstance(GameInfo) ->
-        'GameInfo':new((get({GameInfo, '$class'})):getGameType(GameInfo), (get({GameInfo, '$class'})):getGameMode(GameInfo), (get({GameInfo, '$class'})):getPlayerType(GameInfo), (get({GameInfo, '$class'})):getHighestLevel(GameInfo), (get({GameInfo, '$class'})):getCurrentLevel(GameInfo)).
+
+  def jm_getInstance(p_gameInfo) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameInfo, p_gameInfo)
+        throw({:jreturn, GameInfo.jnew(JR.call(JR.lget(f, :gameInfo), :jm_getGameType, []), JR.call(JR.lget(f, :gameInfo), :jm_getGameMode, []), JR.call(JR.lget(f, :gameInfo), :jm_getPlayerType, []), JR.call(JR.lget(f, :gameInfo), :jm_getHighestLevel, []), JR.call(JR.lget(f, :gameInfo), :jm_getCurrentLevel, []))})
+    end)
+  end
+end
+
 

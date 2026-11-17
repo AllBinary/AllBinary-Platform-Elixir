@@ -1,65 +1,109 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.gyro
-% import org.allbinary.game.input.motion.action.NoCompleteMotionGestureInputEventListener
-% import org.allbinary.input.AllBinarySensor
-% import org.allbinary.input.NoAllBinarySensor
-% import org.allbinary.input.accelerometer.AccelerometerSensorFactory
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.gyro
 
--module('SensorGameUpdateProcessor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule SensorGameUpdateProcessor do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, inputSensor}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :inputSensor, nil)
+        JR.put(this, :inputSensor, nil)
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-setInputSensor(This, InputSensor) ->
-        put({This, inputSensor}, InputSensor).
+  def jm_setInputSensor(this, p_inputSensor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :inputSensor, p_inputSensor)
+        JR.put(this, :inputSensor, JR.lget(f, :inputSensor))
+    end)
+  end
 
-getInputSensor(This) ->
-        get({This, inputSensor}).
 
-% throws Exception
-process(This, AnyType) ->
-        ok.
+  def jm_getInputSensor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :inputSensor)})
+    end)
+  end
 
-% throws Exception
-sendNotifications(This, AnyType) ->
-        ok.
 
-isAnySensor(This) ->
-        try
-        case (get({This, inputSensor}) =:= 'NoAllBinarySensor':getInstance()) of
-            true ->
-            throw({'$return', false});
-            false ->
-            throw({'$return', true})
+  def jm_process(this, p_anyType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+        nil
+    end)
+  end
+
+
+  def jm_sendNotifications(this, p_anyType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+        nil
+    end)
+  end
+
+
+  def jm_isAnySensor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.get(this, :inputSensor) == NoAllBinarySensor.jm_getInstance()) do
+            throw({:jreturn, false})
+        else
+            throw({:jreturn, true})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-setNoSensors(This) ->
-        (fun(Target_N66066) -> (get({Target_N66066, '$class'})):setCompleteMotionGestureInputEventListener(Target_N66066, 'NoCompleteMotionGestureInputEventListener':getInstance()) end)('GyroSensorFactory':getInstance()),
-        (fun(Target_N66113) -> (get({Target_N66113, '$class'})):setCompleteMotionGestureInputEventListener(Target_N66113, 'NoCompleteMotionGestureInputEventListener':getInstance()) end)('AccelerometerSensorFactory':getInstance()),
-        (get({This, '$class'})):setInputSensor(This, 'NoAllBinarySensor':getInstance()).
+
+  def jm_setNoSensors(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(GyroSensorFactory.jm_getInstance(), :jm_setCompleteMotionGestureInputEventListener, [NoCompleteMotionGestureInputEventListener.jm_getInstance()])
+        JR.call(AccelerometerSensorFactory.jm_getInstance(), :jm_setCompleteMotionGestureInputEventListener, [NoCompleteMotionGestureInputEventListener.jm_getInstance()])
+        JR.call(this, :jm_setInputSensor, [NoAllBinarySensor.jm_getInstance()])
+    end)
+  end
+end
+
 

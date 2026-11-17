@@ -1,46 +1,64 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.gyro
-% import org.allbinary.canvas.Processor
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.gyro
 
--module('SingleSensorGameUpdateProcessor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule SingleSensorGameUpdateProcessor do
+  def jsuper(), do: SensorGameUpdateProcessor
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('SensorGameUpdateProcessor', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :accelerometerSensorUpdateProcessor, nil)
+    JR.put(this, :gyroSensorUpdateProcessor, nil)
+        JR.put(this, :accelerometerSensorUpdateProcessor, AccelerometerSensorUpdateProcessor.jnew())
+        JR.put(this, :gyroSensorUpdateProcessor, GyroSensorUpdateProcessor.jnew())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, accelerometerSensorUpdateProcessor}, 'AccelerometerSensorUpdateProcessor':new()),
-    put({This, gyroSensorUpdateProcessor}, 'GyroSensorUpdateProcessor':new()),
-    ok.
+  def jinit(this) do
+    SensorGameUpdateProcessor.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    'SensorGameUpdateProcessor':'$init'(This),
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-% throws Exception
-process(This, AnyType) ->
-        (get({This, '$class'})):setNoSensors(This).
+  def jm_process(this, p_anyType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+        JR.call(this, :jm_setNoSensors, [])
+    end)
+  end
 
-% throws Exception
-sendNotifications(This, AnyType) ->
-        ok.
+
+  def jm_sendNotifications(this, p_anyType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+        nil
+    end)
+  end
+end
+
 

@@ -1,81 +1,135 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.layer.hud.basic.life
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.animation.Animation
-% import org.allbinary.game.ag.life.Life
-% import org.allbinary.game.graphics.hud.BasicHud
-% import org.allbinary.graphics.color.BasicColorFactory
-% import org.allbinary.graphics.displayable.event.DisplayChangeEvent
-% import org.allbinary.graphics.paint.PaintableInterface
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.hud.basic.life
 
--module('LivesHudWidget').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements PaintableInterface
+defmodule LivesHudWidget do
+  def jsuper(), do: BasicHud
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicHud', Function, Arguments).
-
-init_fields(This) ->
-    put({This, lifeInterface}, undefined),
-    put({This, xArray}, undefined),
-    put({This, animationInterface}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :lifeInterface, nil)
+    JR.put(this, :xArray, nil)
+    JR.put(this, :animationInterface, nil)
+        
+        
+        
+    nil
+  end
 
 
-new(AnimationInterface, LifeInterface, Location, Direction) when is_integer(Location), is_integer(Direction) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, AnimationInterface, LifeInterface, Location, Direction),
-    This.
+  def jinit(this, p_animationInterface, p_lifeInterface, p_location, p_direction) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :animationInterface, p_animationInterface)
+      JR.lset(f, :lifeInterface, p_lifeInterface)
+      JR.lset(f, :location, p_location)
+      JR.lset(f, :direction, p_direction)
+        BasicHud.jinit(this, JR.lget(f, :location), JR.lget(f, :direction), 2, JR.get(BasicColorFactory.jm_getInstance(), :WHITE))
+        LivesHudWidget.jinitfields(this)
+        JR.put(this, :lifeInterface, JR.lget(f, :lifeInterface))
+        JR.lset(f, :size, JR.int32(JR.call(JR.call(this, :jm_getLifeInterface, []), :jm_getMaxlives, [])))
+        JR.put(this, :xArray, JR.anew(JR.lget(f, :size), 0))
+        JR.put(this, :animationInterface, JR.lget(f, :animationInterface))
+        JR.put(this, :updateMaxWidth, (JR.call(JR.get(this, :lifeInterface), :jm_getMaxlives, []) * 16))
+        JR.put(this, :updateMaxHeight, 16)
+    end)
+  end
 
-'$init'(This, AnimationInterface, LifeInterface, Location, Direction) when is_integer(Location), is_integer(Direction) ->
-        'BasicHud':'$init'(This, Location, Direction, 2, get({'BasicColorFactory':getInstance(), 'WHITE'})),
-        init_fields(This),
-        put({This, lifeInterface}, LifeInterface),
-        Size = trunc((fun(Target_N66056) -> (get({Target_N66056, '$class'})):getMaxlives(Target_N66056) end)((get({This, '$class'})):getLifeInterface(This))),
-        put({This, xArray}, array:new(Size, {default, 0})),
-        put({This, animationInterface}, AnimationInterface),
-        put({This, updateMaxWidth}, ((get({get({This, lifeInterface}), '$class'})):getMaxlives(get({This, lifeInterface})) * 16)),
-        put({This, updateMaxHeight}, 16).
+  def jnew(p_animationInterface, p_lifeInterface, p_location, p_direction) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_animationInterface, p_lifeInterface, p_location, p_direction)
+    this
+  end
 
-updateMeasurement(This, Graphics) ->
-        'BasicHud':updateMeasurement(This, Graphics),
-        MaxLives = trunc((fun(Target_N66375) -> (get({Target_N66375, '$class'})):getMaxlives(Target_N66375) end)((get({This, '$class'})):getLifeInterface(This))),
-        lists:foreach(fun(Index) ->
-            put({This, xArray}, array:set(Index, ((get({This, '$class'})):getX(This) + ((Index * 16))), get({This, xArray})))
-        end, lists:seq(0, MaxLives - 1)).
 
-onDisplayChangeEvent(This, DisplayChangeEvent) ->
-        'BasicHud':onDisplayChangeEvent(This, DisplayChangeEvent),
-        put({This, myFontProcessor}, get({This, updateMyFontProcessor})).
+  def jm_updateMeasurement(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        BasicHud.jm_updateMeasurement(this, JR.lget(f, :graphics))
+        JR.lset(f, :maxLives, JR.int32(JR.call(JR.call(this, :jm_getLifeInterface, []), :jm_getMaxlives, [])))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :maxLives)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.aset(JR.get(this, :xArray), JR.lget(f, :index), (JR.call(this, :jm_getX, []) + (JR.int32(JR.lget(f, :index) * 16))))
+        end)
+    end)
+  end
 
-setX(This, X) when is_integer(X) ->
-        'BasicHud':setX(This, X),
-        put({This, myFontProcessor}, get({This, updateMyFontProcessor})).
 
-paint(This, Graphics) ->
-        (get({get({This, myFontProcessor}), '$class'})):process(get({This, myFontProcessor}), Graphics),
-        put({local, index}, trunc((fun(Target_N66990) -> (get({Target_N66990, '$class'})):get(Target_N66990) end)((get({This, '$class'})):getLifeInterface(This)))),
-        (fun Loop() -> case (begin put({local, index}, get({local, index}) - 1), get({local, index}) end >= 0) of true ->
-            (get({get({This, animationInterface}), '$class'})):paintXY(get({This, animationInterface}), Graphics, array:get(get({local, index}), get({This, xArray})), (get({This, '$class'})):getY(This)),
-            Loop();
-        false -> ok end end)().
+  def jm_onDisplayChangeEvent(this, p_displayChangeEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :displayChangeEvent, p_displayChangeEvent)
+        BasicHud.jm_onDisplayChangeEvent(this, JR.lget(f, :displayChangeEvent))
+        JR.put(this, :myFontProcessor, JR.get(this, :updateMyFontProcessor))
+    end)
+  end
 
-paintThreed(This, Graphics) ->
-        ok.
 
-getLifeInterface(This) ->
-        get({This, lifeInterface}).
+  def jm_setX(this, p_x) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+        BasicHud.jm_setX(this, JR.lget(f, :x))
+        JR.put(this, :myFontProcessor, JR.get(this, :updateMyFontProcessor))
+    end)
+  end
+
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.get(this, :myFontProcessor), :jm_process, [JR.lget(f, :graphics)])
+        JR.lset(f, :index, JR.int32(JR.call(JR.call(this, :jm_getLifeInterface, []), :jm_get, [])))
+        JR.jfor(fn -> (JR.lpreinc(f, :index, -1) >= 0) end, fn -> nil end, fn ->
+            JR.call(JR.get(this, :animationInterface), :jm_paintXY, [JR.lget(f, :graphics), JR.aget(JR.get(this, :xArray), JR.lget(f, :index)), JR.call(this, :jm_getY, [])])
+        end)
+    end)
+  end
+
+
+  def jm_paintThreed(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        nil
+    end)
+  end
+
+
+  def jm_getLifeInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :lifeInterface)})
+    end)
+  end
+end
+
 

@@ -1,59 +1,94 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.media.ScaleProperties
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation
 
--module('NullAnimationFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements AnimationInterfaceFactoryInterface
-% implements ProceduralAnimationInterfaceFactoryInterface
+defmodule NullAnimationFactory do
+  def jsuper(), do: JObject
+def jstatic_NULL_NOT_FOR_USE_ANIMATION_FACTORY(), do: JR.static_get(__MODULE__, :NULL_NOT_FOR_USE_ANIMATION_FACTORY, fn -> NullAnimationFactory.jnew() end)
+  def jstatic_set_NULL_NOT_FOR_USE_ANIMATION_FACTORY(value), do: JR.static_put(__MODULE__, :NULL_NOT_FOR_USE_ANIMATION_FACTORY, value)
+def jstatic_NULL_ANIMATION_FACTORY(), do: JR.static_get(__MODULE__, :NULL_ANIMATION_FACTORY, fn -> NullAnimationFactory.jnew() end)
+  def jstatic_set_NULL_ANIMATION_FACTORY(value), do: JR.static_put(__MODULE__, :NULL_ANIMATION_FACTORY, value)
 
-static_init() ->
-    put({?MODULE, 'NULL_NOT_FOR_USE_ANIMATION_FACTORY'}, 'NullAnimationFactory':new()),
-    put({?MODULE, 'NULL_ANIMATION_FACTORY'}, 'NullAnimationFactory':new()),
-    ok.
-
-init_fields(This) ->
-    put({This, 'NULL_ANIMATION'}, 'Animation':new() % Java anonymous class body: implement it as a module
-%         ok % paintXY
-),
-    put({This, 'EMPTY_ARRAY'}, array:new(0, {default, undefined})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :NULL_ANIMATION, nil)
+    JR.put(this, :EMPTY_ARRAY, nil)
+        JR.put(this, :NULL_ANIMATION, Animation.jnew())
+        JR.put(this, :EMPTY_ARRAY, JR.anew(0, nil))
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-getFactoryInstance() ->
-        get({'NullAnimationFactory', 'NULL_ANIMATION_FACTORY'}).
 
-getInstance(This, InstanceId) when is_integer(InstanceId) ->
-        get({This, 'NULL_ANIMATION'}).
+  def jm_getFactoryInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, NullAnimationFactory.jstatic_NULL_ANIMATION_FACTORY()})
+    end)
+  end
 
-% throws Exception
-getInstanceAnimation(This, AnimationInterface) ->
-        get({This, 'NULL_ANIMATION'}).
 
-setInitialScale(This, ScaleProperties) ->
-        ok.
+  def jm_getInstance(this, p_instanceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :instanceId, p_instanceId)
+        throw({:jreturn, JR.get(this, :NULL_ANIMATION)})
+    end)
+  end
+
+
+  def jm_getInstanceAnimation(this, p_animationInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :animationInterface, p_animationInterface)
+        throw({:jreturn, JR.get(this, :NULL_ANIMATION)})
+    end)
+  end
+
+
+  def jm_setInitialScale(this, p_scaleProperties) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :scaleProperties, p_scaleProperties)
+        nil
+    end)
+  end
+end
+
 

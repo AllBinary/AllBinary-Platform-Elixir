@@ -1,60 +1,70 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion.gesture.observer
-% import org.allbinary.game.input.Input
-% import org.allbinary.game.input.InputFactory
-% import org.allbinary.input.motion.gesture.MotionGestureInput
-% import org.allbinary.input.motion.gesture.TouchMotionGestureFactory
-% import org.allbinary.logic.util.event.AllBinaryEventObject
-% import org.allbinary.logic.util.event.AllBinaryEventObjectFactoryInterface
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture.observer
 
--module('MotionEventFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements AllBinaryEventObjectFactoryInterface
+defmodule MotionEventFactory do
+  def jsuper(), do: JObject
+def jstatic_index(), do: JR.static_get(__MODULE__, :index, fn -> 0 end)
+  def jstatic_set_index(value), do: JR.static_put(__MODULE__, :index, value)
 
-static_init() ->
-    put({?MODULE, index}, 0),
-    ok.
-
-init_fields(This) ->
-    put({This, source}, undefined),
-    put({This, id}, 0),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :source, nil)
+    JR.put(this, :id, 0)
+        
+        
+    nil
+  end
 
 
-new(Source, Id) when is_integer(Id) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Source, Id),
-    This.
+  def jinit(this, p_source, p_id) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :source, p_source)
+      JR.lset(f, :id, p_id)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :source, JR.lget(f, :source))
+        JR.put(this, :id, JR.lget(f, :id))
+        MotionEventFactory.jstatic_set_index(JR.call(JR.get(TouchMotionGestureFactory.jm_getInstance(), :LAST_MOTION), :jm_getId, []))
+    end)
+  end
 
-'$init'(This, Source, Id) when is_integer(Id) ->
-    init_fields(This),
-        put({This, source}, Source),
-        put({This, id}, Id),
-        put({'MotionEventFactory', index}, (fun(Target_N65993) -> (get({Target_N65993, '$class'})):getId(Target_N65993) end)(get({'TouchMotionGestureFactory':getInstance(), 'LAST_MOTION'}))).
+  def jnew(p_source, p_id) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_source, p_id)
+    this
+  end
 
-getInstance(This) ->
-        try
-        InputFactory = 'InputFactory':getInstance(),
-        Input = (get({InputFactory, '$class'})):getInstanceById(InputFactory, allbinary_java:first(get({'MotionEventFactory', index}), put({'MotionEventFactory', index}, get({'MotionEventFactory', index}) + 1))),
-        case (Input =:= get({InputFactory, 'NO_INPUT'})) of
-            true ->
-            throw({'$return', 'MotionGestureEvent':new(get({This, source}), get({This, id}), get({'TouchMotionGestureFactory':getInstance(), 'NO_MOTION'}))});
-            false ->
-            throw({'$return', 'MotionGestureEvent':new(get({This, source}), get({This, id}), Input)})
+
+  def jm_getInstance(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :inputFactory, InputFactory.jm_getInstance())
+        JR.lset(f, :input, JR.call(JR.lget(f, :inputFactory), :jm_getInstanceById, [JR.postinc(MotionEventFactory, :index, 1)]))
+        if (JR.lget(f, :input) == JR.get(JR.lget(f, :inputFactory), :NO_INPUT)) do
+            throw({:jreturn, MotionGestureEvent.jnew(JR.get(this, :source), JR.get(this, :id), JR.get(TouchMotionGestureFactory.jm_getInstance(), :NO_MOTION))})
+        else
+            throw({:jreturn, MotionGestureEvent.jnew(JR.get(this, :source), JR.get(this, :id), JR.lget(f, :input))})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
+end
+
 

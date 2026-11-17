@@ -1,36 +1,55 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2007 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.logic.util.cache
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2007 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
--module('CacheInterfaceFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule CacheInterfaceFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-% throws Exception
-getInstance(CacheType, CachePolicy) ->
-        erlang:error({'Exception', lists:concat(["No such ", (get({CacheType, '$class'})):toString(CacheType)])}).
+
+  def jm_getInstance(p_cacheType, p_cachePolicy) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cacheType, p_cacheType)
+      JR.lset(f, :cachePolicy, p_cachePolicy)
+        throw({:jexception, JR.exception("Exception", "No such " <> JR.call(JR.lget(f, :cacheType), :jm_toString, []))})
+    end)
+  end
+end
+
 

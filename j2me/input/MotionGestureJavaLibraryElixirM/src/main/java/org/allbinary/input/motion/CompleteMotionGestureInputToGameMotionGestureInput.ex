@@ -1,94 +1,97 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion
-% import org.allbinary.input.motion.gesture.TouchMotionGestureFactory
-% import org.allbinary.input.motion.gesture.configuration.MotionGestureConfiguration
-% import org.allbinary.input.motion.gesture.configuration.MotionGestureConfigurationFactory
-% import org.allbinary.input.motion.touch.action.DiagonalDownLeftTouchInputToGameKeyEventAction
-% import org.allbinary.input.motion.touch.action.DiagonalDownRightTouchInputToGameKeyEventAction
-% import org.allbinary.input.motion.touch.action.DiagonalUpLeftTouchInputToGameKeyEventAction
-% import org.allbinary.input.motion.touch.action.DiagonalUpRightTouchInputToGameKeyEventAction
-% import org.allbinary.input.motion.touch.action.DownTouchInputToGameKeyEventAction
-% import org.allbinary.input.motion.touch.action.LeftTouchInputToGameKeyEventAction
-% import org.allbinary.input.motion.touch.action.ReleaseTouchInputToGameKeyEventAction
-% import org.allbinary.input.motion.touch.action.RightTouchInputToGameKeyEventAction
-% import org.allbinary.input.motion.touch.action.UpTouchInputToGameKeyEventAction
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.communication.log.PreLogUtil
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion
 
--module('CompleteMotionGestureInputToGameMotionGestureInput').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule CompleteMotionGestureInputToGameMotionGestureInput do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> CompleteMotionGestureInputToGameMotionGestureInput.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'CompleteMotionGestureInputToGameMotionGestureInput':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'CompleteMotionGestureInputToGameMotionGestureInput', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, CompleteMotionGestureInputToGameMotionGestureInput.jstatic_instance()})
+    end)
+  end
 
-init(This) ->
-        CommonStrings = 'CommonStrings':getInstance(),
-        try
-            'PreLogUtil':put("Compound Motion Gestures", This, get({CommonStrings, 'INIT'})),
-            MotionGestureConfiguration = 'MotionGestureConfigurationFactory':getInstance(),
-            TouchMotionGestureFactory = 'TouchMotionGestureFactory':getInstance(),
-            put({local, list}, 'BasicArrayListD':new()),
-            (get({get({local, list}), '$class'})):add(get({local, list}), get({TouchMotionGestureFactory, 'DIAGONAL_DOWN_LEFT'})),
-            (get({MotionGestureConfiguration, '$class'})):addMotionGestureAction(MotionGestureConfiguration, get({local, list}), 'DiagonalDownLeftTouchInputToGameKeyEventAction':getInstance()),
-            put({local, list}, 'BasicArrayListD':new()),
-            (get({get({local, list}), '$class'})):add(get({local, list}), get({TouchMotionGestureFactory, 'DIAGONAL_DOWN_RIGHT'})),
-            (get({MotionGestureConfiguration, '$class'})):addMotionGestureAction(MotionGestureConfiguration, get({local, list}), 'DiagonalDownRightTouchInputToGameKeyEventAction':getInstance()),
-            put({local, list}, 'BasicArrayListD':new()),
-            (get({get({local, list}), '$class'})):add(get({local, list}), get({TouchMotionGestureFactory, 'DIAGONAL_UP_LEFT'})),
-            (get({MotionGestureConfiguration, '$class'})):addMotionGestureAction(MotionGestureConfiguration, get({local, list}), 'DiagonalUpLeftTouchInputToGameKeyEventAction':getInstance()),
-            put({local, list}, 'BasicArrayListD':new()),
-            (get({get({local, list}), '$class'})):add(get({local, list}), get({TouchMotionGestureFactory, 'DIAGONAL_UP_RIGHT'})),
-            (get({MotionGestureConfiguration, '$class'})):addMotionGestureAction(MotionGestureConfiguration, get({local, list}), 'DiagonalUpRightTouchInputToGameKeyEventAction':getInstance()),
-            put({local, list}, 'BasicArrayListD':new()),
-            (get({get({local, list}), '$class'})):add(get({local, list}), get({TouchMotionGestureFactory, 'LEFT'})),
-            (get({MotionGestureConfiguration, '$class'})):addMotionGestureAction(MotionGestureConfiguration, get({local, list}), 'LeftTouchInputToGameKeyEventAction':getInstance()),
-            put({local, list}, 'BasicArrayListD':new()),
-            (get({get({local, list}), '$class'})):add(get({local, list}), get({TouchMotionGestureFactory, 'RIGHT'})),
-            (get({MotionGestureConfiguration, '$class'})):addMotionGestureAction(MotionGestureConfiguration, get({local, list}), 'RightTouchInputToGameKeyEventAction':getInstance()),
-            put({local, list}, 'BasicArrayListD':new()),
-            (get({get({local, list}), '$class'})):add(get({local, list}), get({TouchMotionGestureFactory, 'DOWN'})),
-            (get({MotionGestureConfiguration, '$class'})):addMotionGestureAction(MotionGestureConfiguration, get({local, list}), 'DownTouchInputToGameKeyEventAction':getInstance()),
-            put({local, list}, 'BasicArrayListD':new()),
-            (get({get({local, list}), '$class'})):add(get({local, list}), get({TouchMotionGestureFactory, 'UP'})),
-            (get({MotionGestureConfiguration, '$class'})):addMotionGestureAction(MotionGestureConfiguration, get({local, list}), 'UpTouchInputToGameKeyEventAction':getInstance()),
-            put({local, list}, 'BasicArrayListD':new()),
-            (get({get({local, list}), '$class'})):add(get({local, list}), get({TouchMotionGestureFactory, 'RELEASED'})),
-            (get({MotionGestureConfiguration, '$class'})):addMotionGestureAction(MotionGestureConfiguration, get({local, list}), 'ReleaseTouchInputToGameKeyEventAction':getInstance())
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), This, get({CommonStrings, 'INIT'}), E)
-        end.
+
+  def jm_init(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+        try do
+            PreLogUtil.jm_put("Compound Motion Gestures", this, JR.get(JR.lget(f, :commonStrings), :INIT))
+            JR.lset(f, :motionGestureConfiguration, MotionGestureConfigurationFactory.jm_getInstance())
+            JR.lset(f, :touchMotionGestureFactory, TouchMotionGestureFactory.jm_getInstance())
+            JR.lset(f, :list, BasicArrayListD.jnew())
+            JR.call(JR.lget(f, :list), :jm_add, [JR.get(JR.lget(f, :touchMotionGestureFactory), :DIAGONAL_DOWN_LEFT)])
+            JR.call(JR.lget(f, :motionGestureConfiguration), :jm_addMotionGestureAction, [JR.lget(f, :list), DiagonalDownLeftTouchInputToGameKeyEventAction.jm_getInstance()])
+            JR.lset(f, :list, BasicArrayListD.jnew())
+            JR.call(JR.lget(f, :list), :jm_add, [JR.get(JR.lget(f, :touchMotionGestureFactory), :DIAGONAL_DOWN_RIGHT)])
+            JR.call(JR.lget(f, :motionGestureConfiguration), :jm_addMotionGestureAction, [JR.lget(f, :list), DiagonalDownRightTouchInputToGameKeyEventAction.jm_getInstance()])
+            JR.lset(f, :list, BasicArrayListD.jnew())
+            JR.call(JR.lget(f, :list), :jm_add, [JR.get(JR.lget(f, :touchMotionGestureFactory), :DIAGONAL_UP_LEFT)])
+            JR.call(JR.lget(f, :motionGestureConfiguration), :jm_addMotionGestureAction, [JR.lget(f, :list), DiagonalUpLeftTouchInputToGameKeyEventAction.jm_getInstance()])
+            JR.lset(f, :list, BasicArrayListD.jnew())
+            JR.call(JR.lget(f, :list), :jm_add, [JR.get(JR.lget(f, :touchMotionGestureFactory), :DIAGONAL_UP_RIGHT)])
+            JR.call(JR.lget(f, :motionGestureConfiguration), :jm_addMotionGestureAction, [JR.lget(f, :list), DiagonalUpRightTouchInputToGameKeyEventAction.jm_getInstance()])
+            JR.lset(f, :list, BasicArrayListD.jnew())
+            JR.call(JR.lget(f, :list), :jm_add, [JR.get(JR.lget(f, :touchMotionGestureFactory), :LEFT)])
+            JR.call(JR.lget(f, :motionGestureConfiguration), :jm_addMotionGestureAction, [JR.lget(f, :list), LeftTouchInputToGameKeyEventAction.jm_getInstance()])
+            JR.lset(f, :list, BasicArrayListD.jnew())
+            JR.call(JR.lget(f, :list), :jm_add, [JR.get(JR.lget(f, :touchMotionGestureFactory), :RIGHT)])
+            JR.call(JR.lget(f, :motionGestureConfiguration), :jm_addMotionGestureAction, [JR.lget(f, :list), RightTouchInputToGameKeyEventAction.jm_getInstance()])
+            JR.lset(f, :list, BasicArrayListD.jnew())
+            JR.call(JR.lget(f, :list), :jm_add, [JR.get(JR.lget(f, :touchMotionGestureFactory), :DOWN)])
+            JR.call(JR.lget(f, :motionGestureConfiguration), :jm_addMotionGestureAction, [JR.lget(f, :list), DownTouchInputToGameKeyEventAction.jm_getInstance()])
+            JR.lset(f, :list, BasicArrayListD.jnew())
+            JR.call(JR.lget(f, :list), :jm_add, [JR.get(JR.lget(f, :touchMotionGestureFactory), :UP)])
+            JR.call(JR.lget(f, :motionGestureConfiguration), :jm_addMotionGestureAction, [JR.lget(f, :list), UpTouchInputToGameKeyEventAction.jm_getInstance()])
+            JR.lset(f, :list, BasicArrayListD.jnew())
+            JR.call(JR.lget(f, :list), :jm_add, [JR.get(JR.lget(f, :touchMotionGestureFactory), :RELEASED)])
+            JR.call(JR.lget(f, :motionGestureConfiguration), :jm_addMotionGestureAction, [JR.lget(f, :list), ReleaseTouchInputToGameKeyEventAction.jm_getInstance()])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, JR.get(JR.lget(f, :commonStrings), :INIT), JR.lget(f, :e)])
+        end
+    end)
+  end
+end
+
 

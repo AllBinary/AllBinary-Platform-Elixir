@@ -1,37 +1,44 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.io
-% import java.io.FileNotFoundException
-% import org.allbinary.logic.io.file.AbFile
-% import org.allbinary.logic.io.file.AbFileNativeUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
--module('AbFileLocalInputStream').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule AbFileLocalInputStream do
+  def jsuper(), do: AbFileInputStream
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AbFileInputStream', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new(File) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, File),
-    This.
+  def jinit(this, p_file) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :file, p_file)
+        AbFileInputStream.jinit(this, JR.call(AbFileNativeUtil.jm_get(JR.lget(f, :file)), :jm_getPath, []))
+        AbFileLocalInputStream.jinitfields(this)
+    end)
+  end
 
-'$init'(This, File) ->
-        'AbFileInputStream':'$init'(This, (fun(Target_N65698) -> (get({Target_N65698, '$class'})):getPath(Target_N65698) end)('AbFileNativeUtil':get(File))).
+  def jnew(p_file) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_file)
+    this
+  end
+end
+
 

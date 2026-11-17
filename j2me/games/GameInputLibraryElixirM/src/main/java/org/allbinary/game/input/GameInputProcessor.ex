@@ -1,62 +1,116 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.input
-% import org.allbinary.game.input.event.GameKeyEvent
-% import org.allbinary.layer.AllBinaryLayerManager
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.input
 
--module('GameInputProcessor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GameInputProcessor do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> GameInputProcessor.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'GameInputProcessor':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, GameInputProcessor.jstatic_instance()})
+    end)
+  end
 
 
-getInstance() ->
-        get({'GameInputProcessor', instance}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
 
-% throws Exception
-processEvent(This, AllbinaryLayerManager, GameKeyEvent) ->
-        ok.
+  def jm_processEvent(this, p_allbinaryLayerManager, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allbinaryLayerManager, p_allbinaryLayerManager)
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        nil
+    end)
+  end
 
-% throws Exception
-processReleasedEvent(This, AllbinaryLayerManager, GameKeyEvent) ->
-        ok.
 
-% throws Exception
-processAnalog(This, AllbinaryLayerManager, GameKeyEvent, AnalogValue) when is_integer(AnalogValue) ->
-        ok.
+  def jm_processReleasedEvent(this, p_allbinaryLayerManager, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allbinaryLayerManager, p_allbinaryLayerManager)
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        nil
+    end)
+  end
 
-% throws Exception
-process(This, AllbinaryLayerManager, KeyAsInteger) ->
-        ok.
 
-% throws Exception
-processReleased(This, AllbinaryLayerManager, KeyAsInteger) ->
-        ok.
+  def jm_processAnalog(this, p_allbinaryLayerManager, p_gameKeyEvent, p_analogValue) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allbinaryLayerManager, p_allbinaryLayerManager)
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+      JR.lset(f, :analogValue, p_analogValue)
+        nil
+    end)
+  end
+
+
+  def jm_process(this, p_allbinaryLayerManager, p_keyAsInteger) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allbinaryLayerManager, p_allbinaryLayerManager)
+      JR.lset(f, :keyAsInteger, p_keyAsInteger)
+        nil
+    end)
+  end
+
+
+  def jm_processReleased(this, p_allbinaryLayerManager, p_keyAsInteger) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allbinaryLayerManager, p_allbinaryLayerManager)
+      JR.lset(f, :keyAsInteger, p_keyAsInteger)
+        nil
+    end)
+  end
+end
+
 

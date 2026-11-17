@@ -1,74 +1,140 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.input
-% import org.allbinary.game.input.event.GameKeyEvent
-% import org.allbinary.game.input.event.GameKeyEventListenerInterface
-% import org.allbinary.logic.communication.log.ForcedLogUtil
-% import org.allbinary.logic.communication.log.PreLogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.util.event.AllBinaryEventObject
-% import org.allbinary.logic.util.event.EventStrings
-% import org.allbinary.string.CommonLabels
-% import org.allbinary.util.BasicArrayList
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.input
 
--module('PlayerGameInput').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements GameKeyEventListenerInterface
+defmodule PlayerGameInput do
+  def jsuper(), do: GameInput
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('GameInput', Function, Arguments).
-
-init_fields(This) ->
-    put({This, gameInputStrings}, 'GameInputStrings':getInstance()),
-    put({This, playerInputId}, 0),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :gameInputStrings, nil)
+    JR.put(this, :playerInputId, 0)
+        JR.put(this, :gameInputStrings, GameInputStrings.jm_getInstance())
+        
+    nil
+  end
 
 
-new(GameKeyEventList, RemovalGameKeyEventList, PlayerInputId) when is_integer(PlayerInputId) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, GameKeyEventList, RemovalGameKeyEventList, PlayerInputId),
-    This.
+  def jinit(this, p_gameKeyEventList, p_removalGameKeyEventList, p_playerInputId) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEventList, p_gameKeyEventList)
+      JR.lset(f, :removalGameKeyEventList, p_removalGameKeyEventList)
+      JR.lset(f, :playerInputId, p_playerInputId)
+        GameInput.jinit(this, JR.lget(f, :gameKeyEventList), JR.lget(f, :removalGameKeyEventList))
+        PlayerGameInput.jinitfields(this)
+        JR.put(this, :playerInputId, JR.lget(f, :playerInputId))
+    end)
+  end
 
-'$init'(This, GameKeyEventList, RemovalGameKeyEventList, PlayerInputId) when is_integer(PlayerInputId) ->
-        'GameInput':'$init'(This, GameKeyEventList, RemovalGameKeyEventList),
-        init_fields(This),
-        put({This, playerInputId}, PlayerInputId).
+  def jnew(p_gameKeyEventList, p_removalGameKeyEventList, p_playerInputId) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_gameKeyEventList, p_removalGameKeyEventList, p_playerInputId)
+    this
+  end
 
-onPressGameKeyEvent(This, GameKeyEvent) ->
-        (get({This, '$class'})):add(This, GameKeyEvent),
-        (get({This, '$class'})):addForRemoval(This, GameKeyEvent).
 
-onDownGameKeyEvent(This, GameKeyEvent) ->
-        (get({This, '$class'})):add(This, GameKeyEvent).
+  def jm_onPressGameKeyEvent(this, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        JR.call(this, :jm_add, [JR.lget(f, :gameKeyEvent)])
+        JR.call(this, :jm_addForRemoval, [JR.lget(f, :gameKeyEvent)])
+    end)
+  end
 
-onDownKeyEvent(This, GameKeyEvent) ->
-        (get({This, '$class'})):add(This, GameKeyEvent),
-        (get({This, '$class'})):addForRemoval(This, GameKeyEvent).
 
-onDownKey(This, GameKeyEvent) ->
-        'PreLogUtil':put((fun(Target_N66484) -> (get({Target_N66484, '$class'})):toString(Target_N66484) end)((fun(Target_N66491) -> (get({Target_N66491, '$class'})):append(Target_N66491, (get({GameKeyEvent, '$class'})):toString(GameKeyEvent)) end)((fun(Target_N66498) -> (get({Target_N66498, '$class'})):append(Target_N66498, get({'CommonLabels':getInstance(), 'START_LABEL'})) end)('StringMaker':new()))), This, get({get({This, gameInputStrings}), 'ON_DOWN_GAME_KEY'})).
+  def jm_onDownGameKeyEvent(this, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        JR.call(this, :jm_add, [JR.lget(f, :gameKeyEvent)])
+    end)
+  end
 
-onUpGameKeyEvent(This, GameKeyEvent) ->
-        (get({This, '$class'})):addForRemoval(This, GameKeyEvent).
 
-onUpKeyEvent(This, GameKeyEvent) ->
-        ok.
+  def jm_onDownKeyEvent(this, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        JR.call(this, :jm_add, [JR.lget(f, :gameKeyEvent)])
+        JR.call(this, :jm_addForRemoval, [JR.lget(f, :gameKeyEvent)])
+    end)
+  end
 
-onEvent(This, EventObject) ->
-        'ForcedLogUtil':log(get({'EventStrings':getInstance(), 'PERFORMANCE_MESSAGE'}), This).
 
-getPlayerInputId(This) ->
-        get({This, playerInputId}).
+  def jm_onDownKey(this, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        PreLogUtil.jm_put(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(CommonLabels.jm_getInstance(), :START_LABEL)]), :jm_append, [JR.call(JR.lget(f, :gameKeyEvent), :jm_toString, [])]), :jm_toString, []), this, JR.get(JR.get(this, :gameInputStrings), :ON_DOWN_GAME_KEY))
+    end)
+  end
+
+
+  def jm_onUpGameKeyEvent(this, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        JR.call(this, :jm_addForRemoval, [JR.lget(f, :gameKeyEvent)])
+    end)
+  end
+
+
+  def jm_onUpKeyEvent(this, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        nil
+    end)
+  end
+
+
+  def jm_onEvent(this, p_eventObject) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+        ForcedLogUtil.jm_log(JR.get(EventStrings.jm_getInstance(), :PERFORMANCE_MESSAGE), this)
+    end)
+  end
+
+
+  def jm_getPlayerInputId(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :playerInputId)})
+    end)
+  end
+end
+
 

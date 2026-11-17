@@ -1,45 +1,81 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game
-% import org.allbinary.logic.string.StringUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game
 
--module('PlayerType').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule PlayerType do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, id}, 0),
-    put({This, name}, get({'StringUtil':getInstance(), 'EMPTY_STRING'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :id, 0)
+    JR.put(this, :name, nil)
+        
+        JR.put(this, :name, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+    nil
+  end
 
 
-new(Name, Value) when (is_list(Name) orelse Name =:= undefined), is_integer(Value) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Name, Value),
-    This.
+  def jinit(this, p_name, p_value) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :value, p_value)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :name, JR.lget(f, :name))
+        JR.put(this, :id, JR.lget(f, :value))
+    end)
+  end
 
-'$init'(This, Name, Value) when (is_list(Name) orelse Name =:= undefined), is_integer(Value) ->
-    init_fields(This),
-        put({This, name}, Name),
-        put({This, id}, Value).
+  def jnew(p_name, p_value) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_name, p_value)
+    this
+  end
 
-getId(This) ->
-        get({This, id}).
 
-getName(This) ->
-        get({This, name}).
+  def jm_getId(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :id)})
+    end)
+  end
 
-toString(This) ->
-        (get({This, '$class'})):getName(This).
+
+  def jm_getName(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :name)})
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(this, :jm_getName, [])})
+    end)
+  end
+end
+
 

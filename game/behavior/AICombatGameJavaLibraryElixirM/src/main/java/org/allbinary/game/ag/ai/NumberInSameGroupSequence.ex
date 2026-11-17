@@ -1,58 +1,86 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.ai
-% import org.allbinary.logic.math.SmallIntegerSingletonFactory
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
--module('NumberInSameGroupSequence').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule NumberInSameGroupSequence do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_ZERO'}, undefined),
-    put({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_ONE'}, undefined),
-    put({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_TWO'}, undefined),
-    put({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_THREE'}, undefined),
-    put({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_FOUR'}, undefined),
-    put({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_FIVE'}, undefined),
-    put({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_SIX'}, undefined),
-    put({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_SEVEN'}, undefined),
-    put({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_EIGHT'}, undefined),
-    put({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_NINE'}, undefined),
-    put({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE'}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_ZERO, nil)
+    JR.put(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_ONE, nil)
+    JR.put(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_TWO, nil)
+    JR.put(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_THREE, nil)
+    JR.put(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_FOUR, nil)
+    JR.put(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_FIVE, nil)
+    JR.put(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_SIX, nil)
+    JR.put(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_SEVEN, nil)
+    JR.put(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_EIGHT, nil)
+    JR.put(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_NINE, nil)
+    JR.put(this, :NUMBER_ON_SAME_TEAM_SEQUENCE, nil)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    nil
+  end
 
 
-getInstance() ->
-        'NumberInSameGroupSequence':new().
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, NumberInSameGroupSequence.jnew()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-    init_fields(This),
-        SmallIntegerSingletonFactory = 'SmallIntegerSingletonFactory':getInstance(),
-        put({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_ZERO'}, (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 100)),
-        put({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_ONE'}, (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 101)),
-        put({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_TWO'}, (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 102)),
-        put({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_THREE'}, (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 103)),
-        put({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_FOUR'}, (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 104)),
-        put({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_FIVE'}, (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 105)),
-        put({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_SIX'}, (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 106)),
-        put({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_SEVEN'}, (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 107)),
-        put({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_EIGHT'}, (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 108)),
-        put({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_NINE'}, (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, 109)),
-        put({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE'}, array:from_list([get({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_ZERO'}), get({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_ONE'}), get({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_THREE'}), get({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_FOUR'}), get({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_FIVE'}), get({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_SIX'}), get({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_SEVEN'}), get({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_EIGHT'}), get({This, 'NUMBER_ON_SAME_TEAM_SEQUENCE_NINE'})])).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.lset(f, :smallIntegerSingletonFactory, SmallIntegerSingletonFactory.jm_getInstance())
+        JR.put(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_ZERO, JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [100]))
+        JR.put(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_ONE, JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [101]))
+        JR.put(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_TWO, JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [102]))
+        JR.put(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_THREE, JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [103]))
+        JR.put(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_FOUR, JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [104]))
+        JR.put(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_FIVE, JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [105]))
+        JR.put(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_SIX, JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [106]))
+        JR.put(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_SEVEN, JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [107]))
+        JR.put(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_EIGHT, JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [108]))
+        JR.put(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_NINE, JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [109]))
+        JR.put(this, :NUMBER_ON_SAME_TEAM_SEQUENCE, JR.afrom([JR.get(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_ZERO), JR.get(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_ONE), JR.get(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_THREE), JR.get(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_FOUR), JR.get(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_FIVE), JR.get(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_SIX), JR.get(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_SEVEN), JR.get(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_EIGHT), JR.get(this, :NUMBER_ON_SAME_TEAM_SEQUENCE_NINE)]))
+    end)
+  end
+
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+end
+
 

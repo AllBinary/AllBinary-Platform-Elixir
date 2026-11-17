@@ -1,62 +1,86 @@
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.form
-% import org.allbinary.graphics.GPoint
-% import org.allbinary.graphics.Rectangle
-% import org.allbinary.graphics.RectangleFactory
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.color.BasicColorFactory
-% import org.allbinary.graphics.displayable.CanvasStrings
-% import org.allbinary.graphics.form.item.ABCustomItem
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.string.StringUtil
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
--module('PaintableForm').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule PaintableForm do
+  def jsuper(), do: ABCustomForm
+def jstatic_NULL_PAINTABLE_FORM(), do: JR.static_get(__MODULE__, :NULL_PAINTABLE_FORM, fn -> JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT) end)
+  def jstatic_set_NULL_PAINTABLE_FORM(value), do: JR.static_put(__MODULE__, :NULL_PAINTABLE_FORM, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ABCustomForm', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'NULL_PAINTABLE_FORM'}, get({'NullUtil':getInstance(), 'NULL_OBJECT'})),
-    ok.
-
-init_fields(This) ->
-    put({This, canvasStrings}, 'CanvasStrings':getInstance()),
-    put({This, rectangle}, get({'RectangleFactory', 'SINGLETON'})),
-    put({This, x}, 0),
-    put({This, y}, 0),
-    put({This, formType}, get({'FormTypeFactory':getInstance(), 'NULL_FORM_TYPE'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :canvasStrings, nil)
+    JR.put(this, :rectangle, nil)
+    JR.put(this, :x, 0)
+    JR.put(this, :y, 0)
+    JR.put(this, :formType, nil)
+        JR.put(this, :canvasStrings, CanvasStrings.jm_getInstance())
+        JR.put(this, :rectangle, RectangleFactory.jstatic_SINGLETON())
+        JR.put(this, :x, 0)
+        JR.put(this, :y, 0)
+        JR.put(this, :formType, JR.get(FormTypeFactory.jm_getInstance(), :NULL_FORM_TYPE))
+    nil
+  end
 
 
-getNullPaintableForm() ->
-        case (get({'PaintableForm', 'NULL_PAINTABLE_FORM'}) =:= get({'NullUtil':getInstance(), 'NULL_OBJECT'})) of
-            true ->
-            put({'PaintableForm', 'NULL_PAINTABLE_FORM'}, 'PaintableForm':new(get({'StringUtil':getInstance(), 'EMPTY_STRING'}), array:new(0, {default, undefined}), get({'BasicColorFactory':getInstance(), 'BLACK'}), get({'BasicColorFactory':getInstance(), 'WHITE'})));
-            false -> ok
-        end,
-        get({'PaintableForm', 'NULL_PAINTABLE_FORM'}).
+  def jm_getNullPaintableForm() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        if (PaintableForm.jstatic_NULL_PAINTABLE_FORM() == JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)) do
+            PaintableForm.jstatic_set_NULL_PAINTABLE_FORM(PaintableForm.jnew(JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), JR.anew(0, nil), JR.get(BasicColorFactory.jm_getInstance(), :BLACK), JR.get(BasicColorFactory.jm_getInstance(), :WHITE)))
+        end
+        throw({:jreturn, PaintableForm.jstatic_NULL_PAINTABLE_FORM()})
+    end)
+  end
 
-new(Title, Items, BackgroundBasicColor, ForegroundBasicColor) when (is_list(Title) orelse Title =:= undefined), (is_tuple(Items) orelse Items =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Title, Items, BackgroundBasicColor, ForegroundBasicColor),
-    This.
 
-'$init'(This, Title, Items, BackgroundBasicColor, ForegroundBasicColor) when (is_list(Title) orelse Title =:= undefined), (is_tuple(Items) orelse Items =:= undefined) ->
-        'ABCustomForm':'$init'(This, Title, Items, BackgroundBasicColor, ForegroundBasicColor),
-        init_fields(This),
-        (get({This, '$class'})):setSelectedIndex(This, 0).
+  def jinit(this, p_title, p_items, p_backgroundBasicColor, p_foregroundBasicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :title, p_title)
+      JR.lset(f, :items, p_items)
+      JR.lset(f, :backgroundBasicColor, p_backgroundBasicColor)
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+        ABCustomForm.jinit(this, JR.lget(f, :title), JR.lget(f, :items), JR.lget(f, :backgroundBasicColor), JR.lget(f, :foregroundBasicColor))
+        PaintableForm.jinitfields(this)
+        JR.call(this, :jm_setSelectedIndex, [0])
+    end)
+  end
 
-% throws Exception
-init(This, Rectangle, FormType) ->
-        put({This, rectangle}, Rectangle),
-        Point = (get({get({This, rectangle}), '$class'})):getPoint(get({This, rectangle})),
-        put({This, x}, (get({Point, '$class'})):getX(Point)),
-        put({This, y}, (get({Point, '$class'})):getY(Point)),
-        put({This, formType}, FormType).
+  def jnew(p_title, p_items, p_backgroundBasicColor, p_foregroundBasicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_title, p_items, p_backgroundBasicColor, p_foregroundBasicColor)
+    this
+  end
 
-getWidth(This) ->
-        (get({get({This, rectangle}), '$class'})):getWidth(get({This, rectangle})).
+
+  def jm_init(this, p_rectangle, p_formType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :rectangle, p_rectangle)
+      JR.lset(f, :formType, p_formType)
+        JR.put(this, :rectangle, JR.lget(f, :rectangle))
+        JR.lset(f, :point, JR.call(JR.get(this, :rectangle), :jm_getPoint, []))
+        JR.put(this, :x, JR.call(JR.lget(f, :point), :jm_getX, []))
+        JR.put(this, :y, JR.call(JR.lget(f, :point), :jm_getY, []))
+        JR.put(this, :formType, JR.lget(f, :formType))
+    end)
+  end
+
+
+  def jm_getWidth(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.get(this, :rectangle), :jm_getWidth, [])})
+    end)
+  end
+end
+
 

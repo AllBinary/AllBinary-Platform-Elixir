@@ -1,43 +1,69 @@
-% Generated Code Do Not Modify
-% package org.allbinary.game.midlet
-% import org.allbinary.game.state.GameState
-% import org.allbinary.game.state.GameStateFactory
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.string.CommonLabels
+# Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
--module('GameMidletStateFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GameMidletStateFactory do
+  def jsuper(), do: JObject
+def jstatic_INSTANCE(), do: JR.static_get(__MODULE__, :INSTANCE, fn -> GameMidletStateFactory.jnew() end)
+  def jstatic_set_INSTANCE(value), do: JR.static_put(__MODULE__, :INSTANCE, value)
 
-static_init() ->
-    put({?MODULE, 'INSTANCE'}, 'GameMidletStateFactory':new()),
-    ok.
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, currentGameState}, get({'GameStateFactory':getInstance(), 'NO_GAME_STATE'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :currentGameState, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :currentGameState, JR.get(GameStateFactory.jm_getInstance(), :NO_GAME_STATE))
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-getInstance() ->
-        get({'GameMidletStateFactory', 'INSTANCE'}).
 
-getCurrentGameState(This) ->
-        get({This, currentGameState}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, GameMidletStateFactory.jstatic_INSTANCE()})
+    end)
+  end
 
-setCurrentGameState(This, CurrentGameState) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N66065) -> (get({Target_N66065, '$class'})):toString(Target_N66065) end)((fun(Target_N66072) -> (get({Target_N66072, '$class'})):append(Target_N66072, (fun(Target_N66143) -> (get({Target_N66143, '$class'})):toString(Target_N66143, CurrentGameState) end)('StringUtil':getInstance())) end)((fun(Target_N66079) -> (get({Target_N66079, '$class'})):append(Target_N66079, " GameState: ") end)((fun(Target_N66086) -> (get({Target_N66086, '$class'})):append(Target_N66086, get({'CommonLabels':getInstance(), 'CURRENT'})) end)('StringMaker':new())))), This, "setCurrentGameState"),
-        put({This, currentGameState}, CurrentGameState).
+
+  def jm_getCurrentGameState(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :currentGameState)})
+    end)
+  end
+
+
+  def jm_setCurrentGameState(this, p_currentGameState) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :currentGameState, p_currentGameState)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(CommonLabels.jm_getInstance(), :CURRENT)]), :jm_append, [" GameState: "]), :jm_append, [JR.call(StringUtil.jm_getInstance(), :jm_toString, [JR.lget(f, :currentGameState)])]), :jm_toString, []), this, "setCurrentGameState"])
+        JR.put(this, :currentGameState, JR.lget(f, :currentGameState))
+    end)
+  end
+end
+
 

@@ -1,42 +1,57 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-%
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-%
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-%
-% Created By: Travis Berthelot
-% 
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.layer.hud.basic
-% import org.allbinary.canvas.Processor
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+#
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+#
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+#
+# Created By: Travis Berthelot
+# 
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.hud.basic
 
--module('NextUnremoveableProcessor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule NextUnremoveableProcessor do
+  def jsuper(), do: Processor
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Processor', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :updateMeasurementProcessor, nil)
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, updateMeasurementProcessor}, undefined),
-    ok.
+
+  def jinit(this, p_updateMeasurementProcessor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :updateMeasurementProcessor, p_updateMeasurementProcessor)
+      Processor.jinit(this)
+      jinitfields(this)
+        JR.put(this, :updateMeasurementProcessor, JR.lget(f, :updateMeasurementProcessor))
+    end)
+  end
+
+  def jnew(p_updateMeasurementProcessor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_updateMeasurementProcessor)
+    this
+  end
 
 
-new(UpdateMeasurementProcessor) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, UpdateMeasurementProcessor),
-    This.
+  def jm_process(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :updateMeasurementProcessor), :jm_setNextUnremoveableProcess, [])
+    end)
+  end
+end
 
-'$init'(This, UpdateMeasurementProcessor) ->
-    'Processor':'$init'(This),
-    init_fields(This),
-        put({This, updateMeasurementProcessor}, UpdateMeasurementProcessor).
-
-% throws Exception
-process(This) ->
-        (get({get({This, updateMeasurementProcessor}), '$class'})):setNextUnremoveableProcess(get({This, updateMeasurementProcessor})).
 

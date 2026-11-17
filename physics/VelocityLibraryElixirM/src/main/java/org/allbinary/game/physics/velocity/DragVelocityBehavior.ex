@@ -1,75 +1,96 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.physics.velocity
-% import org.allbinary.logic.math.BasicDecimal
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.physics.velocity
 
--module('DragVelocityBehavior').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule DragVelocityBehavior do
+  def jsuper(), do: VelocityBehaviorBase
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> DragVelocityBehavior.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('VelocityBehaviorBase', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-static_init() ->
-    put({?MODULE, instance}, 'DragVelocityBehavior':new()),
-    ok.
+  def jinit(this) do
+    VelocityBehaviorBase.jinit(this)
+    jinitfields(this)
+  end
 
-init_fields(This) ->
-    ok.
-
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    'VelocityBehaviorBase':'$init'(This),
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-reduce(This, VelocityProperties, Nominator, Denominator) when is_integer(Nominator), is_integer(Denominator) ->
-        case ((fun(Target_N65702) -> (get({Target_N65702, '$class'})):getUnscaled(Target_N65702) end)((get({VelocityProperties, '$class'})):getVelocityXBasicDecimalP(VelocityProperties)) =/= 0) of
-            true ->
-            put({local, basicDecimal}, (get({VelocityProperties, '$class'})):getVelocityXBasicDecimalP(VelocityProperties)),
-            (get({get({local, basicDecimal}), '$class'})):multiplyint(get({local, basicDecimal}), Nominator),
-            (get({get({local, basicDecimal}), '$class'})):divideint(get({local, basicDecimal}), Denominator);
-            false -> ok
-        end,
-        case ((fun(Target_N65862) -> (get({Target_N65862, '$class'})):getUnscaled(Target_N65862) end)((get({VelocityProperties, '$class'})):getVelocityYBasicDecimalP(VelocityProperties)) =/= 0) of
-            true ->
-            put({local, basicDecimal}, (get({VelocityProperties, '$class'})):getVelocityYBasicDecimalP(VelocityProperties)),
-            (get({get({local, basicDecimal}), '$class'})):multiplyint(get({local, basicDecimal}), Nominator),
-            (get({get({local, basicDecimal}), '$class'})):divideint(get({local, basicDecimal}), Denominator);
-            false -> ok
-        end.
+  def jm_reduce(this, p_velocityProperties, p_nominator, p_denominator) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :velocityProperties, p_velocityProperties)
+      JR.lset(f, :nominator, p_nominator)
+      JR.lset(f, :denominator, p_denominator)
+        if (JR.call(JR.call(JR.lget(f, :velocityProperties), :jm_getVelocityXBasicDecimalP, []), :jm_getUnscaled, []) != 0) do
+            JR.lset(f, :basicDecimal, JR.call(JR.lget(f, :velocityProperties), :jm_getVelocityXBasicDecimalP, []))
+            JR.call(JR.lget(f, :basicDecimal), :jm_multiplyint, [JR.lget(f, :nominator)])
+            JR.call(JR.lget(f, :basicDecimal), :jm_divideint, [JR.lget(f, :denominator)])
+        end
+        if (JR.call(JR.call(JR.lget(f, :velocityProperties), :jm_getVelocityYBasicDecimalP, []), :jm_getUnscaled, []) != 0) do
+            JR.lset(f, :basicDecimal, JR.call(JR.lget(f, :velocityProperties), :jm_getVelocityYBasicDecimalP, []))
+            JR.call(JR.lget(f, :basicDecimal), :jm_multiplyint, [JR.lget(f, :nominator)])
+            JR.call(JR.lget(f, :basicDecimal), :jm_divideint, [JR.lget(f, :denominator)])
+        end
+    end)
+  end
 
-reduceX(This, VelocityProperties, Nominator, Denominator) when is_integer(Nominator), is_integer(Denominator) ->
-        BasicDecimal = (get({VelocityProperties, '$class'})):getVelocityXBasicDecimalP(VelocityProperties),
-        case ((get({BasicDecimal, '$class'})):getUnscaled(BasicDecimal) =/= 0) of
-            true ->
-            (get({BasicDecimal, '$class'})):multiplyint(BasicDecimal, Nominator),
-            (get({BasicDecimal, '$class'})):divideint(BasicDecimal, Denominator);
-            false -> ok
-        end.
 
-reduceY(This, VelocityProperties, Nominator, Denominator) when is_integer(Nominator), is_integer(Denominator) ->
-        case ((fun(Target_N66372) -> (get({Target_N66372, '$class'})):getUnscaled(Target_N66372) end)((get({VelocityProperties, '$class'})):getVelocityYBasicDecimalP(VelocityProperties)) =/= 0) of
-            true ->
-            BasicDecimal = (get({VelocityProperties, '$class'})):getVelocityYBasicDecimalP(VelocityProperties),
-            (get({BasicDecimal, '$class'})):multiplyint(BasicDecimal, Nominator),
-            (get({BasicDecimal, '$class'})):divideint(BasicDecimal, Denominator);
-            false -> ok
-        end.
+  def jm_reduceX(this, p_velocityProperties, p_nominator, p_denominator) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :velocityProperties, p_velocityProperties)
+      JR.lset(f, :nominator, p_nominator)
+      JR.lset(f, :denominator, p_denominator)
+        JR.lset(f, :basicDecimal, JR.call(JR.lget(f, :velocityProperties), :jm_getVelocityXBasicDecimalP, []))
+        if (JR.call(JR.lget(f, :basicDecimal), :jm_getUnscaled, []) != 0) do
+            JR.call(JR.lget(f, :basicDecimal), :jm_multiplyint, [JR.lget(f, :nominator)])
+            JR.call(JR.lget(f, :basicDecimal), :jm_divideint, [JR.lget(f, :denominator)])
+        end
+    end)
+  end
+
+
+  def jm_reduceY(this, p_velocityProperties, p_nominator, p_denominator) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :velocityProperties, p_velocityProperties)
+      JR.lset(f, :nominator, p_nominator)
+      JR.lset(f, :denominator, p_denominator)
+        if (JR.call(JR.call(JR.lget(f, :velocityProperties), :jm_getVelocityYBasicDecimalP, []), :jm_getUnscaled, []) != 0) do
+            JR.lset(f, :basicDecimal, JR.call(JR.lget(f, :velocityProperties), :jm_getVelocityYBasicDecimalP, []))
+            JR.call(JR.lget(f, :basicDecimal), :jm_multiplyint, [JR.lget(f, :nominator)])
+            JR.call(JR.lget(f, :basicDecimal), :jm_divideint, [JR.lget(f, :denominator)])
+        end
+    end)
+  end
+end
+
 

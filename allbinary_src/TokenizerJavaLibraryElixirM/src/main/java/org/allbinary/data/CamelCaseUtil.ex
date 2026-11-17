@@ -1,63 +1,76 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.data
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.logic.string.StringValidationUtil
-% import org.allbinary.logic.string.tokens.Tokenizer
-% import org.allbinary.string.CommonSeps
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.data
 
--module('CamelCaseUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule CamelCaseUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> CamelCaseUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'CamelCaseUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :commonSeps, nil)
+        JR.put(this, :commonSeps, CommonSeps.jm_getInstance())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, commonSeps}, 'CommonSeps':getInstance()),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'CamelCaseUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, CamelCaseUtil.jstatic_instance()})
+    end)
+  end
 
-% throws Exception
-getAsCamelCase(This, String, StringBuilder) when (is_list(String) orelse String =:= undefined) ->
-        StringValidationUtil = 'StringValidationUtil':getInstance(),
-        (get({StringBuilder, '$class'})):delete(StringBuilder, 0, (get({StringBuilder, '$class'})):length(StringBuilder)),
-        List = 'BasicArrayListD':new(),
-        Tokenizer = 'Tokenizer':new(get({get({This, commonSeps}), 'UNDERSCORE'})),
-        (get({Tokenizer, '$class'})):getTokensFromString(Tokenizer, String, List),
-        Size = (get({List, '$class'})):size(List),
-        put({local, word}, undefined),
-        lists:foreach(fun(I) ->
-            put({local, word}, (get({List, '$class'})):get(List, I)),
-            put({local, word}, case (get({StringValidationUtil, '$class'})):isEmpty(StringValidationUtil, get({local, word})) of true -> get({local, word}); false -> (fun(Target_N66388) -> (get({Target_N66388, '$class'})):toString(Target_N66388) end)((fun(Target_N66395) -> (get({Target_N66395, '$class'})):append(Target_N66395, string:lowercase(string:slice(get({local, word}), 1))) end)((fun(Target_N66402) -> (get({Target_N66402, '$class'})):appendchar(Target_N66402, 'Character':toUpperCase(lists:nth((0) + 1, get({local, word})))) end)('StringMaker':new()))) end),
-            (get({StringBuilder, '$class'})):append(StringBuilder, get({local, word}))
-        end, lists:seq(0, Size - 1)),
-        (get({StringBuilder, '$class'})):toString(StringBuilder).
+
+  def jm_getAsCamelCase(this, p_string, p_stringBuilder) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :string, p_string)
+      JR.lset(f, :stringBuilder, p_stringBuilder)
+        JR.lset(f, :stringValidationUtil, StringValidationUtil.jm_getInstance())
+        JR.call(JR.lget(f, :stringBuilder), :jm_delete, [0, JR.call(JR.lget(f, :stringBuilder), :jm_length, [])])
+        JR.lset(f, :list, BasicArrayListD.jnew())
+        JR.lset(f, :tokenizer, Tokenizer.jnew(JR.get(JR.get(this, :commonSeps), :UNDERSCORE)))
+        JR.call(JR.lget(f, :tokenizer), :jm_getTokensFromString, [JR.lget(f, :string), JR.lget(f, :list)])
+        JR.lset(f, :size, JR.call(JR.lget(f, :list), :jm_size, []))
+        JR.lset(f, :word, nil)
+        JR.lset(f, :i, 0)
+        JR.jfor(fn -> (JR.lget(f, :i) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :i, 1) end, fn ->
+            JR.lset(f, :word, JR.call(JR.lget(f, :list), :jm_get, [JR.lget(f, :i)]))
+            JR.lset(f, :word, (if JR.call(JR.lget(f, :stringValidationUtil), :jm_isEmpty, [JR.lget(f, :word)]), do: JR.lget(f, :word), else: JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_appendchar, [J.Character.jm_toUpperCase(JR.char_at(JR.lget(f, :word), 0))]), :jm_append, [String.downcase(JR.substring(JR.lget(f, :word), 1))]), :jm_toString, [])))
+            JR.call(JR.lget(f, :stringBuilder), :jm_append, [JR.lget(f, :word)])
+        end)
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuilder), :jm_toString, [])})
+    end)
+  end
+end
+
 

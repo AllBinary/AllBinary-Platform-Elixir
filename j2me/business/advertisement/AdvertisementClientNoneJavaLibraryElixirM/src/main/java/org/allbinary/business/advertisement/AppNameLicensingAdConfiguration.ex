@@ -1,23 +1,31 @@
-% Generated Code Do Not Modify
-% package org.allbinary.business.advertisement
-% import org.allbinary.logic.string.StringUtil
+# Generated Code Do Not Modify
+# package org.allbinary.business.advertisement
 
--module('AppNameLicensingAdConfiguration').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule AppNameLicensingAdConfiguration do
+  def jsuper(), do: AdConfiguration
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AdConfiguration', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
 
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        AdConfiguration.jinit(this, JR.afrom([JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING)]))
+        AppNameLicensingAdConfiguration.jinitfields(this)
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+end
 
-'$init'(This) ->
-        'AdConfiguration':'$init'(This, array:from_list([get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'StringUtil':getInstance(), 'EMPTY_STRING'})])).
 

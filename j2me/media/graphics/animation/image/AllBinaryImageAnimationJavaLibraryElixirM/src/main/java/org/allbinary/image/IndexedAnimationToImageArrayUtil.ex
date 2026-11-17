@@ -1,43 +1,57 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.image
-% import javax.microedition.lcdui.Image
-% import org.allbinary.animation.IndexedAnimation
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.image
 
--module('IndexedAnimationToImageArrayUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule IndexedAnimationToImageArrayUtil do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-% throws Exception
-getInstance(Width, Height, SequentialAnimationInterface) when is_integer(Width), is_integer(Height) ->
-        Size = (get({SequentialAnimationInterface, '$class'})):getAnimationSize(SequentialAnimationInterface),
-        ImageArray = array:new(Size, {default, undefined}),
-        lists:foreach(fun(Index) ->
-            (get({SequentialAnimationInterface, '$class'})):setFrame(SequentialAnimationInterface, Index),
-            array:set(Index, (fun(Target_N65800) -> (get({Target_N65800, '$class'})):getInstanceWH(Target_N65800, Width, Height, SequentialAnimationInterface) end)('AnimationFrameToImageUtil':getInstance()), ImageArray)
-        end, lists:seq(0, Size - 1)),
-        ImageArray.
+  def jm_getInstance(p_width, p_height, p_sequentialAnimationInterface) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+      JR.lset(f, :sequentialAnimationInterface, p_sequentialAnimationInterface)
+        JR.lset(f, :size, JR.call(JR.lget(f, :sequentialAnimationInterface), :jm_getAnimationSize, []))
+        JR.lset(f, :imageArray, JR.anew(JR.lget(f, :size), nil))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.call(JR.lget(f, :sequentialAnimationInterface), :jm_setFrame, [JR.lget(f, :index)])
+            JR.aset(JR.lget(f, :imageArray), JR.lget(f, :index), JR.call(AnimationFrameToImageUtil.jm_getInstance(), :jm_getInstanceWH, [JR.lget(f, :width), JR.lget(f, :height), JR.lget(f, :sequentialAnimationInterface)]))
+        end)
+        throw({:jreturn, JR.lget(f, :imageArray)})
+    end)
+  end
+end
+
 

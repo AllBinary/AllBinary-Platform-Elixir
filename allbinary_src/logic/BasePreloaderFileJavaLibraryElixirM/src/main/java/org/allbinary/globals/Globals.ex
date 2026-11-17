@@ -1,77 +1,94 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.globals
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringValidationUtil
-% import org.allbinary.logic.system.loader.WebappClassLoaderInfo
-% import org.allbinary.string.CommonSeps
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.globals
 
--module('Globals').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule Globals do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> Globals.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'Globals':new()),
-    ok.
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+    nil
+  end
 
 
-getInstance() ->
-        get({'Globals', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, Globals.jstatic_instance()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-init(This, ClassLoader, PathString) when (is_list(PathString) orelse PathString =:= undefined) ->
-        CommonStrings = 'CommonStrings':getInstance(),
-        AppUrlGlobals = 'AppUrlGlobals':new(),
-        (get({AppUrlGlobals, '$class'})):setWebappPath(AppUrlGlobals, PathString),
-        (get({get({'Globals', 'URLGLOBALS'}), '$class'})):init(get({'Globals', 'URLGLOBALS'}), AppUrlGlobals),
-        'WebappClassLoaderInfo':setLoader(ClassLoader),
-        StringBuffer = 'StringMaker':new(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "Setting Up AllBinary System Configuration Args: "),
-        (get({StringBuffer, '$class'})):append(StringBuffer, PathString),
-        (get({StringBuffer, '$class'})):append(StringBuffer, " ClassLoader: "),
-        (get({StringBuffer, '$class'})):append(StringBuffer, atom_to_list(get({ClassLoader, '$class'}))),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({StringBuffer, '$class'})):toString(StringBuffer), This, get({CommonStrings, 'INIT'})),
-        StringValidationUtil = 'StringValidationUtil':getInstance(),
-        case (get({StringValidationUtil, '$class'})):isEmpty(StringValidationUtil, PathString) of
-            true ->
-            (get({StringBuffer, '$class'})):delete(StringBuffer, 0, (get({StringBuffer, '$class'})):length(StringBuffer)),
-            (get({StringBuffer, '$class'})):append(StringBuffer, "No Path Provided. Using Process Path: "),
-            (get({StringBuffer, '$class'})):append(StringBuffer, PathString),
-            (get({StringBuffer, '$class'})):append(StringBuffer, get({'CommonSeps':getInstance(), 'SPACE'})),
-            (get({StringBuffer, '$class'})):append(StringBuffer, get({'CommonSeps':getInstance(), 'EQUALS'})),
-            (get({StringBuffer, '$class'})):append(StringBuffer, get({'CommonSeps':getInstance(), 'SPACE'})),
-            (get({StringBuffer, '$class'})):append(StringBuffer, (get({get({'Globals', 'URLGLOBALS'}), '$class'})):getWebappPath(get({'Globals', 'URLGLOBALS'}))),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({StringBuffer, '$class'})):toString(StringBuffer), This, get({CommonStrings, 'INIT'}));
-            false -> ok
-        end,
-        (get({StringBuffer, '$class'})):delete(StringBuffer, 0, (get({StringBuffer, '$class'})):length(StringBuffer)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "Webapp Path Set To: "),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({get({'Globals', 'URLGLOBALS'}), '$class'})):getWebappPath(get({'Globals', 'URLGLOBALS'}))),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({StringBuffer, '$class'})):toString(StringBuffer), This, get({CommonStrings, 'INIT'})).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+
+
+  def jm_init(this, p_classLoader, p_pathString) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :classLoader, p_classLoader)
+      JR.lset(f, :pathString, p_pathString)
+        JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+        JR.lset(f, :appUrlGlobals, AppUrlGlobals.jnew())
+        JR.call(JR.lget(f, :appUrlGlobals), :jm_setWebappPath, [JR.lget(f, :pathString)])
+        JR.call(.jstatic_URLGLOBALS(), :jm_init, [JR.lget(f, :appUrlGlobals)])
+        WebappClassLoaderInfo.jm_setLoader(JR.lget(f, :classLoader))
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["Setting Up AllBinary System Configuration Args: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.lget(f, :pathString)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [" ClassLoader: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.class_name(JR.lget(f, :classLoader))])
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :stringBuffer), :jm_toString, []), this, JR.get(JR.lget(f, :commonStrings), :INIT)])
+        JR.lset(f, :stringValidationUtil, StringValidationUtil.jm_getInstance())
+        if JR.call(JR.lget(f, :stringValidationUtil), :jm_isEmpty, [JR.lget(f, :pathString)]) do
+            JR.call(JR.lget(f, :stringBuffer), :jm_delete, [0, JR.call(JR.lget(f, :stringBuffer), :jm_length, [])])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, ["No Path Provided. Using Process Path: "])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.lget(f, :pathString)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :SPACE)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :EQUALS)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :SPACE)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(.jstatic_URLGLOBALS(), :jm_getWebappPath, [])])
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :stringBuffer), :jm_toString, []), this, JR.get(JR.lget(f, :commonStrings), :INIT)])
+        end
+        JR.call(JR.lget(f, :stringBuffer), :jm_delete, [0, JR.call(JR.lget(f, :stringBuffer), :jm_length, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["Webapp Path Set To: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(.jstatic_URLGLOBALS(), :jm_getWebappPath, [])])
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :stringBuffer), :jm_toString, []), this, JR.get(JR.lget(f, :commonStrings), :INIT)])
+    end)
+  end
+end
+
 

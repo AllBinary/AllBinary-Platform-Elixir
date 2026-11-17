@@ -1,22 +1,33 @@
-% Generated Code Do Not Modify
-% package org.apache.xmlrpc
+# Generated Code Do Not Modify
+# package org.apache.xmlrpc
 
--module('XmlRpcException').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule XmlRpcException do
+  def jsuper(), do: Exception
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Exception', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
 
+  def jinit(this, p_code, p_message) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :code, p_code)
+      JR.lset(f, :message, p_message)
+        Exception.jinit(this, JR.lget(f, :message))
+        XmlRpcException.jinitfields(this)
+    end)
+  end
 
-new(Code, Message) when is_integer(Code), (is_list(Message) orelse Message =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Code, Message),
-    This.
+  def jnew(p_code, p_message) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_code, p_message)
+    this
+  end
+end
 
-'$init'(This, Code, Message) when is_integer(Code), (is_list(Message) orelse Message =:= undefined) ->
-        'Exception':'$init'(This, Message).
 

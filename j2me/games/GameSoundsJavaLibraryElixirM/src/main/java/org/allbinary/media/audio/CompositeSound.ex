@@ -1,38 +1,54 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.media.audio
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
--module('CompositeSound').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule CompositeSound do
+  def jsuper(), do: Sound
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Sound', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+
+  def jinit(this, p_resource) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :resource, p_resource)
+        Sound.jinit(this, JR.lget(f, :resource))
+        CompositeSound.jinitfields(this)
+    end)
+  end
+
+  def jnew(p_resource) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_resource)
+    this
+  end
 
 
-new(Resource) when (is_list(Resource) orelse Resource =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Resource),
-    This.
+  def jm_init(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_setPlayerP, [PlayerComposite.jnew(AllBinaryMediaManager.jm_createPlayer(JR.call(this, :jm_getResource, [])), 570)])
+    end)
+  end
+end
 
-'$init'(This, Resource) when (is_list(Resource) orelse Resource =:= undefined) ->
-        'Sound':'$init'(This, Resource).
-
-% throws Exception
-init(This) ->
-        (get({This, '$class'})):setPlayerP(This, 'PlayerComposite':new('AllBinaryMediaManager':createPlayer((get({This, '$class'})):getResource(This)), 570)).
 

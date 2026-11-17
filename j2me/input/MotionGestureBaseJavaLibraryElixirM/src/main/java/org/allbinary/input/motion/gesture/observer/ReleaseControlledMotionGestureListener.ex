@@ -1,123 +1,229 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion.gesture.observer
-% import org.allbinary.input.motion.gesture.MotionGestureInput
-% import org.allbinary.input.motion.gesture.TouchMotionGestureFactory
-% import org.allbinary.logic.communication.log.ForcedLogUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.logic.util.event.AllBinaryEventObject
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture.observer
 
--module('ReleaseControlledMotionGestureListener').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements MotionGestureEventListener
+defmodule ReleaseControlledMotionGestureListener do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, currentMotionGesture}, get({'TouchMotionGestureFactory':getInstance(), 'NO_MOTION'})),
-    put({This, isMouseGestureOccurring}, false),
-    put({This, motionGestureCollection}, 'BasicArrayListD':new()),
-    put({This, signed}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :currentMotionGesture, nil)
+    JR.put(this, :isMouseGestureOccurring, false)
+    JR.put(this, :motionGestureCollection, nil)
+    JR.put(this, :signed, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        JR.put(this, :currentMotionGesture, JR.get(TouchMotionGestureFactory.jm_getInstance(), :NO_MOTION))
+        JR.put(this, :isMouseGestureOccurring, false)
+        JR.put(this, :motionGestureCollection, BasicArrayListD.jnew())
+        
+    nil
+  end
 
 
-new(Signed) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Signed),
-    This.
+  def jinit(this, p_signed) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :signed, p_signed)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, JR.get(JR.get(this, :commonStrings), :CONSTRUCTOR)])
+        JR.put(this, :signed, JR.lget(f, :signed))
+    end)
+  end
 
-'$init'(This, Signed) ->
-    init_fields(This),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, get({get({This, commonStrings}), 'CONSTRUCTOR'})),
-        put({This, signed}, Signed).
+  def jnew(p_signed) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_signed)
+    this
+  end
 
-onEvent(This, EventObject) ->
-        'ForcedLogUtil':log(get({get({This, commonStrings}), 'NOT_IMPLEMENTED'}), This).
 
-onUpMotionGestureEvent(This, Ev) ->
-        (get({This, '$class'})):onMotionGestureEvent(This, Ev).
+  def jm_onEvent(this, p_eventObject) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+        ForcedLogUtil.jm_log(JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED), this)
+    end)
+  end
 
-onDownMotionGestureEvent(This, Ev) ->
-        (get({This, '$class'})):onMotionGestureEvent(This, Ev).
 
-onLeftMotionGestureEvent(This, Ev) ->
-        (get({This, '$class'})):onMotionGestureEvent(This, Ev).
+  def jm_onUpMotionGestureEvent(this, p_ev) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ev, p_ev)
+        JR.call(this, :jm_onMotionGestureEvent, [JR.lget(f, :ev)])
+    end)
+  end
 
-onRightMotionGestureEvent(This, Ev) ->
-        (get({This, '$class'})):onMotionGestureEvent(This, Ev).
 
-onDiagonalDownRightMotionGestureEvent(This, Ev) ->
-        (get({This, '$class'})):onMotionGestureEvent(This, Ev).
+  def jm_onDownMotionGestureEvent(this, p_ev) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ev, p_ev)
+        JR.call(this, :jm_onMotionGestureEvent, [JR.lget(f, :ev)])
+    end)
+  end
 
-onDiagonalDownLeftMotionGestureEvent(This, Ev) ->
-        (get({This, '$class'})):onMotionGestureEvent(This, Ev).
 
-onDiagonalUpRightMotionGestureEvent(This, Ev) ->
-        (get({This, '$class'})):onMotionGestureEvent(This, Ev).
+  def jm_onLeftMotionGestureEvent(this, p_ev) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ev, p_ev)
+        JR.call(this, :jm_onMotionGestureEvent, [JR.lget(f, :ev)])
+    end)
+  end
 
-onDiagonalUpLeftMotionGestureEvent(This, Ev) ->
-        (get({This, '$class'})):onMotionGestureEvent(This, Ev).
 
-onPressedMotionGestureEvent(This, Ev) ->
-        put({This, isMouseGestureOccurring}, true),
-        put({This, currentMotionGesture}, get({'TouchMotionGestureFactory':getInstance(), 'NO_MOTION'})),
-        (get({This, '$class'})):onMotionGestureEvent(This, Ev).
+  def jm_onRightMotionGestureEvent(this, p_ev) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ev, p_ev)
+        JR.call(this, :jm_onMotionGestureEvent, [JR.lget(f, :ev)])
+    end)
+  end
 
-onScrolledMotionGestureEvent(This, MotionGestureEvent) ->
-        ok.
 
-released(This, Ev) ->
-        try
-            case (get({This, isMouseGestureOccurring}) =:= false) of
-                true ->
-                ok;
-                false -> ok
-            end,
-            put({This, isMouseGestureOccurring}, false),
-            (get({get({This, signed}), '$class'})):onMotionGestureCompleted(get({This, signed}), get({This, motionGestureCollection})),
-            (get({get({This, motionGestureCollection}), '$class'})):clear(get({This, motionGestureCollection}))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), (fun(Target_N67440) -> (get({Target_N67440, '$class'})):toString(Target_N67440) end)((fun(Target_N67447) -> (get({Target_N67447, '$class'})):append(Target_N67447, (fun(Target_N67498) -> (get({Target_N67498, '$class'})):toString(Target_N67498, (get({Ev, '$class'})):getMotionGesture(Ev)) end)('StringUtil':getInstance())) end)((fun(Target_N67454) -> (get({Target_N67454, '$class'})):append(Target_N67454, get({get({This, commonStrings}), 'EXCEPTION_LABEL'})) end)('StringMaker':new()))), This, "release", E)
-        end.
+  def jm_onDiagonalDownRightMotionGestureEvent(this, p_ev) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ev, p_ev)
+        JR.call(this, :jm_onMotionGestureEvent, [JR.lget(f, :ev)])
+    end)
+  end
 
-onMotionGestureEvent(This, Ev) ->
-        case (get({This, isMouseGestureOccurring}) =:= false) of
-            true ->
-            ok;
-            false -> ok
-        end,
-        MotionGestureInput = (get({Ev, '$class'})):getMotionGesture(Ev),
-        case (MotionGestureInput =:= get({'TouchMotionGestureFactory':getInstance(), 'PRESSED'})) of
-            true ->
-            (get({This, '$class'})):onPressedMotionGestureEvent(This, Ev);
-            false ->
-            case (MotionGestureInput =:= get({'TouchMotionGestureFactory':getInstance(), 'RELEASED'})) of
-            true ->
-            (get({This, '$class'})):released(This, Ev);
-            false ->
-            case (get({This, currentMotionGesture}) =/= MotionGestureInput) of
-                true ->
-                put({This, currentMotionGesture}, MotionGestureInput),
-                (get({get({This, motionGestureCollection}), '$class'})):add(get({This, motionGestureCollection}), (get({Ev, '$class'})):getMotionGesture(Ev));
-                false -> ok
+
+  def jm_onDiagonalDownLeftMotionGestureEvent(this, p_ev) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ev, p_ev)
+        JR.call(this, :jm_onMotionGestureEvent, [JR.lget(f, :ev)])
+    end)
+  end
+
+
+  def jm_onDiagonalUpRightMotionGestureEvent(this, p_ev) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ev, p_ev)
+        JR.call(this, :jm_onMotionGestureEvent, [JR.lget(f, :ev)])
+    end)
+  end
+
+
+  def jm_onDiagonalUpLeftMotionGestureEvent(this, p_ev) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ev, p_ev)
+        JR.call(this, :jm_onMotionGestureEvent, [JR.lget(f, :ev)])
+    end)
+  end
+
+
+  def jm_onPressedMotionGestureEvent(this, p_ev) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ev, p_ev)
+        JR.put(this, :isMouseGestureOccurring, true)
+        JR.put(this, :currentMotionGesture, JR.get(TouchMotionGestureFactory.jm_getInstance(), :NO_MOTION))
+        JR.call(this, :jm_onMotionGestureEvent, [JR.lget(f, :ev)])
+    end)
+  end
+
+
+  def jm_onScrolledMotionGestureEvent(this, p_motionGestureEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :motionGestureEvent, p_motionGestureEvent)
+        nil
+    end)
+  end
+
+
+  def jm_released(this, p_ev) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ev, p_ev)
+        try do
+            if (JR.get(this, :isMouseGestureOccurring) == false) do
+                throw({:jreturn, nil})
+            end
+            JR.put(this, :isMouseGestureOccurring, false)
+            JR.call(JR.get(this, :signed), :jm_onMotionGestureCompleted, [JR.get(this, :motionGestureCollection)])
+            JR.call(JR.get(this, :motionGestureCollection), :jm_clear, [])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :commonStrings), :EXCEPTION_LABEL)]), :jm_append, [JR.call(StringUtil.jm_getInstance(), :jm_toString, [JR.call(JR.lget(f, :ev), :jm_getMotionGesture, [])])]), :jm_toString, []), this, "release", JR.lget(f, :e)])
+        end
+    end)
+  end
+
+
+  def jm_onMotionGestureEvent(this, p_ev) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ev, p_ev)
+        if (JR.get(this, :isMouseGestureOccurring) == false) do
+            throw({:jreturn, nil})
+        end
+        JR.lset(f, :motionGestureInput, JR.call(JR.lget(f, :ev), :jm_getMotionGesture, []))
+        if (JR.lget(f, :motionGestureInput) == JR.get(TouchMotionGestureFactory.jm_getInstance(), :PRESSED)) do
+            JR.call(this, :jm_onPressedMotionGestureEvent, [JR.lget(f, :ev)])
+        else
+            if (JR.lget(f, :motionGestureInput) == JR.get(TouchMotionGestureFactory.jm_getInstance(), :RELEASED)) do
+            JR.call(this, :jm_released, [JR.lget(f, :ev)])
+        else
+            if (JR.get(this, :currentMotionGesture) != JR.lget(f, :motionGestureInput)) do
+                JR.put(this, :currentMotionGesture, JR.lget(f, :motionGestureInput))
+                JR.call(JR.get(this, :motionGestureCollection), :jm_add, [JR.call(JR.lget(f, :ev), :jm_getMotionGesture, [])])
             end
         end
-        end.
+        end
+    end)
+  end
+end
+
 

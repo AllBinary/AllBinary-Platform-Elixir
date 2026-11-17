@@ -1,42 +1,81 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2022 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.threed
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.threed
 
--module('GLHolder').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule GLHolder do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, isCreated}, true),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :isCreated, false)
+        JR.put(this, :isCreated, true)
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-runOnSurfaceCreated(This, Renderer) ->
-        ok.
 
-runOnSurfaceChanged(This, Renderer, Width, Height) when is_integer(Width), is_integer(Height) ->
-        ok.
+  def jm_runOnSurfaceCreated(this, p_renderer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :renderer, p_renderer)
+        nil
+    end)
+  end
 
-run(This, Renderer) ->
-        ok.
+
+  def jm_runOnSurfaceChanged(this, p_renderer, p_width, p_height) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :renderer, p_renderer)
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+        nil
+    end)
+  end
+
+
+  def jm_run(this, p_renderer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :renderer, p_renderer)
+        nil
+    end)
+  end
+end
+
 

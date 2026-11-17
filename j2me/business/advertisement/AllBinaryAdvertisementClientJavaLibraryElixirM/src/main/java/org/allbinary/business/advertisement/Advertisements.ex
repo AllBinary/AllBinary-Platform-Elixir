@@ -1,108 +1,167 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.business.advertisement
-% import org.allbinary.game.rand.MyRandomFactory
-% import org.allbinary.logic.system.security.licensing.LockedUtil
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.business.advertisement
 
--module('Advertisements').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule Advertisements do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, bannerList}, 'BasicArrayListD':new()),
-    put({This, pageList}, 'BasicArrayListD':new()),
-    put({This, myRandomFactory}, 'MyRandomFactory':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :bannerList, nil)
+    JR.put(this, :pageList, nil)
+    JR.put(this, :myRandomFactory, nil)
+        JR.put(this, :bannerList, BasicArrayListD.jnew())
+        JR.put(this, :pageList, BasicArrayListD.jnew())
+        JR.put(this, :myRandomFactory, MyRandomFactory.jm_getInstance())
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-addPage(This, AdvertisementProcessorInterface) ->
-        case (not (get({get({This, pageList}), '$class'})):contains(get({This, pageList}), AdvertisementProcessorInterface)) of
-            true ->
-            (get({get({This, pageList}), '$class'})):add(get({This, pageList}), AdvertisementProcessorInterface);
-            false -> ok
-        end.
+  def jm_addPage(this, p_advertisementProcessorInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :advertisementProcessorInterface, p_advertisementProcessorInterface)
+        if !JR.call(JR.get(this, :pageList), :jm_contains, [JR.lget(f, :advertisementProcessorInterface)]) do
+            JR.call(JR.get(this, :pageList), :jm_add, [JR.lget(f, :advertisementProcessorInterface)])
+        end
+    end)
+  end
 
-startRandomPage(This) ->
-        Size = (get({get({This, pageList}), '$class'})):size(get({This, pageList})),
-        case (Size > 0) of
-            true ->
-            Random = (get({get({This, myRandomFactory}), '$class'})):getAbsoluteNextInt(get({This, myRandomFactory}), Size),
-            AdvertisementProcessorInterface = array:get(Random, get({get({This, pageList}), objectArray})),
-            (get({AdvertisementProcessorInterface, '$class'})):start(AdvertisementProcessorInterface);
-            false -> ok
-        end.
 
-processRandomPage(This) ->
-        case (fun(Target_N66219) -> (get({Target_N66219, '$class'})):isLocked(Target_N66219) end)('LockedUtil':getInstance()) of
-            true ->
-            Size = (get({get({This, pageList}), '$class'})):size(get({This, pageList})),
-            case (Size > 0) of
-                true ->
-                Random = (get({get({This, myRandomFactory}), '$class'})):getAbsoluteNextInt(get({This, myRandomFactory}), Size),
-                AdvertisementProcessorInterface = array:get(Random, get({get({This, pageList}), objectArray})),
-                (get({AdvertisementProcessorInterface, '$class'})):process(AdvertisementProcessorInterface);
-                false -> ok
-            end;
-            false -> ok
-        end.
+  def jm_startRandomPage(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :size, JR.call(JR.get(this, :pageList), :jm_size, []))
+        if (JR.lget(f, :size) > 0) do
+            JR.lset(f, :random, JR.call(JR.get(this, :myRandomFactory), :jm_getAbsoluteNextInt, [JR.lget(f, :size)]))
+            JR.lset(f, :advertisementProcessorInterface, JR.aget(JR.get(JR.get(this, :pageList), :objectArray), JR.lget(f, :random)))
+            JR.call(JR.lget(f, :advertisementProcessorInterface), :jm_start, [])
+        end
+    end)
+  end
 
-stopAllPage(This) ->
-        put({local, index}, (get({get({This, pageList}), '$class'})):size(get({This, pageList}))),
-        (fun Loop() -> case (begin put({local, index}, get({local, index}) - 1), get({local, index}) end >= 0) of true ->
-            AdvertisementProcessorInterface = array:get(get({local, index}), get({get({This, pageList}), objectArray})),
-            (get({AdvertisementProcessorInterface, '$class'})):stop(AdvertisementProcessorInterface),
-            Loop();
-        false -> ok end end)().
 
-addBanner(This, AdvertisementProcessorInterface) ->
-        case (not (get({get({This, bannerList}), '$class'})):contains(get({This, bannerList}), AdvertisementProcessorInterface)) of
-            true ->
-            (get({get({This, bannerList}), '$class'})):add(get({This, bannerList}), AdvertisementProcessorInterface);
-            false -> ok
-        end.
+  def jm_processRandomPage(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if JR.call(LockedUtil.jm_getInstance(), :jm_isLocked, []) do
+            JR.lset(f, :size, JR.call(JR.get(this, :pageList), :jm_size, []))
+            if (JR.lget(f, :size) > 0) do
+                JR.lset(f, :random, JR.call(JR.get(this, :myRandomFactory), :jm_getAbsoluteNextInt, [JR.lget(f, :size)]))
+                JR.lset(f, :advertisementProcessorInterface, JR.aget(JR.get(JR.get(this, :pageList), :objectArray), JR.lget(f, :random)))
+                JR.call(JR.lget(f, :advertisementProcessorInterface), :jm_process, [])
+            end
+        end
+    end)
+  end
 
-startAll(This) ->
-        put({local, index}, (get({get({This, bannerList}), '$class'})):size(get({This, bannerList}))),
-        (fun Loop() -> case (begin put({local, index}, get({local, index}) - 1), get({local, index}) end >= 0) of true ->
-            AdvertisementProcessorInterface = array:get(get({local, index}), get({get({This, bannerList}), objectArray})),
-            (get({AdvertisementProcessorInterface, '$class'})):start(AdvertisementProcessorInterface),
-            Loop();
-        false -> ok end end)().
 
-stopAllBanner(This) ->
-        put({local, index}, (get({get({This, bannerList}), '$class'})):size(get({This, bannerList}))),
-        (fun Loop() -> case (begin put({local, index}, get({local, index}) - 1), get({local, index}) end >= 0) of true ->
-            AdvertisementProcessorInterface = array:get(get({local, index}), get({get({This, bannerList}), objectArray})),
-            (get({AdvertisementProcessorInterface, '$class'})):stop(AdvertisementProcessorInterface),
-            Loop();
-        false -> ok end end)().
+  def jm_stopAllPage(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :index, JR.call(JR.get(this, :pageList), :jm_size, []))
+        JR.jfor(fn -> (JR.lpreinc(f, :index, -1) >= 0) end, fn -> nil end, fn ->
+            JR.lset(f, :advertisementProcessorInterface, JR.aget(JR.get(JR.get(this, :pageList), :objectArray), JR.lget(f, :index)))
+            JR.call(JR.lget(f, :advertisementProcessorInterface), :jm_stop, [])
+        end)
+    end)
+  end
 
-getBanner(This, Index) when is_integer(Index) ->
-        AdvertisementProcessorInterface = array:get(Index, get({get({This, bannerList}), objectArray})),
-        AdvertisementProcessorInterface.
 
-stopAll(This) ->
-        (get({This, '$class'})):stopAllBanner(This),
-        (get({This, '$class'})):stopAllPage(This).
+  def jm_addBanner(this, p_advertisementProcessorInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :advertisementProcessorInterface, p_advertisementProcessorInterface)
+        if !JR.call(JR.get(this, :bannerList), :jm_contains, [JR.lget(f, :advertisementProcessorInterface)]) do
+            JR.call(JR.get(this, :bannerList), :jm_add, [JR.lget(f, :advertisementProcessorInterface)])
+        end
+    end)
+  end
+
+
+  def jm_startAll(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :index, JR.call(JR.get(this, :bannerList), :jm_size, []))
+        JR.jfor(fn -> (JR.lpreinc(f, :index, -1) >= 0) end, fn -> nil end, fn ->
+            JR.lset(f, :advertisementProcessorInterface, JR.aget(JR.get(JR.get(this, :bannerList), :objectArray), JR.lget(f, :index)))
+            JR.call(JR.lget(f, :advertisementProcessorInterface), :jm_start, [])
+        end)
+    end)
+  end
+
+
+  def jm_stopAllBanner(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :index, JR.call(JR.get(this, :bannerList), :jm_size, []))
+        JR.jfor(fn -> (JR.lpreinc(f, :index, -1) >= 0) end, fn -> nil end, fn ->
+            JR.lset(f, :advertisementProcessorInterface, JR.aget(JR.get(JR.get(this, :bannerList), :objectArray), JR.lget(f, :index)))
+            JR.call(JR.lget(f, :advertisementProcessorInterface), :jm_stop, [])
+        end)
+    end)
+  end
+
+
+  def jm_getBanner(this, p_index) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :index, p_index)
+        JR.lset(f, :advertisementProcessorInterface, JR.aget(JR.get(JR.get(this, :bannerList), :objectArray), JR.lget(f, :index)))
+        throw({:jreturn, JR.lget(f, :advertisementProcessorInterface)})
+    end)
+  end
+
+
+  def jm_stopAll(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_stopAllBanner, [])
+        JR.call(this, :jm_stopAllPage, [])
+    end)
+  end
+end
+
 

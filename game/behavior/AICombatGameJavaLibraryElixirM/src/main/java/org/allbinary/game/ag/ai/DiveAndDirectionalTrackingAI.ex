@@ -1,370 +1,455 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.ai
-% import javax.microedition.lcdui.Canvas
-% import org.allbinary.ai.ArtificialIntelligenceInterface
-% import org.allbinary.direction.Direction
-% import org.allbinary.direction.DirectionFactory
-% import org.allbinary.direction.DirectionalCompositeInterface
-% import org.allbinary.direction.DirectionalInterface
-% import org.allbinary.game.ai.BasicAI
-% import org.allbinary.game.combat.destroy.event.DestroyedEvent
-% import org.allbinary.game.combat.destroy.event.DestroyedEventHandler
-% import org.allbinary.game.combat.destroy.event.DestroyedEventListenerInterface
-% import org.allbinary.game.identification.Group
-% import org.allbinary.game.input.GameInput
-% import org.allbinary.game.physics.velocity.BasicVelocityProperties
-% import org.allbinary.game.physics.velocity.VelocityInterfaceCompositeInterface
-% import org.allbinary.game.tracking.TrackingEvent
-% import org.allbinary.game.tracking.TrackingEventHandler
-% import org.allbinary.game.tracking.TrackingEventListenerInterface
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.AllBinaryLayerManager
-% import org.allbinary.logic.communication.log.ForcedLogUtil
-% import org.allbinary.logic.math.MathUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.logic.util.event.AllBinaryEventObject
-% import org.allbinary.logic.util.event.EventStrings
-% import org.allbinary.logic.util.visitor.Visitor
-% import org.allbinary.time.GameTickTimeDelayHelper
-% import org.allbinary.time.GameTickTimeDelayHelperFactory
-% import org.allbinary.time.TimeDelayHelper
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
--module('DiveAndDirectionalTrackingAI').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements TrackingEventListenerInterface
-% implements DestroyedEventListenerInterface
+defmodule DiveAndDirectionalTrackingAI do
+  def jsuper(), do: BasicAI
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicAI', Function, Arguments).
-
-init_fields(This) ->
-    put({This, mathUtil}, 'MathUtil':getInstance()),
-    put({This, directionFactory}, 'DirectionFactory':getInstance()),
-    put({This, gameTickTimeDelayHelper}, 'GameTickTimeDelayHelperFactory':getInstance()),
-    put({This, timeDelayHelper}, 'TimeDelayHelper':new(500)),
-    put({This, list}, 'BasicArrayListD':new()),
-    put({This, directionalInterface}, undefined),
-    put({This, velocityInterface}, undefined),
-    put({This, directionToKeyMap}, array:from_list([get({'Canvas', 'LEFT'}), get({'Canvas', 'DOWN'}), get({'Canvas', 'UP'}), get({'Canvas', 'RIGHT'})])),
-    put({This, initialDropped}, false),
-    put({This, diveP}, false),
-    put({This, directionOfTarget}, 'Direction':getInstance(0)),
-    put({This, 'MIN_DISTANCE'}, 40),
-    put({This, lastTrackingLayerInterface}, get({'AllBinaryLayer', 'NULL_ALLBINARY_LAYER'})),
-    put({This, artificialIntelligenceInterface}, undefined),
-    put({This, aiVistor}, undefined),
-    put({This, lastDirection}, get({'DirectionFactory':getInstance(), 'NO_DIRECTION'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :mathUtil, nil)
+    JR.put(this, :directionFactory, nil)
+    JR.put(this, :gameTickTimeDelayHelper, nil)
+    JR.put(this, :timeDelayHelper, nil)
+    JR.put(this, :list, nil)
+    JR.put(this, :directionalInterface, nil)
+    JR.put(this, :velocityInterface, nil)
+    JR.put(this, :directionToKeyMap, nil)
+    JR.put(this, :initialDropped, false)
+    JR.put(this, :diveP, false)
+    JR.put(this, :directionOfTarget, nil)
+    JR.put(this, :MIN_DISTANCE, 0)
+    JR.put(this, :lastTrackingLayerInterface, nil)
+    JR.put(this, :artificialIntelligenceInterface, nil)
+    JR.put(this, :aiVistor, nil)
+    JR.put(this, :lastDirection, nil)
+        JR.put(this, :mathUtil, MathUtil.jm_getInstance())
+        JR.put(this, :directionFactory, DirectionFactory.jm_getInstance())
+        JR.put(this, :gameTickTimeDelayHelper, GameTickTimeDelayHelperFactory.jm_getInstance())
+        JR.put(this, :timeDelayHelper, TimeDelayHelper.jnew(500))
+        JR.put(this, :list, BasicArrayListD.jnew())
+        
+        
+        JR.put(this, :directionToKeyMap, JR.afrom([Canvas.jstatic_LEFT(), Canvas.jstatic_DOWN(), Canvas.jstatic_UP(), Canvas.jstatic_RIGHT()]))
+        JR.put(this, :initialDropped, false)
+        JR.put(this, :diveP, false)
+        JR.put(this, :directionOfTarget, Direction.jm_getInstance(0))
+        JR.put(this, :MIN_DISTANCE, 40)
+        JR.put(this, :lastTrackingLayerInterface, AllBinaryLayer.jstatic_NULL_ALLBINARY_LAYER())
+        
+        
+        JR.put(this, :lastDirection, JR.get(DirectionFactory.jm_getInstance(), :NO_DIRECTION))
+    nil
+  end
 
 
-new(OwnerLayerInterface, ArtificialIntelligenceInterface, GameInput, Visitor) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, OwnerLayerInterface, ArtificialIntelligenceInterface, GameInput, Visitor),
-    This.
+  def jinit(this, p_ownerLayerInterface, p_artificialIntelligenceInterface, p_gameInput, p_visitor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownerLayerInterface, p_ownerLayerInterface)
+      JR.lset(f, :artificialIntelligenceInterface, p_artificialIntelligenceInterface)
+      JR.lset(f, :gameInput, p_gameInput)
+      JR.lset(f, :visitor, p_visitor)
+        BasicAI.jinit(this, JR.lget(f, :ownerLayerInterface), JR.lget(f, :gameInput))
+        DiveAndDirectionalTrackingAI.jinitfields(this)
+        JR.put(this, :aiVistor, JR.lget(f, :visitor))
+        JR.put(this, :artificialIntelligenceInterface, JR.lget(f, :artificialIntelligenceInterface))
+        JR.lset(f, :directionalCompositeInterface, JR.call(this, :jm_getOwnerLayerInterface, []))
+        JR.put(this, :directionalInterface, JR.call(JR.lget(f, :directionalCompositeInterface), :jm_getDirectionalInterface, []))
+        JR.lset(f, :velocityInterfaceCompositeInterface, JR.call(this, :jm_getOwnerLayerInterface, []))
+        JR.put(this, :velocityInterface, JR.call(JR.lget(f, :velocityInterfaceCompositeInterface), :jm_getVelocityProperties, []))
+        JR.call(DestroyedEventHandler.jm_getInstance(), :jm_addListenerInterface, [this])
+        JR.call(this, :jm_init, [])
+    end)
+  end
 
-'$init'(This, OwnerLayerInterface, ArtificialIntelligenceInterface, GameInput, Visitor) ->
-        'BasicAI':'$init'(This, OwnerLayerInterface, GameInput),
-        init_fields(This),
-        put({This, aiVistor}, Visitor),
-        put({This, artificialIntelligenceInterface}, ArtificialIntelligenceInterface),
-        DirectionalCompositeInterface = (get({This, '$class'})):getOwnerLayerInterface(This),
-        put({This, directionalInterface}, (get({DirectionalCompositeInterface, '$class'})):getDirectionalInterface(DirectionalCompositeInterface)),
-        VelocityInterfaceCompositeInterface = (get({This, '$class'})):getOwnerLayerInterface(This),
-        put({This, velocityInterface}, (get({VelocityInterfaceCompositeInterface, '$class'})):getVelocityProperties(VelocityInterfaceCompositeInterface)),
-        (fun(Target_N67560) -> (get({Target_N67560, '$class'})):addListenerInterface(Target_N67560, This) end)('DestroyedEventHandler':getInstance()),
-        (get({This, '$class'})):init(This).
+  def jnew(p_ownerLayerInterface, p_artificialIntelligenceInterface, p_gameInput, p_visitor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_ownerLayerInterface, p_artificialIntelligenceInterface, p_gameInput, p_visitor)
+    this
+  end
 
-% throws Exception
-processAI(This, AllBinaryLayerManager) ->
-        case (get({This, '$class'})):isBeyondTarget(This) of
-            true ->
-            (get({This, '$class'})):init(This),
-            (get({get({This, velocityInterface}), '$class'})):zero(get({This, velocityInterface}));
-            false -> ok
-        end,
-        case (not get({This, diveP})) of
-            true ->
-            (get({This, '$class'})):target(This, AllBinaryLayerManager);
-            false ->
-            (get({This, '$class'})):dive(This),
-            (get({This, '$class'})):attack(This)
-        end,
-        (get({get({This, list}), '$class'})):clear(get({This, list})).
 
-init(This) ->
-        put({This, diveP}, false),
-        put({This, directionOfTarget}, get({'DirectionFactory':getInstance(), 'NOT_BORDERED_WITH'})),
-        (fun(Target_N68018) -> (get({Target_N68018, '$class'})):addListenerInterface(Target_N68018, This) end)('TrackingEventHandler':getInstance()).
+  def jm_processAI(this, p_allBinaryLayerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerManager, p_allBinaryLayerManager)
+        if JR.call(this, :jm_isBeyondTarget, []) do
+            JR.call(this, :jm_init, [])
+            JR.call(JR.get(this, :velocityInterface), :jm_zero, [])
+        end
+        if !JR.get(this, :diveP) do
+            JR.call(this, :jm_target, [JR.lget(f, :allBinaryLayerManager)])
+        else
+            JR.call(this, :jm_dive, [])
+            JR.call(this, :jm_attack, [])
+        end
+        JR.call(JR.get(this, :list), :jm_clear, [])
+    end)
+  end
 
-% throws Exception
-target(This, AllBinaryLayerManager) ->
-        try
-        case ((get({get({This, list}), '$class'})):size(get({This, list})) =:= 0) of
-            true ->
-            throw({'$return', ok});
-            false -> ok
-        end,
-        LastTrackingEvent = (get({get({This, list}), '$class'})):removeAt(get({This, list}), 0),
-        put({This, lastTrackingLayerInterface}, (get({LastTrackingEvent, '$class'})):getLayerInterface(LastTrackingEvent)),
-        LayerInterface = get({This, lastTrackingLayerInterface}),
-        OwnerLayerInterface = (get({This, '$class'})):getOwnerLayerInterface(This),
-        GroupArray = (get({LayerInterface, '$class'})):getGroupInterface(LayerInterface),
-        OwnerGroupArray = (get({OwnerLayerInterface, '$class'})):getGroupInterface(OwnerLayerInterface),
-        case (GroupArray =:= OwnerGroupArray) of
-            true ->
-            throw({'$return', ok});
-            false -> ok
-        end,
-        X = (get({get({This, lastTrackingLayerInterface}), '$class'})):getXP(get({This, lastTrackingLayerInterface})),
-        Y = (get({get({This, lastTrackingLayerInterface}), '$class'})):getYP(get({This, lastTrackingLayerInterface})),
-        YDistance = (((get({OwnerLayerInterface, '$class'})):getYP(OwnerLayerInterface) - Y) - (get({OwnerLayerInterface, '$class'})):getHeight(OwnerLayerInterface)),
-        XDistance = (((get({OwnerLayerInterface, '$class'})):getXP(OwnerLayerInterface) - X) - (get({OwnerLayerInterface, '$class'})):getWidth(OwnerLayerInterface)),
-        DirectionFactory = 'DirectionFactory':getInstance(),
-        case ((get({get({This, mathUtil}), '$class'})):abs(get({This, mathUtil}), YDistance) > (get({get({This, mathUtil}), '$class'})):abs(get({This, mathUtil}), XDistance)) of
-            true ->
-            case (YDistance > get({This, 'MIN_DISTANCE'})) of
-                true ->
-                put({This, directionOfTarget}, get({DirectionFactory, 'UP'}));
-                false ->
-                case (YDistance < (-get({This, 'MIN_DISTANCE'}))) of
-                true ->
-                put({This, directionOfTarget}, get({DirectionFactory, 'DOWN'}));
-                false -> ok
-            end
-            end;
-            false ->
-            case (XDistance > get({This, 'MIN_DISTANCE'})) of
-                true ->
-                put({This, directionOfTarget}, get({DirectionFactory, 'LEFT'}));
-                false ->
-                case (XDistance < (-get({This, 'MIN_DISTANCE'}))) of
-                true ->
-                put({This, directionOfTarget}, get({DirectionFactory, 'RIGHT'}));
-                false -> ok
+
+  def jm_init(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.put(this, :diveP, false)
+        JR.put(this, :directionOfTarget, JR.get(DirectionFactory.jm_getInstance(), :NOT_BORDERED_WITH))
+        JR.call(TrackingEventHandler.jm_getInstance(), :jm_addListenerInterface, [this])
+    end)
+  end
+
+
+  def jm_target(this, p_allBinaryLayerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerManager, p_allBinaryLayerManager)
+        if (JR.call(JR.get(this, :list), :jm_size, []) == 0) do
+            throw({:jreturn, nil})
+        end
+        JR.lset(f, :lastTrackingEvent, JR.call(JR.get(this, :list), :jm_removeAt, [0]))
+        JR.put(this, :lastTrackingLayerInterface, JR.call(JR.lget(f, :lastTrackingEvent), :jm_getLayerInterface, []))
+        JR.lset(f, :layerInterface, JR.get(this, :lastTrackingLayerInterface))
+        JR.lset(f, :ownerLayerInterface, JR.call(this, :jm_getOwnerLayerInterface, []))
+        JR.lset(f, :groupArray, JR.call(JR.lget(f, :layerInterface), :jm_getGroupInterface, []))
+        JR.lset(f, :ownerGroupArray, JR.call(JR.lget(f, :ownerLayerInterface), :jm_getGroupInterface, []))
+        if (JR.lget(f, :groupArray) == JR.lget(f, :ownerGroupArray)) do
+            throw({:jreturn, nil})
+        end
+        JR.lset(f, :x, JR.call(JR.get(this, :lastTrackingLayerInterface), :jm_getXP, []))
+        JR.lset(f, :y, JR.call(JR.get(this, :lastTrackingLayerInterface), :jm_getYP, []))
+        JR.lset(f, :yDistance, ((JR.call(JR.lget(f, :ownerLayerInterface), :jm_getYP, []) - JR.lget(f, :y)) - JR.call(JR.lget(f, :ownerLayerInterface), :jm_getHeight, [])))
+        JR.lset(f, :xDistance, ((JR.call(JR.lget(f, :ownerLayerInterface), :jm_getXP, []) - JR.lget(f, :x)) - JR.call(JR.lget(f, :ownerLayerInterface), :jm_getWidth, [])))
+        JR.lset(f, :directionFactory, DirectionFactory.jm_getInstance())
+        if (JR.call(JR.get(this, :mathUtil), :jm_abs, [JR.lget(f, :yDistance)]) > JR.call(JR.get(this, :mathUtil), :jm_abs, [JR.lget(f, :xDistance)])) do
+            if (JR.lget(f, :yDistance) > JR.get(this, :MIN_DISTANCE)) do
+                JR.put(this, :directionOfTarget, JR.get(JR.lget(f, :directionFactory), :UP))
+            else
+                if (JR.lget(f, :yDistance) < -JR.get(this, :MIN_DISTANCE)) do
+                JR.put(this, :directionOfTarget, JR.get(JR.lget(f, :directionFactory), :DOWN))
             end
             end
-        end,
-        case ((not get({This, initialDropped})) andalso (get({This, directionOfTarget}) =/= get({DirectionFactory, 'NOT_BORDERED_WITH'}))) of
-            true ->
-            (get({This, '$class'})):drop(This);
-            false -> ok
-        end,
-        case get({This, initialDropped}) of
-            true ->
-            case ((get({This, directionOfTarget}) =:= get({DirectionFactory, 'UP'})) orelse (get({This, directionOfTarget}) =:= get({DirectionFactory, 'DOWN'}))) of
-                true ->
-                (get({This, '$class'})):verticalTargeting(This, X);
-                false ->
-                case ((get({This, directionOfTarget}) =:= get({DirectionFactory, 'LEFT'})) orelse (get({This, directionOfTarget}) =:= get({DirectionFactory, 'RIGHT'}))) of
-                true ->
-                (get({This, '$class'})):horizontalTargeting(This, Y);
-                false ->
-                (get({get({This, artificialIntelligenceInterface}), '$class'})):processAI(get({This, artificialIntelligenceInterface}), AllBinaryLayerManager)
+        else
+            if (JR.lget(f, :xDistance) > JR.get(this, :MIN_DISTANCE)) do
+                JR.put(this, :directionOfTarget, JR.get(JR.lget(f, :directionFactory), :LEFT))
+            else
+                if (JR.lget(f, :xDistance) < -JR.get(this, :MIN_DISTANCE)) do
+                JR.put(this, :directionOfTarget, JR.get(JR.lget(f, :directionFactory), :RIGHT))
             end
-            end;
-            false -> ok
+            end
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        if (!JR.get(this, :initialDropped) && (JR.get(this, :directionOfTarget) != JR.get(JR.lget(f, :directionFactory), :NOT_BORDERED_WITH))) do
+            JR.call(this, :jm_drop, [])
+        end
+        if JR.get(this, :initialDropped) do
+            if ((JR.get(this, :directionOfTarget) == JR.get(JR.lget(f, :directionFactory), :UP)) || (JR.get(this, :directionOfTarget) == JR.get(JR.lget(f, :directionFactory), :DOWN))) do
+                JR.call(this, :jm_verticalTargeting, [JR.lget(f, :x)])
+            else
+                if ((JR.get(this, :directionOfTarget) == JR.get(JR.lget(f, :directionFactory), :LEFT)) || (JR.get(this, :directionOfTarget) == JR.get(JR.lget(f, :directionFactory), :RIGHT))) do
+                JR.call(this, :jm_horizontalTargeting, [JR.lget(f, :y)])
+            else
+                JR.call(JR.get(this, :artificialIntelligenceInterface), :jm_processAI, [JR.lget(f, :allBinaryLayerManager)])
+            end
+            end
+        end
+    end)
+  end
 
-% throws Exception
-verticalTargeting(This, X) when is_integer(X) ->
-        OwnerLayerInterface = (get({This, '$class'})):getOwnerLayerInterface(This),
-        case ((get({OwnerLayerInterface, '$class'})):getXP(OwnerLayerInterface) < X) of
-            true ->
-            (get({This, '$class'})):moveRight(This);
-            false -> ok
-        end,
-        case ((get({OwnerLayerInterface, '$class'})):getXP(OwnerLayerInterface) > X) of
-            true ->
-            (get({This, '$class'})):moveLeft(This);
-            false -> ok
-        end,
-        case (((get({OwnerLayerInterface, '$class'})):getXP(OwnerLayerInterface) > (X - 3)) andalso ((get({OwnerLayerInterface, '$class'})):getXP(OwnerLayerInterface) < (X + 3))) of
-            true ->
-            (get({This, '$class'})):setDive(This);
-            false -> ok
-        end.
 
-% throws Exception
-horizontalTargeting(This, Y) when is_integer(Y) ->
-        OwnerLayerInterface = (get({This, '$class'})):getOwnerLayerInterface(This),
-        case ((get({OwnerLayerInterface, '$class'})):getYP(OwnerLayerInterface) < Y) of
-            true ->
-            (get({This, '$class'})):moveDown(This);
-            false -> ok
-        end,
-        case ((get({OwnerLayerInterface, '$class'})):getYP(OwnerLayerInterface) > Y) of
-            true ->
-            (get({This, '$class'})):moveUp(This);
-            false -> ok
-        end,
-        case (((get({OwnerLayerInterface, '$class'})):getYP(OwnerLayerInterface) > (Y - 3)) andalso ((get({OwnerLayerInterface, '$class'})):getYP(OwnerLayerInterface) < (Y + 3))) of
-            true ->
-            (get({This, '$class'})):setDive(This);
-            false -> ok
-        end.
+  def jm_verticalTargeting(this, p_x) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+        JR.lset(f, :ownerLayerInterface, JR.call(this, :jm_getOwnerLayerInterface, []))
+        if (JR.call(JR.lget(f, :ownerLayerInterface), :jm_getXP, []) < JR.lget(f, :x)) do
+            JR.call(this, :jm_moveRight, [])
+        end
+        if (JR.call(JR.lget(f, :ownerLayerInterface), :jm_getXP, []) > JR.lget(f, :x)) do
+            JR.call(this, :jm_moveLeft, [])
+        end
+        if ((JR.call(JR.lget(f, :ownerLayerInterface), :jm_getXP, []) > JR.int32(JR.lget(f, :x) - 3)) && (JR.call(JR.lget(f, :ownerLayerInterface), :jm_getXP, []) < JR.int32(JR.lget(f, :x) + 3))) do
+            JR.call(this, :jm_setDive, [])
+        end
+    end)
+  end
 
-setDive(This) ->
-        put({This, diveP}, true),
-        (get({get({This, velocityInterface}), '$class'})):zero(get({This, velocityInterface})),
-        (fun(Target_N70189) -> (get({Target_N70189, '$class'})):removeListener(Target_N70189, This) end)('TrackingEventHandler':getInstance()).
 
-% throws Exception
-moveRight(This) ->
-        (get({This, '$class'})):setLastDirection(This, get({get({This, directionFactory}), 'RIGHT'})),
-        (get({get({This, directionalInterface}), '$class'})):setFrameByDirection(get({This, directionalInterface}), get({This, lastDirection})),
-        (get({get({This, aiVistor}), '$class'})):visit(get({This, aiVistor}), This).
+  def jm_horizontalTargeting(this, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :y, p_y)
+        JR.lset(f, :ownerLayerInterface, JR.call(this, :jm_getOwnerLayerInterface, []))
+        if (JR.call(JR.lget(f, :ownerLayerInterface), :jm_getYP, []) < JR.lget(f, :y)) do
+            JR.call(this, :jm_moveDown, [])
+        end
+        if (JR.call(JR.lget(f, :ownerLayerInterface), :jm_getYP, []) > JR.lget(f, :y)) do
+            JR.call(this, :jm_moveUp, [])
+        end
+        if ((JR.call(JR.lget(f, :ownerLayerInterface), :jm_getYP, []) > JR.int32(JR.lget(f, :y) - 3)) && (JR.call(JR.lget(f, :ownerLayerInterface), :jm_getYP, []) < JR.int32(JR.lget(f, :y) + 3))) do
+            JR.call(this, :jm_setDive, [])
+        end
+    end)
+  end
 
-% throws Exception
-moveLeft(This) ->
-        (get({This, '$class'})):setLastDirection(This, get({get({This, directionFactory}), 'LEFT'})),
-        (get({get({This, directionalInterface}), '$class'})):setFrameByDirection(get({This, directionalInterface}), get({This, lastDirection})),
-        (get({get({This, aiVistor}), '$class'})):visit(get({This, aiVistor}), This).
 
-% throws Exception
-moveDown(This) ->
-        (get({This, '$class'})):setLastDirection(This, get({get({This, directionFactory}), 'DOWN'})),
-        (get({get({This, directionalInterface}), '$class'})):setFrameByDirection(get({This, directionalInterface}), get({This, lastDirection})),
-        (get({get({This, aiVistor}), '$class'})):visit(get({This, aiVistor}), This).
+  def jm_setDive(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.put(this, :diveP, true)
+        JR.call(JR.get(this, :velocityInterface), :jm_zero, [])
+        JR.call(TrackingEventHandler.jm_getInstance(), :jm_removeListener, [this])
+    end)
+  end
 
-% throws Exception
-moveUp(This) ->
-        (get({This, '$class'})):setLastDirection(This, get({get({This, directionFactory}), 'UP'})),
-        (get({get({This, directionalInterface}), '$class'})):setFrameByDirection(get({This, directionalInterface}), get({This, lastDirection})),
-        (get({get({This, aiVistor}), '$class'})):visit(get({This, aiVistor}), This).
 
-% throws Exception
-dive(This) ->
-        (get({get({This, directionalInterface}), '$class'})):setFrameByDirection(get({This, directionalInterface}), get({This, directionOfTarget})),
-        (get({get({This, aiVistor}), '$class'})):visit(get({This, aiVistor}), This).
+  def jm_moveRight(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_setLastDirection, [JR.get(JR.get(this, :directionFactory), :RIGHT)])
+        JR.call(JR.get(this, :directionalInterface), :jm_setFrameByDirection, [JR.get(this, :lastDirection)])
+        JR.call(JR.get(this, :aiVistor), :jm_visit, [this])
+    end)
+  end
 
-% throws Exception
-attack(This) ->
-        'BasicAI':processKeyAI(This, get({'Canvas', 'KEY_NUM1'})).
 
-% throws Exception
-drop(This) ->
-        case (get({get({This, timeDelayHelper}), '$class'})):isTime(get({This, timeDelayHelper}), get({get({This, gameTickTimeDelayHelper}), startTime})) of
-            true ->
-            put({This, initialDropped}, true),
-            (get({get({This, aiVistor}), '$class'})):visit(get({This, aiVistor}), This);
-            false -> ok
-        end.
+  def jm_moveLeft(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_setLastDirection, [JR.get(JR.get(this, :directionFactory), :LEFT)])
+        JR.call(JR.get(this, :directionalInterface), :jm_setFrameByDirection, [JR.get(this, :lastDirection)])
+        JR.call(JR.get(this, :aiVistor), :jm_visit, [this])
+    end)
+  end
 
-isBeyondTarget(This) ->
-        try
-        case (get({This, directionOfTarget}) =:= get({get({This, directionFactory}), 'DOWN'})) of
-            true ->
-            case ((fun(Target_N71600) -> (get({Target_N71600, '$class'})):getYP(Target_N71600) end)((get({This, '$class'})):getOwnerLayerInterface(This)) > ((get({get({This, lastTrackingLayerInterface}), '$class'})):getYP(get({This, lastTrackingLayerInterface})) + get({This, 'MIN_DISTANCE'}))) of
-                true ->
-                throw({'$return', true});
-                false ->
-                throw({'$return', false})
-            end;
-            false ->
-            case (get({This, directionOfTarget}) =:= get({get({This, directionFactory}), 'UP'})) of
-            true ->
-            case ((fun(Target_N71499) -> (get({Target_N71499, '$class'})):getYP(Target_N71499) end)((get({This, '$class'})):getOwnerLayerInterface(This)) < ((get({get({This, lastTrackingLayerInterface}), '$class'})):getYP(get({This, lastTrackingLayerInterface})) + get({This, 'MIN_DISTANCE'}))) of
-                true ->
-                throw({'$return', true});
-                false ->
-                throw({'$return', false})
-            end;
-            false ->
-            case (get({This, directionOfTarget}) =:= get({get({This, directionFactory}), 'RIGHT'})) of
-            true ->
-            case ((fun(Target_N71398) -> (get({Target_N71398, '$class'})):getXP(Target_N71398) end)((get({This, '$class'})):getOwnerLayerInterface(This)) > ((get({get({This, lastTrackingLayerInterface}), '$class'})):getXP(get({This, lastTrackingLayerInterface})) + get({This, 'MIN_DISTANCE'}))) of
-                true ->
-                throw({'$return', true});
-                false ->
-                throw({'$return', false})
-            end;
-            false ->
-            case (get({This, directionOfTarget}) =:= get({get({This, directionFactory}), 'LEFT'})) of
-            true ->
-            case ((fun(Target_N71297) -> (get({Target_N71297, '$class'})):getXP(Target_N71297) end)((get({This, '$class'})):getOwnerLayerInterface(This)) < ((get({get({This, lastTrackingLayerInterface}), '$class'})):getXP(get({This, lastTrackingLayerInterface})) + get({This, 'MIN_DISTANCE'}))) of
-                true ->
-                throw({'$return', true});
-                false ->
-                throw({'$return', false})
-            end;
-            false ->
-            throw({'$return', false})
+
+  def jm_moveDown(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_setLastDirection, [JR.get(JR.get(this, :directionFactory), :DOWN)])
+        JR.call(JR.get(this, :directionalInterface), :jm_setFrameByDirection, [JR.get(this, :lastDirection)])
+        JR.call(JR.get(this, :aiVistor), :jm_visit, [this])
+    end)
+  end
+
+
+  def jm_moveUp(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_setLastDirection, [JR.get(JR.get(this, :directionFactory), :UP)])
+        JR.call(JR.get(this, :directionalInterface), :jm_setFrameByDirection, [JR.get(this, :lastDirection)])
+        JR.call(JR.get(this, :aiVistor), :jm_visit, [this])
+    end)
+  end
+
+
+  def jm_dive(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :directionalInterface), :jm_setFrameByDirection, [JR.get(this, :directionOfTarget)])
+        JR.call(JR.get(this, :aiVistor), :jm_visit, [this])
+    end)
+  end
+
+
+  def jm_attack(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        BasicAI.jm_processKeyAI(this, Canvas.jstatic_KEY_NUM1())
+    end)
+  end
+
+
+  def jm_drop(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if JR.call(JR.get(this, :timeDelayHelper), :jm_isTime, [JR.get(JR.get(this, :gameTickTimeDelayHelper), :startTime)]) do
+            JR.put(this, :initialDropped, true)
+            JR.call(JR.get(this, :aiVistor), :jm_visit, [this])
+        end
+    end)
+  end
+
+
+  def jm_isBeyondTarget(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.get(this, :directionOfTarget) == JR.get(JR.get(this, :directionFactory), :DOWN)) do
+            if (JR.call(JR.call(this, :jm_getOwnerLayerInterface, []), :jm_getYP, []) > (JR.call(JR.get(this, :lastTrackingLayerInterface), :jm_getYP, []) + JR.get(this, :MIN_DISTANCE))) do
+                throw({:jreturn, true})
+            else
+                throw({:jreturn, false})
+            end
+        else
+            if (JR.get(this, :directionOfTarget) == JR.get(JR.get(this, :directionFactory), :UP)) do
+            if (JR.call(JR.call(this, :jm_getOwnerLayerInterface, []), :jm_getYP, []) < (JR.call(JR.get(this, :lastTrackingLayerInterface), :jm_getYP, []) + JR.get(this, :MIN_DISTANCE))) do
+                throw({:jreturn, true})
+            else
+                throw({:jreturn, false})
+            end
+        else
+            if (JR.get(this, :directionOfTarget) == JR.get(JR.get(this, :directionFactory), :RIGHT)) do
+            if (JR.call(JR.call(this, :jm_getOwnerLayerInterface, []), :jm_getXP, []) > (JR.call(JR.get(this, :lastTrackingLayerInterface), :jm_getXP, []) + JR.get(this, :MIN_DISTANCE))) do
+                throw({:jreturn, true})
+            else
+                throw({:jreturn, false})
+            end
+        else
+            if (JR.get(this, :directionOfTarget) == JR.get(JR.get(this, :directionFactory), :LEFT)) do
+            if (JR.call(JR.call(this, :jm_getOwnerLayerInterface, []), :jm_getXP, []) < (JR.call(JR.get(this, :lastTrackingLayerInterface), :jm_getXP, []) + JR.get(this, :MIN_DISTANCE))) do
+                throw({:jreturn, true})
+            else
+                throw({:jreturn, false})
+            end
+        else
+            throw({:jreturn, false})
         end
         end
         end
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-onEvent(This, EventObject) ->
-        'ForcedLogUtil':log(get({'EventStrings':getInstance(), 'PERFORMANCE_MESSAGE'}), This).
 
-onMovement(This, TrackingEvent) ->
-        (get({get({This, list}), '$class'})):add(get({This, list}), TrackingEvent).
+  def jm_onEvent(this, p_eventObject) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+        ForcedLogUtil.jm_log(JR.get(EventStrings.jm_getInstance(), :PERFORMANCE_MESSAGE), this)
+    end)
+  end
 
-onDestroyed(This, DestroyedEvent) ->
-        case ((get({This, '$class'})):getOwnerLayerInterface(This) =:= (get({DestroyedEvent, '$class'})):getLayerInterface(DestroyedEvent)) of
-            true ->
-            (fun(Target_N71954) -> (get({Target_N71954, '$class'})):removeListener(Target_N71954, This) end)('TrackingEventHandler':getInstance()),
-            (fun(Target_N71988) -> (get({Target_N71988, '$class'})):removeListener(Target_N71988, This) end)('DestroyedEventHandler':getInstance());
-            false -> ok
-        end.
 
-setLastDirection(This, LastDirection) ->
-        put({This, lastDirection}, LastDirection),
-        Value = (fun(Target_N72117) -> (get({Target_N72117, '$class'})):getValue(Target_N72117) end)((get({This, '$class'})):getLastDirection(This)),
-        case (Value < 4) of
-            true ->
-            'BasicAI':setLastKey(This, array:get(Value, get({This, directionToKeyMap})));
-            false -> ok
-        end.
+  def jm_onMovement(this, p_trackingEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :trackingEvent, p_trackingEvent)
+        JR.call(JR.get(this, :list), :jm_add, [JR.lget(f, :trackingEvent)])
+    end)
+  end
 
-setLastKey(This, LastKey) when is_integer(LastKey) ->
-        'BasicAI':setLastKey(This, LastKey),
-        case ((get({This, '$class'})):getLastKey(This) =:= get({'Canvas', 'LEFT'})) of
-            true ->
-            put({This, lastDirection}, get({'DirectionFactory':getInstance(), 'LEFT'}));
-            false ->
-            case ((get({This, '$class'})):getLastKey(This) =:= get({'Canvas', 'DOWN'})) of
-            true ->
-            put({This, lastDirection}, get({'DirectionFactory':getInstance(), 'DOWN'}));
-            false ->
-            case ((get({This, '$class'})):getLastKey(This) =:= get({'Canvas', 'UP'})) of
-            true ->
-            put({This, lastDirection}, get({'DirectionFactory':getInstance(), 'UP'}));
-            false ->
-            case ((get({This, '$class'})):getLastKey(This) =:= get({'Canvas', 'RIGHT'})) of
-            true ->
-            put({This, lastDirection}, get({'DirectionFactory':getInstance(), 'RIGHT'}));
-            false -> ok
+
+  def jm_onDestroyed(this, p_destroyedEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :destroyedEvent, p_destroyedEvent)
+        if (JR.call(this, :jm_getOwnerLayerInterface, []) == JR.call(JR.lget(f, :destroyedEvent), :jm_getLayerInterface, [])) do
+            JR.call(TrackingEventHandler.jm_getInstance(), :jm_removeListener, [this])
+            JR.call(DestroyedEventHandler.jm_getInstance(), :jm_removeListener, [this])
+        end
+    end)
+  end
+
+
+  def jm_setLastDirection(this, p_lastDirection) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :lastDirection, p_lastDirection)
+        JR.put(this, :lastDirection, JR.lget(f, :lastDirection))
+        JR.lset(f, :value, JR.call(JR.call(this, :jm_getLastDirection, []), :jm_getValue, []))
+        if (JR.lget(f, :value) < 4) do
+            BasicAI.jm_setLastKey(this, JR.aget(JR.get(this, :directionToKeyMap), JR.lget(f, :value)))
+        end
+    end)
+  end
+
+
+  def jm_setLastKey(this, p_lastKey) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :lastKey, p_lastKey)
+        BasicAI.jm_setLastKey(this, JR.lget(f, :lastKey))
+        if (JR.call(this, :jm_getLastKey, []) == Canvas.jstatic_LEFT()) do
+            JR.put(this, :lastDirection, JR.get(DirectionFactory.jm_getInstance(), :LEFT))
+        else
+            if (JR.call(this, :jm_getLastKey, []) == Canvas.jstatic_DOWN()) do
+            JR.put(this, :lastDirection, JR.get(DirectionFactory.jm_getInstance(), :DOWN))
+        else
+            if (JR.call(this, :jm_getLastKey, []) == Canvas.jstatic_UP()) do
+            JR.put(this, :lastDirection, JR.get(DirectionFactory.jm_getInstance(), :UP))
+        else
+            if (JR.call(this, :jm_getLastKey, []) == Canvas.jstatic_RIGHT()) do
+            JR.put(this, :lastDirection, JR.get(DirectionFactory.jm_getInstance(), :RIGHT))
         end
         end
         end
-        end.
+        end
+    end)
+  end
 
-getLastDirection(This) ->
-        get({This, lastDirection}).
 
-toString(This) ->
-        StringBuffer = 'StringMaker':new(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, 'BasicAI':toString(This)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, " LastDirection: "),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (fun(Target_N72857) -> (get({Target_N72857, '$class'})):toString(Target_N72857, (get({This, '$class'})):getLastDirection(This)) end)('StringUtil':getInstance())),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+  def jm_getLastDirection(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :lastDirection)})
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [BasicAI.jm_toString(this)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [" LastDirection: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(StringUtil.jm_getInstance(), :jm_toString, [JR.call(this, :jm_getLastDirection, [])])])
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+end
+
 

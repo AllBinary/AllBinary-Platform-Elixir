@@ -1,32 +1,64 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2011 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.displayable
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2011 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable
 
--module('ScalableListener').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
+defmodule ScalableListener do
+  def jsuper(), do: JObject
 
 
-getRatio(This, Ratio) when is_number(Ratio) ->
-    erlang:error({abstract_method, getRatio}).
+  def jm_getRatio(this, p_ratio) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ratio, p_ratio)
+      throw({:jexception, JR.exception("AbstractMethodError", "getRatio")})
+    end)
+  end
 
-getLeft(This, XOffset) when is_integer(XOffset) ->
-    erlang:error({abstract_method, getLeft}).
 
-getTop(This, YOffset) when is_integer(YOffset) ->
-    erlang:error({abstract_method, getTop}).
+  def jm_getLeft(this, p_xOffset) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :xOffset, p_xOffset)
+      throw({:jexception, JR.exception("AbstractMethodError", "getLeft")})
+    end)
+  end
 
-scale(This, Ratio) when is_number(Ratio) ->
-    erlang:error({abstract_method, scale}).
+
+  def jm_getTop(this, p_yOffset) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :yOffset, p_yOffset)
+      throw({:jexception, JR.exception("AbstractMethodError", "getTop")})
+    end)
+  end
+
+
+  def jm_scale(this, p_ratio) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ratio, p_ratio)
+      throw({:jexception, JR.exception("AbstractMethodError", "scale")})
+    end)
+  end
+end
+
 

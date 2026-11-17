@@ -1,119 +1,187 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2011 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.layer
-% import org.allbinary.layer.event.LayerManagerEvent
-% import org.allbinary.layer.event.LayerManagerEventHandler
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2011 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.layer
 
--module('AllBinaryLayerManager').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule AllBinaryLayerManager do
+  def jsuper(), do: LayerManager
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('LayerManager', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :layerManagerEventHandler, nil)
+    JR.put(this, :createLayerManagerEvent, nil)
+    JR.put(this, :deleteLayerManagerEvent, nil)
+    JR.put(this, :basicLayerProcessorArray, nil)
+        JR.put(this, :layerManagerEventHandler, LayerManagerEventHandler.jm_getInstance())
+        JR.put(this, :createLayerManagerEvent, LayerManagerEvent.jnew(this, JR.get(JR.get(this, :layerManagerEventHandler), :CREATE)))
+        JR.put(this, :deleteLayerManagerEvent, LayerManagerEvent.jnew(this, JR.get(JR.get(this, :layerManagerEventHandler), :DELETE)))
+        JR.put(this, :basicLayerProcessorArray, JR.anew(0, nil))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, layerManagerEventHandler}, 'LayerManagerEventHandler':getInstance()),
-    put({This, createLayerManagerEvent}, 'LayerManagerEvent':new(This, get({get({This, layerManagerEventHandler}), 'CREATE'}))),
-    put({This, deleteLayerManagerEvent}, 'LayerManagerEvent':new(This, get({get({This, layerManagerEventHandler}), 'DELETE'}))),
-    put({This, basicLayerProcessorArray}, array:new(0, {default, undefined})),
-    ok.
+
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        LayerManager.jinit(this, LayerManagerNoDebug.jm_getInstance())
+        AllBinaryLayerManager.jinitfields(this)
+    end)
+  end
+
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jm_getLayerProcessorArray(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :basicLayerProcessorArray)})
+    end)
+  end
 
-'$init'(This) ->
-        'LayerManager':'$init'(This, 'LayerManagerNoDebug':getInstance()),
-        init_fields(This).
 
-getLayerProcessorArray(This) ->
-        get({This, basicLayerProcessorArray}).
+  def jm_setLayerProcessorArray(this, p_layerProcessorArray) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerProcessorArray, p_layerProcessorArray)
+        JR.put(this, :basicLayerProcessorArray, JR.lget(f, :layerProcessorArray))
+    end)
+  end
 
-setLayerProcessorArray(This, LayerProcessorArray) when (is_tuple(LayerProcessorArray) orelse LayerProcessorArray =:= undefined) ->
-        put({This, basicLayerProcessorArray}, LayerProcessorArray).
 
-log(This) ->
-        Size = array:size(get({This, basicLayerProcessorArray})),
-        lists:foreach(fun(Index) ->
-            LayerProcessorInterface = array:get(Index, get({This, basicLayerProcessorArray}))
-        end, lists:seq(0, Size - 1)).
+  def jm_log(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :size, JR.alength(JR.get(this, :basicLayerProcessorArray)))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :layerProcessorInterface, JR.aget(JR.get(this, :basicLayerProcessorArray), JR.lget(f, :index)))
+        end)
+    end)
+  end
 
-% throws Exception
-append(This, LayerInterface) ->
-        case (not (get({This, '$class'})):contains(This, LayerInterface)) of
-            true ->
-            (get({This, '$class'})):appendProcessors(This, LayerInterface),
-            'LayerManager':append(This, LayerInterface);
-            false -> ok
-        end.
 
-% throws Exception
-appendAt(This, LayerInterface, Index) when is_integer(Index) ->
-        case (not (get({This, '$class'})):contains(This, LayerInterface)) of
-            true ->
-            (get({This, '$class'})):appendProcessors(This, LayerInterface),
-            'LayerManager':appendAt(This, LayerInterface, Index);
-            false -> ok
-        end.
+  def jm_append(this, p_layerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+        if !JR.call(this, :jm_contains, [JR.lget(f, :layerInterface)]) do
+            JR.call(this, :jm_appendProcessors, [JR.lget(f, :layerInterface)])
+            LayerManager.jm_append(this, JR.lget(f, :layerInterface))
+        end
+    end)
+  end
 
-% throws Exception
-appendProcessors(This, LayerInterface) ->
-        (get({get({This, createLayerManagerEvent}), '$class'})):setLayerInterface(get({This, createLayerManagerEvent}), LayerInterface),
-        (get({get({This, layerManagerEventHandler}), '$class'})):fireEvent(get({This, layerManagerEventHandler}), get({This, createLayerManagerEvent})),
-        put({local, layerProcessorInterface}, undefined),
-        put({local, index}, array:size(get({This, basicLayerProcessorArray}))),
-        (fun Loop() -> case (begin put({local, index}, get({local, index}) - 1), get({local, index}) end >= 0) of true ->
-            put({local, layerProcessorInterface}, array:get(get({local, index}), get({This, basicLayerProcessorArray}))),
-            case (get({get({local, layerProcessorInterface}), '$class'})):isProcessorLayer(get({local, layerProcessorInterface}), LayerInterface) of
-                true ->
-                (fun(Target_N66843) -> (get({Target_N66843, '$class'})):append(Target_N66843, LayerInterface) end)((get({get({local, layerProcessorInterface}), '$class'})):getLayerManager(get({local, layerProcessorInterface})));
-                false -> ok
-            end,
-            Loop();
-        false -> ok end end)().
 
-% throws Exception
-remove(This, LayerInterface) ->
-        (get({get({This, deleteLayerManagerEvent}), '$class'})):setLayerInterface(get({This, deleteLayerManagerEvent}), LayerInterface),
-        (get({get({This, layerManagerEventHandler}), '$class'})):fireDeleteEvent(get({This, layerManagerEventHandler}), get({This, deleteLayerManagerEvent})),
-        put({local, layerProcessorInterface}, undefined),
-        put({local, index}, array:size(get({This, basicLayerProcessorArray}))),
-        (fun Loop() -> case (begin put({local, index}, get({local, index}) - 1), get({local, index}) end >= 0) of true ->
-            put({local, layerProcessorInterface}, array:get(get({local, index}), get({This, basicLayerProcessorArray}))),
-            (fun(Target_N67176) -> (get({Target_N67176, '$class'})):remove(Target_N67176, LayerInterface) end)((get({get({local, layerProcessorInterface}), '$class'})):getLayerManager(get({local, layerProcessorInterface}))),
-            Loop();
-        false -> ok end end)(),
-        'LayerManager':remove(This, LayerInterface).
+  def jm_appendAt(this, p_layerInterface, p_index) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+      JR.lset(f, :index, p_index)
+        if !JR.call(this, :jm_contains, [JR.lget(f, :layerInterface)]) do
+            JR.call(this, :jm_appendProcessors, [JR.lget(f, :layerInterface)])
+            LayerManager.jm_appendAt(this, JR.lget(f, :layerInterface), JR.lget(f, :index))
+        end
+    end)
+  end
 
-% throws Exception
-process(This) ->
-        put({local, layerProcessorInterface}, undefined),
-        Size = array:size(get({This, basicLayerProcessorArray})),
-        lists:foreach(fun(Index) ->
-            put({local, layerProcessorInterface}, array:get(Index, get({This, basicLayerProcessorArray}))),
-            (get({get({local, layerProcessorInterface}), '$class'})):process(get({local, layerProcessorInterface}), This)
-        end, lists:seq(0, Size - 1)).
 
-% throws Exception
-cleanup(This) ->
-        put({local, layerProcessorInterface}, undefined),
-        Size = array:size(get({This, basicLayerProcessorArray})),
-        lists:foreach(fun(Index) ->
-            put({local, layerProcessorInterface}, array:get(Index, get({This, basicLayerProcessorArray}))),
-            (fun(Target_N67763) -> (get({Target_N67763, '$class'})):cleanup(Target_N67763) end)((get({get({local, layerProcessorInterface}), '$class'})):getLayerManager(get({local, layerProcessorInterface})))
-        end, lists:seq(0, Size - 1)),
-        'LayerManager':cleanup(This).
+  def jm_appendProcessors(this, p_layerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+        JR.call(JR.get(this, :createLayerManagerEvent), :jm_setLayerInterface, [JR.lget(f, :layerInterface)])
+        JR.call(JR.get(this, :layerManagerEventHandler), :jm_fireEvent, [JR.get(this, :createLayerManagerEvent)])
+        JR.lset(f, :layerProcessorInterface, nil)
+        JR.lset(f, :index, JR.alength(JR.get(this, :basicLayerProcessorArray)))
+        JR.jfor(fn -> (JR.lpreinc(f, :index, -1) >= 0) end, fn -> nil end, fn ->
+            JR.lset(f, :layerProcessorInterface, JR.aget(JR.get(this, :basicLayerProcessorArray), JR.lget(f, :index)))
+            if JR.call(JR.lget(f, :layerProcessorInterface), :jm_isProcessorLayer, [JR.lget(f, :layerInterface)]) do
+                JR.call(JR.call(JR.lget(f, :layerProcessorInterface), :jm_getLayerManager, []), :jm_append, [JR.lget(f, :layerInterface)])
+            end
+        end)
+    end)
+  end
+
+
+  def jm_remove(this, p_layerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+        JR.call(JR.get(this, :deleteLayerManagerEvent), :jm_setLayerInterface, [JR.lget(f, :layerInterface)])
+        JR.call(JR.get(this, :layerManagerEventHandler), :jm_fireDeleteEvent, [JR.get(this, :deleteLayerManagerEvent)])
+        JR.lset(f, :layerProcessorInterface, nil)
+        JR.lset(f, :index, JR.alength(JR.get(this, :basicLayerProcessorArray)))
+        JR.jfor(fn -> (JR.lpreinc(f, :index, -1) >= 0) end, fn -> nil end, fn ->
+            JR.lset(f, :layerProcessorInterface, JR.aget(JR.get(this, :basicLayerProcessorArray), JR.lget(f, :index)))
+            JR.call(JR.call(JR.lget(f, :layerProcessorInterface), :jm_getLayerManager, []), :jm_remove, [JR.lget(f, :layerInterface)])
+        end)
+        LayerManager.jm_remove(this, JR.lget(f, :layerInterface))
+    end)
+  end
+
+
+  def jm_process(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :layerProcessorInterface, nil)
+        JR.lset(f, :size, JR.alength(JR.get(this, :basicLayerProcessorArray)))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :layerProcessorInterface, JR.aget(JR.get(this, :basicLayerProcessorArray), JR.lget(f, :index)))
+            JR.call(JR.lget(f, :layerProcessorInterface), :jm_process, [this])
+        end)
+    end)
+  end
+
+
+  def jm_cleanup(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :layerProcessorInterface, nil)
+        JR.lset(f, :size, JR.alength(JR.get(this, :basicLayerProcessorArray)))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :layerProcessorInterface, JR.aget(JR.get(this, :basicLayerProcessorArray), JR.lget(f, :index)))
+            JR.call(JR.call(JR.lget(f, :layerProcessorInterface), :jm_getLayerManager, []), :jm_cleanup, [])
+        end)
+        LayerManager.jm_cleanup(this)
+    end)
+  end
+end
+
 

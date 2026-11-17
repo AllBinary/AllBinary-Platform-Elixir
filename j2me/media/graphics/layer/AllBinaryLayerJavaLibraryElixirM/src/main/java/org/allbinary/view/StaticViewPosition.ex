@@ -1,43 +1,76 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.view
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.view
 
--module('StaticViewPosition').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule StaticViewPosition do
+  def jsuper(), do: ViewPosition
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ViewPosition', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+
+  def jinit(this, p_x, p_y, p_z) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :z, p_z)
+        ViewPosition.jinit(this, JR.lget(f, :x), JR.lget(f, :y), JR.lget(f, :z))
+        StaticViewPosition.jinitfields(this)
+    end)
+  end
+
+  def jnew(p_x, p_y, p_z) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_x, p_y, p_z)
+    this
+  end
 
 
-new(X, Y, Z) when is_integer(X), is_integer(Y), is_integer(Z) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, X, Y, Z),
-    This.
+  def jm_getX(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(this, :jm_getRawX, [])})
+    end)
+  end
 
-'$init'(This, X, Y, Z) when is_integer(X), is_integer(Y), is_integer(Z) ->
-        'ViewPosition':'$init'(This, X, Y, Z).
 
-getX(This) ->
-        (get({This, '$class'})):getRawX(This).
+  def jm_getY(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(this, :jm_getRawY, [])})
+    end)
+  end
 
-getY(This) ->
-        (get({This, '$class'})):getRawY(This).
 
-getZ(This) ->
-        (get({This, '$class'})):getRawZ(This).
+  def jm_getZ(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(this, :jm_getRawZ, [])})
+    end)
+  end
+end
+
 

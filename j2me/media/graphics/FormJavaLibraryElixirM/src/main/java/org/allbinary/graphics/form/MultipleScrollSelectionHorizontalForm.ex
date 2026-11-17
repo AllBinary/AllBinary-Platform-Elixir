@@ -1,132 +1,205 @@
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.form
-% import javax.microedition.lcdui.Font
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.J2MEUtil
-% import org.allbinary.graphics.Rectangle
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.color.BasicColorFactory
-% import org.allbinary.graphics.font.MyFontProcessor
-% import org.allbinary.graphics.font.UpdateMyFontInterface
-% import org.allbinary.graphics.font.UpdateMyFontProcessor
-% import org.allbinary.graphics.form.item.ABCustomItem
-% import org.allbinary.graphics.paint.NullPaintable
-% import org.allbinary.graphics.paint.Paintable
-% import org.allbinary.logic.communication.log.PreLogUtil
-% import org.allbinary.logic.string.StringMaker
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
--module('MultipleScrollSelectionHorizontalForm').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements UpdateMyFontInterface
+defmodule MultipleScrollSelectionHorizontalForm do
+  def jsuper(), do: ScrollSelectionForm
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ScrollSelectionForm', Function, Arguments).
-
-init_fields(This) ->
-    put({This, rectPaintable}, 'NullPaintable':getInstance()),
-    put({This, multipleScrollSelectionHorizontalFormTypeItemIndexPaintable}, 'ItemIndexPaintable':getInstance()),
-    put({This, backgroundColor}, (fun(Target_N66498) -> (get({Target_N66498, '$class'})):intValue(Target_N66498) end)(get({'BasicColorFactory':getInstance(), 'TRANSPARENT_GREY'}))),
-    put({This, myFontProcessor}, 'UpdateMyFontProcessor':new(This)),
-    put({This, logged}, false),
-    put({This, fontHeight}, 0),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :rectPaintable, nil)
+    JR.put(this, :multipleScrollSelectionHorizontalFormTypeItemIndexPaintable, nil)
+    JR.put(this, :backgroundColor, 0)
+    JR.put(this, :myFontProcessor, nil)
+    JR.put(this, :logged, false)
+    JR.put(this, :fontHeight, 0)
+        JR.put(this, :rectPaintable, NullPaintable.jm_getInstance())
+        JR.put(this, :multipleScrollSelectionHorizontalFormTypeItemIndexPaintable, ItemIndexPaintable.jm_getInstance())
+        JR.put(this, :backgroundColor, JR.call(JR.get(BasicColorFactory.jm_getInstance(), :TRANSPARENT_GREY), :jm_intValue, []))
+        JR.put(this, :myFontProcessor, UpdateMyFontProcessor.jnew(this))
+        JR.put(this, :logged, false)
+        JR.put(this, :fontHeight, 0)
+    nil
+  end
 
 
-% throws Exception
-createForm(Title, Items, Rectangle, FormType, Border, BackgroundBasicColor, ForegroundBasicColor) when (is_list(Title) orelse Title =:= undefined), (is_tuple(Items) orelse Items =:= undefined), is_integer(Border) ->
-        ScrollSelectionForm = 'MultipleScrollSelectionHorizontalForm':new(Title, Items, 'ItemPaintableFactory':getInstance(), Border, BackgroundBasicColor, ForegroundBasicColor),
-        (get({ScrollSelectionForm, '$class'})):init(ScrollSelectionForm, Rectangle, FormType),
-        ScrollSelectionForm.
+  def jm_createForm(p_title, p_items, p_rectangle, p_formType, p_border, p_backgroundBasicColor, p_foregroundBasicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :title, p_title)
+      JR.lset(f, :items, p_items)
+      JR.lset(f, :rectangle, p_rectangle)
+      JR.lset(f, :formType, p_formType)
+      JR.lset(f, :border, p_border)
+      JR.lset(f, :backgroundBasicColor, p_backgroundBasicColor)
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+        JR.lset(f, :scrollSelectionForm, MultipleScrollSelectionHorizontalForm.jnew(JR.lget(f, :title), JR.lget(f, :items), ItemPaintableFactory.jm_getInstance(), JR.lget(f, :border), JR.lget(f, :backgroundBasicColor), JR.lget(f, :foregroundBasicColor)))
+        JR.call(JR.lget(f, :scrollSelectionForm), :jm_init, [JR.lget(f, :rectangle), JR.lget(f, :formType)])
+        throw({:jreturn, JR.lget(f, :scrollSelectionForm)})
+    end)
+  end
 
-new(Title, Items, FormPaintableFactory, Border, BackgroundBasicColor, ForegroundBasicColor) when (is_list(Title) orelse Title =:= undefined), (is_tuple(Items) orelse Items =:= undefined), is_integer(Border) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Title, Items, FormPaintableFactory, Border, BackgroundBasicColor, ForegroundBasicColor),
-    This.
 
-'$init'(This, Title, Items, FormPaintableFactory, Border, BackgroundBasicColor, ForegroundBasicColor) when (is_list(Title) orelse Title =:= undefined), (is_tuple(Items) orelse Items =:= undefined), is_integer(Border) ->
-        'ScrollSelectionForm':'$init'(This, Title, Items, FormPaintableFactory, Border, 3, BackgroundBasicColor, ForegroundBasicColor),
-        init_fields(This),
-        case ('J2MEUtil':isJ2ME() orelse 'J2MEUtil':isHTML()) of
-            true ->
-            ok;
-            false ->
-            put({This, rectPaintable}, 'MultipleScrollSelectionFormRectPaintable':new(This))
-        end.
+  def jinit(this, p_title, p_items, p_formPaintableFactory, p_border, p_backgroundBasicColor, p_foregroundBasicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :title, p_title)
+      JR.lset(f, :items, p_items)
+      JR.lset(f, :formPaintableFactory, p_formPaintableFactory)
+      JR.lset(f, :border, p_border)
+      JR.lset(f, :backgroundBasicColor, p_backgroundBasicColor)
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+        ScrollSelectionForm.jinit(this, JR.lget(f, :title), JR.lget(f, :items), JR.lget(f, :formPaintableFactory), JR.lget(f, :border), 3, JR.lget(f, :backgroundBasicColor), JR.lget(f, :foregroundBasicColor))
+        MultipleScrollSelectionHorizontalForm.jinitfields(this)
+        if (J2MEUtil.jm_isJ2ME() || J2MEUtil.jm_isHTML()) do
+            nil
+        else
+            JR.put(this, :rectPaintable, MultipleScrollSelectionFormRectPaintable.jnew(this))
+        end
+    end)
+  end
 
-fillRect(This, Graphics) ->
-        (get({Graphics, '$class'})):setColor(Graphics, get({This, backgroundColor})),
-        (get({Graphics, '$class'})):fillRect(Graphics, get({This, x}), get({This, y}), (get({get({This, rectangle}), '$class'})):getWidth(get({This, rectangle})), (get({get({This, rectangle}), '$class'})):getHeight(get({This, rectangle}))).
+  def jnew(p_title, p_items, p_formPaintableFactory, p_border, p_backgroundBasicColor, p_foregroundBasicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_title, p_items, p_formPaintableFactory, p_border, p_backgroundBasicColor, p_foregroundBasicColor)
+    this
+  end
 
-% throws Exception
-init(This, Rectangle, FormType) ->
-        'ScrollSelectionForm':init(This, Rectangle, FormType),
-        FormTypeFactory = 'FormTypeFactory':getInstance(),
-        case (FormType =:= get({FormTypeFactory, 'HORIZONTAL_FORM'})) of
-            true ->
-            put({This, multipleScrollSelectionHorizontalFormTypeItemIndexPaintable}, 'MultipleScrollSelectionFormHorizontalPaintable':new(This));
-            false ->
-            case (FormType =:= get({FormTypeFactory, 'VERTICAL_CENTER_FORM'})) of
-            true ->
-            put({This, multipleScrollSelectionHorizontalFormTypeItemIndexPaintable}, 'MultipleScrollSelectionFormVerticalPaintable':new(This));
-            false ->
-            case (FormType =:= get({FormTypeFactory, 'NULL_FORM_TYPE'})) of
-            true ->
-            ok;
-            false ->
-            erlang:error({'Exception', get({FormTypeFactory, 'UNK'})})
+
+  def jm_fillRect(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.lget(f, :graphics), :jm_setColor, [JR.get(this, :backgroundColor)])
+        JR.call(JR.lget(f, :graphics), :jm_fillRect, [JR.get(this, :x), JR.get(this, :y), JR.call(JR.get(this, :rectangle), :jm_getWidth, []), JR.call(JR.get(this, :rectangle), :jm_getHeight, [])])
+    end)
+  end
+
+
+  def jm_init(this, p_rectangle, p_formType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :rectangle, p_rectangle)
+      JR.lset(f, :formType, p_formType)
+        ScrollSelectionForm.jm_init(this, JR.lget(f, :rectangle), JR.lget(f, :formType))
+        JR.lset(f, :formTypeFactory, FormTypeFactory.jm_getInstance())
+        if (JR.lget(f, :formType) == JR.get(JR.lget(f, :formTypeFactory), :HORIZONTAL_FORM)) do
+            JR.put(this, :multipleScrollSelectionHorizontalFormTypeItemIndexPaintable, MultipleScrollSelectionFormHorizontalPaintable.jnew(this))
+        else
+            if (JR.lget(f, :formType) == JR.get(JR.lget(f, :formTypeFactory), :VERTICAL_CENTER_FORM)) do
+            JR.put(this, :multipleScrollSelectionHorizontalFormTypeItemIndexPaintable, MultipleScrollSelectionFormVerticalPaintable.jnew(this))
+        else
+            if (JR.lget(f, :formType) == JR.get(JR.lget(f, :formTypeFactory), :NULL_FORM_TYPE)) do
+            nil
+        else
+            throw({:jexception, JR.exception("Exception", JR.get(JR.lget(f, :formTypeFactory), :UNK))})
         end
         end
-        end.
+        end
+    end)
+  end
 
-updateMeasurement(This, Graphics) ->
-        Font = (get({Graphics, '$class'})):getFont(Graphics),
-        put({This, fontHeight}, (get({Font, '$class'})):getHeight(Font)),
-        put({This, myFontProcessor}, 'MyFontProcessor':getInstance()).
 
-% throws Exception
-paintHorizontal(This, Graphics, Index, Item, Dx, Dy) when is_integer(Index), is_integer(Dx), is_integer(Dy) ->
-        put({local, dx}, Dx),
-        Dx2 = ((get({This, '$class'})):paintItem(This, Graphics, Index, Item, get({local, dx}), Dy) + get({This, border})),
-        (get({get({This, paintable}), '$class'})):paint(get({This, paintable}), Graphics, Index, get({local, dx}), Dy),
-        put({local, dx}, Dx2),
-        get({local, dx}).
+  def jm_updateMeasurement(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.lset(f, :font, JR.call(JR.lget(f, :graphics), :jm_getFont, []))
+        JR.put(this, :fontHeight, JR.call(JR.lget(f, :font), :jm_getHeight, []))
+        JR.put(this, :myFontProcessor, MyFontProcessor.jm_getInstance())
+    end)
+  end
 
-% throws Exception
-paintVertical(This, Graphics, Index, Item, Dx, Dy) when is_integer(Index), is_integer(Dx), is_integer(Dy) ->
-        (get({This, '$class'})):paintItem(This, Graphics, Index, Item, Dx, Dy),
-        (get({get({This, paintable}), '$class'})):paint(get({This, paintable}), Graphics, Index, Dx, Dy),
-        Dx.
 
-getStartIndex(This) ->
-        (get({This, '$class'})):getSelectedIndex(This).
+  def jm_paintHorizontal(this, p_graphics, p_index, p_item, p_dx, p_dy) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :index, p_index)
+      JR.lset(f, :item, p_item)
+      JR.lset(f, :dx, p_dx)
+      JR.lset(f, :dy, p_dy)
+        JR.lset(f, :dx2, (JR.call(this, :jm_paintItem, [JR.lget(f, :graphics), JR.lget(f, :index), JR.lget(f, :item), JR.lget(f, :dx), JR.lget(f, :dy)]) + JR.get(this, :border)))
+        JR.call(JR.get(this, :paintable), :jm_paint, [JR.lget(f, :graphics), JR.lget(f, :index), JR.lget(f, :dx), JR.lget(f, :dy)])
+        JR.lset(f, :dx, JR.lget(f, :dx2))
+        throw({:jreturn, JR.lget(f, :dx)})
+    end)
+  end
 
-paint(This, Graphics) ->
-        try
-            (get({get({This, myFontProcessor}), '$class'})):process(get({This, myFontProcessor}), Graphics),
-            Start = (get({This, '$class'})):getStartIndex(This),
-            Size = (get({This, '$class'})):size(This),
-            put({local, dx}, get({This, x})),
-            Dy = get({This, y}),
-            (get({get({This, rectPaintable}), '$class'})):paint(get({This, rectPaintable}), Graphics),
-            (get({Graphics, '$class'})):drawString(Graphics, (get({This, '$class'})):getTitle(This), get({This, x}), (get({This, y}) - get({This, fontHeight})), 0),
-            put({local, item}, undefined),
-            lists:foreach(fun(Index) ->
-                put({local, item}, (get({This, '$class'})):get(This, Index)),
-                case (get({local, dx}) >= (get({get({This, rectangle}), '$class'})):getMaxX(get({This, rectangle}))) of
-                    true ->
-                    case get({This, logged}) of
-                        true ->
-                        ok;
-                        false ->
-                        put({This, logged}, true),
-                        'PreLogUtil':put((fun(Target_N68895) -> (get({Target_N68895, '$class'})):toString(Target_N68895) end)((fun(Target_N68902) -> (get({Target_N68902, '$class'})):appendint(Target_N68902, trunc((get({get({This, rectangle}), '$class'})):getMaxX(get({This, rectangle})))) end)((fun(Target_N68909) -> (get({Target_N68909, '$class'})):append(Target_N68909, "painting beyond maxx: ") end)('StringMaker':new()))), This, get({get({This, canvasStrings}), 'PAINT'}))
-                    end;
-                    false -> ok
-                end,
-                put({local, dx}, (get({get({This, multipleScrollSelectionHorizontalFormTypeItemIndexPaintable}), '$class'})):paint(get({This, multipleScrollSelectionHorizontalFormTypeItemIndexPaintable}), Graphics, Index, get({local, item}), get({local, dx}), Dy))
-            end, lists:seq(Start, Size - 1))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            'PreLogUtil':put(get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, canvasStrings}), 'PAINT'}))
-        end.
+
+  def jm_paintVertical(this, p_graphics, p_index, p_item, p_dx, p_dy) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :index, p_index)
+      JR.lset(f, :item, p_item)
+      JR.lset(f, :dx, p_dx)
+      JR.lset(f, :dy, p_dy)
+        JR.call(this, :jm_paintItem, [JR.lget(f, :graphics), JR.lget(f, :index), JR.lget(f, :item), JR.lget(f, :dx), JR.lget(f, :dy)])
+        JR.call(JR.get(this, :paintable), :jm_paint, [JR.lget(f, :graphics), JR.lget(f, :index), JR.lget(f, :dx), JR.lget(f, :dy)])
+        throw({:jreturn, JR.lget(f, :dx)})
+    end)
+  end
+
+
+  def jm_getStartIndex(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(this, :jm_getSelectedIndex, [])})
+    end)
+  end
+
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        try do
+            JR.call(JR.get(this, :myFontProcessor), :jm_process, [JR.lget(f, :graphics)])
+            JR.lset(f, :start, JR.call(this, :jm_getStartIndex, []))
+            JR.lset(f, :size, JR.call(this, :jm_size, []))
+            JR.lset(f, :dx, JR.get(this, :x))
+            JR.lset(f, :dy, JR.get(this, :y))
+            JR.call(JR.get(this, :rectPaintable), :jm_paint, [JR.lget(f, :graphics)])
+            JR.call(JR.lget(f, :graphics), :jm_drawString, [JR.call(this, :jm_getTitle, []), JR.get(this, :x), (JR.get(this, :y) - JR.get(this, :fontHeight)), 0])
+            JR.lset(f, :item, nil)
+            JR.lset(f, :index, JR.lget(f, :start))
+            JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+                JR.lset(f, :item, JR.call(this, :jm_get, [JR.lget(f, :index)]))
+                if (JR.lget(f, :dx) >= JR.call(JR.get(this, :rectangle), :jm_getMaxX, [])) do
+                    if JR.get(this, :logged) do
+                        nil
+                    else
+                        JR.put(this, :logged, true)
+                        PreLogUtil.jm_put(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["painting beyond maxx: "]), :jm_appendint, [JR.int32(JR.call(JR.get(this, :rectangle), :jm_getMaxX, []))]), :jm_toString, []), this, JR.get(JR.get(this, :canvasStrings), :PAINT))
+                    end
+                end
+                JR.lset(f, :dx, JR.call(JR.get(this, :multipleScrollSelectionHorizontalFormTypeItemIndexPaintable), :jm_paint, [JR.lget(f, :graphics), JR.lget(f, :index), JR.lget(f, :item), JR.lget(f, :dx), JR.lget(f, :dy)]))
+            end)
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            PreLogUtil.jm_put(JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :canvasStrings), :PAINT))
+        end
+    end)
+  end
+end
+
 

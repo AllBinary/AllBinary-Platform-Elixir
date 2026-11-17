@@ -1,196 +1,241 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion.gesture
-% import org.allbinary.graphics.GPoint
-% import org.allbinary.graphics.Line
-% import org.allbinary.graphics.PointFactory
-% import org.allbinary.input.motion.gesture.configuration.MotionGestureConfiguration
-% import org.allbinary.input.motion.gesture.configuration.MotionGestureConfigurationFactory
-% import org.allbinary.input.motion.gesture.observer.BasicMotionGesturesHandler
-% import org.allbinary.input.motion.gesture.observer.MotionEventCircularPool
-% import org.allbinary.input.motion.gesture.observer.MotionGestureEvent
-% import org.allbinary.input.motion.gesture.observer.MovedMotionGesturesHandler
-% import org.allbinary.input.motion.gesture.observer.ScrolledMotionGesturesHandler
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.math.J2SEMath
-% import org.allbinary.logic.util.event.handler.BasicEventHandler
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture
 
--module('MotionGestureRecognizer').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule MotionGestureRecognizer do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, j2seMath}, 'J2SEMath':getInstance()),
-    put({This, origin}, get({'PointFactory':getInstance(), 'ZERO_ZERO'})),
-    put({This, previous}, get({This, origin})),
-    put({This, intermediate}, get({This, origin})),
-    put({This, line}, 'Line':new(get({This, origin}), get({This, origin}))),
-    put({This, motionGesturesHandler}, undefined),
-    put({This, movedMotionGesturesHandler}, undefined),
-    put({This, scrolledMotionGesturesHandler}, undefined),
-    put({This, motionEventCircularPool}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :j2seMath, nil)
+    JR.put(this, :origin, nil)
+    JR.put(this, :previous, nil)
+    JR.put(this, :intermediate, nil)
+    JR.put(this, :line, nil)
+    JR.put(this, :motionGesturesHandler, nil)
+    JR.put(this, :movedMotionGesturesHandler, nil)
+    JR.put(this, :scrolledMotionGesturesHandler, nil)
+    JR.put(this, :motionEventCircularPool, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :j2seMath, J2SEMath.jm_getInstance())
+        JR.put(this, :origin, JR.get(PointFactory.jm_getInstance(), :ZERO_ZERO))
+        JR.put(this, :previous, JR.get(this, :origin))
+        JR.put(this, :intermediate, JR.get(this, :origin))
+        JR.put(this, :line, Line.jnew(JR.get(this, :origin), JR.get(this, :origin)))
+        
+        
+        
+        
+    nil
+  end
 
 
-new(Id) when is_integer(Id) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Id),
-    This.
+  def jinit(this, p_id) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :id, p_id)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :motionEventCircularPool, MotionEventCircularPool.jm_createPool(JR.lget(f, :id)))
+        JR.lset(f, :motionGesturesHandler, BasicEventHandler.jnew())
+        JR.lset(f, :movedMotionGesturesHandler, JR.lget(f, :motionGesturesHandler))
+        JR.lset(f, :scrolledMotionGesturesHandler, JR.lget(f, :motionGesturesHandler))
+        try do
+            JR.lset(f, :motionGesturesHandler, BasicMotionGesturesHandler.jm_getInstance())
+            JR.lset(f, :movedMotionGesturesHandler, MovedMotionGesturesHandler.jm_getInstance())
+            JR.lset(f, :scrolledMotionGesturesHandler, ScrolledMotionGesturesHandler.jm_getInstance())
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, JR.get(JR.lget(f, :commonStrings), :CONSTRUCTOR), JR.lget(f, :e)])
+        end
+        JR.put(this, :motionGesturesHandler, JR.lget(f, :motionGesturesHandler))
+        JR.put(this, :movedMotionGesturesHandler, JR.lget(f, :movedMotionGesturesHandler))
+        JR.put(this, :scrolledMotionGesturesHandler, JR.lget(f, :scrolledMotionGesturesHandler))
+    end)
+  end
 
-'$init'(This, Id) when is_integer(Id) ->
-    init_fields(This),
-        put({This, motionEventCircularPool}, 'MotionEventCircularPool':createPool(Id)),
-        put({local, motionGesturesHandler}, 'BasicEventHandler':new()),
-        put({local, movedMotionGesturesHandler}, get({local, motionGesturesHandler})),
-        put({local, scrolledMotionGesturesHandler}, get({local, motionGesturesHandler})),
-        try
-            put({local, motionGesturesHandler}, 'BasicMotionGesturesHandler':getInstance()),
-            put({local, movedMotionGesturesHandler}, 'MovedMotionGesturesHandler':getInstance()),
-            put({local, scrolledMotionGesturesHandler}, 'ScrolledMotionGesturesHandler':getInstance())
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), This, get({CommonStrings, 'CONSTRUCTOR'}), E)
-        end,
-        put({This, motionGesturesHandler}, get({local, motionGesturesHandler})),
-        put({This, movedMotionGesturesHandler}, get({local, movedMotionGesturesHandler})),
-        put({This, scrolledMotionGesturesHandler}, get({local, scrolledMotionGesturesHandler})).
+  def jnew(p_id) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_id)
+    this
+  end
 
-% throws Exception
-processPressedMotionEvent(This, Current, DeviceId, Button) when is_integer(DeviceId), is_integer(Button) ->
-        put({This, intermediate}, get({This, origin})),
-        put({This, previous}, get({This, origin})),
-        Event = (get({get({This, motionEventCircularPool}), '$class'})):getInstance(get({This, motionEventCircularPool}), get({'TouchMotionGestureFactory':getInstance(), 'PRESSED'})),
-        (get({Event, '$class'})):setPreviousPoint(Event, get({This, previous})),
-        (get({Event, '$class'})):setCurrentPoint(Event, Current),
-        (get({get({This, motionGesturesHandler}), '$class'})):fireEvent(get({This, motionGesturesHandler}), Event),
-        true.
 
-% throws Exception
-processReleasedMotionEvent(This, Current, DeviceId, Button) when is_integer(DeviceId), is_integer(Button) ->
-        Event = (get({get({This, motionEventCircularPool}), '$class'})):getInstance(get({This, motionEventCircularPool}), get({'TouchMotionGestureFactory':getInstance(), 'RELEASED'})),
-        (get({Event, '$class'})):setPreviousPoint(Event, get({This, previous})),
-        (get({Event, '$class'})):setCurrentPoint(Event, Current),
-        (get({get({This, motionGesturesHandler}), '$class'})):fireEvent(get({This, motionGesturesHandler}), Event),
-        true.
+  def jm_processPressedMotionEvent(this, p_current, p_deviceId, p_button) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :current, p_current)
+      JR.lset(f, :deviceId, p_deviceId)
+      JR.lset(f, :button, p_button)
+        JR.put(this, :intermediate, JR.get(this, :origin))
+        JR.put(this, :previous, JR.get(this, :origin))
+        JR.lset(f, :event, JR.call(JR.get(this, :motionEventCircularPool), :jm_getInstance, [JR.get(TouchMotionGestureFactory.jm_getInstance(), :PRESSED)]))
+        JR.call(JR.lget(f, :event), :jm_setPreviousPoint, [JR.get(this, :previous)])
+        JR.call(JR.lget(f, :event), :jm_setCurrentPoint, [JR.lget(f, :current)])
+        JR.call(JR.get(this, :motionGesturesHandler), :jm_fireEvent, [JR.lget(f, :event)])
+        throw({:jreturn, true})
+    end)
+  end
 
-% throws Exception
-processDraggedMotionEvent(This, Current, DeviceId, ButtonMask) when is_integer(DeviceId), is_integer(ButtonMask) ->
-        try
-        case ((get({This, previous}) =:= get({This, origin})) orelse (get({This, intermediate}) =:= get({This, origin}))) of
-            true ->
-            put({This, previous}, Current),
-            put({This, intermediate}, Current),
-            throw({'$return', ok});
-            false -> ok
-        end,
-        (get({get({This, line}), '$class'})):setP1(get({This, line}), get({This, previous})),
-        (get({get({This, line}), '$class'})):setP2(get({This, line}), Current),
-        MinimumMotionGesture = (fun(Target_N67977) -> (get({Target_N67977, '$class'})):getMinimumMotionGesture(Target_N67977) end)('MotionGestureConfigurationFactory':getInstance()),
-        case (((get({get({This, j2seMath}), '$class'})):abs(get({This, j2seMath}), float((get({get({This, line}), '$class'})):getDeltaX(get({This, line})))) < MinimumMotionGesture) andalso ((get({get({This, j2seMath}), '$class'})):abs(get({This, j2seMath}), float((get({get({This, line}), '$class'})):getDeltaY(get({This, line})))) < MinimumMotionGesture)) of
-            true ->
-            put({This, intermediate}, Current),
-            throw({'$return', ok});
-            false -> ok
-        end,
-        Gradient = (get({get({This, line}), '$class'})):getGradient(get({This, line})),
-        AbsGradient = float((get({get({This, j2seMath}), '$class'})):abs(get({This, j2seMath}), Gradient)),
-        Conf = 'MotionGestureConfigurationFactory':getInstance(),
-        TouchMotionGestureFactory = 'TouchMotionGestureFactory':getInstance(),
-        put({local, newMotionGesture}, get({TouchMotionGestureFactory, 'NO_MOTION'})),
-        put({local, diagonalToleranceHigher}, 12.0),
-        put({local, diagonalToleranceLower}, 12.0),
-        case (get({Conf, '$class'})):isDiagonalMotionGestureAllowed(Conf) of
-            true ->
-            put({local, diagonalToleranceHigher}, float(((90 - (get({Conf, '$class'})):getDiagonalTolerance(Conf))))),
-            put({local, diagonalToleranceLower}, float((get({Conf, '$class'})):getDiagonalTolerance(Conf)));
-            false -> ok
-        end,
-        case (AbsGradient > math:tan(((get({local, diagonalToleranceHigher})) * math:pi() / 180))) of
-            true ->
-            case ((get({get({This, line}), '$class'})):getDeltaY(get({This, line})) > 0) of
-                true ->
-                put({local, newMotionGesture}, get({TouchMotionGestureFactory, 'UP'}));
-                false ->
-                put({local, newMotionGesture}, get({TouchMotionGestureFactory, 'DOWN'}))
-            end;
-            false ->
-            case (AbsGradient < math:tan(((get({local, diagonalToleranceLower})) * math:pi() / 180))) of
-                true ->
-                case ((get({get({This, line}), '$class'})):getDeltaX(get({This, line})) > 0) of
-                    true ->
-                    put({local, newMotionGesture}, get({TouchMotionGestureFactory, 'LEFT'}));
-                    false ->
-                    put({local, newMotionGesture}, get({TouchMotionGestureFactory, 'RIGHT'}))
-                end;
-                false ->
-                case (Gradient > 0.0) of
-                    true ->
-                    case ((get({get({This, line}), '$class'})):getDeltaX(get({This, line})) > 0) of
-                        true ->
-                        put({local, newMotionGesture}, get({TouchMotionGestureFactory, 'DIAGONAL_UP_LEFT'}));
-                        false ->
-                        put({local, newMotionGesture}, get({TouchMotionGestureFactory, 'DIAGONAL_DOWN_RIGHT'}))
-                    end;
-                    false ->
-                    case ((get({get({This, line}), '$class'})):getDeltaX(get({This, line})) > 0) of
-                        true ->
-                        put({local, newMotionGesture}, get({TouchMotionGestureFactory, 'DIAGONAL_DOWN_LEFT'}));
-                        false ->
-                        put({local, newMotionGesture}, get({TouchMotionGestureFactory, 'DIAGONAL_UP_RIGHT'}))
+
+  def jm_processReleasedMotionEvent(this, p_current, p_deviceId, p_button) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :current, p_current)
+      JR.lset(f, :deviceId, p_deviceId)
+      JR.lset(f, :button, p_button)
+        JR.lset(f, :event, JR.call(JR.get(this, :motionEventCircularPool), :jm_getInstance, [JR.get(TouchMotionGestureFactory.jm_getInstance(), :RELEASED)]))
+        JR.call(JR.lget(f, :event), :jm_setPreviousPoint, [JR.get(this, :previous)])
+        JR.call(JR.lget(f, :event), :jm_setCurrentPoint, [JR.lget(f, :current)])
+        JR.call(JR.get(this, :motionGesturesHandler), :jm_fireEvent, [JR.lget(f, :event)])
+        throw({:jreturn, true})
+    end)
+  end
+
+
+  def jm_processDraggedMotionEvent(this, p_current, p_deviceId, p_buttonMask) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :current, p_current)
+      JR.lset(f, :deviceId, p_deviceId)
+      JR.lset(f, :buttonMask, p_buttonMask)
+        if ((JR.get(this, :previous) == JR.get(this, :origin)) || (JR.get(this, :intermediate) == JR.get(this, :origin))) do
+            JR.put(this, :previous, JR.lget(f, :current))
+            JR.put(this, :intermediate, JR.lget(f, :current))
+            throw({:jreturn, nil})
+        end
+        JR.call(JR.get(this, :line), :jm_setP1, [JR.get(this, :previous)])
+        JR.call(JR.get(this, :line), :jm_setP2, [JR.lget(f, :current)])
+        JR.lset(f, :minimumMotionGesture, JR.call(MotionGestureConfigurationFactory.jm_getInstance(), :jm_getMinimumMotionGesture, []))
+        if ((JR.call(JR.get(this, :j2seMath), :jm_abs, [(JR.call(JR.get(this, :line), :jm_getDeltaX, []) * 1.0)]) < JR.lget(f, :minimumMotionGesture)) && (JR.call(JR.get(this, :j2seMath), :jm_abs, [(JR.call(JR.get(this, :line), :jm_getDeltaY, []) * 1.0)]) < JR.lget(f, :minimumMotionGesture))) do
+            JR.put(this, :intermediate, JR.lget(f, :current))
+            throw({:jreturn, nil})
+        end
+        JR.lset(f, :gradient, JR.call(JR.get(this, :line), :jm_getGradient, []))
+        JR.lset(f, :absGradient, (JR.call(JR.get(this, :j2seMath), :jm_abs, [(JR.lget(f, :gradient) * 1.0)]) * 1.0))
+        JR.lset(f, :conf, MotionGestureConfigurationFactory.jm_getInstance())
+        JR.lset(f, :touchMotionGestureFactory, TouchMotionGestureFactory.jm_getInstance())
+        JR.lset(f, :newMotionGesture, JR.get(JR.lget(f, :touchMotionGestureFactory), :NO_MOTION))
+        JR.lset(f, :diagonalToleranceHigher, 12.0)
+        JR.lset(f, :diagonalToleranceLower, 12.0)
+        if JR.call(JR.lget(f, :conf), :jm_isDiagonalMotionGestureAllowed, []) do
+            JR.lset(f, :diagonalToleranceHigher, (((90 - JR.call(JR.lget(f, :conf), :jm_getDiagonalTolerance, []))) * 1.0))
+            JR.lset(f, :diagonalToleranceLower, (JR.call(JR.lget(f, :conf), :jm_getDiagonalTolerance, []) * 1.0))
+        end
+        if (JR.lget(f, :absGradient) > :math.tan(:math.toRadians(JR.lget(f, :diagonalToleranceHigher)))) do
+            if (JR.call(JR.get(this, :line), :jm_getDeltaY, []) > 0) do
+                JR.lset(f, :newMotionGesture, JR.get(JR.lget(f, :touchMotionGestureFactory), :UP))
+            else
+                JR.lset(f, :newMotionGesture, JR.get(JR.lget(f, :touchMotionGestureFactory), :DOWN))
+            end
+        else
+            if (JR.lget(f, :absGradient) < :math.tan(:math.toRadians(JR.lget(f, :diagonalToleranceLower)))) do
+                if (JR.call(JR.get(this, :line), :jm_getDeltaX, []) > 0) do
+                    JR.lset(f, :newMotionGesture, JR.get(JR.lget(f, :touchMotionGestureFactory), :LEFT))
+                else
+                    JR.lset(f, :newMotionGesture, JR.get(JR.lget(f, :touchMotionGestureFactory), :RIGHT))
+                end
+            else
+                if (JR.lget(f, :gradient) > 0.0) do
+                    if (JR.call(JR.get(this, :line), :jm_getDeltaX, []) > 0) do
+                        JR.lset(f, :newMotionGesture, JR.get(JR.lget(f, :touchMotionGestureFactory), :DIAGONAL_UP_LEFT))
+                    else
+                        JR.lset(f, :newMotionGesture, JR.get(JR.lget(f, :touchMotionGestureFactory), :DIAGONAL_DOWN_RIGHT))
+                    end
+                else
+                    if (JR.call(JR.get(this, :line), :jm_getDeltaX, []) > 0) do
+                        JR.lset(f, :newMotionGesture, JR.get(JR.lget(f, :touchMotionGestureFactory), :DIAGONAL_DOWN_LEFT))
+                    else
+                        JR.lset(f, :newMotionGesture, JR.get(JR.lget(f, :touchMotionGestureFactory), :DIAGONAL_UP_RIGHT))
                     end
                 end
             end
-        end,
-        put({This, previous}, Current),
-        put({This, intermediate}, Current),
-        Event = (get({get({This, motionEventCircularPool}), '$class'})):getInstance(get({This, motionEventCircularPool}), get({local, newMotionGesture})),
-        (get({Event, '$class'})):setPreviousPoint(Event, get({This, previous})),
-        (get({Event, '$class'})):setCurrentPoint(Event, Current),
-        (get({get({This, motionGesturesHandler}), '$class'})):fireEvent(get({This, motionGesturesHandler}), Event),
-        ok
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
-
-% throws Exception
-processMovedMotionEvent(This, Current, DeviceId, Button) when is_integer(DeviceId), is_integer(Button) ->
-        Event = (get({get({This, motionEventCircularPool}), '$class'})):getInstance(get({This, motionEventCircularPool}), get({'TouchMotionGestureFactory':getInstance(), 'NO_MOTION'})),
-        (get({Event, '$class'})):setPreviousPoint(Event, get({This, previous})),
-        (get({Event, '$class'})):setCurrentPoint(Event, Current),
-        (get({get({This, movedMotionGesturesHandler}), '$class'})):fireEvent(get({This, movedMotionGesturesHandler}), Event),
-        true.
-
-% throws Exception
-processScrolledMotionEvent(This, Current, DeviceId, Button) when is_integer(DeviceId), is_integer(Button) ->
-        TouchMotionGestureFactory = 'TouchMotionGestureFactory':getInstance(),
-        put({local, newMotionGesture}, get({TouchMotionGestureFactory, 'NO_MOTION'})),
-        case (Button > 0) of
-            true ->
-            put({local, newMotionGesture}, get({TouchMotionGestureFactory, 'SCROLL_UP'}));
-            false ->
-            case (Button < 0) of
-            true ->
-            put({local, newMotionGesture}, get({TouchMotionGestureFactory, 'SCROLL_DOWN'}));
-            false -> ok
         end
-        end,
-        Event = (get({get({This, motionEventCircularPool}), '$class'})):getInstance(get({This, motionEventCircularPool}), get({local, newMotionGesture})),
-        (get({Event, '$class'})):setPreviousPoint(Event, get({This, previous})),
-        (get({Event, '$class'})):setCurrentPoint(Event, Current),
-        (get({get({This, scrolledMotionGesturesHandler}), '$class'})):fireEvent(get({This, scrolledMotionGesturesHandler}), Event),
-        true.
+        JR.put(this, :previous, JR.lget(f, :current))
+        JR.put(this, :intermediate, JR.lget(f, :current))
+        JR.lset(f, :event, JR.call(JR.get(this, :motionEventCircularPool), :jm_getInstance, [JR.lget(f, :newMotionGesture)]))
+        JR.call(JR.lget(f, :event), :jm_setPreviousPoint, [JR.get(this, :previous)])
+        JR.call(JR.lget(f, :event), :jm_setCurrentPoint, [JR.lget(f, :current)])
+        JR.call(JR.get(this, :motionGesturesHandler), :jm_fireEvent, [JR.lget(f, :event)])
+        throw({:jreturn, nil})
+    end)
+  end
 
-getMotionGesturesHandler(This) ->
-        get({This, motionGesturesHandler}).
+
+  def jm_processMovedMotionEvent(this, p_current, p_deviceId, p_button) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :current, p_current)
+      JR.lset(f, :deviceId, p_deviceId)
+      JR.lset(f, :button, p_button)
+        JR.lset(f, :event, JR.call(JR.get(this, :motionEventCircularPool), :jm_getInstance, [JR.get(TouchMotionGestureFactory.jm_getInstance(), :NO_MOTION)]))
+        JR.call(JR.lget(f, :event), :jm_setPreviousPoint, [JR.get(this, :previous)])
+        JR.call(JR.lget(f, :event), :jm_setCurrentPoint, [JR.lget(f, :current)])
+        JR.call(JR.get(this, :movedMotionGesturesHandler), :jm_fireEvent, [JR.lget(f, :event)])
+        throw({:jreturn, true})
+    end)
+  end
+
+
+  def jm_processScrolledMotionEvent(this, p_current, p_deviceId, p_button) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :current, p_current)
+      JR.lset(f, :deviceId, p_deviceId)
+      JR.lset(f, :button, p_button)
+        JR.lset(f, :touchMotionGestureFactory, TouchMotionGestureFactory.jm_getInstance())
+        JR.lset(f, :newMotionGesture, JR.get(JR.lget(f, :touchMotionGestureFactory), :NO_MOTION))
+        if (JR.lget(f, :button) > 0) do
+            JR.lset(f, :newMotionGesture, JR.get(JR.lget(f, :touchMotionGestureFactory), :SCROLL_UP))
+        else
+            if (JR.lget(f, :button) < 0) do
+            JR.lset(f, :newMotionGesture, JR.get(JR.lget(f, :touchMotionGestureFactory), :SCROLL_DOWN))
+        end
+        end
+        JR.lset(f, :event, JR.call(JR.get(this, :motionEventCircularPool), :jm_getInstance, [JR.lget(f, :newMotionGesture)]))
+        JR.call(JR.lget(f, :event), :jm_setPreviousPoint, [JR.get(this, :previous)])
+        JR.call(JR.lget(f, :event), :jm_setCurrentPoint, [JR.lget(f, :current)])
+        JR.call(JR.get(this, :scrolledMotionGesturesHandler), :jm_fireEvent, [JR.lget(f, :event)])
+        throw({:jreturn, true})
+    end)
+  end
+
+
+  def jm_getMotionGesturesHandler(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :motionGesturesHandler)})
+    end)
+  end
+end
+
 

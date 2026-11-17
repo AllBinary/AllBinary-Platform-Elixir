@@ -1,57 +1,87 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.layer.event
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.LayerManager
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.util.event.AllBinaryEventObject
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.layer.event
 
--module('LayerManagerEvent').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule LayerManagerEvent do
+  def jsuper(), do: AllBinaryEventObject
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AllBinaryEventObject', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :layerInterface, nil)
+    JR.put(this, :crud, nil)
+        JR.put(this, :layerInterface, AllBinaryLayer.jstatic_NULL_ALLBINARY_LAYER())
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, layerInterface}, get({'AllBinaryLayer', 'NULL_ALLBINARY_LAYER'})),
-    put({This, crud}, undefined),
-    ok.
+
+  def jinit(this, p_layerManager, p_crud) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerManager, p_layerManager)
+      JR.lset(f, :crud, p_crud)
+        AllBinaryEventObject.jinit(this, JR.lget(f, :layerManager))
+        LayerManagerEvent.jinitfields(this)
+        JR.put(this, :crud, JR.lget(f, :crud))
+    end)
+  end
+
+  def jnew(p_layerManager, p_crud) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_layerManager, p_crud)
+    this
+  end
 
 
-new(LayerManager, Crud) when (is_list(Crud) orelse Crud =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, LayerManager, Crud),
-    This.
+  def jm_getLayerInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :layerInterface)})
+    end)
+  end
 
-'$init'(This, LayerManager, Crud) when (is_list(Crud) orelse Crud =:= undefined) ->
-        'AllBinaryEventObject':'$init'(This, LayerManager),
-        init_fields(This),
-        put({This, crud}, Crud).
 
-getLayerInterface(This) ->
-        get({This, layerInterface}).
+  def jm_setLayerInterface(this, p_layerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+        JR.put(this, :layerInterface, JR.lget(f, :layerInterface))
+    end)
+  end
 
-setLayerInterface(This, LayerInterface) ->
-        put({This, layerInterface}, LayerInterface).
 
-toString(This) ->
-        StringBuffer = 'StringMaker':new(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "LayerManagerEvent: \n"),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "LayerInterface: "),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (fun(Target_N66139) -> (get({Target_N66139, '$class'})):toString(Target_N66139) end)((get({This, '$class'})):getLayerInterface(This))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "\nCRUD: "),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({This, crud})),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["LayerManagerEvent: \n"])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["LayerInterface: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.call(this, :jm_getLayerInterface, []), :jm_toString, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["\nCRUD: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(this, :crud)])
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+end
+
 

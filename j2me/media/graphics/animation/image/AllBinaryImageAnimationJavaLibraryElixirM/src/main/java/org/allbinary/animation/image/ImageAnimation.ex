@@ -1,84 +1,175 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation.image
-% import javax.microedition.lcdui.Graphics
-% import javax.microedition.lcdui.Image
-% import org.allbinary.DisposalUtil
-% import org.allbinary.animation.AnimationBehavior
-% import org.allbinary.animation.IndexedAnimation
-% import org.allbinary.graphics.Anchor
-% import org.allbinary.logic.math.PrimitiveIntUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
--module('ImageAnimation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule ImageAnimation do
+  def jsuper(), do: IndexedAnimation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('IndexedAnimation', Function, Arguments).
-
-init_fields(This) ->
-    put({This, image}, undefined),
-    put({This, anchor}, get({'Anchor', 'TOP_LEFT'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :image, nil)
+    JR.put(this, :anchor, 0)
+        
+        JR.put(this, :anchor, Anchor.jstatic_TOP_LEFT())
+    nil
+  end
 
 
-new(Image, AnimationBehavior) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Image, AnimationBehavior),
-    This.
+  def jinit(this, p_image, p_animationBehavior) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :image, p_image)
+      JR.lset(f, :animationBehavior, p_animationBehavior)
+        IndexedAnimation.jinit(this, JR.lget(f, :animationBehavior))
+        ImageAnimation.jinitfields(this)
+        JR.put(this, :image, JR.lget(f, :image))
+    end)
+  end
 
-'$init'(This, Image, AnimationBehavior) ->
-        'IndexedAnimation':'$init'(This, AnimationBehavior),
-        init_fields(This),
-        put({This, image}, Image).
+  def jnew(p_image, p_animationBehavior) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_image, p_animationBehavior)
+    this
+  end
 
-% throws Exception
-getAnimationSize(This) ->
-        (get({This, '$class'})):getSize(This).
 
-nextFrame(This) ->
-        ok.
+  def jm_getAnimationSize(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(this, :jm_getSize, [])})
+    end)
+  end
 
-previousFrame(This) ->
-        ok.
 
-setFrame(This, Index) when is_integer(Index) ->
-        ok.
+  def jm_nextFrame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-getFrame(This) ->
-        0.
 
-getSize(This) ->
-        1.
+  def jm_previousFrame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-setSequence(This, Sequence) when (is_tuple(Sequence) orelse Sequence =:= undefined) ->
-        ok.
 
-getSequence(This) ->
-        'PrimitiveIntUtil':getArrayInstance().
+  def jm_setFrame(this, p_index) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :index, p_index)
+        nil
+    end)
+  end
 
-paintXY(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-        (get({Graphics, '$class'})):drawImage(Graphics, get({This, image}), X, Y, get({This, anchor})).
 
-getImage(This) ->
-        get({This, image}).
+  def jm_getFrame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0})
+    end)
+  end
 
-% throws Exception
-close(This) ->
-        (fun(Target_N66565) -> (get({Target_N66565, '$class'})):disposeImage(Target_N66565, get({This, image})) end)('DisposalUtil':getInstance()).
 
-% throws Throwable
-finalize(This) ->
-        (fun(Target_N66647) -> (get({Target_N66647, '$class'})):disposeImage(Target_N66647, get({This, image})) end)('DisposalUtil':getInstance()).
+  def jm_getSize(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 1})
+    end)
+  end
+
+
+  def jm_setSequence(this, p_sequence) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :sequence, p_sequence)
+        nil
+    end)
+  end
+
+
+  def jm_getSequence(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, PrimitiveIntUtil.jm_getArrayInstance()})
+    end)
+  end
+
+
+  def jm_paintXY(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        JR.call(JR.lget(f, :graphics), :jm_drawImage, [JR.get(this, :image), JR.lget(f, :x), JR.lget(f, :y), JR.get(this, :anchor)])
+    end)
+  end
+
+
+  def jm_getImage(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :image)})
+    end)
+  end
+
+
+  def jm_close(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(DisposalUtil.jm_getInstance(), :jm_disposeImage, [JR.get(this, :image)])
+    end)
+  end
+
+
+  def jm_finalize(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(DisposalUtil.jm_getInstance(), :jm_disposeImage, [JR.get(this, :image)])
+    end)
+  end
+end
+
 

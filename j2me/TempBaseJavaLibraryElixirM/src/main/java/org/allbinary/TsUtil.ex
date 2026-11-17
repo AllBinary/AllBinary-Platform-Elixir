@@ -53,7 +53,7 @@ def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> TsUtil.jn
       f = JR.frame()
       _ = f
       JR.lset(f, :bits, p_bits)
-        throw({:jreturn, JR.call(J.Double, :jm_longBitsToDouble, [JR.lget(f, :bits)])})
+        throw({:jreturn, J.Double.jm_longBitsToDouble(JR.lget(f, :bits))})
     end)
   end
 
@@ -64,7 +64,7 @@ def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> TsUtil.jn
       f = JR.frame()
       _ = f
       JR.lset(f, :bits, p_bits)
-        throw({:jreturn, JR.call(J.Float, :jm_intBitsToFloat, [JR.lget(f, :bits)])})
+        throw({:jreturn, J.Float.jm_intBitsToFloat(JR.lget(f, :bits))})
     end)
   end
 

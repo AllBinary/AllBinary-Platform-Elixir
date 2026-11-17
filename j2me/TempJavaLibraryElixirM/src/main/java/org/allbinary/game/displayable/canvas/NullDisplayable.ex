@@ -1,37 +1,55 @@
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import javax.microedition.lcdui.Canvas
-% import javax.microedition.lcdui.Graphics
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('NullDisplayable').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+#Temp should not be in any build
+defmodule NullDisplayable do
+  def jsuper(), do: Canvas
+def jstatic_SINGLETON(), do: JR.static_get(__MODULE__, :SINGLETON, fn -> NullDisplayable.jnew() end)
+  def jstatic_set_SINGLETON(value), do: JR.static_put(__MODULE__, :SINGLETON, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Canvas', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'SINGLETON'}, 'NullDisplayable':new()),
-    ok.
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-getInstance() ->
-        get({'NullDisplayable', 'SINGLETON'}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, NullDisplayable.jstatic_SINGLETON()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-    'Canvas':'$init'(This),
-    init_fields(This),
-        ok.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      Canvas.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-paint(This, Graphics) ->
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        nil
+    end)
+  end
+end
+
 

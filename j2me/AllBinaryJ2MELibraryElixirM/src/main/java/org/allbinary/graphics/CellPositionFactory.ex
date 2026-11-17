@@ -1,90 +1,150 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics
 
--module('CellPositionFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule CellPositionFactory do
+  def jsuper(), do: JObject
+def jstatic_SINGLETON(), do: JR.static_get(__MODULE__, :SINGLETON, fn -> CellPositionFactory.jnew() end)
+  def jstatic_set_SINGLETON(value), do: JR.static_put(__MODULE__, :SINGLETON, value)
 
-static_init() ->
-    put({?MODULE, 'SINGLETON'}, 'CellPositionFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :NONE, nil)
+    JR.put(this, :cellPositionArray, nil)
+    JR.put(this, :columns, 0)
+    JR.put(this, :rows, 0)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :NONE, CellPosition.jnew(-1, -1, -1, -1))
+        JR.put(this, :cellPositionArray, JR.anew_of(0, fn -> JR.anew(0, nil) end))
+        JR.put(this, :columns, 0)
+        JR.put(this, :rows, 0)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, 'NONE'}, 'CellPosition':new((-1), (-1), (-1), (-1))),
-    put({This, cellPositionArray}, array:new(0, {default, array:new(0, {default, undefined})})),
-    put({This, columns}, 0),
-    put({This, rows}, 0),
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, CellPositionFactory.jstatic_SINGLETON()})
+    end)
+  end
 
 
-getInstance() ->
-        get({'CellPositionFactory', 'SINGLETON'}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
 
-init(This, Columns, Rows) when is_integer(Columns), is_integer(Rows) ->
-        CommonStrings = 'CommonStrings':getInstance(),
-        StringBuffer = 'StringMaker':new(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "Init: columns: "),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, Columns),
-        (get({StringBuffer, '$class'})):append(StringBuffer, " rows: "),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, Rows),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({StringBuffer, '$class'})):toString(StringBuffer), This, get({CommonStrings, 'INIT'})),
-        put({This, cellPositionArray}, array:new(Columns, {default, array:new(Rows, {default, undefined})})),
-        put({This, columns}, Columns),
-        put({This, rows}, Rows),
-        lists:foreach(fun(Column) ->
-            lists:foreach(fun(Row) ->
-                (get({This, '$class'})):createInstance(This, Column, Row)
-            end, lists:seq(0, Rows - 1))
-        end, lists:seq(0, Columns - 1)).
+  def jm_init(this, p_columns, p_rows) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :columns, p_columns)
+      JR.lset(f, :rows, p_rows)
+        JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["Init: columns: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.lget(f, :columns)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [" rows: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.lget(f, :rows)])
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :stringBuffer), :jm_toString, []), this, JR.get(JR.lget(f, :commonStrings), :INIT)])
+        JR.put(this, :cellPositionArray, JR.anew_of(JR.lget(f, :columns), fn -> JR.anew(JR.lget(f, :rows), nil) end))
+        JR.put(this, :columns, JR.lget(f, :columns))
+        JR.put(this, :rows, JR.lget(f, :rows))
+        JR.lset(f, :column, 0)
+        JR.jfor(fn -> (JR.lget(f, :column) < JR.lget(f, :columns)) end, fn -> JR.lpostinc(f, :column, 1) end, fn ->
+            JR.lset(f, :row, 0)
+            JR.jfor(fn -> (JR.lget(f, :row) < JR.lget(f, :rows)) end, fn -> JR.lpostinc(f, :row, 1) end, fn ->
+                JR.call(this, :jm_createInstance, [JR.lget(f, :column), JR.lget(f, :row)])
+            end)
+        end)
+    end)
+  end
 
-getInstanceColRow(This, I_column, I_row) when is_integer(I_column), is_integer(I_row) ->
-        try
-            array:get(I_row, array:get(I_column, get({This, cellPositionArray})))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), (fun(Target_N66816) -> (get({Target_N66816, '$class'})):toString(Target_N66816) end)((fun(Target_N66823) -> (get({Target_N66823, '$class'})):appendint(Target_N66823, I_row) end)((fun(Target_N66830) -> (get({Target_N66830, '$class'})):append(Target_N66830, " row: ") end)((fun(Target_N66837) -> (get({Target_N66837, '$class'})):appendint(Target_N66837, I_column) end)((fun(Target_N66844) -> (get({Target_N66844, '$class'})):append(Target_N66844, " col: ") end)((fun(Target_N66851) -> (get({Target_N66851, '$class'})):appendint(Target_N66851, (get({This, '$class'})):getRows(This)) end)((fun(Target_N66858) -> (get({Target_N66858, '$class'})):append(Target_N66858, " rows: ") end)((fun(Target_N66865) -> (get({Target_N66865, '$class'})):appendint(Target_N66865, (get({This, '$class'})):getColumns(This)) end)((fun(Target_N66872) -> (get({Target_N66872, '$class'})):append(Target_N66872, "columns: ") end)('StringMaker':new()))))))))), This, get({CommonStrings, 'GET_INSTANCE'}), E),
-            get({This, 'NONE'})
-        end.
 
-createInstance(This, I_column, I_row) when is_integer(I_column), is_integer(I_row) ->
-        put({local, cellPositionCanBeNull}, array:get(I_row, array:get(I_column, get({This, cellPositionArray})))),
-        case (get({local, cellPositionCanBeNull}) =:= undefined) of
-            true ->
-            put({local, cellPositionCanBeNull}, 'CellPosition':new(I_column, I_row, get({This, columns}), get({This, rows}))),
-            put({This, cellPositionArray}, array:set(I_column, array:set(I_row, get({local, cellPositionCanBeNull}), array:get(I_column, get({This, cellPositionArray}))), get({This, cellPositionArray})));
-            false -> ok
-        end,
-        get({local, cellPositionCanBeNull}).
+  def jm_getInstanceColRow(this, p_i_column, p_i_row) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :i_column, p_i_column)
+      JR.lset(f, :i_row, p_i_row)
+        try do
+            throw({:jreturn, JR.aget(JR.aget(JR.get(this, :cellPositionArray), JR.lget(f, :i_column)), JR.lget(f, :i_row))})
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.call(JR.call(JR.call(JR.call(JR.call(JR.call(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["columns: "]), :jm_appendint, [JR.call(this, :jm_getColumns, [])]), :jm_append, [" rows: "]), :jm_appendint, [JR.call(this, :jm_getRows, [])]), :jm_append, [" col: "]), :jm_appendint, [JR.lget(f, :i_column)]), :jm_append, [" row: "]), :jm_appendint, [JR.lget(f, :i_row)]), :jm_toString, []), this, JR.get(JR.lget(f, :commonStrings), :GET_INSTANCE), JR.lget(f, :e)])
+            throw({:jreturn, JR.get(this, :NONE)})
+        end
+    end)
+  end
 
-getColumns(This) ->
-        get({This, columns}).
 
-getRows(This) ->
-        get({This, rows}).
+  def jm_createInstance(this, p_i_column, p_i_row) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :i_column, p_i_column)
+      JR.lset(f, :i_row, p_i_row)
+        JR.lset(f, :cellPositionCanBeNull, JR.aget(JR.aget(JR.get(this, :cellPositionArray), JR.lget(f, :i_column)), JR.lget(f, :i_row)))
+        if (JR.lget(f, :cellPositionCanBeNull) == nil) do
+            JR.lset(f, :cellPositionCanBeNull, CellPosition.jnew(JR.lget(f, :i_column), JR.lget(f, :i_row), JR.get(this, :columns), JR.get(this, :rows)))
+            JR.aset(JR.aget(JR.get(this, :cellPositionArray), JR.lget(f, :i_column)), JR.lget(f, :i_row), JR.lget(f, :cellPositionCanBeNull))
+        end
+        throw({:jreturn, JR.lget(f, :cellPositionCanBeNull)})
+    end)
+  end
+
+
+  def jm_getColumns(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :columns)})
+    end)
+  end
+
+
+  def jm_getRows(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :rows)})
+    end)
+  end
+end
+
 

@@ -1,48 +1,81 @@
-% Generated Code Do Not Modify
-% package org.allbinary.logic.math.permutations
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.util.visitor.Visitor
-% import org.allbinary.string.CommonSeps
+# Generated Code Do Not Modify
+# package org.allbinary.logic.math.permutations
 
--module('IntPermutationVisitor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule IntPermutationVisitor do
+  def jsuper(), do: Visitor
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Visitor', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :data, nil)
+    JR.put(this, :stringBuilder, nil)
+        
+        JR.put(this, :stringBuilder, StringMaker.jnew())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, data}, undefined),
-    put({This, stringBuilder}, 'StringMaker':new()),
-    ok.
+
+  def jinit(this, p_data) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :data, p_data)
+      Visitor.jinit(this)
+      jinitfields(this)
+        JR.put(this, :data, JR.lget(f, :data))
+    end)
+  end
+
+  def jnew(p_data) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_data)
+    this
+  end
 
 
-new(Data) when (is_tuple(Data) orelse Data =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Data),
-    This.
+  def jm_visit(this, p_anyType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+        JR.call(JR.get(this, :stringBuilder), :jm_delete, [0, JR.call(JR.get(this, :stringBuilder), :jm_length, [])])
+        JR.call(this, :jm_print, [JR.get(this, :data), JR.get(this, :stringBuilder)])
+        throw({:jreturn, JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)})
+    end)
+  end
 
-'$init'(This, Data) when (is_tuple(Data) orelse Data =:= undefined) ->
-    'Visitor':'$init'(This),
-    init_fields(This),
-        put({This, data}, Data).
 
-visit(This, AnyType) ->
-        (get({get({This, stringBuilder}), '$class'})):delete(get({This, stringBuilder}), 0, (get({get({This, stringBuilder}), '$class'})):length(get({This, stringBuilder}))),
-        (get({This, '$class'})):print(This, get({This, data}), get({This, stringBuilder})),
-        get({'NullUtil':getInstance(), 'NULL_OBJECT'}).
+  def jm_print(this, p_data) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :data, p_data)
+        JR.lset(f, :stringBuilder, StringMaker.jnew())
+        JR.call(this, :jm_print, [JR.lget(f, :data), JR.lget(f, :stringBuilder)])
+    end)
+  end
 
-print(This, Data) when (is_tuple(Data) orelse Data =:= undefined) ->
-        StringBuilder = 'StringMaker':new(),
-        (get({This, '$class'})):print(This, Data, StringBuilder).
 
-print(This, Data, StringBuilder) when (is_tuple(Data) orelse Data =:= undefined) ->
-        CommonSeps = 'CommonSeps':getInstance(),
-        Size = array:size(Data),
-        lists:foreach(fun(I) ->
-            (get({StringBuilder, '$class'})):appendint(StringBuilder, array:get(I, Data)),
-            (get({StringBuilder, '$class'})):append(StringBuilder, get({CommonSeps, 'SPACE'}))
-        end, lists:seq(0, Size - 1)),
-        io:format("~ts~n", [allbinary_java:to_string((get({StringBuilder, '$class'})):toString(StringBuilder))]).
+  def jm_print(this, p_data, p_stringBuilder) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :data, p_data)
+      JR.lset(f, :stringBuilder, p_stringBuilder)
+        JR.lset(f, :commonSeps, CommonSeps.jm_getInstance())
+        JR.lset(f, :size, JR.alength(JR.lget(f, :data)))
+        JR.lset(f, :i, 0)
+        JR.jfor(fn -> (JR.lget(f, :i) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :i, 1) end, fn ->
+            JR.call(JR.lget(f, :stringBuilder), :jm_appendint, [JR.aget(JR.lget(f, :data), JR.lget(f, :i))])
+            JR.call(JR.lget(f, :stringBuilder), :jm_append, [JR.get(JR.lget(f, :commonSeps), :SPACE)])
+        end)
+        IO.puts(JR.str(JR.call(JR.lget(f, :stringBuilder), :jm_toString, [])))
+    end)
+  end
+end
+
 

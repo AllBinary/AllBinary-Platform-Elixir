@@ -1,66 +1,108 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2025 AllBinary 
-% 
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-% 
-% Created By: Travis Berthelot 
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.io
-% import java.io.IOException
-% import java.io.Writer
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2025 AllBinary 
+# 
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+# 
+# Created By: Travis Berthelot 
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
--module('NullWriter').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule NullWriter do
+  def jsuper(), do: Writer
+def jstatic_NULL_WRITER(), do: JR.static_get(__MODULE__, :NULL_WRITER, fn -> NullWriter.jnew() end)
+  def jstatic_set_NULL_WRITER(value), do: JR.static_put(__MODULE__, :NULL_WRITER, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Writer', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-static_init() ->
-    put({?MODULE, 'NULL_WRITER'}, 'NullWriter':new()),
-    ok.
+  def jinit(this) do
+    Writer.jinit(this)
+    jinitfields(this)
+  end
 
-init_fields(This) ->
-    ok.
-
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    'Writer':'$init'(This),
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-% throws IOException
-write(This, C) when is_integer(C) ->
-        ok;
-% throws IOException
-write(This, Str) when (is_list(Str) orelse Str =:= undefined) ->
-        ok.
-
-% throws IOException
-write(This, Cbuf, Off, Len) when (is_tuple(Cbuf) orelse Cbuf =:= undefined), is_integer(Off), is_integer(Len) ->
-        ok;
-% throws IOException
-write(This, Str, Off, Len) when (is_list(Str) orelse Str =:= undefined), is_integer(Off), is_integer(Len) ->
-        ok.
+  def jm_write(this, p_c) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :c, p_c)
+        nil
+    end)
+  end
 
 
+  def jm_write(this, p_cbuf, p_off, p_len) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cbuf, p_cbuf)
+      JR.lset(f, :off, p_off)
+      JR.lset(f, :len, p_len)
+        nil
+    end)
+  end
 
-% throws IOException
-flush(This) ->
-        ok.
 
-% throws IOException
-close(This) ->
-        ok.
+  def jm_write(this, p_str) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :str, p_str)
+        nil
+    end)
+  end
+
+
+  def jm_write(this, p_str, p_off, p_len) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :str, p_str)
+      JR.lset(f, :off, p_off)
+      JR.lset(f, :len, p_len)
+        nil
+    end)
+  end
+
+
+  def jm_flush(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_close(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+end
+
 

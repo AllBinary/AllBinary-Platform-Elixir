@@ -1,46 +1,67 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game
 
--module('GameInfoData').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GameInfoData do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> GameInfoData.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'GameInfoData':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :GAME_TYPE, nil)
+    JR.put(this, :GAME_MODE, nil)
+    JR.put(this, :PLAYER_TYPE, nil)
+    JR.put(this, :HIGHEST_LEVEL, nil)
+    JR.put(this, :CURRENT_LEVEL, nil)
+    JR.put(this, :SOFTWARE_INFORMATION, nil)
+        JR.put(this, :GAME_TYPE, "GAME_TYPE")
+        JR.put(this, :GAME_MODE, "GAME_MODE")
+        JR.put(this, :PLAYER_TYPE, "PLAYER_TYPE")
+        JR.put(this, :HIGHEST_LEVEL, "HIGHEST_LEVEL")
+        JR.put(this, :CURRENT_LEVEL, "CURRENT_LEVEL")
+        JR.put(this, :SOFTWARE_INFORMATION, "SOFTWARE_INFORMATION")
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'GAME_TYPE'}, "GAME_TYPE"),
-    put({This, 'GAME_MODE'}, "GAME_MODE"),
-    put({This, 'PLAYER_TYPE'}, "PLAYER_TYPE"),
-    put({This, 'HIGHEST_LEVEL'}, "HIGHEST_LEVEL"),
-    put({This, 'CURRENT_LEVEL'}, "CURRENT_LEVEL"),
-    put({This, 'SOFTWARE_INFORMATION'}, "SOFTWARE_INFORMATION"),
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, GameInfoData.jstatic_instance()})
+    end)
+  end
 
 
-getInstance() ->
-        get({'GameInfoData', instance}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
 

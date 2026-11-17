@@ -1,63 +1,143 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.vector
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.vector
 
--module('VectorInfo').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule VectorInfo do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, width}, 0),
-    put({This, height}, 0),
-    put({This, points}, undefined),
-    put({This, totalFrames}, 0),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :width, 0)
+    JR.put(this, :height, 0)
+    JR.put(this, :points, nil)
+    JR.put(this, :totalFrames, 0)
+        
+        
+        
+        
+    nil
+  end
 
 
-new(Width, Height, Points, TotalFrames) when is_integer(Width), is_integer(Height), (is_tuple(Points) orelse Points =:= undefined), is_integer(TotalFrames) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Width, Height, Points, TotalFrames),
-    This.
+  def jinit(this, p_width, p_height, p_points, p_totalFrames) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+      JR.lset(f, :points, p_points)
+      JR.lset(f, :totalFrames, p_totalFrames)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :width, JR.lget(f, :width))
+        JR.put(this, :height, JR.lget(f, :height))
+        JR.put(this, :points, JR.lget(f, :points))
+        JR.put(this, :totalFrames, JR.lget(f, :totalFrames))
+    end)
+  end
 
-'$init'(This, Width, Height, Points, TotalFrames) when is_integer(Width), is_integer(Height), (is_tuple(Points) orelse Points =:= undefined), is_integer(TotalFrames) ->
-    init_fields(This),
-        put({This, width}, Width),
-        put({This, height}, Height),
-        put({This, points}, Points),
-        put({This, totalFrames}, TotalFrames).
+  def jnew(p_width, p_height, p_points, p_totalFrames) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_width, p_height, p_points, p_totalFrames)
+    this
+  end
 
-getWidth(This) ->
-        get({This, width}).
 
-setWidth(This, Width) when is_integer(Width) ->
-        put({This, width}, Width).
+  def jm_getWidth(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :width)})
+    end)
+  end
 
-getHeight(This) ->
-        get({This, height}).
 
-setHeight(This, Height) when is_integer(Height) ->
-        put({This, height}, Height).
+  def jm_setWidth(this, p_width) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :width, p_width)
+        JR.put(this, :width, JR.lget(f, :width))
+    end)
+  end
 
-getPoints(This) ->
-        get({This, points}).
 
-setPoints(This, Points) when (is_tuple(Points) orelse Points =:= undefined) ->
-        put({This, points}, Points).
+  def jm_getHeight(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :height)})
+    end)
+  end
 
-getTotalFrames(This) ->
-        get({This, totalFrames}).
 
-setTotalFrames(This, TotalFrames) when is_integer(TotalFrames) ->
-        put({This, totalFrames}, TotalFrames).
+  def jm_setHeight(this, p_height) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :height, p_height)
+        JR.put(this, :height, JR.lget(f, :height))
+    end)
+  end
+
+
+  def jm_getPoints(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :points)})
+    end)
+  end
+
+
+  def jm_setPoints(this, p_points) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :points, p_points)
+        JR.put(this, :points, JR.lget(f, :points))
+    end)
+  end
+
+
+  def jm_getTotalFrames(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :totalFrames)})
+    end)
+  end
+
+
+  def jm_setTotalFrames(this, p_totalFrames) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :totalFrames, p_totalFrames)
+        JR.put(this, :totalFrames, JR.lget(f, :totalFrames))
+    end)
+  end
+end
+
 

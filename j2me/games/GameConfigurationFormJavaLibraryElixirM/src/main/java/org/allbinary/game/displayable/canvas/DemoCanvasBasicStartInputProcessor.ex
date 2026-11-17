@@ -1,54 +1,64 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import javax.microedition.lcdui.NullCanvas
-% import org.allbinary.canvas.RunnableCanvas
-% import org.allbinary.game.commands.GameCommandsFactory
-% import org.allbinary.game.input.GameInputStrings
-% import org.allbinary.game.input.event.GameKeyEvent
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.util.BasicArrayList
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('DemoCanvasBasicStartInputProcessor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule DemoCanvasBasicStartInputProcessor do
+  def jsuper(), do: BasicMenuInputProcessor
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicMenuInputProcessor', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new(GameKeyEventList, GameCanvas) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, GameKeyEventList, GameCanvas),
-    This.
+  def jinit(this, p_gameKeyEventList, p_gameCanvas) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEventList, p_gameKeyEventList)
+      JR.lset(f, :gameCanvas, p_gameCanvas)
+        BasicMenuInputProcessor.jinit(this, JR.lget(f, :gameKeyEventList), -1, JR.lget(f, :gameCanvas))
+        DemoCanvasBasicStartInputProcessor.jinitfields(this)
+    end)
+  end
 
-'$init'(This, GameKeyEventList, GameCanvas) ->
-        'BasicMenuInputProcessor':'$init'(This, GameKeyEventList, (-1), GameCanvas).
+  def jnew(p_gameKeyEventList, p_gameCanvas) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_gameKeyEventList, p_gameCanvas)
+    this
+  end
 
-% throws Exception
-processInputList(This) ->
-        List = (get({This, '$class'})):getGameKeyEventList(This),
-        Size = (get({List, '$class'})):size(List),
-        put({local, gameKeyEvent}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, gameKeyEvent}, array:get(Index, get({List, objectArray}))),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N66121) -> (get({Target_N66121, '$class'})):toString(Target_N66121) end)((fun(Target_N66128) -> (get({Target_N66128, '$class'})):append(Target_N66128, (fun(Target_N66164) -> (get({Target_N66164, '$class'})):toString(Target_N66164, get({local, gameKeyEvent})) end)('StringUtil':getInstance())) end)((fun(Target_N66135) -> (get({Target_N66135, '$class'})):append(Target_N66135, "Start GameKey: ") end)('StringMaker':new()))), This, get({'GameInputStrings':getInstance(), 'PROCESS_INPUT'}))
-        end, lists:seq(0, Size - 1)),
-        (fun(Target_N66301) -> (get({Target_N66301, '$class'})):commandAction(Target_N66301, get({'GameCommandsFactory':getInstance(), 'START_COMMAND'}), get({'NullCanvas', 'NULL_CANVAS'})) end)((fun(Target_N66308) -> (get({Target_N66308, '$class'})):getCustomCommandListener(Target_N66308) end)((get({This, '$class'})):getCanvas(This))),
-        Size.
+
+  def jm_processInputList(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :list, JR.call(this, :jm_getGameKeyEventList, []))
+        JR.lset(f, :size, JR.call(JR.lget(f, :list), :jm_size, []))
+        JR.lset(f, :gameKeyEvent, nil)
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :gameKeyEvent, JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index)))
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["Start GameKey: "]), :jm_append, [JR.call(StringUtil.jm_getInstance(), :jm_toString, [JR.lget(f, :gameKeyEvent)])]), :jm_toString, []), this, JR.get(GameInputStrings.jm_getInstance(), :PROCESS_INPUT)])
+        end)
+        JR.call(JR.call(JR.call(this, :jm_getCanvas, []), :jm_getCustomCommandListener, []), :jm_commandAction, [JR.get(GameCommandsFactory.jm_getInstance(), :START_COMMAND), NullCanvas.jstatic_NULL_CANVAS()])
+        throw({:jreturn, JR.lget(f, :size)})
+    end)
+  end
+end
+
 

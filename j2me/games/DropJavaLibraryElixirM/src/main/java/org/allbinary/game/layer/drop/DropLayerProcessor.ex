@@ -1,62 +1,77 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer.drop
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.AllBinaryLayerManager
-% import org.allbinary.layer.BasicLayerProcessor
-% import org.allbinary.util.BasicArrayList
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer.drop
 
--module('DropLayerProcessor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule DropLayerProcessor do
+  def jsuper(), do: BasicLayerProcessor
+def jstatic_LAYER_PROCESSOR(), do: JR.static_get(__MODULE__, :LAYER_PROCESSOR, fn -> DropLayerProcessor.jnew() end)
+  def jstatic_set_LAYER_PROCESSOR(value), do: JR.static_put(__MODULE__, :LAYER_PROCESSOR, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicLayerProcessor', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'LAYER_PROCESSOR'}, 'DropLayerProcessor':new()),
-    ok.
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      BasicLayerProcessor.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    'BasicLayerProcessor':'$init'(This),
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-getInstance() ->
-        get({'DropLayerProcessor', 'LAYER_PROCESSOR'}).
 
-% throws Exception
-process(This, AllBinaryLayerManager) ->
-        List = (get({This, '$class'})):getList(This),
-        Size = (get({List, '$class'})):size(List),
-        put({local, layerInterface}, undefined),
-        put({local, dropLayerInterface}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, layerInterface}, array:get(Index, get({List, objectArray}))),
-            put({local, dropLayerInterface}, get({local, layerInterface})),
-            put({local, layerInterface}, (get({get({local, dropLayerInterface}), '$class'})):getDroppedLayer(get({local, dropLayerInterface}))),
-            (get({AllBinaryLayerManager, '$class'})):append(AllBinaryLayerManager, get({local, layerInterface}))
-        end, lists:seq(0, Size - 1)),
-        (get({List, '$class'})):clear(List).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, DropLayerProcessor.jstatic_LAYER_PROCESSOR()})
+    end)
+  end
+
+
+  def jm_process(this, p_allBinaryLayerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerManager, p_allBinaryLayerManager)
+        JR.lset(f, :list, JR.call(this, :jm_getList, []))
+        JR.lset(f, :size, JR.call(JR.lget(f, :list), :jm_size, []))
+        JR.lset(f, :layerInterface, nil)
+        JR.lset(f, :dropLayerInterface, nil)
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :layerInterface, JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index)))
+            JR.lset(f, :dropLayerInterface, JR.lget(f, :layerInterface))
+            JR.lset(f, :layerInterface, JR.call(JR.lget(f, :dropLayerInterface), :jm_getDroppedLayer, []))
+            JR.call(JR.lget(f, :allBinaryLayerManager), :jm_append, [JR.lget(f, :layerInterface)])
+        end)
+        JR.call(JR.lget(f, :list), :jm_clear, [])
+    end)
+  end
+end
+
 

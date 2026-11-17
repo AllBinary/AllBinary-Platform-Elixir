@@ -1,53 +1,77 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.io
-% import org.allbinary.logic.io.file.AbFile
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
--module('DataOutputStreamFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule DataOutputStreamFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> DataOutputStreamFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'DataOutputStreamFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'DataOutputStreamFactory', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, DataOutputStreamFactory.jstatic_instance()})
+    end)
+  end
 
-% throws Exception
-getInstanceForAbFile(This, File) ->
-        IdFileOutputStream = 'AbFileOutputStream':createFromAbFile(File),
-        IdOutData = 'AbDataOutputStream':new(IdFileOutputStream),
-        IdOutData.
 
-% throws Exception
-getInstance(This, FilePath, FileName) when (is_list(FilePath) orelse FilePath =:= undefined), (is_list(FileName) orelse FileName =:= undefined) ->
-        FileStreamFactory = 'FileStreamFactory':getInstance(),
-        FileOutputStream = (get({FileStreamFactory, '$class'})):getFileOutputStreamInstance(FileStreamFactory, FilePath, FileName),
-        IdOutData = 'AbDataOutputStream':new(FileOutputStream),
-        IdOutData.
+  def jm_getInstanceForAbFile(this, p_file) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :file, p_file)
+        JR.lset(f, :idFileOutputStream, AbFileOutputStream.jm_createFromAbFile(JR.lget(f, :file)))
+        JR.lset(f, :idOutData, AbDataOutputStream.jnew(JR.lget(f, :idFileOutputStream)))
+        throw({:jreturn, JR.lget(f, :idOutData)})
+    end)
+  end
+
+
+  def jm_getInstance(this, p_filePath, p_fileName) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :filePath, p_filePath)
+      JR.lset(f, :fileName, p_fileName)
+        JR.lset(f, :fileStreamFactory, FileStreamFactory.jm_getInstance())
+        JR.lset(f, :fileOutputStream, JR.call(JR.lget(f, :fileStreamFactory), :jm_getFileOutputStreamInstance, [JR.lget(f, :filePath), JR.lget(f, :fileName)]))
+        JR.lset(f, :idOutData, AbDataOutputStream.jnew(JR.lget(f, :fileOutputStream)))
+        throw({:jreturn, JR.lget(f, :idOutData)})
+    end)
+  end
+end
+
 

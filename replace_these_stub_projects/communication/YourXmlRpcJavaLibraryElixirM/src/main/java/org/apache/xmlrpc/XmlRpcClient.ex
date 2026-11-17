@@ -1,43 +1,82 @@
-% Generated Code Do Not Modify
-% package org.apache.xmlrpc
-% import java.io.IOException
-% import java.net.MalformedURLException
-% import java.net.URL
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
-% import org.allbinary.init.crypt.jcehelper.CryptInterface
-% import org.allbinary.logic.NullUtil
+# Generated Code Do Not Modify
+# package org.apache.xmlrpc
 
--module('XmlRpcClient').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements XmlRpcHandler
+defmodule XmlRpcClient do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, url}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :url, nil)
+        
+    nil
+  end
 
 
-new(Url) when (is_list(Url) orelse Url =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Url),
-    This.
+  def jinit(this, p_url) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :url, p_url)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :url, URL.jnew(JR.lget(f, :url)))
+    end)
+  end
 
-'$init'(This, Url) when (is_list(Url) orelse Url =:= undefined) ->
-    init_fields(This),
-        put({This, url}, 'URL':new(Url)).
+  def jnew(p_url) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_url)
+    this
+  end
 
-getURL(This) ->
-        get({This, url}).
 
-setBasicAuthentication(This, User, Password) when (is_list(User) orelse User =:= undefined), (is_list(Password) orelse Password =:= undefined) ->
-        ok.
+  def jm_getURL(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :url)})
+    end)
+  end
 
-% throws XmlRpcException, IOException
-execute(This, Method, Params) when (is_list(Method) orelse Method =:= undefined) ->
-        get({'NullUtil':getInstance(), 'NULL_OBJECT'}).
 
-% throws XmlRpcException, IOException
-executeWithCrypt(This, Method, Params, CryptInterface) when (is_list(Method) orelse Method =:= undefined) ->
-        get({'NullUtil':getInstance(), 'NULL_OBJECT'}).
+  def jm_setBasicAuthentication(this, p_user, p_password) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :user, p_user)
+      JR.lset(f, :password, p_password)
+        nil
+    end)
+  end
+
+
+  def jm_execute(this, p_method, p_params) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :method, p_method)
+      JR.lset(f, :params, p_params)
+        throw({:jreturn, JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)})
+    end)
+  end
+
+
+  def jm_executeWithCrypt(this, p_method, p_params, p_cryptInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :method, p_method)
+      JR.lset(f, :params, p_params)
+      JR.lset(f, :cryptInterface, p_cryptInterface)
+        throw({:jreturn, JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)})
+    end)
+  end
+end
+
 

@@ -1,60 +1,80 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable
-% import org.allbinary.graphics.displayable.event.DisplayChangeEventHandler
-% import org.allbinary.graphics.displayable.event.DisplayChangeEventListener
-% import org.allbinary.logic.util.event.handler.BasicEventHandler
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable
 
--module('GameLevelDisplayChangeEventListenersFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GameLevelDisplayChangeEventListenersFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> GameLevelDisplayChangeEventListenersFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'GameLevelDisplayChangeEventListenersFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :list, nil)
+        JR.put(this, :list, BasicArrayListD.jnew())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, list}, 'BasicArrayListD':new()),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'GameLevelDisplayChangeEventListenersFactory', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, GameLevelDisplayChangeEventListenersFactory.jstatic_instance()})
+    end)
+  end
 
-add(This, DisplayChangeEventListener) ->
-        (get({get({This, list}), '$class'})):add(get({This, list}), DisplayChangeEventListener),
-        (fun(Target_N65946) -> (get({Target_N65946, '$class'})):addListenerInterface(Target_N65946, DisplayChangeEventListener) end)('DisplayChangeEventHandler':getInstance()).
 
-clear(This) ->
-        DisplayChangeEventHandler = 'DisplayChangeEventHandler':getInstance(),
-        put({local, displayChangeEventListener}, undefined),
-        put({local, index}, (get({get({This, list}), '$class'})):size(get({This, list}))),
-        (fun Loop() -> case (begin put({local, index}, get({local, index}) - 1), get({local, index}) end >= 0) of true ->
-            put({local, displayChangeEventListener}, array:get(get({local, index}), get({get({This, list}), objectArray}))),
-            (get({DisplayChangeEventHandler, '$class'})):removeListener(DisplayChangeEventHandler, get({local, displayChangeEventListener})),
-            Loop();
-        false -> ok end end)(),
-        (get({get({This, list}), '$class'})):clear(get({This, list})).
+  def jm_add(this, p_displayChangeEventListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :displayChangeEventListener, p_displayChangeEventListener)
+        JR.call(JR.get(this, :list), :jm_add, [JR.lget(f, :displayChangeEventListener)])
+        JR.call(DisplayChangeEventHandler.jm_getInstance(), :jm_addListenerInterface, [JR.lget(f, :displayChangeEventListener)])
+    end)
+  end
+
+
+  def jm_clear(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :displayChangeEventHandler, DisplayChangeEventHandler.jm_getInstance())
+        JR.lset(f, :displayChangeEventListener, nil)
+        JR.lset(f, :index, JR.call(JR.get(this, :list), :jm_size, []))
+        JR.jfor(fn -> (JR.lpreinc(f, :index, -1) >= 0) end, fn -> nil end, fn ->
+            JR.lset(f, :displayChangeEventListener, JR.aget(JR.get(JR.get(this, :list), :objectArray), JR.lget(f, :index)))
+            JR.call(JR.lget(f, :displayChangeEventHandler), :jm_removeListener, [JR.lget(f, :displayChangeEventListener)])
+        end)
+        JR.call(JR.get(this, :list), :jm_clear, [])
+    end)
+  end
+end
+
 

@@ -1,153 +1,292 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.system.security.licensing
-% import org.allbinary.TsUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.logic.system.hardware.HardwareInterface
-% import org.allbinary.logic.system.hardware.SystemHardwareFactory
-% import org.allbinary.logic.system.os.GenericOperatingSystem
-% import org.allbinary.logic.system.os.NoOperatingSystem
-% import org.allbinary.string.CommonSeps
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListUtil
-% import org.allbinary.logic.StdUtil
-% import org.allbinary.util.ABHashtable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.licensing
 
--module('ClientInformation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements AbeClientInformationInterface
+# This is the information sent to the license server
+defmodule ClientInformation do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, operatingSystemInterface}, get({'NoOperatingSystem', 'NO_OPERATING_SYSTEM'})),
-    put({This, tsUtil}, 'TsUtil':getInstance()),
-    put({This, name}, undefined),
-    put({This, shortName}, undefined),
-    put({This, version}, undefined),
-    put({This, specialName}, undefined),
-    put({This, hardSale}, true),
-    put({This, licenseId}, get({'StringUtil':getInstance(), 'EMPTY_STRING'})),
-    put({This, licenseServers}, (fun(Target_N66284) -> (get({Target_N66284, '$class'})):getImmutableInstance(Target_N66284) end)('BasicArrayListUtil':getInstance())),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :operatingSystemInterface, nil)
+    JR.put(this, :tsUtil, nil)
+    JR.put(this, :name, nil)
+    JR.put(this, :shortName, nil)
+    JR.put(this, :version, nil)
+    JR.put(this, :specialName, nil)
+    JR.put(this, :hardSale, false)
+    JR.put(this, :licenseId, nil)
+    JR.put(this, :licenseServers, nil)
+        JR.put(this, :operatingSystemInterface, NoOperatingSystem.jstatic_NO_OPERATING_SYSTEM())
+        JR.put(this, :tsUtil, TsUtil.jm_getInstance())
+        
+        
+        
+        
+        JR.put(this, :hardSale, true)
+        JR.put(this, :licenseId, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+        JR.put(this, :licenseServers, JR.call(BasicArrayListUtil.jm_getInstance(), :jm_getImmutableInstance, []))
+    nil
+  end
 
 
-new(Name, Version, SpecialName, ShortName) when (is_list(Name) orelse Name =:= undefined), (is_list(Version) orelse Version =:= undefined), (is_list(SpecialName) orelse SpecialName =:= undefined), (is_list(ShortName) orelse ShortName =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Name, Version, SpecialName, ShortName),
-    This.
+  def jinit(this, p_name, p_version, p_specialName, p_shortName) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :version, p_version)
+      JR.lset(f, :specialName, p_specialName)
+      JR.lset(f, :shortName, p_shortName)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :name, JR.lget(f, :name))
+        JR.put(this, :version, JR.lget(f, :version))
+        JR.put(this, :specialName, JR.lget(f, :specialName))
+        JR.put(this, :shortName, JR.call(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.lget(f, :shortName)]), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :UNDERSCORE)]), :jm_append, [JR.lget(f, :version)]), :jm_toString, []))
+        JR.call(this, :jm_init, [])
+    end)
+  end
 
-'$init'(This, Name, Version, SpecialName, ShortName) when (is_list(Name) orelse Name =:= undefined), (is_list(Version) orelse Version =:= undefined), (is_list(SpecialName) orelse SpecialName =:= undefined), (is_list(ShortName) orelse ShortName =:= undefined) ->
-    init_fields(This),
-        put({This, name}, Name),
-        put({This, version}, Version),
-        put({This, specialName}, SpecialName),
-        put({This, shortName}, (fun(Target_N66433) -> (get({Target_N66433, '$class'})):toString(Target_N66433) end)((fun(Target_N66440) -> (get({Target_N66440, '$class'})):append(Target_N66440, Version) end)((fun(Target_N66447) -> (get({Target_N66447, '$class'})):append(Target_N66447, get({'CommonSeps':getInstance(), 'UNDERSCORE'})) end)((fun(Target_N66454) -> (get({Target_N66454, '$class'})):append(Target_N66454, ShortName) end)('StringMaker':new()))))),
-        (get({This, '$class'})):init(This).
+  def jnew(p_name, p_version, p_specialName, p_shortName) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_name, p_version, p_specialName, p_shortName)
+    this
+  end
 
-init(This) ->
-        ok.
 
-getOperatingSystemInterface(This) ->
-        get({This, operatingSystemInterface}).
+  def jm_init(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-getName(This) ->
-        get({This, name}).
 
-getSpecialName(This) ->
-        get({This, specialName}).
+  def jm_getOperatingSystemInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :operatingSystemInterface)})
+    end)
+  end
 
-getVersion(This) ->
-        get({This, version}).
 
-getLicenseId(This) ->
-        get({This, licenseId}).
+  def jm_getName(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :name)})
+    end)
+  end
 
-getLicenseServers(This) ->
-        get({This, licenseServers}).
 
-getLicenseServer(This, Index) when is_integer(Index) ->
-        array:get(Index, get({get({This, licenseServers}), objectArray})).
+  def jm_getSpecialName(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :specialName)})
+    end)
+  end
 
-getNumberOfLicenseServers(This) ->
-        (get({get({This, licenseServers}), '$class'})):size(get({This, licenseServers})).
 
-toHashtable(This) ->
-        AbeClientInformationData = 'AbeClientInformationData':getInstance(),
-        GenericOperatingSystem = (get({This, '$class'})):getOperatingSystemInterface(This),
-        ClientInfoHashtable = (fun(Target_N67341) -> (get({Target_N67341, '$class'})):createHashtable(Target_N67341) end)('StdUtil':getInstance()),
-        (get({ClientInfoHashtable, '$class'})):put(ClientInfoHashtable, get({AbeClientInformationData, 'NAME'}), get({This, name})),
-        (get({ClientInfoHashtable, '$class'})):put(ClientInfoHashtable, get({AbeClientInformationData, 'VERSION'}), get({This, version})),
-        (get({ClientInfoHashtable, '$class'})):put(ClientInfoHashtable, get({AbeClientInformationData, 'SPECIALNAME'}), get({This, specialName})),
-        (get({ClientInfoHashtable, '$class'})):put(ClientInfoHashtable, get({AbeClientInformationData, 'LICENSEID'}), (get({This, '$class'})):getLicenseId(This)),
-        (get({ClientInfoHashtable, '$class'})):put(ClientInfoHashtable, get({AbeClientInformationData, 'OSNAME'}), (get({GenericOperatingSystem, '$class'})):getName(GenericOperatingSystem)),
-        (get({ClientInfoHashtable, '$class'})):put(ClientInfoHashtable, get({AbeClientInformationData, 'OSARCH'}), (get({GenericOperatingSystem, '$class'})):getArch(GenericOperatingSystem)),
-        (get({ClientInfoHashtable, '$class'})):put(ClientInfoHashtable, get({AbeClientInformationData, 'OSVERSION'}), (get({GenericOperatingSystem, '$class'})):getVersion(GenericOperatingSystem)),
-        (get({ClientInfoHashtable, '$class'})):put(ClientInfoHashtable, get({AbeClientInformationData, 'OS'}), (get({GenericOperatingSystem, '$class'})):toString(GenericOperatingSystem)),
-        HardwareInterface = (fun(Target_N67838) -> (get({Target_N67838, '$class'})):getInstance(Target_N67838, GenericOperatingSystem) end)('SystemHardwareFactory':getInstance()),
-        HardwareString = (get({HardwareInterface, '$class'})):toString(HardwareInterface),
-        (get({ClientInfoHashtable, '$class'})):put(ClientInfoHashtable, get({AbeClientInformationData, 'HARDWARE'}), HardwareString),
-        ClientInfoHashtable.
+  def jm_getVersion(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :version)})
+    end)
+  end
 
-isSameId(This, AlicenseId) when (is_list(AlicenseId) orelse AlicenseId =:= undefined) ->
-        try
-        case ((get({get({This, tsUtil}), '$class'})):compareTo(get({This, tsUtil}), (get({This, '$class'})):getLicenseId(This), AlicenseId) =:= 0) of
-            true ->
-            throw({'$return', true});
-            false ->
-            throw({'$return', false})
+
+  def jm_getLicenseId(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :licenseId)})
+    end)
+  end
+
+
+  def jm_getLicenseServers(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :licenseServers)})
+    end)
+  end
+
+
+  def jm_getLicenseServer(this, p_index) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :index, p_index)
+        throw({:jreturn, JR.aget(JR.get(JR.get(this, :licenseServers), :objectArray), JR.lget(f, :index))})
+    end)
+  end
+
+
+  def jm_getNumberOfLicenseServers(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.get(this, :licenseServers), :jm_size, [])})
+    end)
+  end
+
+
+  def jm_toHashtable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :abeClientInformationData, AbeClientInformationData.jm_getInstance())
+        JR.lset(f, :genericOperatingSystem, JR.call(this, :jm_getOperatingSystemInterface, []))
+        JR.lset(f, :clientInfoHashtable, JR.call(StdUtil.jm_getInstance(), :jm_createHashtable, []))
+        JR.call(JR.lget(f, :clientInfoHashtable), :jm_put, [JR.get(JR.lget(f, :abeClientInformationData), :NAME), JR.get(this, :name)])
+        JR.call(JR.lget(f, :clientInfoHashtable), :jm_put, [JR.get(JR.lget(f, :abeClientInformationData), :VERSION), JR.get(this, :version)])
+        JR.call(JR.lget(f, :clientInfoHashtable), :jm_put, [JR.get(JR.lget(f, :abeClientInformationData), :SPECIALNAME), JR.get(this, :specialName)])
+        JR.call(JR.lget(f, :clientInfoHashtable), :jm_put, [JR.get(JR.lget(f, :abeClientInformationData), :LICENSEID), JR.call(this, :jm_getLicenseId, [])])
+        JR.call(JR.lget(f, :clientInfoHashtable), :jm_put, [JR.get(JR.lget(f, :abeClientInformationData), :OSNAME), JR.call(JR.lget(f, :genericOperatingSystem), :jm_getName, [])])
+        JR.call(JR.lget(f, :clientInfoHashtable), :jm_put, [JR.get(JR.lget(f, :abeClientInformationData), :OSARCH), JR.call(JR.lget(f, :genericOperatingSystem), :jm_getArch, [])])
+        JR.call(JR.lget(f, :clientInfoHashtable), :jm_put, [JR.get(JR.lget(f, :abeClientInformationData), :OSVERSION), JR.call(JR.lget(f, :genericOperatingSystem), :jm_getVersion, [])])
+        JR.call(JR.lget(f, :clientInfoHashtable), :jm_put, [JR.get(JR.lget(f, :abeClientInformationData), :OS), JR.call(JR.lget(f, :genericOperatingSystem), :jm_toString, [])])
+        JR.lset(f, :hardwareInterface, JR.call(SystemHardwareFactory.jm_getInstance(), :jm_getInstance, [JR.lget(f, :genericOperatingSystem)]))
+        JR.lset(f, :hardwareString, JR.call(JR.lget(f, :hardwareInterface), :jm_toString, []))
+        JR.call(JR.lget(f, :clientInfoHashtable), :jm_put, [JR.get(JR.lget(f, :abeClientInformationData), :HARDWARE), JR.lget(f, :hardwareString)])
+        throw({:jreturn, JR.lget(f, :clientInfoHashtable)})
+    end)
+  end
+
+
+  def jm_isSameId(this, p_alicenseId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :alicenseId, p_alicenseId)
+        if (JR.call(JR.get(this, :tsUtil), :jm_compareTo, [JR.call(this, :jm_getLicenseId, []), JR.lget(f, :alicenseId)]) == 0) do
+            throw({:jreturn, true})
+        else
+            throw({:jreturn, false})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-isLargerOrDifferentServerList(This, List) ->
-        try
-        Size = ((get({List, '$class'})):size(List) - 1),
-        CurrentSize = ((get({get({This, licenseServers}), '$class'})):size(get({This, licenseServers})) - 1),
-        case (Size > CurrentSize) of
-            true ->
-            throw({'$return', true});
-            false -> ok
-        end,
-        lists:foreach(fun(Index) ->
-            NewServerName = array:get(Index, get({List, objectArray})),
-            lists:foreach(fun(Index2) ->
-                NextOldServerName = array:get(Index, get({get({This, licenseServers}), objectArray})),
-                case ((get({get({This, tsUtil}), '$class'})):compareTo(get({This, tsUtil}), NewServerName, NextOldServerName) =/= 0) of
-                    true ->
-                    throw({'$return', true});
-                    false -> ok
+
+  def jm_isLargerOrDifferentServerList(this, p_list) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :list, p_list)
+        JR.lset(f, :size, JR.int32(JR.call(JR.lget(f, :list), :jm_size, []) - 1))
+        JR.lset(f, :currentSize, JR.int32(JR.call(JR.get(this, :licenseServers), :jm_size, []) - 1))
+        if (JR.lget(f, :size) > JR.lget(f, :currentSize)) do
+            throw({:jreturn, true})
+        end
+        JR.lset(f, :index, JR.lget(f, :size))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.lset(f, :newServerName, JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index)))
+            JR.lset(f, :index2, JR.lget(f, :currentSize))
+            JR.jfor(fn -> (JR.lget(f, :index2) >= 0) end, fn -> JR.lpostinc(f, :index2, -1) end, fn ->
+                JR.lset(f, :nextOldServerName, JR.aget(JR.get(JR.get(this, :licenseServers), :objectArray), JR.lget(f, :index)))
+                if (JR.call(JR.get(this, :tsUtil), :jm_compareTo, [JR.lget(f, :newServerName), JR.lget(f, :nextOldServerName)]) != 0) do
+                    throw({:jreturn, true})
                 end
-            end, lists:seq(CurrentSize, 0, -1))
-        end, lists:seq(Size, 0, -1)),
-        false
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+            end)
+        end)
+        throw({:jreturn, false})
+    end)
+  end
 
-setHardSale(This, HardSale) when is_boolean(HardSale) ->
-        put({This, hardSale}, HardSale).
 
-isHardSale(This) ->
-        get({This, hardSale}).
+  def jm_setHardSale(this, p_hardSale) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :hardSale, p_hardSale)
+        JR.put(this, :hardSale, JR.lget(f, :hardSale))
+    end)
+  end
 
-setOperatingSystemInterface(This, OperatingSystemInterface) ->
-        put({This, operatingSystemInterface}, OperatingSystemInterface).
 
-setLicenseId(This, LicenseId) when (is_list(LicenseId) orelse LicenseId =:= undefined) ->
-        put({This, licenseId}, LicenseId).
+  def jm_isHardSale(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :hardSale)})
+    end)
+  end
 
-setLicenseServers(This, LicenseServers) ->
-        put({This, licenseServers}, LicenseServers).
 
-toShortString(This) ->
-        get({This, shortName}).
+  def jm_setOperatingSystemInterface(this, p_operatingSystemInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :operatingSystemInterface, p_operatingSystemInterface)
+        JR.put(this, :operatingSystemInterface, JR.lget(f, :operatingSystemInterface))
+    end)
+  end
+
+
+  def jm_setLicenseId(this, p_licenseId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :licenseId, p_licenseId)
+        JR.put(this, :licenseId, JR.lget(f, :licenseId))
+    end)
+  end
+
+
+  def jm_setLicenseServers(this, p_licenseServers) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :licenseServers, p_licenseServers)
+        JR.put(this, :licenseServers, JR.lget(f, :licenseServers))
+    end)
+  end
+
+
+  def jm_toShortString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :shortName)})
+    end)
+  end
+end
+
 

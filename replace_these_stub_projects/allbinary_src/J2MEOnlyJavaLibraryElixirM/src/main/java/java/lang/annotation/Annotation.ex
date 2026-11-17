@@ -1,11 +1,18 @@
-% Generated Code Do Not Modify
-% package java.lang.annotation
+# Generated Code Do Not Modify
+# package java.lang.annotation
 
--module('Annotation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
+defmodule Annotation do
+  def jsuper(), do: JObject
 
 
-annotationType(This) ->
-    erlang:error({abstract_method, annotationType}).
+  def jm_annotationType(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "annotationType")})
+    end)
+  end
+end
+
 

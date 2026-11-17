@@ -1,54 +1,66 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.ai.sequence
-% import org.allbinary.ai.ArtificialIntelligenceInterface
-% import org.allbinary.game.input.GameInput
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.AllBinaryLayerManager
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai.sequence
 
--module('NumberLayersSequenceAI').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule NumberLayersSequenceAI do
+  def jsuper(), do: SequenceAI
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('SequenceAI', Function, Arguments).
-
-init_fields(This) ->
-    put({This, numberOfLayersLeft}, 0),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :numberOfLayersLeft, 0)
+        
+    nil
+  end
 
 
-new(NumberOfEnemiesLeft, ArtificialIntelligenceInterface, OwnerLayerInterface, GameInput) when is_integer(NumberOfEnemiesLeft), (is_tuple(ArtificialIntelligenceInterface) orelse ArtificialIntelligenceInterface =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, NumberOfEnemiesLeft, ArtificialIntelligenceInterface, OwnerLayerInterface, GameInput),
-    This.
+  def jinit(this, p_numberOfEnemiesLeft, p_artificialIntelligenceInterface, p_ownerLayerInterface, p_gameInput) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :numberOfEnemiesLeft, p_numberOfEnemiesLeft)
+      JR.lset(f, :artificialIntelligenceInterface, p_artificialIntelligenceInterface)
+      JR.lset(f, :ownerLayerInterface, p_ownerLayerInterface)
+      JR.lset(f, :gameInput, p_gameInput)
+        SequenceAI.jinit(this, JR.lget(f, :artificialIntelligenceInterface), JR.lget(f, :ownerLayerInterface), JR.lget(f, :gameInput))
+        NumberLayersSequenceAI.jinitfields(this)
+        JR.put(this, :numberOfLayersLeft, JR.lget(f, :numberOfEnemiesLeft))
+    end)
+  end
 
-'$init'(This, NumberOfEnemiesLeft, ArtificialIntelligenceInterface, OwnerLayerInterface, GameInput) when is_integer(NumberOfEnemiesLeft), (is_tuple(ArtificialIntelligenceInterface) orelse ArtificialIntelligenceInterface =:= undefined) ->
-        'SequenceAI':'$init'(This, ArtificialIntelligenceInterface, OwnerLayerInterface, GameInput),
-        init_fields(This),
-        put({This, numberOfLayersLeft}, NumberOfEnemiesLeft).
+  def jnew(p_numberOfEnemiesLeft, p_artificialIntelligenceInterface, p_ownerLayerInterface, p_gameInput) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_numberOfEnemiesLeft, p_artificialIntelligenceInterface, p_ownerLayerInterface, p_gameInput)
+    this
+  end
 
-% throws Exception
-processAI(This, AllBinaryLayerManager) ->
-        case ((get({This, '$class'})):getIndex(This) =:= 0) of
-            true ->
-            case ((get({AllBinaryLayerManager, '$class'})):getSize(AllBinaryLayerManager) < get({This, numberOfLayersLeft})) of
-                true ->
-                (get({This, '$class'})):setIndex(This, 1);
-                false -> ok
-            end;
-            false -> ok
-        end,
-        'SequenceAI':processAI(This, AllBinaryLayerManager).
+
+  def jm_processAI(this, p_allBinaryLayerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerManager, p_allBinaryLayerManager)
+        if (JR.call(this, :jm_getIndex, []) == 0) do
+            if (JR.call(JR.lget(f, :allBinaryLayerManager), :jm_getSize, []) < JR.get(this, :numberOfLayersLeft)) do
+                JR.call(this, :jm_setIndex, [1])
+            end
+        end
+        SequenceAI.jm_processAI(this, JR.lget(f, :allBinaryLayerManager))
+    end)
+  end
+end
+
 

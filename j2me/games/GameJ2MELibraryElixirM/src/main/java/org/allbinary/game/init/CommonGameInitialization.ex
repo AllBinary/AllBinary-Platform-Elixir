@@ -1,70 +1,84 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.init
-% import javax.microedition.lcdui.CommandListener
-% import org.allbinary.game.resource.ResourceInitialization
-% import org.allbinary.game.resource.ResourceLoadingLevelFactory
-% import org.allbinary.graphics.PointFactory
-% import org.allbinary.graphics.canvas.transition.progress.ProgressCanvas
-% import org.allbinary.graphics.canvas.transition.progress.ProgressCanvasFactory
-% import org.allbinary.logic.math.SmallIntegerSingletonFactory
-% import org.allbinary.logic.system.security.licensing.AbeClientInformationInterface
-% import org.allbinary.math.AngleFactory
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.init
 
--module('CommonGameInitialization').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule CommonGameInitialization do
+  def jsuper(), do: BaseGameInitialization
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BaseGameInitialization', Function, Arguments).
-
-init_fields(This) ->
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :commonStrings, nil)
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+    nil
+  end
 
 
-new(ResourceInitializationArray, Portion) when (is_tuple(ResourceInitializationArray) orelse ResourceInitializationArray =:= undefined), is_integer(Portion) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, ResourceInitializationArray, Portion),
-    This.
+  def jinit(this, p_resourceInitializationArray, p_portion) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :resourceInitializationArray, p_resourceInitializationArray)
+      JR.lset(f, :portion, p_portion)
+        BaseGameInitialization.jinit(this, JR.lget(f, :resourceInitializationArray), JR.lget(f, :portion))
+        CommonGameInitialization.jinitfields(this)
+    end)
+  end
 
-'$init'(This, ResourceInitializationArray, Portion) when (is_tuple(ResourceInitializationArray) orelse ResourceInitializationArray =:= undefined), is_integer(Portion) ->
-        'BaseGameInitialization':'$init'(This, ResourceInitializationArray, Portion),
-        init_fields(This).
+  def jnew(p_resourceInitializationArray, p_portion) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_resourceInitializationArray, p_portion)
+    this
+  end
 
-% throws Exception
-init(This, AbeClientInformation, CommandListener, Level) when is_integer(Level) ->
-        'BaseGameInitialization':init(This, AbeClientInformation, CommandListener, Level),
-        ResourceLoadingLevelFactory = 'ResourceLoadingLevelFactory':getInstance(),
-        case ((not (get({This, '$class'})):isGameInitialized(This)) andalso (Level =:= (get({get({ResourceLoadingLevelFactory, 'LOAD_ALL'}), '$class'})):getLevel(get({ResourceLoadingLevelFactory, 'LOAD_ALL'})))) of
-            true ->
-            (get({This, '$class'})):setGameInitialized(This, true),
-            ProgressCanvas = 'ProgressCanvasFactory':getInstance(),
-            (fun(Target_N66294) -> (get({Target_N66294, '$class'})):init(Target_N66294) end)('SmallIntegerSingletonFactory':getInstance()),
-            (get({ProgressCanvas, '$class'})):addNormalPortion(ProgressCanvas, 50, "Integers"),
-            (fun(Target_N66353) -> (get({Target_N66353, '$class'})):init(Target_N66353) end)('PointFactory':getInstance()),
-            (get({ProgressCanvas, '$class'})):addNormalPortion(ProgressCanvas, 50, "Points"),
-            'AngleFactory':getInstance(),
-            (get({ProgressCanvas, '$class'})):addNormalPortion(ProgressCanvas, 50, "Angles"),
-            (get({This, '$class'})):initGame(This),
-            (fun(Target_N66478) -> (get({Target_N66478, '$class'})):init(Target_N66478) end)(array:get(get({This, 'GAME_RESOURCES'}), get({This, resourceInitializationArray})));
-            false -> ok
-        end,
-        'BaseGameInitialization':resourceInitialization(This, Level).
 
-% throws Exception
-initGame(This) ->
-        erlang:error({'Exception', get({get({This, commonStrings}), 'NOT_IMPLEMENTED'})}).
+  def jm_init(this, p_abeClientInformation, p_commandListener, p_level) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+      JR.lset(f, :commandListener, p_commandListener)
+      JR.lset(f, :level, p_level)
+        BaseGameInitialization.jm_init(this, JR.lget(f, :abeClientInformation), JR.lget(f, :commandListener), JR.lget(f, :level))
+        JR.lset(f, :resourceLoadingLevelFactory, ResourceLoadingLevelFactory.jm_getInstance())
+        if (!JR.call(this, :jm_isGameInitialized, []) && (JR.lget(f, :level) == JR.call(JR.get(JR.lget(f, :resourceLoadingLevelFactory), :LOAD_ALL), :jm_getLevel, []))) do
+            JR.call(this, :jm_setGameInitialized, [true])
+            JR.lset(f, :progressCanvas, ProgressCanvasFactory.jm_getInstance())
+            JR.call(SmallIntegerSingletonFactory.jm_getInstance(), :jm_init, [])
+            JR.call(JR.lget(f, :progressCanvas), :jm_addNormalPortion, [50, "Integers"])
+            JR.call(PointFactory.jm_getInstance(), :jm_init, [])
+            JR.call(JR.lget(f, :progressCanvas), :jm_addNormalPortion, [50, "Points"])
+            AngleFactory.jm_getInstance()
+            JR.call(JR.lget(f, :progressCanvas), :jm_addNormalPortion, [50, "Angles"])
+            JR.call(this, :jm_initGame, [])
+            JR.call(JR.aget(JR.get(this, :resourceInitializationArray), JR.get(this, :GAME_RESOURCES)), :jm_init, [])
+        end
+        BaseGameInitialization.jm_resourceInitialization(this, JR.lget(f, :level))
+    end)
+  end
+
+
+  def jm_initGame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jexception, JR.exception("Exception", JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED))})
+    end)
+  end
+end
+
 

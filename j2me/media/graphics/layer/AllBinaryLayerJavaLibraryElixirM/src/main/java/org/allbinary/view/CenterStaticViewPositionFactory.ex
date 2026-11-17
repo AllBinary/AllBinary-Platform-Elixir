@@ -1,37 +1,56 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.view
-% import org.allbinary.graphics.displayable.DisplayInfoSingleton
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.view
 
--module('CenterStaticViewPositionFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule CenterStaticViewPositionFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-getInstance(This, Z) when is_integer(Z) ->
-        DisplayInfoSingleton = 'DisplayInfoSingleton':getInstance(),
-        'StaticViewPosition':new((((get({DisplayInfoSingleton, '$class'})):getLastWidth(DisplayInfoSingleton) bsr 1)), (((get({DisplayInfoSingleton, '$class'})):getLastHeight(DisplayInfoSingleton) bsr 1)), Z).
+
+  def jm_getInstance(this, p_z) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :z, p_z)
+        JR.lset(f, :displayInfoSingleton, DisplayInfoSingleton.jm_getInstance())
+        throw({:jreturn, StaticViewPosition.jnew((Bitwise.bsr(JR.call(JR.lget(f, :displayInfoSingleton), :jm_getLastWidth, []), 1)), (Bitwise.bsr(JR.call(JR.lget(f, :displayInfoSingleton), :jm_getLastHeight, []), 1)), JR.lget(f, :z))})
+    end)
+  end
+end
+
 

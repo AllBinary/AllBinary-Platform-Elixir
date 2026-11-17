@@ -1,66 +1,121 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2022 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.game.score
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonStrings
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.game.score
 
--module('HighScoresHelperBase').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements HighScoresHelperBaseInterface
+defmodule HighScoresHelperBase do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, highScoresArrayP}, get({'LastFetchHighScoresFactory':getInstance(), highScoresArray})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :highScoresArrayP, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :highScoresArrayP, JR.get(LastFetchHighScoresFactory.jm_getInstance(), :highScoresArray))
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-setHighScoresArray(This, HighScoresArrayP) when (is_tuple(HighScoresArrayP) orelse HighScoresArrayP =:= undefined) ->
-        case (HighScoresArrayP =/= undefined) of
-            true ->
-            put({local, commonStrings}, 'CommonStrings':getInstance()),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N66008) -> (get({Target_N66008, '$class'})):toString(Target_N66008) end)((fun(Target_N66015) -> (get({Target_N66015, '$class'})):appendint(Target_N66015, array:size(HighScoresArrayP)) end)((fun(Target_N66022) -> (get({Target_N66022, '$class'})):append(Target_N66022, get({get({local, commonStrings}), 'START'})) end)('StringMaker':new()))), This, "setHighScoresArray");
-            false ->
-            put({local, commonStrings}, 'CommonStrings':getInstance()),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({local, commonStrings}), 'START'}), This, "setHighScoresArray")
-        end,
-        put({This, highScoresArrayP}, HighScoresArrayP).
+  def jm_setHighScoresArray(this, p_highScoresArrayP) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :highScoresArrayP, p_highScoresArrayP)
+        if (JR.lget(f, :highScoresArrayP) != nil) do
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.lget(f, :commonStrings), :START)]), :jm_appendint, [JR.alength(JR.lget(f, :highScoresArrayP))]), :jm_toString, []), this, "setHighScoresArray"])
+        else
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.lget(f, :commonStrings), :START), this, "setHighScoresArray"])
+        end
+        JR.put(this, :highScoresArrayP, JR.lget(f, :highScoresArrayP))
+    end)
+  end
 
-getNextHighScores(This) ->
-        'NullHighScoresSingletonFactory':getInstance().
 
-isAnyHighScores(This) ->
-        erlang:error({'RuntimeException'}).
+  def jm_getNextHighScores(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, NullHighScoresSingletonFactory.jm_getInstance()})
+    end)
+  end
 
-setSelectedHighScores(This, SelectedHighScores) ->
-        ok.
 
-getSelectedHighScores(This) ->
-        'NullHighScoresSingletonFactory':getInstance().
+  def jm_isAnyHighScores(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jexception, JR.exception("RuntimeException", "")})
+    end)
+  end
 
-getHighScoresArray(This) ->
-        get({This, highScoresArrayP}).
 
-selectHighScores(This) ->
-        ok.
+  def jm_setSelectedHighScores(this, p_selectedHighScores) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :selectedHighScores, p_selectedHighScores)
+        nil
+    end)
+  end
+
+
+  def jm_getSelectedHighScores(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, NullHighScoresSingletonFactory.jm_getInstance()})
+    end)
+  end
+
+
+  def jm_getHighScoresArray(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :highScoresArrayP)})
+    end)
+  end
+
+
+  def jm_selectHighScores(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+end
+
 

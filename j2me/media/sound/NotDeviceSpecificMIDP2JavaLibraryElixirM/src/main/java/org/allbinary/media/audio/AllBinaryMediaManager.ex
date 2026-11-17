@@ -1,98 +1,134 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.media.audio
-% import java.io.InputStream
-% import javax.microedition.media.Manager
-% import javax.microedition.media.MediaException
-% import javax.microedition.media.Player
-% import org.allbinary.MIDPUtil
-% import org.allbinary.TsUtil
-% import org.allbinary.audio.AudioContentTypeDataFactory
-% import org.allbinary.data.resource.ResourceUtil
-% import org.allbinary.game.configuration.feature.Features
-% import org.allbinary.game.configuration.feature.GameFeatureFactory
-% import org.allbinary.graphics.canvas.transition.progress.ProgressCanvasFactory
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
--module('AllBinaryMediaManager').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+#NotDeviceSpecificMIDP2JavaLibrary
+defmodule AllBinaryMediaManager do
+  def jsuper(), do: JObject
+def jstatic_THIS(), do: JR.static_get(__MODULE__, :THIS, fn -> "AllBinaryMediaManagerNoMIPD2" end)
+  def jstatic_set_THIS(value), do: JR.static_put(__MODULE__, :THIS, value)
 
-static_init() ->
-    put({?MODULE, 'THIS'}, "AllBinaryMediaManagerNoMIPD2"),
-    ok.
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-isMuted() ->
-        false.
 
-setMuted(AMuted) when is_boolean(AMuted) ->
-        ok.
+  def jm_isMuted() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
 
-update() ->
-        true.
 
-% throws Exception
-init(SoundsFactoryInterface) ->
-        LogUtil = 'LogUtil':getInstance(),
-        CommonString = 'CommonStrings':getInstance(),
-        (get({LogUtil, '$class'})):putF(LogUtil, get({CommonString, 'START'}), get({'AllBinaryMediaManager', 'THIS'}), get({CommonString, 'INIT'})),
-        (fun(Target_N66318) -> (get({Target_N66318, '$class'})):addNormalPortion(Target_N66318, 50, "Media Manager") end)('ProgressCanvasFactory':getInstance()),
-        (fun(Target_N66357) -> (get({Target_N66357, '$class'})):init(Target_N66357) end)('Sounds':new(SoundsFactoryInterface)).
+  def jm_setMuted(p_aMuted) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :aMuted, p_aMuted)
+        nil
+    end)
+  end
 
-% throws Exception
-shutdown(SoundsFactoryInterface) ->
-        (fun(Target_N66452) -> (get({Target_N66452, '$class'})):stopAll(Target_N66452) end)('Sounds':new(SoundsFactoryInterface)),
-        (fun(Target_N66487) -> (get({Target_N66487, '$class'})):closeAll(Target_N66487) end)('Sounds':new(SoundsFactoryInterface)),
-        (fun(Target_N66522) -> (get({Target_N66522, '$class'})):gc(Target_N66522) end)('TsUtil':getInstance()).
 
-% throws Exception
-createPlayer(Resource) when (is_list(Resource) orelse Resource =:= undefined) ->
-        try
-        case (fun(Target_N66610) -> (get({Target_N66610, '$class'})):isFeature(Target_N66610, get({'GameFeatureFactory':getInstance(), 'SOUND'})) end)('Features':getInstance()) of
-            true ->
-            case ((fun(Target_N66700) -> (get({Target_N66700, '$class'})):compareTo(Target_N66700, Resource, get({'Manager', 'TONE_DEVICE_LOCATOR'})) end)('TsUtil':getInstance()) =:= 0) of
-                true ->
-                throw({'$return', 'Manager':createPlayer(Resource)});
-                false ->
-                InputStream = (fun(Target_N66772) -> (get({Target_N66772, '$class'})):getResourceAsStream(Target_N66772, Resource) end)('ResourceUtil':getInstance()),
-                throw({'$return', (fun(Target_N66826) -> (get({Target_N66826, '$class'})):createPlayerFromInputStream(Target_N66826, InputStream, (fun(Target_N66859) -> (get({Target_N66859, '$class'})):getName(Target_N66859) end)(get({'AudioContentTypeDataFactory':getInstance(), 'MIME_AUDIO_WAV'}))) end)('MIDPUtil':getInstance())})
-            end;
-            false ->
-            throw({'$return', get({'NoPlayer', 'NO_PLAYER'})})
+  def jm_update() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, true})
+    end)
+  end
+
+
+  def jm_init(p_soundsFactoryInterface) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :soundsFactoryInterface, p_soundsFactoryInterface)
+        JR.lset(f, :logUtil, LogUtil.jm_getInstance())
+        JR.lset(f, :commonString, CommonStrings.jm_getInstance())
+        JR.call(JR.lget(f, :logUtil), :jm_putF, [JR.get(JR.lget(f, :commonString), :START), AllBinaryMediaManager.jstatic_THIS(), JR.get(JR.lget(f, :commonString), :INIT)])
+        JR.call(ProgressCanvasFactory.jm_getInstance(), :jm_addNormalPortion, [50, "Media Manager"])
+        JR.call(Sounds.jnew(JR.lget(f, :soundsFactoryInterface)), :jm_init, [])
+    end)
+  end
+
+
+  def jm_shutdown(p_soundsFactoryInterface) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :soundsFactoryInterface, p_soundsFactoryInterface)
+        JR.call(Sounds.jnew(JR.lget(f, :soundsFactoryInterface)), :jm_stopAll, [])
+        JR.call(Sounds.jnew(JR.lget(f, :soundsFactoryInterface)), :jm_closeAll, [])
+        JR.call(TsUtil.jm_getInstance(), :jm_gc, [])
+    end)
+  end
+
+
+  def jm_createPlayer(p_resource) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :resource, p_resource)
+        if JR.call(Features.jm_getInstance(), :jm_isFeature, [JR.get(GameFeatureFactory.jm_getInstance(), :SOUND)]) do
+            if (JR.call(TsUtil.jm_getInstance(), :jm_compareTo, [JR.lget(f, :resource), Manager.jstatic_TONE_DEVICE_LOCATOR()]) == 0) do
+                throw({:jreturn, Manager.jm_createPlayer(JR.lget(f, :resource))})
+            else
+                JR.lset(f, :inputStream, JR.call(ResourceUtil.jm_getInstance(), :jm_getResourceAsStream, [JR.lget(f, :resource)]))
+                throw({:jreturn, JR.call(MIDPUtil.jm_getInstance(), :jm_createPlayerFromInputStream, [JR.lget(f, :inputStream), JR.call(JR.get(AudioContentTypeDataFactory.jm_getInstance(), :MIME_AUDIO_WAV), :jm_getName, [])])})
+            end
+        else
+            throw({:jreturn, NoPlayer.jstatic_NO_PLAYER()})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-% throws MediaException
-playTone(Frequency, Time, Volume) when is_integer(Frequency), is_integer(Time), is_integer(Volume) ->
-        case (fun(Target_N67006) -> (get({Target_N67006, '$class'})):isFeature(Target_N67006, get({'GameFeatureFactory':getInstance(), 'SOUND'})) end)('Features':getInstance()) of
-            true ->
-            'Manager':playTone(Frequency, Time, Volume);
-            false -> ok
-        end.
+
+  def jm_playTone(p_frequency, p_time, p_volume) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :frequency, p_frequency)
+      JR.lset(f, :time, p_time)
+      JR.lset(f, :volume, p_volume)
+        if JR.call(Features.jm_getInstance(), :jm_isFeature, [JR.get(GameFeatureFactory.jm_getInstance(), :SOUND)]) do
+            Manager.jm_playTone(JR.lget(f, :frequency), JR.lget(f, :time), JR.lget(f, :volume))
+        end
+    end)
+  end
+end
+
 

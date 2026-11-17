@@ -1,71 +1,179 @@
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.form
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.form.item.ABCustomItem
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.string.CommonStrings
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
--module('ABCustomForm').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule ABCustomForm do
+  def jsuper(), do: CustomScreen
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('CustomScreen', Function, Arguments).
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+    nil
+  end
 
 
-new(Title, Items, BackgroundBasicColor, ForegroundBasicColor) when (is_list(Title) orelse Title =:= undefined), (is_tuple(Items) orelse Items =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Title, Items, BackgroundBasicColor, ForegroundBasicColor),
-    This.
+  def jinit(this, p_title, p_items, p_backgroundBasicColor, p_foregroundBasicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :title, p_title)
+      JR.lset(f, :items, p_items)
+      JR.lset(f, :backgroundBasicColor, p_backgroundBasicColor)
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+      CustomScreen.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This, Title, Items, BackgroundBasicColor, ForegroundBasicColor) when (is_list(Title) orelse Title =:= undefined), (is_tuple(Items) orelse Items =:= undefined) ->
-    'CustomScreen':'$init'(This),
-    init_fields(This),
-        ok.
+  def jnew(p_title, p_items, p_backgroundBasicColor, p_foregroundBasicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_title, p_items, p_backgroundBasicColor, p_foregroundBasicColor)
+    this
+  end
 
-getAllitems(This) ->
-        array:new(0, {default, undefined}).
 
-size(This) ->
-        0.
+  def jm_getAllitems(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.anew(0, nil)})
+    end)
+  end
 
-setSelectedIndex(This, Index) when is_integer(Index) ->
-        ok.
 
-getSelectedIndex(This) ->
-        0.
+  def jm_size(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0})
+    end)
+  end
 
-deleteAll(This) ->
-        ok.
 
-delete(This, ItemNum) when is_integer(ItemNum) ->
-        ok.
+  def jm_setSelectedIndex(this, p_index) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :index, p_index)
+        nil
+    end)
+  end
 
-append(This, Item) ->
-        (-1).
 
-insert(This, ItemNum, Item) when is_integer(ItemNum) ->
-        ok.
+  def jm_getSelectedIndex(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0})
+    end)
+  end
 
-set(This, ItemNum, Item) when is_integer(ItemNum) ->
-        ok.
 
-get(This, ItemNum) when is_integer(ItemNum) ->
-        'ABCustomItem':getNullInstance().
+  def jm_deleteAll(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-getWidth(This) ->
-        erlang:error({'RuntimeException'}).
 
-paint(This, Graphics) ->
-        ok.
+  def jm_delete(this, p_itemNum) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :itemNum, p_itemNum)
+        nil
+    end)
+  end
 
-getTitle(This) ->
-        get({'StringUtil':getInstance(), 'EMPTY_STRING'}).
+
+  def jm_append(this, p_item) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :item, p_item)
+        throw({:jreturn, -1})
+    end)
+  end
+
+
+  def jm_insert(this, p_itemNum, p_item) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :itemNum, p_itemNum)
+      JR.lset(f, :item, p_item)
+        nil
+    end)
+  end
+
+
+  def jm_set(this, p_itemNum, p_item) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :itemNum, p_itemNum)
+      JR.lset(f, :item, p_item)
+        nil
+    end)
+  end
+
+
+  def jm_get(this, p_itemNum) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :itemNum, p_itemNum)
+        throw({:jreturn, ABCustomItem.jm_getNullInstance()})
+    end)
+  end
+
+
+  def jm_getWidth(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jexception, JR.exception("RuntimeException", "")})
+    end)
+  end
+
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        nil
+    end)
+  end
+
+
+  def jm_getTitle(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING)})
+    end)
+  end
+end
+
 

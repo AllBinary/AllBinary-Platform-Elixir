@@ -1,47 +1,65 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import org.allbinary.graphics.canvas.transition.progress.ProgressCanvas
-% import org.allbinary.graphics.canvas.transition.progress.ProgressCanvasFactory
-% import org.allbinary.graphics.paint.PaintableComposite
-% import org.allbinary.graphics.paint.PaintableInterface
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('DemoCanvasProgressUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule DemoCanvasProgressUtil do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-showProgress(DemoCanvas) ->
-        'DemoCanvasProgressUtil':showProgressOptionallyInTheBackground(DemoCanvas, false).
+  def jm_showProgress(p_demoCanvas) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :demoCanvas, p_demoCanvas)
+        DemoCanvasProgressUtil.jm_showProgressOptionallyInTheBackground(JR.lget(f, :demoCanvas), false)
+    end)
+  end
 
-showProgressOptionallyInTheBackground(DemoCanvas, Background) when is_boolean(Background) ->
-        ProgressCanvas = 'ProgressCanvasFactory':getInstance(),
-        (get({ProgressCanvas, '$class'})):startBackground(ProgressCanvas, Background),
-        PaintableArray = array:new(2, {default, undefined}),
-        array:set(0, ProgressCanvas, PaintableArray),
-        array:set(1, (get({DemoCanvas, '$class'})):getDefaultPaintableInterface(DemoCanvas), PaintableArray),
-        (get({DemoCanvas, '$class'})):setDefaultPaintableInterface(DemoCanvas, 'PaintableComposite':new(PaintableArray)),
-        (get({DemoCanvas, '$class'})):setPaintableInterface(DemoCanvas, (get({DemoCanvas, '$class'})):getDefaultPaintableInterface(DemoCanvas)).
+
+  def jm_showProgressOptionallyInTheBackground(p_demoCanvas, p_background) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :demoCanvas, p_demoCanvas)
+      JR.lset(f, :background, p_background)
+        JR.lset(f, :progressCanvas, ProgressCanvasFactory.jm_getInstance())
+        JR.call(JR.lget(f, :progressCanvas), :jm_startBackground, [JR.lget(f, :background)])
+        JR.lset(f, :paintableArray, JR.anew(2, nil))
+        JR.aset(JR.lget(f, :paintableArray), 0, JR.lget(f, :progressCanvas))
+        JR.aset(JR.lget(f, :paintableArray), 1, JR.call(JR.lget(f, :demoCanvas), :jm_getDefaultPaintableInterface, []))
+        JR.call(JR.lget(f, :demoCanvas), :jm_setDefaultPaintableInterface, [PaintableComposite.jnew(JR.lget(f, :paintableArray))])
+        JR.call(JR.lget(f, :demoCanvas), :jm_setPaintableInterface, [JR.call(JR.lget(f, :demoCanvas), :jm_getDefaultPaintableInterface, [])])
+    end)
+  end
+end
+
 

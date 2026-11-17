@@ -1,97 +1,143 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.terrain
-% import org.allbinary.logic.StdUtil
-% import org.allbinary.logic.util.event.AllBinaryEventObject
-% import org.allbinary.logic.util.event.EventListenerInterface
-% import org.allbinary.logic.util.event.EventStrings
-% import org.allbinary.logic.util.event.handler.BasicEventHandler
-% import org.allbinary.util.ABHashtable
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.terrain
 
--module('TerrainEventHandler').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule TerrainEventHandler do
+  def jsuper(), do: BasicEventHandler
+def jstatic_hashtable(), do: JR.static_get(__MODULE__, :hashtable, fn -> JR.get(StdUtil.jm_getInstance(), :NULL_TABLE) end)
+  def jstatic_set_hashtable(value), do: JR.static_put(__MODULE__, :hashtable, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicEventHandler', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, hashtable}, get({'StdUtil':getInstance(), 'NULL_TABLE'})),
-    ok.
-
-init_fields(This) ->
-    put({This, list}, 'BasicArrayListD':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :list, nil)
+        JR.put(this, :list, BasicArrayListD.jnew())
+    nil
+  end
 
 
-init() ->
-        put({'TerrainEventHandler', hashtable}, (fun(Target_N65947) -> (get({Target_N65947, '$class'})):createHashtable(Target_N65947) end)('StdUtil':getInstance())).
+  def jm_init() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        TerrainEventHandler.jstatic_set_hashtable(JR.call(StdUtil.jm_getInstance(), :jm_createHashtable, []))
+    end)
+  end
 
-getInstance(AnyType) ->
-        put({local, eventHandlerCanBeNull}, (get({get({'TerrainEventHandler', hashtable}), '$class'})):get(get({'TerrainEventHandler', hashtable}), AnyType)),
-        case (get({local, eventHandlerCanBeNull}) =:= undefined) of
-            true ->
-            put({local, eventHandlerCanBeNull}, 'TerrainEventHandler':new()),
-            (get({get({'TerrainEventHandler', hashtable}), '$class'})):put(get({'TerrainEventHandler', hashtable}), AnyType, get({local, eventHandlerCanBeNull}));
-            false -> ok
-        end,
-        get({local, eventHandlerCanBeNull}).
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jm_getInstance(p_anyType) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+        JR.lset(f, :eventHandlerCanBeNull, JR.call(TerrainEventHandler.jstatic_hashtable(), :jm_get, [JR.lget(f, :anyType)]))
+        if (JR.lget(f, :eventHandlerCanBeNull) == nil) do
+            JR.lset(f, :eventHandlerCanBeNull, TerrainEventHandler.jnew())
+            JR.call(TerrainEventHandler.jstatic_hashtable(), :jm_put, [JR.lget(f, :anyType), JR.lget(f, :eventHandlerCanBeNull)])
+        end
+        throw({:jreturn, JR.lget(f, :eventHandlerCanBeNull)})
+    end)
+  end
 
-'$init'(This) ->
-    'BasicEventHandler':'$init'(This),
-    init_fields(This),
-        ok.
 
-addListener(This, TerrainEventListener) ->
-        case (not (get({get({This, list}), '$class'})):contains(get({This, list}), TerrainEventListener)) of
-            true ->
-            (get({get({This, list}), '$class'})):add(get({This, list}), TerrainEventListener);
-            false -> ok
-        end.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      BasicEventHandler.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-removeAllListeners(This) ->
-        (get({get({This, list}), '$class'})):clear(get({This, list})),
-        'BasicEventHandler':removeAllListeners(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-removeListener(This, EventListenerInterface) ->
-        (get({get({This, list}), '$class'})):remove(get({This, list}), EventListenerInterface),
-        'BasicEventHandler':removeListener(This, EventListenerInterface).
 
-% throws Exception
-fireEvent(This, EventObject) ->
-        put({local, index}, (get({get({This, list}), '$class'})):size(get({This, list}))),
-        (fun Loop() -> case (begin put({local, index}, get({local, index}) - 1), get({local, index}) end >= 0) of true ->
-            try
-                TerrainEventListener = (get({get({This, list}), '$class'})):get(get({This, list}), get({local, index})),
-                (get({TerrainEventListener, '$class'})):onTerrainEvent(TerrainEventListener, EventObject)
-            catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-                (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({'EventStrings':getInstance(), 'FIRE_EVENT'}), E)
-            end,
-            Loop();
-        false -> ok end end)(),
-        'BasicEventHandler':fireEvent(This, EventObject).
+  def jm_addListener(this, p_terrainEventListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :terrainEventListener, p_terrainEventListener)
+        if !JR.call(JR.get(this, :list), :jm_contains, [JR.lget(f, :terrainEventListener)]) do
+            JR.call(JR.get(this, :list), :jm_add, [JR.lget(f, :terrainEventListener)])
+        end
+    end)
+  end
 
-% throws Exception
-process(This, EventObject, EventListenerInterface) ->
-        TerrainEventListenerInterface = EventListenerInterface,
-        (get({TerrainEventListenerInterface, '$class'})):onTerrainEvent(TerrainEventListenerInterface, EventObject).
+
+  def jm_removeAllListeners(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :list), :jm_clear, [])
+        BasicEventHandler.jm_removeAllListeners(this)
+    end)
+  end
+
+
+  def jm_removeListener(this, p_eventListenerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventListenerInterface, p_eventListenerInterface)
+        JR.call(JR.get(this, :list), :jm_remove, [JR.lget(f, :eventListenerInterface)])
+        BasicEventHandler.jm_removeListener(this, JR.lget(f, :eventListenerInterface))
+    end)
+  end
+
+
+  def jm_fireEvent(this, p_eventObject) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+        JR.lset(f, :index, JR.call(JR.get(this, :list), :jm_size, []))
+        JR.jfor(fn -> (JR.lpreinc(f, :index, -1) >= 0) end, fn -> nil end, fn ->
+            try do
+                JR.lset(f, :terrainEventListener, JR.call(JR.get(this, :list), :jm_get, [JR.lget(f, :index)]))
+                JR.call(JR.lget(f, :terrainEventListener), :jm_onTerrainEvent, [JR.lget(f, :eventObject)])
+            catch
+                {:jexception, jexception} ->
+                    JR.lset(f, :e, jexception)
+                JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(EventStrings.jm_getInstance(), :FIRE_EVENT), JR.lget(f, :e)])
+            end
+        end)
+        BasicEventHandler.jm_fireEvent(this, JR.lget(f, :eventObject))
+    end)
+  end
+
+
+  def jm_process(this, p_eventObject, p_eventListenerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+      JR.lset(f, :eventListenerInterface, p_eventListenerInterface)
+        JR.lset(f, :terrainEventListenerInterface, JR.lget(f, :eventListenerInterface))
+        JR.call(JR.lget(f, :terrainEventListenerInterface), :jm_onTerrainEvent, [JR.lget(f, :eventObject)])
+    end)
+  end
+end
+
 

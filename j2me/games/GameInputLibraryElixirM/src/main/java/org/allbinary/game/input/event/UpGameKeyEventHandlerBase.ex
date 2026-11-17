@@ -1,106 +1,160 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.input.event
-% import org.allbinary.game.input.PlayerGameInput
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.util.event.AllBinaryEventObject
-% import org.allbinary.logic.util.event.EventListenerInterface
-% import org.allbinary.logic.util.event.EventStrings
-% import org.allbinary.logic.util.event.handler.BasicEventHandler
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.input.event
 
--module('UpGameKeyEventHandlerBase').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule UpGameKeyEventHandlerBase do
+  def jsuper(), do: BasicEventHandler
+def jstatic_TOTAL_LISTENERS(), do: JR.static_get(__MODULE__, :TOTAL_LISTENERS, fn -> " Total PlayerGameInput Listeners: " end)
+  def jstatic_set_TOTAL_LISTENERS(value), do: JR.static_put(__MODULE__, :TOTAL_LISTENERS, value)
+def jstatic_LISTENER_LABEL(), do: JR.static_get(__MODULE__, :LISTENER_LABEL, fn -> " PlayerGameInput Listener: " end)
+  def jstatic_set_LISTENER_LABEL(value), do: JR.static_put(__MODULE__, :LISTENER_LABEL, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicEventHandler', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'TOTAL_LISTENERS'}, " Total PlayerGameInput Listeners: "),
-    put({?MODULE, 'LISTENER_LABEL'}, " PlayerGameInput Listener: "),
-    ok.
-
-init_fields(This) ->
-    put({This, list}, 'BasicArrayListD':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :list, nil)
+        JR.put(this, :list, BasicArrayListD.jnew())
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      BasicEventHandler.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    'BasicEventHandler':'$init'(This),
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-addListener(This, PlayerGameInput) ->
-        case (not (get({get({This, list}), '$class'})):contains(get({This, list}), PlayerGameInput)) of
-            true ->
-            (get({get({This, list}), '$class'})):add(get({This, list}), PlayerGameInput);
-            false -> ok
-        end.
 
-removeAllListeners(This) ->
-        (get({get({This, list}), '$class'})):clear(get({This, list})),
-        'BasicEventHandler':removeAllListeners(This).
+  def jm_addListener(this, p_playerGameInput) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :playerGameInput, p_playerGameInput)
+        if !JR.call(JR.get(this, :list), :jm_contains, [JR.lget(f, :playerGameInput)]) do
+            JR.call(JR.get(this, :list), :jm_add, [JR.lget(f, :playerGameInput)])
+        end
+    end)
+  end
 
-removeListenerSingleThreaded(This, EventListenerInterface) ->
-        (get({get({This, list}), '$class'})):remove(get({This, list}), EventListenerInterface),
-        'BasicEventHandler':removeListenerSingleThreaded(This, EventListenerInterface).
 
-removeListener(This, EventListenerInterface) ->
-        (get({get({This, list}), '$class'})):remove(get({This, list}), EventListenerInterface),
-        'BasicEventHandler':removeListener(This, EventListenerInterface).
+  def jm_removeAllListeners(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :list), :jm_clear, [])
+        BasicEventHandler.jm_removeAllListeners(this)
+    end)
+  end
 
-% throws Exception
-fireEvent(This, EventObject) ->
-        put({local, index}, (get({get({This, list}), '$class'})):size(get({This, list}))),
-        (fun Loop() -> case (begin put({local, index}, get({local, index}) - 1), get({local, index}) end >= 0) of true ->
-            try
-                PlayerGameInput = array:get(get({local, index}), get({get({This, list}), objectArray})),
-                (get({PlayerGameInput, '$class'})):onUpGameKeyEvent(PlayerGameInput, EventObject)
-            catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-                (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({'EventStrings':getInstance(), 'FIRE_EVENT'}), E)
-            end,
-            Loop();
-        false -> ok end end)(),
-        'BasicEventHandler':fireEvent(This, EventObject).
 
-% throws Exception
-process(This, EventObject, EventListenerInterface) ->
-        UpGameKeyEventListenerInterface = EventListenerInterface,
-        (get({UpGameKeyEventListenerInterface, '$class'})):onUpGameKeyEvent(UpGameKeyEventListenerInterface, EventObject).
+  def jm_removeListenerSingleThreaded(this, p_eventListenerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventListenerInterface, p_eventListenerInterface)
+        JR.call(JR.get(this, :list), :jm_remove, [JR.lget(f, :eventListenerInterface)])
+        BasicEventHandler.jm_removeListenerSingleThreaded(this, JR.lget(f, :eventListenerInterface))
+    end)
+  end
 
-toString(This) ->
-        StringBuffer = 'StringMaker':new(),
-        Size = (get({get({This, list}), '$class'})):size(get({This, list})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, 'BasicEventHandler':toString(This)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({'UpGameKeyEventHandlerBase', 'TOTAL_LISTENERS'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, Size),
-        lists:foreach(fun(Index) ->
-            try
-                EventListenerInterface = (get({get({This, list}), '$class'})):get(get({This, list}), Index),
-                (get({StringBuffer, '$class'})):append(StringBuffer, get({'UpGameKeyEventHandlerBase', 'LISTENER_LABEL'})),
-                (get({StringBuffer, '$class'})):append(StringBuffer, (get({EventListenerInterface, '$class'})):toString(EventListenerInterface))
-            catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-                (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'TOSTRING'}), E)
+
+  def jm_removeListener(this, p_eventListenerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventListenerInterface, p_eventListenerInterface)
+        JR.call(JR.get(this, :list), :jm_remove, [JR.lget(f, :eventListenerInterface)])
+        BasicEventHandler.jm_removeListener(this, JR.lget(f, :eventListenerInterface))
+    end)
+  end
+
+
+  def jm_fireEvent(this, p_eventObject) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+        JR.lset(f, :index, JR.call(JR.get(this, :list), :jm_size, []))
+        JR.jfor(fn -> (JR.lpreinc(f, :index, -1) >= 0) end, fn -> nil end, fn ->
+            try do
+                JR.lset(f, :playerGameInput, JR.aget(JR.get(JR.get(this, :list), :objectArray), JR.lget(f, :index)))
+                JR.call(JR.lget(f, :playerGameInput), :jm_onUpGameKeyEvent, [JR.lget(f, :eventObject)])
+            catch
+                {:jexception, jexception} ->
+                    JR.lset(f, :e, jexception)
+                JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(EventStrings.jm_getInstance(), :FIRE_EVENT), JR.lget(f, :e)])
             end
-        end, lists:seq(0, Size - 1)),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+        end)
+        BasicEventHandler.jm_fireEvent(this, JR.lget(f, :eventObject))
+    end)
+  end
+
+
+  def jm_process(this, p_eventObject, p_eventListenerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+      JR.lset(f, :eventListenerInterface, p_eventListenerInterface)
+        JR.lset(f, :upGameKeyEventListenerInterface, JR.lget(f, :eventListenerInterface))
+        JR.call(JR.lget(f, :upGameKeyEventListenerInterface), :jm_onUpGameKeyEvent, [JR.lget(f, :eventObject)])
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.lset(f, :size, JR.call(JR.get(this, :list), :jm_size, []))
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [BasicEventHandler.jm_toString(this)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [UpGameKeyEventHandlerBase.jstatic_TOTAL_LISTENERS()])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.lget(f, :size)])
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            try do
+                JR.lset(f, :eventListenerInterface, JR.call(JR.get(this, :list), :jm_get, [JR.lget(f, :index)]))
+                JR.call(JR.lget(f, :stringBuffer), :jm_append, [UpGameKeyEventHandlerBase.jstatic_LISTENER_LABEL()])
+                JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.lget(f, :eventListenerInterface), :jm_toString, [])])
+            catch
+                {:jexception, jexception} ->
+                    JR.lset(f, :e, jexception)
+                JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :TOSTRING), JR.lget(f, :e)])
+            end
+        end)
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+end
+
 

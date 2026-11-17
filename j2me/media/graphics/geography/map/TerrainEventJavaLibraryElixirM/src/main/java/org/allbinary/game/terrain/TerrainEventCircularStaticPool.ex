@@ -1,50 +1,74 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.terrain
-% import org.allbinary.logic.util.event.AllBinaryEventCircularPool
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.terrain
 
--module('TerrainEventCircularStaticPool').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule TerrainEventCircularStaticPool do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> TerrainEventCircularStaticPool.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'TerrainEventCircularStaticPool':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :EVENT_POOL, nil)
+        JR.put(this, :EVENT_POOL, AllBinaryEventCircularPool.jnew(20))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'EVENT_POOL'}, 'AllBinaryEventCircularPool':new(20)),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'TerrainEventCircularStaticPool', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, TerrainEventCircularStaticPool.jstatic_instance()})
+    end)
+  end
 
-init(This) ->
-        (get({get({This, 'EVENT_POOL'}), '$class'})):initAllBinaryEventCircularPool(get({This, 'EVENT_POOL'}), 'TerrainEventFactory':new()).
 
-% throws Exception
-getNext(This, BasicTerrainInfo) ->
-        TrackingEvent = (get({get({This, 'EVENT_POOL'}), '$class'})):getNextInstance(get({This, 'EVENT_POOL'})),
-        (get({TrackingEvent, '$class'})):setBasicTerrainInfoForCircularStaticPool(TrackingEvent, BasicTerrainInfo),
-        TrackingEvent.
+  def jm_init(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :EVENT_POOL), :jm_initAllBinaryEventCircularPool, [TerrainEventFactory.jnew()])
+    end)
+  end
+
+
+  def jm_getNext(this, p_basicTerrainInfo) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicTerrainInfo, p_basicTerrainInfo)
+        JR.lset(f, :trackingEvent, JR.call(JR.get(this, :EVENT_POOL), :jm_getNextInstance, []))
+        JR.call(JR.lget(f, :trackingEvent), :jm_setBasicTerrainInfoForCircularStaticPool, [JR.lget(f, :basicTerrainInfo)])
+        throw({:jreturn, JR.lget(f, :trackingEvent)})
+    end)
+  end
+end
+
 

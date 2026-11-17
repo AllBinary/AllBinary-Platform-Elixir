@@ -1,94 +1,186 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2022 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.animation.text
-% import javax.microedition.lcdui.Font
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.animation.AnimationBehavior
-% import org.allbinary.animation.IndexedAnimation
-% import org.allbinary.game.input.event.RawKeyEventListener
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.font.UpdateMyFontInterface
-% import org.allbinary.graphics.form.item.CustomTextBox
-% import org.allbinary.logic.string.StringUtil
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.animation.text
 
--module('CustomTextBoxIndexedAnimation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements RawKeyEventListener
-% implements UpdateMyFontInterface
-% implements TextInterface
+defmodule CustomTextBoxIndexedAnimation do
+  def jsuper(), do: IndexedAnimation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('IndexedAnimation', Function, Arguments).
-
-init_fields(This) ->
-    put({This, customTextBox}, undefined),
-    put({This, lastText}, get({'StringUtil':getInstance(), 'INIT_STRING'})),
-    put({This, hasChanged}, true),
-    put({This, textChangeListener}, 'TextChangeListener':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :customTextBox, nil)
+    JR.put(this, :lastText, nil)
+    JR.put(this, :hasChanged, false)
+    JR.put(this, :textChangeListener, nil)
+        
+        JR.put(this, :lastText, JR.get(StringUtil.jm_getInstance(), :INIT_STRING))
+        JR.put(this, :hasChanged, true)
+        JR.put(this, :textChangeListener, TextChangeListener.jm_getInstance())
+    nil
+  end
 
 
-new(CustomTextBox) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, CustomTextBox),
-    This.
+  def jinit(this, p_customTextBox) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :customTextBox, p_customTextBox)
+        IndexedAnimation.jinit(this, AnimationBehavior.jm_getInstance())
+        CustomTextBoxIndexedAnimation.jinitfields(this)
+        JR.put(this, :customTextBox, JR.lget(f, :customTextBox))
+    end)
+  end
 
-'$init'(This, CustomTextBox) ->
-        'IndexedAnimation':'$init'(This, 'AnimationBehavior':getInstance()),
-        init_fields(This),
-        put({This, customTextBox}, CustomTextBox).
+  def jnew(p_customTextBox) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_customTextBox)
+    this
+  end
 
-setBasicColorP(This, BasicColor) ->
-        (fun(Target_N66169) -> (get({Target_N66169, '$class'})):setForegroundBasicColorP(Target_N66169, BasicColor) end)((get({get({This, customTextBox}), '$class'})):getTextFieldItem(get({This, customTextBox}))).
 
-setBackgroundBasicColorP(This, BasicColor) ->
-        (fun(Target_N66274) -> (get({Target_N66274, '$class'})):setBackgroundBasicColorP(Target_N66274, BasicColor) end)((get({get({This, customTextBox}), '$class'})):getTextFieldItem(get({This, customTextBox}))).
+  def jm_setBasicColorP(this, p_basicColor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicColor, p_basicColor)
+        JR.call(JR.call(JR.get(this, :customTextBox), :jm_getTextFieldItem, []), :jm_setForegroundBasicColorP, [JR.lget(f, :basicColor)])
+    end)
+  end
 
-setTextWithOnMeasure(This, Text, TextChangeListener) when (is_list(Text) orelse Text =:= undefined) ->
-        (get({This, '$class'})):setText(This, Text),
-        put({This, textChangeListener}, TextChangeListener).
 
-updateMeasurement(This, Graphics) ->
-        Font = (get({Graphics, '$class'})):getFont(Graphics),
-        (get({get({This, textChangeListener}), '$class'})):onMeasure(get({This, textChangeListener})),
-        put({This, textChangeListener}, 'TextChangeListener':getInstance()).
+  def jm_setBackgroundBasicColorP(this, p_basicColor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicColor, p_basicColor)
+        JR.call(JR.call(JR.get(this, :customTextBox), :jm_getTextFieldItem, []), :jm_setBackgroundBasicColorP, [JR.lget(f, :basicColor)])
+    end)
+  end
 
-setText(This, Text) when (is_list(Text) orelse Text =:= undefined) ->
-        case (get({This, lastText}) =/= Text) of
-            true ->
-            put({This, hasChanged}, true),
-            put({This, lastText}, Text),
-            (fun(Target_N66780) -> (get({Target_N66780, '$class'})):setString(Target_N66780, Text) end)((get({get({This, customTextBox}), '$class'})):getTextFieldItem(get({This, customTextBox})));
-            false -> ok
-        end.
 
-getText(This) ->
-        (fun(Target_N66892) -> (get({Target_N66892, '$class'})):getString(Target_N66892) end)((get({get({This, customTextBox}), '$class'})):getTextFieldItem(get({This, customTextBox}))).
+  def jm_setTextWithOnMeasure(this, p_text, p_textChangeListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :text, p_text)
+      JR.lset(f, :textChangeListener, p_textChangeListener)
+        JR.call(this, :jm_setText, [JR.lget(f, :text)])
+        JR.put(this, :textChangeListener, JR.lget(f, :textChangeListener))
+    end)
+  end
 
-onEventRaw(This, KeyCode, DeviceId, Repeated) when is_integer(KeyCode), is_integer(DeviceId), is_boolean(Repeated) ->
-        (get({get({This, customTextBox}), '$class'})):onEventRaw(get({This, customTextBox}), KeyCode, DeviceId, Repeated).
 
-getFontHeight(This) ->
-        (fun(Target_N67113) -> (get({Target_N67113, '$class'})):getFontHeight(Target_N67113) end)((get({get({This, customTextBox}), '$class'})):getTextFieldItem(get({This, customTextBox}))).
+  def jm_updateMeasurement(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.lset(f, :font, JR.call(JR.lget(f, :graphics), :jm_getFont, []))
+        JR.call(JR.get(this, :textChangeListener), :jm_onMeasure, [])
+        JR.put(this, :textChangeListener, TextChangeListener.jm_getInstance())
+    end)
+  end
 
-paintXY(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-        (get({get({This, customTextBox}), '$class'})):paintXY(get({This, customTextBox}), Graphics, X, Y).
 
-paintThreedXYZ(This, Graphics, X, Y, Z) when is_integer(X), is_integer(Y), is_integer(Z) ->
-        ok.
+  def jm_setText(this, p_text) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :text, p_text)
+        if (JR.get(this, :lastText) != JR.lget(f, :text)) do
+            JR.put(this, :hasChanged, true)
+            JR.put(this, :lastText, JR.lget(f, :text))
+            JR.call(JR.call(JR.get(this, :customTextBox), :jm_getTextFieldItem, []), :jm_setString, [JR.lget(f, :text)])
+        end
+    end)
+  end
 
-getWidth(This) ->
-        'IndexedAnimation':getWidth(This).
+
+  def jm_getText(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.call(JR.get(this, :customTextBox), :jm_getTextFieldItem, []), :jm_getString, [])})
+    end)
+  end
+
+
+  def jm_onEventRaw(this, p_keyCode, p_deviceId, p_repeated) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+      JR.lset(f, :deviceId, p_deviceId)
+      JR.lset(f, :repeated, p_repeated)
+        JR.call(JR.get(this, :customTextBox), :jm_onEventRaw, [JR.lget(f, :keyCode), JR.lget(f, :deviceId), JR.lget(f, :repeated)])
+    end)
+  end
+
+
+  def jm_getFontHeight(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.call(JR.get(this, :customTextBox), :jm_getTextFieldItem, []), :jm_getFontHeight, [])})
+    end)
+  end
+
+
+  def jm_paintXY(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        JR.call(JR.get(this, :customTextBox), :jm_paintXY, [JR.lget(f, :graphics), JR.lget(f, :x), JR.lget(f, :y)])
+    end)
+  end
+
+
+  def jm_paintThreedXYZ(this, p_graphics, p_x, p_y, p_z) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :z, p_z)
+        nil
+    end)
+  end
+
+
+  def jm_getWidth(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, IndexedAnimation.jm_getWidth(this)})
+    end)
+  end
+end
+
 

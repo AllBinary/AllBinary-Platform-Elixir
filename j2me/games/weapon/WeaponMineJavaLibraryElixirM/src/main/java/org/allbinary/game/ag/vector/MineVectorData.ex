@@ -1,37 +1,46 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.vector
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.vector
 
--module('MineVectorData').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule MineVectorData do
+  def jsuper(), do: JObject
+def jstatic_points(), do: JR.static_get(__MODULE__, :points, fn -> JR.afrom([JR.afrom([JR.afrom([10, 5]), JR.afrom([2, 6]), JR.afrom([1000, 1000]), JR.afrom([2, 2]), JR.afrom([10, 9]), JR.afrom([1000, 1000]), JR.afrom([10, 2]), JR.afrom([2, 9]), JR.afrom([1000, 1000]), JR.afrom([2, 5]), JR.afrom([10, 6]), JR.afrom([1000, 1000]), JR.afrom([7, 9]), JR.afrom([5, 2]), JR.afrom([1000, 1000]), JR.afrom([7, 2]), JR.afrom([5, 9]), JR.afrom([1000, 1000])])]) end)
+  def jstatic_set_points(value), do: JR.static_put(__MODULE__, :points, value)
 
-static_init() ->
-    put({?MODULE, points}, array:from_list([array:from_list([array:from_list([10, 5]), array:from_list([2, 6]), array:from_list([1000, 1000]), array:from_list([2, 2]), array:from_list([10, 9]), array:from_list([1000, 1000]), array:from_list([10, 2]), array:from_list([2, 9]), array:from_list([1000, 1000]), array:from_list([2, 5]), array:from_list([10, 6]), array:from_list([1000, 1000]), array:from_list([7, 9]), array:from_list([5, 2]), array:from_list([1000, 1000]), array:from_list([7, 2]), array:from_list([5, 9]), array:from_list([1000, 1000])])])),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
 
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
 

@@ -1,52 +1,66 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import org.allbinary.canvas.Processor
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('StartIntermissionProcessor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule StartIntermissionProcessor do
+  def jsuper(), do: Processor
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Processor', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :gameCanvas, nil)
+    JR.put(this, :WAIT, 0)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        
+        JR.put(this, :WAIT, 5000)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, gameCanvas}, undefined),
-    put({This, 'WAIT'}, 5000),
-    ok.
+
+  def jinit(this, p_gameCanvas) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameCanvas, p_gameCanvas)
+      Processor.jinit(this)
+      jinitfields(this)
+        JR.put(this, :gameCanvas, JR.lget(f, :gameCanvas))
+    end)
+  end
+
+  def jnew(p_gameCanvas) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_gameCanvas)
+    this
+  end
 
 
-new(GameCanvas) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, GameCanvas),
-    This.
+  def jm_process(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if JR.call(JR.call(JR.call(JR.get(this, :gameCanvas), :jm_getStartIntermissionInterface, []), :jm_getTimeDelayHelper, []), :jm_isElapsedTNT, [JR.get(this, :WAIT)]) do
+            JR.call(JR.get(this, :logUtil), :jm_putF, ["Intermission End", this, JR.get(JR.get(this, :commonStrings), :PROCESS)])
+            JR.call(JR.call(JR.get(this, :gameCanvas), :jm_getStartIntermissionInterface, []), :jm_setEnabled, [false])
+        end
+    end)
+  end
+end
 
-'$init'(This, GameCanvas) ->
-    'Processor':'$init'(This),
-    init_fields(This),
-        put({This, gameCanvas}, GameCanvas).
-
-% throws Exception
-process(This) ->
-        case (fun(Target_N65929) -> (get({Target_N65929, '$class'})):isElapsedTNT(Target_N65929, get({This, 'WAIT'})) end)((fun(Target_N65936) -> (get({Target_N65936, '$class'})):getTimeDelayHelper(Target_N65936) end)((get({get({This, gameCanvas}), '$class'})):getStartIntermissionInterface(get({This, gameCanvas})))) of
-            true ->
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), "Intermission End", This, get({get({This, commonStrings}), 'PROCESS'})),
-            (fun(Target_N66038) -> (get({Target_N66038, '$class'})):setEnabled(Target_N66038, false) end)((get({get({This, gameCanvas}), '$class'})):getStartIntermissionInterface(get({This, gameCanvas})));
-            false -> ok
-        end.
 

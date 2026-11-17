@@ -1,52 +1,107 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.util.cache
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
--module('CachePolicy').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule CachePolicy do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, name}, undefined),
-    put({This, maxTime}, 0),
-    put({This, maxSize}, 0),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :name, nil)
+    JR.put(this, :maxTime, 0)
+    JR.put(this, :maxSize, 0)
+        
+        JR.put(this, :maxTime, 0)
+        JR.put(this, :maxSize, 0)
+    nil
+  end
 
 
-new(Name, MaxTime, MaxSize) when (is_list(Name) orelse Name =:= undefined), is_integer(MaxTime), is_integer(MaxSize) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Name, MaxTime, MaxSize),
-    This.
+  def jinit(this, p_name, p_maxTime, p_maxSize) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :maxTime, p_maxTime)
+      JR.lset(f, :maxSize, p_maxSize)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :name, JR.lget(f, :name))
+        JR.call(this, :jm_setMaxTime, [JR.lget(f, :maxTime)])
+        JR.call(this, :jm_setMaxSize, [JR.lget(f, :maxSize)])
+    end)
+  end
 
-'$init'(This, Name, MaxTime, MaxSize) when (is_list(Name) orelse Name =:= undefined), is_integer(MaxTime), is_integer(MaxSize) ->
-    init_fields(This),
-        put({This, name}, Name),
-        (get({This, '$class'})):setMaxTime(This, MaxTime),
-        (get({This, '$class'})):setMaxSize(This, MaxSize).
+  def jnew(p_name, p_maxTime, p_maxSize) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_name, p_maxTime, p_maxSize)
+    this
+  end
 
-getMaxTime(This) ->
-        get({This, maxTime}).
 
-setMaxTime(This, MaxTime) when is_integer(MaxTime) ->
-        put({This, maxTime}, MaxTime).
+  def jm_getMaxTime(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :maxTime)})
+    end)
+  end
 
-getMaxSize(This) ->
-        get({This, maxSize}).
 
-setMaxSize(This, MaxSize) when is_integer(MaxSize) ->
-        put({This, maxSize}, MaxSize).
+  def jm_setMaxTime(this, p_maxTime) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :maxTime, p_maxTime)
+        JR.put(this, :maxTime, JR.lget(f, :maxTime))
+    end)
+  end
 
-getName(This) ->
-        get({This, name}).
+
+  def jm_getMaxSize(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :maxSize)})
+    end)
+  end
+
+
+  def jm_setMaxSize(this, p_maxSize) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :maxSize, p_maxSize)
+        JR.put(this, :maxSize, JR.lget(f, :maxSize))
+    end)
+  end
+
+
+  def jm_getName(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :name)})
+    end)
+  end
+end
+
 

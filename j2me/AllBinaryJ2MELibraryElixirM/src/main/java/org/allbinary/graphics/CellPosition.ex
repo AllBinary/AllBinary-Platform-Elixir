@@ -1,69 +1,124 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics
-% import org.allbinary.graph.V
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonSeps
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics
 
--module('CellPosition').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule CellPosition do
+  def jsuper(), do: V
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('V', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :id, 0)
+    JR.put(this, :column, 0)
+    JR.put(this, :row, 0)
+        
+        
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, id}, 0),
-    put({This, column}, 0),
-    put({This, row}, 0),
-    ok.
+
+  def jinit(this, p_column, p_row, p_columns, p_rows) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :column, p_column)
+      JR.lset(f, :row, p_row)
+      JR.lset(f, :columns, p_columns)
+      JR.lset(f, :rows, p_rows)
+      V.jinit(this)
+      jinitfields(this)
+        JR.put(this, :column, JR.lget(f, :column))
+        JR.put(this, :row, JR.lget(f, :row))
+        JR.put(this, :id, JR.int32((JR.int32(JR.lget(f, :row) * JR.lget(f, :columns))) + JR.lget(f, :column)))
+    end)
+  end
+
+  def jnew(p_column, p_row, p_columns, p_rows) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_column, p_row, p_columns, p_rows)
+    this
+  end
 
 
-new(Column, Row, Columns, Rows) when is_integer(Column), is_integer(Row), is_integer(Columns), is_integer(Rows) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Column, Row, Columns, Rows),
-    This.
+  def jm_getColumn(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :column)})
+    end)
+  end
 
-'$init'(This, Column, Row, Columns, Rows) when is_integer(Column), is_integer(Row), is_integer(Columns), is_integer(Rows) ->
-    'V':'$init'(This),
-    init_fields(This),
-        put({This, column}, Column),
-        put({This, row}, Row),
-        put({This, id}, (((Row * Columns)) + Column)).
 
-getColumn(This) ->
-        get({This, column}).
+  def jm_getRow(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :row)})
+    end)
+  end
 
-getRow(This) ->
-        get({This, row}).
 
-toString(This) ->
-        'CellPosition':toStringColRow((get({This, '$class'})):getColumn(This), (get({This, '$class'})):getRow(This)).
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, CellPosition.jm_toStringColRow(JR.call(this, :jm_getColumn, []), JR.call(this, :jm_getRow, []))})
+    end)
+  end
 
-toStringCellPosition(BasicGeographicMapCellPosition) ->
-        'CellPosition':toStringColRow((get({BasicGeographicMapCellPosition, '$class'})):getColumn(BasicGeographicMapCellPosition), (get({BasicGeographicMapCellPosition, '$class'})):getRow(BasicGeographicMapCellPosition)).
 
-toStringColRow(I_column, I_row) when is_integer(I_column), is_integer(I_row) ->
-        StringBuffer = 'StringMaker':new(),
-        CommonSeps = 'CommonSeps':getInstance(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'PARENTHESIS_OPEN'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, I_column),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'COMMA'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, I_row),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'PARENTHESIS_CLOSE'})),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+  def jm_toStringCellPosition(p_basicGeographicMapCellPosition) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicGeographicMapCellPosition, p_basicGeographicMapCellPosition)
+        throw({:jreturn, CellPosition.jm_toStringColRow(JR.call(JR.lget(f, :basicGeographicMapCellPosition), :jm_getColumn, []), JR.call(JR.lget(f, :basicGeographicMapCellPosition), :jm_getRow, []))})
+    end)
+  end
 
-getId(This) ->
-        get({This, id}).
+
+  def jm_toStringColRow(p_i_column, p_i_row) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :i_column, p_i_column)
+      JR.lset(f, :i_row, p_i_row)
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.lset(f, :commonSeps, CommonSeps.jm_getInstance())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :PARENTHESIS_OPEN)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.lget(f, :i_column)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :COMMA)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.lget(f, :i_row)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :PARENTHESIS_CLOSE)])
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+
+
+  def jm_getId(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :id)})
+    end)
+  end
+end
+
 

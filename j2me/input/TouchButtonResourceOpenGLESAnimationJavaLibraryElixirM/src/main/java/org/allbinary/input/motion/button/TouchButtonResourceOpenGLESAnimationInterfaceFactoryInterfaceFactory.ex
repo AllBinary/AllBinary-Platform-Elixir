@@ -1,51 +1,68 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion.button
-% import org.allbinary.game.configuration.feature.Features
-% import org.allbinary.graphics.opengles.OpenGLFeatureFactory
-% import org.allbinary.image.opengles.OpenGLImageCacheFactory
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
--module('TouchButtonResourceOpenGLESAnimationInterfaceFactoryInterfaceFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule TouchButtonResourceOpenGLESAnimationInterfaceFactoryInterfaceFactory do
+  def jsuper(), do: TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory.jinit(this, "OpenGL TouchButton Animations")
+        TouchButtonResourceOpenGLESAnimationInterfaceFactoryInterfaceFactory.jinitfields(this)
+    end)
+  end
 
-'$init'(This) ->
-        'TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory':'$init'(This, "OpenGL TouchButton Animations").
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-% throws Exception
-init(This, Level) when is_integer(Level) ->
-        'TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory':initImageCache(This, 'OpenGLImageCacheFactory':getInstance(), Level).
 
-isFeature(This) ->
-        try
-        case (fun(Target_N65844) -> (get({Target_N65844, '$class'})):isDefault(Target_N65844, get({'OpenGLFeatureFactory':getInstance(), 'OPENGL'})) end)('Features':getInstance()) of
-            true ->
-            throw({'$return', true});
-            false ->
-            throw({'$return', false})
+  def jm_init(this, p_level) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :level, p_level)
+        TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory.jm_initImageCache(this, OpenGLImageCacheFactory.jm_getInstance(), JR.lget(f, :level))
+    end)
+  end
+
+
+  def jm_isFeature(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if JR.call(Features.jm_getInstance(), :jm_isDefault, [JR.get(OpenGLFeatureFactory.jm_getInstance(), :OPENGL)]) do
+            throw({:jreturn, true})
+        else
+            throw({:jreturn, false})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
+end
+
 

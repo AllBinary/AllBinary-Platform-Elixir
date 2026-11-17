@@ -1,76 +1,148 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.score
-% import java.io.ByteArrayOutputStream
-% import java.io.DataOutputStream
-% import org.allbinary.game.GameInfo
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonSeps
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.score
 
--module('HighScore').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule HighScore do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, id}, 0),
-    put({This, name}, undefined),
-    put({This, gameInfo}, undefined),
-    put({This, score}, 0),
-    put({This, scoreString}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :id, 0)
+    JR.put(this, :name, nil)
+    JR.put(this, :gameInfo, nil)
+    JR.put(this, :score, 0)
+    JR.put(this, :scoreString, nil)
+        
+        
+        
+        
+        
+    nil
+  end
 
 
-new(Id, Name, GameInfo, Score) when is_integer(Id), (is_list(Name) orelse Name =:= undefined), is_integer(Score) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Id, Name, GameInfo, Score),
-    This.
+  def jinit(this, p_id, p_name, p_gameInfo, p_score) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :id, p_id)
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :gameInfo, p_gameInfo)
+      JR.lset(f, :score, p_score)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :id, JR.lget(f, :id))
+        JR.put(this, :name, JR.lget(f, :name))
+        JR.put(this, :gameInfo, JR.lget(f, :gameInfo))
+        JR.put(this, :score, JR.lget(f, :score))
+        JR.put(this, :scoreString, JR.str(JR.get(this, :score)))
+    end)
+  end
 
-'$init'(This, Id, Name, GameInfo, Score) when is_integer(Id), (is_list(Name) orelse Name =:= undefined), is_integer(Score) ->
-    init_fields(This),
-        put({This, id}, Id),
-        put({This, name}, Name),
-        put({This, gameInfo}, GameInfo),
-        put({This, score}, Score),
-        put({This, scoreString}, allbinary_java:to_string(get({This, score}))).
+  def jnew(p_id, p_name, p_gameInfo, p_score) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_id, p_name, p_gameInfo, p_score)
+    this
+  end
 
-getId(This) ->
-        get({This, id}).
 
-getName(This) ->
-        get({This, name}).
+  def jm_getId(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :id)})
+    end)
+  end
 
-getScore(This) ->
-        get({This, score}).
 
-% throws Exception
-getAsBytes(This) ->
-        ByteArrayOutputStream = 'ByteArrayOutputStream':new(),
-        OutputStream = 'DataOutputStream':new(ByteArrayOutputStream),
-        (get({OutputStream, '$class'})):writeUTF(OutputStream, (get({This, '$class'})):getName(This)),
-        (get({OutputStream, '$class'})):writeLong(OutputStream, (get({This, '$class'})):getScore(This)),
-        (get({ByteArrayOutputStream, '$class'})):toByteArray(ByteArrayOutputStream).
+  def jm_getName(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :name)})
+    end)
+  end
 
-getGameInfo(This) ->
-        get({This, gameInfo}).
 
-getScoreString(This) ->
-        get({This, scoreString}).
+  def jm_getScore(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :score)})
+    end)
+  end
 
-setName(This, Name) when (is_list(Name) orelse Name =:= undefined) ->
-        put({This, name}, Name).
 
-toString(This) ->
-        CommonSeps = 'CommonSeps':getInstance(),
-        (fun(Target_N66700) -> (get({Target_N66700, '$class'})):toString(Target_N66700) end)((fun(Target_N66707) -> (get({Target_N66707, '$class'})):append(Target_N66707, get({This, scoreString})) end)((fun(Target_N66714) -> (get({Target_N66714, '$class'})):append(Target_N66714, get({CommonSeps, 'FORWARD_SLASH'})) end)((fun(Target_N66721) -> (get({Target_N66721, '$class'})):appendlong(Target_N66721, get({This, score})) end)((fun(Target_N66728) -> (get({Target_N66728, '$class'})):append(Target_N66728, get({CommonSeps, 'COLON'})) end)((fun(Target_N66735) -> (get({Target_N66735, '$class'})):append(Target_N66735, get({This, name})) end)('StringMaker':new())))))).
+  def jm_getAsBytes(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :byteArrayOutputStream, J.ByteArrayOutputStream.jnew())
+        JR.lset(f, :outputStream, DataOutputStream.jnew(JR.lget(f, :byteArrayOutputStream)))
+        JR.call(JR.lget(f, :outputStream), :jm_writeUTF, [JR.call(this, :jm_getName, [])])
+        JR.call(JR.lget(f, :outputStream), :jm_writeLong, [JR.call(this, :jm_getScore, [])])
+        throw({:jreturn, JR.call(JR.lget(f, :byteArrayOutputStream), :jm_toByteArray, [])})
+    end)
+  end
+
+
+  def jm_getGameInfo(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :gameInfo)})
+    end)
+  end
+
+
+  def jm_getScoreString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :scoreString)})
+    end)
+  end
+
+
+  def jm_setName(this, p_name) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+        JR.put(this, :name, JR.lget(f, :name))
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :commonSeps, CommonSeps.jm_getInstance())
+        throw({:jreturn, JR.call(JR.call(JR.call(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(this, :name)]), :jm_append, [JR.get(JR.lget(f, :commonSeps), :COLON)]), :jm_appendlong, [JR.get(this, :score)]), :jm_append, [JR.get(JR.lget(f, :commonSeps), :FORWARD_SLASH)]), :jm_append, [JR.get(this, :scoreString)]), :jm_toString, [])})
+    end)
+  end
+end
+
 

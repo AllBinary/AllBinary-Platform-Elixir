@@ -1,122 +1,281 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2025 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import javax.microedition.lcdui.CommandListener
-% import javax.microedition.lcdui.Graphics
-% import javax.microedition.lcdui.Item
-% import org.allbinary.game.state.GameState
-% import org.allbinary.game.state.GameStateFactory
-% import org.allbinary.logic.StdUtil
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.util.ABHashtable
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2025 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('NullGameCanvasRunnable').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements GameCanvasRunnableInterface
+defmodule NullGameCanvasRunnable do
+  def jsuper(), do: JObject
+def jstatic_NULL_GAME_CANVAS_RUNNABLE(), do: JR.static_get(__MODULE__, :NULL_GAME_CANVAS_RUNNABLE, fn -> NullGameCanvasRunnable.jnew() end)
+  def jstatic_set_NULL_GAME_CANVAS_RUNNABLE(value), do: JR.static_put(__MODULE__, :NULL_GAME_CANVAS_RUNNABLE, value)
 
-static_init() ->
-    put({?MODULE, 'NULL_GAME_CANVAS_RUNNABLE'}, 'NullGameCanvasRunnable':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :gameStateFactory, nil)
+        JR.put(this, :gameStateFactory, GameStateFactory.jm_getInstance())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, gameStateFactory}, 'GameStateFactory':getInstance()),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getTitle(This) ->
-        get({'StringUtil':getInstance(), 'EMPTY_STRING'}).
+  def jm_getTitle(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING)})
+    end)
+  end
 
-isInitialized(This) ->
-        false.
 
-isPaused(This) ->
-        false.
+  def jm_isInitialized(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
 
-unPause(This) ->
-        ok.
 
-pause(This) ->
-        ok.
+  def jm_isPaused(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
 
-isHighScoreSubmitted(This) ->
-        false.
 
-% throws Exception
-setHighScoreSubmitted(This, HighScoreSubmitted) when is_boolean(HighScoreSubmitted) ->
-        ok.
+  def jm_unPause(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-% throws Exception
-processGameOver(This) ->
-        ok.
 
-isGameOver(This) ->
-        false.
+  def jm_pause(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-initCommands(This, CmdListener) ->
-        ok.
 
-% throws Exception
-getCurrentStateHashtable(This) ->
-        get({'StdUtil':getInstance(), 'NULL_TABLE'}).
+  def jm_isHighScoreSubmitted(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
 
-% throws Exception
-getLoadStateHashtable(This) ->
-        get({'StdUtil':getInstance(), 'NULL_TABLE'}).
 
-% throws Exception
-setLoadStateHashtable(This, Hashtable) ->
-        ok.
+  def jm_setHighScoreSubmitted(this, p_highScoreSubmitted) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :highScoreSubmitted, p_highScoreSubmitted)
+        nil
+    end)
+  end
 
-getType(This) ->
-        (-1).
 
-% throws Exception
-setGameState(This, GameState) ->
-        ok.
+  def jm_processGameOver(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-getGameState(This) ->
-        get({get({This, gameStateFactory}), 'NO_GAME_STATE'}).
 
-itemStateChanged(This, Item) ->
-        ok.
+  def jm_isGameOver(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
 
-paint(This, Graphics) ->
-        ok.
 
-paintThreed(This, Graphics) ->
-        ok.
+  def jm_initCommands(this, p_cmdListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cmdListener, p_cmdListener)
+        nil
+    end)
+  end
 
-isRunning(This) ->
-        false.
 
-setRunning(This, IsRunning) when is_boolean(IsRunning) ->
-        ok.
+  def jm_getCurrentStateHashtable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(StdUtil.jm_getInstance(), :NULL_TABLE)})
+    end)
+  end
 
-% throws Exception
-setThread(This, Thread) ->
-        ok.
 
-run(This) ->
-        ok.
+  def jm_getLoadStateHashtable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(StdUtil.jm_getInstance(), :NULL_TABLE)})
+    end)
+  end
+
+
+  def jm_setLoadStateHashtable(this, p_hashtable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :hashtable, p_hashtable)
+        nil
+    end)
+  end
+
+
+  def jm_getType(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, -1})
+    end)
+  end
+
+
+  def jm_setGameState(this, p_gameState) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameState, p_gameState)
+        nil
+    end)
+  end
+
+
+  def jm_getGameState(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(JR.get(this, :gameStateFactory), :NO_GAME_STATE)})
+    end)
+  end
+
+
+  def jm_itemStateChanged(this, p_item) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :item, p_item)
+        nil
+    end)
+  end
+
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        nil
+    end)
+  end
+
+
+  def jm_paintThreed(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        nil
+    end)
+  end
+
+
+  def jm_isRunning(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
+
+
+  def jm_setRunning(this, p_isRunning) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :isRunning, p_isRunning)
+        nil
+    end)
+  end
+
+
+  def jm_setThread(this, p_thread) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :thread, p_thread)
+        nil
+    end)
+  end
+
+
+  def jm_run(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+end
+
 

@@ -1,56 +1,81 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.media
-% import org.allbinary.game.configuration.GameConfigurationCentral
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.media
 
--module('AllBinaryVibration').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule AllBinaryVibration do
+  def jsuper(), do: AllBinaryVibrationME
+def jstatic_VIBRATION(), do: JR.static_get(__MODULE__, :VIBRATION, fn -> AllBinaryNoVibration.jstatic_NO_VIBRATION() end)
+  def jstatic_set_VIBRATION(value), do: JR.static_put(__MODULE__, :VIBRATION, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AllBinaryVibrationME', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'VIBRATION'}, get({'AllBinaryNoVibration', 'NO_VIBRATION'})),
-    ok.
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      AllBinaryVibrationME.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    'AllBinaryVibrationME':'$init'(This),
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-getInstance() ->
-        get({'AllBinaryVibration', 'VIBRATION'}).
 
-init() ->
-        case ((fun(Target_N65756) -> (get({Target_N65756, '$class'})):intValue(Target_N65756) end)((fun(Target_N65763) -> (get({Target_N65763, '$class'})):getValue(Target_N65763) end)(get({'GameConfigurationCentral':getInstance(), 'VIBRATION'}))) =:= 0) of
-            true ->
-            put({'AllBinaryVibration', 'VIBRATION'}, get({'AllBinaryNoVibration', 'NO_VIBRATION'}));
-            false ->
-            put({'AllBinaryVibration', 'VIBRATION'}, 'AllBinaryVibration':new())
-        end.
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, AllBinaryVibration.jstatic_VIBRATION()})
+    end)
+  end
 
-vibrate(This, Duration, Type, Volume) when is_integer(Duration), is_integer(Type), is_integer(Volume) ->
-        ok.
+
+  def jm_init() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        if (JR.call(JR.call(JR.get(GameConfigurationCentral.jm_getInstance(), :VIBRATION), :jm_getValue, []), :jm_intValue, []) == 0) do
+            AllBinaryVibration.jstatic_set_VIBRATION(AllBinaryNoVibration.jstatic_NO_VIBRATION())
+        else
+            AllBinaryVibration.jstatic_set_VIBRATION(AllBinaryVibration.jnew())
+        end
+    end)
+  end
+
+
+  def jm_vibrate(this, p_duration, p_type, p_volume) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :duration, p_duration)
+      JR.lset(f, :type, p_type)
+      JR.lset(f, :volume, p_volume)
+        nil
+    end)
+  end
+end
+
 

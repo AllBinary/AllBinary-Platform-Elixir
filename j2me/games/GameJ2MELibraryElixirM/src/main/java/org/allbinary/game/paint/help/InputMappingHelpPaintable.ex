@@ -1,250 +1,280 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.paint.help
-% import javax.microedition.lcdui.Font
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.game.input.GameKey
-% import org.allbinary.game.input.GameKeyFactory
-% import org.allbinary.game.input.Input
-% import org.allbinary.game.input.PlatformInputMappingFactory
-% import org.allbinary.game.input.mapping.GameInputMapping
-% import org.allbinary.game.input.mapping.PersistentInputMapping
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.color.BasicColorFactory
-% import org.allbinary.graphics.color.BasicColorUtil
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.string.CommonLabels
-% import org.allbinary.string.CommonSeps
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.BasicArrayList
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.paint.help
 
--module('InputMappingHelpPaintable').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule InputMappingHelpPaintable do
+  def jsuper(), do: HelpPaintable
+def jstatic_AND(), do: JR.static_get(__MODULE__, :AND, fn -> " and " end)
+  def jstatic_set_AND(value), do: JR.static_put(__MODULE__, :AND, value)
+def jstatic_SEP(), do: JR.static_get(__MODULE__, :SEP, fn -> ", " end)
+  def jstatic_set_SEP(value), do: JR.static_put(__MODULE__, :SEP, value)
+def jstatic_MORE_THAN_TWO_IN_LIST_AND(), do: JR.static_get(__MODULE__, :MORE_THAN_TWO_IN_LIST_AND, fn -> ", and " end)
+  def jstatic_set_MORE_THAN_TWO_IN_LIST_AND(value), do: JR.static_put(__MODULE__, :MORE_THAN_TWO_IN_LIST_AND, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('HelpPaintable', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'AND'}, " and "),
-    put({?MODULE, 'SEP'}, ", "),
-    put({?MODULE, 'MORE_THAN_TWO_IN_LIST_AND'}, ", and "),
-    ok.
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, commonSeps}, 'CommonSeps':getInstance()),
-    put({This, stringUtil}, 'StringUtil':getInstance()),
-    put({This, basicColorFactory}, 'BasicColorFactory':getInstance()),
-    put({This, 'NONE'}, get({'GameKeyFactory':getInstance(), 'NONE'})),
-    put({This, 'EMPTY_STRING'}, get({'StringUtil':getInstance(), 'EMPTY_STRING'})),
-    put({This, gameInputMappingArray}, undefined),
-    put({This, keyMappingArray}, array:new(0, {default, undefined})),
-    put({This, actionBasicColor}, get({'BasicColorUtil':getInstance(), 'ZERO_ARRAY'})),
-    put({This, inputBasicColorArray}, array:new(0, {default, array:new(0, {default, undefined})})),
-    put({This, selectedBasicColor}, undefined),
-    put({This, updateMyFontProperties}, 'UpdateMyFontProperties':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :commonSeps, nil)
+    JR.put(this, :stringUtil, nil)
+    JR.put(this, :basicColorFactory, nil)
+    JR.put(this, :NONE, nil)
+    JR.put(this, :EMPTY_STRING, nil)
+    JR.put(this, :gameInputMappingArray, nil)
+    JR.put(this, :keyMappingArray, nil)
+    JR.put(this, :actionBasicColor, nil)
+    JR.put(this, :inputBasicColorArray, nil)
+    JR.put(this, :selectedBasicColor, nil)
+    JR.put(this, :updateMyFontProperties, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        JR.put(this, :commonSeps, CommonSeps.jm_getInstance())
+        JR.put(this, :stringUtil, StringUtil.jm_getInstance())
+        JR.put(this, :basicColorFactory, BasicColorFactory.jm_getInstance())
+        JR.put(this, :NONE, JR.get(GameKeyFactory.jm_getInstance(), :NONE))
+        JR.put(this, :EMPTY_STRING, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+        
+        JR.put(this, :keyMappingArray, JR.anew(0, nil))
+        JR.put(this, :actionBasicColor, JR.get(BasicColorUtil.jm_getInstance(), :ZERO_ARRAY))
+        JR.put(this, :inputBasicColorArray, JR.anew_of(0, fn -> JR.anew(0, nil) end))
+        JR.put(this, :selectedBasicColor, nil)
+        JR.put(this, :updateMyFontProperties, UpdateMyFontProperties.jnew())
+    nil
+  end
 
 
-new(GameInputMappingArray, BackgroundBasicColor, BasicColor) when (is_tuple(GameInputMappingArray) orelse GameInputMappingArray =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, GameInputMappingArray, BackgroundBasicColor, BasicColor),
-    This.
+  def jinit(this, p_gameInputMappingArray, p_backgroundBasicColor, p_basicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameInputMappingArray, p_gameInputMappingArray)
+      JR.lset(f, :backgroundBasicColor, p_backgroundBasicColor)
+      JR.lset(f, :basicColor, p_basicColor)
+        HelpPaintable.jinit(this, "Input Mapping", JR.lget(f, :backgroundBasicColor), JR.lget(f, :basicColor))
+        InputMappingHelpPaintable.jinitfields(this)
+        JR.put(this, :gameInputMappingArray, JR.lget(f, :gameInputMappingArray))
+        JR.call(this, :jm_update, [JR.get(this, :NONE), JR.get(this, :NONE)])
+        if ((JR.lget(f, :backgroundBasicColor) == JR.get(JR.get(this, :basicColorFactory), :WHITE)) || (JR.lget(f, :basicColor) == JR.get(JR.get(this, :basicColorFactory), :WHITE))) do
+            JR.put(this, :selectedBasicColor, JR.get(JR.get(this, :basicColorFactory), :RED))
+        else
+            JR.put(this, :selectedBasicColor, JR.get(JR.get(this, :basicColorFactory), :WHITE))
+        end
+    end)
+  end
 
-'$init'(This, GameInputMappingArray, BackgroundBasicColor, BasicColor) when (is_tuple(GameInputMappingArray) orelse GameInputMappingArray =:= undefined) ->
-        'HelpPaintable':'$init'(This, "Input Mapping", BackgroundBasicColor, BasicColor),
-        init_fields(This),
-        put({This, gameInputMappingArray}, GameInputMappingArray),
-        (get({This, '$class'})):update(This, get({This, 'NONE'}), get({This, 'NONE'})),
-        case ((BackgroundBasicColor =:= get({get({This, basicColorFactory}), 'WHITE'})) orelse (BasicColor =:= get({get({This, basicColorFactory}), 'WHITE'}))) of
-            true ->
-            put({This, selectedBasicColor}, get({get({This, basicColorFactory}), 'RED'}));
-            false ->
-            put({This, selectedBasicColor}, get({get({This, basicColorFactory}), 'WHITE'}))
-        end.
+  def jnew(p_gameInputMappingArray, p_backgroundBasicColor, p_basicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_gameInputMappingArray, p_backgroundBasicColor, p_basicColor)
+    this
+  end
 
-updateMeasurement(This, Graphics) ->
-        Font = (get({Graphics, '$class'})):getFont(Graphics),
-        UpdateMyFontProperties = 'UpdateMyFontProperties':new(),
-        put({UpdateMyFontProperties, charHeight}, (get({Font, '$class'})):getHeight(Font)),
-        StringMaker = 'StringMaker':new(),
-        InputInfo = get({This, inputInfo}),
-        Size = array:size(InputInfo),
-        put({UpdateMyFontProperties, actionStringArray}, array:new(Size, {default, undefined})),
-        put({UpdateMyFontProperties, keymappingBeginWidthArray}, array:new(Size, {default, 0})),
-        put({UpdateMyFontProperties, actionStringDeltaXArray}, array:new(Size, {default, 0})),
-        put({UpdateMyFontProperties, inputDeltaXArray}, array:new(Size, {default, array:new(0, {default, 0})})),
-        put({UpdateMyFontProperties, sepArray}, array:new(Size, {default, array:new(0, {default, undefined})})),
-        put({UpdateMyFontProperties, sepWidthArray}, array:new(Size, {default, array:new(0, {default, 0})})),
-        put({local, list}, undefined),
-        put({local, keyMappings}, undefined),
-        put({local, actionString}, undefined),
-        put({local, input}, undefined),
-        put({local, size2}, 0),
-        lists:foreach(fun(Index) ->
-            put({local, list}, array:get(Index, get({This, keyMappingArray}))),
-            put({local, keyMappings}, (get({This, '$class'})):get(This, get({local, list}))),
-            (get({StringMaker, '$class'})):delete(StringMaker, 0, (get({StringMaker, '$class'})):length(StringMaker)),
-            put({local, actionString}, (fun(Target_N68190) -> (get({Target_N68190, '$class'})):toString(Target_N68190) end)((fun(Target_N68197) -> (get({Target_N68197, '$class'})):append(Target_N68197, get({get({This, commonSeps}), 'SPACE'})) end)((fun(Target_N68204) -> (get({Target_N68204, '$class'})):append(Target_N68204, get({get({This, commonSeps}), 'SPACE'})) end)((fun(Target_N68211) -> (get({Target_N68211, '$class'})):append(Target_N68211, get({get({This, commonSeps}), 'COLON'})) end)((get({StringMaker, '$class'})):append(StringMaker, array:get(Index, InputInfo))))))),
-            put({UpdateMyFontProperties, actionStringArray}, array:set(Index, get({local, actionString}), get({UpdateMyFontProperties, actionStringArray}))),
-            (get({StringMaker, '$class'})):delete(StringMaker, 0, (get({StringMaker, '$class'})):length(StringMaker)),
-            put({UpdateMyFontProperties, keymappingBeginWidthArray}, array:set(Index, (((get({Font, '$class'})):stringWidth(Font, (fun(Target_N68471) -> (get({Target_N68471, '$class'})):toString(Target_N68471) end)((fun(Target_N68478) -> (get({Target_N68478, '$class'})):append(Target_N68478, get({local, keyMappings})) end)((get({StringMaker, '$class'})):append(StringMaker, array:get(Index, get({UpdateMyFontProperties, actionStringArray})))))) bsr 1)), get({UpdateMyFontProperties, keymappingBeginWidthArray}))),
-            put({UpdateMyFontProperties, actionStringDeltaXArray}, array:set(Index, (get({Font, '$class'})):stringWidth(Font, get({local, actionString})), get({UpdateMyFontProperties, actionStringDeltaXArray}))),
-            put({local, size2}, (get({get({local, list}), '$class'})):size(get({local, list}))),
-            put({UpdateMyFontProperties, inputDeltaXArray}, array:set(Index, array:new(get({local, size2}), {default, 0}), get({UpdateMyFontProperties, inputDeltaXArray}))),
-            put({UpdateMyFontProperties, sepArray}, array:set(Index, array:new(get({local, size2}), {default, undefined}), get({UpdateMyFontProperties, sepArray}))),
-            put({UpdateMyFontProperties, sepWidthArray}, array:set(Index, array:new(get({local, size2}), {default, 0}), get({UpdateMyFontProperties, sepWidthArray}))),
-            lists:foreach(fun(Index2) ->
-                put({local, input}, array:get(Index2, get({get({local, list}), objectArray}))),
-                put({UpdateMyFontProperties, inputDeltaXArray}, array:set(Index, array:set(Index2, (get({Font, '$class'})):stringWidth(Font, (get({get({local, input}), '$class'})):getName(get({local, input}))), array:get(Index, get({UpdateMyFontProperties, inputDeltaXArray}))), get({UpdateMyFontProperties, inputDeltaXArray}))),
-                put({UpdateMyFontProperties, sepArray}, array:set(Index, array:set(Index2, get({This, 'EMPTY_STRING'}), array:get(Index, get({UpdateMyFontProperties, sepArray}))), get({UpdateMyFontProperties, sepArray}))),
-                case ((Index2 + 1) < (get({get({local, list}), '$class'})):size(get({local, list}))) of
-                    true ->
-                    case ((get({get({local, list}), '$class'})):size(get({local, list})) =:= 2) of
-                        true ->
-                        put({UpdateMyFontProperties, sepArray}, array:set(Index, array:set(Index2, get({'InputMappingHelpPaintable', 'AND'}), array:get(Index, get({UpdateMyFontProperties, sepArray}))), get({UpdateMyFontProperties, sepArray})));
-                        false ->
-                        case ((Index2 + 2) =:= (get({get({local, list}), '$class'})):size(get({local, list}))) of
-                            true ->
-                            put({UpdateMyFontProperties, sepArray}, array:set(Index, array:set(Index2, get({'InputMappingHelpPaintable', 'MORE_THAN_TWO_IN_LIST_AND'}), array:get(Index, get({UpdateMyFontProperties, sepArray}))), get({UpdateMyFontProperties, sepArray})));
-                            false ->
-                            put({UpdateMyFontProperties, sepArray}, array:set(Index, array:set(Index2, get({'InputMappingHelpPaintable', 'SEP'}), array:get(Index, get({UpdateMyFontProperties, sepArray}))), get({UpdateMyFontProperties, sepArray})))
+
+  def jm_updateMeasurement(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.lset(f, :font, JR.call(JR.lget(f, :graphics), :jm_getFont, []))
+        JR.lset(f, :updateMyFontProperties, UpdateMyFontProperties.jnew())
+        JR.put(JR.lget(f, :updateMyFontProperties), :charHeight, JR.call(JR.lget(f, :font), :jm_getHeight, []))
+        JR.lset(f, :stringMaker, StringMaker.jnew())
+        JR.lset(f, :inputInfo, JR.get(this, :inputInfo))
+        JR.lset(f, :size, JR.alength(JR.lget(f, :inputInfo)))
+        JR.put(JR.lget(f, :updateMyFontProperties), :actionStringArray, JR.anew(JR.lget(f, :size), nil))
+        JR.put(JR.lget(f, :updateMyFontProperties), :keymappingBeginWidthArray, JR.anew(JR.lget(f, :size), 0))
+        JR.put(JR.lget(f, :updateMyFontProperties), :actionStringDeltaXArray, JR.anew(JR.lget(f, :size), 0))
+        JR.put(JR.lget(f, :updateMyFontProperties), :inputDeltaXArray, JR.anew_of(JR.lget(f, :size), fn -> JR.anew(0, 0) end))
+        JR.put(JR.lget(f, :updateMyFontProperties), :sepArray, JR.anew_of(JR.lget(f, :size), fn -> JR.anew(0, nil) end))
+        JR.put(JR.lget(f, :updateMyFontProperties), :sepWidthArray, JR.anew_of(JR.lget(f, :size), fn -> JR.anew(0, 0) end))
+        JR.lset(f, :list, nil)
+        JR.lset(f, :keyMappings, nil)
+        JR.lset(f, :actionString, nil)
+        JR.lset(f, :input, nil)
+        JR.lset(f, :size2, 0)
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :list, JR.aget(JR.get(this, :keyMappingArray), JR.lget(f, :index)))
+            JR.lset(f, :keyMappings, JR.call(this, :jm_get, [JR.lget(f, :list)]))
+            JR.call(JR.lget(f, :stringMaker), :jm_delete, [0, JR.call(JR.lget(f, :stringMaker), :jm_length, [])])
+            JR.lset(f, :actionString, JR.call(JR.call(JR.call(JR.call(JR.call(JR.lget(f, :stringMaker), :jm_append, [JR.aget(JR.lget(f, :inputInfo), JR.lget(f, :index))]), :jm_append, [JR.get(JR.get(this, :commonSeps), :COLON)]), :jm_append, [JR.get(JR.get(this, :commonSeps), :SPACE)]), :jm_append, [JR.get(JR.get(this, :commonSeps), :SPACE)]), :jm_toString, []))
+            JR.aset(JR.get(JR.lget(f, :updateMyFontProperties), :actionStringArray), JR.lget(f, :index), JR.lget(f, :actionString))
+            JR.call(JR.lget(f, :stringMaker), :jm_delete, [0, JR.call(JR.lget(f, :stringMaker), :jm_length, [])])
+            JR.aset(JR.get(JR.lget(f, :updateMyFontProperties), :keymappingBeginWidthArray), JR.lget(f, :index), (Bitwise.bsr(JR.call(JR.lget(f, :font), :jm_stringWidth, [JR.call(JR.call(JR.call(JR.lget(f, :stringMaker), :jm_append, [JR.aget(JR.get(JR.lget(f, :updateMyFontProperties), :actionStringArray), JR.lget(f, :index))]), :jm_append, [JR.lget(f, :keyMappings)]), :jm_toString, [])]), 1)))
+            JR.aset(JR.get(JR.lget(f, :updateMyFontProperties), :actionStringDeltaXArray), JR.lget(f, :index), JR.call(JR.lget(f, :font), :jm_stringWidth, [JR.lget(f, :actionString)]))
+            JR.lset(f, :size2, JR.call(JR.lget(f, :list), :jm_size, []))
+            JR.aset(JR.get(JR.lget(f, :updateMyFontProperties), :inputDeltaXArray), JR.lget(f, :index), JR.anew(JR.lget(f, :size2), 0))
+            JR.aset(JR.get(JR.lget(f, :updateMyFontProperties), :sepArray), JR.lget(f, :index), JR.anew(JR.lget(f, :size2), nil))
+            JR.aset(JR.get(JR.lget(f, :updateMyFontProperties), :sepWidthArray), JR.lget(f, :index), JR.anew(JR.lget(f, :size2), 0))
+            JR.lset(f, :index2, 0)
+            JR.jfor(fn -> (JR.lget(f, :index2) < JR.lget(f, :size2)) end, fn -> JR.lpostinc(f, :index2, 1) end, fn ->
+                JR.lset(f, :input, JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index2)))
+                JR.aset(JR.aget(JR.get(JR.lget(f, :updateMyFontProperties), :inputDeltaXArray), JR.lget(f, :index)), JR.lget(f, :index2), JR.call(JR.lget(f, :font), :jm_stringWidth, [JR.call(JR.lget(f, :input), :jm_getName, [])]))
+                JR.aset(JR.aget(JR.get(JR.lget(f, :updateMyFontProperties), :sepArray), JR.lget(f, :index)), JR.lget(f, :index2), JR.get(this, :EMPTY_STRING))
+                if (JR.int32(JR.lget(f, :index2) + 1) < JR.call(JR.lget(f, :list), :jm_size, [])) do
+                    if (JR.call(JR.lget(f, :list), :jm_size, []) == 2) do
+                        JR.aset(JR.aget(JR.get(JR.lget(f, :updateMyFontProperties), :sepArray), JR.lget(f, :index)), JR.lget(f, :index2), InputMappingHelpPaintable.jstatic_AND())
+                    else
+                        if (JR.int32(JR.lget(f, :index2) + 2) == JR.call(JR.lget(f, :list), :jm_size, [])) do
+                            JR.aset(JR.aget(JR.get(JR.lget(f, :updateMyFontProperties), :sepArray), JR.lget(f, :index)), JR.lget(f, :index2), InputMappingHelpPaintable.jstatic_MORE_THAN_TWO_IN_LIST_AND())
+                        else
+                            JR.aset(JR.aget(JR.get(JR.lget(f, :updateMyFontProperties), :sepArray), JR.lget(f, :index)), JR.lget(f, :index2), InputMappingHelpPaintable.jstatic_SEP())
                         end
-                    end;
-                    false -> ok
-                end,
-                case (array:get(Index2, array:get(Index, get({UpdateMyFontProperties, sepArray}))) =/= get({This, 'EMPTY_STRING'})) of
-                    true ->
-                    put({UpdateMyFontProperties, sepWidthArray}, array:set(Index, array:set(Index2, (get({Font, '$class'})):stringWidth(Font, array:get(Index2, array:get(Index, get({UpdateMyFontProperties, sepArray})))), array:get(Index, get({UpdateMyFontProperties, sepWidthArray}))), get({UpdateMyFontProperties, sepWidthArray})));
-                    false -> ok
-                end
-            end, lists:seq(0, get({local, size2}) - 1))
-        end, lists:seq(0, Size - 1)),
-        put({This, updateMyFontProperties}, UpdateMyFontProperties),
-        'HelpPaintable':updateMeasurement(This, Graphics).
-
-update(This, SelectedGameKey, SelectedInput) ->
-        StringMaker = 'StringMaker':new(),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N69875) -> (get({Target_N69875, '$class'})):toString(Target_N69875) end)((fun(Target_N69882) -> (get({Target_N69882, '$class'})):append(Target_N69882, (get({get({This, stringUtil}), '$class'})):toString(get({This, stringUtil}), SelectedInput)) end)((fun(Target_N69889) -> (get({Target_N69889, '$class'})):append(Target_N69889, " Input: ") end)((fun(Target_N69896) -> (get({Target_N69896, '$class'})):append(Target_N69896, (get({get({This, stringUtil}), '$class'})):toString(get({This, stringUtil}), SelectedGameKey)) end)((fun(Target_N69903) -> (get({Target_N69903, '$class'})):append(Target_N69903, "selected GameKey: ") end)((get({StringMaker, '$class'})):append(StringMaker, get({'CommonLabels':getInstance(), 'START_LABEL'}))))))), This, get({get({This, commonStrings}), 'UPDATE'})),
-        GameKeyMapping = (fun(Target_N70081) -> (get({Target_N70081, '$class'})):getPersistentInputMappingInstance(Target_N70081) end)('PlatformInputMappingFactory':getInstance()),
-        Size = array:size(get({This, gameInputMappingArray})),
-        KeyInfo = array:new(Size, {default, undefined}),
-        KeyMappingArray = array:new(Size, {default, undefined}),
-        ActionBasicColor = array:new(Size, {default, undefined}),
-        InputBasicColorArray = array:new(Size, {default, undefined}),
-        put({local, gameInputMapping}, undefined),
-        put({local, gameKey}, undefined),
-        put({local, list}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, gameInputMapping}, array:get(Index, get({This, gameInputMappingArray}))),
-            put({local, gameKey}, (get({get({local, gameInputMapping}), '$class'})):getGameKey(get({local, gameInputMapping}))),
-            put({local, list}, (fun(Target_N70619) -> (get({Target_N70619, '$class'})):getMappedInput(Target_N70619, get({local, gameKey})) end)((get({GameKeyMapping, '$class'})):getInputMapping(GameKeyMapping))),
-            Size2 = (get({get({local, list}), '$class'})):size(get({local, list})),
-            array:set(Index, array:new(Size2, {default, undefined}), InputBasicColorArray),
-            lists:foreach(fun(Index2) ->
-                array:set(Index, array:set(Index2, get({This, basicColor}), array:get(Index, InputBasicColorArray)), InputBasicColorArray)
-            end, lists:seq(0, Size2 - 1)),
-            case (get({local, gameKey}) =:= SelectedGameKey) of
-                true ->
-                (get({StringMaker, '$class'})):delete(StringMaker, 0, (get({StringMaker, '$class'})):length(StringMaker)),
-                (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N71019) -> (get({Target_N71019, '$class'})):toString(Target_N71019) end)((fun(Target_N71026) -> (get({Target_N71026, '$class'})):append(Target_N71026, (get({get({This, stringUtil}), '$class'})):toString(get({This, stringUtil}), SelectedGameKey)) end)((get({StringMaker, '$class'})):append(StringMaker, "Found: selected GameKey: "))), This, get({get({This, commonStrings}), 'UPDATE'})),
-                array:set(Index, get({This, selectedBasicColor}), ActionBasicColor),
-                IndexOfSelectedInput = (get({get({local, list}), '$class'})):indexOf(get({local, list}), SelectedInput),
-                case (IndexOfSelectedInput >= 0) of
-                    true ->
-                    (get({StringMaker, '$class'})):delete(StringMaker, 0, (get({StringMaker, '$class'})):length(StringMaker)),
-                    (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N71297) -> (get({Target_N71297, '$class'})):toString(Target_N71297) end)((fun(Target_N71304) -> (get({Target_N71304, '$class'})):append(Target_N71304, (get({get({This, stringUtil}), '$class'})):toString(get({This, stringUtil}), SelectedInput)) end)((get({StringMaker, '$class'})):append(StringMaker, "Found: selected Input: "))), This, get({get({This, commonStrings}), 'UPDATE'})),
-                    array:set(Index, array:set(IndexOfSelectedInput, get({This, selectedBasicColor}), array:get(Index, InputBasicColorArray)), InputBasicColorArray);
-                    false -> ok
-                end;
-                false ->
-                array:set(Index, get({This, basicColor}), ActionBasicColor)
-            end,
-            array:set(Index, (get({get({local, gameInputMapping}), '$class'})):getName(get({local, gameInputMapping})), KeyInfo),
-            array:set(Index, get({local, list}), KeyMappingArray)
-        end, lists:seq(0, Size - 1)),
-        put({This, keyMappingArray}, KeyMappingArray),
-        put({This, actionBasicColor}, ActionBasicColor),
-        put({This, inputBasicColorArray}, InputBasicColorArray),
-        'HelpPaintable':setInputInfoP(This, KeyInfo),
-        put({This, myFontProcessor}, get({This, updateMyFontProcessor})).
-
-get(This, KeyList) ->
-        StringBuffer = 'StringMaker':new(),
-        put({local, key}, undefined),
-        Size = (get({KeyList, '$class'})):size(KeyList),
-        lists:foreach(fun(Index) ->
-            put({local, key}, array:get(Index, get({KeyList, objectArray}))),
-            (get({StringBuffer, '$class'})):append(StringBuffer, (get({get({local, key}), '$class'})):getName(get({local, key}))),
-            case ((Index + 1) < (get({KeyList, '$class'})):size(KeyList)) of
-                true ->
-                case ((get({KeyList, '$class'})):size(KeyList) =:= 2) of
-                    true ->
-                    (get({StringBuffer, '$class'})):append(StringBuffer, get({'InputMappingHelpPaintable', 'AND'}));
-                    false ->
-                    case ((Index + 2) =:= (get({KeyList, '$class'})):size(KeyList)) of
-                        true ->
-                        (get({StringBuffer, '$class'})):append(StringBuffer, get({'InputMappingHelpPaintable', 'MORE_THAN_TWO_IN_LIST_AND'}));
-                        false ->
-                        (get({StringBuffer, '$class'})):append(StringBuffer, get({'InputMappingHelpPaintable', 'SEP'}))
                     end
-                end;
-                false -> ok
-            end
-        end, lists:seq(0, Size - 1)),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+                end
+                if (JR.aget(JR.aget(JR.get(JR.lget(f, :updateMyFontProperties), :sepArray), JR.lget(f, :index)), JR.lget(f, :index2)) != JR.get(this, :EMPTY_STRING)) do
+                    JR.aset(JR.aget(JR.get(JR.lget(f, :updateMyFontProperties), :sepWidthArray), JR.lget(f, :index)), JR.lget(f, :index2), JR.call(JR.lget(f, :font), :jm_stringWidth, [JR.aget(JR.aget(JR.get(JR.lget(f, :updateMyFontProperties), :sepArray), JR.lget(f, :index)), JR.lget(f, :index2))]))
+                end
+            end)
+        end)
+        JR.put(this, :updateMyFontProperties, JR.lget(f, :updateMyFontProperties))
+        HelpPaintable.jm_updateMeasurement(this, JR.lget(f, :graphics))
+    end)
+  end
 
-paint(This, Graphics) ->
-        (get({get({This, myFontProcessor}), '$class'})):process(get({This, myFontProcessor}), Graphics),
-        HalfWidth = (get({get({This, displayInfo}), '$class'})):getLastHalfWidth(get({This, displayInfo})),
-        (get({Graphics, '$class'})):setColor(Graphics, (get({get({This, basicColor}), '$class'})):intValue(get({This, basicColor}))),
-        (get({Graphics, '$class'})):drawString(Graphics, get({This, title}), (HalfWidth - get({This, titleBeginWidth})), get({get({This, updateMyFontProperties}), charHeight}), get({This, anchor})),
-        InputInfo = get({This, inputInfo}),
-        Size = array:size(InputInfo),
-        put({local, y}, 0),
-        put({local, deltaX}, 0),
-        put({local, size2}, 0),
-        put({local, actionString}, undefined),
-        put({local, input}, undefined),
-        put({local, list}, undefined),
-        put({local, sep}, undefined),
-        put({local, beginWidth}, 0),
-        lists:foreach(fun(Index) ->
-            put({local, y}, (((Index + 3)) * get({get({This, updateMyFontProperties}), charHeight}))),
-            put({local, deltaX}, 0),
-            put({local, list}, array:get(Index, get({This, keyMappingArray}))),
-            put({local, size2}, (get({get({local, list}), '$class'})):size(get({local, list}))),
-            put({local, beginWidth}, array:get(Index, get({get({This, updateMyFontProperties}), keymappingBeginWidthArray}))),
-            (get({Graphics, '$class'})):setColor(Graphics, (fun(Target_N73214) -> (get({Target_N73214, '$class'})):intValue(Target_N73214) end)(array:get(Index, get({This, actionBasicColor})))),
-            put({local, actionString}, array:get(Index, get({get({This, updateMyFontProperties}), actionStringArray}))),
-            (get({Graphics, '$class'})):drawString(Graphics, get({local, actionString}), ((HalfWidth - get({local, beginWidth})) + get({local, deltaX})), get({local, y}), get({This, anchor})),
-            put({local, deltaX}, (get({local, deltaX}) + array:get(Index, get({get({This, updateMyFontProperties}), actionStringDeltaXArray})))),
-            lists:foreach(fun(Index2) ->
-                put({local, input}, array:get(Index2, get({get({local, list}), objectArray}))),
-                (get({Graphics, '$class'})):setColor(Graphics, (fun(Target_N73521) -> (get({Target_N73521, '$class'})):intValue(Target_N73521) end)(array:get(Index2, array:get(Index, get({This, inputBasicColorArray}))))),
-                (get({Graphics, '$class'})):drawString(Graphics, (get({get({local, input}), '$class'})):getName(get({local, input})), ((HalfWidth - get({local, beginWidth})) + get({local, deltaX})), get({local, y}), get({This, anchor})),
-                put({local, deltaX}, (get({local, deltaX}) + array:get(Index2, array:get(Index, get({get({This, updateMyFontProperties}), inputDeltaXArray}))))),
-                put({local, sep}, array:get(Index2, array:get(Index, get({get({This, updateMyFontProperties}), sepArray})))),
-                (get({Graphics, '$class'})):setColor(Graphics, (get({get({This, basicColor}), '$class'})):intValue(get({This, basicColor}))),
-                (get({Graphics, '$class'})):drawString(Graphics, get({local, sep}), ((HalfWidth - get({local, beginWidth})) + get({local, deltaX})), get({local, y}), get({This, anchor})),
-                put({local, deltaX}, (get({local, deltaX}) + array:get(Index2, array:get(Index, get({get({This, updateMyFontProperties}), sepWidthArray})))))
-            end, lists:seq(0, get({local, size2}) - 1))
-        end, lists:seq(0, Size - 1)).
+
+  def jm_update(this, p_selectedGameKey, p_selectedInput) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :selectedGameKey, p_selectedGameKey)
+      JR.lset(f, :selectedInput, p_selectedInput)
+        JR.lset(f, :stringMaker, StringMaker.jnew())
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(JR.call(JR.call(JR.call(JR.lget(f, :stringMaker), :jm_append, [JR.get(CommonLabels.jm_getInstance(), :START_LABEL)]), :jm_append, ["selected GameKey: "]), :jm_append, [JR.call(JR.get(this, :stringUtil), :jm_toString, [JR.lget(f, :selectedGameKey)])]), :jm_append, [" Input: "]), :jm_append, [JR.call(JR.get(this, :stringUtil), :jm_toString, [JR.lget(f, :selectedInput)])]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :UPDATE)])
+        JR.lset(f, :gameKeyMapping, JR.call(PlatformInputMappingFactory.jm_getInstance(), :jm_getPersistentInputMappingInstance, []))
+        JR.lset(f, :size, JR.alength(JR.get(this, :gameInputMappingArray)))
+        JR.lset(f, :keyInfo, JR.anew(JR.lget(f, :size), nil))
+        JR.lset(f, :keyMappingArray, JR.anew(JR.lget(f, :size), nil))
+        JR.lset(f, :actionBasicColor, JR.anew(JR.lget(f, :size), nil))
+        JR.lset(f, :inputBasicColorArray, JR.anew(JR.lget(f, :size), nil))
+        JR.lset(f, :gameInputMapping, nil)
+        JR.lset(f, :gameKey, nil)
+        JR.lset(f, :list, nil)
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :gameInputMapping, JR.aget(JR.get(this, :gameInputMappingArray), JR.lget(f, :index)))
+            JR.lset(f, :gameKey, JR.call(JR.lget(f, :gameInputMapping), :jm_getGameKey, []))
+            JR.lset(f, :list, JR.call(JR.call(JR.lget(f, :gameKeyMapping), :jm_getInputMapping, []), :jm_getMappedInput, [JR.lget(f, :gameKey)]))
+            JR.lset(f, :size2, JR.call(JR.lget(f, :list), :jm_size, []))
+            JR.aset(JR.lget(f, :inputBasicColorArray), JR.lget(f, :index), JR.anew(JR.lget(f, :size2), nil))
+            JR.lset(f, :index2, 0)
+            JR.jfor(fn -> (JR.lget(f, :index2) < JR.lget(f, :size2)) end, fn -> JR.lpostinc(f, :index2, 1) end, fn ->
+                JR.aset(JR.aget(JR.lget(f, :inputBasicColorArray), JR.lget(f, :index)), JR.lget(f, :index2), JR.get(this, :basicColor))
+            end)
+            if (JR.lget(f, :gameKey) == JR.lget(f, :selectedGameKey)) do
+                JR.call(JR.lget(f, :stringMaker), :jm_delete, [0, JR.call(JR.lget(f, :stringMaker), :jm_length, [])])
+                JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(JR.lget(f, :stringMaker), :jm_append, ["Found: selected GameKey: "]), :jm_append, [JR.call(JR.get(this, :stringUtil), :jm_toString, [JR.lget(f, :selectedGameKey)])]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :UPDATE)])
+                JR.aset(JR.lget(f, :actionBasicColor), JR.lget(f, :index), JR.get(this, :selectedBasicColor))
+                JR.lset(f, :indexOfSelectedInput, JR.call(JR.lget(f, :list), :jm_indexOf, [JR.lget(f, :selectedInput)]))
+                if (JR.lget(f, :indexOfSelectedInput) >= 0) do
+                    JR.call(JR.lget(f, :stringMaker), :jm_delete, [0, JR.call(JR.lget(f, :stringMaker), :jm_length, [])])
+                    JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(JR.lget(f, :stringMaker), :jm_append, ["Found: selected Input: "]), :jm_append, [JR.call(JR.get(this, :stringUtil), :jm_toString, [JR.lget(f, :selectedInput)])]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :UPDATE)])
+                    JR.aset(JR.aget(JR.lget(f, :inputBasicColorArray), JR.lget(f, :index)), JR.lget(f, :indexOfSelectedInput), JR.get(this, :selectedBasicColor))
+                end
+            else
+                JR.aset(JR.lget(f, :actionBasicColor), JR.lget(f, :index), JR.get(this, :basicColor))
+            end
+            JR.aset(JR.lget(f, :keyInfo), JR.lget(f, :index), JR.call(JR.lget(f, :gameInputMapping), :jm_getName, []))
+            JR.aset(JR.lget(f, :keyMappingArray), JR.lget(f, :index), JR.lget(f, :list))
+        end)
+        JR.put(this, :keyMappingArray, JR.lget(f, :keyMappingArray))
+        JR.put(this, :actionBasicColor, JR.lget(f, :actionBasicColor))
+        JR.put(this, :inputBasicColorArray, JR.lget(f, :inputBasicColorArray))
+        HelpPaintable.jm_setInputInfoP(this, JR.lget(f, :keyInfo))
+        JR.put(this, :myFontProcessor, JR.get(this, :updateMyFontProcessor))
+    end)
+  end
+
+
+  def jm_get(this, p_keyList) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyList, p_keyList)
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.lset(f, :key, nil)
+        JR.lset(f, :size, JR.call(JR.lget(f, :keyList), :jm_size, []))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :key, JR.aget(JR.get(JR.lget(f, :keyList), :objectArray), JR.lget(f, :index)))
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.lget(f, :key), :jm_getName, [])])
+            if (JR.int32(JR.lget(f, :index) + 1) < JR.call(JR.lget(f, :keyList), :jm_size, [])) do
+                if (JR.call(JR.lget(f, :keyList), :jm_size, []) == 2) do
+                    JR.call(JR.lget(f, :stringBuffer), :jm_append, [InputMappingHelpPaintable.jstatic_AND()])
+                else
+                    if (JR.int32(JR.lget(f, :index) + 2) == JR.call(JR.lget(f, :keyList), :jm_size, [])) do
+                        JR.call(JR.lget(f, :stringBuffer), :jm_append, [InputMappingHelpPaintable.jstatic_MORE_THAN_TWO_IN_LIST_AND()])
+                    else
+                        JR.call(JR.lget(f, :stringBuffer), :jm_append, [InputMappingHelpPaintable.jstatic_SEP()])
+                    end
+                end
+            end
+        end)
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.get(this, :myFontProcessor), :jm_process, [JR.lget(f, :graphics)])
+        JR.lset(f, :halfWidth, JR.call(JR.get(this, :displayInfo), :jm_getLastHalfWidth, []))
+        JR.call(JR.lget(f, :graphics), :jm_setColor, [JR.call(JR.get(this, :basicColor), :jm_intValue, [])])
+        JR.call(JR.lget(f, :graphics), :jm_drawString, [JR.get(this, :title), (JR.lget(f, :halfWidth) - JR.get(this, :titleBeginWidth)), JR.get(JR.get(this, :updateMyFontProperties), :charHeight), JR.get(this, :anchor)])
+        JR.lset(f, :inputInfo, JR.get(this, :inputInfo))
+        JR.lset(f, :size, JR.alength(JR.lget(f, :inputInfo)))
+        JR.lset(f, :y, 0)
+        JR.lset(f, :deltaX, 0)
+        JR.lset(f, :size2, 0)
+        JR.lset(f, :actionString, nil)
+        JR.lset(f, :input, nil)
+        JR.lset(f, :list, nil)
+        JR.lset(f, :sep, nil)
+        JR.lset(f, :beginWidth, 0)
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :y, ((JR.int32(JR.lget(f, :index) + 3)) * JR.get(JR.get(this, :updateMyFontProperties), :charHeight)))
+            JR.lset(f, :deltaX, 0)
+            JR.lset(f, :list, JR.aget(JR.get(this, :keyMappingArray), JR.lget(f, :index)))
+            JR.lset(f, :size2, JR.call(JR.lget(f, :list), :jm_size, []))
+            JR.lset(f, :beginWidth, JR.aget(JR.get(JR.get(this, :updateMyFontProperties), :keymappingBeginWidthArray), JR.lget(f, :index)))
+            JR.call(JR.lget(f, :graphics), :jm_setColor, [JR.call(JR.aget(JR.get(this, :actionBasicColor), JR.lget(f, :index)), :jm_intValue, [])])
+            JR.lset(f, :actionString, JR.aget(JR.get(JR.get(this, :updateMyFontProperties), :actionStringArray), JR.lget(f, :index)))
+            JR.call(JR.lget(f, :graphics), :jm_drawString, [JR.lget(f, :actionString), JR.int32(JR.int32(JR.lget(f, :halfWidth) - JR.lget(f, :beginWidth)) + JR.lget(f, :deltaX)), JR.lget(f, :y), JR.get(this, :anchor)])
+            JR.lset(f, :deltaX, JR.int32(JR.lget(f, :deltaX) + JR.aget(JR.get(JR.get(this, :updateMyFontProperties), :actionStringDeltaXArray), JR.lget(f, :index))))
+            JR.lset(f, :index2, 0)
+            JR.jfor(fn -> (JR.lget(f, :index2) < JR.lget(f, :size2)) end, fn -> JR.lpostinc(f, :index2, 1) end, fn ->
+                JR.lset(f, :input, JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index2)))
+                JR.call(JR.lget(f, :graphics), :jm_setColor, [JR.call(JR.aget(JR.aget(JR.get(this, :inputBasicColorArray), JR.lget(f, :index)), JR.lget(f, :index2)), :jm_intValue, [])])
+                JR.call(JR.lget(f, :graphics), :jm_drawString, [JR.call(JR.lget(f, :input), :jm_getName, []), JR.int32(JR.int32(JR.lget(f, :halfWidth) - JR.lget(f, :beginWidth)) + JR.lget(f, :deltaX)), JR.lget(f, :y), JR.get(this, :anchor)])
+                JR.lset(f, :deltaX, JR.int32(JR.lget(f, :deltaX) + JR.aget(JR.aget(JR.get(JR.get(this, :updateMyFontProperties), :inputDeltaXArray), JR.lget(f, :index)), JR.lget(f, :index2))))
+                JR.lset(f, :sep, JR.aget(JR.aget(JR.get(JR.get(this, :updateMyFontProperties), :sepArray), JR.lget(f, :index)), JR.lget(f, :index2)))
+                JR.call(JR.lget(f, :graphics), :jm_setColor, [JR.call(JR.get(this, :basicColor), :jm_intValue, [])])
+                JR.call(JR.lget(f, :graphics), :jm_drawString, [JR.lget(f, :sep), JR.int32(JR.int32(JR.lget(f, :halfWidth) - JR.lget(f, :beginWidth)) + JR.lget(f, :deltaX)), JR.lget(f, :y), JR.get(this, :anchor)])
+                JR.lset(f, :deltaX, JR.int32(JR.lget(f, :deltaX) + JR.aget(JR.aget(JR.get(JR.get(this, :updateMyFontProperties), :sepWidthArray), JR.lget(f, :index)), JR.lget(f, :index2))))
+            end)
+        end)
+    end)
+  end
+end
+
 

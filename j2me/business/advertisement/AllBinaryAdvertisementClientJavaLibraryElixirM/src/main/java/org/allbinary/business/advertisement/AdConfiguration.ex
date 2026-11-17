@@ -1,57 +1,116 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.business.advertisement
-% import org.allbinary.direction.Direction
-% import org.allbinary.game.state.GameState
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.business.advertisement
 
--module('AdConfiguration').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule AdConfiguration do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, 'INNERACTIVE'}, undefined),
-    put({This, 'LEADBOLT'}, undefined),
-    put({This, 'ADMOB'}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :INNERACTIVE, nil)
+    JR.put(this, :LEADBOLT, nil)
+    JR.put(this, :ADMOB, nil)
+        
+        
+        
+    nil
+  end
 
 
-new(AdvertIdArray) when (is_tuple(AdvertIdArray) orelse AdvertIdArray =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, AdvertIdArray),
-    This.
+  def jinit(this, p_advertIdArray) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :advertIdArray, p_advertIdArray)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :INNERACTIVE, JR.aget(JR.lget(f, :advertIdArray), 0))
+        JR.put(this, :ADMOB, JR.aget(JR.lget(f, :advertIdArray), 1))
+        JR.put(this, :LEADBOLT, JR.aget(JR.lget(f, :advertIdArray), 2))
+    end)
+  end
 
-'$init'(This, AdvertIdArray) when (is_tuple(AdvertIdArray) orelse AdvertIdArray =:= undefined) ->
-    init_fields(This),
-        put({This, 'INNERACTIVE'}, array:get(0, AdvertIdArray)),
-        put({This, 'ADMOB'}, array:get(1, AdvertIdArray)),
-        put({This, 'LEADBOLT'}, array:get(2, AdvertIdArray)).
+  def jnew(p_advertIdArray) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_advertIdArray)
+    this
+  end
 
-getValidAdSpots(This) ->
-        array:new(0, {default, undefined}).
 
-process(This, GameState) ->
-        ok.
+  def jm_getValidAdSpots(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.anew(0, nil)})
+    end)
+  end
 
-processDemo(This, State) when is_integer(State) ->
-        ok.
 
-setShowAds(This) ->
-        ok.
+  def jm_process(this, p_gameState) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameState, p_gameState)
+        nil
+    end)
+  end
 
-setToggleAds(This, ShowAds) when is_boolean(ShowAds) ->
-        ok.
 
-isShowAds(This) ->
-        true.
+  def jm_processDemo(this, p_state) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :state, p_state)
+        nil
+    end)
+  end
+
+
+  def jm_setShowAds(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_setToggleAds(this, p_showAds) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :showAds, p_showAds)
+        nil
+    end)
+  end
+
+
+  def jm_isShowAds(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, true})
+    end)
+  end
+end
+
 

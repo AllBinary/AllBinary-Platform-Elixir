@@ -1,46 +1,59 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.layer.pickup.points
-% import org.allbinary.game.score.ScoreableInterface
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.AllBinaryLayerCircularPool
-% import org.allbinary.layer.AllBinaryLayerFactoryInterface
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.pickup.points
 
--module('PointsLayerCircularStaticPool').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule PointsLayerCircularStaticPool do
+  def jsuper(), do: AllBinaryLayerCircularPool
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AllBinaryLayerCircularPool', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new(AllbinaryLayerFactoryInterface, Total) when is_integer(Total) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, AllbinaryLayerFactoryInterface, Total),
-    This.
+  def jinit(this, p_allbinaryLayerFactoryInterface, p_total) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allbinaryLayerFactoryInterface, p_allbinaryLayerFactoryInterface)
+      JR.lset(f, :total, p_total)
+      AllBinaryLayerCircularPool.jinit(this)
+      jinitfields(this)
+        AllBinaryLayerCircularPool.jm_initAllBinaryLayerCircularPool(this, JR.lget(f, :allbinaryLayerFactoryInterface), JR.lget(f, :total))
+    end)
+  end
 
-'$init'(This, AllbinaryLayerFactoryInterface, Total) when is_integer(Total) ->
-    'AllBinaryLayerCircularPool':'$init'(This),
-    init_fields(This),
-        'AllBinaryLayerCircularPool':initAllBinaryLayerCircularPool(This, AllbinaryLayerFactoryInterface, Total).
+  def jnew(p_allbinaryLayerFactoryInterface, p_total) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_allbinaryLayerFactoryInterface, p_total)
+    this
+  end
 
-% throws Exception
-visit(This, SourceLayerInterface) ->
-        PointsLayer = (get({This, '$class'})):getNextInstance(This),
-        ScoreableInterface = SourceLayerInterface,
-        (get({PointsLayer, '$class'})):visit(PointsLayer, ScoreableInterface).
+
+  def jm_visit(this, p_sourceLayerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :sourceLayerInterface, p_sourceLayerInterface)
+        JR.lset(f, :pointsLayer, JR.call(this, :jm_getNextInstance, []))
+        JR.lset(f, :scoreableInterface, JR.lget(f, :sourceLayerInterface))
+        JR.call(JR.lget(f, :pointsLayer), :jm_visit, [JR.lget(f, :scoreableInterface)])
+    end)
+  end
+end
+
 

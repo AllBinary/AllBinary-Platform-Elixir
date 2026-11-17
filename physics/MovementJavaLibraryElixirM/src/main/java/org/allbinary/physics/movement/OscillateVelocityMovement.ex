@@ -1,66 +1,81 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.physics.movement
-% import org.allbinary.game.layer.AllBinaryGameLayer
-% import org.allbinary.game.physics.velocity.VelocityProperties
-% import org.allbinary.logic.math.BasicDecimal
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.physics.movement
 
--module('OscillateVelocityMovement').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule OscillateVelocityMovement do
+  def jsuper(), do: BasicConstantVelocityMovement
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicConstantVelocityMovement', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :oscillateMin, 0)
+    JR.put(this, :oscillateMax, 0)
+    JR.put(this, :oscillate, 0)
+    JR.put(this, :oscillatePositive, false)
+        
+        
+        JR.put(this, :oscillate, 0)
+        JR.put(this, :oscillatePositive, false)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, oscillateMin}, 0),
-    put({This, oscillateMax}, 0),
-    put({This, oscillate}, 0),
-    put({This, oscillatePositive}, false),
-    ok.
+
+  def jinit(this, p_speedBasicDecimal, p_oscillateMin, p_oscillateMax) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :speedBasicDecimal, p_speedBasicDecimal)
+      JR.lset(f, :oscillateMin, p_oscillateMin)
+      JR.lset(f, :oscillateMax, p_oscillateMax)
+        BasicConstantVelocityMovement.jinit(this, JR.lget(f, :speedBasicDecimal), VelocityProperties.jnew(JR.int32(JR.call(JR.lget(f, :speedBasicDecimal), :jm_getUnscaled, [])), JR.int32(JR.call(JR.lget(f, :speedBasicDecimal), :jm_getUnscaled, []))))
+        OscillateVelocityMovement.jinitfields(this)
+        JR.put(this, :oscillateMin, JR.lget(f, :oscillateMin))
+        JR.put(this, :oscillateMax, JR.lget(f, :oscillateMax))
+    end)
+  end
+
+  def jnew(p_speedBasicDecimal, p_oscillateMin, p_oscillateMax) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_speedBasicDecimal, p_oscillateMin, p_oscillateMax)
+    this
+  end
 
 
-new(SpeedBasicDecimal, OscillateMin, OscillateMax) when is_integer(OscillateMin), is_integer(OscillateMax) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, SpeedBasicDecimal, OscillateMin, OscillateMax),
-    This.
-
-'$init'(This, SpeedBasicDecimal, OscillateMin, OscillateMax) when is_integer(OscillateMin), is_integer(OscillateMax) ->
-        'BasicConstantVelocityMovement':'$init'(This, SpeedBasicDecimal, 'VelocityProperties':new(trunc((get({SpeedBasicDecimal, '$class'})):getUnscaled(SpeedBasicDecimal)), trunc((get({SpeedBasicDecimal, '$class'})):getUnscaled(SpeedBasicDecimal)))),
-        init_fields(This),
-        put({This, oscillateMin}, OscillateMin),
-        put({This, oscillateMax}, OscillateMax).
-
-% throws Exception
-process(This, Layer) ->
-        'BasicConstantVelocityMovement':process(This, Layer),
-        case (get({This, oscillate}) < get({This, oscillateMin})) of
-            true ->
-            put({This, oscillatePositive}, true);
-            false ->
-            case (get({This, oscillate}) > get({This, oscillateMax})) of
-            true ->
-            put({This, oscillatePositive}, false);
-            false -> ok
+  def jm_process(this, p_layer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layer, p_layer)
+        BasicConstantVelocityMovement.jm_process(this, JR.lget(f, :layer))
+        if (JR.get(this, :oscillate) < JR.get(this, :oscillateMin)) do
+            JR.put(this, :oscillatePositive, true)
+        else
+            if (JR.get(this, :oscillate) > JR.get(this, :oscillateMax)) do
+            JR.put(this, :oscillatePositive, false)
         end
-        end,
-        case get({This, oscillatePositive}) of
-            true ->
-            put({This, oscillate}, get({This, oscillate}) + 1),
-            (fun(Target_N66261) -> (get({Target_N66261, '$class'})):addint(Target_N66261, 2000) end)((fun(Target_N66268) -> (get({Target_N66268, '$class'})):getVelocityXBasicDecimalP(Target_N66268) end)((get({This, '$class'})):getVelocityProperties(This)));
-            false ->
-            put({This, oscillate}, get({This, oscillate}) - 1),
-            (fun(Target_N66196) -> (get({Target_N66196, '$class'})):subtractint(Target_N66196, 2000) end)((fun(Target_N66203) -> (get({Target_N66203, '$class'})):getVelocityXBasicDecimalP(Target_N66203) end)((get({This, '$class'})):getVelocityProperties(This)))
-        end.
+        end
+        if JR.get(this, :oscillatePositive) do
+            JR.postinc(this, :oscillate, 1)
+            JR.call(JR.call(JR.call(this, :jm_getVelocityProperties, []), :jm_getVelocityXBasicDecimalP, []), :jm_addint, [2000])
+        else
+            JR.postinc(this, :oscillate, -1)
+            JR.call(JR.call(JR.call(this, :jm_getVelocityProperties, []), :jm_getVelocityXBasicDecimalP, []), :jm_subtractint, [2000])
+        end
+    end)
+  end
+end
+
 

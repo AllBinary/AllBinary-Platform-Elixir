@@ -1,43 +1,54 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.score
-% import javax.microedition.lcdui.Command
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.score
 
--module('HighScoreCommandsFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule HighScoreCommandsFactory do
+  def jsuper(), do: HighScoreCommandsBaseFactory
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> HighScoreCommandsFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('HighScoreCommandsBaseFactory', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, instance}, 'HighScoreCommandsFactory':new()),
-    ok.
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-getInstance() ->
-        get({'HighScoreCommandsFactory', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, HighScoreCommandsFactory.jstatic_instance()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-        'HighScoreCommandsBaseFactory':'$init'(This, array:from_list([get({'HighScoreCommands':getInstance(), 'PERSONAL'}), get({'HighScoreCommands':getInstance(), 'WORLD'})])).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        HighScoreCommandsBaseFactory.jinit(this, JR.afrom([JR.get(HighScoreCommands.jm_getInstance(), :PERSONAL), JR.get(HighScoreCommands.jm_getInstance(), :WORLD)]))
+        HighScoreCommandsFactory.jinitfields(this)
+    end)
+  end
+
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+end
+
 

@@ -1,42 +1,53 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.image.opengles
-% import javax.microedition.lcdui.Image
-% import org.allbinary.platform.graphics.PlatformBitmapBaseFactory
-% import org.allbinary.platform.opengles.PlatformTextureBaseFactory
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.image.opengles
 
--module('OpenGLImageFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule OpenGLImageFactory do
+  def jsuper(), do: JObject
+def jstatic_NULL_OPENGL_IMAGE_FACTORY(), do: JR.static_get(__MODULE__, :NULL_OPENGL_IMAGE_FACTORY, fn -> OpenGLImageFactory.jnew() end)
+  def jstatic_set_NULL_OPENGL_IMAGE_FACTORY(value), do: JR.static_put(__MODULE__, :NULL_OPENGL_IMAGE_FACTORY, value)
 
-static_init() ->
-    put({?MODULE, 'NULL_OPENGL_IMAGE_FACTORY'}, 'OpenGLImageFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance(This, Image, BitmapFactory, TextureFactory) ->
-        erlang:error({'RuntimeException'}).
+  def jm_getInstance(this, p_image, p_bitmapFactory, p_textureFactory) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :image, p_image)
+      JR.lset(f, :bitmapFactory, p_bitmapFactory)
+      JR.lset(f, :textureFactory, p_textureFactory)
+        throw({:jexception, JR.exception("RuntimeException", "")})
+    end)
+  end
+end
+
 

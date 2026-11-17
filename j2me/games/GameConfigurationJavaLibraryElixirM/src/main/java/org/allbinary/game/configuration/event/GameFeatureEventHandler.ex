@@ -1,52 +1,68 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.configuration.event
-% import org.allbinary.logic.util.event.AllBinaryEventObject
-% import org.allbinary.logic.util.event.EventListenerInterface
-% import org.allbinary.logic.util.event.handler.BasicEventHandler
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.configuration.event
 
--module('GameFeatureEventHandler').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GameFeatureEventHandler do
+  def jsuper(), do: BasicEventHandler
+def jstatic_gameKeyEventHandler(), do: JR.static_get(__MODULE__, :gameKeyEventHandler, fn -> GameFeatureEventHandler.jnew() end)
+  def jstatic_set_gameKeyEventHandler(value), do: JR.static_put(__MODULE__, :gameKeyEventHandler, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicEventHandler', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, gameKeyEventHandler}, 'GameFeatureEventHandler':new()),
-    ok.
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      BasicEventHandler.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    'BasicEventHandler':'$init'(This),
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-getInstance() ->
-        get({'GameFeatureEventHandler', gameKeyEventHandler}).
 
-% throws Exception
-process(This, EventObject, EventListenerInterface) ->
-        GameFeatureListenerInterface = (EventListenerInterface),
-        (get({GameFeatureListenerInterface, '$class'})):onGameFeatureChange(GameFeatureListenerInterface, EventObject).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, GameFeatureEventHandler.jstatic_gameKeyEventHandler()})
+    end)
+  end
+
+
+  def jm_process(this, p_eventObject, p_eventListenerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+      JR.lset(f, :eventListenerInterface, p_eventListenerInterface)
+        JR.lset(f, :gameFeatureListenerInterface, (JR.lget(f, :eventListenerInterface)))
+        JR.call(JR.lget(f, :gameFeatureListenerInterface), :jm_onGameFeatureChange, [JR.lget(f, :eventObject)])
+    end)
+  end
+end
+
 

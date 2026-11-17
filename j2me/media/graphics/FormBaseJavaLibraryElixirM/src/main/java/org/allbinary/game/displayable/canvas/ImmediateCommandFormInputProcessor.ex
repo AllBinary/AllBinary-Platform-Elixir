@@ -1,95 +1,136 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import org.allbinary.game.input.event.GameKeyEvent
-% import org.allbinary.graphics.form.ScrollSelectionForm
-% import org.allbinary.input.motion.gesture.observer.MotionGestureEvent
-% import org.allbinary.time.TimeDelayHelper
-% import org.allbinary.util.BasicArrayList
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('ImmediateCommandFormInputProcessor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule ImmediateCommandFormInputProcessor do
+  def jsuper(), do: CommandFormInputProcessor
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('CommandFormInputProcessor', Function, Arguments).
-
-init_fields(This) ->
-    put({This, timeHelper}, 'TimeDelayHelper':new(25)),
-    put({This, gameCommandCanvas}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :timeHelper, nil)
+    JR.put(this, :gameCommandCanvas, nil)
+        JR.put(this, :timeHelper, TimeDelayHelper.jnew(25))
+        
+    nil
+  end
 
 
-new(GameKeyEventList, PlayerInputId, GameCommandCanvas, Form) when is_integer(PlayerInputId) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, GameKeyEventList, PlayerInputId, GameCommandCanvas, Form),
-    This.
+  def jinit(this, p_gameKeyEventList, p_playerInputId, p_gameCommandCanvas, p_form) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEventList, p_gameKeyEventList)
+      JR.lset(f, :playerInputId, p_playerInputId)
+      JR.lset(f, :gameCommandCanvas, p_gameCommandCanvas)
+      JR.lset(f, :form, p_form)
+        CommandFormInputProcessor.jinit(this, JR.lget(f, :gameKeyEventList), JR.lget(f, :playerInputId), JR.lget(f, :gameCommandCanvas), JR.lget(f, :form))
+        ImmediateCommandFormInputProcessor.jinitfields(this)
+        JR.put(this, :gameCommandCanvas, JR.lget(f, :gameCommandCanvas))
+    end)
+  end
 
-'$init'(This, GameKeyEventList, PlayerInputId, GameCommandCanvas, Form) when is_integer(PlayerInputId) ->
-        'CommandFormInputProcessor':'$init'(This, GameKeyEventList, PlayerInputId, GameCommandCanvas, Form),
-        init_fields(This),
-        put({This, gameCommandCanvas}, GameCommandCanvas).
+  def jnew(p_gameKeyEventList, p_playerInputId, p_gameCommandCanvas, p_form) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_gameKeyEventList, p_playerInputId, p_gameCommandCanvas, p_form)
+    this
+  end
 
-onPressGameKeyEvent(This, GameKeyEvent) ->
-        try
-            'CommandFormInputProcessor':onPressGameKeyEvent(This, GameKeyEvent),
-            case (get({get({This, timeHelper}), '$class'})):isTimeTNT(get({This, timeHelper})) of
-                true ->
-                (get({This, '$class'})):processInputList(This),
-                (get({get({get({This, gameCommandCanvas}), repaintBehavior}), '$class'})):onChangeRepaint(get({get({This, gameCommandCanvas}), repaintBehavior}), (get({This, '$class'})):getCanvas(This));
-                false -> ok
+
+  def jm_onPressGameKeyEvent(this, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        try do
+            CommandFormInputProcessor.jm_onPressGameKeyEvent(this, JR.lget(f, :gameKeyEvent))
+            if JR.call(JR.get(this, :timeHelper), :jm_isTimeTNT, []) do
+                JR.call(this, :jm_processInputList, [])
+                JR.call(JR.get(JR.get(this, :gameCommandCanvas), :repaintBehavior), :jm_onChangeRepaint, [JR.call(this, :jm_getCanvas, [])])
             end
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, gameInputStrings}), 'ON_PRESS_GAME_KEY'}), E)
-        end.
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :gameInputStrings), :ON_PRESS_GAME_KEY), JR.lget(f, :e)])
+        end
+    end)
+  end
 
-onDownGameKeyEvent(This, GameKeyEvent) ->
-        try
-            'CommandFormInputProcessor':onDownGameKeyEvent(This, GameKeyEvent),
-            case (get({get({This, timeHelper}), '$class'})):isTimeTNT(get({This, timeHelper})) of
-                true ->
-                (get({This, '$class'})):processInputList(This),
-                (get({get({get({This, gameCommandCanvas}), repaintBehavior}), '$class'})):onChangeRepaint(get({get({This, gameCommandCanvas}), repaintBehavior}), (get({This, '$class'})):getCanvas(This));
-                false -> ok
-            end
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, gameInputStrings}), 'ON_DOWN_GAME_KEY'}), E)
-        end.
 
-onUpGameKeyEvent(This, GameKeyEvent) ->
-        try
-            'CommandFormInputProcessor':onUpGameKeyEvent(This, GameKeyEvent),
-            case (get({get({This, timeHelper}), '$class'})):isTimeTNT(get({This, timeHelper})) of
-                true ->
-                (get({This, '$class'})):processInputList(This),
-                (get({get({get({This, gameCommandCanvas}), repaintBehavior}), '$class'})):onChangeRepaint(get({get({This, gameCommandCanvas}), repaintBehavior}), (get({This, '$class'})):getCanvas(This));
-                false -> ok
+  def jm_onDownGameKeyEvent(this, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        try do
+            CommandFormInputProcessor.jm_onDownGameKeyEvent(this, JR.lget(f, :gameKeyEvent))
+            if JR.call(JR.get(this, :timeHelper), :jm_isTimeTNT, []) do
+                JR.call(this, :jm_processInputList, [])
+                JR.call(JR.get(JR.get(this, :gameCommandCanvas), :repaintBehavior), :jm_onChangeRepaint, [JR.call(this, :jm_getCanvas, [])])
             end
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, gameInputStrings}), 'ON_UP_GAME_KEY'}), E)
-        end.
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :gameInputStrings), :ON_DOWN_GAME_KEY), JR.lget(f, :e)])
+        end
+    end)
+  end
 
-onMotionGestureEvent(This, MotionGestureEvent) ->
-        try
-            'CommandFormInputProcessor':onMotionGestureEvent(This, MotionGestureEvent),
-            case (get({get({This, timeHelper}), '$class'})):isTimeTNT(get({This, timeHelper})) of
-                true ->
-                (get({This, '$class'})):processInputList(This),
-                (get({get({get({This, gameCommandCanvas}), repaintBehavior}), '$class'})):onChangeRepaint(get({get({This, gameCommandCanvas}), repaintBehavior}), (get({This, '$class'})):getCanvas(This));
-                false -> ok
+
+  def jm_onUpGameKeyEvent(this, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        try do
+            CommandFormInputProcessor.jm_onUpGameKeyEvent(this, JR.lget(f, :gameKeyEvent))
+            if JR.call(JR.get(this, :timeHelper), :jm_isTimeTNT, []) do
+                JR.call(this, :jm_processInputList, [])
+                JR.call(JR.get(JR.get(this, :gameCommandCanvas), :repaintBehavior), :jm_onChangeRepaint, [JR.call(this, :jm_getCanvas, [])])
             end
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, "onMotionGestureEvent", E)
-        end.
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :gameInputStrings), :ON_UP_GAME_KEY), JR.lget(f, :e)])
+        end
+    end)
+  end
+
+
+  def jm_onMotionGestureEvent(this, p_motionGestureEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :motionGestureEvent, p_motionGestureEvent)
+        try do
+            CommandFormInputProcessor.jm_onMotionGestureEvent(this, JR.lget(f, :motionGestureEvent))
+            if JR.call(JR.get(this, :timeHelper), :jm_isTimeTNT, []) do
+                JR.call(this, :jm_processInputList, [])
+                JR.call(JR.get(JR.get(this, :gameCommandCanvas), :repaintBehavior), :jm_onChangeRepaint, [JR.call(this, :jm_getCanvas, [])])
+            end
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, "onMotionGestureEvent", JR.lget(f, :e)])
+        end
+    end)
+  end
+end
+
 

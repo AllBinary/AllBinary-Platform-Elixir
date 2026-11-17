@@ -1,42 +1,58 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-%
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-%
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-%
-% Created By: Travis Berthelot
-% 
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.canvas.transition.progress
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.graphics.paint.Paintable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+#
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+#
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+#
+# Created By: Travis Berthelot
+# 
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.canvas.transition.progress
 
--module('ProgressPaintable').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule ProgressPaintable do
+  def jsuper(), do: Paintable
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Paintable', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :progressCanvas, nil)
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, progressCanvas}, undefined),
-    ok.
+
+  def jinit(this, p_progressCanvas) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :progressCanvas, p_progressCanvas)
+      Paintable.jinit(this)
+      jinitfields(this)
+        JR.put(this, :progressCanvas, JR.lget(f, :progressCanvas))
+    end)
+  end
+
+  def jnew(p_progressCanvas) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_progressCanvas)
+    this
+  end
 
 
-new(ProgressCanvas) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, ProgressCanvas),
-    This.
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.get(this, :progressCanvas), :jm_paint2, [JR.lget(f, :graphics)])
+    end)
+  end
+end
 
-'$init'(This, ProgressCanvas) ->
-    'Paintable':'$init'(This),
-    init_fields(This),
-        put({This, progressCanvas}, ProgressCanvas).
-
-paint(This, Graphics) ->
-        (get({get({This, progressCanvas}), '$class'})):paint2(get({This, progressCanvas}), Graphics).
 

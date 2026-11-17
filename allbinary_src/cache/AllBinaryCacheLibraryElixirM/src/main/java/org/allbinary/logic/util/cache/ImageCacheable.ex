@@ -1,40 +1,68 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.util.cache
-% import org.allbinary.logic.string.StringUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
--module('ImageCacheable').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule ImageCacheable do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, name}, get({'StringUtil':getInstance(), 'EMPTY_STRING'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :name, nil)
+        JR.put(this, :name, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+    nil
+  end
 
 
-new(Name, AnyType) when (is_list(Name) orelse Name =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Name, AnyType),
-    This.
+  def jinit(this, p_name, p_anyType) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :anyType, p_anyType)
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This, Name, AnyType) when (is_list(Name) orelse Name =:= undefined) ->
-    init_fields(This),
-        ok.
+  def jnew(p_name, p_anyType) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_name, p_anyType)
+    this
+  end
 
-getKey(This) ->
-        get({This, name}).
 
-toString(This) ->
-        get({This, name}).
+  def jm_getKey(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :name)})
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :name)})
+    end)
+  end
+end
+
 

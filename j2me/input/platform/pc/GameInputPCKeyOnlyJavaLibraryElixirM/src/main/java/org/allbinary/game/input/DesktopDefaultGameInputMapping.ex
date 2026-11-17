@@ -1,87 +1,93 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.input
-% import org.allbinary.game.configuration.persistance.GamePersistanceStrings
-% import org.allbinary.game.input.mapping.InputToGameKeyMapping
-% import org.allbinary.game.input.mapping.PersistentInputMapping
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.input
 
--module('DesktopDefaultGameInputMapping').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule DesktopDefaultGameInputMapping do
+  def jsuper(), do: PersistentInputMapping
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('PersistentInputMapping', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        PersistentInputMapping.jinit(this, JR.get(GamePersistanceStrings.jm_getInstance(), :DEFAULT_INPUT_MAPPING_RECORD_ID))
+        DesktopDefaultGameInputMapping.jinitfields(this)
+        JR.lset(f, :inputToGameKeyMapping, JR.call(this, :jm_getInputMapping, []))
+        JR.lset(f, :pcKeyFactory, PCKeyFactory.jm_getInstance())
+        JR.lset(f, :gameKeyFactory, GameKeyFactory.jm_getInstance())
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :FIRE), JR.get(JR.lget(f, :pcKeyFactory), :ENTER)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_NUM1), JR.get(JR.lget(f, :pcKeyFactory), :FOUR)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_NUM1), JR.get(JR.lget(f, :pcKeyFactory), :_P)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_NUM1), JR.get(JR.lget(f, :pcKeyFactory), :p)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :UP), JR.get(JR.lget(f, :pcKeyFactory), :DPAD_UP)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :DOWN), JR.get(JR.lget(f, :pcKeyFactory), :DPAD_DOWN)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :LEFT), JR.get(JR.lget(f, :pcKeyFactory), :DPAD_LEFT)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :RIGHT), JR.get(JR.lget(f, :pcKeyFactory), :DPAD_RIGHT)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_NUM1), JR.get(JR.lget(f, :pcKeyFactory), :FIVE)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_NUM7), JR.get(JR.lget(f, :pcKeyFactory), :_Y)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_NUM9), JR.get(JR.lget(f, :pcKeyFactory), :_I)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :UP), JR.get(JR.lget(f, :pcKeyFactory), :_U)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :LEFT), JR.get(JR.lget(f, :pcKeyFactory), :_H)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :RIGHT), JR.get(JR.lget(f, :pcKeyFactory), :_J)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :DOWN), JR.get(JR.lget(f, :pcKeyFactory), :_N)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_NUM5), JR.get(JR.lget(f, :pcKeyFactory), :_M)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_NUM7), JR.get(JR.lget(f, :pcKeyFactory), :y)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_NUM9), JR.get(JR.lget(f, :pcKeyFactory), :i)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :UP), JR.get(JR.lget(f, :pcKeyFactory), :u)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :LEFT), JR.get(JR.lget(f, :pcKeyFactory), :h)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :RIGHT), JR.get(JR.lget(f, :pcKeyFactory), :j)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :DOWN), JR.get(JR.lget(f, :pcKeyFactory), :n)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_NUM5), JR.get(JR.lget(f, :pcKeyFactory), :m)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_NUM7), JR.get(JR.lget(f, :pcKeyFactory), :_Q)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_NUM9), JR.get(JR.lget(f, :pcKeyFactory), :_E)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :UP), JR.get(JR.lget(f, :pcKeyFactory), :_W)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :LEFT), JR.get(JR.lget(f, :pcKeyFactory), :_A)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :RIGHT), JR.get(JR.lget(f, :pcKeyFactory), :_D)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :DOWN), JR.get(JR.lget(f, :pcKeyFactory), :_S)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_NUM5), JR.get(JR.lget(f, :pcKeyFactory), :_X)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_NUM7), JR.get(JR.lget(f, :pcKeyFactory), :q)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_NUM9), JR.get(JR.lget(f, :pcKeyFactory), :e)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :UP), JR.get(JR.lget(f, :pcKeyFactory), :w)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :LEFT), JR.get(JR.lget(f, :pcKeyFactory), :a)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :RIGHT), JR.get(JR.lget(f, :pcKeyFactory), :d)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :DOWN), JR.get(JR.lget(f, :pcKeyFactory), :s)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_NUM5), JR.get(JR.lget(f, :pcKeyFactory), :x)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_NUM3), JR.get(JR.lget(f, :pcKeyFactory), :THREE)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_NUM0), JR.get(JR.lget(f, :pcKeyFactory), :ZERO)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_NUM0), JR.get(JR.lget(f, :pcKeyFactory), :ONE)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_NUM0), JR.get(JR.lget(f, :pcKeyFactory), :SPACE)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_POUND), JR.get(JR.lget(f, :pcKeyFactory), :DEL)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_POUND), JR.get(JR.lget(f, :pcKeyFactory), :TWO)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_STAR), JR.get(JR.lget(f, :pcKeyFactory), :ESCAPE)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :KEY_STAR), JR.get(JR.lget(f, :pcKeyFactory), :STAR)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :LEVEL_DOWN), JR.get(JR.lget(f, :pcKeyFactory), :COMMA)])
+        JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_add, [JR.get(JR.lget(f, :gameKeyFactory), :LEVEL_UP), JR.get(JR.lget(f, :pcKeyFactory), :PERIOD)])
+    end)
+  end
 
-'$init'(This) ->
-        'PersistentInputMapping':'$init'(This, get({'GamePersistanceStrings':getInstance(), 'DEFAULT_INPUT_MAPPING_RECORD_ID'})),
-        InputToGameKeyMapping = (get({This, '$class'})):getInputMapping(This),
-        PcKeyFactory = 'PCKeyFactory':getInstance(),
-        GameKeyFactory = 'GameKeyFactory':getInstance(),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'FIRE'}), get({PcKeyFactory, 'ENTER'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_NUM1'}), get({PcKeyFactory, 'FOUR'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_NUM1'}), get({PcKeyFactory, '_P'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_NUM1'}), get({PcKeyFactory, p})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'UP'}), get({PcKeyFactory, 'DPAD_UP'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'DOWN'}), get({PcKeyFactory, 'DPAD_DOWN'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'LEFT'}), get({PcKeyFactory, 'DPAD_LEFT'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'RIGHT'}), get({PcKeyFactory, 'DPAD_RIGHT'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_NUM1'}), get({PcKeyFactory, 'FIVE'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_NUM7'}), get({PcKeyFactory, '_Y'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_NUM9'}), get({PcKeyFactory, '_I'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'UP'}), get({PcKeyFactory, '_U'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'LEFT'}), get({PcKeyFactory, '_H'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'RIGHT'}), get({PcKeyFactory, '_J'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'DOWN'}), get({PcKeyFactory, '_N'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_NUM5'}), get({PcKeyFactory, '_M'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_NUM7'}), get({PcKeyFactory, y})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_NUM9'}), get({PcKeyFactory, i})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'UP'}), get({PcKeyFactory, u})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'LEFT'}), get({PcKeyFactory, h})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'RIGHT'}), get({PcKeyFactory, j})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'DOWN'}), get({PcKeyFactory, n})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_NUM5'}), get({PcKeyFactory, m})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_NUM7'}), get({PcKeyFactory, '_Q'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_NUM9'}), get({PcKeyFactory, '_E'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'UP'}), get({PcKeyFactory, '_W'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'LEFT'}), get({PcKeyFactory, '_A'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'RIGHT'}), get({PcKeyFactory, '_D'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'DOWN'}), get({PcKeyFactory, '_S'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_NUM5'}), get({PcKeyFactory, '_X'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_NUM7'}), get({PcKeyFactory, q})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_NUM9'}), get({PcKeyFactory, e})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'UP'}), get({PcKeyFactory, w})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'LEFT'}), get({PcKeyFactory, a})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'RIGHT'}), get({PcKeyFactory, d})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'DOWN'}), get({PcKeyFactory, s})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_NUM5'}), get({PcKeyFactory, x})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_NUM3'}), get({PcKeyFactory, 'THREE'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_NUM0'}), get({PcKeyFactory, 'ZERO'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_NUM0'}), get({PcKeyFactory, 'ONE'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_NUM0'}), get({PcKeyFactory, 'SPACE'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_POUND'}), get({PcKeyFactory, 'DEL'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_POUND'}), get({PcKeyFactory, 'TWO'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_STAR'}), get({PcKeyFactory, 'ESCAPE'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'KEY_STAR'}), get({PcKeyFactory, 'STAR'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'LEVEL_DOWN'}), get({PcKeyFactory, 'COMMA'})),
-        (get({InputToGameKeyMapping, '$class'})):add(InputToGameKeyMapping, get({GameKeyFactory, 'LEVEL_UP'}), get({PcKeyFactory, 'PERIOD'})).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+end
+
 

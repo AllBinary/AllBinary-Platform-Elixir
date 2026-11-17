@@ -1,41 +1,87 @@
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.opengles.shader
-% import javax.microedition.khronos.opengles.GL10
-% import org.allbinary.graphics.opengles.OpenGLProcessor
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles.shader
 
--module('ShaderOpenGLProcessor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule ShaderOpenGLProcessor do
+  def jsuper(), do: OpenGLProcessor
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('OpenGLProcessor', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      OpenGLProcessor.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
+
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jm_process0(this, p_gl) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    'OpenGLProcessor':'$init'(This),
-    init_fields(This),
-        ok.
 
-process0(This, Gl) ->
-        ok.
+  def jm_process1(this, p_gl) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+        nil
+    end)
+  end
 
-process1(This, Gl) ->
-        ok.
 
-process(This, Gl) ->
-        ok.
+  def jm_process(this, p_gl) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+        nil
+    end)
+  end
 
-process2(This, Gl) ->
-        ok.
 
-process3(This, Gl) ->
-        ok.
+  def jm_process2(this, p_gl) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+        nil
+    end)
+  end
+
+
+  def jm_process3(this, p_gl) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+        nil
+    end)
+  end
+end
+
 

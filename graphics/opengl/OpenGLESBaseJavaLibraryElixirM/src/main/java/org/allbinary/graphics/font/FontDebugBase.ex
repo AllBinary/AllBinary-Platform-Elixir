@@ -1,39 +1,80 @@
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.font
-% import javax.microedition.lcdui.Font
-% import org.allbinary.logic.string.StringMaker
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.font
 
--module('FontDebugBase').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+#OpenGLESBaseJavaLibrary
+defmodule FontDebugBase do
+  def jsuper(), do: JObject
+def jstatic_instanceBase(), do: JR.static_get(__MODULE__, :instanceBase, fn -> FontDebugBase.jnew() end)
+  def jstatic_set_instanceBase(value), do: JR.static_put(__MODULE__, :instanceBase, value)
 
-static_init() ->
-    put({?MODULE, instanceBase}, 'FontDebugBase':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :SET_FONT, nil)
+        JR.put(this, :SET_FONT, "setFont")
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'SET_FONT'}, "setFont"),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'FontDebugBase', instanceBase}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, FontDebugBase.jstatic_instanceBase()})
+    end)
+  end
 
-debugMetrics(This, CurrentFont, ConvertedTextSize, DisplayMetrics, StringBuffer) when is_number(ConvertedTextSize) ->
-        ok.
 
-debugDpi(This, DensityDpi, StringBuffer) when is_integer(DensityDpi) ->
-        ok.
+  def jm_debugMetrics(this, p_currentFont, p_convertedTextSize, p_displayMetrics, p_stringBuffer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :currentFont, p_currentFont)
+      JR.lset(f, :convertedTextSize, p_convertedTextSize)
+      JR.lset(f, :displayMetrics, p_displayMetrics)
+      JR.lset(f, :stringBuffer, p_stringBuffer)
+        nil
+    end)
+  end
 
-debugDimension(This, CurrentFont, ConvertedTextSize, LongestDimensionTotalPixels, StringBuffer) when is_number(ConvertedTextSize), is_integer(LongestDimensionTotalPixels) ->
-        ok.
+
+  def jm_debugDpi(this, p_densityDpi, p_stringBuffer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :densityDpi, p_densityDpi)
+      JR.lset(f, :stringBuffer, p_stringBuffer)
+        nil
+    end)
+  end
+
+
+  def jm_debugDimension(this, p_currentFont, p_convertedTextSize, p_longestDimensionTotalPixels, p_stringBuffer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :currentFont, p_currentFont)
+      JR.lset(f, :convertedTextSize, p_convertedTextSize)
+      JR.lset(f, :longestDimensionTotalPixels, p_longestDimensionTotalPixels)
+      JR.lset(f, :stringBuffer, p_stringBuffer)
+        nil
+    end)
+  end
+end
+
 

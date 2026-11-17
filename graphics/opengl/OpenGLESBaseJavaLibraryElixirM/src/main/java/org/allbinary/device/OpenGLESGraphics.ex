@@ -1,61 +1,120 @@
-% Generated Code Do Not Modify
-% package org.allbinary.device
-% import javax.microedition.khronos.opengles.GL
-% import javax.microedition.khronos.opengles.GL10
-% import javax.microedition.lcdui.Font
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.graphics.font.FontDebugBase
-% import org.allbinary.image.opengles.OpenGLSurfaceChangedInterface
-% import org.allbinary.string.CommonStrings
+# Generated Code Do Not Modify
+# package org.allbinary.device
 
--module('OpenGLESGraphics').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements OpenGLSurfaceChangedInterface
-% implements GraphicsInterface
+defmodule OpenGLESGraphics do
+  def jsuper(), do: Graphics
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Graphics', Function, Arguments).
-
-init_fields(This) ->
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, gl}, get({'NullGL10', 'NULL_GL10'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :gl, nil)
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        JR.put(this, :gl, NullGL10.jstatic_NULL_GL10())
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      Graphics.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    'Graphics':'$init'(This),
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-updateGL(This, Gl) ->
-        ok.
 
-set(This, Gl) ->
-        ok.
+  def jm_updateGL(this, p_gl) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+        nil
+    end)
+  end
 
-% throws Exception
-init(This) ->
-        ok.
 
-% throws Exception
-update(This) ->
-        ok.
+  def jm_set(this, p_gl) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+        nil
+    end)
+  end
 
-setOrthoginalMode(This) ->
-        ok.
 
-setCameraMode(This) ->
-        ok.
+  def jm_init(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-getGl10(This) ->
-        get({This, gl}).
 
-setFontDebug(This, Font, FontDebug) ->
-        erlang:error({'RuntimeException'}).
+  def jm_update(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_setOrthoginalMode(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_setCameraMode(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_getGl10(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :gl)})
+    end)
+  end
+
+
+  def jm_setFontDebug(this, p_font, p_fontDebug) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :font, p_font)
+      JR.lset(f, :fontDebug, p_fontDebug)
+        throw({:jexception, JR.exception("RuntimeException", "")})
+    end)
+  end
+end
+
 

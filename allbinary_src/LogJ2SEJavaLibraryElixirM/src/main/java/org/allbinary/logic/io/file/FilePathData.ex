@@ -46,7 +46,7 @@ def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> FilePathD
       JObject.jinit(this)
       jinitfields(this)
         if (J.File.jstatic_separatorChar() == ?\\) do
-            JR.put(this, :PATH_START, (J.File.jstatic_separator() + J.File.jstatic_separator()))
+            JR.put(this, :PATH_START, J.File.jstatic_separator() <> J.File.jstatic_separator())
         end
     end)
   end

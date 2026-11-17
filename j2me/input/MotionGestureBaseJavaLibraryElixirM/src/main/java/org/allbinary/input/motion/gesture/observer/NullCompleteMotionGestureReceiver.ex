@@ -1,42 +1,58 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion.gesture.observer
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.BasicArrayList
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture.observer
 
--module('NullCompleteMotionGestureReceiver').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements CompleteMotionGestureListenerInterface
+defmodule NullCompleteMotionGestureReceiver do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+        JR.call(JR.get(this, :logUtil), :jm_putF, ["Null Gesture Reciever", this, JR.get(JR.lget(f, :commonStrings), :CONSTRUCTOR)])
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        CommonStrings = 'CommonStrings':getInstance(),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), "Null Gesture Reciever", This, get({CommonStrings, 'CONSTRUCTOR'})).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-% throws Exception
-onMotionGestureCompleted(This, List) ->
-        ok.
+
+  def jm_onMotionGestureCompleted(this, p_list) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :list, p_list)
+        nil
+    end)
+  end
+end
+
 

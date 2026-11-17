@@ -1,46 +1,62 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.string
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.string
 
--module('StringValidationJSEUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule StringValidationJSEUtil do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-isBlank(String) when (is_list(String) orelse String =:= undefined) ->
-        try
-        Len = string:length(String),
-        lists:foreach(fun(I) ->
-            C = lists:nth((I) + 1, String),
-            case ('Character':isWhitespace(C) =:= false) of
-                true ->
-                throw({'$return', false});
-                false -> ok
+
+  def jm_isBlank(p_string) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :string, p_string)
+        JR.lset(f, :len, byte_size(JR.lget(f, :string)))
+        JR.lset(f, :i, 0)
+        JR.jfor(fn -> (JR.lget(f, :i) < JR.lget(f, :len)) end, fn -> JR.lpostinc(f, :i, 1) end, fn ->
+            JR.lset(f, :c, JR.char_at(JR.lget(f, :string), JR.lget(f, :i)))
+            if (J.Character.jm_isWhitespace(JR.lget(f, :c)) == false) do
+                throw({:jreturn, false})
             end
-        end, lists:seq(0, Len - 1)),
-        true
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        end)
+        throw({:jreturn, true})
+    end)
+  end
+end
+
 

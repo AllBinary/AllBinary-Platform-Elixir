@@ -1,127 +1,186 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.pipeline
-% import org.allbinary.graphics.GPoint
-% import org.allbinary.graphics.PointFactory
-% import org.allbinary.math.Angle
-% import org.allbinary.math.NoDecimalTrigTable
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.pipeline
 
--module('BasicGraphicsPipeline').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule BasicGraphicsPipeline do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, pointBasicArrayList}, undefined),
-    put({This, noDecimalTrigTable}, 'NoDecimalTrigTable':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :pointBasicArrayList, nil)
+    JR.put(this, :noDecimalTrigTable, nil)
+        
+        JR.put(this, :noDecimalTrigTable, NoDecimalTrigTable.jm_getInstance())
+    nil
+  end
 
 
-new(Points) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Points),
-    This.
+  def jinit(this, p_points) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :points, p_points)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :pointBasicArrayList, JR.lget(f, :points))
+    end)
+  end
 
-'$init'(This, Points) ->
-    init_fields(This),
-        put({This, pointBasicArrayList}, Points).
+  def jnew(p_points) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_points)
+    this
+  end
 
-setInitMatrix(This, Points) ->
-        put({This, pointBasicArrayList}, Points).
 
-createMatrix(This) ->
-        ok.
+  def jm_setInitMatrix(this, p_points) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :points, p_points)
+        JR.put(this, :pointBasicArrayList, JR.lget(f, :points))
+    end)
+  end
 
-% throws Exception
-translate(This, X, Y) when is_integer(X), is_integer(Y) ->
-        NewBasicArrayList = 'BasicArrayListD':new(),
-        Size = (get({get({This, pointBasicArrayList}), '$class'})):size(get({This, pointBasicArrayList})),
-        PointFactory = 'PointFactory':getInstance(),
-        put({local, secondPoint}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, secondPoint}, array:get(Index, get({get({This, pointBasicArrayList}), objectArray}))),
-            case ((get({get({local, secondPoint}), '$class'})):getX(get({local, secondPoint})) =/= 1000) of
-                true ->
-                (get({NewBasicArrayList, '$class'})):add(NewBasicArrayList, (get({PointFactory, '$class'})):createXY(PointFactory, ((get({get({local, secondPoint}), '$class'})):getX(get({local, secondPoint})) + X), ((get({get({local, secondPoint}), '$class'})):getY(get({local, secondPoint})) + Y)));
-                false ->
-                (get({NewBasicArrayList, '$class'})):add(NewBasicArrayList, get({local, secondPoint}))
+
+  def jm_createMatrix(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_translate(this, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        JR.lset(f, :newBasicArrayList, BasicArrayListD.jnew())
+        JR.lset(f, :size, JR.call(JR.get(this, :pointBasicArrayList), :jm_size, []))
+        JR.lset(f, :pointFactory, PointFactory.jm_getInstance())
+        JR.lset(f, :secondPoint, nil)
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :secondPoint, JR.aget(JR.get(JR.get(this, :pointBasicArrayList), :objectArray), JR.lget(f, :index)))
+            if (JR.call(JR.lget(f, :secondPoint), :jm_getX, []) != 1000) do
+                JR.call(JR.lget(f, :newBasicArrayList), :jm_add, [JR.call(JR.lget(f, :pointFactory), :jm_createXY, [(JR.call(JR.lget(f, :secondPoint), :jm_getX, []) + JR.lget(f, :x)), (JR.call(JR.lget(f, :secondPoint), :jm_getY, []) + JR.lget(f, :y))])])
+            else
+                JR.call(JR.lget(f, :newBasicArrayList), :jm_add, [JR.lget(f, :secondPoint)])
             end
-        end, lists:seq(0, Size - 1)),
-        put({This, pointBasicArrayList}, NewBasicArrayList).
+        end)
+        JR.put(this, :pointBasicArrayList, JR.lget(f, :newBasicArrayList))
+    end)
+  end
 
-% throws Exception
-rotateToAngle(This, Angle) ->
-        (get({This, '$class'})):rotate(This, trunc((get({Angle, '$class'})):getValue(Angle))).
 
-% throws Exception
-rotate(This, Angle) when is_integer(Angle) ->
-        NewBasicArrayList = 'BasicArrayListD':new(),
-        put({local, secondPoint}, undefined),
-        put({local, y}, 0),
-        put({local, secondX}, 0),
-        put({local, secondY}, 0),
-        put({local, point}, undefined),
-        PointFactory = 'PointFactory':getInstance(),
-        Size = (get({get({This, pointBasicArrayList}), '$class'})):size(get({This, pointBasicArrayList})),
-        put({local, sin}, 0),
-        put({local, cos}, 0),
-        lists:foreach(fun(Index) ->
-            put({local, secondPoint}, array:get(Index, get({get({This, pointBasicArrayList}), objectArray}))),
-            case ((get({get({local, secondPoint}), '$class'})):getX(get({local, secondPoint})) =/= 1000) of
-                true ->
-                put({local, sin}, (get({get({This, noDecimalTrigTable}), '$class'})):sin(get({This, noDecimalTrigTable}), Angle)),
-                put({local, cos}, (get({get({This, noDecimalTrigTable}), '$class'})):cos(get({This, noDecimalTrigTable}), Angle)),
-                put({local, y}, ((get({get({local, secondPoint}), '$class'})):getY(get({local, secondPoint})) * get({local, sin}))),
-                put({local, secondX}, ((((get({get({local, secondPoint}), '$class'})):getX(get({local, secondPoint})) * get({local, cos}))) - get({local, y}))),
-                put({local, secondY}, ((((get({get({local, secondPoint}), '$class'})):getX(get({local, secondPoint})) * get({local, sin}))) + (((get({get({local, secondPoint}), '$class'})):getY(get({local, secondPoint})) * get({local, cos}))))),
-                put({local, point}, (get({PointFactory, '$class'})):createXY(PointFactory, (get({local, secondX}) div 10000), (get({local, secondY}) div 10000))),
-                (get({NewBasicArrayList, '$class'})):add(NewBasicArrayList, get({local, point}));
-                false ->
-                (get({NewBasicArrayList, '$class'})):add(NewBasicArrayList, get({local, secondPoint}))
+  def jm_rotateToAngle(this, p_angle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :angle, p_angle)
+        JR.call(this, :jm_rotate, [JR.int32(JR.call(JR.lget(f, :angle), :jm_getValue, []))])
+    end)
+  end
+
+
+  def jm_rotate(this, p_angle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :angle, p_angle)
+        JR.lset(f, :newBasicArrayList, BasicArrayListD.jnew())
+        JR.lset(f, :secondPoint, nil)
+        JR.lset(f, :y, 0)
+        JR.lset(f, :secondX, 0)
+        JR.lset(f, :secondY, 0)
+        JR.lset(f, :point, nil)
+        JR.lset(f, :pointFactory, PointFactory.jm_getInstance())
+        JR.lset(f, :size, JR.call(JR.get(this, :pointBasicArrayList), :jm_size, []))
+        JR.lset(f, :sin, 0)
+        JR.lset(f, :cos, 0)
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :secondPoint, JR.aget(JR.get(JR.get(this, :pointBasicArrayList), :objectArray), JR.lget(f, :index)))
+            if (JR.call(JR.lget(f, :secondPoint), :jm_getX, []) != 1000) do
+                JR.lset(f, :sin, JR.call(JR.get(this, :noDecimalTrigTable), :jm_sin, [JR.lget(f, :angle)]))
+                JR.lset(f, :cos, JR.call(JR.get(this, :noDecimalTrigTable), :jm_cos, [JR.lget(f, :angle)]))
+                JR.lset(f, :y, (JR.call(JR.lget(f, :secondPoint), :jm_getY, []) * JR.lget(f, :sin)))
+                JR.lset(f, :secondX, (((JR.call(JR.lget(f, :secondPoint), :jm_getX, []) * JR.lget(f, :cos))) - JR.lget(f, :y)))
+                JR.lset(f, :secondY, (((JR.call(JR.lget(f, :secondPoint), :jm_getX, []) * JR.lget(f, :sin))) + ((JR.call(JR.lget(f, :secondPoint), :jm_getY, []) * JR.lget(f, :cos)))))
+                JR.lset(f, :point, JR.call(JR.lget(f, :pointFactory), :jm_createXY, [div(JR.int32(JR.lget(f, :secondX)), 10000), div(JR.int32(JR.lget(f, :secondY)), 10000)]))
+                JR.call(JR.lget(f, :newBasicArrayList), :jm_add, [JR.lget(f, :point)])
+            else
+                JR.call(JR.lget(f, :newBasicArrayList), :jm_add, [JR.lget(f, :secondPoint)])
             end
-        end, lists:seq(0, Size - 1)),
-        put({This, pointBasicArrayList}, NewBasicArrayList).
+        end)
+        JR.put(this, :pointBasicArrayList, JR.lget(f, :newBasicArrayList))
+    end)
+  end
 
-% throws Exception
-mirror(This, Width) when is_integer(Width) ->
-        PointFactory = 'PointFactory':getInstance(),
-        HalfWidth = ((Width bsr 1)),
-        NewBasicArrayList = 'BasicArrayListD':new(),
-        put({local, secondPoint}, undefined),
-        put({local, newX}, 0),
-        put({local, point}, undefined),
-        Size = (get({get({This, pointBasicArrayList}), '$class'})):size(get({This, pointBasicArrayList})),
-        lists:foreach(fun(Index) ->
-            put({local, secondPoint}, array:get(Index, get({get({This, pointBasicArrayList}), objectArray}))),
-            case ((get({get({local, secondPoint}), '$class'})):getX(get({local, secondPoint})) =/= 1000) of
-                true ->
-                put({local, newX}, 0),
-                case ((get({get({local, secondPoint}), '$class'})):getX(get({local, secondPoint})) > HalfWidth) of
-                    true ->
-                    put({local, newX}, (HalfWidth - (((get({get({local, secondPoint}), '$class'})):getX(get({local, secondPoint})) - HalfWidth))));
-                    false ->
-                    put({local, newX}, (HalfWidth + ((HalfWidth - (get({get({local, secondPoint}), '$class'})):getX(get({local, secondPoint}))))))
-                end,
-                put({local, point}, (get({PointFactory, '$class'})):createXY(PointFactory, get({local, newX}), (get({get({local, secondPoint}), '$class'})):getY(get({local, secondPoint})))),
-                (get({NewBasicArrayList, '$class'})):add(NewBasicArrayList, get({local, point}));
-                false ->
-                (get({NewBasicArrayList, '$class'})):add(NewBasicArrayList, get({local, secondPoint}))
+
+  def jm_mirror(this, p_width) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :width, p_width)
+        JR.lset(f, :pointFactory, PointFactory.jm_getInstance())
+        JR.lset(f, :halfWidth, (Bitwise.bsr(JR.lget(f, :width), 1)))
+        JR.lset(f, :newBasicArrayList, BasicArrayListD.jnew())
+        JR.lset(f, :secondPoint, nil)
+        JR.lset(f, :newX, 0)
+        JR.lset(f, :point, nil)
+        JR.lset(f, :size, JR.call(JR.get(this, :pointBasicArrayList), :jm_size, []))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :secondPoint, JR.aget(JR.get(JR.get(this, :pointBasicArrayList), :objectArray), JR.lget(f, :index)))
+            if (JR.call(JR.lget(f, :secondPoint), :jm_getX, []) != 1000) do
+                JR.lset(f, :newX, 0)
+                if (JR.call(JR.lget(f, :secondPoint), :jm_getX, []) > JR.lget(f, :halfWidth)) do
+                    JR.lset(f, :newX, (JR.lget(f, :halfWidth) - ((JR.call(JR.lget(f, :secondPoint), :jm_getX, []) - JR.lget(f, :halfWidth)))))
+                else
+                    JR.lset(f, :newX, (JR.lget(f, :halfWidth) + ((JR.lget(f, :halfWidth) - JR.call(JR.lget(f, :secondPoint), :jm_getX, [])))))
+                end
+                JR.lset(f, :point, JR.call(JR.lget(f, :pointFactory), :jm_createXY, [JR.lget(f, :newX), JR.call(JR.lget(f, :secondPoint), :jm_getY, [])]))
+                JR.call(JR.lget(f, :newBasicArrayList), :jm_add, [JR.lget(f, :point)])
+            else
+                JR.call(JR.lget(f, :newBasicArrayList), :jm_add, [JR.lget(f, :secondPoint)])
             end
-        end, lists:seq(0, Size - 1)),
-        put({This, pointBasicArrayList}, NewBasicArrayList).
+        end)
+        JR.put(this, :pointBasicArrayList, JR.lget(f, :newBasicArrayList))
+    end)
+  end
 
-getMatrix(This) ->
-        get({This, pointBasicArrayList}).
+
+  def jm_getMatrix(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :pointBasicArrayList)})
+    end)
+  end
+end
+
 

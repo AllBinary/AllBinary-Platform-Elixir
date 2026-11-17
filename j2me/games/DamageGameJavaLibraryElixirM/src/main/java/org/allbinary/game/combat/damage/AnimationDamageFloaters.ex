@@ -1,84 +1,111 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.combat.damage
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.animation.IndexedAnimation
-% import org.allbinary.graphics.displayable.CanvasStrings
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.CircularIndexUtil
-% import org.allbinary.view.ViewPosition
-% import org.allbinary.view.ViewPositionBase
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.combat.damage
 
--module('AnimationDamageFloaters').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule AnimationDamageFloaters do
+  def jsuper(), do: DamageFloaters
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('DamageFloaters', Function, Arguments).
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, layerInterface}, undefined),
-    put({This, animationInterfaceArray}, undefined),
-    put({This, circularIndexUtil}, undefined),
-    put({This, dx}, 0),
-    put({This, dy}, 0),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :layerInterface, nil)
+    JR.put(this, :animationInterfaceArray, nil)
+    JR.put(this, :circularIndexUtil, nil)
+    JR.put(this, :dx, 0)
+    JR.put(this, :dy, 0)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        
+        
+        
+        
+        
+    nil
+  end
 
 
-new(LayerInterface, AnimationInterfaceArray, Dx, Dy) when (is_tuple(AnimationInterfaceArray) orelse AnimationInterfaceArray =:= undefined), is_integer(Dx), is_integer(Dy) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, LayerInterface, AnimationInterfaceArray, Dx, Dy),
-    This.
+  def jinit(this, p_layerInterface, p_animationInterfaceArray, p_dx, p_dy) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+      JR.lset(f, :animationInterfaceArray, p_animationInterfaceArray)
+      JR.lset(f, :dx, p_dx)
+      JR.lset(f, :dy, p_dy)
+      DamageFloaters.jinit(this)
+      jinitfields(this)
+        JR.put(this, :animationInterfaceArray, JR.lget(f, :animationInterfaceArray))
+        JR.lset(f, :index, JR.int32(JR.alength(JR.get(this, :animationInterfaceArray)) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.call(JR.aget(JR.get(this, :animationInterfaceArray), JR.lget(f, :index)), :jm_setFrame, [(JR.call(JR.aget(JR.get(this, :animationInterfaceArray), JR.lget(f, :index)), :jm_getSize, []) - 1)])
+        end)
+        JR.put(this, :layerInterface, JR.lget(f, :layerInterface))
+        JR.put(this, :circularIndexUtil, CircularIndexUtil.jm_createInstance(JR.alength(JR.get(this, :animationInterfaceArray))))
+        JR.put(this, :dx, JR.lget(f, :dx))
+        JR.put(this, :dy, JR.lget(f, :dy))
+    end)
+  end
 
-'$init'(This, LayerInterface, AnimationInterfaceArray, Dx, Dy) when (is_tuple(AnimationInterfaceArray) orelse AnimationInterfaceArray =:= undefined), is_integer(Dx), is_integer(Dy) ->
-    'DamageFloaters':'$init'(This),
-    init_fields(This),
-        put({This, animationInterfaceArray}, AnimationInterfaceArray),
-        lists:foreach(fun(Index) ->
-            (fun(Target_N66091) -> (get({Target_N66091, '$class'})):setFrame(Target_N66091, ((fun(Target_N66127) -> (get({Target_N66127, '$class'})):getSize(Target_N66127) end)(array:get(Index, get({This, animationInterfaceArray}))) - 1)) end)(array:get(Index, get({This, animationInterfaceArray})))
-        end, lists:seq((array:size(get({This, animationInterfaceArray})) - 1), 0, -1)),
-        put({This, layerInterface}, LayerInterface),
-        put({This, circularIndexUtil}, 'CircularIndexUtil':createInstance(array:size(get({This, animationInterfaceArray})))),
-        put({This, dx}, Dx),
-        put({This, dy}, Dy).
+  def jnew(p_layerInterface, p_animationInterfaceArray, p_dx, p_dy) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_layerInterface, p_animationInterfaceArray, p_dx, p_dy)
+    this
+  end
 
-add(This, Damage) when is_integer(Damage) ->
-        I = (get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})),
-        (fun(Target_N66533) -> (get({Target_N66533, '$class'})):setFrame(Target_N66533, 0) end)(array:get(I, get({This, animationInterfaceArray}))),
-        (get({get({This, circularIndexUtil}), '$class'})):next(get({This, circularIndexUtil})).
 
-paint(This, Graphics) ->
-        try
-            ViewPosition = (get({get({This, layerInterface}), '$class'})):getViewPosition(get({This, layerInterface})),
-            X = (get({ViewPosition, '$class'})):getX(ViewPosition),
-            Y = (get({ViewPosition, '$class'})):getY(ViewPosition),
-            lists:foreach(fun(Index) ->
-                AnimationInterface = array:get(Index, get({This, animationInterfaceArray})),
-                case ((get({AnimationInterface, '$class'})):getFrame(AnimationInterface) < ((get({AnimationInterface, '$class'})):getAnimationSize(AnimationInterface) - 1)) of
-                    true ->
-                    Delta = ((get({AnimationInterface, '$class'})):getFrame(AnimationInterface) * 20),
-                    (get({AnimationInterface, '$class'})):paintXY(AnimationInterface, Graphics, (X + get({This, dx})), ((Y - Delta) + get({This, dy}))),
-                    (get({AnimationInterface, '$class'})):nextFrame(AnimationInterface);
-                    false -> ok
+  def jm_add(this, p_damage) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :damage, p_damage)
+        JR.lset(f, :i, JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, []))
+        JR.call(JR.aget(JR.get(this, :animationInterfaceArray), JR.lget(f, :i)), :jm_setFrame, [0])
+        JR.call(JR.get(this, :circularIndexUtil), :jm_next, [])
+    end)
+  end
+
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        try do
+            JR.lset(f, :viewPosition, JR.call(JR.get(this, :layerInterface), :jm_getViewPosition, []))
+            JR.lset(f, :x, JR.call(JR.lget(f, :viewPosition), :jm_getX, []))
+            JR.lset(f, :y, JR.call(JR.lget(f, :viewPosition), :jm_getY, []))
+            JR.lset(f, :index, 0)
+            JR.jfor(fn -> (JR.lget(f, :index) < JR.alength(JR.get(this, :animationInterfaceArray))) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+                JR.lset(f, :animationInterface, JR.aget(JR.get(this, :animationInterfaceArray), JR.lget(f, :index)))
+                if (JR.call(JR.lget(f, :animationInterface), :jm_getFrame, []) < (JR.call(JR.lget(f, :animationInterface), :jm_getAnimationSize, []) - 1)) do
+                    JR.lset(f, :delta, (JR.call(JR.lget(f, :animationInterface), :jm_getFrame, []) * 20))
+                    JR.call(JR.lget(f, :animationInterface), :jm_paintXY, [JR.lget(f, :graphics), JR.int32(JR.lget(f, :x) + JR.get(this, :dx)), JR.int32(JR.int32(JR.lget(f, :y) - JR.lget(f, :delta)) + JR.get(this, :dy))])
+                    JR.call(JR.lget(f, :animationInterface), :jm_nextFrame, [])
                 end
-            end, lists:seq(0, array:size(get({This, animationInterfaceArray})) - 1))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            CanvasStrings = 'CanvasStrings':getInstance(),
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), This, get({CanvasStrings, 'PAINT'}), E)
-        end.
+            end)
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.lset(f, :canvasStrings, CanvasStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, JR.get(JR.lget(f, :canvasStrings), :PAINT), JR.lget(f, :e)])
+        end
+    end)
+  end
+end
+
 

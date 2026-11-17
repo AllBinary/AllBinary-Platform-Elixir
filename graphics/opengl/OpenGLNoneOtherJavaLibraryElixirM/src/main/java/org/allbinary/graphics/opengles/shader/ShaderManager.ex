@@ -1,54 +1,94 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2025 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.opengles.shader
-% import javax.microedition.khronos.opengles.GL10
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.BasicArrayList
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2025 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles.shader
 
--module('ShaderManager').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule ShaderManager do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> ShaderManager.jnew(-1, -1) end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'ShaderManager':new((-1), (-1))),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :LOAD_SHADER, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :GL_VERTEX_SHADER, 0)
+    JR.put(this, :GL_FRAGMENT_SHADER, 0)
+        JR.put(this, :LOAD_SHADER, "loadShader")
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'LOAD_SHADER'}, "loadShader"),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, 'GL_VERTEX_SHADER'}, 0),
-    put({This, 'GL_FRAGMENT_SHADER'}, 0),
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, ShaderManager.jstatic_instance()})
+    end)
+  end
 
 
-getInstance() ->
-        get({'ShaderManager', instance}).
+  def jinit(this, p_GL_VERTEX_SHADER, p_GL_FRAGMENT_SHADER) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :GL_VERTEX_SHADER, p_GL_VERTEX_SHADER)
+      JR.lset(f, :GL_FRAGMENT_SHADER, p_GL_FRAGMENT_SHADER)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :GL_VERTEX_SHADER, JR.lget(f, :GL_VERTEX_SHADER))
+        JR.put(this, :GL_FRAGMENT_SHADER, JR.lget(f, :GL_FRAGMENT_SHADER))
+    end)
+  end
 
-new(GL_VERTEX_SHADER, GL_FRAGMENT_SHADER) when is_integer(GL_VERTEX_SHADER), is_integer(GL_FRAGMENT_SHADER) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, GL_VERTEX_SHADER, GL_FRAGMENT_SHADER),
-    This.
+  def jnew(p_GL_VERTEX_SHADER, p_GL_FRAGMENT_SHADER) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_GL_VERTEX_SHADER, p_GL_FRAGMENT_SHADER)
+    this
+  end
 
-'$init'(This, GL_VERTEX_SHADER, GL_FRAGMENT_SHADER) when is_integer(GL_VERTEX_SHADER), is_integer(GL_FRAGMENT_SHADER) ->
-    init_fields(This),
-        put({This, 'GL_VERTEX_SHADER'}, GL_VERTEX_SHADER),
-        put({This, 'GL_FRAGMENT_SHADER'}, GL_FRAGMENT_SHADER).
 
-load(This, Gl, Resource, ShaderAsStringArray, ShaderType) when (is_list(Resource) orelse Resource =:= undefined), (is_tuple(ShaderAsStringArray) orelse ShaderAsStringArray =:= undefined), is_integer(ShaderType) ->
-        (-1).
+  def jm_load(this, p_gl, p_resource, p_shaderAsStringArray, p_shaderType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+      JR.lset(f, :resource, p_resource)
+      JR.lset(f, :shaderAsStringArray, p_shaderAsStringArray)
+      JR.lset(f, :shaderType, p_shaderType)
+        throw({:jreturn, -1})
+    end)
+  end
 
-loadShader(This, Gl, Resource, StringList, ShaderType) when (is_list(Resource) orelse Resource =:= undefined), is_integer(ShaderType) ->
-        (-1).
+
+  def jm_loadShader(this, p_gl, p_resource, p_stringList, p_shaderType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+      JR.lset(f, :resource, p_resource)
+      JR.lset(f, :stringList, p_stringList)
+      JR.lset(f, :shaderType, p_shaderType)
+        throw({:jreturn, -1})
+    end)
+  end
+end
+
 

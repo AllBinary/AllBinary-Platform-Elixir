@@ -1,151 +1,242 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.input.mapping
-% import java.util.Enumeration
-% import org.allbinary.game.configuration.persistance.GamePersistanceStrings
-% import org.allbinary.game.input.Input
-% import org.allbinary.game.input.InputPersistance
-% import org.allbinary.game.input.mapping.event.InputMappingEvent
-% import org.allbinary.game.input.mapping.event.InputMappingEventListenerInterface
-% import org.allbinary.game.input.mapping.event.NullInputMappingEventListener
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.communication.log.PreLogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.system.security.licensing.AbeClientInformationInterface
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.EnumerationUtil
-% import org.allbinary.util.ABHashtable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.input.mapping
 
--module('PersistentInputMapping').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+#GameInputNoPersistanceLibrary
+defmodule PersistentInputMapping do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT) end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, get({'NullUtil':getInstance(), 'NULL_OBJECT'})),
-    ok.
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, enumerationUtil}, 'EnumerationUtil':getInstance()),
-    put({This, inputMapping}, 'InputToGameKeyMapping':new()),
-    put({This, inputMappingEventListenerInterface}, get({'NullInputMappingEventListener', 'NULL_INPUT_MAPPING_EVENT_LISTENER'})),
-    put({This, inputPersistance}, undefined),
-    put({This, inputMappingEvent}, 'InputMappingEvent':new(This)),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :enumerationUtil, nil)
+    JR.put(this, :inputMapping, nil)
+    JR.put(this, :inputMappingEventListenerInterface, nil)
+    JR.put(this, :inputPersistance, nil)
+    JR.put(this, :inputMappingEvent, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        JR.put(this, :enumerationUtil, EnumerationUtil.jm_getInstance())
+        JR.put(this, :inputMapping, InputToGameKeyMapping.jnew())
+        JR.put(this, :inputMappingEventListenerInterface, NullInputMappingEventListener.jstatic_NULL_INPUT_MAPPING_EVENT_LISTENER())
+        
+        JR.put(this, :inputMappingEvent, InputMappingEvent.jnew(this))
+    nil
+  end
 
 
-getNullInstance() ->
-        case (get({'PersistentInputMapping', instance}) =:= get({'NullUtil':getInstance(), 'NULL_OBJECT'})) of
-            true ->
-            put({'PersistentInputMapping', instance}, 'PersistentInputMapping':new(get({'GamePersistanceStrings':getInstance(), 'SAVED_INPUT_CONFIGURATION_RECORD_ID'})));
-            false -> ok
-        end,
-        get({'PersistentInputMapping', instance}).
+  def jm_getNullInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        if (PersistentInputMapping.jstatic_instance() == JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)) do
+            PersistentInputMapping.jstatic_set_instance(PersistentInputMapping.jnew(JR.get(GamePersistanceStrings.jm_getInstance(), :SAVED_INPUT_CONFIGURATION_RECORD_ID)))
+        end
+        throw({:jreturn, PersistentInputMapping.jstatic_instance()})
+    end)
+  end
 
-new(Name) when (is_list(Name) orelse Name =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Name),
-    This.
 
-'$init'(This, Name) when (is_list(Name) orelse Name =:= undefined) ->
-    init_fields(This),
-        put({This, inputPersistance}, 'InputPersistance':new(Name)).
+  def jinit(this, p_name) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :inputPersistance, InputPersistance.jnew(JR.lget(f, :name)))
+    end)
+  end
 
-getTotalMapped(This) ->
-        (fun(Target_N66708) -> (get({Target_N66708, '$class'})):size(Target_N66708) end)((fun(Target_N66715) -> (get({Target_N66715, '$class'})):getHashtable(Target_N66715) end)((get({This, '$class'})):getInputMapping(This))).
+  def jnew(p_name) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_name)
+    this
+  end
 
-isDefaultNew(This) ->
-        false.
 
-getDefault(This) ->
-        'InputToGameKeyMapping':getNullInstance().
+  def jm_getTotalMapped(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.call(JR.call(this, :jm_getInputMapping, []), :jm_getHashtable, []), :jm_size, [])})
+    end)
+  end
 
-% throws Exception
-setDefault(This, AbeClientInformation) ->
-        (fun(Target_N66849) -> (get({Target_N66849, '$class'})):removeAll(Target_N66849) end)((get({This, '$class'})):getInputMapping(This)),
-        (fun(Target_N66872) -> (get({Target_N66872, '$class'})):addMapping(Target_N66872, (get({This, '$class'})):getDefault(This)) end)((get({This, '$class'})):getInputMapping(This)),
-        (get({This, '$class'})):save(This, AbeClientInformation).
 
-% throws Exception
-update(This, AbeClientInformation) ->
-        (get({get({This, inputPersistance}), '$class'})):deleteAll(get({This, inputPersistance}), AbeClientInformation),
-        (get({This, '$class'})):save(This, AbeClientInformation).
+  def jm_isDefaultNew(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
 
-% throws Exception
-save(This, AbeClientInformation) ->
-        (get({get({This, inputPersistance}), '$class'})):save(get({This, inputPersistance}), AbeClientInformation, (fun(Target_N67205) -> (get({Target_N67205, '$class'})):getHashtable(Target_N67205) end)((get({This, '$class'})):getInputMapping(This))),
-        (get({get({This, inputMappingEvent}), '$class'})):setInputToGameKeyMapping(get({This, inputMappingEvent}), (get({This, '$class'})):getInputMapping(This)),
-        case ((get({This, '$class'})):getInputMappingEventListenerInterface(This) =/= undefined) of
-            true ->
-            (fun(Target_N67298) -> (get({Target_N67298, '$class'})):onInputMappingEvent(Target_N67298, get({This, inputMappingEvent})) end)((get({This, '$class'})):getInputMappingEventListenerInterface(This));
-            false -> ok
-        end.
 
-% throws Exception
-init(This, AbeClientInformation) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, get({get({This, commonStrings}), 'INIT'})),
-        try
-            (get({get({This, inputPersistance}), '$class'})):loadAll(get({This, inputPersistance}), AbeClientInformation)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            'PreLogUtil':putOE(get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'INIT'}), E),
-            (get({get({This, inputPersistance}), '$class'})):deleteRecoreStore(get({This, inputPersistance}), AbeClientInformation),
-            (get({This, '$class'})):setDefault(This, AbeClientInformation),
-            (get({get({This, inputPersistance}), '$class'})):loadAll(get({This, inputPersistance}), AbeClientInformation)
-        end,
-        List = (get({get({This, inputPersistance}), '$class'})):getList(get({This, inputPersistance})),
-        put({local, totalMappedTo}, 0),
-        Size = (get({List, '$class'})):size(List),
-        put({local, hashtable}, undefined),
-        put({local, enumeration}, undefined),
-        put({local, mappedToInput}, undefined),
-        put({local, gameActionInput}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, hashtable}, array:get(Index, get({List, objectArray}))),
-            put({local, enumeration}, (get({get({local, hashtable}), '$class'})):keys(get({local, hashtable}))),
-            (fun Loop() -> case (get({get({This, enumerationUtil}), '$class'})):hasMoreElements(get({This, enumerationUtil}), get({local, enumeration})) of true ->
-                put({local, mappedToInput}, (get({get({This, enumerationUtil}), '$class'})):nextElement(get({This, enumerationUtil}), get({local, enumeration}))),
-                put({local, gameActionInput}, (get({get({local, hashtable}), '$class'})):get(get({local, hashtable}), get({local, mappedToInput}))),
-                put({local, totalMappedTo}, get({local, totalMappedTo}) + 1),
-                (fun(Target_N68248) -> (get({Target_N68248, '$class'})):add(Target_N68248, get({local, gameActionInput}), get({local, mappedToInput})) end)((get({This, '$class'})):getInputMapping(This)),
-                Loop();
-            false -> ok end end)()
-        end, lists:seq(0, Size - 1)),
-        StringBuffer = 'StringMaker':new(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "End - Total Loaded Keys Mapped: "),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, (get({This, '$class'})):getTotalMapped(This)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, " to: "),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, get({local, totalMappedTo})),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({StringBuffer, '$class'})):toString(StringBuffer), This, get({get({This, commonStrings}), 'INIT'})).
+  def jm_getDefault(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, InputToGameKeyMapping.jm_getNullInstance()})
+    end)
+  end
 
-setInputMappingEventListenerInterface(This, InputMappingEventListenerInterface) ->
-        put({This, inputMappingEventListenerInterface}, InputMappingEventListenerInterface).
 
-getInputMappingEventListenerInterface(This) ->
-        get({This, inputMappingEventListenerInterface}).
+  def jm_setDefault(this, p_abeClientInformation) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+        JR.call(JR.call(this, :jm_getInputMapping, []), :jm_removeAll, [])
+        JR.call(JR.call(this, :jm_getInputMapping, []), :jm_addMapping, [JR.call(this, :jm_getDefault, [])])
+        JR.call(this, :jm_save, [JR.lget(f, :abeClientInformation)])
+    end)
+  end
 
-getInputMapping(This) ->
-        get({This, inputMapping}).
 
-% throws Exception
-isDelete(This, Input) ->
-        erlang:error({'Exception', get({get({This, commonStrings}), 'NOT_IMPLEMENTED'})}).
+  def jm_update(this, p_abeClientInformation) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+        JR.call(JR.get(this, :inputPersistance), :jm_deleteAll, [JR.lget(f, :abeClientInformation)])
+        JR.call(this, :jm_save, [JR.lget(f, :abeClientInformation)])
+    end)
+  end
 
-% throws Exception
-isSystemInput(This, Input) ->
-        erlang:error({'Exception', get({get({This, commonStrings}), 'NOT_IMPLEMENTED'})}).
+
+  def jm_save(this, p_abeClientInformation) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+        JR.call(JR.get(this, :inputPersistance), :jm_save, [JR.lget(f, :abeClientInformation), JR.call(JR.call(this, :jm_getInputMapping, []), :jm_getHashtable, [])])
+        JR.call(JR.get(this, :inputMappingEvent), :jm_setInputToGameKeyMapping, [JR.call(this, :jm_getInputMapping, [])])
+        if (JR.call(this, :jm_getInputMappingEventListenerInterface, []) != nil) do
+            JR.call(JR.call(this, :jm_getInputMappingEventListenerInterface, []), :jm_onInputMappingEvent, [JR.get(this, :inputMappingEvent)])
+        end
+    end)
+  end
+
+
+  def jm_init(this, p_abeClientInformation) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, JR.get(JR.get(this, :commonStrings), :INIT)])
+        try do
+            JR.call(JR.get(this, :inputPersistance), :jm_loadAll, [JR.lget(f, :abeClientInformation)])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            PreLogUtil.jm_putOE(JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :INIT), JR.lget(f, :e))
+            JR.call(JR.get(this, :inputPersistance), :jm_deleteRecoreStore, [JR.lget(f, :abeClientInformation)])
+            JR.call(this, :jm_setDefault, [JR.lget(f, :abeClientInformation)])
+            JR.call(JR.get(this, :inputPersistance), :jm_loadAll, [JR.lget(f, :abeClientInformation)])
+        end
+        JR.lset(f, :list, JR.call(JR.get(this, :inputPersistance), :jm_getList, []))
+        JR.lset(f, :totalMappedTo, 0)
+        JR.lset(f, :size, JR.call(JR.lget(f, :list), :jm_size, []))
+        JR.lset(f, :hashtable, nil)
+        JR.lset(f, :enumeration, nil)
+        JR.lset(f, :mappedToInput, nil)
+        JR.lset(f, :gameActionInput, nil)
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :hashtable, JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index)))
+            JR.lset(f, :enumeration, JR.call(JR.lget(f, :hashtable), :jm_keys, []))
+            JR.jwhile(fn -> JR.call(JR.get(this, :enumerationUtil), :jm_hasMoreElements, [JR.lget(f, :enumeration)]) end, fn ->
+                JR.lset(f, :mappedToInput, JR.call(JR.get(this, :enumerationUtil), :jm_nextElement, [JR.lget(f, :enumeration)]))
+                JR.lset(f, :gameActionInput, JR.call(JR.lget(f, :hashtable), :jm_get, [JR.lget(f, :mappedToInput)]))
+                JR.lpostinc(f, :totalMappedTo, 1)
+                JR.call(JR.call(this, :jm_getInputMapping, []), :jm_add, [JR.lget(f, :gameActionInput), JR.lget(f, :mappedToInput)])
+            end)
+        end)
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["End - Total Loaded Keys Mapped: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.call(this, :jm_getTotalMapped, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [" to: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.lget(f, :totalMappedTo)])
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :stringBuffer), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :INIT)])
+    end)
+  end
+
+
+  def jm_setInputMappingEventListenerInterface(this, p_inputMappingEventListenerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :inputMappingEventListenerInterface, p_inputMappingEventListenerInterface)
+        JR.put(this, :inputMappingEventListenerInterface, JR.lget(f, :inputMappingEventListenerInterface))
+    end)
+  end
+
+
+  def jm_getInputMappingEventListenerInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :inputMappingEventListenerInterface)})
+    end)
+  end
+
+
+  def jm_getInputMapping(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :inputMapping)})
+    end)
+  end
+
+
+  def jm_isDelete(this, p_input) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :input, p_input)
+        throw({:jexception, JR.exception("Exception", JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED))})
+    end)
+  end
+
+
+  def jm_isSystemInput(this, p_input) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :input, p_input)
+        throw({:jexception, JR.exception("Exception", JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED))})
+    end)
+  end
+end
+
 

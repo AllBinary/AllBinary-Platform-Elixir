@@ -1,49 +1,76 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.form.item
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.graphics.color.BasicColor
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item
 
--module('SelectableTextItem').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule SelectableTextItem do
+  def jsuper(), do: ABTextItem
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ABTextItem', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+
+  def jinit(this, p_label, p_layout, p_altText, p_backgroundBasicColor, p_foregroundBasicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :label, p_label)
+      JR.lset(f, :layout, p_layout)
+      JR.lset(f, :altText, p_altText)
+      JR.lset(f, :backgroundBasicColor, p_backgroundBasicColor)
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+        ABTextItem.jinit(this, JR.lget(f, :label), JR.lget(f, :layout), JR.lget(f, :altText), JR.lget(f, :backgroundBasicColor), JR.lget(f, :foregroundBasicColor))
+        SelectableTextItem.jinitfields(this)
+    end)
+  end
+
+  def jnew(p_label, p_layout, p_altText, p_backgroundBasicColor, p_foregroundBasicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_label, p_layout, p_altText, p_backgroundBasicColor, p_foregroundBasicColor)
+    this
+  end
 
 
-new(Label, Layout, AltText, BackgroundBasicColor, ForegroundBasicColor) when (is_list(Label) orelse Label =:= undefined), is_integer(Layout), (is_list(AltText) orelse AltText =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Label, Layout, AltText, BackgroundBasicColor, ForegroundBasicColor),
-    This.
+  def jm_isFocusable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, true})
+    end)
+  end
 
-'$init'(This, Label, Layout, AltText, BackgroundBasicColor, ForegroundBasicColor) when (is_list(Label) orelse Label =:= undefined), is_integer(Layout), (is_list(AltText) orelse AltText =:= undefined) ->
-        'ABTextItem':'$init'(This, Label, Layout, AltText, BackgroundBasicColor, ForegroundBasicColor).
 
-isFocusable(This) ->
-        true.
+  def jm_paintXY(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        JR.call(JR.get(this, :myFontProcessor), :jm_process, [JR.lget(f, :graphics)])
+        JR.lset(f, :stringComponent, JR.call(this, :jm_getLabelStringComponent, []))
+        if (JR.lget(f, :stringComponent) != nil) do
+            JR.call(JR.lget(f, :graphics), :jm_setColor, [JR.call(JR.call(JR.lget(f, :stringComponent), :jm_getForegroundBasicColor, []), :jm_intValue, [])])
+        end
+        JR.call(JR.lget(f, :graphics), :jm_drawString, [JR.call(this, :jm_getLabel, []), JR.int32(JR.lget(f, :x) + 2), JR.lget(f, :y), 0])
+    end)
+  end
+end
 
-paintXY(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-        (get({get({This, myFontProcessor}), '$class'})):process(get({This, myFontProcessor}), Graphics),
-        StringComponent = (get({This, '$class'})):getLabelStringComponent(This),
-        case (StringComponent =/= undefined) of
-            true ->
-            (get({Graphics, '$class'})):setColor(Graphics, (fun(Target_N65977) -> (get({Target_N65977, '$class'})):intValue(Target_N65977) end)((get({StringComponent, '$class'})):getForegroundBasicColor(StringComponent)));
-            false -> ok
-        end,
-        (get({Graphics, '$class'})):drawString(Graphics, (get({This, '$class'})):getLabel(This), (X + 2), Y, 0).
 

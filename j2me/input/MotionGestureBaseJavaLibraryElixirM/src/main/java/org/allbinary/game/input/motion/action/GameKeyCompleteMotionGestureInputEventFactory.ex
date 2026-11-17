@@ -1,56 +1,79 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.input.motion.action
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonLabels
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.input.motion.action
 
--module('GameKeyCompleteMotionGestureInputEventFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GameKeyCompleteMotionGestureInputEventFactory do
+  def jsuper(), do: JObject
+def jstatic_SINGLETON(), do: JR.static_get(__MODULE__, :SINGLETON, fn -> GameKeyCompleteMotionGestureInputEventFactory.jnew() end)
+  def jstatic_set_SINGLETON(value), do: JR.static_put(__MODULE__, :SINGLETON, value)
 
-static_init() ->
-    put({?MODULE, 'SINGLETON'}, 'GameKeyCompleteMotionGestureInputEventFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :eventList, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :eventList, BasicArrayListD.jnew())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, eventList}, 'BasicArrayListD':new()),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'GameKeyCompleteMotionGestureInputEventFactory', 'SINGLETON'}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, GameKeyCompleteMotionGestureInputEventFactory.jstatic_SINGLETON()})
+    end)
+  end
 
-add(This, GameKeyCompleteMotionGestureInputEvent) ->
-        (get({get({This, eventList}), '$class'})):add(get({This, eventList}), GameKeyCompleteMotionGestureInputEvent).
 
-updateAll(This) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N66043) -> (get({Target_N66043, '$class'})):toString(Target_N66043) end)((fun(Target_N66050) -> (get({Target_N66050, '$class'})):appendint(Target_N66050, (get({get({This, eventList}), '$class'})):size(get({This, eventList}))) end)((fun(Target_N66057) -> (get({Target_N66057, '$class'})):append(Target_N66057, get({'CommonLabels':getInstance(), 'START_LABEL'})) end)('StringMaker':new()))), This, "updateAll"),
-        lists:foreach(fun(Index) ->
-            GameKeyCompleteMotionGestureInputEvent = array:get(Index, get({get({This, eventList}), objectArray})),
-            (get({GameKeyCompleteMotionGestureInputEvent, '$class'})):update(GameKeyCompleteMotionGestureInputEvent)
-        end, lists:seq(((get({get({This, eventList}), '$class'})):size(get({This, eventList})) - 1), 0, -1)).
+  def jm_add(this, p_gameKeyCompleteMotionGestureInputEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyCompleteMotionGestureInputEvent, p_gameKeyCompleteMotionGestureInputEvent)
+        JR.call(JR.get(this, :eventList), :jm_add, [JR.lget(f, :gameKeyCompleteMotionGestureInputEvent)])
+    end)
+  end
+
+
+  def jm_updateAll(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(CommonLabels.jm_getInstance(), :START_LABEL)]), :jm_appendint, [JR.call(JR.get(this, :eventList), :jm_size, [])]), :jm_toString, []), this, "updateAll"])
+        JR.lset(f, :index, JR.int32(JR.call(JR.get(this, :eventList), :jm_size, []) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.lset(f, :gameKeyCompleteMotionGestureInputEvent, JR.aget(JR.get(JR.get(this, :eventList), :objectArray), JR.lget(f, :index)))
+            JR.call(JR.lget(f, :gameKeyCompleteMotionGestureInputEvent), :jm_update, [])
+        end)
+    end)
+  end
+end
+
 

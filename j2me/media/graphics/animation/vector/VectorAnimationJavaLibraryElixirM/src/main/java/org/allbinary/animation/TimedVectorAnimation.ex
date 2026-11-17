@@ -1,46 +1,60 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.time.GameTickTimeDelayHelperFactory
-% import org.allbinary.time.TimeDelayHelper
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation
 
--module('TimedVectorAnimation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule TimedVectorAnimation do
+  def jsuper(), do: VectorAnimation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('VectorAnimation', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :timeElapsedHelper, nil)
+        JR.put(this, :timeElapsedHelper, TimeDelayHelper.jnew(200))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, timeElapsedHelper}, 'TimeDelayHelper':new(200)),
-    ok.
+
+  def jinit(this, p_currentPoints, p_basicColor, p_animationBehavior) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :currentPoints, p_currentPoints)
+      JR.lset(f, :basicColor, p_basicColor)
+      JR.lset(f, :animationBehavior, p_animationBehavior)
+        VectorAnimation.jinit(this, JR.lget(f, :currentPoints), JR.lget(f, :basicColor), JR.lget(f, :animationBehavior))
+        TimedVectorAnimation.jinitfields(this)
+    end)
+  end
+
+  def jnew(p_currentPoints, p_basicColor, p_animationBehavior) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_currentPoints, p_basicColor, p_animationBehavior)
+    this
+  end
 
 
-new(CurrentPoints, BasicColor, AnimationBehavior) when (is_tuple(CurrentPoints) orelse CurrentPoints =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, CurrentPoints, BasicColor, AnimationBehavior),
-    This.
+  def jm_nextFrame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if JR.call(JR.get(this, :timeElapsedHelper), :jm_isTime, [JR.get(GameTickTimeDelayHelperFactory.jm_getInstance(), :startTime)]) do
+            VectorAnimation.jm_nextFrame(this)
+        end
+    end)
+  end
+end
 
-'$init'(This, CurrentPoints, BasicColor, AnimationBehavior) when (is_tuple(CurrentPoints) orelse CurrentPoints =:= undefined) ->
-        'VectorAnimation':'$init'(This, CurrentPoints, BasicColor, AnimationBehavior),
-        init_fields(This).
-
-nextFrame(This) ->
-        case (get({get({This, timeElapsedHelper}), '$class'})):isTime(get({This, timeElapsedHelper}), get({'GameTickTimeDelayHelperFactory':getInstance(), startTime})) of
-            true ->
-            'VectorAnimation':nextFrame(This);
-            false -> ok
-        end.
 

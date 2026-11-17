@@ -1,72 +1,87 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.collision
-% import org.allbinary.game.layer.CollidableCompositeLayer
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.AllBinaryLayerManager
-% import org.allbinary.layer.LayerManager
-% import org.allbinary.layer.LayerProcessor
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.collision
 
--module('OptimizedAllBinaryCollisionLayerProcessorForCollidableLayer').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule OptimizedAllBinaryCollisionLayerProcessorForCollidableLayer do
+  def jsuper(), do: LayerProcessor
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('LayerProcessor', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        LayerProcessor.jinit(this, OptimizedAllBinaryCollisionLayerManager.jnew())
+        OptimizedAllBinaryCollisionLayerProcessorForCollidableLayer.jinitfields(this)
+    end)
+  end
 
-'$init'(This) ->
-        'LayerProcessor':'$init'(This, 'OptimizedAllBinaryCollisionLayerManager':new()).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-% throws Exception
-processAt(This, AllBinaryLayerManager, LayerInterface, StartIndex) when is_integer(StartIndex) ->
-        CollidableInterfaceCompositeInterface = LayerInterface,
-        CollidableBase = (get({CollidableInterfaceCompositeInterface, '$class'})):getCollidableInferface(CollidableInterfaceCompositeInterface),
-        case (get({CollidableBase, '$class'})):isCollidable(CollidableBase, CollidableInterfaceCompositeInterface) of
-            true ->
-            LayerManager = (get({This, '$class'})):getLayerManager(This),
-            Size = (get({LayerManager, '$class'})):getSize(LayerManager),
-            put({local, collidableInterfaceCompositeInterface2}, undefined),
-            put({local, collidableBase2}, undefined),
-            lists:foreach(fun(Index) ->
-                put({local, collidableInterfaceCompositeInterface2}, (get({LayerManager, '$class'})):getLayerAt(LayerManager, Index)),
-                put({local, collidableBase2}, (get({get({local, collidableInterfaceCompositeInterface2}), '$class'})):getCollidableInferface(get({local, collidableInterfaceCompositeInterface2}))),
-                case ((get({get({local, collidableBase2}), '$class'})):isCollidable(get({local, collidableBase2}), CollidableInterfaceCompositeInterface) andalso (get({CollidableBase, '$class'})):isCollision(CollidableBase, CollidableInterfaceCompositeInterface, get({local, collidableInterfaceCompositeInterface2}))) of
-                    true ->
-                    (get({CollidableBase, '$class'})):collide(CollidableBase, CollidableInterfaceCompositeInterface, get({local, collidableInterfaceCompositeInterface2})),
-                    (get({get({local, collidableBase2}), '$class'})):collide(get({local, collidableBase2}), get({local, collidableInterfaceCompositeInterface2}), CollidableInterfaceCompositeInterface);
-                    false -> ok
+
+  def jm_processAt(this, p_allBinaryLayerManager, p_layerInterface, p_startIndex) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerManager, p_allBinaryLayerManager)
+      JR.lset(f, :layerInterface, p_layerInterface)
+      JR.lset(f, :startIndex, p_startIndex)
+        JR.lset(f, :collidableInterfaceCompositeInterface, JR.lget(f, :layerInterface))
+        JR.lset(f, :collidableBase, JR.call(JR.lget(f, :collidableInterfaceCompositeInterface), :jm_getCollidableInferface, []))
+        if JR.call(JR.lget(f, :collidableBase), :jm_isCollidable, [JR.lget(f, :collidableInterfaceCompositeInterface)]) do
+            JR.lset(f, :layerManager, JR.call(this, :jm_getLayerManager, []))
+            JR.lset(f, :size, JR.call(JR.lget(f, :layerManager), :jm_getSize, []))
+            JR.lset(f, :collidableInterfaceCompositeInterface2, nil)
+            JR.lset(f, :collidableBase2, nil)
+            JR.lset(f, :index, JR.int32(JR.lget(f, :startIndex) + 1))
+            JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+                JR.lset(f, :collidableInterfaceCompositeInterface2, JR.call(JR.lget(f, :layerManager), :jm_getLayerAt, [JR.lget(f, :index)]))
+                JR.lset(f, :collidableBase2, JR.call(JR.lget(f, :collidableInterfaceCompositeInterface2), :jm_getCollidableInferface, []))
+                if (JR.call(JR.lget(f, :collidableBase2), :jm_isCollidable, [JR.lget(f, :collidableInterfaceCompositeInterface)]) && JR.call(JR.lget(f, :collidableBase), :jm_isCollision, [JR.lget(f, :collidableInterfaceCompositeInterface), JR.lget(f, :collidableInterfaceCompositeInterface2)])) do
+                    JR.call(JR.lget(f, :collidableBase), :jm_collide, [JR.lget(f, :collidableInterfaceCompositeInterface), JR.lget(f, :collidableInterfaceCompositeInterface2)])
+                    JR.call(JR.lget(f, :collidableBase2), :jm_collide, [JR.lget(f, :collidableInterfaceCompositeInterface2), JR.lget(f, :collidableInterfaceCompositeInterface)])
                 end
-            end, lists:seq((StartIndex + 1), Size - 1));
-            false -> ok
-        end.
-
-isProcessorLayer(This, LayerInterface) ->
-        try
-        case (get({LayerInterface, '$class'})):implmentsCollidableInterface(LayerInterface) of
-            true ->
-            throw({'$return', true});
-            false ->
-            throw({'$return', false})
+            end)
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
+
+
+  def jm_isProcessorLayer(this, p_layerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+        if JR.call(JR.lget(f, :layerInterface), :jm_implmentsCollidableInterface, []) do
+            throw({:jreturn, true})
+        else
+            throw({:jreturn, false})
+        end
+    end)
+  end
+end
+
 

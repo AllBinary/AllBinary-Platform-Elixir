@@ -1,53 +1,58 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.ai
-% import org.allbinary.ai.ArtificialIntelligenceInterface
-% import org.allbinary.game.ag.ai.tactical.BasicRandomAIFactory
-% import org.allbinary.game.ai.ArtificialIntelligenceInterfaceFactoryInterface
-% import org.allbinary.game.ai.BasicAI
-% import org.allbinary.game.input.GameInput
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.logic.util.visitor.Visitor
-% import org.allbinary.util.ABHashtable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
--module('DiveAndDirectionalTrackingAIFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements ArtificialIntelligenceInterfaceFactoryInterface
+defmodule DiveAndDirectionalTrackingAIFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-% throws Exception
-getInstance(This, Hashtable, OwnerLayerInterface, GameInput) ->
-        put({local, visitorCanBeNull}, (get({Hashtable, '$class'})):get(Hashtable, get({'BasicAI', 'AI_VISITOR'}))),
-        case (get({local, visitorCanBeNull}) =:= undefined) of
-            true ->
-            put({local, visitorCanBeNull}, 'ThrustAIVisitorFactory':getInstance());
-            false -> ok
-        end,
-        Hashtable2 = (fun(Target_N65999) -> (get({Target_N65999, '$class'})):getInstance(Target_N65999) end)('BasicProbabilityAIDataFactory':new()),
-        (get({Hashtable2, '$class'})):put(Hashtable2, get({'BasicAI', 'AI_VISITOR'}), 'LastKeyAIVisitorFactory':getInstance()),
-        ArtificialIntelligenceInterface = (fun(Target_N66127) -> (get({Target_N66127, '$class'})):getInstance(Target_N66127, Hashtable2, OwnerLayerInterface, GameInput) end)('BasicRandomAIFactory':new()),
-        'DiveAndDirectionalTrackingAI':new(OwnerLayerInterface, ArtificialIntelligenceInterface, GameInput, get({local, visitorCanBeNull})).
+  def jm_getInstance(this, p_hashtable, p_ownerLayerInterface, p_gameInput) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :hashtable, p_hashtable)
+      JR.lset(f, :ownerLayerInterface, p_ownerLayerInterface)
+      JR.lset(f, :gameInput, p_gameInput)
+        JR.lset(f, :visitorCanBeNull, JR.call(JR.lget(f, :hashtable), :jm_get, [BasicAI.jstatic_AI_VISITOR()]))
+        if (JR.lget(f, :visitorCanBeNull) == nil) do
+            JR.lset(f, :visitorCanBeNull, ThrustAIVisitorFactory.jm_getInstance())
+        end
+        JR.lset(f, :hashtable2, JR.call(BasicProbabilityAIDataFactory.jnew(), :jm_getInstance, []))
+        JR.call(JR.lget(f, :hashtable2), :jm_put, [BasicAI.jstatic_AI_VISITOR(), LastKeyAIVisitorFactory.jm_getInstance()])
+        JR.lset(f, :artificialIntelligenceInterface, JR.call(BasicRandomAIFactory.jnew(), :jm_getInstance, [JR.lget(f, :hashtable2), JR.lget(f, :ownerLayerInterface), JR.lget(f, :gameInput)]))
+        throw({:jreturn, DiveAndDirectionalTrackingAI.jnew(JR.lget(f, :ownerLayerInterface), JR.lget(f, :artificialIntelligenceInterface), JR.lget(f, :gameInput), JR.lget(f, :visitorCanBeNull))})
+    end)
+  end
+end
+
 

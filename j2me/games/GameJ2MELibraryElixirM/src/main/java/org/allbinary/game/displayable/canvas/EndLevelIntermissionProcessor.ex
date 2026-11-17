@@ -1,42 +1,57 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import org.allbinary.canvas.Processor
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('EndLevelIntermissionProcessor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule EndLevelIntermissionProcessor do
+  def jsuper(), do: Processor
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Processor', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :gameCanvas, nil)
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, gameCanvas}, undefined),
-    ok.
+
+  def jinit(this, p_gameCanvas) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameCanvas, p_gameCanvas)
+      Processor.jinit(this)
+      jinitfields(this)
+        JR.put(this, :gameCanvas, JR.lget(f, :gameCanvas))
+    end)
+  end
+
+  def jnew(p_gameCanvas) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_gameCanvas)
+    this
+  end
 
 
-new(GameCanvas) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, GameCanvas),
-    This.
+  def jm_process(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :gameCanvas), :jm_processEndLevelIntermissionGameState, [])
+    end)
+  end
+end
 
-'$init'(This, GameCanvas) ->
-    'Processor':'$init'(This),
-    init_fields(This),
-        put({This, gameCanvas}, GameCanvas).
-
-% throws Exception
-process(This) ->
-        (get({get({This, gameCanvas}), '$class'})):processEndLevelIntermissionGameState(get({This, gameCanvas})).
 

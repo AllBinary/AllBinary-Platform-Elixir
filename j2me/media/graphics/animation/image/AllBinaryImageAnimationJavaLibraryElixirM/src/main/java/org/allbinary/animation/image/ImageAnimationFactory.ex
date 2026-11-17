@@ -1,58 +1,78 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2022 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.animation.image
-% import javax.microedition.lcdui.Image
-% import org.allbinary.animation.Animation
-% import org.allbinary.animation.AnimationBehaviorFactory
-% import org.allbinary.graphics.opengles.OpenGLUtil
-% import org.allbinary.logic.math.PrimitiveIntUtil
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
--module('ImageAnimationFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule ImageAnimationFactory do
+  def jsuper(), do: BaseImageAnimationFactory
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BaseImageAnimationFactory', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-% throws Exception
-createFactory(Image) ->
-        'ImageAnimationFactory':new(Image, (get({Image, '$class'})):getWidth(Image), (get({Image, '$class'})):getHeight(Image), 0, 0, 'AnimationBehaviorFactory':getInstance()).
+  def jm_createFactory(p_image) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :image, p_image)
+        throw({:jreturn, ImageAnimationFactory.jnew(JR.lget(f, :image), JR.call(JR.lget(f, :image), :jm_getWidth, []), JR.call(JR.lget(f, :image), :jm_getHeight, []), 0, 0, AnimationBehaviorFactory.jm_getInstance())})
+    end)
+  end
 
-new(Image, Width, Height, Dx, Dy, AnimationBehaviorFactory) when is_integer(Width), is_integer(Height), is_integer(Dx), is_integer(Dy) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Image, Width, Height, Dx, Dy, AnimationBehaviorFactory),
-    This.
 
-'$init'(This, Image, Width, Height, Dx, Dy, AnimationBehaviorFactory) when is_integer(Width), is_integer(Height), is_integer(Dx), is_integer(Dy) ->
-        'BaseImageAnimationFactory':'$init'(This, Image, 'PrimitiveIntUtil':getArrayInstance(), Width, Height, Dx, Dy, AnimationBehaviorFactory).
+  def jinit(this, p_image, p_width, p_height, p_dx, p_dy, p_animationBehaviorFactory) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :image, p_image)
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+      JR.lset(f, :dx, p_dx)
+      JR.lset(f, :dy, p_dy)
+      JR.lset(f, :animationBehaviorFactory, p_animationBehaviorFactory)
+        BaseImageAnimationFactory.jinit(this, JR.lget(f, :image), PrimitiveIntUtil.jm_getArrayInstance(), JR.lget(f, :width), JR.lget(f, :height), JR.lget(f, :dx), JR.lget(f, :dy), JR.lget(f, :animationBehaviorFactory))
+        ImageAnimationFactory.jinitfields(this)
+    end)
+  end
 
-% throws Exception
-getInstance(This, InstanceId) when is_integer(InstanceId) ->
-        try
-        put({local, scaledImage}, (get({get({This, animationFactoryImageScaleUtil}), '$class'})):createImage(get({This, animationFactoryImageScaleUtil}), (get({This, '$class'})):getImage(This), get({get({This, animationFactoryInitializationVisitor}), width}), get({get({This, animationFactoryInitializationVisitor}), height}), get({get({This, scaleProperties}), scaleWidth}), get({get({This, scaleProperties}), scaleHeight}))),
-        OpenGLUtil = 'OpenGLUtil':getInstance(),
-        put({local, scaledImage}, (get({OpenGLUtil, '$class'})):addImage(OpenGLUtil, get({local, scaledImage}))),
-        case ((get({get({This, animationFactoryInitializationVisitor}), dx}) =/= 0) orelse (get({get({This, animationFactoryInitializationVisitor}), dy}) =/= 0)) of
-            true ->
-            (get({get({This, animationFactoryImageScaleUtil}), '$class'})):processAdjust(get({This, animationFactoryImageScaleUtil}), This),
-            throw({'$return', 'AdjustedImageAnimation':new(get({local, scaledImage}), get({get({This, animationFactoryInitializationVisitor}), dx}), get({get({This, animationFactoryInitializationVisitor}), dy}), (get({get({This, animationBehaviorFactory}), '$class'})):getOrCreateInstance(get({This, animationBehaviorFactory})))});
-            false ->
-            throw({'$return', 'ImageAnimation':new(get({local, scaledImage}), (get({get({This, animationBehaviorFactory}), '$class'})):getOrCreateInstance(get({This, animationBehaviorFactory})))})
+  def jnew(p_image, p_width, p_height, p_dx, p_dy, p_animationBehaviorFactory) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_image, p_width, p_height, p_dx, p_dy, p_animationBehaviorFactory)
+    this
+  end
+
+
+  def jm_getInstance(this, p_instanceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :instanceId, p_instanceId)
+        JR.lset(f, :scaledImage, JR.call(JR.get(this, :animationFactoryImageScaleUtil), :jm_createImage, [JR.call(this, :jm_getImage, []), JR.get(JR.get(this, :animationFactoryInitializationVisitor), :width), JR.get(JR.get(this, :animationFactoryInitializationVisitor), :height), JR.get(JR.get(this, :scaleProperties), :scaleWidth), JR.get(JR.get(this, :scaleProperties), :scaleHeight)]))
+        JR.lset(f, :openGLUtil, OpenGLUtil.jm_getInstance())
+        JR.lset(f, :scaledImage, JR.call(JR.lget(f, :openGLUtil), :jm_addImage, [JR.lget(f, :scaledImage)]))
+        if ((JR.get(JR.get(this, :animationFactoryInitializationVisitor), :dx) != 0) || (JR.get(JR.get(this, :animationFactoryInitializationVisitor), :dy) != 0)) do
+            JR.call(JR.get(this, :animationFactoryImageScaleUtil), :jm_processAdjust, [this])
+            throw({:jreturn, AdjustedImageAnimation.jnew(JR.lget(f, :scaledImage), JR.get(JR.get(this, :animationFactoryInitializationVisitor), :dx), JR.get(JR.get(this, :animationFactoryInitializationVisitor), :dy), JR.call(JR.get(this, :animationBehaviorFactory), :jm_getOrCreateInstance, []))})
+        else
+            throw({:jreturn, ImageAnimation.jnew(JR.lget(f, :scaledImage), JR.call(JR.get(this, :animationBehaviorFactory), :jm_getOrCreateInstance, []))})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
+end
+
 

@@ -1,140 +1,187 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.configuration
-% import javax.microedition.lcdui.Item
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.math.SmallIntegerSingletonFactory
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.configuration
 
--module('GameConfigurationUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GameConfigurationUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> GameConfigurationUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'GameConfigurationUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :GAUGE_UPDATE, nil)
+    JR.put(this, :FROM, nil)
+    JR.put(this, :TO, nil)
+    JR.put(this, :COMPETITION_VALUE, 0)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        JR.put(this, :GAUGE_UPDATE, "Gauge Update: ")
+        JR.put(this, :FROM, " from: ")
+        JR.put(this, :TO, " to: ")
+        JR.put(this, :COMPETITION_VALUE, 1)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, 'GAUGE_UPDATE'}, "Gauge Update: "),
-    put({This, 'FROM'}, " from: "),
-    put({This, 'TO'}, " to: "),
-    put({This, 'COMPETITION_VALUE'}, 1),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'GameConfigurationUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, GameConfigurationUtil.jstatic_instance()})
+    end)
+  end
 
-% throws Exception
-change(This, GameOptionsForm, Gauge) ->
-        (get({This, '$class'})):update(This, Gauge),
-        GameConfigurationSingleton = 'GameConfigurationSingleton':getInstance(),
-        GameConfiguration = (get({GameConfigurationSingleton, '$class'})):getInstanceByName(GameConfigurationSingleton, (get({Gauge, '$class'})):getLabel(Gauge)),
-        (get({This, '$class'})):updateChallange(This, GameOptionsForm, GameConfiguration).
 
-% throws Exception
-update(This, Gauge) ->
-        GameConfigurationSingleton = 'GameConfigurationSingleton':getInstance(),
-        GameConfiguration = (get({GameConfigurationSingleton, '$class'})):getInstanceByName(GameConfigurationSingleton, (get({Gauge, '$class'})):getLabel(Gauge)),
-        SmallIntegerSingletonFactory = 'SmallIntegerSingletonFactory':getInstance(),
-        Value = (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, ((get({Gauge, '$class'})):getValue(Gauge) + (fun(Target_N66495) -> (get({Target_N66495, '$class'})):intValue(Target_N66495) end)((get({GameConfiguration, '$class'})):getMinValue(GameConfiguration)))),
-        StringBuffer = 'StringMaker':new(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({This, 'GAUGE_UPDATE'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({GameConfiguration, '$class'})):getName(GameConfiguration)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({This, 'FROM'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, trunc((fun(Target_N66704) -> (get({Target_N66704, '$class'})):intValue(Target_N66704) end)((get({GameConfiguration, '$class'})):getValue(GameConfiguration)))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({This, 'TO'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, trunc((get({Value, '$class'})):intValue(Value))),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({StringBuffer, '$class'})):toString(StringBuffer), This, get({get({This, commonStrings}), 'UPDATE'})),
-        (get({GameConfiguration, '$class'})):setValue(GameConfiguration, Value).
+  def jm_change(this, p_gameOptionsForm, p_gauge) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameOptionsForm, p_gameOptionsForm)
+      JR.lset(f, :gauge, p_gauge)
+        JR.call(this, :jm_update, [JR.lget(f, :gauge)])
+        JR.lset(f, :gameConfigurationSingleton, GameConfigurationSingleton.jm_getInstance())
+        JR.lset(f, :gameConfiguration, JR.call(JR.lget(f, :gameConfigurationSingleton), :jm_getInstanceByName, [JR.call(JR.lget(f, :gauge), :jm_getLabel, [])]))
+        JR.call(this, :jm_updateChallange, [JR.lget(f, :gameOptionsForm), JR.lget(f, :gameConfiguration)])
+    end)
+  end
 
-% throws Exception
-setDefault(This, Gauge) ->
-        GameConfigurationSingleton = 'GameConfigurationSingleton':getInstance(),
-        GameConfiguration = (get({GameConfigurationSingleton, '$class'})):getInstanceByName(GameConfigurationSingleton, (get({Gauge, '$class'})):getLabel(Gauge)),
-        StringBuffer = 'StringMaker':new(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "Gauge Default: "),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({GameConfiguration, '$class'})):getName(GameConfiguration)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({This, 'TO'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, trunc((fun(Target_N67219) -> (get({Target_N67219, '$class'})):intValue(Target_N67219) end)((get({GameConfiguration, '$class'})):getDefaultValue(GameConfiguration)))),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({StringBuffer, '$class'})):toString(StringBuffer), This, "setDefault"),
-        (get({Gauge, '$class'})):setValue(Gauge, ((fun(Target_N67319) -> (get({Target_N67319, '$class'})):intValue(Target_N67319) end)((get({GameConfiguration, '$class'})):getDefaultValue(GameConfiguration)) - (fun(Target_N67343) -> (get({Target_N67343, '$class'})):intValue(Target_N67343) end)((get({GameConfiguration, '$class'})):getMinValue(GameConfiguration)))),
-        (get({GameConfiguration, '$class'})):setValue(GameConfiguration, (get({GameConfiguration, '$class'})):getDefaultValue(GameConfiguration)).
 
-% throws Exception
-updateChallange(This, GameOptionsForm, GameConfiguration) ->
-        GameConfigurationSingleton = 'GameConfigurationSingleton':getInstance(),
-        GameConfigurationCentral = 'GameConfigurationCentral':getInstance(),
-        case (GameConfiguration =:= get({GameConfigurationCentral, 'CHALLENGE_LEVEL'})) of
-            true ->
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, "updateChallange"),
-            (get({get({GameConfigurationCentral, 'COLLIDE_DAMAGE'}), '$class'})):setValue(get({GameConfigurationCentral, 'COLLIDE_DAMAGE'}), (get({GameConfiguration, '$class'})):getValue(GameConfiguration)),
-            (get({get({GameConfigurationCentral, 'ATTACK_CHALLENGE_LEVEL'}), '$class'})):setValue(get({GameConfigurationCentral, 'ATTACK_CHALLENGE_LEVEL'}), (get({GameConfiguration, '$class'})):getValue(GameConfiguration)),
-            (get({get({GameConfigurationCentral, 'DURABILITY_CHALLENGE_LEVEL'}), '$class'})):setValue(get({GameConfigurationCentral, 'DURABILITY_CHALLENGE_LEVEL'}), (get({GameConfiguration, '$class'})):getValue(GameConfiguration)),
-            (get({get({GameConfigurationCentral, 'SPEED_CHALLENGE_LEVEL'}), '$class'})):setValue(get({GameConfigurationCentral, 'SPEED_CHALLENGE_LEVEL'}), (get({GameConfiguration, '$class'})):getValue(GameConfiguration)),
-            Size = (get({GameOptionsForm, '$class'})):size(GameOptionsForm),
-            lists:foreach(fun(Index) ->
-                Item = (get({GameOptionsForm, '$class'})):get(GameOptionsForm, Index),
-                case allbinary_java:instance_of(Item, 'GameConfigurationGauge') of
-                    true ->
-                    Gauge = Item,
-                    Name = (get({Item, '$class'})):getLabel(Item),
-                    NextGameConfiguration = (get({GameConfigurationSingleton, '$class'})):getInstanceByName(GameConfigurationSingleton, Name),
-                    case (NextGameConfiguration =:= get({GameConfigurationCentral, 'COLLIDE_DAMAGE'})) of
-                        true ->
-                        (get({Gauge, '$class'})):setValue(Gauge, ((fun(Target_N68542) -> (get({Target_N68542, '$class'})):intValue(Target_N68542) end)((get({get({GameConfigurationCentral, 'COLLIDE_DAMAGE'}), '$class'})):getValue(get({GameConfigurationCentral, 'COLLIDE_DAMAGE'}))) - (fun(Target_N68574) -> (get({Target_N68574, '$class'})):intValue(Target_N68574) end)((get({GameConfiguration, '$class'})):getMinValue(GameConfiguration))));
-                        false ->
-                        case (NextGameConfiguration =:= get({GameConfigurationCentral, 'DURABILITY_CHALLENGE_LEVEL'})) of
-                        true ->
-                        (get({Gauge, '$class'})):setValue(Gauge, ((fun(Target_N68450) -> (get({Target_N68450, '$class'})):intValue(Target_N68450) end)((get({get({GameConfigurationCentral, 'DURABILITY_CHALLENGE_LEVEL'}), '$class'})):getValue(get({GameConfigurationCentral, 'DURABILITY_CHALLENGE_LEVEL'}))) - (fun(Target_N68482) -> (get({Target_N68482, '$class'})):intValue(Target_N68482) end)((get({GameConfiguration, '$class'})):getMinValue(GameConfiguration))));
-                        false ->
-                        case (NextGameConfiguration =:= get({GameConfigurationCentral, 'ATTACK_CHALLENGE_LEVEL'})) of
-                        true ->
-                        (get({Gauge, '$class'})):setValue(Gauge, ((fun(Target_N68358) -> (get({Target_N68358, '$class'})):intValue(Target_N68358) end)((get({get({GameConfigurationCentral, 'ATTACK_CHALLENGE_LEVEL'}), '$class'})):getValue(get({GameConfigurationCentral, 'ATTACK_CHALLENGE_LEVEL'}))) - (fun(Target_N68390) -> (get({Target_N68390, '$class'})):intValue(Target_N68390) end)((get({GameConfiguration, '$class'})):getMinValue(GameConfiguration))));
-                        false ->
-                        case (NextGameConfiguration =:= get({GameConfigurationCentral, 'SPEED_CHALLENGE_LEVEL'})) of
-                        true ->
-                        (get({Gauge, '$class'})):setValue(Gauge, ((fun(Target_N68266) -> (get({Target_N68266, '$class'})):intValue(Target_N68266) end)((get({get({GameConfigurationCentral, 'SPEED_CHALLENGE_LEVEL'}), '$class'})):getValue(get({GameConfigurationCentral, 'SPEED_CHALLENGE_LEVEL'}))) - (fun(Target_N68298) -> (get({Target_N68298, '$class'})):intValue(Target_N68298) end)((get({GameConfiguration, '$class'})):getMinValue(GameConfiguration))));
-                        false -> ok
+  def jm_update(this, p_gauge) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gauge, p_gauge)
+        JR.lset(f, :gameConfigurationSingleton, GameConfigurationSingleton.jm_getInstance())
+        JR.lset(f, :gameConfiguration, JR.call(JR.lget(f, :gameConfigurationSingleton), :jm_getInstanceByName, [JR.call(JR.lget(f, :gauge), :jm_getLabel, [])]))
+        JR.lset(f, :smallIntegerSingletonFactory, SmallIntegerSingletonFactory.jm_getInstance())
+        JR.lset(f, :value, JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [(JR.call(JR.lget(f, :gauge), :jm_getValue, []) + JR.call(JR.call(JR.lget(f, :gameConfiguration), :jm_getMinValue, []), :jm_intValue, []))]))
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(this, :GAUGE_UPDATE)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.lget(f, :gameConfiguration), :jm_getName, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(this, :FROM)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.int32(JR.call(JR.call(JR.lget(f, :gameConfiguration), :jm_getValue, []), :jm_intValue, []))])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(this, :TO)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.int32(JR.call(JR.lget(f, :value), :jm_intValue, []))])
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :stringBuffer), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :UPDATE)])
+        JR.call(JR.lget(f, :gameConfiguration), :jm_setValue, [JR.lget(f, :value)])
+    end)
+  end
+
+
+  def jm_setDefault(this, p_gauge) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gauge, p_gauge)
+        JR.lset(f, :gameConfigurationSingleton, GameConfigurationSingleton.jm_getInstance())
+        JR.lset(f, :gameConfiguration, JR.call(JR.lget(f, :gameConfigurationSingleton), :jm_getInstanceByName, [JR.call(JR.lget(f, :gauge), :jm_getLabel, [])]))
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["Gauge Default: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.lget(f, :gameConfiguration), :jm_getName, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(this, :TO)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.int32(JR.call(JR.call(JR.lget(f, :gameConfiguration), :jm_getDefaultValue, []), :jm_intValue, []))])
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :stringBuffer), :jm_toString, []), this, "setDefault"])
+        JR.call(JR.lget(f, :gauge), :jm_setValue, [(JR.call(JR.call(JR.lget(f, :gameConfiguration), :jm_getDefaultValue, []), :jm_intValue, []) - JR.call(JR.call(JR.lget(f, :gameConfiguration), :jm_getMinValue, []), :jm_intValue, []))])
+        JR.call(JR.lget(f, :gameConfiguration), :jm_setValue, [JR.call(JR.lget(f, :gameConfiguration), :jm_getDefaultValue, [])])
+    end)
+  end
+
+
+  def jm_updateChallange(this, p_gameOptionsForm, p_gameConfiguration) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameOptionsForm, p_gameOptionsForm)
+      JR.lset(f, :gameConfiguration, p_gameConfiguration)
+        JR.lset(f, :gameConfigurationSingleton, GameConfigurationSingleton.jm_getInstance())
+        JR.lset(f, :gameConfigurationCentral, GameConfigurationCentral.jm_getInstance())
+        if (JR.lget(f, :gameConfiguration) == JR.get(JR.lget(f, :gameConfigurationCentral), :CHALLENGE_LEVEL)) do
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, "updateChallange"])
+            JR.call(JR.get(JR.lget(f, :gameConfigurationCentral), :COLLIDE_DAMAGE), :jm_setValue, [JR.call(JR.lget(f, :gameConfiguration), :jm_getValue, [])])
+            JR.call(JR.get(JR.lget(f, :gameConfigurationCentral), :ATTACK_CHALLENGE_LEVEL), :jm_setValue, [JR.call(JR.lget(f, :gameConfiguration), :jm_getValue, [])])
+            JR.call(JR.get(JR.lget(f, :gameConfigurationCentral), :DURABILITY_CHALLENGE_LEVEL), :jm_setValue, [JR.call(JR.lget(f, :gameConfiguration), :jm_getValue, [])])
+            JR.call(JR.get(JR.lget(f, :gameConfigurationCentral), :SPEED_CHALLENGE_LEVEL), :jm_setValue, [JR.call(JR.lget(f, :gameConfiguration), :jm_getValue, [])])
+            JR.lset(f, :size, JR.call(JR.lget(f, :gameOptionsForm), :jm_size, []))
+            JR.lset(f, :index, 0)
+            JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+                JR.lset(f, :item, JR.call(JR.lget(f, :gameOptionsForm), :jm_get, [JR.lget(f, :index)]))
+                if JR.instance_of(JR.lget(f, :item), GameConfigurationGauge) do
+                    JR.lset(f, :gauge, JR.lget(f, :item))
+                    JR.lset(f, :name, JR.call(JR.lget(f, :item), :jm_getLabel, []))
+                    JR.lset(f, :nextGameConfiguration, JR.call(JR.lget(f, :gameConfigurationSingleton), :jm_getInstanceByName, [JR.lget(f, :name)]))
+                    if (JR.lget(f, :nextGameConfiguration) == JR.get(JR.lget(f, :gameConfigurationCentral), :COLLIDE_DAMAGE)) do
+                        JR.call(JR.lget(f, :gauge), :jm_setValue, [(JR.call(JR.call(JR.get(JR.lget(f, :gameConfigurationCentral), :COLLIDE_DAMAGE), :jm_getValue, []), :jm_intValue, []) - JR.call(JR.call(JR.lget(f, :gameConfiguration), :jm_getMinValue, []), :jm_intValue, []))])
+                    else
+                        if (JR.lget(f, :nextGameConfiguration) == JR.get(JR.lget(f, :gameConfigurationCentral), :DURABILITY_CHALLENGE_LEVEL)) do
+                        JR.call(JR.lget(f, :gauge), :jm_setValue, [(JR.call(JR.call(JR.get(JR.lget(f, :gameConfigurationCentral), :DURABILITY_CHALLENGE_LEVEL), :jm_getValue, []), :jm_intValue, []) - JR.call(JR.call(JR.lget(f, :gameConfiguration), :jm_getMinValue, []), :jm_intValue, []))])
+                    else
+                        if (JR.lget(f, :nextGameConfiguration) == JR.get(JR.lget(f, :gameConfigurationCentral), :ATTACK_CHALLENGE_LEVEL)) do
+                        JR.call(JR.lget(f, :gauge), :jm_setValue, [(JR.call(JR.call(JR.get(JR.lget(f, :gameConfigurationCentral), :ATTACK_CHALLENGE_LEVEL), :jm_getValue, []), :jm_intValue, []) - JR.call(JR.call(JR.lget(f, :gameConfiguration), :jm_getMinValue, []), :jm_intValue, []))])
+                    else
+                        if (JR.lget(f, :nextGameConfiguration) == JR.get(JR.lget(f, :gameConfigurationCentral), :SPEED_CHALLENGE_LEVEL)) do
+                        JR.call(JR.lget(f, :gauge), :jm_setValue, [(JR.call(JR.call(JR.get(JR.lget(f, :gameConfigurationCentral), :SPEED_CHALLENGE_LEVEL), :jm_getValue, []), :jm_intValue, []) - JR.call(JR.call(JR.lget(f, :gameConfiguration), :jm_getMinValue, []), :jm_intValue, []))])
                     end
                     end
                     end
-                    end;
-                    false -> ok
+                    end
                 end
-            end, lists:seq(0, Size - 1));
-            false -> ok
-        end.
+            end)
+        end
+    end)
+  end
 
-updateCompetitionValue(This) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, "updateCompetitionValue"),
-        GameConfigurationCentral = 'GameConfigurationCentral':getInstance(),
-        put({This, 'COMPETITION_VALUE'}, ((((fun(Target_N68905) -> (get({Target_N68905, '$class'})):intValue(Target_N68905) end)((get({get({GameConfigurationCentral, 'COLLIDE_DAMAGE'}), '$class'})):getValue(get({GameConfigurationCentral, 'COLLIDE_DAMAGE'}))) + (fun(Target_N68937) -> (get({Target_N68937, '$class'})):intValue(Target_N68937) end)((get({get({GameConfigurationCentral, 'ATTACK_CHALLENGE_LEVEL'}), '$class'})):getValue(get({GameConfigurationCentral, 'ATTACK_CHALLENGE_LEVEL'})))) + (fun(Target_N68970) -> (get({Target_N68970, '$class'})):intValue(Target_N68970) end)((get({get({GameConfigurationCentral, 'DURABILITY_CHALLENGE_LEVEL'}), '$class'})):getValue(get({GameConfigurationCentral, 'DURABILITY_CHALLENGE_LEVEL'})))) + (fun(Target_N69003) -> (get({Target_N69003, '$class'})):intValue(Target_N69003) end)((get({get({GameConfigurationCentral, 'SPEED_CHALLENGE_LEVEL'}), '$class'})):getValue(get({GameConfigurationCentral, 'SPEED_CHALLENGE_LEVEL'}))))),
-        put({This, 'COMPETITION_VALUE'}, ((get({This, 'COMPETITION_VALUE'}) bsr 2))).
 
-getCompetitionValue(This) ->
-        get({This, 'COMPETITION_VALUE'}).
+  def jm_updateCompetitionValue(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, "updateCompetitionValue"])
+        JR.lset(f, :gameConfigurationCentral, GameConfigurationCentral.jm_getInstance())
+        JR.put(this, :COMPETITION_VALUE, (((JR.call(JR.call(JR.get(JR.lget(f, :gameConfigurationCentral), :COLLIDE_DAMAGE), :jm_getValue, []), :jm_intValue, []) + JR.call(JR.call(JR.get(JR.lget(f, :gameConfigurationCentral), :ATTACK_CHALLENGE_LEVEL), :jm_getValue, []), :jm_intValue, [])) + JR.call(JR.call(JR.get(JR.lget(f, :gameConfigurationCentral), :DURABILITY_CHALLENGE_LEVEL), :jm_getValue, []), :jm_intValue, [])) + JR.call(JR.call(JR.get(JR.lget(f, :gameConfigurationCentral), :SPEED_CHALLENGE_LEVEL), :jm_getValue, []), :jm_intValue, [])))
+        JR.put(this, :COMPETITION_VALUE, (Bitwise.bsr(JR.get(this, :COMPETITION_VALUE), 2)))
+    end)
+  end
+
+
+  def jm_getCompetitionValue(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :COMPETITION_VALUE)})
+    end)
+  end
+end
+
 

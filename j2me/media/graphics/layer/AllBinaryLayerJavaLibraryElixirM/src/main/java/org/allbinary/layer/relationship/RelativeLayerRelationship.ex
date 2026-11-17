@@ -1,50 +1,79 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.layer.relationship
-% import org.allbinary.graphics.GPoint
-% import org.allbinary.graphics.RelativeRelationship
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.util.BasicArrayList
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.layer.relationship
 
--module('RelativeLayerRelationship').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule RelativeLayerRelationship do
+  def jsuper(), do: RelativeRelationship
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('RelativeRelationship', Function, Arguments).
-
-init_fields(This) ->
-    put({This, layer}, get({'AllBinaryLayer', 'NULL_ALLBINARY_LAYER'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :layer, nil)
+        JR.put(this, :layer, AllBinaryLayer.jstatic_NULL_ALLBINARY_LAYER())
+    nil
+  end
 
 
-new(Layer, Point, TypesAllowedList) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Layer, Point, TypesAllowedList),
-    This.
+  def jinit(this, p_layer, p_point, p_typesAllowedList) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layer, p_layer)
+      JR.lset(f, :point, p_point)
+      JR.lset(f, :typesAllowedList, p_typesAllowedList)
+        RelativeRelationship.jinit(this, JR.lget(f, :point), JR.lget(f, :typesAllowedList))
+        RelativeLayerRelationship.jinitfields(this)
+        JR.put(this, :layer, JR.lget(f, :layer))
+    end)
+  end
 
-'$init'(This, Layer, Point, TypesAllowedList) ->
-        'RelativeRelationship':'$init'(This, Point, TypesAllowedList),
-        init_fields(This),
-        put({This, layer}, Layer).
+  def jnew(p_layer, p_point, p_typesAllowedList) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_layer, p_point, p_typesAllowedList)
+    this
+  end
 
-getX(This) ->
-        ((get({get({This, layer}), '$class'})):getXP(get({This, layer})) + 'RelativeRelationship':getX(This)).
 
-getY(This) ->
-        ((get({get({This, layer}), '$class'})):getYP(get({This, layer})) + 'RelativeRelationship':getY(This)).
+  def jm_getX(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, (JR.call(JR.get(this, :layer), :jm_getXP, []) + RelativeRelationship.jm_getX(this))})
+    end)
+  end
 
-getZ(This) ->
-        ((get({get({This, layer}), '$class'})):getZP(get({This, layer})) + 'RelativeRelationship':getZ(This)).
+
+  def jm_getY(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, (JR.call(JR.get(this, :layer), :jm_getYP, []) + RelativeRelationship.jm_getY(this))})
+    end)
+  end
+
+
+  def jm_getZ(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, (JR.call(JR.get(this, :layer), :jm_getZP, []) + RelativeRelationship.jm_getZ(this))})
+    end)
+  end
+end
+
 

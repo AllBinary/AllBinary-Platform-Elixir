@@ -1,69 +1,104 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion
-% import org.allbinary.graphics.CustomGPoint
-% import org.allbinary.graphics.GPointCircularPool
-% import org.allbinary.input.motion.gesture.MotionGestureRecognizer
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion
 
--module('GestureOnlyMotionRecognizer').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GestureOnlyMotionRecognizer do
+  def jsuper(), do: MotionRecognizer
+def jstatic_index(), do: JR.static_get(__MODULE__, :index, fn -> 0 end)
+  def jstatic_set_index(value), do: JR.static_put(__MODULE__, :index, value)
+def jstatic_pointCircularPool(), do: JR.static_get(__MODULE__, :pointCircularPool, fn -> GPointCircularPool.jnew(40) end)
+  def jstatic_set_pointCircularPool(value), do: JR.static_put(__MODULE__, :pointCircularPool, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('MotionRecognizer', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, index}, 0),
-    put({?MODULE, pointCircularPool}, 'GPointCircularPool':new(40)),
-    ok.
-
-init_fields(This) ->
-    put({This, motionGestureRecognizer}, undefined),
-    put({This, id}, 0),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :motionGestureRecognizer, nil)
+    JR.put(this, :id, 0)
+        
+        
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      MotionRecognizer.jinit(this)
+      jinitfields(this)
+        JR.put(this, :id, JR.postinc(GestureOnlyMotionRecognizer, :index, 1))
+        JR.put(this, :motionGestureRecognizer, MotionGestureRecognizer.jnew(JR.get(this, :id)))
+    end)
+  end
 
-'$init'(This) ->
-    'MotionRecognizer':'$init'(This),
-    init_fields(This),
-        put({This, id}, allbinary_java:first(get({'GestureOnlyMotionRecognizer', index}), put({'GestureOnlyMotionRecognizer', index}, get({'GestureOnlyMotionRecognizer', index}) + 1))),
-        put({This, motionGestureRecognizer}, 'MotionGestureRecognizer':new(get({This, id}))).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-% throws Exception
-processStartMotionEvent(This, X, Y, DeviceId, Modifiers) when is_integer(X), is_integer(Y), is_integer(DeviceId), is_integer(Modifiers) ->
-        Point = (get({get({'GestureOnlyMotionRecognizer', pointCircularPool}), '$class'})):getNextInstance(get({'GestureOnlyMotionRecognizer', pointCircularPool})),
-        (get({Point, '$class'})):setX(Point, X),
-        (get({Point, '$class'})):setY(Point, Y),
-        (get({get({This, motionGestureRecognizer}), '$class'})):processPressedMotionEvent(get({This, motionGestureRecognizer}), Point, DeviceId, Modifiers).
 
-% throws Exception
-processEndMotionEvent(This, X, Y, DeviceId, Modifiers) when is_integer(X), is_integer(Y), is_integer(DeviceId), is_integer(Modifiers) ->
-        Point = (get({get({'GestureOnlyMotionRecognizer', pointCircularPool}), '$class'})):getNextInstance(get({'GestureOnlyMotionRecognizer', pointCircularPool})),
-        (get({Point, '$class'})):setX(Point, X),
-        (get({Point, '$class'})):setY(Point, Y),
-        (get({get({This, motionGestureRecognizer}), '$class'})):processReleasedMotionEvent(get({This, motionGestureRecognizer}), Point, DeviceId, Modifiers).
+  def jm_processStartMotionEvent(this, p_x, p_y, p_deviceId, p_modifiers) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :deviceId, p_deviceId)
+      JR.lset(f, :modifiers, p_modifiers)
+        JR.lset(f, :point, JR.call(GestureOnlyMotionRecognizer.jstatic_pointCircularPool(), :jm_getNextInstance, []))
+        JR.call(JR.lget(f, :point), :jm_setX, [JR.lget(f, :x)])
+        JR.call(JR.lget(f, :point), :jm_setY, [JR.lget(f, :y)])
+        JR.call(JR.get(this, :motionGestureRecognizer), :jm_processPressedMotionEvent, [JR.lget(f, :point), JR.lget(f, :deviceId), JR.lget(f, :modifiers)])
+    end)
+  end
 
-% throws Exception
-processDraggedMotionEvent(This, X, Y, DeviceId, Modifiers) when is_integer(X), is_integer(Y), is_integer(DeviceId), is_integer(Modifiers) ->
-        Point = (get({get({'GestureOnlyMotionRecognizer', pointCircularPool}), '$class'})):getNextInstance(get({'GestureOnlyMotionRecognizer', pointCircularPool})),
-        (get({Point, '$class'})):setX(Point, X),
-        (get({Point, '$class'})):setY(Point, Y),
-        (get({get({This, motionGestureRecognizer}), '$class'})):processDraggedMotionEvent(get({This, motionGestureRecognizer}), Point, DeviceId, Modifiers).
+
+  def jm_processEndMotionEvent(this, p_x, p_y, p_deviceId, p_modifiers) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :deviceId, p_deviceId)
+      JR.lset(f, :modifiers, p_modifiers)
+        JR.lset(f, :point, JR.call(GestureOnlyMotionRecognizer.jstatic_pointCircularPool(), :jm_getNextInstance, []))
+        JR.call(JR.lget(f, :point), :jm_setX, [JR.lget(f, :x)])
+        JR.call(JR.lget(f, :point), :jm_setY, [JR.lget(f, :y)])
+        JR.call(JR.get(this, :motionGestureRecognizer), :jm_processReleasedMotionEvent, [JR.lget(f, :point), JR.lget(f, :deviceId), JR.lget(f, :modifiers)])
+    end)
+  end
+
+
+  def jm_processDraggedMotionEvent(this, p_x, p_y, p_deviceId, p_modifiers) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :deviceId, p_deviceId)
+      JR.lset(f, :modifiers, p_modifiers)
+        JR.lset(f, :point, JR.call(GestureOnlyMotionRecognizer.jstatic_pointCircularPool(), :jm_getNextInstance, []))
+        JR.call(JR.lget(f, :point), :jm_setX, [JR.lget(f, :x)])
+        JR.call(JR.lget(f, :point), :jm_setY, [JR.lget(f, :y)])
+        JR.call(JR.get(this, :motionGestureRecognizer), :jm_processDraggedMotionEvent, [JR.lget(f, :point), JR.lget(f, :deviceId), JR.lget(f, :modifiers)])
+    end)
+  end
+end
+
 

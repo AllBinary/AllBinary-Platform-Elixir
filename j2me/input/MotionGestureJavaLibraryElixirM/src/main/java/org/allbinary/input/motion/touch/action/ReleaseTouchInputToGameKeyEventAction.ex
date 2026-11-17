@@ -1,67 +1,78 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion.touch.action
-% import org.allbinary.game.input.GameKey
-% import org.allbinary.game.input.GameKeyFactory
-% import org.allbinary.game.input.PlatformInputMappingFactory
-% import org.allbinary.game.input.event.GameKeyEventFactory
-% import org.allbinary.game.input.motion.action.GameKeyCompleteMotionGestureInputEvent
-% import org.allbinary.input.motion.gesture.TouchMotionGestureFactory
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion.touch.action
 
--module('ReleaseTouchInputToGameKeyEventAction').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule ReleaseTouchInputToGameKeyEventAction do
+  def jsuper(), do: GameKeyCompleteMotionGestureInputEvent
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT) end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('GameKeyCompleteMotionGestureInputEvent', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, instance}, get({'NullUtil':getInstance(), 'NULL_OBJECT'})),
-    ok.
-
-init_fields(This) ->
-    put({This, 'NONE'}, get({'GameKeyFactory':getInstance(), 'NONE'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :NONE, nil)
+        JR.put(this, :NONE, JR.get(GameKeyFactory.jm_getInstance(), :NONE))
+    nil
+  end
 
 
-getInstance() ->
-        case (get({'ReleaseTouchInputToGameKeyEventAction', instance}) =:= get({'NullUtil':getInstance(), 'NULL_OBJECT'})) of
-            true ->
-            put({'ReleaseTouchInputToGameKeyEventAction', instance}, 'ReleaseTouchInputToGameKeyEventAction':new());
-            false -> ok
-        end,
-        get({'ReleaseTouchInputToGameKeyEventAction', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        if (ReleaseTouchInputToGameKeyEventAction.jstatic_instance() == JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)) do
+            ReleaseTouchInputToGameKeyEventAction.jstatic_set_instance(ReleaseTouchInputToGameKeyEventAction.jnew())
+        end
+        throw({:jreturn, ReleaseTouchInputToGameKeyEventAction.jstatic_instance()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-        'GameKeyCompleteMotionGestureInputEvent':'$init'(This, "Release Action", get({'TouchMotionGestureFactory':getInstance(), 'RELEASED'}), (fun(Target_N66171) -> (get({Target_N66171, '$class'})):getInputMapping(Target_N66171) end)((fun(Target_N66178) -> (get({Target_N66178, '$class'})):getPersistentInputMappingInstance(Target_N66178) end)('PlatformInputMappingFactory':getInstance()))),
-        init_fields(This),
-        try
-            (get({This, '$class'})):setGameKey(This, get({This, 'NONE'})),
-            (get({This, '$class'})):setGameKeyEvent(This, (fun(Target_N66257) -> (get({Target_N66257, '$class'})):getInstanceForInput(Target_N66257, This, get({This, 'NONE'})) end)('GameKeyEventFactory':getInstance()))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), This, get({CommonStrings, 'CONSTRUCTOR'}), E)
-        end.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        GameKeyCompleteMotionGestureInputEvent.jinit(this, "Release Action", JR.get(TouchMotionGestureFactory.jm_getInstance(), :RELEASED), JR.call(JR.call(PlatformInputMappingFactory.jm_getInstance(), :jm_getPersistentInputMappingInstance, []), :jm_getInputMapping, []))
+        ReleaseTouchInputToGameKeyEventAction.jinitfields(this)
+        try do
+            JR.call(this, :jm_setGameKey, [JR.get(this, :NONE)])
+            JR.call(this, :jm_setGameKeyEvent, [JR.call(GameKeyEventFactory.jm_getInstance(), :jm_getInstanceForInput, [this, JR.get(this, :NONE)])])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, JR.get(JR.lget(f, :commonStrings), :CONSTRUCTOR), JR.lget(f, :e)])
+        end
+    end)
+  end
 
-update(This) ->
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+
+
+  def jm_update(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+end
+
 

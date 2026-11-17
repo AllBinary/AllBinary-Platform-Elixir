@@ -1,59 +1,79 @@
-% Generated Code Do Not Modify
-% package org.allbinary.physics.movement
-% import org.allbinary.game.layer.AllBinaryGameLayer
-% import org.allbinary.game.physics.velocity.BasicVelocityProperties
-% import org.allbinary.logic.math.BasicDecimal
-% import org.allbinary.logic.math.MathUtil
-% import org.allbinary.logic.math.ScaleFactorFactory
+# Generated Code Do Not Modify
+# package org.allbinary.physics.movement
 
--module('PreciseConstantVelocityMovement').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule PreciseConstantVelocityMovement do
+  def jsuper(), do: BasicConstantVelocityMovement
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicConstantVelocityMovement', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :accumulatedX, 0)
+    JR.put(this, :accumulatedY, 0)
+    JR.put(this, :accumulatedZ, 0)
+    JR.put(this, :factorValue, 0)
+        JR.put(this, :accumulatedX, 0)
+        JR.put(this, :accumulatedY, 0)
+        JR.put(this, :accumulatedZ, 0)
+        JR.put(this, :factorValue, JR.get(ScaleFactorFactory.jm_getInstance(), :DEFAULT_SCALE_VALUE))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, accumulatedX}, 0),
-    put({This, accumulatedY}, 0),
-    put({This, accumulatedZ}, 0),
-    put({This, factorValue}, get({'ScaleFactorFactory':getInstance(), 'DEFAULT_SCALE_VALUE'})),
-    ok.
+
+  def jinit(this, p_basicDecimal, p_velocityProperties) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicDecimal, p_basicDecimal)
+      JR.lset(f, :velocityProperties, p_velocityProperties)
+        BasicConstantVelocityMovement.jinit(this, JR.lget(f, :basicDecimal), JR.lget(f, :velocityProperties))
+        PreciseConstantVelocityMovement.jinitfields(this)
+    end)
+  end
+
+  def jnew(p_basicDecimal, p_velocityProperties) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_basicDecimal, p_velocityProperties)
+    this
+  end
 
 
-new(BasicDecimal, VelocityProperties) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, BasicDecimal, VelocityProperties),
-    This.
+  def jm_init(this, p_speedBasicDecimal, p_angle, p_otherAngle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :speedBasicDecimal, p_speedBasicDecimal)
+      JR.lset(f, :angle, p_angle)
+      JR.lset(f, :otherAngle, p_otherAngle)
+        nil
+    end)
+  end
 
-'$init'(This, BasicDecimal, VelocityProperties) ->
-        'BasicConstantVelocityMovement':'$init'(This, BasicDecimal, VelocityProperties),
-        init_fields(This).
 
-init(This, SpeedBasicDecimal, Angle, OtherAngle) when is_integer(Angle), is_integer(OtherAngle) ->
-        ok.
+  def jm_process(this, p_layer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layer, p_layer)
+        JR.lset(f, :mathUtil, MathUtil.jm_getInstance())
+        JR.lset(f, :velocityProperties, JR.call(this, :jm_getVelocityProperties, []))
+        JR.put(this, :accumulatedX, JR.int32(((JR.get(this, :accumulatedX) + JR.call(JR.call(JR.lget(f, :velocityProperties), :jm_getVelocityXBasicDecimalP, []), :jm_getUnscaled, [])))))
+        JR.put(this, :accumulatedY, JR.int32(((JR.get(this, :accumulatedY) + JR.call(JR.call(JR.lget(f, :velocityProperties), :jm_getVelocityYBasicDecimalP, []), :jm_getUnscaled, [])))))
+        JR.put(this, :accumulatedZ, JR.int32(((JR.get(this, :accumulatedZ) + JR.call(JR.call(JR.lget(f, :velocityProperties), :jm_getVelocityZBasicDecimalP, []), :jm_getUnscaled, [])))))
+        JR.call(JR.lget(f, :layer), :jm_moveDXYZ, [div(JR.get(this, :accumulatedX), JR.get(this, :factorValue)), div(JR.get(this, :accumulatedY), JR.get(this, :factorValue)), div(JR.get(this, :accumulatedZ), JR.get(this, :factorValue))])
+        if (JR.call(JR.lget(f, :mathUtil), :jm_abs, [JR.get(this, :accumulatedX)]) > JR.get(this, :factorValue)) do
+            JR.put(this, :accumulatedX, 0)
+        end
+        if (JR.call(JR.lget(f, :mathUtil), :jm_abs, [JR.get(this, :accumulatedY)]) > JR.get(this, :factorValue)) do
+            JR.put(this, :accumulatedY, 0)
+        end
+        if (JR.call(JR.lget(f, :mathUtil), :jm_abs, [JR.get(this, :accumulatedZ)]) > JR.get(this, :factorValue)) do
+            JR.put(this, :accumulatedZ, 0)
+        end
+    end)
+  end
+end
 
-% throws Exception
-process(This, Layer) ->
-        MathUtil = 'MathUtil':getInstance(),
-        VelocityProperties = (get({This, '$class'})):getVelocityProperties(This),
-        put({This, accumulatedX}, trunc(((get({This, accumulatedX}) + (fun(Target_N66215) -> (get({Target_N66215, '$class'})):getUnscaled(Target_N66215) end)((get({VelocityProperties, '$class'})):getVelocityXBasicDecimalP(VelocityProperties)))))),
-        put({This, accumulatedY}, trunc(((get({This, accumulatedY}) + (fun(Target_N66287) -> (get({Target_N66287, '$class'})):getUnscaled(Target_N66287) end)((get({VelocityProperties, '$class'})):getVelocityYBasicDecimalP(VelocityProperties)))))),
-        put({This, accumulatedZ}, trunc(((get({This, accumulatedZ}) + (fun(Target_N66359) -> (get({Target_N66359, '$class'})):getUnscaled(Target_N66359) end)((get({VelocityProperties, '$class'})):getVelocityZBasicDecimalP(VelocityProperties)))))),
-        (get({Layer, '$class'})):moveDXYZ(Layer, (get({This, accumulatedX}) div get({This, factorValue})), (get({This, accumulatedY}) div get({This, factorValue})), (get({This, accumulatedZ}) div get({This, factorValue}))),
-        case ((get({MathUtil, '$class'})):abs(MathUtil, get({This, accumulatedX})) > get({This, factorValue})) of
-            true ->
-            put({This, accumulatedX}, 0);
-            false -> ok
-        end,
-        case ((get({MathUtil, '$class'})):abs(MathUtil, get({This, accumulatedY})) > get({This, factorValue})) of
-            true ->
-            put({This, accumulatedY}, 0);
-            false -> ok
-        end,
-        case ((get({MathUtil, '$class'})):abs(MathUtil, get({This, accumulatedZ})) > get({This, factorValue})) of
-            true ->
-            put({This, accumulatedZ}, 0);
-            false -> ok
-        end.
 

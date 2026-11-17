@@ -1,75 +1,111 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation.caption
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.animation.Animation
-% import org.allbinary.animation.AnimationBehavior
-% import org.allbinary.animation.NullAnimationFactory
-% import org.allbinary.animation.text.TextAnimation
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.time.GameTickTimeDelayHelperFactory
-% import org.allbinary.time.TimeDelayHelper
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation.caption
 
--module('CaptionAnimationHelper').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule CaptionAnimationHelper do
+  def jsuper(), do: CaptionAnimationHelperBase
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('CaptionAnimationHelperBase', Function, Arguments).
-
-init_fields(This) ->
-    put({This, timeHelper}, 'TimeDelayHelper':new(620)),
-    put({This, textAnimation}, 'TextAnimation':new(get({'StringUtil':getInstance(), 'EMPTY_STRING'}), 'AnimationBehavior':getInstance())),
-    put({This, captionAnimation}, undefined),
-    put({This, animation}, (fun(Target_N66025) -> (get({Target_N66025, '$class'})):getInstance(Target_N66025, 0) end)('NullAnimationFactory':getFactoryInstance())),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :timeHelper, nil)
+    JR.put(this, :textAnimation, nil)
+    JR.put(this, :captionAnimation, nil)
+    JR.put(this, :animation, nil)
+        JR.put(this, :timeHelper, TimeDelayHelper.jnew(620))
+        JR.put(this, :textAnimation, TextAnimation.jnew(JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), AnimationBehavior.jm_getInstance()))
+        
+        JR.put(this, :animation, JR.call(NullAnimationFactory.jm_getFactoryInstance(), :jm_getInstance, [0]))
+    nil
+  end
 
 
-new(CaptionAnimation, CaptionDx, CaptionDy, Dx, Dy) when is_integer(CaptionDx), is_integer(CaptionDy), is_integer(Dx), is_integer(Dy) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, CaptionAnimation, CaptionDx, CaptionDy, Dx, Dy),
-    This.
+  def jinit(this, p_captionAnimation, p_captionDx, p_captionDy, p_dx, p_dy) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :captionAnimation, p_captionAnimation)
+      JR.lset(f, :captionDx, p_captionDx)
+      JR.lset(f, :captionDy, p_captionDy)
+      JR.lset(f, :dx, p_dx)
+      JR.lset(f, :dy, p_dy)
+      CaptionAnimationHelperBase.jinit(this)
+      jinitfields(this)
+        JR.put(this, :captionAnimation, CaptionAnimation.jnew(JR.lget(f, :captionAnimation), JR.get(this, :textAnimation), JR.lget(f, :captionDx), JR.lget(f, :captionDy), JR.lget(f, :dx), JR.lget(f, :dy)))
+    end)
+  end
 
-'$init'(This, CaptionAnimation, CaptionDx, CaptionDy, Dx, Dy) when is_integer(CaptionDx), is_integer(CaptionDy), is_integer(Dx), is_integer(Dy) ->
-    'CaptionAnimationHelperBase':'$init'(This),
-    init_fields(This),
-        put({This, captionAnimation}, 'CaptionAnimation':new(CaptionAnimation, get({This, textAnimation}), CaptionDx, CaptionDy, Dx, Dy)).
+  def jnew(p_captionAnimation, p_captionDx, p_captionDy, p_dx, p_dy) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_captionAnimation, p_captionDx, p_captionDy, p_dx, p_dy)
+    this
+  end
 
-isShowing(This) ->
-        try
-        case (get({This, animation}) =:= get({This, captionAnimation})) of
-            true ->
-            throw({'$return', true});
-            false ->
-            throw({'$return', false})
+
+  def jm_isShowing(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.get(this, :animation) == JR.get(this, :captionAnimation)) do
+            throw({:jreturn, true})
+        else
+            throw({:jreturn, false})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-tick(This) ->
-        case (get({get({This, timeHelper}), '$class'})):isTime(get({This, timeHelper}), get({'GameTickTimeDelayHelperFactory':getInstance(), startTime})) of
-            true ->
-            put({This, animation}, (fun(Target_N66464) -> (get({Target_N66464, '$class'})):getInstance(Target_N66464, 0) end)('NullAnimationFactory':getFactoryInstance()));
-            false -> ok
-        end.
 
-update(This, Message, BasicColor) when (is_list(Message) orelse Message =:= undefined) ->
-        (get({get({This, textAnimation}), '$class'})):setBasicColorP(get({This, textAnimation}), BasicColor),
-        (get({get({This, textAnimation}), '$class'})):setText(get({This, textAnimation}), Message),
-        put({This, animation}, get({This, captionAnimation})),
-        (get({get({This, timeHelper}), '$class'})):setStartTimeTNT(get({This, timeHelper})).
+  def jm_tick(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if JR.call(JR.get(this, :timeHelper), :jm_isTime, [JR.get(GameTickTimeDelayHelperFactory.jm_getInstance(), :startTime)]) do
+            JR.put(this, :animation, JR.call(NullAnimationFactory.jm_getFactoryInstance(), :jm_getInstance, [0]))
+        end
+    end)
+  end
 
-paintXY(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-        (get({get({This, animation}), '$class'})):paintXY(get({This, animation}), Graphics, X, Y).
+
+  def jm_update(this, p_message, p_basicColor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :message, p_message)
+      JR.lset(f, :basicColor, p_basicColor)
+        JR.call(JR.get(this, :textAnimation), :jm_setBasicColorP, [JR.lget(f, :basicColor)])
+        JR.call(JR.get(this, :textAnimation), :jm_setText, [JR.lget(f, :message)])
+        JR.put(this, :animation, JR.get(this, :captionAnimation))
+        JR.call(JR.get(this, :timeHelper), :jm_setStartTimeTNT, [])
+    end)
+  end
+
+
+  def jm_paintXY(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        JR.call(JR.get(this, :animation), :jm_paintXY, [JR.lget(f, :graphics), JR.lget(f, :x), JR.lget(f, :y)])
+    end)
+  end
+end
+
 

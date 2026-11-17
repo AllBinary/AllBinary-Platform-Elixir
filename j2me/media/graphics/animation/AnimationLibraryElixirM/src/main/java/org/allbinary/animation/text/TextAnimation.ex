@@ -1,131 +1,193 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation.text
-% import javax.microedition.lcdui.Font
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.animation.AnimationBehavior
-% import org.allbinary.animation.IndexedAnimation
-% import org.allbinary.graphics.Anchor
-% import org.allbinary.graphics.font.MyFontProcessor
-% import org.allbinary.graphics.font.UpdateMyFontInterface
-% import org.allbinary.graphics.font.UpdateMyFontProcessor
-% import org.allbinary.graphics.threed.SWTJOGLProcessor
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation.text
 
--module('TextAnimation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements UpdateMyFontInterface
+defmodule TextAnimation do
+  def jsuper(), do: IndexedAnimation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('IndexedAnimation', Function, Arguments).
-
-init_fields(This) ->
-    put({This, updateMyFontProcessor}, 'UpdateMyFontProcessor':new(This)),
-    put({This, myFontProcessor}, get({This, updateMyFontProcessor})),
-    put({This, textArrayP}, get({'StringUtil':getInstance(), 'ONE_EMPTY_STRING_ARRAY'})),
-    put({This, anchor}, get({'Anchor', 'TOP_LEFT'})),
-    put({This, fontHeight}, 0),
-    put({This, offsetY}, 0),
-    put({This, textChangeListener}, 'TextChangeListener':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :updateMyFontProcessor, nil)
+    JR.put(this, :myFontProcessor, nil)
+    JR.put(this, :textArrayP, nil)
+    JR.put(this, :anchor, 0)
+    JR.put(this, :fontHeight, 0)
+    JR.put(this, :offsetY, 0)
+    JR.put(this, :textChangeListener, nil)
+        JR.put(this, :updateMyFontProcessor, UpdateMyFontProcessor.jnew(this))
+        JR.put(this, :myFontProcessor, JR.get(this, :updateMyFontProcessor))
+        JR.put(this, :textArrayP, JR.get(StringUtil.jm_getInstance(), :ONE_EMPTY_STRING_ARRAY))
+        JR.put(this, :anchor, Anchor.jstatic_TOP_LEFT())
+        JR.put(this, :fontHeight, 0)
+        JR.put(this, :offsetY, 0)
+        JR.put(this, :textChangeListener, TextChangeListener.jm_getInstance())
+    nil
+  end
 
 
-new(Text, AnimationBehavior) when (is_list(Text) orelse Text =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Text, AnimationBehavior),
-    This.
+  def jinit(this, p_text, p_animationBehavior) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :text, p_text)
+      JR.lset(f, :animationBehavior, p_animationBehavior)
+        IndexedAnimation.jinit(this, JR.lget(f, :animationBehavior))
+        TextAnimation.jinitfields(this)
+        JR.call(this, :jm_setText, [JR.lget(f, :text)])
+    end)
+  end
 
-'$init'(This, Text, AnimationBehavior) when (is_list(Text) orelse Text =:= undefined) ->
-        'IndexedAnimation':'$init'(This, AnimationBehavior),
-        init_fields(This),
-        (get({This, '$class'})):setText(This, Text).
+  def jnew(p_text, p_animationBehavior) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_text, p_animationBehavior)
+    this
+  end
 
-updateMeasurement(This, Graphics) ->
-        Font = (get({Graphics, '$class'})):getFont(Graphics),
-        put({This, fontHeight}, (get({Font, '$class'})):getHeight(Font)),
-        AdjustedFontHeight = trunc((-((float(get({This, fontHeight})) * 2.00)))),
-        put({This, offsetY}, case (fun(Target_N66565) -> (get({Target_N66565, '$class'})):isJOGL(Target_N66565) end)('SWTJOGLProcessor':getInstance()) of true -> AdjustedFontHeight; false -> 0 end),
-        (get({get({This, textChangeListener}), '$class'})):onMeasure(get({This, textChangeListener})),
-        put({This, textChangeListener}, 'TextChangeListener':getInstance()),
-        put({This, myFontProcessor}, 'MyFontProcessor':getInstance()).
 
-% throws Exception
-nextFrame(This) ->
-        ok.
+  def jm_updateMeasurement(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.lset(f, :font, JR.call(JR.lget(f, :graphics), :jm_getFont, []))
+        JR.put(this, :fontHeight, JR.call(JR.lget(f, :font), :jm_getHeight, []))
+        JR.lset(f, :adjustedFontHeight, JR.int32(JR.d2i(-(((JR.get(this, :fontHeight) * 1.0) * 2.00)))))
+        JR.put(this, :offsetY, (if JR.call(SWTJOGLProcessor.jm_getInstance(), :jm_isJOGL, []), do: JR.lget(f, :adjustedFontHeight), else: 0))
+        JR.call(JR.get(this, :textChangeListener), :jm_onMeasure, [])
+        JR.put(this, :textChangeListener, TextChangeListener.jm_getInstance())
+        JR.put(this, :myFontProcessor, MyFontProcessor.jm_getInstance())
+    end)
+  end
 
-paintXY(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-        (get({get({This, myFontProcessor}), '$class'})):process(get({This, myFontProcessor}), Graphics),
-        (get({This, '$class'})):paintXYNoUpdate(This, Graphics, X, Y).
 
-paintXYNoUpdate(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-        (get({get({This, basicSetColorUtil}), '$class'})):setBasicColorP3(get({This, basicSetColorUtil}), Graphics, (get({This, '$class'})):getBasicColorP(This), (get({This, '$class'})):getColor(This)),
-        Size = array:size(get({This, textArrayP})),
-        lists:foreach(fun(Index) ->
-            (get({Graphics, '$class'})):drawString(Graphics, array:get(Index, get({This, textArrayP})), X, ((Y + get({This, offsetY})) + ((Index * get({This, fontHeight})))), get({This, anchor}))
-        end, lists:seq(0, Size - 1)).
+  def jm_nextFrame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-setTextWithOnMeasure(This, Text, TextChangeListener) when (is_list(Text) orelse Text =:= undefined) ->
-        (get({This, '$class'})):setText(This, Text),
-        put({This, textChangeListener}, TextChangeListener).
 
-setText(This, Text) when (is_list(Text) orelse Text =:= undefined) ->
-        List = 'BasicArrayListD':new(),
-        case (string:length(Text) > 0) of
-            true ->
-            put({local, index}, 0),
-            put({local, startIndex}, 0),
-            put({local, endIndex}, 0),
-            (fun Loop() -> case (get({local, index}) >= 0) of true ->
-                put({local, startIndex}, get({local, index})),
-                put({local, index}, (get({Text, '$class'})):indexOf(Text, $\n, get({local, startIndex}))),
-                put({local, endIndex}, get({local, index})),
-                case (get({local, index}) < 0) of
-                    true ->
-                    put({local, endIndex}, string:length(Text));
-                    false -> ok
-                end,
-                (get({List, '$class'})):add(List, string:slice(Text, get({local, startIndex}), (get({local, endIndex})) - (get({local, startIndex})))),
-                case (get({local, index}) < 0) of
-                    true ->
-                    throw('$break');
-                    false -> ok
-                end,
-                put({local, index}, get({local, index}) + 1),
-                Loop();
-            false -> ok end end)();
-            false -> ok
-        end,
-        case ((get({List, '$class'})):size(List) > 0) of
-            true ->
-            TextArray = array:new((get({List, '$class'})):size(List), {default, undefined}),
-            Size = (get({List, '$class'})):size(List),
-            lists:foreach(fun(Index) ->
-                array:set(Index, (get({List, '$class'})):get(List, Index), TextArray)
-            end, lists:seq(0, Size - 1)),
-            put({This, textArrayP}, TextArray);
-            false ->
-            put({This, textArrayP}, get({'StringUtil':getInstance(), 'ONE_EMPTY_STRING_ARRAY'}))
-        end,
-        put({This, myFontProcessor}, get({This, updateMyFontProcessor})).
+  def jm_paintXY(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        JR.call(JR.get(this, :myFontProcessor), :jm_process, [JR.lget(f, :graphics)])
+        JR.call(this, :jm_paintXYNoUpdate, [JR.lget(f, :graphics), JR.lget(f, :x), JR.lget(f, :y)])
+    end)
+  end
 
-getTextArray(This) ->
-        get({This, textArrayP}).
 
-getFontHeight(This) ->
-        get({This, fontHeight}).
+  def jm_paintXYNoUpdate(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        JR.call(JR.get(this, :basicSetColorUtil), :jm_setBasicColorP3, [JR.lget(f, :graphics), JR.call(this, :jm_getBasicColorP, []), JR.call(this, :jm_getColor, [])])
+        JR.lset(f, :size, JR.alength(JR.get(this, :textArrayP)))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.call(JR.lget(f, :graphics), :jm_drawString, [JR.aget(JR.get(this, :textArrayP), JR.lget(f, :index)), JR.lget(f, :x), JR.int32(JR.int32(JR.lget(f, :y) + JR.get(this, :offsetY)) + (JR.int32(JR.lget(f, :index) * JR.get(this, :fontHeight)))), JR.get(this, :anchor)])
+        end)
+    end)
+  end
+
+
+  def jm_setTextWithOnMeasure(this, p_text, p_textChangeListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :text, p_text)
+      JR.lset(f, :textChangeListener, p_textChangeListener)
+        JR.call(this, :jm_setText, [JR.lget(f, :text)])
+        JR.put(this, :textChangeListener, JR.lget(f, :textChangeListener))
+    end)
+  end
+
+
+  def jm_setText(this, p_text) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :text, p_text)
+        JR.lset(f, :list, BasicArrayListD.jnew())
+        if (byte_size(JR.lget(f, :text)) > 0) do
+            JR.lset(f, :index, 0)
+            JR.lset(f, :startIndex, 0)
+            JR.lset(f, :endIndex, 0)
+            JR.jwhile(fn -> (JR.lget(f, :index) >= 0) end, fn ->
+                JR.lset(f, :startIndex, JR.lget(f, :index))
+                JR.lset(f, :index, JR.index_of(JR.lget(f, :text), ?\n))
+                JR.lset(f, :endIndex, JR.lget(f, :index))
+                if (JR.lget(f, :index) < 0) do
+                    JR.lset(f, :endIndex, byte_size(JR.lget(f, :text)))
+                end
+                JR.call(JR.lget(f, :list), :jm_add, [JR.substring(JR.lget(f, :text), JR.lget(f, :startIndex), JR.lget(f, :endIndex))])
+                if (JR.lget(f, :index) < 0) do
+                    throw(:jbreak)
+                end
+                JR.lpostinc(f, :index, 1)
+            end)
+        end
+        if (JR.call(JR.lget(f, :list), :jm_size, []) > 0) do
+            JR.lset(f, :textArray, JR.anew(JR.call(JR.lget(f, :list), :jm_size, []), nil))
+            JR.lset(f, :size, JR.call(JR.lget(f, :list), :jm_size, []))
+            JR.lset(f, :index, 0)
+            JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+                JR.aset(JR.lget(f, :textArray), JR.lget(f, :index), JR.call(JR.lget(f, :list), :jm_get, [JR.lget(f, :index)]))
+            end)
+            JR.put(this, :textArrayP, JR.lget(f, :textArray))
+        else
+            JR.put(this, :textArrayP, JR.get(StringUtil.jm_getInstance(), :ONE_EMPTY_STRING_ARRAY))
+        end
+        JR.put(this, :myFontProcessor, JR.get(this, :updateMyFontProcessor))
+    end)
+  end
+
+
+  def jm_getTextArray(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :textArrayP)})
+    end)
+  end
+
+
+  def jm_getFontHeight(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :fontHeight)})
+    end)
+  end
+end
+
 

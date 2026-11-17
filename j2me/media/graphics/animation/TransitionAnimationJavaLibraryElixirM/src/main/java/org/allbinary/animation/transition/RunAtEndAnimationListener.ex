@@ -1,43 +1,77 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation.transition
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation.transition
 
--module('RunAtEndAnimationListener').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements AnimationListenerInterface
+defmodule RunAtEndAnimationListener do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, runnable}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :runnable, nil)
+        
+    nil
+  end
 
 
-new(Runnable) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Runnable),
-    This.
+  def jinit(this, p_runnable) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :runnable, p_runnable)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :runnable, JR.lget(f, :runnable))
+    end)
+  end
 
-'$init'(This, Runnable) ->
-    init_fields(This),
-        put({This, runnable}, Runnable).
+  def jnew(p_runnable) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_runnable)
+    this
+  end
 
-onPlatformAnimationStart(This) ->
-        ok.
 
-onPlatformAnimationEnd(This) ->
-        ok.
+  def jm_onPlatformAnimationStart(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-onPlatformAnimationRepeat(This) ->
-        ok.
+
+  def jm_onPlatformAnimationEnd(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_onPlatformAnimationRepeat(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+end
+
 

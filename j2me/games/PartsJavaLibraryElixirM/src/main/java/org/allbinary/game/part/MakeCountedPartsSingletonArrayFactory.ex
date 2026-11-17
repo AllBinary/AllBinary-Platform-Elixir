@@ -1,76 +1,90 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.part
-% import org.allbinary.game.layer.pickup.CountedPickedUpLayerInterfaceFactory
-% import org.allbinary.game.layer.pickup.CountedPickedUpLayerInterfaceFactoryPool
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
-% import org.allbinary.util.BasicArrayListUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.part
 
--module('MakeCountedPartsSingletonArrayFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule MakeCountedPartsSingletonArrayFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> MakeCountedPartsSingletonArrayFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'MakeCountedPartsSingletonArrayFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :list, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :list, JR.call(BasicArrayListUtil.jm_getInstance(), :jm_getImmutableInstance, []))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, list}, (fun(Target_N65987) -> (get({Target_N65987, '$class'})):getImmutableInstance(Target_N65987) end)('BasicArrayListUtil':getInstance())),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'MakeCountedPartsSingletonArrayFactory', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, MakeCountedPartsSingletonArrayFactory.jstatic_instance()})
+    end)
+  end
 
-% throws Exception
-getUpdated(This, PartInterfaceArray) when (is_tuple(PartInterfaceArray) orelse PartInterfaceArray =:= undefined) ->
-        put({This, list}, 'BasicArrayListD':new()),
-        lists:foreach(fun(Index) ->
-            (get({get({This, list}), '$class'})):add(get({This, list}), array:get(Index, PartInterfaceArray))
-        end, lists:seq(0, array:size(PartInterfaceArray) - 1)),
-        CountedBasicArrayList = (fun(Target_N66212) -> (get({Target_N66212, '$class'})):getList(Target_N66212) end)('CountedPickedUpLayerInterfaceFactoryPool':getInstance()),
-        put({local, layerInterfaceFactoryInterface}, undefined),
-        Size = (get({CountedBasicArrayList, '$class'})):size(CountedBasicArrayList),
-        lists:foreach(fun(Index) ->
-            put({local, layerInterfaceFactoryInterface}, array:get(Index, get({CountedBasicArrayList, objectArray}))),
-            (get({get({This, list}), '$class'})):add(get({This, list}), 'CountedLayerInterfaceFactoryPart':new(0, get({local, layerInterfaceFactoryInterface})))
-        end, lists:seq(0, Size - 1)),
-        StringBuffer = 'StringMaker':new(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "Total Parts: "),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, (get({get({This, list}), '$class'})):size(get({This, list}))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, " Counted: "),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, (get({CountedBasicArrayList, '$class'})):size(CountedBasicArrayList)),
-        CommonStrings = 'CommonStrings':getInstance(),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({StringBuffer, '$class'})):toString(StringBuffer), This, get({CommonStrings, 'GET_INSTANCE'})),
-        NewPartInterfaceArray = array:new((get({get({This, list}), '$class'})):size(get({This, list})), {default, undefined}),
-        NewSize = array:size(NewPartInterfaceArray),
-        lists:foreach(fun(Index) ->
-            array:set(Index, (get({get({This, list}), '$class'})):get(get({This, list}), Index), NewPartInterfaceArray)
-        end, lists:seq(0, NewSize - 1)),
-        NewPartInterfaceArray.
+
+  def jm_getUpdated(this, p_partInterfaceArray) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :partInterfaceArray, p_partInterfaceArray)
+        JR.put(this, :list, BasicArrayListD.jnew())
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.alength(JR.lget(f, :partInterfaceArray))) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.call(JR.get(this, :list), :jm_add, [JR.aget(JR.lget(f, :partInterfaceArray), JR.lget(f, :index))])
+        end)
+        JR.lset(f, :countedBasicArrayList, JR.call(CountedPickedUpLayerInterfaceFactoryPool.jm_getInstance(), :jm_getList, []))
+        JR.lset(f, :layerInterfaceFactoryInterface, nil)
+        JR.lset(f, :size, JR.call(JR.lget(f, :countedBasicArrayList), :jm_size, []))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :layerInterfaceFactoryInterface, JR.aget(JR.get(JR.lget(f, :countedBasicArrayList), :objectArray), JR.lget(f, :index)))
+            JR.call(JR.get(this, :list), :jm_add, [CountedLayerInterfaceFactoryPart.jnew(0, JR.lget(f, :layerInterfaceFactoryInterface))])
+        end)
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["Total Parts: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.call(JR.get(this, :list), :jm_size, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [" Counted: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.call(JR.lget(f, :countedBasicArrayList), :jm_size, [])])
+        JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :stringBuffer), :jm_toString, []), this, JR.get(JR.lget(f, :commonStrings), :GET_INSTANCE)])
+        JR.lset(f, :newPartInterfaceArray, JR.anew(JR.call(JR.get(this, :list), :jm_size, []), nil))
+        JR.lset(f, :newSize, JR.alength(JR.lget(f, :newPartInterfaceArray)))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :newSize)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.aset(JR.lget(f, :newPartInterfaceArray), JR.lget(f, :index), JR.call(JR.get(this, :list), :jm_get, [JR.lget(f, :index)]))
+        end)
+        throw({:jreturn, JR.lget(f, :newPartInterfaceArray)})
+    end)
+  end
+end
+
 

@@ -1,52 +1,89 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2011 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.view
-% import org.allbinary.graphics.GPoint
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2011 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.view
 
--module('ViewPositionBase').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule ViewPositionBase do
+  def jsuper(), do: GPoint
+def jstatic_NULL_VIEW_POSITION(), do: JR.static_get(__MODULE__, :NULL_VIEW_POSITION, fn -> ViewPositionBase.jnew(0, 0, 0) end)
+  def jstatic_set_NULL_VIEW_POSITION(value), do: JR.static_put(__MODULE__, :NULL_VIEW_POSITION, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('GPoint', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'NULL_VIEW_POSITION'}, 'ViewPositionBase':new(0, 0, 0)),
-    ok.
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new(X, Y, Z) when is_integer(X), is_integer(Y), is_integer(Z) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, X, Y, Z),
-    This.
+  def jinit(this, p_x, p_y, p_z) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :z, p_z)
+        GPoint.jinit(this, JR.lget(f, :x), JR.lget(f, :y), JR.lget(f, :z))
+        ViewPositionBase.jinitfields(this)
+    end)
+  end
 
-'$init'(This, X, Y, Z) when is_integer(X), is_integer(Y), is_integer(Z) ->
-        'GPoint':'$init'(This, X, Y, Z).
+  def jnew(p_x, p_y, p_z) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_x, p_y, p_z)
+    this
+  end
 
-getX2(This) ->
-        (get({This, '$class'})):getX(This).
 
-getY2(This) ->
-        (get({This, '$class'})):getY(This).
+  def jm_getX2(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(this, :jm_getX, [])})
+    end)
+  end
 
-getZ2(This) ->
-        (get({This, '$class'})):getZ(This).
 
-setAllbinaryLayer(This, AllbinaryLayer) ->
-        ok.
+  def jm_getY2(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(this, :jm_getY, [])})
+    end)
+  end
+
+
+  def jm_getZ2(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(this, :jm_getZ, [])})
+    end)
+  end
+
+
+  def jm_setAllbinaryLayer(this, p_allbinaryLayer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allbinaryLayer, p_allbinaryLayer)
+        nil
+    end)
+  end
+end
+
 

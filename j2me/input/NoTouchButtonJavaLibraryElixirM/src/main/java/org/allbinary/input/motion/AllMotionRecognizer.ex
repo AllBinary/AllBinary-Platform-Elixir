@@ -1,61 +1,128 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion
 
--module('AllMotionRecognizer').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule AllMotionRecognizer do
+  def jsuper(), do: JObject
+def jstatic_index(), do: JR.static_get(__MODULE__, :index, fn -> 0 end)
+  def jstatic_set_index(value), do: JR.static_put(__MODULE__, :index, value)
 
-static_init() ->
-    put({?MODULE, index}, 0),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :id, 0)
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, id}, 0),
-    ok.
+
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :id, JR.postinc(AllMotionRecognizer, :index, 1))
+    end)
+  end
+
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jm_processStartMotionEvent(this, p_x, p_y, p_deviceId, p_modifiers) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :deviceId, p_deviceId)
+      JR.lset(f, :modifiers, p_modifiers)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        put({This, id}, allbinary_java:first(get({'AllMotionRecognizer', index}), put({'AllMotionRecognizer', index}, get({'AllMotionRecognizer', index}) + 1))).
 
-% throws Exception
-processStartMotionEvent(This, X, Y, DeviceId, Modifiers) when is_integer(X), is_integer(Y), is_integer(DeviceId), is_integer(Modifiers) ->
-        ok.
+  def jm_processEndMotionEvent(this, p_x, p_y, p_deviceId, p_modifiers) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :deviceId, p_deviceId)
+      JR.lset(f, :modifiers, p_modifiers)
+        nil
+    end)
+  end
 
-% throws Exception
-processEndMotionEvent(This, X, Y, DeviceId, Modifiers) when is_integer(X), is_integer(Y), is_integer(DeviceId), is_integer(Modifiers) ->
-        ok.
 
-% throws Exception
-processDraggedMotionEvent(This, X, Y, DeviceId, Modifiers) when is_integer(X), is_integer(Y), is_integer(DeviceId), is_integer(Modifiers) ->
-        ok.
+  def jm_processDraggedMotionEvent(this, p_x, p_y, p_deviceId, p_modifiers) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :deviceId, p_deviceId)
+      JR.lset(f, :modifiers, p_modifiers)
+        nil
+    end)
+  end
 
-% throws Exception
-processMovedMotionEvent(This, X, Y, DeviceId, Modifiers) when is_integer(X), is_integer(Y), is_integer(DeviceId), is_integer(Modifiers) ->
-        ok.
 
-% throws Exception
-processScrolledMotionEvent(This, X, Y, DeviceId, Modifiers) when is_integer(X), is_integer(Y), is_integer(DeviceId), is_integer(Modifiers) ->
-        ok.
+  def jm_processMovedMotionEvent(this, p_x, p_y, p_deviceId, p_modifiers) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :deviceId, p_deviceId)
+      JR.lset(f, :modifiers, p_modifiers)
+        nil
+    end)
+  end
 
-getId(This) ->
-        get({This, id}).
+
+  def jm_processScrolledMotionEvent(this, p_x, p_y, p_deviceId, p_modifiers) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :deviceId, p_deviceId)
+      JR.lset(f, :modifiers, p_modifiers)
+        nil
+    end)
+  end
+
+
+  def jm_getId(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :id)})
+    end)
+  end
+end
+
 

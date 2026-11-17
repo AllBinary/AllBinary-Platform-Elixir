@@ -1,67 +1,93 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.collision.layer
-% import org.allbinary.game.collision.CollidableBaseBehavior
-% import org.allbinary.game.collision.CollidableInterfaceCompositeInterface
-% import org.allbinary.game.layer.CollidableCompositeLayer
-% import org.allbinary.layer.LayerManager
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.collision.layer
 
--module('AllBinaryCollisionManager').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule AllBinaryCollisionManager do
+  def jsuper(), do: JObject
+def jstatic_allBinaryCollisionManager(), do: JR.static_get(__MODULE__, :allBinaryCollisionManager, fn -> AllBinaryCollisionManager.jnew() end)
+  def jstatic_set_allBinaryCollisionManager(value), do: JR.static_put(__MODULE__, :allBinaryCollisionManager, value)
 
-static_init() ->
-    put({?MODULE, allBinaryCollisionManager}, 'AllBinaryCollisionManager':new()),
-    ok.
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-getInstance() ->
-        get({'AllBinaryCollisionManager', allBinaryCollisionManager}).
 
-% throws Exception
-process(This, LayerManager, CollidableInterfaceCompositeInterface, StartIndex) when is_integer(StartIndex) ->
-        Size = (get({LayerManager, '$class'})):getSize(LayerManager),
-        lists:foreach(fun(Index) ->
-            CollidableInterfaceCompositeInterface2 = (get({LayerManager, '$class'})):getLayerAt(LayerManager, Index),
-            (get({This, '$class'})):collide(This, LayerManager, CollidableInterfaceCompositeInterface, CollidableInterfaceCompositeInterface2)
-        end, lists:seq((StartIndex + 1), Size - 1)).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, AllBinaryCollisionManager.jstatic_allBinaryCollisionManager()})
+    end)
+  end
 
-% throws Exception
-collide(This, LayerManager, CollidableInterfaceCompositeInterface, CollidableInterfaceCompositeInterface2) ->
-        CollidableBase2 = (get({CollidableInterfaceCompositeInterface2, '$class'})):getCollidableInferface(CollidableInterfaceCompositeInterface2),
-        CollidableBase = (get({CollidableInterfaceCompositeInterface, '$class'})):getCollidableInferface(CollidableInterfaceCompositeInterface),
-        case (get({CollidableBase2, '$class'})):isCollidable(CollidableBase2, CollidableInterfaceCompositeInterface) of
-            true ->
-            case (get({CollidableBase, '$class'})):isCollisionInterface(CollidableBase, CollidableInterfaceCompositeInterface, CollidableInterfaceCompositeInterface2) of
-                true ->
-                (get({CollidableBase, '$class'})):collideInterface(CollidableBase, CollidableInterfaceCompositeInterface, CollidableInterfaceCompositeInterface2),
-                (get({CollidableBase2, '$class'})):collideInterface(CollidableBase2, CollidableInterfaceCompositeInterface, CollidableInterfaceCompositeInterface);
-                false -> ok
-            end;
-            false -> ok
-        end.
+
+  def jm_process(this, p_layerManager, p_collidableInterfaceCompositeInterface, p_startIndex) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerManager, p_layerManager)
+      JR.lset(f, :collidableInterfaceCompositeInterface, p_collidableInterfaceCompositeInterface)
+      JR.lset(f, :startIndex, p_startIndex)
+        JR.lset(f, :size, JR.call(JR.lget(f, :layerManager), :jm_getSize, []))
+        JR.lset(f, :index, JR.int32(JR.lget(f, :startIndex) + 1))
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :collidableInterfaceCompositeInterface2, JR.call(JR.lget(f, :layerManager), :jm_getLayerAt, [JR.lget(f, :index)]))
+            JR.call(this, :jm_collide, [JR.lget(f, :layerManager), JR.lget(f, :collidableInterfaceCompositeInterface), JR.lget(f, :collidableInterfaceCompositeInterface2)])
+        end)
+    end)
+  end
+
+
+  def jm_collide(this, p_layerManager, p_collidableInterfaceCompositeInterface, p_collidableInterfaceCompositeInterface2) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerManager, p_layerManager)
+      JR.lset(f, :collidableInterfaceCompositeInterface, p_collidableInterfaceCompositeInterface)
+      JR.lset(f, :collidableInterfaceCompositeInterface2, p_collidableInterfaceCompositeInterface2)
+        JR.lset(f, :collidableBase2, JR.call(JR.lget(f, :collidableInterfaceCompositeInterface2), :jm_getCollidableInferface, []))
+        JR.lset(f, :collidableBase, JR.call(JR.lget(f, :collidableInterfaceCompositeInterface), :jm_getCollidableInferface, []))
+        if JR.call(JR.lget(f, :collidableBase2), :jm_isCollidable, [JR.lget(f, :collidableInterfaceCompositeInterface)]) do
+            if JR.call(JR.lget(f, :collidableBase), :jm_isCollisionInterface, [JR.lget(f, :collidableInterfaceCompositeInterface), JR.lget(f, :collidableInterfaceCompositeInterface2)]) do
+                JR.call(JR.lget(f, :collidableBase), :jm_collideInterface, [JR.lget(f, :collidableInterfaceCompositeInterface), JR.lget(f, :collidableInterfaceCompositeInterface2)])
+                JR.call(JR.lget(f, :collidableBase2), :jm_collideInterface, [JR.lget(f, :collidableInterfaceCompositeInterface), JR.lget(f, :collidableInterfaceCompositeInterface)])
+            end
+        end
+    end)
+  end
+end
+
 

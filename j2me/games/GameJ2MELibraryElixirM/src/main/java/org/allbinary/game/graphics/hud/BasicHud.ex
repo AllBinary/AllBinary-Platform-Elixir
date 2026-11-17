@@ -1,239 +1,468 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.game.graphics.hud
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.J2MEUtil
-% import org.allbinary.graphics.Anchor
-% import org.allbinary.graphics.GPoint
-% import org.allbinary.graphics.PointFactory
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.color.BasicColorFactory
-% import org.allbinary.graphics.color.BasicColorSetUtil
-% import org.allbinary.graphics.displayable.CanvasStrings
-% import org.allbinary.graphics.displayable.DisplayInfoSingleton
-% import org.allbinary.graphics.displayable.event.DisplayChangeEvent
-% import org.allbinary.graphics.font.MyFontProcessor
-% import org.allbinary.graphics.font.UpdateMyFontInterface
-% import org.allbinary.graphics.font.UpdateMyFontProcessor
-% import org.allbinary.logic.communication.log.ForcedLogUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.util.event.AllBinaryEventObject
-% import org.allbinary.logic.util.event.EventStrings
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.game.graphics.hud
 
--module('BasicHud').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements UpdateMyFontInterface
+defmodule BasicHud do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, canvasStrings}, 'CanvasStrings':getInstance()),
-    put({This, basicSetColorUtil}, 'BasicColorSetUtil':getInstance()),
-    put({This, displayInfo}, 'DisplayInfoSingleton':getInstance()),
-    put({This, updateMyFontProcessor}, 'UpdateMyFontProcessor':new(This)),
-    put({This, myFontProcessor}, get({This, updateMyFontProcessor})),
-    put({This, location}, 0),
-    put({This, direction}, 0),
-    put({This, bufferZone}, 0),
-    put({This, bufferZoneY}, 0),
-    put({This, hudGraphicsPosition}, get({'HudGraphicsPosition', 'NULL_HUD_GRAPHICS_POSITION'})),
-    put({This, x}, 0),
-    put({This, y}, 0),
-    put({This, basicColor}, get({'BasicColorFactory':getInstance(), 'BLACK'})),
-    put({This, color}, 0),
-    put({This, updateMaxWidth}, 0),
-    put({This, updateMaxHeight}, 0),
-    put({This, offsetY}, 0),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :canvasStrings, nil)
+    JR.put(this, :basicSetColorUtil, nil)
+    JR.put(this, :displayInfo, nil)
+    JR.put(this, :updateMyFontProcessor, nil)
+    JR.put(this, :myFontProcessor, nil)
+    JR.put(this, :location, 0)
+    JR.put(this, :direction, 0)
+    JR.put(this, :bufferZone, 0)
+    JR.put(this, :bufferZoneY, 0)
+    JR.put(this, :hudGraphicsPosition, nil)
+    JR.put(this, :x, 0)
+    JR.put(this, :y, 0)
+    JR.put(this, :basicColor, nil)
+    JR.put(this, :color, 0)
+    JR.put(this, :updateMaxWidth, 0)
+    JR.put(this, :updateMaxHeight, 0)
+    JR.put(this, :offsetY, 0)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        JR.put(this, :canvasStrings, CanvasStrings.jm_getInstance())
+        JR.put(this, :basicSetColorUtil, BasicColorSetUtil.jm_getInstance())
+        JR.put(this, :displayInfo, DisplayInfoSingleton.jm_getInstance())
+        JR.put(this, :updateMyFontProcessor, UpdateMyFontProcessor.jnew(this))
+        JR.put(this, :myFontProcessor, JR.get(this, :updateMyFontProcessor))
+        JR.put(this, :location, 0)
+        JR.put(this, :direction, 0)
+        JR.put(this, :bufferZone, 0)
+        JR.put(this, :bufferZoneY, 0)
+        JR.put(this, :hudGraphicsPosition, HudGraphicsPosition.jstatic_NULL_HUD_GRAPHICS_POSITION())
+        JR.put(this, :x, 0)
+        JR.put(this, :y, 0)
+        JR.put(this, :basicColor, JR.get(BasicColorFactory.jm_getInstance(), :BLACK))
+        
+        JR.put(this, :updateMaxWidth, 0)
+        JR.put(this, :updateMaxHeight, 0)
+        JR.put(this, :offsetY, 0)
+    nil
+  end
 
 
-new(Location, Direction, BufferZone, BasicColor) when is_integer(Location), is_integer(Direction), is_integer(BufferZone) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Location, Direction, BufferZone, BasicColor),
-    This.
+  def jinit(this, p_location, p_direction, p_bufferZone, p_basicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :location, p_location)
+      JR.lset(f, :direction, p_direction)
+      JR.lset(f, :bufferZone, p_bufferZone)
+      JR.lset(f, :basicColor, p_basicColor)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.call(this, :jm_setLocation, [JR.lget(f, :location)])
+        JR.call(this, :jm_setDirection, [JR.lget(f, :direction)])
+        JR.call(this, :jm_setBufferZone, [JR.lget(f, :bufferZone)])
+        JR.call(this, :jm_onDisplayChangeEvent, [JR.get(DisplayInfoSingleton.jm_getInstance(), :displayChangeEvent)])
+        JR.call(this, :jm_setBasicColorP, [JR.lget(f, :basicColor)])
+        JR.put(this, :color, JR.call(JR.lget(f, :basicColor), :jm_intValue, []))
+    end)
+  end
 
-'$init'(This, Location, Direction, BufferZone, BasicColor) when is_integer(Location), is_integer(Direction), is_integer(BufferZone) ->
-    init_fields(This),
-        (get({This, '$class'})):setLocation(This, Location),
-        (get({This, '$class'})):setDirection(This, Direction),
-        (get({This, '$class'})):setBufferZone(This, BufferZone),
-        (get({This, '$class'})):onDisplayChangeEvent(This, get({'DisplayInfoSingleton':getInstance(), displayChangeEvent})),
-        (get({This, '$class'})):setBasicColorP(This, BasicColor),
-        put({This, color}, (get({BasicColor, '$class'})):intValue(BasicColor)).
+  def jnew(p_location, p_direction, p_bufferZone, p_basicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_location, p_direction, p_bufferZone, p_basicColor)
+    this
+  end
 
-updateMeasurement(This, Graphics) ->
-        try
-            put({This, hudGraphicsPosition}, (get({This, '$class'})):getHudGraphicsPositionWH(This, (get({get({This, displayInfo}), '$class'})):getLastWidth(get({This, displayInfo})), (get({get({This, displayInfo}), '$class'})):getLastHeight(get({This, displayInfo})), get({This, updateMaxWidth}), get({This, updateMaxHeight}))),
-            put({This, x}, (fun(Target_N67294) -> (get({Target_N67294, '$class'})):getX(Target_N67294) end)((get({get({This, hudGraphicsPosition}), '$class'})):getPoint(get({This, hudGraphicsPosition})))),
-            (get({This, '$class'})):setY(This, (fun(Target_N67338) -> (get({Target_N67338, '$class'})):getY(Target_N67338) end)((get({get({This, hudGraphicsPosition}), '$class'})):getPoint(get({This, hudGraphicsPosition}))))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), This, get({get({This, canvasStrings}), 'ON_DISPLAY_CHANGE_EVENT'}), E)
-        end,
-        put({This, myFontProcessor}, 'MyFontProcessor':getInstance()).
 
-getLocation(This) ->
-        get({This, location}).
+  def jm_updateMeasurement(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        try do
+            JR.put(this, :hudGraphicsPosition, JR.call(this, :jm_getHudGraphicsPositionWH, [JR.call(JR.get(this, :displayInfo), :jm_getLastWidth, []), JR.call(JR.get(this, :displayInfo), :jm_getLastHeight, []), JR.get(this, :updateMaxWidth), JR.get(this, :updateMaxHeight)]))
+            JR.put(this, :x, JR.call(JR.call(JR.get(this, :hudGraphicsPosition), :jm_getPoint, []), :jm_getX, []))
+            JR.call(this, :jm_setY, [JR.call(JR.call(JR.get(this, :hudGraphicsPosition), :jm_getPoint, []), :jm_getY, [])])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :canvasStrings), :ON_DISPLAY_CHANGE_EVENT), JR.lget(f, :e)])
+        end
+        JR.put(this, :myFontProcessor, MyFontProcessor.jm_getInstance())
+    end)
+  end
 
-getDirection(This) ->
-        get({This, direction}).
 
-% throws Exception
-getHudGraphicsPositionWH(This, Width, Height, MaxWidth, MaxHeight) when is_integer(Width), is_integer(Height), is_integer(MaxWidth), is_integer(MaxHeight) ->
-        put({local, x}, 0),
-        put({local, y}, 0),
-        put({local, anchor}, 0),
-        BasicHudFactory = 'BasicHudFactory':getInstance(),
-        case (get({BasicHudFactory, 'BOTTOMLEFT'}) =:= (get({This, '$class'})):getLocation(This)) of
-            true ->
-            put({local, x}, (get({This, bufferZone}) + 2)),
-            put({local, y}, ((Height - MaxHeight) - get({This, bufferZone}))),
-            put({local, anchor}, (get({'Graphics', 'BOTTOM'}) band get({'Graphics', 'LEFT'})));
-            false ->
-            case (get({BasicHudFactory, 'BOTTOMRIGHT'}) =:= (get({This, '$class'})):getLocation(This)) of
-            true ->
-            put({local, x}, (Width - MaxWidth)),
-            put({local, y}, ((Height - MaxHeight) - get({This, bufferZone}))),
-            put({local, anchor}, (get({'Graphics', 'BOTTOM'}) band get({'Graphics', 'RIGHT'})));
-            false ->
-            case (get({BasicHudFactory, 'TOPLEFT'}) =:= (get({This, '$class'})):getLocation(This)) of
-            true ->
-            put({local, x}, (get({This, bufferZone}) + 2)),
-            put({local, y}, get({This, bufferZoneY})),
-            put({local, anchor}, get({'Anchor', 'TOP_LEFT'}));
-            false ->
-            case (get({BasicHudFactory, 'TOPRIGHT'}) =:= (get({This, '$class'})):getLocation(This)) of
-            true ->
-            put({local, x}, (Width - MaxWidth)),
-            put({local, y}, get({This, bufferZoneY})),
-            put({local, anchor}, (get({'Graphics', 'TOP'}) band get({'Graphics', 'RIGHT'})));
-            false ->
-            case (get({BasicHudFactory, 'TOPCENTER'}) =:= (get({This, '$class'})):getLocation(This)) of
-            true ->
-            put({local, x}, ((((Width - MaxWidth)) div 2))),
-            put({local, y}, get({This, bufferZoneY})),
-            put({local, anchor}, (get({'Graphics', 'TOP'}) band get({'Graphics', 'HCENTER'})));
-            false ->
-            case (get({BasicHudFactory, 'BOTTOMCENTER'}) =:= (get({This, '$class'})):getLocation(This)) of
-            true ->
-            put({local, x}, ((((Width - MaxWidth)) div 2))),
-            put({local, y}, ((Height - MaxHeight) - get({This, bufferZone}))),
-            put({local, anchor}, (get({'Graphics', 'BOTTOM'}) band get({'Graphics', 'HCENTER'})));
-            false ->
-            case (get({BasicHudFactory, 'ABSOLUTE'}) =:= (get({This, '$class'})):getLocation(This)) of
-            true ->
-            put({local, x}, MaxHeight),
-            put({local, y}, MaxWidth),
-            put({local, anchor}, 0);
-            false -> ok
+  def jm_getLocation(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :location)})
+    end)
+  end
+
+
+  def jm_getDirection(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :direction)})
+    end)
+  end
+
+
+  def jm_getHudGraphicsPositionWH(this, p_width, p_height, p_maxWidth, p_maxHeight) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+      JR.lset(f, :maxWidth, p_maxWidth)
+      JR.lset(f, :maxHeight, p_maxHeight)
+        JR.lset(f, :x, 0)
+        JR.lset(f, :y, 0)
+        JR.lset(f, :anchor, 0)
+        JR.lset(f, :basicHudFactory, BasicHudFactory.jm_getInstance())
+        if (JR.get(JR.lget(f, :basicHudFactory), :BOTTOMLEFT) == JR.call(this, :jm_getLocation, [])) do
+            JR.lset(f, :x, JR.int32(JR.get(this, :bufferZone) + 2))
+            JR.lset(f, :y, JR.int32(JR.int32(JR.lget(f, :height) - JR.lget(f, :maxHeight)) - JR.get(this, :bufferZone)))
+            JR.lset(f, :anchor, (Graphics.jstatic_BOTTOM() and Graphics.jstatic_LEFT()))
+        else
+            if (JR.get(JR.lget(f, :basicHudFactory), :BOTTOMRIGHT) == JR.call(this, :jm_getLocation, [])) do
+            JR.lset(f, :x, JR.int32(JR.lget(f, :width) - JR.lget(f, :maxWidth)))
+            JR.lset(f, :y, JR.int32(JR.int32(JR.lget(f, :height) - JR.lget(f, :maxHeight)) - JR.get(this, :bufferZone)))
+            JR.lset(f, :anchor, (Graphics.jstatic_BOTTOM() and Graphics.jstatic_RIGHT()))
+        else
+            if (JR.get(JR.lget(f, :basicHudFactory), :TOPLEFT) == JR.call(this, :jm_getLocation, [])) do
+            JR.lset(f, :x, JR.int32(JR.get(this, :bufferZone) + 2))
+            JR.lset(f, :y, JR.get(this, :bufferZoneY))
+            JR.lset(f, :anchor, Anchor.jstatic_TOP_LEFT())
+        else
+            if (JR.get(JR.lget(f, :basicHudFactory), :TOPRIGHT) == JR.call(this, :jm_getLocation, [])) do
+            JR.lset(f, :x, JR.int32(JR.lget(f, :width) - JR.lget(f, :maxWidth)))
+            JR.lset(f, :y, JR.get(this, :bufferZoneY))
+            JR.lset(f, :anchor, (Graphics.jstatic_TOP() and Graphics.jstatic_RIGHT()))
+        else
+            if (JR.get(JR.lget(f, :basicHudFactory), :TOPCENTER) == JR.call(this, :jm_getLocation, [])) do
+            JR.lset(f, :x, (div((JR.int32(JR.lget(f, :width) - JR.lget(f, :maxWidth))), 2)))
+            JR.lset(f, :y, JR.get(this, :bufferZoneY))
+            JR.lset(f, :anchor, (Graphics.jstatic_TOP() and Graphics.jstatic_HCENTER()))
+        else
+            if (JR.get(JR.lget(f, :basicHudFactory), :BOTTOMCENTER) == JR.call(this, :jm_getLocation, [])) do
+            JR.lset(f, :x, (div((JR.int32(JR.lget(f, :width) - JR.lget(f, :maxWidth))), 2)))
+            JR.lset(f, :y, JR.int32(JR.int32(JR.lget(f, :height) - JR.lget(f, :maxHeight)) - JR.get(this, :bufferZone)))
+            JR.lset(f, :anchor, (Graphics.jstatic_BOTTOM() and Graphics.jstatic_HCENTER()))
+        else
+            if (JR.get(JR.lget(f, :basicHudFactory), :ABSOLUTE) == JR.call(this, :jm_getLocation, [])) do
+            JR.lset(f, :x, JR.lget(f, :maxHeight))
+            JR.lset(f, :y, JR.lget(f, :maxWidth))
+            JR.lset(f, :anchor, 0)
         end
         end
         end
         end
         end
         end
-        end,
-        'HudGraphicsPosition':new((get({This, '$class'})):getPoint(This, get({local, x}), get({local, y})), get({local, anchor})).
+        end
+        throw({:jreturn, HudGraphicsPosition.jnew(JR.call(this, :jm_getPoint, [JR.lget(f, :x), JR.lget(f, :y)]), JR.lget(f, :anchor))})
+    end)
+  end
 
-onEvent(This, EventObject) ->
-        'ForcedLogUtil':log(get({'EventStrings':getInstance(), 'PERFORMANCE_MESSAGE'}), This).
 
-onDisplayChangeEvent(This, DisplayChangeEvent) ->
-        put({This, myFontProcessor}, get({This, updateMyFontProcessor})).
+  def jm_onEvent(this, p_eventObject) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+        ForcedLogUtil.jm_log(JR.get(EventStrings.jm_getInstance(), :PERFORMANCE_MESSAGE), this)
+    end)
+  end
 
-getPoint(This, X, Y) when is_integer(X), is_integer(Y) ->
-        (fun(Target_N69394) -> (get({Target_N69394, '$class'})):createXY(Target_N69394, X, Y) end)('PointFactory':getInstance()).
 
-getBufferZone(This) ->
-        get({This, bufferZone}).
+  def jm_onDisplayChangeEvent(this, p_displayChangeEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :displayChangeEvent, p_displayChangeEvent)
+        JR.put(this, :myFontProcessor, JR.get(this, :updateMyFontProcessor))
+    end)
+  end
 
-setBufferZone(This, BufferZone) when is_integer(BufferZone) ->
-        put({This, bufferZone}, BufferZone),
-        case 'J2MEUtil':isHTML() of
-            true ->
-            put({This, bufferZoneY}, get({This, bufferZone}));
-            false ->
-            put({This, bufferZoneY}, (get({This, bufferZone}) + 5))
-        end.
 
-setLocation(This, Location) when is_integer(Location) ->
-        put({This, location}, Location).
+  def jm_getPoint(this, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        throw({:jreturn, JR.call(PointFactory.jm_getInstance(), :jm_createXY, [JR.lget(f, :x), JR.lget(f, :y)])})
+    end)
+  end
 
-setDirection(This, Direction) when is_integer(Direction) ->
-        put({This, direction}, Direction).
 
-getHudGraphicsPosition(This) ->
-        get({This, hudGraphicsPosition}).
+  def jm_getBufferZone(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :bufferZone)})
+    end)
+  end
 
-getColor(This) ->
-        get({This, color}).
 
-getX(This) ->
-        get({This, x}).
+  def jm_setBufferZone(this, p_bufferZone) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :bufferZone, p_bufferZone)
+        JR.put(this, :bufferZone, JR.lget(f, :bufferZone))
+        if J2MEUtil.jm_isHTML() do
+            JR.put(this, :bufferZoneY, JR.get(this, :bufferZone))
+        else
+            JR.put(this, :bufferZoneY, JR.int32(JR.get(this, :bufferZone) + 5))
+        end
+    end)
+  end
 
-setX(This, X) when is_integer(X) ->
-        put({This, x}, X).
 
-setBasicColorP(This, BasicColor) ->
-        put({This, basicColor}, BasicColor).
+  def jm_setLocation(this, p_location) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :location, p_location)
+        JR.put(this, :location, JR.lget(f, :location))
+    end)
+  end
 
-getBasicColorP(This) ->
-        get({This, basicColor}).
 
-setY(This, Y) when is_integer(Y) ->
-        put({This, y}, Y).
+  def jm_setDirection(this, p_direction) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :direction, p_direction)
+        JR.put(this, :direction, JR.lget(f, :direction))
+    end)
+  end
 
-getY(This) ->
-        get({This, y}).
 
-paintSSO(This, Graphics, String, String2, Offset) when (is_list(String) orelse String =:= undefined), (is_list(String2) orelse String2 =:= undefined), is_integer(Offset) ->
-        (get({get({This, myFontProcessor}), '$class'})):process(get({This, myFontProcessor}), Graphics),
-        (get({get({This, basicSetColorUtil}), '$class'})):setBasicColorP(get({This, basicSetColorUtil}), Graphics, (get({This, '$class'})):getBasicColorP(This)),
-        (get({Graphics, '$class'})):drawString(Graphics, String, get({This, x}), (get({This, '$class'})):getY(This), (get({get({This, hudGraphicsPosition}), '$class'})):getAnchor(get({This, hudGraphicsPosition}))),
-        (get({Graphics, '$class'})):drawString(Graphics, String2, (get({This, x}) + Offset), (get({This, '$class'})):getY(This), (get({get({This, hudGraphicsPosition}), '$class'})):getAnchor(get({This, hudGraphicsPosition}))).
+  def jm_getHudGraphicsPosition(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :hudGraphicsPosition)})
+    end)
+  end
 
-paintSSOO(This, Graphics, String, String2, Offset, Offset2) when (is_list(String) orelse String =:= undefined), (is_list(String2) orelse String2 =:= undefined), is_integer(Offset), is_integer(Offset2) ->
-        (get({get({This, myFontProcessor}), '$class'})):process(get({This, myFontProcessor}), Graphics),
-        (get({Graphics, '$class'})):setColor(Graphics, (get({This, '$class'})):getColor(This)),
-        (get({Graphics, '$class'})):drawString(Graphics, String, (get({This, x}) + Offset), (get({This, '$class'})):getY(This), (get({get({This, hudGraphicsPosition}), '$class'})):getAnchor(get({This, hudGraphicsPosition}))),
-        (get({Graphics, '$class'})):drawString(Graphics, String2, (get({This, x}) + Offset2), (get({This, '$class'})):getY(This), (get({get({This, hudGraphicsPosition}), '$class'})):getAnchor(get({This, hudGraphicsPosition}))).
 
-paintDXY(This, Graphics, CharArray, Offset, Len, CharArray2, Offset2, Len2, XOffset, XOffset2) when (is_tuple(CharArray) orelse CharArray =:= undefined), is_integer(Offset), is_integer(Len), (is_tuple(CharArray2) orelse CharArray2 =:= undefined), is_integer(Offset2), is_integer(Len2), is_integer(XOffset), is_integer(XOffset2) ->
-        (get({get({This, myFontProcessor}), '$class'})):process(get({This, myFontProcessor}), Graphics),
-        (get({get({This, basicSetColorUtil}), '$class'})):setBasicColorP(get({This, basicSetColorUtil}), Graphics, (get({This, '$class'})):getBasicColorP(This)),
-        Y = (get({This, '$class'})):getY(This),
-        (get({Graphics, '$class'})):drawChars(Graphics, CharArray, Offset, Len, (get({This, x}) + XOffset), Y, (get({get({This, hudGraphicsPosition}), '$class'})):getAnchor(get({This, hudGraphicsPosition}))),
-        (get({Graphics, '$class'})):drawChars(Graphics, CharArray2, Offset2, Len2, (get({This, x}) + XOffset2), Y, (get({get({This, hudGraphicsPosition}), '$class'})):getAnchor(get({This, hudGraphicsPosition}))).
+  def jm_getColor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :color)})
+    end)
+  end
 
-paintDX(This, Graphics, CharArray, Offset, Len, CharArray2, Offset2, Len2, XOffset) when (is_tuple(CharArray) orelse CharArray =:= undefined), is_integer(Offset), is_integer(Len), (is_tuple(CharArray2) orelse CharArray2 =:= undefined), is_integer(Offset2), is_integer(Len2), is_integer(XOffset) ->
-        (get({get({This, myFontProcessor}), '$class'})):process(get({This, myFontProcessor}), Graphics),
-        (get({get({This, basicSetColorUtil}), '$class'})):setBasicColorP(get({This, basicSetColorUtil}), Graphics, (get({This, '$class'})):getBasicColorP(This)),
-        Y = (get({This, '$class'})):getY(This),
-        (get({Graphics, '$class'})):drawChars(Graphics, CharArray, Offset, Len, get({This, x}), Y, (get({get({This, hudGraphicsPosition}), '$class'})):getAnchor(get({This, hudGraphicsPosition}))),
-        (get({Graphics, '$class'})):drawChars(Graphics, CharArray2, Offset2, Len2, (get({This, x}) + XOffset), Y, (get({get({This, hudGraphicsPosition}), '$class'})):getAnchor(get({This, hudGraphicsPosition}))).
 
-paintOffsetAndLength(This, Graphics, CharArray, Offset, Len) when (is_tuple(CharArray) orelse CharArray =:= undefined), is_integer(Offset), is_integer(Len) ->
-        (get({get({This, myFontProcessor}), '$class'})):process(get({This, myFontProcessor}), Graphics),
-        (get({get({This, basicSetColorUtil}), '$class'})):setBasicColorP(get({This, basicSetColorUtil}), Graphics, (get({This, '$class'})):getBasicColorP(This)),
-        Y = (get({This, '$class'})):getY(This),
-        (get({Graphics, '$class'})):drawChars(Graphics, CharArray, Offset, Len, get({This, x}), Y, (get({get({This, hudGraphicsPosition}), '$class'})):getAnchor(get({This, hudGraphicsPosition}))).
+  def jm_getX(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :x)})
+    end)
+  end
 
-paintString(This, Graphics, String) when (is_list(String) orelse String =:= undefined) ->
-        (get({get({This, myFontProcessor}), '$class'})):process(get({This, myFontProcessor}), Graphics),
-        (get({get({This, basicSetColorUtil}), '$class'})):setBasicColorP(get({This, basicSetColorUtil}), Graphics, (get({This, '$class'})):getBasicColorP(This)),
-        Y = ((get({This, '$class'})):getY(This) + get({This, offsetY})),
-        (get({Graphics, '$class'})):drawString(Graphics, String, get({This, x}), Y, (get({get({This, hudGraphicsPosition}), '$class'})):getAnchor(get({This, hudGraphicsPosition}))).
+
+  def jm_setX(this, p_x) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+        JR.put(this, :x, JR.lget(f, :x))
+    end)
+  end
+
+
+  def jm_setBasicColorP(this, p_basicColor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicColor, p_basicColor)
+        JR.put(this, :basicColor, JR.lget(f, :basicColor))
+    end)
+  end
+
+
+  def jm_getBasicColorP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :basicColor)})
+    end)
+  end
+
+
+  def jm_setY(this, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :y, p_y)
+        JR.put(this, :y, JR.lget(f, :y))
+    end)
+  end
+
+
+  def jm_getY(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :y)})
+    end)
+  end
+
+
+  def jm_paintSSO(this, p_graphics, p_string, p_string2, p_offset) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :string, p_string)
+      JR.lset(f, :string2, p_string2)
+      JR.lset(f, :offset, p_offset)
+        JR.call(JR.get(this, :myFontProcessor), :jm_process, [JR.lget(f, :graphics)])
+        JR.call(JR.get(this, :basicSetColorUtil), :jm_setBasicColorP, [JR.lget(f, :graphics), JR.call(this, :jm_getBasicColorP, [])])
+        JR.call(JR.lget(f, :graphics), :jm_drawString, [JR.lget(f, :string), JR.get(this, :x), JR.call(this, :jm_getY, []), JR.call(JR.get(this, :hudGraphicsPosition), :jm_getAnchor, [])])
+        JR.call(JR.lget(f, :graphics), :jm_drawString, [JR.lget(f, :string2), JR.int32(JR.get(this, :x) + JR.lget(f, :offset)), JR.call(this, :jm_getY, []), JR.call(JR.get(this, :hudGraphicsPosition), :jm_getAnchor, [])])
+    end)
+  end
+
+
+  def jm_paintSSOO(this, p_graphics, p_string, p_string2, p_offset, p_offset2) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :string, p_string)
+      JR.lset(f, :string2, p_string2)
+      JR.lset(f, :offset, p_offset)
+      JR.lset(f, :offset2, p_offset2)
+        JR.call(JR.get(this, :myFontProcessor), :jm_process, [JR.lget(f, :graphics)])
+        JR.call(JR.lget(f, :graphics), :jm_setColor, [JR.call(this, :jm_getColor, [])])
+        JR.call(JR.lget(f, :graphics), :jm_drawString, [JR.lget(f, :string), JR.int32(JR.get(this, :x) + JR.lget(f, :offset)), JR.call(this, :jm_getY, []), JR.call(JR.get(this, :hudGraphicsPosition), :jm_getAnchor, [])])
+        JR.call(JR.lget(f, :graphics), :jm_drawString, [JR.lget(f, :string2), JR.int32(JR.get(this, :x) + JR.lget(f, :offset2)), JR.call(this, :jm_getY, []), JR.call(JR.get(this, :hudGraphicsPosition), :jm_getAnchor, [])])
+    end)
+  end
+
+
+  def jm_paintDXY(this, p_graphics, p_charArray, p_offset, p_len, p_charArray2, p_offset2, p_len2, p_xOffset, p_xOffset2) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :charArray, p_charArray)
+      JR.lset(f, :offset, p_offset)
+      JR.lset(f, :len, p_len)
+      JR.lset(f, :charArray2, p_charArray2)
+      JR.lset(f, :offset2, p_offset2)
+      JR.lset(f, :len2, p_len2)
+      JR.lset(f, :xOffset, p_xOffset)
+      JR.lset(f, :xOffset2, p_xOffset2)
+        JR.call(JR.get(this, :myFontProcessor), :jm_process, [JR.lget(f, :graphics)])
+        JR.call(JR.get(this, :basicSetColorUtil), :jm_setBasicColorP, [JR.lget(f, :graphics), JR.call(this, :jm_getBasicColorP, [])])
+        JR.lset(f, :y, JR.call(this, :jm_getY, []))
+        JR.call(JR.lget(f, :graphics), :jm_drawChars, [JR.lget(f, :charArray), JR.lget(f, :offset), JR.lget(f, :len), JR.int32(JR.get(this, :x) + JR.lget(f, :xOffset)), JR.lget(f, :y), JR.call(JR.get(this, :hudGraphicsPosition), :jm_getAnchor, [])])
+        JR.call(JR.lget(f, :graphics), :jm_drawChars, [JR.lget(f, :charArray2), JR.lget(f, :offset2), JR.lget(f, :len2), JR.int32(JR.get(this, :x) + JR.lget(f, :xOffset2)), JR.lget(f, :y), JR.call(JR.get(this, :hudGraphicsPosition), :jm_getAnchor, [])])
+    end)
+  end
+
+
+  def jm_paintDX(this, p_graphics, p_charArray, p_offset, p_len, p_charArray2, p_offset2, p_len2, p_xOffset) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :charArray, p_charArray)
+      JR.lset(f, :offset, p_offset)
+      JR.lset(f, :len, p_len)
+      JR.lset(f, :charArray2, p_charArray2)
+      JR.lset(f, :offset2, p_offset2)
+      JR.lset(f, :len2, p_len2)
+      JR.lset(f, :xOffset, p_xOffset)
+        JR.call(JR.get(this, :myFontProcessor), :jm_process, [JR.lget(f, :graphics)])
+        JR.call(JR.get(this, :basicSetColorUtil), :jm_setBasicColorP, [JR.lget(f, :graphics), JR.call(this, :jm_getBasicColorP, [])])
+        JR.lset(f, :y, JR.call(this, :jm_getY, []))
+        JR.call(JR.lget(f, :graphics), :jm_drawChars, [JR.lget(f, :charArray), JR.lget(f, :offset), JR.lget(f, :len), JR.get(this, :x), JR.lget(f, :y), JR.call(JR.get(this, :hudGraphicsPosition), :jm_getAnchor, [])])
+        JR.call(JR.lget(f, :graphics), :jm_drawChars, [JR.lget(f, :charArray2), JR.lget(f, :offset2), JR.lget(f, :len2), JR.int32(JR.get(this, :x) + JR.lget(f, :xOffset)), JR.lget(f, :y), JR.call(JR.get(this, :hudGraphicsPosition), :jm_getAnchor, [])])
+    end)
+  end
+
+
+  def jm_paintOffsetAndLength(this, p_graphics, p_charArray, p_offset, p_len) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :charArray, p_charArray)
+      JR.lset(f, :offset, p_offset)
+      JR.lset(f, :len, p_len)
+        JR.call(JR.get(this, :myFontProcessor), :jm_process, [JR.lget(f, :graphics)])
+        JR.call(JR.get(this, :basicSetColorUtil), :jm_setBasicColorP, [JR.lget(f, :graphics), JR.call(this, :jm_getBasicColorP, [])])
+        JR.lset(f, :y, JR.call(this, :jm_getY, []))
+        JR.call(JR.lget(f, :graphics), :jm_drawChars, [JR.lget(f, :charArray), JR.lget(f, :offset), JR.lget(f, :len), JR.get(this, :x), JR.lget(f, :y), JR.call(JR.get(this, :hudGraphicsPosition), :jm_getAnchor, [])])
+    end)
+  end
+
+
+  def jm_paintString(this, p_graphics, p_string) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :string, p_string)
+        JR.call(JR.get(this, :myFontProcessor), :jm_process, [JR.lget(f, :graphics)])
+        JR.call(JR.get(this, :basicSetColorUtil), :jm_setBasicColorP, [JR.lget(f, :graphics), JR.call(this, :jm_getBasicColorP, [])])
+        JR.lset(f, :y, JR.int32(JR.call(this, :jm_getY, []) + JR.get(this, :offsetY)))
+        JR.call(JR.lget(f, :graphics), :jm_drawString, [JR.lget(f, :string), JR.get(this, :x), JR.lget(f, :y), JR.call(JR.get(this, :hudGraphicsPosition), :jm_getAnchor, [])])
+    end)
+  end
+end
+
 

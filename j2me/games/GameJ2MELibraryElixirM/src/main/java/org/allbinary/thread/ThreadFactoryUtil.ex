@@ -1,81 +1,111 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.thread
-% import org.allbinary.J2MEUtil
-% import org.allbinary.canvas.RunnableCanvas
-% import org.allbinary.game.displayable.canvas.AllBinaryGameCanvas
-% import org.allbinary.game.displayable.canvas.DemoCanvas
-% import org.allbinary.game.displayable.canvas.GameCanvasRunnableInterface
-% import org.allbinary.game.displayable.canvas.RunnableCanvasSingleThreadStartRunnable
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.communication.log.PreLogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.thread
 
--module('ThreadFactoryUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule ThreadFactoryUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> ThreadFactoryUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'ThreadFactoryUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'ThreadFactoryUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, ThreadFactoryUtil.jstatic_instance()})
+    end)
+  end
 
-getInstanceGameCanvasRunnable(This, Runnable) ->
-        (get({This, '$class'})):getInstanceType(This, Runnable, (get({Runnable, '$class'})):getType(Runnable)).
 
-getInstanceForRunnable(This, Runnable) ->
-        (get({This, '$class'})):getInstanceType(This, Runnable, (get({Runnable, '$class'})):getType(Runnable)).
+  def jm_getInstanceGameCanvasRunnable(this, p_runnable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :runnable, p_runnable)
+        throw({:jreturn, JR.call(this, :jm_getInstanceType, [JR.lget(f, :runnable), JR.call(JR.lget(f, :runnable), :jm_getType, [])])})
+    end)
+  end
 
-getInstanceType(This, Runnable, Type) when is_integer(Type) ->
-        CommonStrings = 'CommonStrings':getInstance(),
-        case 'J2MEUtil':isHTML() of
-            true ->
-            case ((Type =:= get({'DemoCanvas', 'TYPE'})) orelse (Type =:= get({'AllBinaryGameCanvas', 'TYPE'}))) of
-                true ->
-                DemoGameSingleThreadStartRunnable = 'RunnableCanvasSingleThreadStartRunnable':new(Runnable),
-                'PreLogUtil':put((fun(Target_N66720) -> (get({Target_N66720, '$class'})):toString(Target_N66720) end)((fun(Target_N66727) -> (get({Target_N66727, '$class'})):append(Target_N66727, (fun(Target_N66763) -> (get({Target_N66763, '$class'})):toString(Target_N66763, Runnable) end)('StringUtil':getInstance())) end)((fun(Target_N66734) -> (get({Target_N66734, '$class'})):append(Target_N66734, "Using Pseudo Thread for DemoCanvas/AllBinaryGameCanvas under PlayN/HTML5: ") end)('StringMaker':new()))), This, get({CommonStrings, 'CONSTRUCTOR'})),
-                put({local, primaryThreadPool}, 'PrimaryThreadPool':getInstance()),
-                (get({get({local, primaryThreadPool}), '$class'})):runTask(get({local, primaryThreadPool}), DemoGameSingleThreadStartRunnable);
-                false ->
-                'PreLogUtil':put((fun(Target_N66443) -> (get({Target_N66443, '$class'})):toString(Target_N66443) end)((fun(Target_N66450) -> (get({Target_N66450, '$class'})):append(Target_N66450, (fun(Target_N66486) -> (get({Target_N66486, '$class'})):toString(Target_N66486, Runnable) end)('StringUtil':getInstance())) end)((fun(Target_N66457) -> (get({Target_N66457, '$class'})):append(Target_N66457, "Using Pseudo Thread for Runnable under PlayN/HTML5: ") end)('StringMaker':new()))), This, get({CommonStrings, 'CONSTRUCTOR'})),
-                put({local, primaryThreadPool}, 'PrimaryThreadPool':getInstance()),
-                (get({get({local, primaryThreadPool}), '$class'})):runTask(get({local, primaryThreadPool}), Runnable)
-            end;
-            false -> ok
-        end,
-        Thread = 'Thread':new(Runnable, (get({Runnable, '$class'})):toString(Runnable)),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({Thread, '$class'})):toString(Thread), This, get({CommonStrings, 'CONSTRUCTOR'})),
-        Thread.
 
-start(This, Thread) ->
-        (get({Thread, '$class'})):start(Thread).
+  def jm_getInstanceForRunnable(this, p_runnable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :runnable, p_runnable)
+        throw({:jreturn, JR.call(this, :jm_getInstanceType, [JR.lget(f, :runnable), JR.call(JR.lget(f, :runnable), :jm_getType, [])])})
+    end)
+  end
+
+
+  def jm_getInstanceType(this, p_runnable, p_type) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :runnable, p_runnable)
+      JR.lset(f, :type, p_type)
+        JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+        if J2MEUtil.jm_isHTML() do
+            if ((JR.lget(f, :type) == DemoCanvas.jstatic_TYPE()) || (JR.lget(f, :type) == AllBinaryGameCanvas.jstatic_TYPE())) do
+                JR.lset(f, :demoGameSingleThreadStartRunnable, RunnableCanvasSingleThreadStartRunnable.jnew(JR.lget(f, :runnable)))
+                PreLogUtil.jm_put(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["Using Pseudo Thread for DemoCanvas/AllBinaryGameCanvas under PlayN/HTML5: "]), :jm_append, [JR.call(StringUtil.jm_getInstance(), :jm_toString, [JR.lget(f, :runnable)])]), :jm_toString, []), this, JR.get(JR.lget(f, :commonStrings), :CONSTRUCTOR))
+                JR.lset(f, :primaryThreadPool, PrimaryThreadPool.jm_getInstance())
+                JR.call(JR.lget(f, :primaryThreadPool), :jm_runTask, [JR.lget(f, :demoGameSingleThreadStartRunnable)])
+            else
+                PreLogUtil.jm_put(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["Using Pseudo Thread for Runnable under PlayN/HTML5: "]), :jm_append, [JR.call(StringUtil.jm_getInstance(), :jm_toString, [JR.lget(f, :runnable)])]), :jm_toString, []), this, JR.get(JR.lget(f, :commonStrings), :CONSTRUCTOR))
+                JR.lset(f, :primaryThreadPool, PrimaryThreadPool.jm_getInstance())
+                JR.call(JR.lget(f, :primaryThreadPool), :jm_runTask, [JR.lget(f, :runnable)])
+            end
+        end
+        JR.lset(f, :thread, J.Thread.jnew(JR.lget(f, :runnable), JR.call(JR.lget(f, :runnable), :jm_toString, [])))
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :thread), :jm_toString, []), this, JR.get(JR.lget(f, :commonStrings), :CONSTRUCTOR)])
+        throw({:jreturn, JR.lget(f, :thread)})
+    end)
+  end
+
+
+  def jm_start(this, p_thread) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :thread, p_thread)
+        JR.call(JR.lget(f, :thread), :jm_start, [])
+    end)
+  end
+end
+
 

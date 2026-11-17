@@ -1,104 +1,129 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.io
-% import java.io.BufferedWriter
-% import java.io.FileWriter
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.io.file.AbFile
-% import org.allbinary.logic.io.file.AbFileNativeUtil
-% import org.allbinary.logic.io.path.AbPathData
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonLabels
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
--module('BufferedWriterUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule BufferedWriterUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> BufferedWriterUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'BufferedWriterUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :commonLabels, nil)
+    JR.put(this, :REMOVING_OLD, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        JR.put(this, :commonLabels, CommonLabels.jm_getInstance())
+        JR.put(this, :REMOVING_OLD, "Remove old for overwriting: ")
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, commonLabels}, 'CommonLabels':getInstance()),
-    put({This, 'REMOVING_OLD'}, "Remove old for overwriting: "),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'BufferedWriterUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, BufferedWriterUtil.jstatic_instance()})
+    end)
+  end
 
-% throws Exception
-overwrite(This, Path, Data) when (is_list(Path) orelse Path =:= undefined), (is_list(Data) orelse Data =:= undefined) ->
-        AbFile = 'AbFile':createAbFile(Path),
-        case (get({AbFile, '$class'})):exists(AbFile) of
-            true ->
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), lists:concat([get({This, 'REMOVING_OLD'}), Path]), This, get({get({This, commonStrings}), 'CREATE'})),
-            (get({AbFile, '$class'})):delete(AbFile);
-            false ->
-            Name = (fun(Target_N66250) -> (get({Target_N66250, '$class'})):removeNameFromPath(Target_N66250, Path) end)('AbPathData':getInstance()),
-            AbFileDirectory = 'AbFile':createAbFile(Name),
-            case (get({AbFileDirectory, '$class'})):exists(AbFileDirectory) of
-                true ->
-                ok;
-                false ->
-                StringBuilder = 'StringMaker':new(),
-                (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N66459) -> (get({Target_N66459, '$class'})):toString(Target_N66459) end)((fun(Target_N66466) -> (get({Target_N66466, '$class'})):append(Target_N66466, Name) end)((fun(Target_N66473) -> (get({Target_N66473, '$class'})):append(Target_N66473, get({get({This, commonLabels}), 'COLON_SEP'})) end)((get({StringBuilder, '$class'})):append(StringBuilder, get({get({This, commonStrings}), 'CREATE'}))))), This, get({get({This, commonStrings}), 'CREATE'})),
-                Result = (get({AbFileDirectory, '$class'})):mkdirs(AbFileDirectory),
-                (get({StringBuilder, '$class'})):delete(StringBuilder, 0, (get({StringBuilder, '$class'})):length(StringBuilder)),
-                (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N66684) -> (get({Target_N66684, '$class'})):toString(Target_N66684) end)((fun(Target_N66691) -> (get({Target_N66691, '$class'})):appendboolean(Target_N66691, Result) end)((get({StringBuilder, '$class'})):append(StringBuilder, get({get({This, commonLabels}), 'RESULT_'})))), This, get({get({This, commonStrings}), 'CREATE'}))
+
+  def jm_overwrite(this, p_path, p_data) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :path, p_path)
+      JR.lset(f, :data, p_data)
+        JR.lset(f, :abFile, AbFile.jm_createAbFile(JR.lget(f, :path)))
+        if JR.call(JR.lget(f, :abFile), :jm_exists, []) do
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(this, :REMOVING_OLD) <> JR.lget(f, :path), this, JR.get(JR.get(this, :commonStrings), :CREATE)])
+            JR.call(JR.lget(f, :abFile), :jm_delete, [])
+        else
+            JR.lset(f, :name, JR.call(AbPathData.jm_getInstance(), :jm_removeNameFromPath, [JR.lget(f, :path)]))
+            JR.lset(f, :abFileDirectory, AbFile.jm_createAbFile(JR.lget(f, :name)))
+            if JR.call(JR.lget(f, :abFileDirectory), :jm_exists, []) do
+                nil
+            else
+                JR.lset(f, :stringBuilder, StringMaker.jnew())
+                JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(JR.call(JR.lget(f, :stringBuilder), :jm_append, [JR.get(JR.get(this, :commonStrings), :CREATE)]), :jm_append, [JR.get(JR.get(this, :commonLabels), :COLON_SEP)]), :jm_append, [JR.lget(f, :name)]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :CREATE)])
+                JR.lset(f, :result, JR.call(JR.lget(f, :abFileDirectory), :jm_mkdirs, []))
+                JR.call(JR.lget(f, :stringBuilder), :jm_delete, [0, JR.call(JR.lget(f, :stringBuilder), :jm_length, [])])
+                JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(JR.lget(f, :stringBuilder), :jm_append, [JR.get(JR.get(this, :commonLabels), :RESULT_)]), :jm_appendboolean, [JR.lget(f, :result)]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :CREATE)])
             end
-        end,
-        (get({This, '$class'})):write(This, AbFile, Data);
-% throws Exception
-overwrite(This, AbFile, Data) when (is_list(Data) orelse Data =:= undefined) ->
-        case (get({AbFile, '$class'})):exists(AbFile) of
-            true ->
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), lists:concat([get({This, 'REMOVING_OLD'}), (get({AbFile, '$class'})):getPath(AbFile)]), This, get({get({This, commonStrings}), 'CREATE'})),
-            (get({AbFile, '$class'})):delete(AbFile);
-            false ->
-            Name = (fun(Target_N67045) -> (get({Target_N67045, '$class'})):removeNameFromPath(Target_N67045, (get({AbFile, '$class'})):getAbsolutePath(AbFile)) end)('AbPathData':getInstance()),
-            AbFileDirectory = 'AbFile':createAbFile(Name),
-            case (get({AbFileDirectory, '$class'})):exists(AbFileDirectory) of
-                true ->
-                ok;
-                false ->
-                StringBuilder = 'StringMaker':new(),
-                (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N67262) -> (get({Target_N67262, '$class'})):toString(Target_N67262) end)((fun(Target_N67269) -> (get({Target_N67269, '$class'})):append(Target_N67269, Name) end)((fun(Target_N67276) -> (get({Target_N67276, '$class'})):append(Target_N67276, get({get({This, commonLabels}), 'COLON_SEP'})) end)((get({StringBuilder, '$class'})):append(StringBuilder, get({get({This, commonStrings}), 'CREATE'}))))), This, get({get({This, commonStrings}), 'CREATE'})),
-                Result = (get({AbFileDirectory, '$class'})):mkdirs(AbFileDirectory),
-                (get({StringBuilder, '$class'})):delete(StringBuilder, 0, (get({StringBuilder, '$class'})):length(StringBuilder)),
-                (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N67487) -> (get({Target_N67487, '$class'})):toString(Target_N67487) end)((fun(Target_N67494) -> (get({Target_N67494, '$class'})):appendboolean(Target_N67494, Result) end)((get({StringBuilder, '$class'})):append(StringBuilder, get({get({This, commonLabels}), 'RESULT_'})))), This, get({get({This, commonStrings}), 'CREATE'}))
+        end
+        JR.call(this, :jm_write, [JR.lget(f, :abFile), JR.lget(f, :data)])
+    end)
+  end
+
+
+  def jm_overwrite(this, p_abFile, p_data) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abFile, p_abFile)
+      JR.lset(f, :data, p_data)
+        if JR.call(JR.lget(f, :abFile), :jm_exists, []) do
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(this, :REMOVING_OLD) <> JR.str(JR.call(JR.lget(f, :abFile), :jm_getPath, [])), this, JR.get(JR.get(this, :commonStrings), :CREATE)])
+            JR.call(JR.lget(f, :abFile), :jm_delete, [])
+        else
+            JR.lset(f, :name, JR.call(AbPathData.jm_getInstance(), :jm_removeNameFromPath, [JR.call(JR.lget(f, :abFile), :jm_getAbsolutePath, [])]))
+            JR.lset(f, :abFileDirectory, AbFile.jm_createAbFile(JR.lget(f, :name)))
+            if JR.call(JR.lget(f, :abFileDirectory), :jm_exists, []) do
+                nil
+            else
+                JR.lset(f, :stringBuilder, StringMaker.jnew())
+                JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(JR.call(JR.lget(f, :stringBuilder), :jm_append, [JR.get(JR.get(this, :commonStrings), :CREATE)]), :jm_append, [JR.get(JR.get(this, :commonLabels), :COLON_SEP)]), :jm_append, [JR.lget(f, :name)]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :CREATE)])
+                JR.lset(f, :result, JR.call(JR.lget(f, :abFileDirectory), :jm_mkdirs, []))
+                JR.call(JR.lget(f, :stringBuilder), :jm_delete, [0, JR.call(JR.lget(f, :stringBuilder), :jm_length, [])])
+                JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(JR.lget(f, :stringBuilder), :jm_append, [JR.get(JR.get(this, :commonLabels), :RESULT_)]), :jm_appendboolean, [JR.lget(f, :result)]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :CREATE)])
             end
-        end,
-        (get({This, '$class'})):write(This, AbFile, Data).
+        end
+        JR.call(this, :jm_write, [JR.lget(f, :abFile), JR.lget(f, :data)])
+    end)
+  end
 
 
-% throws Exception
-write(This, AbFile, Data) when (is_list(Data) orelse Data =:= undefined) ->
-        FileOut = 'BufferedWriter':new('FileWriter':new('AbFileNativeUtil':get(AbFile))),
-        (get({FileOut, '$class'})):write(FileOut, Data, 0, string:length(Data)),
-        (get({FileOut, '$class'})):newLine(FileOut),
-        (get({FileOut, '$class'})):flush(FileOut).
+  def jm_write(this, p_abFile, p_data) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abFile, p_abFile)
+      JR.lset(f, :data, p_data)
+        JR.lset(f, :fileOut, BufferedWriter.jnew(FileWriter.jnew(AbFileNativeUtil.jm_get(JR.lget(f, :abFile)))))
+        JR.call(JR.lget(f, :fileOut), :jm_write, [JR.lget(f, :data), 0, byte_size(JR.lget(f, :data))])
+        JR.call(JR.lget(f, :fileOut), :jm_newLine, [])
+        JR.call(JR.lget(f, :fileOut), :jm_flush, [])
+    end)
+  end
+end
+
 

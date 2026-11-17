@@ -1,36 +1,50 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2025 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.opengles.shader
-% import org.allbinary.graphics.opengles.NullOpenGLProcessorFactory
-% import org.allbinary.graphics.opengles.OpenGLProcessor
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2025 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles.shader
 
--module('PlatformShaderComposite').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule PlatformShaderComposite do
+  def jsuper(), do: ShaderComposite
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ShaderComposite', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
 
+  def jinit(this, p_requiresOpenGLVersion, p_shaderArray, p_compositeShaderUpdater, p_shaderInitializer, p_modelViewProjection, p_colorOpenGLProcessor, p_vertexOpenGLProcessor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :requiresOpenGLVersion, p_requiresOpenGLVersion)
+      JR.lset(f, :shaderArray, p_shaderArray)
+      JR.lset(f, :compositeShaderUpdater, p_compositeShaderUpdater)
+      JR.lset(f, :shaderInitializer, p_shaderInitializer)
+      JR.lset(f, :modelViewProjection, p_modelViewProjection)
+      JR.lset(f, :colorOpenGLProcessor, p_colorOpenGLProcessor)
+      JR.lset(f, :vertexOpenGLProcessor, p_vertexOpenGLProcessor)
+        ShaderComposite.jinit(this, JR.lget(f, :requiresOpenGLVersion), JR.lget(f, :shaderArray), JR.lget(f, :compositeShaderUpdater), JR.lget(f, :shaderInitializer), JR.lget(f, :modelViewProjection), JR.lget(f, :colorOpenGLProcessor), JR.lget(f, :vertexOpenGLProcessor), NullOpenGLProcessorFactory.jm_getInstance())
+        PlatformShaderComposite.jinitfields(this)
+    end)
+  end
 
-new(RequiresOpenGLVersion, ShaderArray, CompositeShaderUpdater, ShaderInitializer, ModelViewProjection, ColorOpenGLProcessor, VertexOpenGLProcessor) when (is_list(RequiresOpenGLVersion) orelse RequiresOpenGLVersion =:= undefined), (is_tuple(ShaderArray) orelse ShaderArray =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, RequiresOpenGLVersion, ShaderArray, CompositeShaderUpdater, ShaderInitializer, ModelViewProjection, ColorOpenGLProcessor, VertexOpenGLProcessor),
-    This.
+  def jnew(p_requiresOpenGLVersion, p_shaderArray, p_compositeShaderUpdater, p_shaderInitializer, p_modelViewProjection, p_colorOpenGLProcessor, p_vertexOpenGLProcessor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_requiresOpenGLVersion, p_shaderArray, p_compositeShaderUpdater, p_shaderInitializer, p_modelViewProjection, p_colorOpenGLProcessor, p_vertexOpenGLProcessor)
+    this
+  end
+end
 
-'$init'(This, RequiresOpenGLVersion, ShaderArray, CompositeShaderUpdater, ShaderInitializer, ModelViewProjection, ColorOpenGLProcessor, VertexOpenGLProcessor) when (is_list(RequiresOpenGLVersion) orelse RequiresOpenGLVersion =:= undefined), (is_tuple(ShaderArray) orelse ShaderArray =:= undefined) ->
-        'ShaderComposite':'$init'(This, RequiresOpenGLVersion, ShaderArray, CompositeShaderUpdater, ShaderInitializer, ModelViewProjection, ColorOpenGLProcessor, VertexOpenGLProcessor, 'NullOpenGLProcessorFactory':getInstance()).
 

@@ -1,61 +1,122 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion.button
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
--module('CurrentlyPressedTouchButtonSingleton').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule CurrentlyPressedTouchButtonSingleton do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> CurrentlyPressedTouchButtonSingleton.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'CurrentlyPressedTouchButtonSingleton':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :list, nil)
+        JR.put(this, :list, BasicArrayListD.jnew())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, list}, 'BasicArrayListD':new()),
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, CurrentlyPressedTouchButtonSingleton.jstatic_instance()})
+    end)
+  end
 
 
-getInstance() ->
-        get({'CurrentlyPressedTouchButtonSingleton', instance}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
 
-size(This) ->
-        (get({get({This, list}), '$class'})):size(get({This, list})).
+  def jm_size(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.get(this, :list), :jm_size, [])})
+    end)
+  end
 
-removeAt(This, Index) when is_integer(Index) ->
-        (get({get({This, list}), '$class'})):removeAt(get({This, list}), Index).
 
-remove(This, TouchButtonInput) ->
-        (get({get({This, list}), '$class'})):remove(get({This, list}), TouchButtonInput).
+  def jm_removeAt(this, p_index) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :index, p_index)
+        throw({:jreturn, JR.call(JR.get(this, :list), :jm_removeAt, [JR.lget(f, :index)])})
+    end)
+  end
 
-get(This, Index) when is_integer(Index) ->
-        array:get(Index, get({get({This, list}), objectArray})).
 
-contains(This, TouchButtonInput) ->
-        (get({get({This, list}), '$class'})):contains(get({This, list}), TouchButtonInput).
+  def jm_remove(this, p_touchButtonInput) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :touchButtonInput, p_touchButtonInput)
+        throw({:jreturn, JR.call(JR.get(this, :list), :jm_remove, [JR.lget(f, :touchButtonInput)])})
+    end)
+  end
 
-add(This, TouchButtonInput) ->
-        (get({get({This, list}), '$class'})):add(get({This, list}), TouchButtonInput).
+
+  def jm_get(this, p_index) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :index, p_index)
+        throw({:jreturn, JR.aget(JR.get(JR.get(this, :list), :objectArray), JR.lget(f, :index))})
+    end)
+  end
+
+
+  def jm_contains(this, p_touchButtonInput) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :touchButtonInput, p_touchButtonInput)
+        throw({:jreturn, JR.call(JR.get(this, :list), :jm_contains, [JR.lget(f, :touchButtonInput)])})
+    end)
+  end
+
+
+  def jm_add(this, p_touchButtonInput) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :touchButtonInput, p_touchButtonInput)
+        JR.call(JR.get(this, :list), :jm_add, [JR.lget(f, :touchButtonInput)])
+    end)
+  end
+end
+
 

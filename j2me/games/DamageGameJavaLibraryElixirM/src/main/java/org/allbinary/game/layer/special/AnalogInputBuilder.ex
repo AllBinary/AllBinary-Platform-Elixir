@@ -1,57 +1,83 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer.special
-% import javax.microedition.lcdui.Canvas
-% import org.allbinary.game.input.GameInputProcessor
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer.special
 
--module('AnalogInputBuilder').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule AnalogInputBuilder do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> AnalogInputBuilder.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'AnalogInputBuilder':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'AnalogInputBuilder', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, AnalogInputBuilder.jstatic_instance()})
+    end)
+  end
 
-disable(This, InputProcessorArray, CollidableDestroyableDamageableLayer) when (is_tuple(InputProcessorArray) orelse InputProcessorArray =:= undefined) ->
-        array:set(get({'Canvas', 'UP'}), 'SpecialUpGameInputProcessor':new(CollidableDestroyableDamageableLayer), InputProcessorArray),
-        array:set(get({'Canvas', 'DOWN'}), 'SpecialDownGameInputProcessor':new(CollidableDestroyableDamageableLayer), InputProcessorArray),
-        array:set(get({'Canvas', 'RIGHT'}), 'SpecialRightGameInputProcessor':new(CollidableDestroyableDamageableLayer), InputProcessorArray),
-        array:set(get({'Canvas', 'LEFT'}), 'SpecialLeftGameInputProcessor':new(CollidableDestroyableDamageableLayer), InputProcessorArray),
-        array:set(get({'Canvas', 'KEY_NUM0'}), 'Special1GameInputProcessor':new(CollidableDestroyableDamageableLayer), InputProcessorArray),
-        array:set(get({'Canvas', 'KEY_NUM5'}), 'Special3GameInputProcessor':new(CollidableDestroyableDamageableLayer), InputProcessorArray).
 
-enable(This, InputProcessorArray, CollidableDestroyableDamageableLayer) when (is_tuple(InputProcessorArray) orelse InputProcessorArray =:= undefined) ->
-        array:set(get({'Canvas', 'UP'}), 'SpecialAnalogUpGameInputProcessor':new(CollidableDestroyableDamageableLayer), InputProcessorArray),
-        array:set(get({'Canvas', 'DOWN'}), 'SpecialAnalogDownGameInputProcessor':new(CollidableDestroyableDamageableLayer), InputProcessorArray),
-        array:set(get({'Canvas', 'RIGHT'}), 'SpecialAnalogRightGameInputProcessor':new(CollidableDestroyableDamageableLayer), InputProcessorArray),
-        array:set(get({'Canvas', 'LEFT'}), 'SpecialAnalogLeftGameInputProcessor':new(CollidableDestroyableDamageableLayer), InputProcessorArray),
-        array:set(get({'Canvas', 'KEY_NUM0'}), 'SpecialAnalogLeftTriggerGameInputProcessor':new(CollidableDestroyableDamageableLayer), InputProcessorArray),
-        array:set(get({'Canvas', 'KEY_NUM5'}), 'SpecialAnalogRightTriggerGameInputProcessor':new(CollidableDestroyableDamageableLayer), InputProcessorArray).
+  def jm_disable(this, p_inputProcessorArray, p_collidableDestroyableDamageableLayer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :inputProcessorArray, p_inputProcessorArray)
+      JR.lset(f, :collidableDestroyableDamageableLayer, p_collidableDestroyableDamageableLayer)
+        JR.aset(JR.lget(f, :inputProcessorArray), Canvas.jstatic_UP(), SpecialUpGameInputProcessor.jnew(JR.lget(f, :collidableDestroyableDamageableLayer)))
+        JR.aset(JR.lget(f, :inputProcessorArray), Canvas.jstatic_DOWN(), SpecialDownGameInputProcessor.jnew(JR.lget(f, :collidableDestroyableDamageableLayer)))
+        JR.aset(JR.lget(f, :inputProcessorArray), Canvas.jstatic_RIGHT(), SpecialRightGameInputProcessor.jnew(JR.lget(f, :collidableDestroyableDamageableLayer)))
+        JR.aset(JR.lget(f, :inputProcessorArray), Canvas.jstatic_LEFT(), SpecialLeftGameInputProcessor.jnew(JR.lget(f, :collidableDestroyableDamageableLayer)))
+        JR.aset(JR.lget(f, :inputProcessorArray), Canvas.jstatic_KEY_NUM0(), Special1GameInputProcessor.jnew(JR.lget(f, :collidableDestroyableDamageableLayer)))
+        JR.aset(JR.lget(f, :inputProcessorArray), Canvas.jstatic_KEY_NUM5(), Special3GameInputProcessor.jnew(JR.lget(f, :collidableDestroyableDamageableLayer)))
+    end)
+  end
+
+
+  def jm_enable(this, p_inputProcessorArray, p_collidableDestroyableDamageableLayer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :inputProcessorArray, p_inputProcessorArray)
+      JR.lset(f, :collidableDestroyableDamageableLayer, p_collidableDestroyableDamageableLayer)
+        JR.aset(JR.lget(f, :inputProcessorArray), Canvas.jstatic_UP(), SpecialAnalogUpGameInputProcessor.jnew(JR.lget(f, :collidableDestroyableDamageableLayer)))
+        JR.aset(JR.lget(f, :inputProcessorArray), Canvas.jstatic_DOWN(), SpecialAnalogDownGameInputProcessor.jnew(JR.lget(f, :collidableDestroyableDamageableLayer)))
+        JR.aset(JR.lget(f, :inputProcessorArray), Canvas.jstatic_RIGHT(), SpecialAnalogRightGameInputProcessor.jnew(JR.lget(f, :collidableDestroyableDamageableLayer)))
+        JR.aset(JR.lget(f, :inputProcessorArray), Canvas.jstatic_LEFT(), SpecialAnalogLeftGameInputProcessor.jnew(JR.lget(f, :collidableDestroyableDamageableLayer)))
+        JR.aset(JR.lget(f, :inputProcessorArray), Canvas.jstatic_KEY_NUM0(), SpecialAnalogLeftTriggerGameInputProcessor.jnew(JR.lget(f, :collidableDestroyableDamageableLayer)))
+        JR.aset(JR.lget(f, :inputProcessorArray), Canvas.jstatic_KEY_NUM5(), SpecialAnalogRightTriggerGameInputProcessor.jnew(JR.lget(f, :collidableDestroyableDamageableLayer)))
+    end)
+  end
+end
+
 

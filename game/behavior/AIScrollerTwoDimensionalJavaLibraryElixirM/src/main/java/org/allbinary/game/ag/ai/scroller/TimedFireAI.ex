@@ -1,61 +1,68 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.ai.scroller
-% import javax.microedition.lcdui.Canvas
-% import org.allbinary.game.ai.BasicAI
-% import org.allbinary.game.input.GameInput
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.AllBinaryLayerManager
-% import org.allbinary.logic.math.SmallIntegerSingletonFactory
-% import org.allbinary.time.GameTickTimeDelayHelperFactory
-% import org.allbinary.time.TimeDelayHelper
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai.scroller
 
--module('TimedFireAI').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule TimedFireAI do
+  def jsuper(), do: BasicAI
+def jstatic_TIME(), do: JR.static_get(__MODULE__, :TIME, fn -> JR.call(SmallIntegerSingletonFactory.jm_getInstance(), :jm_getAt, [1]) end)
+  def jstatic_set_TIME(value), do: JR.static_put(__MODULE__, :TIME, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicAI', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'TIME'}, (fun(Target_N65842) -> (get({Target_N65842, '$class'})):getAt(Target_N65842, 1) end)('SmallIntegerSingletonFactory':getInstance())),
-    ok.
-
-init_fields(This) ->
-    put({This, maxFireDelayTimeHelper}, 'TimeDelayHelper':new(0)),
-    put({This, delay}, 0),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :maxFireDelayTimeHelper, nil)
+    JR.put(this, :delay, 0)
+        JR.put(this, :maxFireDelayTimeHelper, TimeDelayHelper.jnew(0))
+        
+    nil
+  end
 
 
-new(Delay, OwnerLayerInterface, GameInput) when is_integer(Delay) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Delay, OwnerLayerInterface, GameInput),
-    This.
+  def jinit(this, p_delay, p_ownerLayerInterface, p_gameInput) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :delay, p_delay)
+      JR.lset(f, :ownerLayerInterface, p_ownerLayerInterface)
+      JR.lset(f, :gameInput, p_gameInput)
+        BasicAI.jinit(this, JR.lget(f, :ownerLayerInterface), JR.lget(f, :gameInput))
+        TimedFireAI.jinitfields(this)
+        JR.put(this, :delay, JR.lget(f, :delay))
+    end)
+  end
 
-'$init'(This, Delay, OwnerLayerInterface, GameInput) when is_integer(Delay) ->
-        'BasicAI':'$init'(This, OwnerLayerInterface, GameInput),
-        init_fields(This),
-        put({This, delay}, Delay).
+  def jnew(p_delay, p_ownerLayerInterface, p_gameInput) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_delay, p_ownerLayerInterface, p_gameInput)
+    this
+  end
 
-% throws Exception
-processAI(This, AllBinaryLayerManager) ->
-        TimeFiredInterface = (get({This, '$class'})):getOwnerLayerInterface(This),
-        case ((get({get({This, maxFireDelayTimeHelper}), '$class'})):isTime(get({This, maxFireDelayTimeHelper}), get({'GameTickTimeDelayHelperFactory':getInstance(), startTime})) andalso (((get({TimeFiredInterface, '$class'})):getLastFireTime(TimeFiredInterface) + get({get({This, maxFireDelayTimeHelper}), delay})) < (get({get({This, maxFireDelayTimeHelper}), '$class'})):getStartTime(get({This, maxFireDelayTimeHelper})))) of
-            true ->
-            'BasicAI':processKeyAI(This, get({'Canvas', 'KEY_NUM1'})),
-            put({get({This, maxFireDelayTimeHelper}), delay}, get({This, delay}));
-            false -> ok
-        end.
+
+  def jm_processAI(this, p_allBinaryLayerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerManager, p_allBinaryLayerManager)
+        JR.lset(f, :timeFiredInterface, JR.call(this, :jm_getOwnerLayerInterface, []))
+        if (JR.call(JR.get(this, :maxFireDelayTimeHelper), :jm_isTime, [JR.get(GameTickTimeDelayHelperFactory.jm_getInstance(), :startTime)]) && ((JR.call(JR.lget(f, :timeFiredInterface), :jm_getLastFireTime, []) + JR.get(JR.get(this, :maxFireDelayTimeHelper), :delay)) < JR.call(JR.get(this, :maxFireDelayTimeHelper), :jm_getStartTime, []))) do
+            BasicAI.jm_processKeyAI(this, Canvas.jstatic_KEY_NUM1())
+            JR.put(JR.get(this, :maxFireDelayTimeHelper), :delay, JR.get(this, :delay))
+        end
+    end)
+  end
+end
+
 

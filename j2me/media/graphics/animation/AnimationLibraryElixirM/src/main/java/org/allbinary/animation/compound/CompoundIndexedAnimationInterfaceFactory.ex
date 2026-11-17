@@ -1,44 +1,67 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation.compound
-% import org.allbinary.animation.Animation
-% import org.allbinary.animation.AnimationBehaviorFactory
-% import org.allbinary.animation.AnimationInterfaceFactoryInterface
-% import org.allbinary.logic.communication.log.ForcedLogUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation.compound
 
--module('CompoundIndexedAnimationInterfaceFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule CompoundIndexedAnimationInterfaceFactory do
+  def jsuper(), do: CompoundAnimationInterfaceFactory
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('CompoundAnimationInterfaceFactory', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new(BasicAnimationInterfaceFactoryInterfaceArray, AnimationBehaviorFactory) when (is_tuple(BasicAnimationInterfaceFactoryInterfaceArray) orelse BasicAnimationInterfaceFactoryInterfaceArray =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, BasicAnimationInterfaceFactoryInterfaceArray, AnimationBehaviorFactory),
-    This.
+  def jinit(this, p_basicAnimationInterfaceFactoryInterfaceArray, p_animationBehaviorFactory) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicAnimationInterfaceFactoryInterfaceArray, p_basicAnimationInterfaceFactoryInterfaceArray)
+      JR.lset(f, :animationBehaviorFactory, p_animationBehaviorFactory)
+        CompoundAnimationInterfaceFactory.jinit(this, JR.lget(f, :basicAnimationInterfaceFactoryInterfaceArray), JR.lget(f, :animationBehaviorFactory))
+        CompoundIndexedAnimationInterfaceFactory.jinitfields(this)
+    end)
+  end
 
-'$init'(This, BasicAnimationInterfaceFactoryInterfaceArray, AnimationBehaviorFactory) when (is_tuple(BasicAnimationInterfaceFactoryInterfaceArray) orelse BasicAnimationInterfaceFactoryInterfaceArray =:= undefined) ->
-        'CompoundAnimationInterfaceFactory':'$init'(This, BasicAnimationInterfaceFactoryInterfaceArray, AnimationBehaviorFactory).
+  def jnew(p_basicAnimationInterfaceFactoryInterfaceArray, p_animationBehaviorFactory) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_basicAnimationInterfaceFactoryInterfaceArray, p_animationBehaviorFactory)
+    this
+  end
 
-createArray(This, Size) when is_integer(Size) ->
-        array:new(Size, {default, undefined}).
 
-createAnimation(This, AnimationArray) when (is_tuple(AnimationArray) orelse AnimationArray =:= undefined) ->
-        'CompoundIndexedAnimation':new(AnimationArray, (get({get({This, animationBehaviorFactory}), '$class'})):getOrCreateInstance(get({This, animationBehaviorFactory}))).
+  def jm_createArray(this, p_size) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :size, p_size)
+        throw({:jreturn, JR.anew(JR.lget(f, :size), nil)})
+    end)
+  end
+
+
+  def jm_createAnimation(this, p_animationArray) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :animationArray, p_animationArray)
+        throw({:jreturn, CompoundIndexedAnimation.jnew(JR.lget(f, :animationArray), JR.call(JR.get(this, :animationBehaviorFactory), :jm_getOrCreateInstance, []))})
+    end)
+  end
+end
+
 

@@ -1,77 +1,121 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.ai
-% import org.allbinary.bounds.BoundsVisitorInterface
-% import org.allbinary.game.physics.velocity.VelocityInterface
-% import org.allbinary.game.physics.velocity.VelocityInterfaceCompositeInterface
-% import org.allbinary.layer.LayerInterface
-% import org.allbinary.logic.communication.log.LogUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
--module('ReverseVelocityBoundsVisitor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements BoundsVisitorInterface
+defmodule ReverseVelocityBoundsVisitor do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, velocityInterface}, undefined),
-    put({This, layerInterface}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :velocityInterface, nil)
+    JR.put(this, :layerInterface, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        
+        
+    nil
+  end
 
 
-new(LayerInterface) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, LayerInterface),
-    This.
+  def jinit(this, p_layerInterface) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :layerInterface, JR.lget(f, :layerInterface))
+        JR.lset(f, :velocityInterfaceCompositeInterface, JR.lget(f, :layerInterface))
+        JR.put(this, :velocityInterface, JR.call(JR.lget(f, :velocityInterfaceCompositeInterface), :jm_getVelocityProperties, []))
+    end)
+  end
 
-'$init'(This, LayerInterface) ->
-    init_fields(This),
-        put({This, layerInterface}, LayerInterface),
-        VelocityInterfaceCompositeInterface = LayerInterface,
-        put({This, velocityInterface}, (get({VelocityInterfaceCompositeInterface, '$class'})):getVelocityProperties(VelocityInterfaceCompositeInterface)).
+  def jnew(p_layerInterface) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_layerInterface)
+    this
+  end
 
-getX(This) ->
-        (get({get({This, layerInterface}), '$class'})):getXP(get({This, layerInterface})).
 
-getY(This) ->
-        (get({get({This, layerInterface}), '$class'})):getYP(get({This, layerInterface})).
+  def jm_getX(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.get(this, :layerInterface), :jm_getXP, [])})
+    end)
+  end
 
-minX(This) ->
-        case ((fun(Target_N66180) -> (get({Target_N66180, '$class'})):getUnscaled(Target_N66180) end)((get({get({This, velocityInterface}), '$class'})):getVelocityXBasicDecimalP(get({This, velocityInterface}))) < 0) of
-            true ->
-            (fun(Target_N66215) -> (get({Target_N66215, '$class'})):multiplyint(Target_N66215, (-1)) end)((get({get({This, velocityInterface}), '$class'})):getVelocityXBasicDecimalP(get({This, velocityInterface})));
-            false -> ok
-        end.
 
-maxX(This) ->
-        case ((fun(Target_N66303) -> (get({Target_N66303, '$class'})):getUnscaled(Target_N66303) end)((get({get({This, velocityInterface}), '$class'})):getVelocityXBasicDecimalP(get({This, velocityInterface}))) > 0) of
-            true ->
-            (fun(Target_N66338) -> (get({Target_N66338, '$class'})):multiplyint(Target_N66338, (-1)) end)((get({get({This, velocityInterface}), '$class'})):getVelocityXBasicDecimalP(get({This, velocityInterface})));
-            false -> ok
-        end.
+  def jm_getY(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.get(this, :layerInterface), :jm_getYP, [])})
+    end)
+  end
 
-minY(This) ->
-        case ((fun(Target_N66426) -> (get({Target_N66426, '$class'})):getUnscaled(Target_N66426) end)((get({get({This, velocityInterface}), '$class'})):getVelocityYBasicDecimalP(get({This, velocityInterface}))) < 0) of
-            true ->
-            (fun(Target_N66461) -> (get({Target_N66461, '$class'})):multiplyint(Target_N66461, (-1)) end)((get({get({This, velocityInterface}), '$class'})):getVelocityYBasicDecimalP(get({This, velocityInterface})));
-            false -> ok
-        end.
 
-maxY(This) ->
-        case ((fun(Target_N66549) -> (get({Target_N66549, '$class'})):getUnscaled(Target_N66549) end)((get({get({This, velocityInterface}), '$class'})):getVelocityYBasicDecimalP(get({This, velocityInterface}))) > 0) of
-            true ->
-            (fun(Target_N66584) -> (get({Target_N66584, '$class'})):multiplyint(Target_N66584, (-1)) end)((get({get({This, velocityInterface}), '$class'})):getVelocityYBasicDecimalP(get({This, velocityInterface})));
-            false -> ok
-        end.
+  def jm_minX(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.call(JR.call(JR.get(this, :velocityInterface), :jm_getVelocityXBasicDecimalP, []), :jm_getUnscaled, []) < 0) do
+            JR.call(JR.call(JR.get(this, :velocityInterface), :jm_getVelocityXBasicDecimalP, []), :jm_multiplyint, [-1])
+        end
+    end)
+  end
+
+
+  def jm_maxX(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.call(JR.call(JR.get(this, :velocityInterface), :jm_getVelocityXBasicDecimalP, []), :jm_getUnscaled, []) > 0) do
+            JR.call(JR.call(JR.get(this, :velocityInterface), :jm_getVelocityXBasicDecimalP, []), :jm_multiplyint, [-1])
+        end
+    end)
+  end
+
+
+  def jm_minY(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.call(JR.call(JR.get(this, :velocityInterface), :jm_getVelocityYBasicDecimalP, []), :jm_getUnscaled, []) < 0) do
+            JR.call(JR.call(JR.get(this, :velocityInterface), :jm_getVelocityYBasicDecimalP, []), :jm_multiplyint, [-1])
+        end
+    end)
+  end
+
+
+  def jm_maxY(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.call(JR.call(JR.get(this, :velocityInterface), :jm_getVelocityYBasicDecimalP, []), :jm_getUnscaled, []) > 0) do
+            JR.call(JR.call(JR.get(this, :velocityInterface), :jm_getVelocityYBasicDecimalP, []), :jm_multiplyint, [-1])
+        end
+    end)
+  end
+end
+
 

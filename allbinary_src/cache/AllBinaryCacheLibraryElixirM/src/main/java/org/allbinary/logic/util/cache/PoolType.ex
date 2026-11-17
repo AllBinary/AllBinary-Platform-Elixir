@@ -1,40 +1,68 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2007 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.logic.util.cache
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2007 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
--module('PoolType').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule PoolType do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, cacheType}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :cacheType, nil)
+        
+    nil
+  end
 
 
-new(CacheType) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, CacheType),
-    This.
+  def jinit(this, p_cacheType) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cacheType, p_cacheType)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :cacheType, JR.lget(f, :cacheType))
+    end)
+  end
 
-'$init'(This, CacheType) ->
-    init_fields(This),
-        put({This, cacheType}, CacheType).
+  def jnew(p_cacheType) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_cacheType)
+    this
+  end
 
-getCacheType(This) ->
-        get({This, cacheType}).
 
-toString(This) ->
-        POOL_TYPE = "PoolType: ",
-        lists:concat([POOL_TYPE, (fun(Target_N65795) -> (get({Target_N65795, '$class'})):toString(Target_N65795) end)((get({This, '$class'})):getCacheType(This))]).
+  def jm_getCacheType(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :cacheType)})
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :POOL_TYPE, "PoolType: ")
+        throw({:jreturn, JR.lget(f, :POOL_TYPE) <> JR.call(JR.call(this, :jm_getCacheType, []), :jm_toString, [])})
+    end)
+  end
+end
+
 

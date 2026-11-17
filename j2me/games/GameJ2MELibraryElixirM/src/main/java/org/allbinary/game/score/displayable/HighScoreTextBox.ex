@@ -1,112 +1,160 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.score.displayable
-% import javax.microedition.lcdui.CommandListener
-% import javax.microedition.lcdui.Font
-% import javax.microedition.lcdui.Graphics
-% import javax.microedition.lcdui.TextField
-% import org.allbinary.PostGameCommandFactory
-% import org.allbinary.game.GameInfo
-% import org.allbinary.game.score.HighScore
-% import org.allbinary.game.score.HighScoresHelperBaseInterface
-% import org.allbinary.game.score.HighScoresFactoryInterface
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.color.BasicColorFactory
-% import org.allbinary.graphics.form.item.CustomTextBox
-% import org.allbinary.graphics.paint.NullPaintable
-% import org.allbinary.graphics.paint.Paintable
-% import org.allbinary.graphics.paint.SimpleTextPaintable
-% import org.allbinary.input.event.VirtualKeyboardEventHandler
-% import org.allbinary.logic.system.os.GenericOperatingSystem
-% import org.allbinary.logic.system.os.OperatingSystemFactory
-% import org.allbinary.logic.system.security.licensing.AbeClientInformationInterface
-% import org.allbinary.logic.system.security.licensing.InApplicationPurchaseFactory
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.score.displayable
 
--module('HighScoreTextBox').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule HighScoreTextBox do
+  def jsuper(), do: CustomTextBox
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('CustomTextBox', Function, Arguments).
-
-init_fields(This) ->
-    put({This, virtualKeyboardEventHandler}, 'VirtualKeyboardEventHandler':getInstance()),
-    put({This, highScoreUtil}, undefined),
-    put({This, pleaseWait}, 'SimpleTextPaintable':new(get({get({This, commonStrings}), 'PLEASE_WAIT'}), get({'BasicColorFactory':getInstance(), 'WHITE'}))),
-    put({This, paintable}, 'NullPaintable':getInstance()),
-    put({This, submitted}, false),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :virtualKeyboardEventHandler, nil)
+    JR.put(this, :highScoreUtil, nil)
+    JR.put(this, :pleaseWait, nil)
+    JR.put(this, :paintable, nil)
+    JR.put(this, :submitted, false)
+        JR.put(this, :virtualKeyboardEventHandler, VirtualKeyboardEventHandler.jm_getInstance())
+        
+        JR.put(this, :pleaseWait, SimpleTextPaintable.jnew(JR.get(JR.get(this, :commonStrings), :PLEASE_WAIT), JR.get(BasicColorFactory.jm_getInstance(), :WHITE)))
+        JR.put(this, :paintable, NullPaintable.jm_getInstance())
+        JR.put(this, :submitted, false)
+    nil
+  end
 
 
-new(HighScoresFactoryInterface, HighScoresHelper, AbeClientInformation, GameInfo, CmdListener, Name, HighScore, BackgrounBasicColor, ForegroundBasicColor) when (is_list(Name) orelse Name =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, HighScoresFactoryInterface, HighScoresHelper, AbeClientInformation, GameInfo, CmdListener, Name, HighScore, BackgrounBasicColor, ForegroundBasicColor),
-    This.
+  def jinit(this, p_highScoresFactoryInterface, p_highScoresHelper, p_abeClientInformation, p_gameInfo, p_cmdListener, p_name, p_highScore, p_backgrounBasicColor, p_foregroundBasicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :highScoresFactoryInterface, p_highScoresFactoryInterface)
+      JR.lset(f, :highScoresHelper, p_highScoresHelper)
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+      JR.lset(f, :gameInfo, p_gameInfo)
+      JR.lset(f, :cmdListener, p_cmdListener)
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :highScore, p_highScore)
+      JR.lset(f, :backgrounBasicColor, p_backgrounBasicColor)
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+        CustomTextBox.jinit(this, JR.lget(f, :cmdListener), "New High Score Enter Name:", JR.lget(f, :name), 12, TextField.jstatic_ANY(), Font.jm_getDefaultFont(), JR.lget(f, :backgrounBasicColor), JR.lget(f, :foregroundBasicColor))
+        HighScoreTextBox.jinitfields(this)
+        JR.put(this, :highScoreUtil, HighScoreUtil.jnew(JR.lget(f, :highScoresFactoryInterface), JR.lget(f, :highScoresHelper), JR.lget(f, :abeClientInformation), JR.lget(f, :gameInfo), JR.lget(f, :cmdListener), JR.lget(f, :name), JR.lget(f, :highScore)))
+        JR.lset(f, :operatingSystemInterface, JR.call(OperatingSystemFactory.jm_getInstance(), :jm_getOperatingSystemInstance, []))
+        if JR.call(JR.lget(f, :operatingSystemInterface), :jm_isOverScan, []) do
+            JR.lset(f, :username, JR.call(InApplicationPurchaseFactory.jm_getInstance(), :jm_getUserName, []))
+            JR.call(JR.call(this, :jm_getTextFieldItem, []), :jm_setString, [JR.lget(f, :username)])
+        end
+    end)
+  end
 
-'$init'(This, HighScoresFactoryInterface, HighScoresHelper, AbeClientInformation, GameInfo, CmdListener, Name, HighScore, BackgrounBasicColor, ForegroundBasicColor) when (is_list(Name) orelse Name =:= undefined) ->
-        'CustomTextBox':'$init'(This, CmdListener, "New High Score Enter Name:", Name, 12, get({'TextField', 'ANY'}), 'Font':getDefaultFont(), BackgrounBasicColor, ForegroundBasicColor),
-        init_fields(This),
-        put({This, highScoreUtil}, 'HighScoreUtil':new(HighScoresFactoryInterface, HighScoresHelper, AbeClientInformation, GameInfo, CmdListener, Name, HighScore)),
-        OperatingSystemInterface = (fun(Target_N66660) -> (get({Target_N66660, '$class'})):getOperatingSystemInstance(Target_N66660) end)('OperatingSystemFactory':getInstance()),
-        case (get({OperatingSystemInterface, '$class'})):isOverScan(OperatingSystemInterface) of
-            true ->
-            Username = (fun(Target_N66739) -> (get({Target_N66739, '$class'})):getUserName(Target_N66739) end)('InApplicationPurchaseFactory':getInstance()),
-            (fun(Target_N66782) -> (get({Target_N66782, '$class'})):setString(Target_N66782, Username) end)((get({This, '$class'})):getTextFieldItem(This));
-            false -> ok
-        end.
+  def jnew(p_highScoresFactoryInterface, p_highScoresHelper, p_abeClientInformation, p_gameInfo, p_cmdListener, p_name, p_highScore, p_backgrounBasicColor, p_foregroundBasicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_highScoresFactoryInterface, p_highScoresHelper, p_abeClientInformation, p_gameInfo, p_cmdListener, p_name, p_highScore, p_backgrounBasicColor, p_foregroundBasicColor)
+    this
+  end
 
-initCommands(This, CmdListener) ->
-        (get({This, '$class'})):removeAllCommands(This),
-        (fun(Target_N67090) -> (get({Target_N67090, '$class'})):addCommands(Target_N67090, This) end)('PostGameCommandFactory':getInstance()),
-        (get({This, '$class'})):addCommand(This, get({'HighScoreUtil', 'SUBMIT_TEXTBOX_COMMAND'})),
-        (get({This, '$class'})):setCommandListener(This, CmdListener).
 
-open(This) ->
-        (get({get({This, virtualKeyboardEventHandler}), '$class'})):open(get({This, virtualKeyboardEventHandler})),
-        put({This, paintable}, 'NullPaintable':getInstance()),
-        'CustomTextBox':open(This).
+  def jm_initCommands(this, p_cmdListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cmdListener, p_cmdListener)
+        JR.call(this, :jm_removeAllCommands, [])
+        JR.call(PostGameCommandFactory.jm_getInstance(), :jm_addCommands, [this])
+        JR.call(this, :jm_addCommand, [HighScoreUtil.jstatic_SUBMIT_TEXTBOX_COMMAND()])
+        JR.call(this, :jm_setCommandListener, [JR.lget(f, :cmdListener)])
+    end)
+  end
 
-% throws Exception
-close(This) ->
-        (get({get({This, virtualKeyboardEventHandler}), '$class'})):close(get({This, virtualKeyboardEventHandler})),
-        put({This, paintable}, get({This, pleaseWait})),
-        (get({get({This, repaintBehavior}), '$class'})):onChangeRepaint(get({This, repaintBehavior}), This),
-        'CustomTextBox':close(This),
-        (get({This, '$class'})):removeCommand(This, get({'HighScoreUtil', 'SUBMIT_TEXTBOX_COMMAND'})),
-        (get({This, '$class'})):update(This),
-        case get({This, submitted}) of
-            true ->
-            (get({get({This, highScoreUtil}), '$class'})):saveHighScore(get({This, highScoreUtil}));
-            false ->
-            ok
-        end,
-        put({This, paintable}, 'NullPaintable':getInstance()),
-        (get({get({This, repaintBehavior}), '$class'})):onChangeRepaint(get({This, repaintBehavior}), This).
 
-% throws Exception
-update(This) ->
-        Name = (fun(Target_N67676) -> (get({Target_N67676, '$class'})):getString(Target_N67676) end)((get({This, '$class'})):getTextFieldItem(This)),
-        (get({get({This, highScoreUtil}), '$class'})):update(get({This, highScoreUtil}), Name),
-        'CustomTextBox':update(This).
+  def jm_open(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :virtualKeyboardEventHandler), :jm_open, [])
+        JR.put(this, :paintable, NullPaintable.jm_getInstance())
+        CustomTextBox.jm_open(this)
+    end)
+  end
 
-paint(This, Graphics) ->
-        'CustomTextBox':paint(This, Graphics),
-        (get({get({This, paintable}), '$class'})):paint(get({This, paintable}), Graphics).
 
-saveHighScore(This) ->
-        (get({get({This, highScoreUtil}), '$class'})):saveHighScore(get({This, highScoreUtil})).
+  def jm_close(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :virtualKeyboardEventHandler), :jm_close, [])
+        JR.put(this, :paintable, JR.get(this, :pleaseWait))
+        JR.call(JR.get(this, :repaintBehavior), :jm_onChangeRepaint, [this])
+        CustomTextBox.jm_close(this)
+        JR.call(this, :jm_removeCommand, [HighScoreUtil.jstatic_SUBMIT_TEXTBOX_COMMAND()])
+        JR.call(this, :jm_update, [])
+        if JR.get(this, :submitted) do
+            JR.call(JR.get(this, :highScoreUtil), :jm_saveHighScore, [])
+        else
+            nil
+        end
+        JR.put(this, :paintable, NullPaintable.jm_getInstance())
+        JR.call(JR.get(this, :repaintBehavior), :jm_onChangeRepaint, [this])
+    end)
+  end
 
-submit(This) ->
-        (get({get({This, highScoreUtil}), '$class'})):submit(get({This, highScoreUtil}), This).
+
+  def jm_update(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :name, JR.call(JR.call(this, :jm_getTextFieldItem, []), :jm_getString, []))
+        JR.call(JR.get(this, :highScoreUtil), :jm_update, [JR.lget(f, :name)])
+        CustomTextBox.jm_update(this)
+    end)
+  end
+
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        CustomTextBox.jm_paint(this, JR.lget(f, :graphics))
+        JR.call(JR.get(this, :paintable), :jm_paint, [JR.lget(f, :graphics)])
+    end)
+  end
+
+
+  def jm_saveHighScore(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :highScoreUtil), :jm_saveHighScore, [])
+    end)
+  end
+
+
+  def jm_submit(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :highScoreUtil), :jm_submit, [this])
+    end)
+  end
+end
+
 

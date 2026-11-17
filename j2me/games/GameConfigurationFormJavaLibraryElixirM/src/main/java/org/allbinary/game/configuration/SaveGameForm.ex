@@ -1,67 +1,93 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.configuration
-% import javax.microedition.lcdui.CommandListener
-% import javax.microedition.lcdui.TextField
-% import org.allbinary.MIDPUtil
-% import org.allbinary.game.commands.GameCommandsFactory
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.displayable.screen.CommandForm
-% import org.allbinary.logic.ABSystemWrapper
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.configuration
 
--module('SaveGameForm').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule SaveGameForm do
+  def jsuper(), do: CommandForm
+def jstatic_FORM(), do: JR.static_get(__MODULE__, :FORM, fn -> CommandForm.jm_getNullCommandForm() end)
+  def jstatic_set_FORM(value), do: JR.static_put(__MODULE__, :FORM, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('CommandForm', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'FORM'}, 'CommandForm':getNullCommandForm()),
-    ok.
-
-init_fields(This) ->
-    put({This, meUtil}, 'MIDPUtil':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :meUtil, nil)
+        JR.put(this, :meUtil, MIDPUtil.jm_getInstance())
+    nil
+  end
 
 
-% throws Exception
-createForm(CommandListener, Title, BackgrounBasicColor, ForegroundBasicColor) when (is_list(Title) orelse Title =:= undefined) ->
-        put({'SaveGameForm', 'FORM'}, 'SaveGameForm':new(CommandListener, Title, BackgrounBasicColor, ForegroundBasicColor)),
-        get({'SaveGameForm', 'FORM'}).
+  def jm_createForm(p_commandListener, p_title, p_backgrounBasicColor, p_foregroundBasicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :commandListener, p_commandListener)
+      JR.lset(f, :title, p_title)
+      JR.lset(f, :backgrounBasicColor, p_backgrounBasicColor)
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+        SaveGameForm.jstatic_set_FORM(SaveGameForm.jnew(JR.lget(f, :commandListener), JR.lget(f, :title), JR.lget(f, :backgrounBasicColor), JR.lget(f, :foregroundBasicColor)))
+        throw({:jreturn, SaveGameForm.jstatic_FORM()})
+    end)
+  end
 
-getInstance() ->
-        get({'SaveGameForm', 'FORM'}).
 
-new(CommandListener, Title, BackgrounBasicColor, ForegroundBasicColor) when (is_list(Title) orelse Title =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, CommandListener, Title, BackgrounBasicColor, ForegroundBasicColor),
-    This.
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, SaveGameForm.jstatic_FORM()})
+    end)
+  end
 
-'$init'(This, CommandListener, Title, BackgrounBasicColor, ForegroundBasicColor) when (is_list(Title) orelse Title =:= undefined) ->
-        'CommandForm':'$init'(This, CommandListener, Title, BackgrounBasicColor, ForegroundBasicColor),
-        init_fields(This),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, get({get({This, commonStrings}), 'CONSTRUCTOR'})),
-        TimeString = allbinary_java:to_string((fun(Target_N66289) -> (get({Target_N66289, '$class'})):currentTimeMillis(Target_N66289) end)('ABSystemWrapper':getInstance())),
-        (get({get({This, meUtil}), '$class'})):appendItem(get({This, meUtil}), This, 'TextField':new("Name: ", TimeString, 30, get({'TextField', 'ANY'}))),
-        (get({This, '$class'})):initCommands(This, CommandListener).
 
-initCommands(This, CmdListener) ->
-        GameCommandsFactory = 'GameCommandsFactory':getInstance(),
-        (get({This, '$class'})):removeAllCommands(This),
-        (get({This, '$class'})):addCommand(This, get({GameCommandsFactory, 'SAVE'})),
-        (get({This, '$class'})):addCommand(This, get({GameCommandsFactory, 'CLOSE_AND_SHOW_GAME_CANVAS'})),
-        (get({This, '$class'})):setCommandListener(This, CmdListener).
+  def jinit(this, p_commandListener, p_title, p_backgrounBasicColor, p_foregroundBasicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :commandListener, p_commandListener)
+      JR.lset(f, :title, p_title)
+      JR.lset(f, :backgrounBasicColor, p_backgrounBasicColor)
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+        CommandForm.jinit(this, JR.lget(f, :commandListener), JR.lget(f, :title), JR.lget(f, :backgrounBasicColor), JR.lget(f, :foregroundBasicColor))
+        SaveGameForm.jinitfields(this)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, JR.get(JR.get(this, :commonStrings), :CONSTRUCTOR)])
+        JR.lset(f, :timeString, JR.str(JR.call(ABSystemWrapper.jm_getInstance(), :jm_currentTimeMillis, [])))
+        JR.call(JR.get(this, :meUtil), :jm_appendItem, [this, TextField.jnew("Name: ", JR.lget(f, :timeString), 30, TextField.jstatic_ANY())])
+        JR.call(this, :jm_initCommands, [JR.lget(f, :commandListener)])
+    end)
+  end
+
+  def jnew(p_commandListener, p_title, p_backgrounBasicColor, p_foregroundBasicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_commandListener, p_title, p_backgrounBasicColor, p_foregroundBasicColor)
+    this
+  end
+
+
+  def jm_initCommands(this, p_cmdListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cmdListener, p_cmdListener)
+        JR.lset(f, :gameCommandsFactory, GameCommandsFactory.jm_getInstance())
+        JR.call(this, :jm_removeAllCommands, [])
+        JR.call(this, :jm_addCommand, [JR.get(JR.lget(f, :gameCommandsFactory), :SAVE)])
+        JR.call(this, :jm_addCommand, [JR.get(JR.lget(f, :gameCommandsFactory), :CLOSE_AND_SHOW_GAME_CANVAS)])
+        JR.call(this, :jm_setCommandListener, [JR.lget(f, :cmdListener)])
+    end)
+  end
+end
+
 

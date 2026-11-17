@@ -1,58 +1,103 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2025 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import javax.microedition.lcdui.Command
-% import javax.microedition.lcdui.CommandListener
-% import org.allbinary.game.layer.AllBinaryGameLayerManager
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2025 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('NullAllBinaryGameCanvas').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements AllBinaryGameCanvasInterface
+defmodule NullAllBinaryGameCanvas do
+  def jsuper(), do: JObject
+def jstatic_NULL_ALLBINARY_GAME_CANVAS(), do: JR.static_get(__MODULE__, :NULL_ALLBINARY_GAME_CANVAS, fn -> NullAllBinaryGameCanvas.jnew() end)
+  def jstatic_set_NULL_ALLBINARY_GAME_CANVAS(value), do: JR.static_put(__MODULE__, :NULL_ALLBINARY_GAME_CANVAS, value)
 
-static_init() ->
-    put({?MODULE, 'NULL_ALLBINARY_GAME_CANVAS'}, 'NullAllBinaryGameCanvas':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getLayerManager(This) ->
-        erlang:error({'RuntimeException'}).
+  def jm_getLayerManager(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jexception, JR.exception("RuntimeException", "")})
+    end)
+  end
 
-addCommand(This, Cmd) ->
-        erlang:error({'RuntimeException'}).
 
-getHeight(This) ->
-        erlang:error({'RuntimeException'}).
+  def jm_addCommand(this, p_cmd) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cmd, p_cmd)
+        throw({:jexception, JR.exception("RuntimeException", "")})
+    end)
+  end
 
-getWidth(This) ->
-        erlang:error({'RuntimeException'}).
 
-removeCommand(This, Cmd) ->
-        erlang:error({'RuntimeException'}).
+  def jm_getHeight(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jexception, JR.exception("RuntimeException", "")})
+    end)
+  end
 
-setCommandListener(This, L) ->
-        erlang:error({'RuntimeException'}).
+
+  def jm_getWidth(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jexception, JR.exception("RuntimeException", "")})
+    end)
+  end
+
+
+  def jm_removeCommand(this, p_cmd) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cmd, p_cmd)
+        throw({:jexception, JR.exception("RuntimeException", "")})
+    end)
+  end
+
+
+  def jm_setCommandListener(this, p_l) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :l, p_l)
+        throw({:jexception, JR.exception("RuntimeException", "")})
+    end)
+  end
+end
+
 

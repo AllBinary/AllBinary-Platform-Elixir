@@ -1,47 +1,103 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.physics.velocity
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.physics.velocity
 
--module('VelocityInterface').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
-
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicVelocityInterface', Function, Arguments).
+defmodule VelocityInterface do
+  def jsuper(), do: JObject
 
 
-getMaxForwardVelocity(This) ->
-    erlang:error({abstract_method, getMaxForwardVelocity}).
+  def jm_getMaxForwardVelocity(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "getMaxForwardVelocity")})
+    end)
+  end
 
-getMaxReverseVelocity(This) ->
-    erlang:error({abstract_method, getMaxReverseVelocity}).
 
-limitMaxXYForwardVelocity(This) ->
-    erlang:error({abstract_method, limitMaxXYForwardVelocity}).
+  def jm_getMaxReverseVelocity(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "getMaxReverseVelocity")})
+    end)
+  end
 
-limitMaxXYReverseVelocity(This) ->
-    erlang:error({abstract_method, limitMaxXYReverseVelocity}).
 
-limitXYToForwardAndReverseMaxVelocity(This) ->
-    erlang:error({abstract_method, limitXYToForwardAndReverseMaxVelocity}).
+  def jm_limitMaxXYForwardVelocity(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "limitMaxXYForwardVelocity")})
+    end)
+  end
 
-limitMaxXYVelocity(This, MaxVelocity) when is_integer(MaxVelocity) ->
-    erlang:error({abstract_method, limitMaxXYVelocity}).
 
-setMaxForwardVelocity(This, MaxForwardVelocity) when is_integer(MaxForwardVelocity) ->
-    erlang:error({abstract_method, setMaxForwardVelocity}).
+  def jm_limitMaxXYReverseVelocity(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "limitMaxXYReverseVelocity")})
+    end)
+  end
 
-setMaxReverseVelocity(This, MaxReverseVelocity) when is_integer(MaxReverseVelocity) ->
-    erlang:error({abstract_method, setMaxReverseVelocity}).
+
+  def jm_limitXYToForwardAndReverseMaxVelocity(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "limitXYToForwardAndReverseMaxVelocity")})
+    end)
+  end
+
+
+  def jm_limitMaxXYVelocity(this, p_maxVelocity) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :maxVelocity, p_maxVelocity)
+      throw({:jexception, JR.exception("AbstractMethodError", "limitMaxXYVelocity")})
+    end)
+  end
+
+
+  def jm_setMaxForwardVelocity(this, p_maxForwardVelocity) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :maxForwardVelocity, p_maxForwardVelocity)
+      throw({:jexception, JR.exception("AbstractMethodError", "setMaxForwardVelocity")})
+    end)
+  end
+
+
+  def jm_setMaxReverseVelocity(this, p_maxReverseVelocity) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :maxReverseVelocity, p_maxReverseVelocity)
+      throw({:jexception, JR.exception("AbstractMethodError", "setMaxReverseVelocity")})
+    end)
+  end
+end
+
 

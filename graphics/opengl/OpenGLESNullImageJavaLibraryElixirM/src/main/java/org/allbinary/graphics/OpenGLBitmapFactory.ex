@@ -1,48 +1,74 @@
-% Generated Code Do Not Modify
-% package org.allbinary.graphics
-% import java.io.IOException
-% import java.io.InputStream
-% import javax.microedition.lcdui.Image
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.platform.graphics.PlatformBitmapBase
-% import org.allbinary.platform.graphics.PlatformBitmapBaseFactory
+# Generated Code Do Not Modify
+# package org.allbinary.graphics
 
--module('OpenGLBitmapFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule OpenGLBitmapFactory do
+  def jsuper(), do: PlatformBitmapBaseFactory
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> OpenGLBitmapFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('PlatformBitmapBaseFactory', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :ARGB_8888, nil)
+        JR.put(this, :ARGB_8888, OpenGLBitmapConfig.jnew(JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)))
+    nil
+  end
 
-static_init() ->
-    put({?MODULE, instance}, 'OpenGLBitmapFactory':new()),
-    ok.
+  def jinit(this) do
+    PlatformBitmapBaseFactory.jinit(this)
+    jinitfields(this)
+  end
 
-init_fields(This) ->
-    put({This, 'ARGB_8888'}, 'OpenGLBitmapConfig':new(get({'NullUtil':getInstance(), 'NULL_OBJECT'}))),
-    ok.
-
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    'PlatformBitmapBaseFactory':'$init'(This),
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'OpenGLBitmapFactory', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, OpenGLBitmapFactory.jstatic_instance()})
+    end)
+  end
 
-createBitmap(This, Width, Height, Config) when is_integer(Width), is_integer(Height) ->
-        'OpenGLBitmap':new(get({'NullUtil':getInstance(), 'NULL_OBJECT'})).
 
-% throws IOException
-decodeStream(This, InputStream) ->
-        'OpenGLBitmap':new(get({'NullUtil':getInstance(), 'NULL_OBJECT'})).
+  def jm_createBitmap(this, p_width, p_height, p_config) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+      JR.lset(f, :config, p_config)
+        throw({:jreturn, OpenGLBitmap.jnew(JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT))})
+    end)
+  end
 
-createBitmap(This, Image) ->
-        'OpenGLBitmap':new(get({'NullUtil':getInstance(), 'NULL_OBJECT'})).
+
+  def jm_decodeStream(this, p_inputStream) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :inputStream, p_inputStream)
+        throw({:jreturn, OpenGLBitmap.jnew(JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT))})
+    end)
+  end
+
+
+  def jm_createBitmap(this, p_image) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :image, p_image)
+        throw({:jreturn, OpenGLBitmap.jnew(JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT))})
+    end)
+  end
+end
+
 

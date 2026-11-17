@@ -1,243 +1,379 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.canvas
-% import javax.microedition.lcdui.CommandListener
-% import org.allbinary.TsUtil
-% import org.allbinary.game.displayable.canvas.NullWaitGameRunnable
-% import org.allbinary.graphics.displayable.MyCanvas
-% import org.allbinary.logic.ABSystemWrapper
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.StdUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.string.CommonLabels
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.thread.NullThread
-% import org.allbinary.thread.RunnableInterface
-% import org.allbinary.thread.ThreadObjectUtil
-% import org.allbinary.time.TimeDelayHelper
-% import org.allbinary.util.BasicArrayList
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.canvas
 
--module('RunnableCanvas').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements RunnableInterface
+defmodule RunnableCanvas do
+  def jsuper(), do: MyCanvas
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('MyCanvas', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :nullUtil, nil)
+    JR.put(this, :stdUtil, nil)
+    JR.put(this, :systemWrapper, nil)
+    JR.put(this, :tsUtil, nil)
+    JR.put(this, :thread, nil)
+    JR.put(this, :currentThread, nil)
+    JR.put(this, :running, false)
+    JR.put(this, :loopTimeHelper, nil)
+    JR.put(this, :runnableCanvasRefreshHelper, nil)
+    JR.put(this, :commonLabels, nil)
+    JR.put(this, :threadObjectUtil, nil)
+    JR.put(this, :SET_RUNNING, nil)
+    JR.put(this, :IS_RUNNING, nil)
+    JR.put(this, :THREAD, nil)
+    JR.put(this, :NOT_EQUAL, nil)
+    JR.put(this, :PAUSE_SLEEP, nil)
+    JR.put(this, :START_PAUSE, nil)
+    JR.put(this, :END_PAUSE, nil)
+    JR.put(this, :PROCESS_LOOP_SLEEP, nil)
+    JR.put(this, :pauseWait, 0)
+    JR.put(this, :notified, false)
+        JR.put(this, :nullUtil, NullUtil.jm_getInstance())
+        JR.put(this, :stdUtil, StdUtil.jm_getInstance())
+        JR.put(this, :systemWrapper, ABSystemWrapper.jm_getInstance())
+        JR.put(this, :tsUtil, TsUtil.jm_getInstance())
+        JR.put(this, :thread, NullThread.jstatic_NULL_THREAD())
+        JR.put(this, :currentThread, NullThread.jstatic_NULL_THREAD())
+        JR.put(this, :running, false)
+        JR.put(this, :loopTimeHelper, TimeDelayHelper.jnew(JR.get(NullWaitGameRunnable.jm_getInstance(), :WAIT)))
+        JR.put(this, :runnableCanvasRefreshHelper, Processor.jm_getInstance())
+        JR.put(this, :commonLabels, CommonLabels.jm_getInstance())
+        JR.put(this, :threadObjectUtil, ThreadObjectUtil.jm_getInstance())
+        JR.put(this, :SET_RUNNING, "setRunning")
+        JR.put(this, :IS_RUNNING, "isRunning")
+        JR.put(this, :THREAD, "Thread: ")
+        JR.put(this, :NOT_EQUAL, " != ")
+        JR.put(this, :PAUSE_SLEEP, "pause sleep")
+        JR.put(this, :START_PAUSE, "start pause - game thread sleep at: ")
+        JR.put(this, :END_PAUSE, "end pause - game thread sleep at: ")
+        JR.put(this, :PROCESS_LOOP_SLEEP, "processLoopSleep")
+        JR.put(this, :pauseWait, 0)
+        JR.put(this, :notified, false)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, nullUtil}, 'NullUtil':getInstance()),
-    put({This, stdUtil}, 'StdUtil':getInstance()),
-    put({This, systemWrapper}, 'ABSystemWrapper':getInstance()),
-    put({This, tsUtil}, 'TsUtil':getInstance()),
-    put({This, thread}, get({'NullThread', 'NULL_THREAD'})),
-    put({This, currentThread}, get({'NullThread', 'NULL_THREAD'})),
-    put({This, running}, false),
-    put({This, loopTimeHelper}, 'TimeDelayHelper':new(get({'NullWaitGameRunnable':getInstance(), 'WAIT'}))),
-    put({This, runnableCanvasRefreshHelper}, 'Processor':getInstance()),
-    put({This, commonLabels}, 'CommonLabels':getInstance()),
-    put({This, threadObjectUtil}, 'ThreadObjectUtil':getInstance()),
-    put({This, 'SET_RUNNING'}, "setRunning"),
-    put({This, 'IS_RUNNING'}, "isRunning"),
-    put({This, 'THREAD'}, "Thread: "),
-    put({This, 'NOT_EQUAL'}, " != "),
-    put({This, 'PAUSE_SLEEP'}, "pause sleep"),
-    put({This, 'START_PAUSE'}, "start pause - game thread sleep at: "),
-    put({This, 'END_PAUSE'}, "end pause - game thread sleep at: "),
-    put({This, 'PROCESS_LOOP_SLEEP'}, "processLoopSleep"),
-    put({This, pauseWait}, 0),
-    put({This, notified}, false),
-    ok.
 
-
-new(CommandListener, ChildNameList, HasParam) when is_boolean(HasParam) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, CommandListener, ChildNameList, HasParam),
-    This.
-
-'$init'(This, CommandListener, ChildNameList, HasParam) when is_boolean(HasParam) ->
-        'MyCanvas':'$init'(This, get({'CommonStrings':getInstance(), 'UNKNOWN'}), ChildNameList),
-        init_fields(This),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N66948) -> (get({Target_N66948, '$class'})):toString(Target_N66948) end)((fun(Target_N66955) -> (get({Target_N66955, '$class'})):appendint(Target_N66955, trunc(get({get({This, loopTimeHelper}), delay}))) end)((fun(Target_N66962) -> (get({Target_N66962, '$class'})):append(Target_N66962, "RunnableCanvas delay: ") end)('StringMaker':new()))), This, get({get({This, commonStrings}), 'CONSTRUCTOR'})),
-        put({This, runnableCanvasRefreshHelper}, 'RunnableCanvasRefreshHelper':new(This)),
-        case (CommandListener =/= undefined) of
-            true ->
-            (get({This, '$class'})):initCommands(This, CommandListener);
-            false ->
-            case HasParam of
-            true ->
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), "commandListener was null", This, "initCommands");
-            false -> ok
+  def jinit(this, p_commandListener, p_childNameList, p_hasParam) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :commandListener, p_commandListener)
+      JR.lset(f, :childNameList, p_childNameList)
+      JR.lset(f, :hasParam, p_hasParam)
+        MyCanvas.jinit(this, JR.get(CommonStrings.jm_getInstance(), :UNKNOWN), JR.lget(f, :childNameList))
+        RunnableCanvas.jinitfields(this)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["RunnableCanvas delay: "]), :jm_appendint, [JR.int32(JR.get(JR.get(this, :loopTimeHelper), :delay))]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :CONSTRUCTOR)])
+        JR.put(this, :runnableCanvasRefreshHelper, RunnableCanvasRefreshHelper.jnew(this))
+        if (JR.lget(f, :commandListener) != nil) do
+            JR.call(this, :jm_initCommands, [JR.lget(f, :commandListener)])
+        else
+            if JR.lget(f, :hasParam) do
+            JR.call(JR.get(this, :logUtil), :jm_putF, ["commandListener was null", this, "initCommands"])
         end
-        end.
-
-initCommands(This, CmdListener) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'NOT_IMPLEMENTED'}), This, "initCommands").
-
-isMainCanvas(This) ->
-        try
-        case ((get({This, '$class'})):getCustomCommandListener(This) =/= undefined) of
-            true ->
-            throw({'$return', true});
-            false ->
-            throw({'$return', false})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-setThread(This, Thread) ->
-        put({This, thread}, Thread).
+  def jnew(p_commandListener, p_childNameList, p_hasParam) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_commandListener, p_childNameList, p_hasParam)
+    this
+  end
 
-setRunning(This, Running) when is_boolean(Running) ->
-        put({This, running}, Running),
-        case (not get({This, running})) of
-            true ->
-            put({This, thread}, get({'NullThread', 'NULL_THREAD'})),
-            begin % synchronized
-                (get({get({This, threadObjectUtil}), '$class'})):notifyObject(get({This, threadObjectUtil}), This)
-            end;
-            false -> ok
-        end,
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N67707) -> (get({Target_N67707, '$class'})):toString(Target_N67707) end)((fun(Target_N67714) -> (get({Target_N67714, '$class'})):appendboolean(Target_N67714, get({This, running})) end)((fun(Target_N67721) -> (get({Target_N67721, '$class'})):append(Target_N67721, get({This, 'IS_RUNNING'})) end)('StringMaker':new()))), This, get({This, 'SET_RUNNING'})).
 
-isRunning(This) ->
-        try
-        case (get({This, thread}) =:= get({This, currentThread})) of
-            true ->
-            throw({'$return', get({This, running})});
-            false ->
-            StringBuffer = 'StringMaker':new(),
-            (get({StringBuffer, '$class'})):append(StringBuffer, get({This, 'THREAD'})),
-            case (get({This, thread}) =/= undefined) of
-                true ->
-                (get({StringBuffer, '$class'})):append(StringBuffer, (get({get({This, thread}), '$class'})):toString(get({This, thread})));
-                false -> ok
-            end,
-            (get({StringBuffer, '$class'})):append(StringBuffer, get({This, 'NOT_EQUAL'})),
-            case (get({This, currentThread}) =/= undefined) of
-                true ->
-                (get({StringBuffer, '$class'})):append(StringBuffer, (fun(Target_N68108) -> (get({Target_N68108, '$class'})):toString(Target_N68108, get({This, currentThread})) end)('StringUtil':getInstance()));
-                false -> ok
-            end,
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({StringBuffer, '$class'})):toString(StringBuffer), This, get({This, 'IS_RUNNING'})),
-            throw({'$return', false})
+  def jm_initCommands(this, p_cmdListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cmdListener, p_cmdListener)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED), this, "initCommands"])
+    end)
+  end
+
+
+  def jm_isMainCanvas(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.call(this, :jm_getCustomCommandListener, []) != nil) do
+            throw({:jreturn, true})
+        else
+            throw({:jreturn, false})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-getLoopTimeHelperP(This) ->
-        get({This, loopTimeHelper}).
 
-setWait(This, Wait) when is_integer(Wait) ->
-        put({get({This, loopTimeHelper}), delay}, Wait),
-        put({This, pauseWait}, (Wait * 3)),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N68469) -> (get({Target_N68469, '$class'})):toString(Target_N68469) end)((fun(Target_N68476) -> (get({Target_N68476, '$class'})):appendint(Target_N68476, trunc(get({get({This, loopTimeHelper}), delay}))) end)((fun(Target_N68483) -> (get({Target_N68483, '$class'})):append(Target_N68483, "setWait - delay: ") end)('StringMaker':new()))), This, get({get({This, commonStrings}), 'CONSTRUCTOR'})).
+  def jm_setThread(this, p_thread) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :thread, p_thread)
+        JR.put(this, :thread, JR.lget(f, :thread))
+    end)
+  end
 
-getWait(This) ->
-        get({get({This, loopTimeHelper}), delay}).
 
-setCurrentThread(This) ->
-        put({This, currentThread}, 'Thread':currentThread()).
-
-setCurrentThreadFake(This) ->
-        put({This, currentThread}, get({This, thread})).
-
-showNotify(This) ->
-        try
-            (get({This, '$class'})):stopWaiting(This)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, "showNotify", E)
-        end.
-
-% throws Exception
-stopWaiting(This) ->
-        put({This, notified}, true),
-        begin % synchronized
-            (get({get({This, threadObjectUtil}), '$class'})):notifyObject(get({This, threadObjectUtil}), This)
-        end,
-        (get({This, '$class'})):repaint(This).
-
-% throws Exception
-waitOnNotify(This, Wait) when is_integer(Wait) ->
-        case (not get({This, notified})) of
-            true ->
-            case (Wait > 0) of
-                true ->
-                (get({get({This, threadObjectUtil}), '$class'})):waitObjectFor(get({This, threadObjectUtil}), This, Wait);
-                false ->
-                (get({get({This, threadObjectUtil}), '$class'})):waitObject(get({This, threadObjectUtil}), This)
-            end;
-            false -> ok
-        end.
-
-% throws Exception
-processSleep(This) ->
-        timer:sleep(get({This, pauseWait})).
-
-isPausable(This) ->
-        false.
-
-% throws Exception
-processGameSleep(This, Sleep) when is_integer(Sleep) ->
-        timer:sleep(Sleep).
-
-% throws Exception
-processLoopSleep(This) ->
-        try
-        (get({get({This, runnableCanvasRefreshHelper}), '$class'})):process(get({This, runnableCanvasRefreshHelper})),
-        case (get({This, '$class'})):isPaused(This) of
-            true ->
-            StringMaker = 'StringMaker':new(),
-            case ((get({This, '$class'})):isRunning(This) andalso (not (get({This, '$class'})):isSingleThread(This))) of
-                true ->
-                (get({StringMaker, '$class'})):delete(StringMaker, 0, (get({StringMaker, '$class'})):length(StringMaker)),
-                CurrentTimeMillis = (get({get({This, systemWrapper}), '$class'})):currentTimeMillis(get({This, systemWrapper})),
-                (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N69709) -> (get({Target_N69709, '$class'})):toString(Target_N69709) end)((fun(Target_N69716) -> (get({Target_N69716, '$class'})):appendlong(Target_N69716, get({This, pauseWait})) end)((fun(Target_N69723) -> (get({Target_N69723, '$class'})):append(Target_N69723, get({This, 'PAUSE_SLEEP'})) end)((fun(Target_N69730) -> (get({Target_N69730, '$class'})):appendlong(Target_N69730, CurrentTimeMillis) end)((get({StringMaker, '$class'})):append(StringMaker, get({This, 'START_PAUSE'})))))), This, get({This, 'PROCESS_LOOP_SLEEP'})),
-                (fun Loop() -> case (((get({This, '$class'})):isPaused(This) andalso (get({This, '$class'})):isRunning(This)) andalso (not (get({This, '$class'})):isSingleThread(This))) of true ->
-                    (get({This, '$class'})):processSleep(This),
-                    case (not (get({This, '$class'})):isPausable(This)) of
-                        true ->
-                        (get({StringMaker, '$class'})):delete(StringMaker, 0, (get({StringMaker, '$class'})):length(StringMaker)),
-                        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N69940) -> (get({Target_N69940, '$class'})):toString(Target_N69940) end)((fun(Target_N69947) -> (get({Target_N69947, '$class'})):appendlong(Target_N69947, CurrentTimeMillis) end)((get({StringMaker, '$class'})):append(StringMaker, get({This, 'END_PAUSE'})))), This, get({This, 'PROCESS_LOOP_SLEEP'})),
-                        throw({'$return', ok});
-                        false -> ok
-                    end,
-                    Loop();
-                false -> ok end end)();
-                false -> ok
-            end;
-            false -> ok
-        end,
-        put({local, elapsedTime}, (get({get({This, loopTimeHelper}), '$class'})):getElapsedTNT(get({This, loopTimeHelper}))),
-        Wait = trunc(get({get({This, loopTimeHelper}), delay})),
-        case (get({local, elapsedTime}) > Wait) of
-            true ->
-            put({local, elapsedTime}, Wait);
-            false ->
-            (get({This, '$class'})):processGameSleep(This, (Wait - get({local, elapsedTime})))
+  def jm_setRunning(this, p_running) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :running, p_running)
+        JR.put(this, :running, JR.lget(f, :running))
+        if !JR.get(this, :running) do
+            JR.put(this, :thread, NullThread.jstatic_NULL_THREAD())
+            (
+                JR.call(JR.get(this, :threadObjectUtil), :jm_notifyObject, [this])
+            )
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(this, :IS_RUNNING)]), :jm_appendboolean, [JR.get(this, :running)]), :jm_toString, []), this, JR.get(this, :SET_RUNNING)])
+    end)
+  end
 
-isSingleThread(This) ->
-        false.
 
-run(This) ->
-        (get({This, '$class'})):setCurrentThread(This).
+  def jm_isRunning(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.get(this, :thread) == JR.get(this, :currentThread)) do
+            throw({:jreturn, JR.get(this, :running)})
+        else
+            JR.lset(f, :stringBuffer, StringMaker.jnew())
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(this, :THREAD)])
+            if (JR.get(this, :thread) != nil) do
+                JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(this, :thread), :jm_toString, [])])
+            end
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(this, :NOT_EQUAL)])
+            if (JR.get(this, :currentThread) != nil) do
+                JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(StringUtil.jm_getInstance(), :jm_toString, [JR.get(this, :currentThread)])])
+            end
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :stringBuffer), :jm_toString, []), this, JR.get(this, :IS_RUNNING)])
+            throw({:jreturn, false})
+        end
+    end)
+  end
 
-% throws Exception
-end2(This) ->
-        ok.
 
-getType(This) ->
-        (-1).
+  def jm_getLoopTimeHelperP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :loopTimeHelper)})
+    end)
+  end
+
+
+  def jm_setWait(this, p_wait) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :wait, p_wait)
+        JR.put(JR.get(this, :loopTimeHelper), :delay, JR.lget(f, :wait))
+        JR.put(this, :pauseWait, JR.int64(JR.lget(f, :wait) * 3))
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["setWait - delay: "]), :jm_appendint, [JR.int32(JR.get(JR.get(this, :loopTimeHelper), :delay))]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :CONSTRUCTOR)])
+    end)
+  end
+
+
+  def jm_getWait(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(JR.get(this, :loopTimeHelper), :delay)})
+    end)
+  end
+
+
+  def jm_setCurrentThread(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.put(this, :currentThread, J.Thread.jm_currentThread())
+    end)
+  end
+
+
+  def jm_setCurrentThreadFake(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.put(this, :currentThread, JR.get(this, :thread))
+    end)
+  end
+
+
+  def jm_showNotify(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            JR.call(this, :jm_stopWaiting, [])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, "showNotify", JR.lget(f, :e)])
+        end
+    end)
+  end
+
+
+  def jm_stopWaiting(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.put(this, :notified, true)
+        (
+            JR.call(JR.get(this, :threadObjectUtil), :jm_notifyObject, [this])
+        )
+        JR.call(this, :jm_repaint, [])
+    end)
+  end
+
+
+  def jm_waitOnNotify(this, p_wait) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :wait, p_wait)
+        if !JR.get(this, :notified) do
+            if (JR.lget(f, :wait) > 0) do
+                JR.call(JR.get(this, :threadObjectUtil), :jm_waitObjectFor, [this, JR.lget(f, :wait)])
+            else
+                JR.call(JR.get(this, :threadObjectUtil), :jm_waitObject, [this])
+            end
+        end
+    end)
+  end
+
+
+  def jm_processSleep(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        J.Thread.jm_sleep(JR.get(this, :pauseWait))
+    end)
+  end
+
+
+  def jm_isPausable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
+
+
+  def jm_processGameSleep(this, p_sleep) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :sleep, p_sleep)
+        J.Thread.jm_sleep(JR.lget(f, :sleep))
+    end)
+  end
+
+
+  def jm_processLoopSleep(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :runnableCanvasRefreshHelper), :jm_process, [])
+        if JR.call(this, :jm_isPaused, []) do
+            JR.lset(f, :stringMaker, StringMaker.jnew())
+            if (JR.call(this, :jm_isRunning, []) && !JR.call(this, :jm_isSingleThread, [])) do
+                JR.call(JR.lget(f, :stringMaker), :jm_delete, [0, JR.call(JR.lget(f, :stringMaker), :jm_length, [])])
+                JR.lset(f, :currentTimeMillis, JR.call(JR.get(this, :systemWrapper), :jm_currentTimeMillis, []))
+                JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(JR.call(JR.call(JR.lget(f, :stringMaker), :jm_append, [JR.get(this, :START_PAUSE)]), :jm_appendlong, [JR.lget(f, :currentTimeMillis)]), :jm_append, [JR.get(this, :PAUSE_SLEEP)]), :jm_appendlong, [JR.get(this, :pauseWait)]), :jm_toString, []), this, JR.get(this, :PROCESS_LOOP_SLEEP)])
+                JR.jwhile(fn -> ((JR.call(this, :jm_isPaused, []) && JR.call(this, :jm_isRunning, [])) && !JR.call(this, :jm_isSingleThread, [])) end, fn ->
+                    JR.call(this, :jm_processSleep, [])
+                    if !JR.call(this, :jm_isPausable, []) do
+                        JR.call(JR.lget(f, :stringMaker), :jm_delete, [0, JR.call(JR.lget(f, :stringMaker), :jm_length, [])])
+                        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(JR.lget(f, :stringMaker), :jm_append, [JR.get(this, :END_PAUSE)]), :jm_appendlong, [JR.lget(f, :currentTimeMillis)]), :jm_toString, []), this, JR.get(this, :PROCESS_LOOP_SLEEP)])
+                        throw({:jreturn, nil})
+                    end
+                end)
+            end
+        end
+        JR.lset(f, :elapsedTime, JR.call(JR.get(this, :loopTimeHelper), :jm_getElapsedTNT, []))
+        JR.lset(f, :wait, JR.get(JR.get(this, :loopTimeHelper), :delay))
+        if (JR.lget(f, :elapsedTime) > JR.lget(f, :wait)) do
+            JR.lset(f, :elapsedTime, JR.lget(f, :wait))
+        else
+            JR.call(this, :jm_processGameSleep, [JR.int64(JR.lget(f, :wait) - JR.lget(f, :elapsedTime))])
+        end
+    end)
+  end
+
+
+  def jm_isSingleThread(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
+
+
+  def jm_run(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_setCurrentThread, [])
+    end)
+  end
+
+
+  def jm_end2(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_getType(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, -1})
+    end)
+  end
+end
+
 

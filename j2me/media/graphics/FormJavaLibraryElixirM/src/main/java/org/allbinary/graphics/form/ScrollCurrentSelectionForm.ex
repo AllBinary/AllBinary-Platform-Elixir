@@ -1,201 +1,302 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.form
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.canvas.Processor
-% import org.allbinary.graphics.Rectangle
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.font.MyFontProcessor
-% import org.allbinary.graphics.font.UpdateMyFontInterface
-% import org.allbinary.graphics.font.UpdateMyFontProcessor
-% import org.allbinary.graphics.form.item.ABCustomItem
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
--module('ScrollCurrentSelectionForm').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements UpdateMyFontInterface
+defmodule ScrollCurrentSelectionForm do
+  def jsuper(), do: ScrollSelectionForm
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ScrollSelectionForm', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :moveForSmallScreen, false)
+    JR.put(this, :updateMyFontProcessor, nil)
+    JR.put(this, :myFontProcessor, nil)
+    JR.put(this, :processor, nil)
+    JR.put(this, :preItemIndexDx, nil)
+    JR.put(this, :dx, 0)
+    JR.put(this, :dy, 0)
+    JR.put(this, :maxWidth, 0)
+        
+        JR.put(this, :updateMyFontProcessor, UpdateMyFontProcessor.jnew(this))
+        JR.put(this, :myFontProcessor, JR.get(this, :updateMyFontProcessor))
+        JR.put(this, :processor, Processor.jm_getInstance())
+        JR.put(this, :preItemIndexDx, ItemIndexDx.jm_getInstance())
+        JR.put(this, :dx, 0)
+        JR.put(this, :dy, 0)
+        JR.put(this, :maxWidth, 0)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, moveForSmallScreen}, false),
-    put({This, updateMyFontProcessor}, 'UpdateMyFontProcessor':new(This)),
-    put({This, myFontProcessor}, get({This, updateMyFontProcessor})),
-    put({This, processor}, 'Processor':getInstance()),
-    put({This, preItemIndexDx}, 'ItemIndexDx':getInstance()),
-    put({This, dx}, 0),
-    put({This, dy}, 0),
-    put({This, maxWidth}, 0),
-    ok.
+
+  def jinit(this, p_title, p_items, p_formPaintableFactory, p_border, p_adjustedExtraBorder, p_moveForSmallScreen, p_backgroundBasicColor, p_foregroundBasicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :title, p_title)
+      JR.lset(f, :items, p_items)
+      JR.lset(f, :formPaintableFactory, p_formPaintableFactory)
+      JR.lset(f, :border, p_border)
+      JR.lset(f, :adjustedExtraBorder, p_adjustedExtraBorder)
+      JR.lset(f, :moveForSmallScreen, p_moveForSmallScreen)
+      JR.lset(f, :backgroundBasicColor, p_backgroundBasicColor)
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+        ScrollSelectionForm.jinit(this, JR.lget(f, :title), JR.lget(f, :items), JR.lget(f, :formPaintableFactory), JR.lget(f, :border), JR.lget(f, :adjustedExtraBorder), JR.lget(f, :backgroundBasicColor), JR.lget(f, :foregroundBasicColor))
+        ScrollCurrentSelectionForm.jinitfields(this)
+        JR.put(this, :moveForSmallScreen, JR.lget(f, :moveForSmallScreen))
+    end)
+  end
+
+  def jnew(p_title, p_items, p_formPaintableFactory, p_border, p_adjustedExtraBorder, p_moveForSmallScreen, p_backgroundBasicColor, p_foregroundBasicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_title, p_items, p_formPaintableFactory, p_border, p_adjustedExtraBorder, p_moveForSmallScreen, p_backgroundBasicColor, p_foregroundBasicColor)
+    this
+  end
 
 
-new(Title, Items, FormPaintableFactory, Border, AdjustedExtraBorder, MoveForSmallScreen, BackgroundBasicColor, ForegroundBasicColor) when (is_list(Title) orelse Title =:= undefined), (is_tuple(Items) orelse Items =:= undefined), is_integer(Border), is_integer(AdjustedExtraBorder), is_boolean(MoveForSmallScreen) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Title, Items, FormPaintableFactory, Border, AdjustedExtraBorder, MoveForSmallScreen, BackgroundBasicColor, ForegroundBasicColor),
-    This.
-
-'$init'(This, Title, Items, FormPaintableFactory, Border, AdjustedExtraBorder, MoveForSmallScreen, BackgroundBasicColor, ForegroundBasicColor) when (is_list(Title) orelse Title =:= undefined), (is_tuple(Items) orelse Items =:= undefined), is_integer(Border), is_integer(AdjustedExtraBorder), is_boolean(MoveForSmallScreen) ->
-        'ScrollSelectionForm':'$init'(This, Title, Items, FormPaintableFactory, Border, AdjustedExtraBorder, BackgroundBasicColor, ForegroundBasicColor),
-        init_fields(This),
-        put({This, moveForSmallScreen}, MoveForSmallScreen).
-
-% throws Exception
-init(This, Rectangle, FormType) ->
-        'ScrollSelectionForm':init(This, Rectangle, FormType),
-        FormTypeFactory = 'FormTypeFactory':getInstance(),
-        case (FormType =:= get({FormTypeFactory, 'TEMP_HORIZONTAL_FORM'})) of
-            true ->
-            put({This, processor}, 'TempHorizontalFormProcessor':new(This)),
-            put({This, preItemIndexDx}, 'TempHorizontalItemIndexDx':new(This));
-            false ->
-            case (FormType =:= get({FormTypeFactory, 'HORIZONTAL_FORM'})) of
-            true ->
-            put({This, processor}, 'HorizontalFormProcessor':new(This)),
-            put({This, preItemIndexDx}, 'HorizontalItemIndexDx':new(This));
-            false ->
-            case (FormType =:= get({FormTypeFactory, 'VERTICAL_CENTER_FORM'})) of
-            true ->
-            put({This, processor}, 'VerticalFormProcessor':new(This)),
-            put({This, preItemIndexDx}, 'VerticalItemIndexDx':new(This));
-            false ->
-            case (FormType =:= get({FormTypeFactory, 'NULL_FORM_TYPE'})) of
-            true ->
-            ok;
-            false ->
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({FormTypeFactory, 'UNK'}), This, get({get({This, commonStrings}), 'INIT'}))
+  def jm_init(this, p_rectangle, p_formType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :rectangle, p_rectangle)
+      JR.lset(f, :formType, p_formType)
+        ScrollSelectionForm.jm_init(this, JR.lget(f, :rectangle), JR.lget(f, :formType))
+        JR.lset(f, :formTypeFactory, FormTypeFactory.jm_getInstance())
+        if (JR.lget(f, :formType) == JR.get(JR.lget(f, :formTypeFactory), :TEMP_HORIZONTAL_FORM)) do
+            JR.put(this, :processor, TempHorizontalFormProcessor.jnew(this))
+            JR.put(this, :preItemIndexDx, TempHorizontalItemIndexDx.jnew(this))
+        else
+            if (JR.lget(f, :formType) == JR.get(JR.lget(f, :formTypeFactory), :HORIZONTAL_FORM)) do
+            JR.put(this, :processor, HorizontalFormProcessor.jnew(this))
+            JR.put(this, :preItemIndexDx, HorizontalItemIndexDx.jnew(this))
+        else
+            if (JR.lget(f, :formType) == JR.get(JR.lget(f, :formTypeFactory), :VERTICAL_CENTER_FORM)) do
+            JR.put(this, :processor, VerticalFormProcessor.jnew(this))
+            JR.put(this, :preItemIndexDx, VerticalItemIndexDx.jnew(this))
+        else
+            if (JR.lget(f, :formType) == JR.get(JR.lget(f, :formTypeFactory), :NULL_FORM_TYPE)) do
+            nil
+        else
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.lget(f, :formTypeFactory), :UNK), this, JR.get(JR.get(this, :commonStrings), :INIT)])
         end
         end
         end
-        end,
-        put({This, myFontProcessor}, get({This, updateMyFontProcessor})).
+        end
+        JR.put(this, :myFontProcessor, JR.get(this, :updateMyFontProcessor))
+    end)
+  end
 
-updateMeasurement(This, Graphics) ->
-        put({This, myFontProcessor}, 'MyFontProcessor':getInstance()).
 
-processTempHorizontalForm(This) ->
-        put({This, dx}, ((get({This, x}) - 30) + (((get({get({This, rectangle}), '$class'})):getWidth(get({This, rectangle})) bsr 1)))),
-        put({This, dy}, get({This, y})).
+  def jm_updateMeasurement(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.put(this, :myFontProcessor, MyFontProcessor.jm_getInstance())
+    end)
+  end
 
-processHorizontalForm(This) ->
-        Size = (get({This, '$class'})):size(This),
-        put({local, totalWidth}, 0),
-        put({local, item}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, item}, (get({This, '$class'})):get(This, Index)),
-            put({local, totalWidth}, (get({local, totalWidth}) + ((get({get({local, item}), '$class'})):getMinimumWidth(get({local, item})) + get({This, border}))))
-        end, lists:seq(0, Size - 1)),
-        put({This, dx}, ((get({This, x}) + (((get({get({This, rectangle}), '$class'})):getWidth(get({This, rectangle})) bsr 1))) - ((get({local, totalWidth}) bsr 1)))),
-        put({This, dy}, (get({This, y}) + (((get({get({This, rectangle}), '$class'})):getHeight(get({This, rectangle})) bsr 1)))),
-        case get({This, moveForSmallScreen}) of
-            true ->
-            MaxTitleHeight = 175,
-            case (get({This, dy}) < MaxTitleHeight) of
-                true ->
-                put({This, dy}, MaxTitleHeight);
-                false -> ok
-            end;
-            false -> ok
-        end.
 
-processVerticalForm(This) ->
-        put({local, totalHeight}, 0),
-        Size = (get({This, '$class'})):size(This),
-        put({local, item2}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, item2}, (get({This, '$class'})):get(This, Index)),
-            case (get({This, maxWidth}) < (get({get({local, item2}), '$class'})):getMinimumWidth(get({local, item2}))) of
-                true ->
-                put({This, maxWidth}, (get({get({local, item2}), '$class'})):getMinimumWidth(get({local, item2})));
-                false -> ok
-            end,
-            put({local, totalHeight}, (get({local, totalHeight}) + ((get({get({local, item2}), '$class'})):getMinimumHeight(get({local, item2})) + get({This, border}))))
-        end, lists:seq(0, Size - 1)),
-        put({This, dx}, (((((get({get({This, rectangle}), '$class'})):getWidth(get({This, rectangle})) - get({This, maxWidth}))) / 2))),
-        case ((get({This, '$class'})):size(This) > 0) of
-            true ->
-            put({This, dy}, (get({This, y}) + (((((get({get({This, rectangle}), '$class'})):getHeight(get({This, rectangle})) - get({local, totalHeight}))) / 2)))),
-            case get({This, moveForSmallScreen}) of
-                true ->
-                MaxTitleHeight = 175,
-                case (get({This, dy}) < MaxTitleHeight) of
-                    true ->
-                    put({This, dy}, MaxTitleHeight);
-                    false -> ok
-                end;
-                false -> ok
-            end;
-            false ->
-            put({This, dy}, get({This, y}))
-        end.
+  def jm_processTempHorizontalForm(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.put(this, :dx, ((JR.get(this, :x) - 30) + (Bitwise.bsr(JR.call(JR.get(this, :rectangle), :jm_getWidth, []), 1))))
+        JR.put(this, :dy, JR.get(this, :y))
+    end)
+  end
 
-getXTempHorizontalForm(This, Index, Item, Dx, Dy) when is_integer(Index), is_integer(Dx), is_integer(Dy) ->
-        (get({This, '$class'})):getDiffX(This, Item).
 
-getXHorizontalForm(This, Index, Item, Dx, Dy) when is_integer(Index), is_integer(Dx), is_integer(Dy) ->
-        0.
+  def jm_processHorizontalForm(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :size, JR.call(this, :jm_size, []))
+        JR.lset(f, :totalWidth, 0)
+        JR.lset(f, :item, nil)
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :item, JR.call(this, :jm_get, [JR.lget(f, :index)]))
+            JR.lset(f, :totalWidth, JR.int32(JR.lget(f, :totalWidth) + (JR.call(JR.lget(f, :item), :jm_getMinimumWidth, []) + JR.get(this, :border))))
+        end)
+        JR.put(this, :dx, ((JR.get(this, :x) + (Bitwise.bsr(JR.call(JR.get(this, :rectangle), :jm_getWidth, []), 1))) - (Bitwise.bsr(JR.lget(f, :totalWidth), 1))))
+        JR.put(this, :dy, (JR.get(this, :y) + (Bitwise.bsr(JR.call(JR.get(this, :rectangle), :jm_getHeight, []), 1))))
+        if JR.get(this, :moveForSmallScreen) do
+            JR.lset(f, :maxTitleHeight, 175)
+            if (JR.get(this, :dy) < JR.lget(f, :maxTitleHeight)) do
+                JR.put(this, :dy, JR.lget(f, :maxTitleHeight))
+            end
+        end
+    end)
+  end
 
-getXVerticalForm(This, Index, Item, Dx, Dy) when is_integer(Index), is_integer(Dx), is_integer(Dy) ->
-        ((get({This, '$class'})):getDiffX(This, Item) + get({This, halfBorder})).
 
-getDiffX(This, Item) ->
-        ((((get({This, maxWidth}) - (get({Item, '$class'})):getMinimumWidth(Item))) bsr 1)).
+  def jm_processVerticalForm(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :totalHeight, 0)
+        JR.lset(f, :size, JR.call(this, :jm_size, []))
+        JR.lset(f, :item2, nil)
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :item2, JR.call(this, :jm_get, [JR.lget(f, :index)]))
+            if (JR.get(this, :maxWidth) < JR.call(JR.lget(f, :item2), :jm_getMinimumWidth, [])) do
+                JR.put(this, :maxWidth, JR.call(JR.lget(f, :item2), :jm_getMinimumWidth, []))
+            end
+            JR.lset(f, :totalHeight, JR.int32(JR.lget(f, :totalHeight) + (JR.call(JR.lget(f, :item2), :jm_getMinimumHeight, []) + JR.get(this, :border))))
+        end)
+        JR.put(this, :dx, ((((JR.call(JR.get(this, :rectangle), :jm_getWidth, []) - JR.get(this, :maxWidth))) / 2)))
+        if (JR.call(this, :jm_size, []) > 0) do
+            JR.put(this, :dy, (JR.get(this, :y) + ((((JR.call(JR.get(this, :rectangle), :jm_getHeight, []) - JR.lget(f, :totalHeight))) / 2))))
+            if JR.get(this, :moveForSmallScreen) do
+                JR.lset(f, :maxTitleHeight, 175)
+                if (JR.get(this, :dy) < JR.lget(f, :maxTitleHeight)) do
+                    JR.put(this, :dy, JR.lget(f, :maxTitleHeight))
+                end
+            end
+        else
+            JR.put(this, :dy, JR.get(this, :y))
+        end
+    end)
+  end
 
-getDx(This) ->
-        get({This, dx}).
 
-getDy(This) ->
-        get({This, dy}).
+  def jm_getXTempHorizontalForm(this, p_index, p_item, p_dx, p_dy) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :index, p_index)
+      JR.lset(f, :item, p_item)
+      JR.lset(f, :dx, p_dx)
+      JR.lset(f, :dy, p_dy)
+        throw({:jreturn, JR.call(this, :jm_getDiffX, [JR.lget(f, :item)])})
+    end)
+  end
 
-paint(This, Graphics) ->
-        try
-            (get({get({This, processor}), '$class'})):process(get({This, processor})),
-            put({local, delta}, 0),
-            put({local, deltaX}, (get({This, '$class'})):getDx(This)),
-            put({local, deltaY}, (get({This, '$class'})):getDy(This)),
-            Size = (get({This, '$class'})):size(This),
-            FormTypeFactory = 'FormTypeFactory':getInstance(),
-            put({local, item}, undefined),
-            lists:foreach(fun(Index) ->
-                put({local, item}, (get({This, '$class'})):get(This, Index)),
-                DiffX = (get({get({This, preItemIndexDx}), '$class'})):getDx(get({This, preItemIndexDx}), Index, get({local, item}), get({This, dx}), get({This, dy})),
-                case (Index =:= (get({This, '$class'})):getSelectedIndex(This)) of
-                    true ->
-                    put({local, delta}, (get({This, '$class'})):paintItem(This, Graphics, Index, get({local, item}), (get({local, deltaX}) + DiffX), get({local, deltaY}))),
-                    (get({get({This, paintable}), '$class'})):paint(get({This, paintable}), Graphics, Index, (get({local, deltaX}) + DiffX), get({local, deltaY}));
-                    false ->
-                    put({local, delta}, (get({This, '$class'})):paintUnselectedItem(This, Graphics, Index, get({local, item}), (get({local, deltaX}) + DiffX), get({local, deltaY}))),
-                    (get({get({This, paintable}), '$class'})):paint(get({This, paintable}), Graphics, Index, (get({local, deltaX}) + DiffX), get({local, deltaY}))
-                end,
-                case (get({This, formType}) =:= get({FormTypeFactory, 'TEMP_HORIZONTAL_FORM'})) of
-                    true ->
-                    ok;
-                    false ->
-                    case (get({This, formType}) =:= get({FormTypeFactory, 'HORIZONTAL_FORM'})) of
-                    true ->
-                    put({local, deltaX}, get({local, delta}));
-                    false ->
-                    case (get({This, formType}) =:= get({FormTypeFactory, 'VERTICAL_CENTER_FORM'})) of
-                    true ->
-                    put({local, deltaY}, get({local, delta}));
-                    false ->
-                    erlang:error({'Exception', get({FormTypeFactory, 'UNK'})})
+
+  def jm_getXHorizontalForm(this, p_index, p_item, p_dx, p_dy) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :index, p_index)
+      JR.lset(f, :item, p_item)
+      JR.lset(f, :dx, p_dx)
+      JR.lset(f, :dy, p_dy)
+        throw({:jreturn, 0})
+    end)
+  end
+
+
+  def jm_getXVerticalForm(this, p_index, p_item, p_dx, p_dy) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :index, p_index)
+      JR.lset(f, :item, p_item)
+      JR.lset(f, :dx, p_dx)
+      JR.lset(f, :dy, p_dy)
+        throw({:jreturn, (JR.call(this, :jm_getDiffX, [JR.lget(f, :item)]) + JR.get(this, :halfBorder))})
+    end)
+  end
+
+
+  def jm_getDiffX(this, p_item) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :item, p_item)
+        throw({:jreturn, (Bitwise.bsr(((JR.get(this, :maxWidth) - JR.call(JR.lget(f, :item), :jm_getMinimumWidth, []))), 1))})
+    end)
+  end
+
+
+  def jm_getDx(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :dx)})
+    end)
+  end
+
+
+  def jm_getDy(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :dy)})
+    end)
+  end
+
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        try do
+            JR.call(JR.get(this, :processor), :jm_process, [])
+            JR.lset(f, :delta, 0)
+            JR.lset(f, :deltaX, JR.call(this, :jm_getDx, []))
+            JR.lset(f, :deltaY, JR.call(this, :jm_getDy, []))
+            JR.lset(f, :size, JR.call(this, :jm_size, []))
+            JR.lset(f, :formTypeFactory, FormTypeFactory.jm_getInstance())
+            JR.lset(f, :item, nil)
+            JR.lset(f, :index, 0)
+            JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+                JR.lset(f, :item, JR.call(this, :jm_get, [JR.lget(f, :index)]))
+                JR.lset(f, :diffX, JR.call(JR.get(this, :preItemIndexDx), :jm_getDx, [JR.lget(f, :index), JR.lget(f, :item), JR.get(this, :dx), JR.get(this, :dy)]))
+                if (JR.lget(f, :index) == JR.call(this, :jm_getSelectedIndex, [])) do
+                    JR.lset(f, :delta, JR.call(this, :jm_paintItem, [JR.lget(f, :graphics), JR.lget(f, :index), JR.lget(f, :item), JR.int32(JR.lget(f, :deltaX) + JR.lget(f, :diffX)), JR.lget(f, :deltaY)]))
+                    JR.call(JR.get(this, :paintable), :jm_paint, [JR.lget(f, :graphics), JR.lget(f, :index), JR.int32(JR.lget(f, :deltaX) + JR.lget(f, :diffX)), JR.lget(f, :deltaY)])
+                else
+                    JR.lset(f, :delta, JR.call(this, :jm_paintUnselectedItem, [JR.lget(f, :graphics), JR.lget(f, :index), JR.lget(f, :item), JR.int32(JR.lget(f, :deltaX) + JR.lget(f, :diffX)), JR.lget(f, :deltaY)]))
+                    JR.call(JR.get(this, :paintable), :jm_paint, [JR.lget(f, :graphics), JR.lget(f, :index), JR.int32(JR.lget(f, :deltaX) + JR.lget(f, :diffX)), JR.lget(f, :deltaY)])
+                end
+                if (JR.get(this, :formType) == JR.get(JR.lget(f, :formTypeFactory), :TEMP_HORIZONTAL_FORM)) do
+                    nil
+                else
+                    if (JR.get(this, :formType) == JR.get(JR.lget(f, :formTypeFactory), :HORIZONTAL_FORM)) do
+                    JR.lset(f, :deltaX, JR.lget(f, :delta))
+                else
+                    if (JR.get(this, :formType) == JR.get(JR.lget(f, :formTypeFactory), :VERTICAL_CENTER_FORM)) do
+                    JR.lset(f, :deltaY, JR.lget(f, :delta))
+                else
+                    throw({:jexception, JR.exception("Exception", JR.get(JR.lget(f, :formTypeFactory), :UNK))})
                 end
                 end
                 end
-            end, lists:seq(0, Size - 1))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, canvasStrings}), 'PAINT'}), E)
-        end.
+            end)
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :canvasStrings), :PAINT), JR.lget(f, :e)])
+        end
+    end)
+  end
+end
+
 

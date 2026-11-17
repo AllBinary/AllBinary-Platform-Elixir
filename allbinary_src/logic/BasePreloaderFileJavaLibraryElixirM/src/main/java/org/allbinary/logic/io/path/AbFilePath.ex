@@ -1,40 +1,49 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.io.path
-% import org.allbinary.logic.string.StringUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.io.path
 
--module('AbFilePath').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule AbFilePath do
+  def jsuper(), do: AbPath
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AbPath', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
 
+  def jinit(this, p_aPath) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :aPath, p_aPath)
+        AbPath.jinit(this, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+        AbFilePath.jinitfields(this)
+        JR.lset(f, :pathData, AbPathData.jm_getInstance())
+        JR.lset(f, :abPathUtil, PathUtil.jm_getInstance())
+        JR.put(this, :schema, JR.call(this, :jm_getSchema, [JR.lget(f, :aPath)]))
+        JR.call(this, :jm_setName, [JR.call(JR.lget(f, :pathData), :jm_getNameFromPath, [JR.lget(f, :aPath)])])
+        JR.call(this, :jm_setPath, [JR.call(JR.lget(f, :abPathUtil), :jm_adjust, [JR.call(this, :jm_getPathFromPath, [JR.call(JR.call(JR.lget(f, :abPathUtil), :jm_removeNameFromPath, [JR.lget(f, :aPath)]), :jm_toString, [])])])])
+    end)
+  end
 
-new(APath) when (is_list(APath) orelse APath =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, APath),
-    This.
+  def jnew(p_aPath) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_aPath)
+    this
+  end
+end
 
-'$init'(This, APath) when (is_list(APath) orelse APath =:= undefined) ->
-        'AbPath':'$init'(This, get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'StringUtil':getInstance(), 'EMPTY_STRING'})),
-        PathData = 'AbPathData':getInstance(),
-        AbPathUtil = 'PathUtil':getInstance(),
-        put({This, schema}, (get({This, '$class'})):getSchema(This, APath)),
-        (get({This, '$class'})):setName(This, (get({PathData, '$class'})):getNameFromPath(PathData, APath)),
-        (get({This, '$class'})):setPath(This, (get({AbPathUtil, '$class'})):adjust(AbPathUtil, (get({This, '$class'})):getPathFromPath(This, (fun(Target_N65924) -> (get({Target_N65924, '$class'})):toString(Target_N65924) end)((get({AbPathUtil, '$class'})):removeNameFromPath(AbPathUtil, APath))))).
 

@@ -1,54 +1,98 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.io
-% import java.io.BufferedReader
-% import java.io.FileReader
-% import org.allbinary.logic.io.file.AbFile
-% import org.allbinary.logic.io.file.AbFileNativeUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
--module('BufferedLineReader').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule BufferedLineReader do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, tmpIn}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :tmpIn, nil)
+        
+    nil
+  end
 
 
-new(File) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, File),
-    This.
+  def jinit(this, p_file) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :file, p_file)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :tmpIn, BufferedReader.jnew(FileReader.jnew(AbFileNativeUtil.jm_get(JR.lget(f, :file)))))
+    end)
+  end
 
-'$init'(This, File) ->
-    init_fields(This),
-        put({This, tmpIn}, 'BufferedReader':new('FileReader':new('AbFileNativeUtil':get(File)))).
+  def jnew(p_file) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_file)
+    this
+  end
 
-readUpToLines(This, ReadAheadIndex) when is_integer(ReadAheadIndex) ->
-        ok.
 
-% throws Exception
-readLine(This) ->
-        (get({get({This, tmpIn}), '$class'})):readLine(get({This, tmpIn})).
+  def jm_readUpToLines(this, p_readAheadIndex) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :readAheadIndex, p_readAheadIndex)
+        nil
+    end)
+  end
 
-% throws Exception
-ready(This) ->
-        (get({get({This, tmpIn}), '$class'})):ready(get({This, tmpIn})).
 
-getSize(This) ->
-        0.
+  def jm_readLine(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.get(this, :tmpIn), :jm_readLine, [])})
+    end)
+  end
 
-getCurrent(This) ->
-        0.
+
+  def jm_ready(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.get(this, :tmpIn), :jm_ready, [])})
+    end)
+  end
+
+
+  def jm_getSize(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0})
+    end)
+  end
+
+
+  def jm_getCurrent(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0})
+    end)
+  end
+end
+
 

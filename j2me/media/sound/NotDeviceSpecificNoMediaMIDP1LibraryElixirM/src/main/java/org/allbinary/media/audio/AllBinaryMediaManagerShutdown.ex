@@ -1,45 +1,53 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.media.audio
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
--module('AllBinaryMediaManagerShutdown').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule AllBinaryMediaManagerShutdown do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> AllBinaryMediaManagerShutdown.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'AllBinaryMediaManagerShutdown':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-% throws Exception
-shutdown(SoundsFactoryInterface) ->
-        LogUtil = 'LogUtil':getInstance(),
-        CommonStrings = 'CommonStrings':getInstance(),
-        (get({LogUtil, '$class'})):putF(LogUtil, get({CommonStrings, 'START'}), get({'AllBinaryMediaManagerShutdown', instance}), "shutdown"),
-        'AllBinaryMediaManager':shutdown(SoundsFactoryInterface).
+  def jm_shutdown(p_soundsFactoryInterface) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :soundsFactoryInterface, p_soundsFactoryInterface)
+        JR.lset(f, :logUtil, LogUtil.jm_getInstance())
+        JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+        JR.call(JR.lget(f, :logUtil), :jm_putF, [JR.get(JR.lget(f, :commonStrings), :START), AllBinaryMediaManagerShutdown.jstatic_instance(), "shutdown"])
+        AllBinaryMediaManager.jm_shutdown(JR.lget(f, :soundsFactoryInterface))
+    end)
+  end
+end
+
 

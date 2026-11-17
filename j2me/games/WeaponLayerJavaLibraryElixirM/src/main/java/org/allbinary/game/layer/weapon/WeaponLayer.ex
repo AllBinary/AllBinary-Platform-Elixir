@@ -1,241 +1,458 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer.weapon
-% import javax.microedition.khronos.opengles.GL
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.animation.Animation
-% import org.allbinary.animation.IndexedAnimation
-% import org.allbinary.animation.NullAnimationFactory
-% import org.allbinary.game.collision.CollidableBaseBehavior
-% import org.allbinary.game.combat.destroy.DestroyedLayerProcessor
-% import org.allbinary.game.combat.weapon.WeaponProperties
-% import org.allbinary.game.configuration.GameConfigurationUtil
-% import org.allbinary.game.identification.BasicGroupFactory
-% import org.allbinary.game.multiplayer.layer.MultiPlayerGameLayer
-% import org.allbinary.game.multiplayer.layer.RemoteInfo
-% import org.allbinary.game.score.NoScoreable
-% import org.allbinary.game.score.ScoreableInterface
-% import org.allbinary.game.tick.TickableInterface
-% import org.allbinary.graphics.Rectangle
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.AllBinaryLayerManager
-% import org.allbinary.physics.movement.Movement
-% import org.allbinary.view.ViewPosition
-% import org.allbinary.view.ViewPositionBase
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer.weapon
 
--module('WeaponLayer').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements TickableInterface
+defmodule WeaponLayer do
+  def jsuper(), do: MultiPlayerGameLayer
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('MultiPlayerGameLayer', Function, Arguments).
-
-init_fields(This) ->
-    put({This, animationInterface}, (fun(Target_N66234) -> (get({Target_N66234, '$class'})):getInstance(Target_N66234, 0) end)('NullAnimationFactory':getFactoryInstance())),
-    put({This, initAnimationInterface}, undefined),
-    put({This, destroyedAnimationInterface}, undefined),
-    put({This, sourceLayerInterface}, get({'AllBinaryLayer', 'NULL_ALLBINARY_LAYER'})),
-    put({This, totalDamage}, 0),
-    put({This, initDamage}, 0),
-    put({This, destroyed}, true),
-    put({This, scoreableInterface}, 'NoScoreable':getInstance()),
-    put({This, movement}, undefined),
-    put({This, weaponProperties}, get({'WeaponProperties', 'NULL_WEAPON_PROPERTIES'})),
-    put({This, multiPlayerType}, 0),
-    put({This, collidableWeaponBehavior}, 'CollidableWeaponBehavior':getNullInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :animationInterface, nil)
+    JR.put(this, :initAnimationInterface, nil)
+    JR.put(this, :destroyedAnimationInterface, nil)
+    JR.put(this, :sourceLayerInterface, nil)
+    JR.put(this, :totalDamage, 0)
+    JR.put(this, :initDamage, 0)
+    JR.put(this, :destroyed, false)
+    JR.put(this, :scoreableInterface, nil)
+    JR.put(this, :movement, nil)
+    JR.put(this, :weaponProperties, nil)
+    JR.put(this, :multiPlayerType, 0)
+    JR.put(this, :collidableWeaponBehavior, nil)
+        JR.put(this, :animationInterface, JR.call(NullAnimationFactory.jm_getFactoryInstance(), :jm_getInstance, [0]))
+        
+        
+        JR.put(this, :sourceLayerInterface, AllBinaryLayer.jstatic_NULL_ALLBINARY_LAYER())
+        JR.put(this, :totalDamage, 0)
+        JR.put(this, :initDamage, 0)
+        JR.put(this, :destroyed, true)
+        JR.put(this, :scoreableInterface, NoScoreable.jm_getInstance())
+        
+        JR.put(this, :weaponProperties, WeaponProperties.jstatic_NULL_WEAPON_PROPERTIES())
+        
+        JR.put(this, :collidableWeaponBehavior, CollidableWeaponBehavior.jm_getNullInstance())
+    nil
+  end
 
 
-new(Name, RemoteInfo, MultiPlayerType, Movement, AnimationInterface, DestroyedAnimationInterface, Rectangle, ViewPosition) when (is_list(Name) orelse Name =:= undefined), is_integer(MultiPlayerType) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Name, RemoteInfo, MultiPlayerType, Movement, AnimationInterface, DestroyedAnimationInterface, Rectangle, ViewPosition),
-    This.
+  def jinit(this, p_name, p_remoteInfo, p_multiPlayerType, p_movement, p_animationInterface, p_destroyedAnimationInterface, p_rectangle, p_viewPosition) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :remoteInfo, p_remoteInfo)
+      JR.lset(f, :multiPlayerType, p_multiPlayerType)
+      JR.lset(f, :movement, p_movement)
+      JR.lset(f, :animationInterface, p_animationInterface)
+      JR.lset(f, :destroyedAnimationInterface, p_destroyedAnimationInterface)
+      JR.lset(f, :rectangle, p_rectangle)
+      JR.lset(f, :viewPosition, p_viewPosition)
+        MultiPlayerGameLayer.jinit(this, JR.lget(f, :remoteInfo), JR.get(BasicGroupFactory.jm_getInstance(), :NONE_ARRAY), JR.lget(f, :name), JR.lget(f, :rectangle), JR.lget(f, :viewPosition))
+        WeaponLayer.jinitfields(this)
+        JR.put(this, :initAnimationInterface, JR.lget(f, :animationInterface))
+        JR.call(this, :jm_setAnimationInterface, [JR.lget(f, :animationInterface)])
+        JR.put(this, :destroyedAnimationInterface, JR.lget(f, :destroyedAnimationInterface))
+        JR.put(this, :movement, JR.lget(f, :movement))
+        JR.put(this, :multiPlayerType, JR.lget(f, :multiPlayerType))
+    end)
+  end
 
-'$init'(This, Name, RemoteInfo, MultiPlayerType, Movement, AnimationInterface, DestroyedAnimationInterface, Rectangle, ViewPosition) when (is_list(Name) orelse Name =:= undefined), is_integer(MultiPlayerType) ->
-        'MultiPlayerGameLayer':'$init'(This, RemoteInfo, get({'BasicGroupFactory':getInstance(), 'NONE_ARRAY'}), Name, Rectangle, ViewPosition),
-        init_fields(This),
-        put({This, initAnimationInterface}, AnimationInterface),
-        (get({This, '$class'})):setAnimationInterface(This, AnimationInterface),
-        put({This, destroyedAnimationInterface}, DestroyedAnimationInterface),
-        put({This, movement}, Movement),
-        put({This, multiPlayerType}, MultiPlayerType).
+  def jnew(p_name, p_remoteInfo, p_multiPlayerType, p_movement, p_animationInterface, p_destroyedAnimationInterface, p_rectangle, p_viewPosition) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_name, p_remoteInfo, p_multiPlayerType, p_movement, p_animationInterface, p_destroyedAnimationInterface, p_rectangle, p_viewPosition)
+    this
+  end
 
-setCollidableInferface(This, CollidableInferface) ->
-        'MultiPlayerGameLayer':setCollidableInferface(This, CollidableInferface),
-        put({This, collidableWeaponBehavior}, (get({This, '$class'})):getCollidableInferface(This)).
 
-% throws Exception
-initXYZ(This, X, Y, Z) when is_integer(X), is_integer(Y), is_integer(Z) ->
-        put({This, x}, X),
-        put({This, y}, Y),
-        put({This, z}, Z).
+  def jm_setCollidableInferface(this, p_collidableInferface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :collidableInferface, p_collidableInferface)
+        MultiPlayerGameLayer.jm_setCollidableInferface(this, JR.lget(f, :collidableInferface))
+        JR.put(this, :collidableWeaponBehavior, JR.call(this, :jm_getCollidableInferface, []))
+    end)
+  end
 
-% throws Exception
-init(This, SourceLayerInterface, Angle, OtherAngle, WeaponProperties, Scoreable) when is_integer(Angle), is_integer(OtherAngle) ->
-        (get({This, '$class'})):setWeaponPropertiesP(This, WeaponProperties),
-        (get({This, '$class'})):setReadyForExplosion(This, false),
-        (get({This, '$class'})):setAnimationInterface(This, (get({This, '$class'})):getInitAnimationInterfaceP(This)),
-        (get({This, '$class'})):setOwnerLayerInterface(This, SourceLayerInterface),
-        (get({get({This, collidableWeaponBehavior}), '$class'})):init(get({This, collidableWeaponBehavior}), SourceLayerInterface),
-        (get({This, '$class'})):setGroupInterfaces(This),
-        case (Scoreable =/= undefined) of
-            true ->
-            put({This, scoreableInterface}, Scoreable);
-            false -> ok
-        end,
-        put({This, totalDamage}, 0),
-        put({This, initDamage}, (get({WeaponProperties, '$class'})):getDamage(WeaponProperties)),
-        (get({This, '$class'})):setDestroyed(This, false),
-        (get({get({This, movement}), '$class'})):init(get({This, movement}), (get({WeaponProperties, '$class'})):getSpeed(WeaponProperties), Angle, OtherAngle).
 
-setGroupInterfaces(This) ->
-        BasicGroupFactory = 'BasicGroupFactory':getInstance(),
-        case (array:get(0, (get({get({This, sourceLayerInterface}), '$class'})):getGroupInterface(get({This, sourceLayerInterface}))) =:= get({BasicGroupFactory, 'ENEMY'})) of
-            true ->
-            (get({This, '$class'})):setGroupInterface(This, get({BasicGroupFactory, 'ENEMY_ARRAY'}));
-            false ->
-            (get({This, '$class'})):setGroupInterface(This, (get({get({This, sourceLayerInterface}), '$class'})):getGroupInterface(get({This, sourceLayerInterface})))
-        end.
+  def jm_initXYZ(this, p_x, p_y, p_z) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :z, p_z)
+        JR.put(this, :x, JR.lget(f, :x))
+        JR.put(this, :y, JR.lget(f, :y))
+        JR.put(this, :z, JR.lget(f, :z))
+    end)
+  end
 
-% throws Exception
-processTick(This, AllBinaryLayerManager) ->
-        case ((get({This, '$class'})):isExhausted(This) andalso (not (get({This, '$class'})):isDestroyed(This))) of
-            true ->
-            case (get({This, '$class'})):isReadyForExplosion(This) of
-                true ->
-                IndexedAnimationInterface = (get({This, '$class'})):getAnimationInterface(This),
-                CurrentFrame = (get({IndexedAnimationInterface, '$class'})):getFrame(IndexedAnimationInterface),
-                case (CurrentFrame < ((get({IndexedAnimationInterface, '$class'})):getAnimationSize(IndexedAnimationInterface) - 1)) of
-                    true ->
-                    (get({IndexedAnimationInterface, '$class'})):nextFrame(IndexedAnimationInterface);
-                    false ->
-                    (get({This, '$class'})):setDestroyed(This, true)
-                end;
-                false ->
-                CollidableWeaponBehavior = (get({This, '$class'})):getCollidableInferface(This),
-                case (get({CollidableWeaponBehavior, '$class'})):isCollided(CollidableWeaponBehavior) of
-                    true ->
-                    (get({This, '$class'})):setAnimationInterface(This, get({This, destroyedAnimationInterface})),
-                    (fun(Target_N68299) -> (get({Target_N68299, '$class'})):stop(Target_N68299) end)((get({This, '$class'})):getMovement(This)),
-                    (get({This, '$class'})):setReadyForExplosion(This, true);
-                    false ->
-                    (get({This, '$class'})):setDestroyed(This, true)
-                end
-            end;
-            false -> ok
-        end,
-        (get({get({This, movement}), '$class'})):process(get({This, movement}), This),
-        put({This, totalDamage}, (get({This, totalDamage}) + (get({get({This, weaponProperties}), '$class'})):getDissipation(get({This, weaponProperties})))).
 
-isDestroyed(This) ->
-        get({This, destroyed}).
-
-damage(This, Damage, DamageType) when is_integer(Damage), is_integer(DamageType) ->
-        put({This, totalDamage}, (get({This, totalDamage}) + (Damage * Damage))).
-
-givePoints(This, Total) when is_integer(Total) ->
-        (get({get({This, scoreableInterface}), '$class'})):addPoints(get({This, scoreableInterface}), ((fun(Target_N68892) -> (get({Target_N68892, '$class'})):getCompetitionValue(Target_N68892) end)('GameConfigurationUtil':getInstance()) * Total)).
-
-isExhausted(This) ->
-        try
-        case ((get({This, totalDamage}) > (get({This, '$class'})):getInitDamage(This)) orelse (get({This, totalDamage}) < 0)) of
-            true ->
-            throw({'$return', true});
-            false ->
-            throw({'$return', false})
+  def jm_init(this, p_sourceLayerInterface, p_angle, p_otherAngle, p_weaponProperties, p_scoreable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :sourceLayerInterface, p_sourceLayerInterface)
+      JR.lset(f, :angle, p_angle)
+      JR.lset(f, :otherAngle, p_otherAngle)
+      JR.lset(f, :weaponProperties, p_weaponProperties)
+      JR.lset(f, :scoreable, p_scoreable)
+        JR.call(this, :jm_setWeaponPropertiesP, [JR.lget(f, :weaponProperties)])
+        JR.call(this, :jm_setReadyForExplosion, [false])
+        JR.call(this, :jm_setAnimationInterface, [JR.call(this, :jm_getInitAnimationInterfaceP, [])])
+        JR.call(this, :jm_setOwnerLayerInterface, [JR.lget(f, :sourceLayerInterface)])
+        JR.call(JR.get(this, :collidableWeaponBehavior), :jm_init, [JR.lget(f, :sourceLayerInterface)])
+        JR.call(this, :jm_setGroupInterfaces, [])
+        if (JR.lget(f, :scoreable) != nil) do
+            JR.put(this, :scoreableInterface, JR.lget(f, :scoreable))
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        JR.put(this, :totalDamage, 0)
+        JR.put(this, :initDamage, JR.call(JR.lget(f, :weaponProperties), :jm_getDamage, []))
+        JR.call(this, :jm_setDestroyed, [false])
+        JR.call(JR.get(this, :movement), :jm_init, [JR.call(JR.lget(f, :weaponProperties), :jm_getSpeed, []), JR.lget(f, :angle), JR.lget(f, :otherAngle)])
+    end)
+  end
 
-getDamage(This, DamageType) when is_integer(DamageType) ->
-        try
-        case (not (get({This, '$class'})):isExhausted(This)) of
-            true ->
-            Total = ((get({This, '$class'})):getInitDamage(This) - get({This, totalDamage})),
-            (get({This, '$class'})):givePoints(This, Total),
-            throw({'$return', Total});
-            false -> ok
-        end,
-        0
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
 
-setDestroyed(This, Destroyed) when is_boolean(Destroyed) ->
-        put({This, destroyed}, Destroyed),
-        case (get({This, '$class'})):isDestroyed(This) of
-            true ->
-            put({This, scoreableInterface}, 'NoScoreable':getInstance()),
-            (fun(Target_N69355) -> (get({Target_N69355, '$class'})):add(Target_N69355, This) end)('DestroyedLayerProcessor':getInstance());
-            false -> ok
-        end.
+  def jm_setGroupInterfaces(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :basicGroupFactory, BasicGroupFactory.jm_getInstance())
+        if (JR.aget(JR.call(JR.get(this, :sourceLayerInterface), :jm_getGroupInterface, []), 0) == JR.get(JR.lget(f, :basicGroupFactory), :ENEMY)) do
+            JR.call(this, :jm_setGroupInterface, [JR.get(JR.lget(f, :basicGroupFactory), :ENEMY_ARRAY)])
+        else
+            JR.call(this, :jm_setGroupInterface, [JR.call(JR.get(this, :sourceLayerInterface), :jm_getGroupInterface, [])])
+        end
+    end)
+  end
 
-getInitDamage(This) ->
-        get({This, initDamage}).
 
-setAnimationInterface(This, AnimationInterface) ->
-        put({This, animationInterface}, AnimationInterface).
+  def jm_processTick(this, p_allBinaryLayerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerManager, p_allBinaryLayerManager)
+        if (JR.call(this, :jm_isExhausted, []) && !JR.call(this, :jm_isDestroyed, [])) do
+            if JR.call(this, :jm_isReadyForExplosion, []) do
+                JR.lset(f, :indexedAnimationInterface, JR.call(this, :jm_getAnimationInterface, []))
+                JR.lset(f, :currentFrame, JR.call(JR.lget(f, :indexedAnimationInterface), :jm_getFrame, []))
+                if (JR.lget(f, :currentFrame) < (JR.call(JR.lget(f, :indexedAnimationInterface), :jm_getAnimationSize, []) - 1)) do
+                    JR.call(JR.lget(f, :indexedAnimationInterface), :jm_nextFrame, [])
+                else
+                    JR.call(this, :jm_setDestroyed, [true])
+                end
+            else
+                JR.lset(f, :collidableWeaponBehavior, JR.call(this, :jm_getCollidableInferface, []))
+                if JR.call(JR.lget(f, :collidableWeaponBehavior), :jm_isCollided, []) do
+                    JR.call(this, :jm_setAnimationInterface, [JR.get(this, :destroyedAnimationInterface)])
+                    JR.call(JR.call(this, :jm_getMovement, []), :jm_stop, [])
+                    JR.call(this, :jm_setReadyForExplosion, [true])
+                else
+                    JR.call(this, :jm_setDestroyed, [true])
+                end
+            end
+        end
+        JR.call(JR.get(this, :movement), :jm_process, [this])
+        JR.put(this, :totalDamage, JR.int32(JR.get(this, :totalDamage) + JR.call(JR.get(this, :weaponProperties), :jm_getDissipation, [])))
+    end)
+  end
 
-getAnimationInterface(This) ->
-        get({This, animationInterface}).
 
-getInitAnimationInterfaceP(This) ->
-        get({This, initAnimationInterface}).
+  def jm_isDestroyed(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :destroyed)})
+    end)
+  end
 
-setInitAnimationInterfaceP(This, InitAnimationInterface) ->
-        put({This, initAnimationInterface}, InitAnimationInterface).
 
-getDestroyedAnimationInterface(This) ->
-        get({This, destroyedAnimationInterface}).
+  def jm_damage(this, p_damage, p_damageType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :damage, p_damage)
+      JR.lset(f, :damageType, p_damageType)
+        JR.put(this, :totalDamage, JR.int32(JR.get(this, :totalDamage) + JR.int32(JR.lget(f, :damage) * JR.lget(f, :damage))))
+    end)
+  end
 
-getOwnerLayerInterface(This) ->
-        get({This, sourceLayerInterface}).
 
-setOwnerLayerInterface(This, SourceLayerInterface) ->
-        put({This, sourceLayerInterface}, SourceLayerInterface).
+  def jm_givePoints(this, p_total) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :total, p_total)
+        JR.call(JR.get(this, :scoreableInterface), :jm_addPoints, [(JR.call(GameConfigurationUtil.jm_getInstance(), :jm_getCompetitionValue, []) * JR.lget(f, :total))])
+    end)
+  end
 
-paint(This, Graphics) ->
-        ViewPosition = (get({This, '$class'})):getViewPosition(This),
-        (get({get({This, animationInterface}), '$class'})):paintXY(get({This, animationInterface}), Graphics, ((get({ViewPosition, '$class'})):getX(ViewPosition) - (get({This, '$class'})):getHalfWidth(This)), ((get({ViewPosition, '$class'})):getY(ViewPosition) - (get({This, '$class'})):getHalfHeight(This))).
 
-paintThreed(This, Graphics) ->
-        ViewPosition = (get({This, '$class'})):getViewPosition(This),
-        (get({get({This, animationInterface}), '$class'})):paintThreedXYZ(get({This, animationInterface}), Graphics, ((get({ViewPosition, '$class'})):getX(ViewPosition) - (get({This, '$class'})):getHalfWidth(This)), ((get({ViewPosition, '$class'})):getY(ViewPosition) - (get({This, '$class'})):getHalfHeight(This)), ((get({ViewPosition, '$class'})):getZ(ViewPosition) - (get({This, '$class'})):getHalfDepth(This))).
+  def jm_isExhausted(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if ((JR.get(this, :totalDamage) > JR.call(this, :jm_getInitDamage, [])) || (JR.get(this, :totalDamage) < 0)) do
+            throw({:jreturn, true})
+        else
+            throw({:jreturn, false})
+        end
+    end)
+  end
 
-getMovement(This) ->
-        get({This, movement}).
 
-setMovement(This, Movement) ->
-        put({This, movement}, Movement).
+  def jm_getDamage(this, p_damageType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :damageType, p_damageType)
+        if !JR.call(this, :jm_isExhausted, []) do
+            JR.lset(f, :total, JR.int32(JR.call(this, :jm_getInitDamage, []) - JR.get(this, :totalDamage)))
+            JR.call(this, :jm_givePoints, [JR.lget(f, :total)])
+            throw({:jreturn, JR.lget(f, :total)})
+        end
+        throw({:jreturn, 0})
+    end)
+  end
 
-getType(This) ->
-        'WeaponLayer':getStaticType().
 
-getStaticType() ->
-        0.
+  def jm_setDestroyed(this, p_destroyed) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :destroyed, p_destroyed)
+        JR.put(this, :destroyed, JR.lget(f, :destroyed))
+        if JR.call(this, :jm_isDestroyed, []) do
+            JR.put(this, :scoreableInterface, NoScoreable.jm_getInstance())
+            JR.call(DestroyedLayerProcessor.jm_getInstance(), :jm_add, [this])
+        end
+    end)
+  end
 
-getMultiPlayerType(This) ->
-        get({This, multiPlayerType}).
 
-setWeaponPropertiesP(This, WeaponProperties) ->
-        put({This, weaponProperties}, WeaponProperties).
+  def jm_getInitDamage(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :initDamage)})
+    end)
+  end
 
-getWeaponPropertiesP(This) ->
-        get({This, weaponProperties}).
 
-implmentsTickableInterface(This) ->
-        true.
+  def jm_setAnimationInterface(this, p_animationInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :animationInterface, p_animationInterface)
+        JR.put(this, :animationInterface, JR.lget(f, :animationInterface))
+    end)
+  end
 
-% throws Exception
-set(This, Gl) ->
-        (get({get({This, initAnimationInterface}), '$class'})):set(get({This, initAnimationInterface}), Gl).
+
+  def jm_getAnimationInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :animationInterface)})
+    end)
+  end
+
+
+  def jm_getInitAnimationInterfaceP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :initAnimationInterface)})
+    end)
+  end
+
+
+  def jm_setInitAnimationInterfaceP(this, p_initAnimationInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :initAnimationInterface, p_initAnimationInterface)
+        JR.put(this, :initAnimationInterface, JR.lget(f, :initAnimationInterface))
+    end)
+  end
+
+
+  def jm_getDestroyedAnimationInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :destroyedAnimationInterface)})
+    end)
+  end
+
+
+  def jm_getOwnerLayerInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :sourceLayerInterface)})
+    end)
+  end
+
+
+  def jm_setOwnerLayerInterface(this, p_sourceLayerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :sourceLayerInterface, p_sourceLayerInterface)
+        JR.put(this, :sourceLayerInterface, JR.lget(f, :sourceLayerInterface))
+    end)
+  end
+
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.lset(f, :viewPosition, JR.call(this, :jm_getViewPosition, []))
+        JR.call(JR.get(this, :animationInterface), :jm_paintXY, [JR.lget(f, :graphics), (JR.call(JR.lget(f, :viewPosition), :jm_getX, []) - JR.call(this, :jm_getHalfWidth, [])), (JR.call(JR.lget(f, :viewPosition), :jm_getY, []) - JR.call(this, :jm_getHalfHeight, []))])
+    end)
+  end
+
+
+  def jm_paintThreed(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.lset(f, :viewPosition, JR.call(this, :jm_getViewPosition, []))
+        JR.call(JR.get(this, :animationInterface), :jm_paintThreedXYZ, [JR.lget(f, :graphics), (JR.call(JR.lget(f, :viewPosition), :jm_getX, []) - JR.call(this, :jm_getHalfWidth, [])), (JR.call(JR.lget(f, :viewPosition), :jm_getY, []) - JR.call(this, :jm_getHalfHeight, [])), (JR.call(JR.lget(f, :viewPosition), :jm_getZ, []) - JR.call(this, :jm_getHalfDepth, []))])
+    end)
+  end
+
+
+  def jm_getMovement(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :movement)})
+    end)
+  end
+
+
+  def jm_setMovement(this, p_movement) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :movement, p_movement)
+        JR.put(this, :movement, JR.lget(f, :movement))
+    end)
+  end
+
+
+  def jm_getType(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, WeaponLayer.jm_getStaticType()})
+    end)
+  end
+
+
+  def jm_getStaticType() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0})
+    end)
+  end
+
+
+  def jm_getMultiPlayerType(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :multiPlayerType)})
+    end)
+  end
+
+
+  def jm_setWeaponPropertiesP(this, p_weaponProperties) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :weaponProperties, p_weaponProperties)
+        JR.put(this, :weaponProperties, JR.lget(f, :weaponProperties))
+    end)
+  end
+
+
+  def jm_getWeaponPropertiesP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :weaponProperties)})
+    end)
+  end
+
+
+  def jm_implmentsTickableInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, true})
+    end)
+  end
+
+
+  def jm_set(this, p_gl) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+        JR.call(JR.get(this, :initAnimationInterface), :jm_set, [JR.lget(f, :gl)])
+    end)
+  end
+end
+
 

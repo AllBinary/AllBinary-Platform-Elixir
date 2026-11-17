@@ -1,60 +1,72 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.configuration.feature
-% import javax.microedition.lcdui.Command
-% import javax.microedition.lcdui.Item
-% import javax.microedition.lcdui.ItemCommandListener
-% import org.allbinary.game.configuration.GameConfigurationGauge
-% import org.allbinary.game.configuration.GameConfigurationUtil
-% import org.allbinary.game.configuration.GameOptionsForm
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.midlet.MidletStrings
-% import org.allbinary.string.CommonLabels
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.configuration.feature
 
--module('GameFeatureItemCommandListener').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements ItemCommandListener
+defmodule GameFeatureItemCommandListener do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, gameOptionsForm}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :gameOptionsForm, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        
+    nil
+  end
 
 
-new(GameOptionsForm) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, GameOptionsForm),
-    This.
+  def jinit(this, p_gameOptionsForm) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameOptionsForm, p_gameOptionsForm)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :gameOptionsForm, JR.lget(f, :gameOptionsForm))
+    end)
+  end
 
-'$init'(This, GameOptionsForm) ->
-    init_fields(This),
-        put({This, gameOptionsForm}, GameOptionsForm).
+  def jnew(p_gameOptionsForm) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_gameOptionsForm)
+    this
+  end
 
-commandAction(This, Command, Item) ->
-        try
-            ItemLabel = (get({Item, '$class'})):getLabel(Item),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N66140) -> (get({Target_N66140, '$class'})):toString(Target_N66140) end)((fun(Target_N66147) -> (get({Target_N66147, '$class'})):append(Target_N66147, ItemLabel) end)((fun(Target_N66154) -> (get({Target_N66154, '$class'})):append(Target_N66154, get({'CommonLabels':getInstance(), 'ITEM_LABEL'})) end)('StringMaker':new()))), This, get({'MidletStrings':getInstance(), 'COMMAND_ACTION'})),
-            case allbinary_java:instance_of(Item, 'GameConfigurationGauge') of
-                true ->
-                (fun(Target_N66275) -> (get({Target_N66275, '$class'})):change(Target_N66275, get({This, gameOptionsForm}), Item) end)('GameConfigurationUtil':getInstance());
-                false -> ok
+
+  def jm_commandAction(this, p_command, p_item) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :command, p_command)
+      JR.lset(f, :item, p_item)
+        try do
+            JR.lset(f, :itemLabel, JR.call(JR.lget(f, :item), :jm_getLabel, []))
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(CommonLabels.jm_getInstance(), :ITEM_LABEL)]), :jm_append, [JR.lget(f, :itemLabel)]), :jm_toString, []), this, JR.get(MidletStrings.jm_getInstance(), :COMMAND_ACTION)])
+            if JR.instance_of(JR.lget(f, :item), GameConfigurationGauge) do
+                JR.call(GameConfigurationUtil.jm_getInstance(), :jm_change, [JR.get(this, :gameOptionsForm), JR.lget(f, :item)])
             end
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), This, get({'MidletStrings':getInstance(), 'COMMAND_ACTION'}), E)
-        end.
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, JR.get(MidletStrings.jm_getInstance(), :COMMAND_ACTION), JR.lget(f, :e)])
+        end
+    end)
+  end
+end
+
 

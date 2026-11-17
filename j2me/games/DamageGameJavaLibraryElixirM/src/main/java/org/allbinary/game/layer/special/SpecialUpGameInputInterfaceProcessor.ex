@@ -1,40 +1,56 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer.special
-% import org.allbinary.game.input.event.GameKeyEvent
-% import org.allbinary.layer.AllBinaryLayerManager
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer.special
 
--module('SpecialUpGameInputInterfaceProcessor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule SpecialUpGameInputInterfaceProcessor do
+  def jsuper(), do: SpecialGameInputInterfaceProcessor
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('SpecialGameInputInterfaceProcessor', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+
+  def jinit(this, p_collidableDestroyableDamageableLayer) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :collidableDestroyableDamageableLayer, p_collidableDestroyableDamageableLayer)
+        SpecialGameInputInterfaceProcessor.jinit(this, JR.lget(f, :collidableDestroyableDamageableLayer))
+        SpecialUpGameInputInterfaceProcessor.jinitfields(this)
+    end)
+  end
+
+  def jnew(p_collidableDestroyableDamageableLayer) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_collidableDestroyableDamageableLayer)
+    this
+  end
 
 
-new(CollidableDestroyableDamageableLayer) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, CollidableDestroyableDamageableLayer),
-    This.
+  def jm_processEvent(this, p_allbinaryLayerManager, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allbinaryLayerManager, p_allbinaryLayerManager)
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        JR.call(JR.get(this, :specialGameInputInterface), :jm_up, [])
+    end)
+  end
+end
 
-'$init'(This, CollidableDestroyableDamageableLayer) ->
-        'SpecialGameInputInterfaceProcessor':'$init'(This, CollidableDestroyableDamageableLayer).
-
-% throws Exception
-processEvent(This, AllbinaryLayerManager, GameKeyEvent) ->
-        (get({get({This, specialGameInputInterface}), '$class'})):up(get({This, specialGameInputInterface})).
 

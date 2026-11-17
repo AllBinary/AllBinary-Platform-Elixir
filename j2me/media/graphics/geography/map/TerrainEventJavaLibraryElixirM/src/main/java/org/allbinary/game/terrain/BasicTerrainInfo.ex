@@ -1,46 +1,70 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.terrain
-% import org.allbinary.math.Angle
-% import org.allbinary.math.AngleFactory
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.terrain
 
--module('BasicTerrainInfo').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule BasicTerrainInfo do
+  def jsuper(), do: JObject
+def jstatic_NULL_BASIC_TERRAIN_INFO(), do: JR.static_get(__MODULE__, :NULL_BASIC_TERRAIN_INFO, fn -> BasicTerrainInfo.jnew(JR.get(AngleFactory.jm_getInstance(), :NOT_ANGLE)) end)
+  def jstatic_set_NULL_BASIC_TERRAIN_INFO(value), do: JR.static_put(__MODULE__, :NULL_BASIC_TERRAIN_INFO, value)
 
-static_init() ->
-    put({?MODULE, 'NULL_BASIC_TERRAIN_INFO'}, 'BasicTerrainInfo':new(get({'AngleFactory':getInstance(), 'NOT_ANGLE'}))),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :angle, nil)
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, angle}, undefined),
-    ok.
+
+  def jinit(this, p_angle) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :angle, p_angle)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :angle, JR.lget(f, :angle))
+    end)
+  end
+
+  def jnew(p_angle) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_angle)
+    this
+  end
 
 
-new(Angle) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Angle),
-    This.
+  def jm_getAngle(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :angle)})
+    end)
+  end
 
-'$init'(This, Angle) ->
-    init_fields(This),
-        put({This, angle}, Angle).
 
-getAngle(This) ->
-        get({This, angle}).
+  def jm_setAngle(this, p_angle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :angle, p_angle)
+        JR.put(this, :angle, JR.lget(f, :angle))
+    end)
+  end
+end
 
-setAngle(This, Angle) ->
-        put({This, angle}, Angle).
 

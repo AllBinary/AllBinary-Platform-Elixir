@@ -1,117 +1,198 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.life
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.life
 
--module('Life').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements LifeInterface
+defmodule Life do
+  def jsuper(), do: JObject
+def jstatic_NO_LIFE(), do: JR.static_get(__MODULE__, :NO_LIFE, fn -> Life.jm_createLife() end)
+  def jstatic_set_NO_LIFE(value), do: JR.static_put(__MODULE__, :NO_LIFE, value)
 
-static_init() ->
-    put({?MODULE, 'NO_LIFE'}, 'Life':createLife()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :lives, 0)
+    JR.put(this, :startLives, 0)
+    JR.put(this, :maxlives, 0)
+        
+        
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, lives}, 0),
-    put({This, startLives}, 0),
-    put({This, maxlives}, 0),
-    ok.
 
-
-createLife() ->
-        try
-            'Life':new(0, 0)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            erlang:error({'RuntimeException'})
-        end.
-
-new(Lives, Maxlives) when is_integer(Lives), is_integer(Maxlives) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Lives, Maxlives),
-    This.
-
-'$init'(This, Lives, Maxlives) when is_integer(Lives), is_integer(Maxlives) ->
-    init_fields(This),
-        put({This, maxlives}, Maxlives),
-        case (Lives > get({This, maxlives})) of
-            true ->
-            erlang:error({'Exception', "To Many Lives"});
-            false -> ok
-        end,
-        put({This, lives}, Lives),
-        put({This, startLives}, Lives).
-
-get(This) ->
-        get({This, lives}).
-
-set(This, Lives) when is_integer(Lives) ->
-        put({This, lives}, Lives).
-
-reset(This) ->
-        put({This, lives}, get({This, startLives})).
-
-add(This, Lives) when is_integer(Lives) ->
-        case (not (get({This, '$class'})):reachedLimit(This)) of
-            true ->
-            case ((get({This, lives}) + Lives) =< (get({This, '$class'})):getMaxlives(This)) of
-                true ->
-                put({This, lives}, ((get({This, lives}) + Lives)));
-                false ->
-                put({This, lives}, (get({This, '$class'})):getMaxlives(This))
-            end;
-            false -> ok
-        end.
-
-isAlive(This) ->
-        try
-        case (get({This, lives}) =< 0) of
-            true ->
-            throw({'$return', false});
-            false ->
-            throw({'$return', true})
+  def jm_createLife() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        try do
+            throw({:jreturn, Life.jnew(JR.int16(0), JR.int16(0))})
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            throw({:jexception, JR.exception("RuntimeException", "")})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-getMaxlives(This) ->
-        get({This, maxlives}).
 
-reachedLimit(This) ->
-        try
-        case ((get({This, lives}) > get({This, maxlives})) orelse (get({This, lives}) < 0)) of
-            true ->
-            throw({'$return', true});
-            false ->
-            throw({'$return', false})
+  def jinit(this, p_lives, p_maxlives) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :lives, p_lives)
+      JR.lset(f, :maxlives, p_maxlives)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :maxlives, JR.lget(f, :maxlives))
+        if (JR.lget(f, :lives) > JR.get(this, :maxlives)) do
+            throw({:jexception, JR.exception("Exception", "To Many Lives")})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        JR.put(this, :lives, JR.lget(f, :lives))
+        JR.put(this, :startLives, JR.lget(f, :lives))
+    end)
+  end
 
-deaths(This, Lives) when is_integer(Lives) ->
-        case (not (get({This, '$class'})):reachedLimit(This)) of
-            true ->
-            case ((get({This, lives}) - Lives) >= 0) of
-                true ->
-                put({This, lives}, ((get({This, lives}) - Lives)));
-                false ->
-                put({This, lives}, 0)
-            end;
-            false -> ok
-        end.
+  def jnew(p_lives, p_maxlives) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_lives, p_maxlives)
+    this
+  end
 
-getStartLives(This) ->
-        get({This, startLives}).
 
-setStartLives(This, StartLives) when is_integer(StartLives) ->
-        put({This, startLives}, StartLives).
+  def jm_get(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :lives)})
+    end)
+  end
+
+
+  def jm_set(this, p_lives) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :lives, p_lives)
+        JR.put(this, :lives, JR.lget(f, :lives))
+    end)
+  end
+
+
+  def jm_reset(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.put(this, :lives, JR.get(this, :startLives))
+    end)
+  end
+
+
+  def jm_add(this, p_lives) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :lives, p_lives)
+        if !JR.call(this, :jm_reachedLimit, []) do
+            if (JR.int32(JR.get(this, :lives) + JR.lget(f, :lives)) <= JR.int32(JR.call(this, :jm_getMaxlives, []))) do
+                JR.put(this, :lives, JR.int16((JR.int32(JR.get(this, :lives) + JR.lget(f, :lives)))))
+            else
+                JR.put(this, :lives, JR.call(this, :jm_getMaxlives, []))
+            end
+        end
+    end)
+  end
+
+
+  def jm_isAlive(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.int32(JR.get(this, :lives)) <= 0) do
+            throw({:jreturn, false})
+        else
+            throw({:jreturn, true})
+        end
+    end)
+  end
+
+
+  def jm_getMaxlives(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :maxlives)})
+    end)
+  end
+
+
+  def jm_reachedLimit(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if ((JR.get(this, :lives) > JR.get(this, :maxlives)) || (JR.int32(JR.get(this, :lives)) < 0)) do
+            throw({:jreturn, true})
+        else
+            throw({:jreturn, false})
+        end
+    end)
+  end
+
+
+  def jm_deaths(this, p_lives) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :lives, p_lives)
+        if !JR.call(this, :jm_reachedLimit, []) do
+            if (JR.int32(JR.get(this, :lives) - JR.lget(f, :lives)) >= 0) do
+                JR.put(this, :lives, JR.int16((JR.int32(JR.get(this, :lives) - JR.lget(f, :lives)))))
+            else
+                JR.put(this, :lives, 0)
+            end
+        end
+    end)
+  end
+
+
+  def jm_getStartLives(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :startLives)})
+    end)
+  end
+
+
+  def jm_setStartLives(this, p_startLives) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :startLives, p_startLives)
+        JR.put(this, :startLives, JR.lget(f, :startLives))
+    end)
+  end
+end
+
 

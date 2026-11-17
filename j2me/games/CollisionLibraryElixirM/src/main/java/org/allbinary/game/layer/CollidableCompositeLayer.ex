@@ -1,93 +1,134 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer
-% import org.allbinary.ai.ArtificialIntelligence
-% import org.allbinary.ai.ArtificialIntelligenceInterface
-% import org.allbinary.game.collision.CollidableBaseBehavior
-% import org.allbinary.game.collision.CollidableBaseBehaviorFactory
-% import org.allbinary.game.collision.CollidableInterfaceCompositeInterface
-% import org.allbinary.game.collision.CollidableNeverCollideBehaviorFactory
-% import org.allbinary.graphics.Rectangle
-% import org.allbinary.graphics.RectangleFactory
-% import org.allbinary.logic.communication.log.ForcedLogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.string.CommonSeps
-% import org.allbinary.view.ViewPositionBase
-% import org.allbinary.logic.NullUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer
 
--module('CollidableCompositeLayer').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements CollidableInterfaceCompositeInterface
+defmodule CollidableCompositeLayer do
+  def jsuper(), do: AllBinaryGameLayer
+def jstatic_NULL_COLLIDABLE_COMPOSITE_LAYER(), do: JR.static_get(__MODULE__, :NULL_COLLIDABLE_COMPOSITE_LAYER, fn -> JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT) end)
+  def jstatic_set_NULL_COLLIDABLE_COMPOSITE_LAYER(value), do: JR.static_put(__MODULE__, :NULL_COLLIDABLE_COMPOSITE_LAYER, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AllBinaryGameLayer', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'NULL_COLLIDABLE_COMPOSITE_LAYER'}, get({'NullUtil':getInstance(), 'NULL_OBJECT'})),
-    ok.
-
-init_fields(This) ->
-    put({This, collidableInferface}, (fun(Target_N66310) -> (get({Target_N66310, '$class'})):createBehavior(Target_N66310) end)('CollidableNeverCollideBehaviorFactory':getInstance())),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :collidableInferface, nil)
+        JR.put(this, :collidableInferface, JR.call(CollidableNeverCollideBehaviorFactory.jm_getInstance(), :jm_createBehavior, []))
+    nil
+  end
 
 
-getNullInstance() ->
-        case (get({'CollidableCompositeLayer', 'NULL_COLLIDABLE_COMPOSITE_LAYER'}) =:= get({'NullUtil':getInstance(), 'NULL_OBJECT'})) of
-            true ->
-            put({'CollidableCompositeLayer', 'NULL_COLLIDABLE_COMPOSITE_LAYER'}, 'CollidableCompositeLayer':new(get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'RectangleFactory', 'SINGLETON'}), get({'ViewPositionBase', 'NULL_VIEW_POSITION'}), 'CollidableNeverCollideBehaviorFactory':getInstance()));
-            false -> ok
-        end,
-        get({'CollidableCompositeLayer', 'NULL_COLLIDABLE_COMPOSITE_LAYER'}).
+  def jm_getNullInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        if (CollidableCompositeLayer.jstatic_NULL_COLLIDABLE_COMPOSITE_LAYER() == JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)) do
+            CollidableCompositeLayer.jstatic_set_NULL_COLLIDABLE_COMPOSITE_LAYER(CollidableCompositeLayer.jnew(JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), RectangleFactory.jstatic_SINGLETON(), ViewPositionBase.jstatic_NULL_VIEW_POSITION(), CollidableNeverCollideBehaviorFactory.jm_getInstance()))
+        end
+        throw({:jreturn, CollidableCompositeLayer.jstatic_NULL_COLLIDABLE_COMPOSITE_LAYER()})
+    end)
+  end
 
-new(Name, LayerInfo, ViewPosition, CollidableBaseBehaviorFactory) when (is_list(Name) orelse Name =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Name, LayerInfo, ViewPosition, CollidableBaseBehaviorFactory),
-    This.
 
-'$init'(This, Name, LayerInfo, ViewPosition, CollidableBaseBehaviorFactory) when (is_list(Name) orelse Name =:= undefined) ->
-        'AllBinaryGameLayer':'$init'(This, Name, LayerInfo, ViewPosition),
-        init_fields(This),
-        case (CollidableBaseBehaviorFactory =/= 'CollidableNeverCollideBehaviorFactory':getInstance()) of
-            true ->
-            (get({This, '$class'})):setCollidableInferface(This, (get({CollidableBaseBehaviorFactory, '$class'})):createBehavior(CollidableBaseBehaviorFactory));
-            false -> ok
-        end.
+  def jinit(this, p_name, p_layerInfo, p_viewPosition, p_collidableBaseBehaviorFactory) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :layerInfo, p_layerInfo)
+      JR.lset(f, :viewPosition, p_viewPosition)
+      JR.lset(f, :collidableBaseBehaviorFactory, p_collidableBaseBehaviorFactory)
+        AllBinaryGameLayer.jinit(this, JR.lget(f, :name), JR.lget(f, :layerInfo), JR.lget(f, :viewPosition))
+        CollidableCompositeLayer.jinitfields(this)
+        if (JR.lget(f, :collidableBaseBehaviorFactory) != CollidableNeverCollideBehaviorFactory.jm_getInstance()) do
+            JR.call(this, :jm_setCollidableInferface, [JR.call(JR.lget(f, :collidableBaseBehaviorFactory), :jm_createBehavior, [])])
+        end
+    end)
+  end
 
-getArtificialIntelligenceInterface(This) ->
-        'ForcedLogUtil':log(get({get({This, commonStrings}), 'NOT_IMPLEMENTED'}), This),
-        'ArtificialIntelligence':getInstance().
+  def jnew(p_name, p_layerInfo, p_viewPosition, p_collidableBaseBehaviorFactory) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_name, p_layerInfo, p_viewPosition, p_collidableBaseBehaviorFactory)
+    this
+  end
 
-getCollidableInferface(This) ->
-        get({This, collidableInferface}).
 
-setCollidableInferface(This, CollidableInferface) ->
-        put({This, collidableInferface}, CollidableInferface).
+  def jm_getArtificialIntelligenceInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        ForcedLogUtil.jm_log(JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED), this)
+        throw({:jreturn, ArtificialIntelligence.jm_getInstance()})
+    end)
+  end
 
-implmentsCollidableInterface(This) ->
-        true.
 
-toStringAppend(This, StringBuffer) ->
-        CommonSeps = 'CommonSeps':getInstance(),
-        'AllBinaryGameLayer':toStringAppend(This, StringBuffer),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'NEW_LINE'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (fun(Target_N66995) -> (get({Target_N66995, '$class'})):toString(Target_N66995) end)((get({This, '$class'})):getCollidableInferface(This))).
+  def jm_getCollidableInferface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :collidableInferface)})
+    end)
+  end
 
-toString(This) ->
-        StringBuffer = 'StringMaker':new(),
-        (get({This, '$class'})):toStringAppend(This, StringBuffer),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+
+  def jm_setCollidableInferface(this, p_collidableInferface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :collidableInferface, p_collidableInferface)
+        JR.put(this, :collidableInferface, JR.lget(f, :collidableInferface))
+    end)
+  end
+
+
+  def jm_implmentsCollidableInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, true})
+    end)
+  end
+
+
+  def jm_toStringAppend(this, p_stringBuffer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :stringBuffer, p_stringBuffer)
+        JR.lset(f, :commonSeps, CommonSeps.jm_getInstance())
+        AllBinaryGameLayer.jm_toStringAppend(this, JR.lget(f, :stringBuffer))
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :NEW_LINE)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.call(this, :jm_getCollidableInferface, []), :jm_toString, [])])
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(this, :jm_toStringAppend, [JR.lget(f, :stringBuffer)])
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+end
+
 

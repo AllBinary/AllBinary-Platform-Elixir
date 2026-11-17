@@ -1,67 +1,124 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.score
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.game.input.PlayerGameInput
-% import org.allbinary.game.input.event.GameKeyEvent
-% import org.allbinary.game.score.displayable.HighScoresCanvas
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.score
 
--module('HighScoresCanvasInputProcessor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule HighScoresCanvasInputProcessor do
+  def jsuper(), do: PlayerGameInput
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('PlayerGameInput', Function, Arguments).
-
-init_fields(This) ->
-    put({This, highScoresCanvas}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :highScoresCanvas, nil)
+        
+    nil
+  end
 
 
-new(HighScoresCanvas) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, HighScoresCanvas),
-    This.
+  def jinit(this, p_highScoresCanvas) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :highScoresCanvas, p_highScoresCanvas)
+        PlayerGameInput.jinit(this, BasicArrayListD.jnew(), BasicArrayListD.jnew(), -1)
+        HighScoresCanvasInputProcessor.jinitfields(this)
+        JR.put(this, :highScoresCanvas, JR.lget(f, :highScoresCanvas))
+    end)
+  end
 
-'$init'(This, HighScoresCanvas) ->
-        'PlayerGameInput':'$init'(This, 'BasicArrayListD':new(), 'BasicArrayListD':new(), (-1)),
-        init_fields(This),
-        put({This, highScoresCanvas}, HighScoresCanvas).
+  def jnew(p_highScoresCanvas) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_highScoresCanvas)
+    this
+  end
 
-open(This) ->
-        ok.
 
-close(This) ->
-        ok.
+  def jm_open(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-onPressGameKeyEvent(This, GameKeyEvent) ->
-        'PlayerGameInput':onPressGameKeyEvent(This, GameKeyEvent),
-        (get({This, '$class'})):update(This).
 
-onDownGameKeyEvent(This, GameKeyEvent) ->
-        'PlayerGameInput':onDownGameKeyEvent(This, GameKeyEvent),
-        (get({This, '$class'})):update(This).
+  def jm_close(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-onUpGameKeyEvent(This, GameKeyEvent) ->
-        'PlayerGameInput':onUpGameKeyEvent(This, GameKeyEvent),
-        (get({This, '$class'})):update(This).
 
-paint(This, Graphics) ->
-        ok.
+  def jm_onPressGameKeyEvent(this, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        PlayerGameInput.jm_onPressGameKeyEvent(this, JR.lget(f, :gameKeyEvent))
+        JR.call(this, :jm_update, [])
+    end)
+  end
 
-getHighScoresCanvas(This) ->
-        get({This, highScoresCanvas}).
+
+  def jm_onDownGameKeyEvent(this, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        PlayerGameInput.jm_onDownGameKeyEvent(this, JR.lget(f, :gameKeyEvent))
+        JR.call(this, :jm_update, [])
+    end)
+  end
+
+
+  def jm_onUpGameKeyEvent(this, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        PlayerGameInput.jm_onUpGameKeyEvent(this, JR.lget(f, :gameKeyEvent))
+        JR.call(this, :jm_update, [])
+    end)
+  end
+
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        nil
+    end)
+  end
+
+
+  def jm_getHighScoresCanvas(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :highScoresCanvas)})
+    end)
+  end
+end
+
 

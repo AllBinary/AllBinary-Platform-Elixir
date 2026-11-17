@@ -1,35 +1,79 @@
-% Generated Code Do Not Modify
-% package org.allbinary.graphics
-% import org.allbinary.platform.graphics.PlatformBitmapBase
+# Generated Code Do Not Modify
+# package org.allbinary.graphics
 
--module('OpenGLBitmap').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule OpenGLBitmap do
+  def jsuper(), do: PlatformBitmapBase
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('PlatformBitmapBase', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :bitmap, nil)
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, bitmap}, undefined),
-    ok.
+
+  def jinit(this, p_bitmap) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :bitmap, p_bitmap)
+      PlatformBitmapBase.jinit(this)
+      jinitfields(this)
+        JR.put(this, :bitmap, JR.lget(f, :bitmap))
+    end)
+  end
+
+  def jnew(p_bitmap) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_bitmap)
+    this
+  end
 
 
-new(Bitmap) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Bitmap),
-    This.
+  def jm_getPixels(this, p_pixels, p_offset, p_stride, p_x, p_y, p_width, p_height) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :pixels, p_pixels)
+      JR.lset(f, :offset, p_offset)
+      JR.lset(f, :stride, p_stride)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+        nil
+    end)
+  end
 
-'$init'(This, Bitmap) ->
-    'PlatformBitmapBase':'$init'(This),
-    init_fields(This),
-        put({This, bitmap}, Bitmap).
 
-getPixels(This, Pixels, Offset, Stride, X, Y, Width, Height) when (is_tuple(Pixels) orelse Pixels =:= undefined), is_integer(Offset), is_integer(Stride), is_integer(X), is_integer(Y), is_integer(Width), is_integer(Height) ->
-        ok.
+  def jm_setPixels(this, p_pixels, p_offset, p_stride, p_x, p_y, p_width, p_height) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :pixels, p_pixels)
+      JR.lset(f, :offset, p_offset)
+      JR.lset(f, :stride, p_stride)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+        nil
+    end)
+  end
 
-setPixels(This, Pixels, Offset, Stride, X, Y, Width, Height) when (is_tuple(Pixels) orelse Pixels =:= undefined), is_integer(Offset), is_integer(Stride), is_integer(X), is_integer(Y), is_integer(Width), is_integer(Height) ->
-        ok.
 
-recycle(This) ->
-        ok.
+  def jm_recycle(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+end
+
 

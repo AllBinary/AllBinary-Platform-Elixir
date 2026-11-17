@@ -1,26 +1,42 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.vector
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.vector
 
--module('VectorInterface').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
+defmodule VectorInterface do
+  def jsuper(), do: JObject
 
 
-getPoints(This, Frame) when is_integer(Frame) ->
-    erlang:error({abstract_method, getPoints}).
+  def jm_getPoints(this, p_frame) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :frame, p_frame)
+      throw({:jexception, JR.exception("AbstractMethodError", "getPoints")})
+    end)
+  end
 
-setPoints(This, CurrentPoints) when (is_tuple(CurrentPoints) orelse CurrentPoints =:= undefined) ->
-    erlang:error({abstract_method, setPoints}).
+
+  def jm_setPoints(this, p_currentPoints) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :currentPoints, p_currentPoints)
+      throw({:jexception, JR.exception("AbstractMethodError", "setPoints")})
+    end)
+  end
+end
+
 

@@ -1,49 +1,67 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game
-% import org.allbinary.business.advertisement.GameAdStateBase
-% import org.allbinary.business.advertisement.AdConfiguration
-% import org.allbinary.input.event.VirtualKeyboardEvent
-% import org.allbinary.input.event.VirtualKeyboardEventHandler
-% import org.allbinary.input.event.VirtualKeyboardEventListenerInterface
-% import org.allbinary.logic.util.event.AllBinaryEventObject
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game
 
--module('GameAdState').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements VirtualKeyboardEventListenerInterface
+defmodule GameAdState do
+  def jsuper(), do: GameAdStateBase
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('GameAdStateBase', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new(AdConfiguration) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, AdConfiguration),
-    This.
+  def jinit(this, p_adConfiguration) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :adConfiguration, p_adConfiguration)
+        GameAdStateBase.jinit(this, JR.lget(f, :adConfiguration))
+        GameAdState.jinitfields(this)
+        JR.call(VirtualKeyboardEventHandler.jm_getInstance(), :jm_addListenerInterface, [this])
+    end)
+  end
 
-'$init'(This, AdConfiguration) ->
-        'GameAdStateBase':'$init'(This, AdConfiguration),
-        (fun(Target_N65812) -> (get({Target_N65812, '$class'})):addListenerInterface(Target_N65812, This) end)('VirtualKeyboardEventHandler':getInstance()).
+  def jnew(p_adConfiguration) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_adConfiguration)
+    this
+  end
 
-% throws Exception
-onVirtualKeyboardEvent(This, VirtualKeyboardEvent) ->
-        ok.
 
-onEvent(This, EventObject) ->
-        'GameAdStateBase':onEvent(This, EventObject).
+  def jm_onVirtualKeyboardEvent(this, p_virtualKeyboardEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :virtualKeyboardEvent, p_virtualKeyboardEvent)
+        nil
+    end)
+  end
+
+
+  def jm_onEvent(this, p_eventObject) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+        GameAdStateBase.jm_onEvent(this, JR.lget(f, :eventObject))
+    end)
+  end
+end
+
 

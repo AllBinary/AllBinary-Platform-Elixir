@@ -1,46 +1,61 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.layer
-% import org.allbinary.logic.util.cache.BaseCircularPool
-% import org.allbinary.util.CircularIndexUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.layer
 
--module('AllBinaryLayerCircularPool').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule AllBinaryLayerCircularPool do
+  def jsuper(), do: BaseCircularPool
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BaseCircularPool', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      BaseCircularPool.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
+
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jm_initAllBinaryLayerCircularPool(this, p_allbinaryLayerFactoryInterface, p_total) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allbinaryLayerFactoryInterface, p_allbinaryLayerFactoryInterface)
+      JR.lset(f, :total, p_total)
+        JR.put(this, :circularIndexUtil, CircularIndexUtil.jm_createInstance(JR.lget(f, :total)))
+        JR.put(this, :OBJECT_ARRAY, JR.anew(JR.lget(f, :total), nil))
+        JR.lset(f, :localIndex, 0)
+        JR.jfor(fn -> (JR.lget(f, :localIndex) < JR.lget(f, :total)) end, fn -> JR.lpostinc(f, :localIndex, 1) end, fn ->
+            JR.aset(JR.get(this, :OBJECT_ARRAY), JR.lget(f, :localIndex), JR.call(JR.lget(f, :allbinaryLayerFactoryInterface), :jm_getInstance, []))
+        end)
+    end)
+  end
+end
 
-'$init'(This) ->
-    'BaseCircularPool':'$init'(This),
-    init_fields(This),
-        ok.
-
-% throws Exception
-initAllBinaryLayerCircularPool(This, AllbinaryLayerFactoryInterface, Total) when is_integer(Total) ->
-        put({This, circularIndexUtil}, 'CircularIndexUtil':createInstance(Total)),
-        put({This, 'OBJECT_ARRAY'}, array:new(Total, {default, undefined})),
-        lists:foreach(fun(LocalIndex) ->
-            put({This, 'OBJECT_ARRAY'}, array:set(LocalIndex, (get({AllbinaryLayerFactoryInterface, '$class'})):getInstance(AllbinaryLayerFactoryInterface), get({This, 'OBJECT_ARRAY'})))
-        end, lists:seq(0, Total - 1)).
 

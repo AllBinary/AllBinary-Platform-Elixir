@@ -1,78 +1,190 @@
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.form.item
-% import javax.microedition.lcdui.Graphics
-% import javax.microedition.lcdui.Screen
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.color.BasicColorFactory
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.string.StringUtil
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item
 
--module('ABCustomItem').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule ABCustomItem do
+  def jsuper(), do: JObject
+def jstatic_NULL_CUSTOM_ITEM(), do: JR.static_get(__MODULE__, :NULL_CUSTOM_ITEM, fn -> JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT) end)
+  def jstatic_set_NULL_CUSTOM_ITEM(value), do: JR.static_put(__MODULE__, :NULL_CUSTOM_ITEM, value)
 
-static_init() ->
-    put({?MODULE, 'NULL_CUSTOM_ITEM'}, get({'NullUtil':getInstance(), 'NULL_OBJECT'})),
-    ok.
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-getNullInstance() ->
-        case (get({'ABCustomItem', 'NULL_CUSTOM_ITEM'}) =:= get({'NullUtil':getInstance(), 'NULL_OBJECT'})) of
-            true ->
-            put({'ABCustomItem', 'NULL_CUSTOM_ITEM'}, 'ABCustomItem':new(get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'BasicColorFactory':getInstance(), 'BLACK'}), get({'BasicColorFactory':getInstance(), 'WHITE'})));
-            false -> ok
-        end,
-        get({'ABCustomItem', 'NULL_CUSTOM_ITEM'}).
+  def jm_getNullInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        if (ABCustomItem.jstatic_NULL_CUSTOM_ITEM() == JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)) do
+            ABCustomItem.jstatic_set_NULL_CUSTOM_ITEM(ABCustomItem.jnew(JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), JR.get(BasicColorFactory.jm_getInstance(), :BLACK), JR.get(BasicColorFactory.jm_getInstance(), :WHITE)))
+        end
+        throw({:jreturn, ABCustomItem.jstatic_NULL_CUSTOM_ITEM()})
+    end)
+  end
 
-new(Label, BackgroundBasicColor, ForegroundBasicColor) when (is_list(Label) orelse Label =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Label, BackgroundBasicColor, ForegroundBasicColor),
-    This.
 
-'$init'(This, Label, BackgroundBasicColor, ForegroundBasicColor) when (is_list(Label) orelse Label =:= undefined) ->
-    init_fields(This),
-        ok.
+  def jinit(this, p_label, p_backgroundBasicColor, p_foregroundBasicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :label, p_label)
+      JR.lset(f, :backgroundBasicColor, p_backgroundBasicColor)
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-setOwner(This, Owner) ->
-        ok.
+  def jnew(p_label, p_backgroundBasicColor, p_foregroundBasicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_label, p_backgroundBasicColor, p_foregroundBasicColor)
+    this
+  end
 
-paintXY(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-        ok.
 
-paintUnselected(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-        ok.
+  def jm_setOwner(this, p_owner) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :owner, p_owner)
+        nil
+    end)
+  end
 
-isFocusable(This) ->
-        false.
 
-getLabel(This) ->
-        get({'StringUtil':getInstance(), 'EMPTY_STRING'}).
+  def jm_paintXY(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        nil
+    end)
+  end
 
-setLabel(This, Label) when (is_list(Label) orelse Label =:= undefined) ->
-        ok.
 
-getHeight(This) ->
-        0.
+  def jm_paintUnselected(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        nil
+    end)
+  end
 
-setHeight(This, Height) when is_integer(Height) ->
-        ok.
 
-getValue(This) ->
-        0.0.
+  def jm_isFocusable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
 
-setValue(This, Value) when is_number(Value) ->
-        ok.
 
-getMinimumWidth(This) ->
-        0.
+  def jm_getLabel(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING)})
+    end)
+  end
 
-getMinimumHeight(This) ->
-        0.
 
-preMeasurement(This, Graphics) ->
-        ok.
+  def jm_setLabel(this, p_label) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :label, p_label)
+        nil
+    end)
+  end
+
+
+  def jm_getHeight(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0})
+    end)
+  end
+
+
+  def jm_setHeight(this, p_height) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :height, p_height)
+        nil
+    end)
+  end
+
+
+  def jm_getValue(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0.0})
+    end)
+  end
+
+
+  def jm_setValue(this, p_value) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :value, p_value)
+        nil
+    end)
+  end
+
+
+  def jm_getMinimumWidth(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0})
+    end)
+  end
+
+
+  def jm_getMinimumHeight(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0})
+    end)
+  end
+
+
+  def jm_preMeasurement(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        nil
+    end)
+  end
+end
+
 

@@ -1,70 +1,114 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.input.event
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.util.event.EventListenerInterface
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.input.event
 
--module('GameKeyEventHandler').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GameKeyEventHandler do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> GameKeyEventHandler.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'GameKeyEventHandler':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :pressGameKeyEventHandler, nil)
+    JR.put(this, :upGameKeyEventHandler, nil)
+    JR.put(this, :downGameKeyEventHandler, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        JR.put(this, :pressGameKeyEventHandler, PressGameKeyEventHandler.jm_getInstance())
+        JR.put(this, :upGameKeyEventHandler, UpGameKeyEventHandler.jm_getInstance())
+        JR.put(this, :downGameKeyEventHandler, DownGameKeyEventHandler.jm_getInstance())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, pressGameKeyEventHandler}, 'PressGameKeyEventHandler':getInstance()),
-    put({This, upGameKeyEventHandler}, 'UpGameKeyEventHandler':getInstance()),
-    put({This, downGameKeyEventHandler}, 'DownGameKeyEventHandler':getInstance()),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'GameKeyEventHandler', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, GameKeyEventHandler.jstatic_instance()})
+    end)
+  end
 
-removeAllListeners(This) ->
-        (get({get({This, pressGameKeyEventHandler}), '$class'})):removeAllListeners(get({This, pressGameKeyEventHandler})),
-        (get({get({This, upGameKeyEventHandler}), '$class'})):removeAllListeners(get({This, upGameKeyEventHandler})),
-        (get({get({This, downGameKeyEventHandler}), '$class'})):removeAllListeners(get({This, downGameKeyEventHandler})).
 
-addListenerForPlayer(This, EventListenerInterface, PlayerInputId) when is_integer(PlayerInputId) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({EventListenerInterface, '$class'})):toString(EventListenerInterface), This, get({get({This, commonStrings}), 'ADD_LISTENER'})),
-        (get({get({This, pressGameKeyEventHandler}), '$class'})):addListenerSingleThreaded(get({This, pressGameKeyEventHandler}), EventListenerInterface),
-        (fun(Target_N66248) -> (get({Target_N66248, '$class'})):addListenerSingleThreaded(Target_N66248, EventListenerInterface) end)((get({get({This, upGameKeyEventHandler}), '$class'})):getInstanceForPlayer(get({This, upGameKeyEventHandler}), PlayerInputId)),
-        (fun(Target_N66301) -> (get({Target_N66301, '$class'})):addListenerSingleThreaded(Target_N66301, EventListenerInterface) end)((get({get({This, downGameKeyEventHandler}), '$class'})):getInstanceForPlayer(get({This, downGameKeyEventHandler}), PlayerInputId)).
+  def jm_removeAllListeners(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :pressGameKeyEventHandler), :jm_removeAllListeners, [])
+        JR.call(JR.get(this, :upGameKeyEventHandler), :jm_removeAllListeners, [])
+        JR.call(JR.get(this, :downGameKeyEventHandler), :jm_removeAllListeners, [])
+    end)
+  end
 
-addListener(This, EventListenerInterface) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({EventListenerInterface, '$class'})):toString(EventListenerInterface), This, get({get({This, commonStrings}), 'ADD_LISTENER'})),
-        (get({get({This, pressGameKeyEventHandler}), '$class'})):addListenerSingleThreaded(get({This, pressGameKeyEventHandler}), EventListenerInterface),
-        (get({get({This, upGameKeyEventHandler}), '$class'})):addListenerSingleThreaded(get({This, upGameKeyEventHandler}), EventListenerInterface),
-        (get({get({This, downGameKeyEventHandler}), '$class'})):addListenerSingleThreaded(get({This, downGameKeyEventHandler}), EventListenerInterface).
 
-removeListener(This, EventListenerInterface) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({EventListenerInterface, '$class'})):toString(EventListenerInterface), This, get({get({This, commonStrings}), 'REMOVE_LISTENER'})),
-        (get({get({This, pressGameKeyEventHandler}), '$class'})):removeListenerSingleThreaded(get({This, pressGameKeyEventHandler}), EventListenerInterface),
-        (get({get({This, upGameKeyEventHandler}), '$class'})):removeListenerSingleThreaded(get({This, upGameKeyEventHandler}), EventListenerInterface),
-        (get({get({This, downGameKeyEventHandler}), '$class'})):removeListenerSingleThreaded(get({This, downGameKeyEventHandler}), EventListenerInterface).
+  def jm_addListenerForPlayer(this, p_eventListenerInterface, p_playerInputId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventListenerInterface, p_eventListenerInterface)
+      JR.lset(f, :playerInputId, p_playerInputId)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :eventListenerInterface), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :ADD_LISTENER)])
+        JR.call(JR.get(this, :pressGameKeyEventHandler), :jm_addListenerSingleThreaded, [JR.lget(f, :eventListenerInterface)])
+        JR.call(JR.call(JR.get(this, :upGameKeyEventHandler), :jm_getInstanceForPlayer, [JR.lget(f, :playerInputId)]), :jm_addListenerSingleThreaded, [JR.lget(f, :eventListenerInterface)])
+        JR.call(JR.call(JR.get(this, :downGameKeyEventHandler), :jm_getInstanceForPlayer, [JR.lget(f, :playerInputId)]), :jm_addListenerSingleThreaded, [JR.lget(f, :eventListenerInterface)])
+    end)
+  end
+
+
+  def jm_addListener(this, p_eventListenerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventListenerInterface, p_eventListenerInterface)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :eventListenerInterface), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :ADD_LISTENER)])
+        JR.call(JR.get(this, :pressGameKeyEventHandler), :jm_addListenerSingleThreaded, [JR.lget(f, :eventListenerInterface)])
+        JR.call(JR.get(this, :upGameKeyEventHandler), :jm_addListenerSingleThreaded, [JR.lget(f, :eventListenerInterface)])
+        JR.call(JR.get(this, :downGameKeyEventHandler), :jm_addListenerSingleThreaded, [JR.lget(f, :eventListenerInterface)])
+    end)
+  end
+
+
+  def jm_removeListener(this, p_eventListenerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventListenerInterface, p_eventListenerInterface)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :eventListenerInterface), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :REMOVE_LISTENER)])
+        JR.call(JR.get(this, :pressGameKeyEventHandler), :jm_removeListenerSingleThreaded, [JR.lget(f, :eventListenerInterface)])
+        JR.call(JR.get(this, :upGameKeyEventHandler), :jm_removeListenerSingleThreaded, [JR.lget(f, :eventListenerInterface)])
+        JR.call(JR.get(this, :downGameKeyEventHandler), :jm_removeListenerSingleThreaded, [JR.lget(f, :eventListenerInterface)])
+    end)
+  end
+end
+
 

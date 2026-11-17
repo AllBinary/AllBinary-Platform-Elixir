@@ -1,76 +1,133 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2026 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.logic.io.file
-% import java.io.InputStream
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.string.CommonStrings
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2026 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.logic.io.file
 
--module('AbFileSystem').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+#J2MEForJ2ME
+defmodule AbFileSystem do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> AbFileSystem.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'AbFileSystem':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'AbFileSystem', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, AbFileSystem.jstatic_instance()})
+    end)
+  end
 
-isDirectoryOrFile(This, Path) when (is_list(Path) orelse Path =:= undefined) ->
-        false.
 
-isDirectory(This, Path) when (is_list(Path) orelse Path =:= undefined) ->
-        false.
+  def jm_isDirectoryOrFile(this, p_path) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :path, p_path)
+        throw({:jreturn, false})
+    end)
+  end
 
-getFilesAsStringArrayForPath(This, CurrentDirPath) when (is_list(CurrentDirPath) orelse CurrentDirPath =:= undefined) ->
-        (fun(Target_N66072) -> (get({Target_N66072, '$class'})):getArrayInstance(Target_N66072) end)('StringUtil':getInstance()).
 
-readAsString(This, FileName) when (is_list(FileName) orelse FileName =:= undefined) ->
-        Bytes = array:new(1000000, {default, 0}),
-        (get({This, '$class'})):readAsString(This, FileName, Bytes).
+  def jm_isDirectory(this, p_path) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :path, p_path)
+        throw({:jreturn, false})
+    end)
+  end
 
-readAsString(This, FileName, Bytes) when (is_list(FileName) orelse FileName =:= undefined), (is_tuple(Bytes) orelse Bytes =:= undefined) ->
-        get({'StringUtil':getInstance(), 'EMPTY_STRING'}).
 
-close(This, Closeable) ->
-        try
-            case (Closeable =/= undefined) of
-                true ->
-                InputStream = (Closeable),
-                (get({InputStream, '$class'})):close(InputStream);
-                false -> ok
-            end,
-            true
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'CLOSE'}), E),
-            false
-        end.
+  def jm_getFilesAsStringArrayForPath(this, p_currentDirPath) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :currentDirPath, p_currentDirPath)
+        throw({:jreturn, JR.call(StringUtil.jm_getInstance(), :jm_getArrayInstance, [])})
+    end)
+  end
+
+
+  def jm_readAsString(this, p_fileName) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :fileName, p_fileName)
+        JR.lset(f, :bytes, JR.anew(1000000, 0))
+        throw({:jreturn, JR.call(this, :jm_readAsString, [JR.lget(f, :fileName), JR.lget(f, :bytes)])})
+    end)
+  end
+
+
+  def jm_readAsString(this, p_fileName, p_bytes) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :fileName, p_fileName)
+      JR.lset(f, :bytes, p_bytes)
+        throw({:jreturn, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING)})
+    end)
+  end
+
+
+  def jm_close(this, p_closeable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :closeable, p_closeable)
+        try do
+            if (JR.lget(f, :closeable) != nil) do
+                JR.lset(f, :inputStream, (JR.lget(f, :closeable)))
+                JR.call(JR.lget(f, :inputStream), :jm_close, [])
+            end
+            throw({:jreturn, true})
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :CLOSE), JR.lget(f, :e)])
+            throw({:jreturn, false})
+        end
+    end)
+  end
+end
+
 

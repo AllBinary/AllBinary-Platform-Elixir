@@ -1,194 +1,436 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2011 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.layer
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.game.identification.BasicGroupFactory
-% import org.allbinary.game.identification.Group
-% import org.allbinary.graphics.GPoint
-% import org.allbinary.graphics.Rectangle
-% import org.allbinary.graphics.RectangleFactory
-% import org.allbinary.graphics.opengles.OpenGLFeatureUtil
-% import org.allbinary.TsUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.math.PositionStrings
-% import org.allbinary.string.CommonLabels
-% import org.allbinary.string.CommonSeps
-% import org.allbinary.view.ViewPositionBase
-% import org.allbinary.view.event.ViewPositionEvent
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2011 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.layer
 
--module('AllBinaryLayer').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements LayerInterface
+defmodule AllBinaryLayer do
+  def jsuper(), do: Layer
+def jstatic_NULL_ALLBINARY_LAYER(), do: JR.static_get(__MODULE__, :NULL_ALLBINARY_LAYER, fn -> AllBinaryLayer.jnew(JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), RectangleFactory.jstatic_SINGLETON(), ViewPositionBase.jstatic_NULL_VIEW_POSITION()) end)
+  def jstatic_set_NULL_ALLBINARY_LAYER(value), do: JR.static_put(__MODULE__, :NULL_ALLBINARY_LAYER, value)
+def jstatic_TYPE(), do: JR.static_get(__MODULE__, :TYPE, fn -> "Type: " end)
+  def jstatic_set_TYPE(value), do: JR.static_put(__MODULE__, :TYPE, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Layer', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'NULL_ALLBINARY_LAYER'}, 'AllBinaryLayer':new(get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'RectangleFactory', 'SINGLETON'}), get({'ViewPositionBase', 'NULL_VIEW_POSITION'}))),
-    put({?MODULE, 'TYPE'}, "Type: "),
-    ok.
-
-init_fields(This) ->
-    put({This, viewPositionEvent}, 'ViewPositionEvent':new(This)),
-    put({This, halfWidth}, 0),
-    put({This, halfHeight}, 0),
-    put({This, name}, undefined),
-    put({This, viewPosition}, get({'ViewPositionBase', 'NULL_VIEW_POSITION'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :viewPositionEvent, nil)
+    JR.put(this, :halfWidth, 0)
+    JR.put(this, :halfHeight, 0)
+    JR.put(this, :name, nil)
+    JR.put(this, :viewPosition, nil)
+        JR.put(this, :viewPositionEvent, ViewPositionEvent.jnew(this))
+        JR.put(this, :halfWidth, 0)
+        JR.put(this, :halfHeight, 0)
+        
+        JR.put(this, :viewPosition, ViewPositionBase.jstatic_NULL_VIEW_POSITION())
+    nil
+  end
 
 
-new(Name, Rectangle, ViewPosition) when (is_list(Name) orelse Name =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Name, Rectangle, ViewPosition),
-    This.
+  def jinit(this, p_name, p_rectangle, p_viewPosition) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :rectangle, p_rectangle)
+      JR.lset(f, :viewPosition, p_viewPosition)
+        Layer.jinit(this, JR.call(JR.lget(f, :rectangle), :jm_getWidth, []), JR.call(JR.lget(f, :rectangle), :jm_getHeight, []))
+        AllBinaryLayer.jinitfields(this)
+        JR.lset(f, :localName, nil)
+        JR.lset(f, :localName, JR.call(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.lget(f, :name)]), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :COLON)]), :jm_append, [J.Integer.jm_toHexString(JR.call(TsUtil.jm_getInstance(), :jm_hashCode, [this]))]), :jm_toString, []))
+        JR.put(this, :name, JR.lget(f, :localName))
+        JR.lset(f, :point, JR.call(JR.lget(f, :rectangle), :jm_getPoint, []))
+        JR.call(this, :jm_setPosition, [JR.call(JR.lget(f, :point), :jm_getX, []), JR.call(JR.lget(f, :point), :jm_getY, []), JR.call(JR.lget(f, :point), :jm_getZ, [])])
+        JR.call(this, :jm_setHalfWidth, [(Bitwise.bsr(JR.call(this, :jm_getWidth, []), 1))])
+        JR.call(this, :jm_setHalfHeight, [(Bitwise.bsr(JR.call(this, :jm_getHeight, []), 1))])
+        JR.put(this, :viewPosition, JR.lget(f, :viewPosition))
+        JR.call(JR.get(this, :viewPosition), :jm_setAllbinaryLayer, [this])
+    end)
+  end
 
-'$init'(This, Name, Rectangle, ViewPosition) when (is_list(Name) orelse Name =:= undefined) ->
-        'Layer':'$init'(This, (get({Rectangle, '$class'})):getWidth(Rectangle), (get({Rectangle, '$class'})):getHeight(Rectangle)),
-        init_fields(This),
-        put({local, localName}, undefined),
-        put({local, localName}, (fun(Target_N66390) -> (get({Target_N66390, '$class'})):toString(Target_N66390) end)((fun(Target_N66397) -> (get({Target_N66397, '$class'})):append(Target_N66397, integer_to_list((fun(Target_N66489) -> (get({Target_N66489, '$class'})):hashCode(Target_N66489, This) end)('TsUtil':getInstance()), 16)) end)((fun(Target_N66404) -> (get({Target_N66404, '$class'})):append(Target_N66404, get({'CommonSeps':getInstance(), 'COLON'})) end)((fun(Target_N66411) -> (get({Target_N66411, '$class'})):append(Target_N66411, Name) end)('StringMaker':new()))))),
-        put({This, name}, get({local, localName})),
-        Point = (get({Rectangle, '$class'})):getPoint(Rectangle),
-        (get({This, '$class'})):setPosition(This, (get({Point, '$class'})):getX(Point), (get({Point, '$class'})):getY(Point), (get({Point, '$class'})):getZ(Point)),
-        (get({This, '$class'})):setHalfWidth(This, (((get({This, '$class'})):getWidth(This) bsr 1))),
-        (get({This, '$class'})):setHalfHeight(This, (((get({This, '$class'})):getHeight(This) bsr 1))),
-        put({This, viewPosition}, ViewPosition),
-        (get({get({This, viewPosition}), '$class'})):setAllbinaryLayer(get({This, viewPosition}), This).
+  def jnew(p_name, p_rectangle, p_viewPosition) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_name, p_rectangle, p_viewPosition)
+    this
+  end
 
-setPosition(This, X, Y, Z) when is_integer(X), is_integer(Y), is_integer(Z) ->
-        'Layer':setPosition(This, X, Y, Z).
 
-moveDXYZ(This, Dx, Dy, Dz) when is_integer(Dx), is_integer(Dy), is_integer(Dz) ->
-        'Layer':moveDXYZ(This, Dx, Dy, Dz).
+  def jm_setPosition(this, p_x, p_y, p_z) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :z, p_z)
+        Layer.jm_setPosition(this, JR.lget(f, :x), JR.lget(f, :y), JR.lget(f, :z))
+    end)
+  end
 
-getXP(This) ->
-        'Layer':getXP(This).
 
-getYP(This) ->
-        'Layer':getYP(This).
+  def jm_moveDXYZ(this, p_dx, p_dy, p_dz) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :dx, p_dx)
+      JR.lset(f, :dy, p_dy)
+      JR.lset(f, :dz, p_dz)
+        Layer.jm_moveDXYZ(this, JR.lget(f, :dx), JR.lget(f, :dy), JR.lget(f, :dz))
+    end)
+  end
 
-getZP(This) ->
-        'Layer':getZP(This).
 
-getWidth(This) ->
-        'Layer':getWidth(This).
+  def jm_getXP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, Layer.jm_getXP(this)})
+    end)
+  end
 
-getHeight(This) ->
-        'Layer':getHeight(This).
 
-setVisible(This, Visible) when is_boolean(Visible) ->
-        'Layer':setVisible(This, Visible).
+  def jm_getYP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, Layer.jm_getYP(this)})
+    end)
+  end
 
-isVisible(This) ->
-        'Layer':isVisible(This).
 
-paint(This, Graphics) ->
-        'Layer':paint(This, Graphics).
+  def jm_getZP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, Layer.jm_getZP(this)})
+    end)
+  end
 
-% throws Exception
-onChangeEvent(This, LayerManagerEvent) ->
-        ok.
 
-paintThreed(This, Graphics) ->
-        ok.
+  def jm_getWidth(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, Layer.jm_getWidth(this)})
+    end)
+  end
 
-getX2(This) ->
-        ((get({This, '$class'})):getXP(This) + (get({This, '$class'})):getWidth(This)).
 
-getY2(This) ->
-        ((get({This, '$class'})):getYP(This) + (get({This, '$class'})):getHeight(This)).
+  def jm_getHeight(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, Layer.jm_getHeight(this)})
+    end)
+  end
 
-getZ2(This) ->
-        trunc((((get({This, '$class'})):getZP(This) + (get({This, '$class'})):getDepth(This)))).
 
-getName(This) ->
-        get({This, name}).
+  def jm_setVisible(this, p_visible) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :visible, p_visible)
+        Layer.jm_setVisible(this, JR.lget(f, :visible))
+    end)
+  end
 
-setHalfWidth(This, HalfWidth) when is_integer(HalfWidth) ->
-        put({This, halfWidth}, HalfWidth).
 
-getHalfWidth(This) ->
-        get({This, halfWidth}).
+  def jm_isVisible(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, Layer.jm_isVisible(this)})
+    end)
+  end
 
-setHalfHeight(This, HalfHeight) when is_integer(HalfHeight) ->
-        put({This, halfHeight}, HalfHeight).
 
-getHalfHeight(This) ->
-        get({This, halfHeight}).
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        Layer.jm_paint(this, JR.lget(f, :graphics))
+    end)
+  end
 
-getHalfDepth(This) ->
-        (trunc((get({This, '$class'})):getDepth(This)) div 2).
 
-getViewPosition(This) ->
-        get({This, viewPosition}).
+  def jm_onChangeEvent(this, p_layerManagerEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerManagerEvent, p_layerManagerEvent)
+        nil
+    end)
+  end
 
-setViewPosition(This, ViewPosition) ->
-        put({This, viewPosition}, ViewPosition).
 
-getGroupInterface(This) ->
-        get({'BasicGroupFactory':getInstance(), 'NONE_ARRAY'}).
+  def jm_paintThreed(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        nil
+    end)
+  end
 
-implmentsTickableInterface(This) ->
-        false.
 
-implmentsGameInputInterface(This) ->
-        false.
+  def jm_getX2(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.int32(JR.call(this, :jm_getXP, []) + JR.call(this, :jm_getWidth, []))})
+    end)
+  end
 
-implmentsArtificialIntelligenceCompositeInterface(This) ->
-        false.
 
-implmentsCollidableInterface(This) ->
-        false.
+  def jm_getY2(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.int32(JR.call(this, :jm_getYP, []) + JR.call(this, :jm_getHeight, []))})
+    end)
+  end
 
-implementsThreedInterface(This) ->
-        (fun(Target_N68810) -> (get({Target_N68810, '$class'})):isAnyThreed(Target_N68810) end)('OpenGLFeatureUtil':getInstance()).
 
-getType(This) ->
-        (-1).
+  def jm_getZ2(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.int32(((JR.call(this, :jm_getZP, []) + JR.call(this, :jm_getDepth, []))))})
+    end)
+  end
 
-getMultiPlayerType(This) ->
-        (-1).
 
-toStringAppend(This, StringBuffer) ->
-        CommonSeps = 'CommonSeps':getInstance(),
-        PositionStrings = 'PositionStrings':getInstance(),
-        CommonLabels = 'CommonLabels':getInstance(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({This, '$class'})):getName(This)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'COLON'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({'AllBinaryLayer', 'TYPE'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, (get({This, '$class'})):getType(This)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'SPACE'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({PositionStrings, 'X_LABEL'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, (get({This, '$class'})):getXP(This)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'SPACE'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({PositionStrings, 'Y_LABEL'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, (get({This, '$class'})):getYP(This)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'SPACE'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({PositionStrings, 'Z_LABEL'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, (get({This, '$class'})):getZP(This)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'SPACE'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonLabels, 'WIDTH_LABEL'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, (get({This, '$class'})):getWidth(This)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'SPACE'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonLabels, 'HEIGHT_LABEL'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, (get({This, '$class'})):getHeight(This)).
+  def jm_getName(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :name)})
+    end)
+  end
 
-toString(This) ->
-        StringBuffer = 'StringMaker':new(),
-        (get({This, '$class'})):toStringAppend(This, StringBuffer),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+
+  def jm_setHalfWidth(this, p_halfWidth) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :halfWidth, p_halfWidth)
+        JR.put(this, :halfWidth, JR.lget(f, :halfWidth))
+    end)
+  end
+
+
+  def jm_getHalfWidth(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :halfWidth)})
+    end)
+  end
+
+
+  def jm_setHalfHeight(this, p_halfHeight) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :halfHeight, p_halfHeight)
+        JR.put(this, :halfHeight, JR.lget(f, :halfHeight))
+    end)
+  end
+
+
+  def jm_getHalfHeight(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :halfHeight)})
+    end)
+  end
+
+
+  def jm_getHalfDepth(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, div(JR.int32(JR.call(this, :jm_getDepth, [])), 2)})
+    end)
+  end
+
+
+  def jm_getViewPosition(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :viewPosition)})
+    end)
+  end
+
+
+  def jm_setViewPosition(this, p_viewPosition) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :viewPosition, p_viewPosition)
+        JR.put(this, :viewPosition, JR.lget(f, :viewPosition))
+    end)
+  end
+
+
+  def jm_getGroupInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(BasicGroupFactory.jm_getInstance(), :NONE_ARRAY)})
+    end)
+  end
+
+
+  def jm_implmentsTickableInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
+
+
+  def jm_implmentsGameInputInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
+
+
+  def jm_implmentsArtificialIntelligenceCompositeInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
+
+
+  def jm_implmentsCollidableInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
+
+
+  def jm_implementsThreedInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(OpenGLFeatureUtil.jm_getInstance(), :jm_isAnyThreed, [])})
+    end)
+  end
+
+
+  def jm_getType(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, -1})
+    end)
+  end
+
+
+  def jm_getMultiPlayerType(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, -1})
+    end)
+  end
+
+
+  def jm_toStringAppend(this, p_stringBuffer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :stringBuffer, p_stringBuffer)
+        JR.lset(f, :commonSeps, CommonSeps.jm_getInstance())
+        JR.lset(f, :positionStrings, PositionStrings.jm_getInstance())
+        JR.lset(f, :commonLabels, CommonLabels.jm_getInstance())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(this, :jm_getName, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :COLON)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [AllBinaryLayer.jstatic_TYPE()])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.call(this, :jm_getType, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :SPACE)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :positionStrings), :X_LABEL)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.call(this, :jm_getXP, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :SPACE)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :positionStrings), :Y_LABEL)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.call(this, :jm_getYP, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :SPACE)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :positionStrings), :Z_LABEL)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.call(this, :jm_getZP, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :SPACE)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonLabels), :WIDTH_LABEL)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.call(this, :jm_getWidth, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :SPACE)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonLabels), :HEIGHT_LABEL)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.call(this, :jm_getHeight, [])])
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(this, :jm_toStringAppend, [JR.lget(f, :stringBuffer)])
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+end
+
 

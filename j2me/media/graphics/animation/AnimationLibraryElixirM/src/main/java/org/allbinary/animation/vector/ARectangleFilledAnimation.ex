@@ -1,33 +1,58 @@
-% Generated Code Do Not Modify
-% package org.allbinary.animation.vector
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.graphics.color.BasicColorFactory
+# Generated Code Do Not Modify
+# package org.allbinary.animation.vector
 
--module('ARectangleFilledAnimation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule ARectangleFilledAnimation do
+  def jsuper(), do: RectangleFilledAnimation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('RectangleFilledAnimation', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :x, 0)
+    JR.put(this, :y, 0)
+        JR.put(this, :x, 0)
+        JR.put(this, :y, 0)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, x}, 0),
-    put({This, y}, 0),
-    ok.
+
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        RectangleFilledAnimation.jinit(this, 0, 0, JR.get(BasicColorFactory.jm_getInstance(), :BLACK))
+        ARectangleFilledAnimation.jinitfields(this)
+    end)
+  end
+
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jm_nextFrame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-'$init'(This) ->
-        'RectangleFilledAnimation':'$init'(This, 0, 0, get({'BasicColorFactory':getInstance(), 'BLACK'})),
-        init_fields(This).
 
-nextFrame(This) ->
-        ok.
+  def jm_paintXY(this, p_graphics, p_unusedX, p_unusedY) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :unusedX, p_unusedX)
+      JR.lset(f, :unusedY, p_unusedY)
+        RectangleFilledAnimation.jm_paintXY(this, JR.lget(f, :graphics), JR.get(this, :x), JR.get(this, :y))
+    end)
+  end
+end
 
-paintXY(This, Graphics, UnusedX, UnusedY) when is_integer(UnusedX), is_integer(UnusedY) ->
-        'RectangleFilledAnimation':paintXY(This, Graphics, get({This, x}), get({This, y})).
 

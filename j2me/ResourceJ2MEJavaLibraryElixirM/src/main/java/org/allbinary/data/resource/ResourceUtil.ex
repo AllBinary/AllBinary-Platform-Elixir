@@ -1,146 +1,165 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.data.resource
-% import java.io.InputStream
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonSeps
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.data.resource
 
--module('ResourceUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+#J2ME
+defmodule ResourceUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> ResourceUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'ResourceUtil':new()),
-    ok.
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+    nil
+  end
 
 
-getInstance() ->
-        get({'ResourceUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, ResourceUtil.jstatic_instance()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-setLoadingPaths(This, Path, Ext) when (is_list(Path) orelse Path =:= undefined), (is_list(Ext) orelse Ext =:= undefined) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({'CommonStrings':getInstance(), 'NOT_IMPLEMENTED'}), This, "setLoadingPaths").
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-% throws Exception
-getResourceAsStream(This, Resource) when (is_list(Resource) orelse Resource =:= undefined) ->
-        put({local, inputStream}, (get({get({Resource, '$class'}), '$class'})):getResourceAsStream(get({Resource, '$class'}), Resource)),
-        case (get({local, inputStream}) =:= undefined) of
-            true ->
-            put({local, inputStream}, (get({This, '$class'})):getResourceAsStreamAtStart(This, Resource, 2)),
-            case (get({local, inputStream}) =:= undefined) of
-                true ->
-                put({local, inputStream}, (get({This, '$class'})):getResourceAsStreamAtStart(This, Resource, 1)),
-                case (get({local, inputStream}) =:= undefined) of
-                    true ->
-                    StringMaker = 'StringMaker':new(),
-                    Index = (get({Resource, '$class'})):lastIndexOf(Resource, $/),
-                    put({local, resourcePath}, string:slice(Resource, (Index + 1))),
-                    put({local, inputStream}, (get({get({Resource, '$class'}), '$class'})):getResourceAsStream(get({Resource, '$class'}), get({local, resourcePath}))),
-                    case (get({local, inputStream}) =:= undefined) of
-                        true ->
-                        put({local, resourcePath}, string:slice(Resource, Index)),
-                        put({local, inputStream}, (get({get({Resource, '$class'}), '$class'})):getResourceAsStream(get({Resource, '$class'}), get({local, resourcePath}))),
-                        case (get({local, inputStream}) =:= undefined) of
-                            true ->
-                            RES = "res",
-                            put({local, resourcePath}, (fun(Target_N66656) -> (get({Target_N66656, '$class'})):toString(Target_N66656) end)((fun(Target_N66663) -> (get({Target_N66663, '$class'})):append(Target_N66663, string:slice(Resource, Index)) end)((get({StringMaker, '$class'})):append(StringMaker, RES)))),
-                            put({local, inputStream}, (get({get({Resource, '$class'}), '$class'})):getResourceAsStream(get({Resource, '$class'}), get({local, resourcePath}))),
-                            case (get({local, inputStream}) =:= undefined) of
-                                true ->
-                                (get({StringMaker, '$class'})):delete(StringMaker, 0, (get({StringMaker, '$class'})):length(StringMaker)),
-                                put({local, resourcePath}, (fun(Target_N66869) -> (get({Target_N66869, '$class'})):toString(Target_N66869) end)((fun(Target_N66876) -> (get({Target_N66876, '$class'})):append(Target_N66876, string:slice(Resource, Index)) end)((fun(Target_N66883) -> (get({Target_N66883, '$class'})):append(Target_N66883, RES) end)((get({StringMaker, '$class'})):append(StringMaker, "/"))))),
-                                put({local, inputStream}, (get({get({Resource, '$class'}), '$class'})):getResourceAsStream(get({Resource, '$class'}), get({local, resourcePath}))),
-                                COLON = get({'CommonSeps':getInstance(), 'COLON'}),
-                                case (get({local, inputStream}) =:= undefined) of
-                                    true ->
-                                    (get({StringMaker, '$class'})):delete(StringMaker, 0, (get({StringMaker, '$class'})):length(StringMaker)),
-                                    put({local, resourcePath}, (fun(Target_N67155) -> (get({Target_N67155, '$class'})):toString(Target_N67155) end)((fun(Target_N67162) -> (get({Target_N67162, '$class'})):append(Target_N67162, string:slice(Resource, Index)) end)((fun(Target_N67169) -> (get({Target_N67169, '$class'})):append(Target_N67169, COLON) end)((get({StringMaker, '$class'})):append(StringMaker, RES))))),
-                                    put({local, inputStream}, (get({get({Resource, '$class'}), '$class'})):getResourceAsStream(get({Resource, '$class'}), get({local, resourcePath}))),
-                                    case (get({local, inputStream}) =:= undefined) of
-                                        true ->
-                                        (get({StringMaker, '$class'})):delete(StringMaker, 0, (get({StringMaker, '$class'})):length(StringMaker)),
-                                        put({local, resourcePath}, (fun(Target_N67387) -> (get({Target_N67387, '$class'})):toString(Target_N67387) end)((fun(Target_N67394) -> (get({Target_N67394, '$class'})):append(Target_N67394, string:slice(Resource, (Index + 1))) end)((fun(Target_N67401) -> (get({Target_N67401, '$class'})):append(Target_N67401, COLON) end)((get({StringMaker, '$class'})):append(StringMaker, RES))))),
-                                        put({local, inputStream}, (get({get({Resource, '$class'}), '$class'})):getResourceAsStream(get({Resource, '$class'}), get({local, resourcePath}))),
-                                        case (get({local, inputStream}) =:= undefined) of
-                                            true ->
-                                            RESOURCE_STRING = "resource",
-                                            (get({StringMaker, '$class'})):delete(StringMaker, 0, (get({StringMaker, '$class'})):length(StringMaker)),
-                                            put({local, resourcePath}, (fun(Target_N67666) -> (get({Target_N67666, '$class'})):toString(Target_N67666) end)((fun(Target_N67673) -> (get({Target_N67673, '$class'})):append(Target_N67673, string:slice(Resource, Index)) end)((fun(Target_N67680) -> (get({Target_N67680, '$class'})):append(Target_N67680, COLON) end)((get({StringMaker, '$class'})):append(StringMaker, RESOURCE_STRING))))),
-                                            put({local, inputStream}, (get({get({Resource, '$class'}), '$class'})):getResourceAsStream(get({Resource, '$class'}), get({local, resourcePath}))),
-                                            case (get({local, inputStream}) =:= undefined) of
-                                                true ->
-                                                (get({StringMaker, '$class'})):delete(StringMaker, 0, (get({StringMaker, '$class'})):length(StringMaker)),
-                                                put({local, resourcePath}, (fun(Target_N67898) -> (get({Target_N67898, '$class'})):toString(Target_N67898) end)((fun(Target_N67905) -> (get({Target_N67905, '$class'})):append(Target_N67905, string:slice(Resource, (Index + 1))) end)((fun(Target_N67912) -> (get({Target_N67912, '$class'})):append(Target_N67912, COLON) end)((get({StringMaker, '$class'})):append(StringMaker, RESOURCE_STRING))))),
-                                                put({local, inputStream}, (get({get({Resource, '$class'}), '$class'})):getResourceAsStream(get({Resource, '$class'}), get({local, resourcePath}))),
-                                                case (get({local, inputStream}) =:= undefined) of
-                                                    true ->
-                                                    (get({StringMaker, '$class'})):delete(StringMaker, 0, (get({StringMaker, '$class'})):length(StringMaker)),
-                                                    erlang:error({'Exception', (fun(Target_N68140) -> (get({Target_N68140, '$class'})):toString(Target_N68140) end)((fun(Target_N68147) -> (get({Target_N68147, '$class'})):append(Target_N68147, Resource) end)((get({StringMaker, '$class'})):append(StringMaker, "Unable to obtain: ")))});
-                                                    false -> ok
-                                                end;
-                                                false -> ok
-                                            end;
-                                            false -> ok
-                                        end;
-                                        false -> ok
-                                    end;
-                                    false -> ok
-                                end;
-                                false -> ok
-                            end;
-                            false -> ok
-                        end;
-                        false -> ok
-                    end;
-                    false -> ok
-                end;
-                false -> ok
-            end;
-            false -> ok
-        end,
-        get({local, inputStream}).
 
-% throws Exception
-getResourceAsStreamAtStart(This, Resource, StartIndex) when (is_list(Resource) orelse Resource =:= undefined), is_integer(StartIndex) ->
-        try
-        StringMaker = 'StringMaker':new(),
-        Index = allbinary_java:index_of(Resource, get({'CommonSeps':getInstance(), 'COLON'})),
-        ResourcePath = string:slice(Resource, (Index + StartIndex)),
-        InputStream = (get({get({Resource, '$class'}), '$class'})):getResourceAsStream(get({Resource, '$class'}), ResourcePath),
-        case (InputStream =/= undefined) of
-            true ->
-            throw({'$return', InputStream});
-            false -> ok
-        end,
-        InputStream
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+  def jm_setLoadingPaths(this, p_path, p_ext) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :path, p_path)
+      JR.lset(f, :ext, p_ext)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(CommonStrings.jm_getInstance(), :NOT_IMPLEMENTED), this, "setLoadingPaths"])
+    end)
+  end
 
-addResource(This, Resource, Value) when (is_list(Resource) orelse Resource =:= undefined) ->
-        ok.
+
+  def jm_getResourceAsStream(this, p_resource) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :resource, p_resource)
+        JR.lset(f, :inputStream, JR.call(JR.class_name(JR.lget(f, :resource)), :jm_getResourceAsStream, [JR.lget(f, :resource)]))
+        if (JR.lget(f, :inputStream) == nil) do
+            JR.lset(f, :inputStream, JR.call(this, :jm_getResourceAsStreamAtStart, [JR.lget(f, :resource), 2]))
+            if (JR.lget(f, :inputStream) == nil) do
+                JR.lset(f, :inputStream, JR.call(this, :jm_getResourceAsStreamAtStart, [JR.lget(f, :resource), 1]))
+                if (JR.lget(f, :inputStream) == nil) do
+                    JR.lset(f, :stringMaker, StringMaker.jnew())
+                    JR.lset(f, :index, JR.call(JR.lget(f, :resource), :jm_lastIndexOf, [?/]))
+                    JR.lset(f, :resourcePath, JR.substring(JR.lget(f, :resource), JR.int32(JR.lget(f, :index) + 1)))
+                    JR.lset(f, :inputStream, JR.call(JR.class_name(JR.lget(f, :resource)), :jm_getResourceAsStream, [JR.lget(f, :resourcePath)]))
+                    if (JR.lget(f, :inputStream) == nil) do
+                        JR.lset(f, :resourcePath, JR.substring(JR.lget(f, :resource), JR.lget(f, :index)))
+                        JR.lset(f, :inputStream, JR.call(JR.class_name(JR.lget(f, :resource)), :jm_getResourceAsStream, [JR.lget(f, :resourcePath)]))
+                        if (JR.lget(f, :inputStream) == nil) do
+                            JR.lset(f, :RES, "res")
+                            JR.lset(f, :resourcePath, JR.call(JR.call(JR.call(JR.lget(f, :stringMaker), :jm_append, [JR.lget(f, :RES)]), :jm_append, [JR.substring(JR.lget(f, :resource), JR.lget(f, :index))]), :jm_toString, []))
+                            JR.lset(f, :inputStream, JR.call(JR.class_name(JR.lget(f, :resource)), :jm_getResourceAsStream, [JR.lget(f, :resourcePath)]))
+                            if (JR.lget(f, :inputStream) == nil) do
+                                JR.call(JR.lget(f, :stringMaker), :jm_delete, [0, JR.call(JR.lget(f, :stringMaker), :jm_length, [])])
+                                JR.lset(f, :resourcePath, JR.call(JR.call(JR.call(JR.call(JR.lget(f, :stringMaker), :jm_append, ["/"]), :jm_append, [JR.lget(f, :RES)]), :jm_append, [JR.substring(JR.lget(f, :resource), JR.lget(f, :index))]), :jm_toString, []))
+                                JR.lset(f, :inputStream, JR.call(JR.class_name(JR.lget(f, :resource)), :jm_getResourceAsStream, [JR.lget(f, :resourcePath)]))
+                                JR.lset(f, :COLON, JR.get(CommonSeps.jm_getInstance(), :COLON))
+                                if (JR.lget(f, :inputStream) == nil) do
+                                    JR.call(JR.lget(f, :stringMaker), :jm_delete, [0, JR.call(JR.lget(f, :stringMaker), :jm_length, [])])
+                                    JR.lset(f, :resourcePath, JR.call(JR.call(JR.call(JR.call(JR.lget(f, :stringMaker), :jm_append, [JR.lget(f, :RES)]), :jm_append, [JR.lget(f, :COLON)]), :jm_append, [JR.substring(JR.lget(f, :resource), JR.lget(f, :index))]), :jm_toString, []))
+                                    JR.lset(f, :inputStream, JR.call(JR.class_name(JR.lget(f, :resource)), :jm_getResourceAsStream, [JR.lget(f, :resourcePath)]))
+                                    if (JR.lget(f, :inputStream) == nil) do
+                                        JR.call(JR.lget(f, :stringMaker), :jm_delete, [0, JR.call(JR.lget(f, :stringMaker), :jm_length, [])])
+                                        JR.lset(f, :resourcePath, JR.call(JR.call(JR.call(JR.call(JR.lget(f, :stringMaker), :jm_append, [JR.lget(f, :RES)]), :jm_append, [JR.lget(f, :COLON)]), :jm_append, [JR.substring(JR.lget(f, :resource), JR.int32(JR.lget(f, :index) + 1))]), :jm_toString, []))
+                                        JR.lset(f, :inputStream, JR.call(JR.class_name(JR.lget(f, :resource)), :jm_getResourceAsStream, [JR.lget(f, :resourcePath)]))
+                                        if (JR.lget(f, :inputStream) == nil) do
+                                            JR.lset(f, :RESOURCE_STRING, "resource")
+                                            JR.call(JR.lget(f, :stringMaker), :jm_delete, [0, JR.call(JR.lget(f, :stringMaker), :jm_length, [])])
+                                            JR.lset(f, :resourcePath, JR.call(JR.call(JR.call(JR.call(JR.lget(f, :stringMaker), :jm_append, [JR.lget(f, :RESOURCE_STRING)]), :jm_append, [JR.lget(f, :COLON)]), :jm_append, [JR.substring(JR.lget(f, :resource), JR.lget(f, :index))]), :jm_toString, []))
+                                            JR.lset(f, :inputStream, JR.call(JR.class_name(JR.lget(f, :resource)), :jm_getResourceAsStream, [JR.lget(f, :resourcePath)]))
+                                            if (JR.lget(f, :inputStream) == nil) do
+                                                JR.call(JR.lget(f, :stringMaker), :jm_delete, [0, JR.call(JR.lget(f, :stringMaker), :jm_length, [])])
+                                                JR.lset(f, :resourcePath, JR.call(JR.call(JR.call(JR.call(JR.lget(f, :stringMaker), :jm_append, [JR.lget(f, :RESOURCE_STRING)]), :jm_append, [JR.lget(f, :COLON)]), :jm_append, [JR.substring(JR.lget(f, :resource), JR.int32(JR.lget(f, :index) + 1))]), :jm_toString, []))
+                                                JR.lset(f, :inputStream, JR.call(JR.class_name(JR.lget(f, :resource)), :jm_getResourceAsStream, [JR.lget(f, :resourcePath)]))
+                                                if (JR.lget(f, :inputStream) == nil) do
+                                                    JR.call(JR.lget(f, :stringMaker), :jm_delete, [0, JR.call(JR.lget(f, :stringMaker), :jm_length, [])])
+                                                    throw({:jexception, JR.exception("Exception", JR.call(JR.call(JR.call(JR.lget(f, :stringMaker), :jm_append, ["Unable to obtain: "]), :jm_append, [JR.lget(f, :resource)]), :jm_toString, []))})
+                                                end
+                                            end
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+        throw({:jreturn, JR.lget(f, :inputStream)})
+    end)
+  end
+
+
+  def jm_getResourceAsStreamAtStart(this, p_resource, p_startIndex) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :resource, p_resource)
+      JR.lset(f, :startIndex, p_startIndex)
+        JR.lset(f, :stringMaker, StringMaker.jnew())
+        JR.lset(f, :index, JR.index_of(JR.lget(f, :resource), JR.get(CommonSeps.jm_getInstance(), :COLON)))
+        JR.lset(f, :resourcePath, JR.substring(JR.lget(f, :resource), JR.int32(JR.lget(f, :index) + JR.lget(f, :startIndex))))
+        JR.lset(f, :inputStream, JR.call(JR.class_name(JR.lget(f, :resource)), :jm_getResourceAsStream, [JR.lget(f, :resourcePath)]))
+        if (JR.lget(f, :inputStream) != nil) do
+            throw({:jreturn, JR.lget(f, :inputStream)})
+        end
+        throw({:jreturn, JR.lget(f, :inputStream)})
+    end)
+  end
+
+
+  def jm_addResource(this, p_resource, p_value) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :resource, p_resource)
+      JR.lset(f, :value, p_value)
+        nil
+    end)
+  end
+end
+
 

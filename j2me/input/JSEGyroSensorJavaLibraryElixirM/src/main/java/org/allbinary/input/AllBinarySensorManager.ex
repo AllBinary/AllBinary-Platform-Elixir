@@ -1,60 +1,94 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input
 
--module('AllBinarySensorManager').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule AllBinarySensorManager do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT) end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, get({'NullUtil':getInstance(), 'NULL_OBJECT'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :ORIENTATION_SENSOR_INPUT, nil)
+    JR.put(this, :ORIENTATION_TYPE, nil)
+    JR.put(this, :list, nil)
+        JR.put(this, :ORIENTATION_SENSOR_INPUT, "Orientation Sensor Input")
+        JR.put(this, :ORIENTATION_TYPE, "Orientation Type")
+        JR.put(this, :list, BasicArrayListD.jnew())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'ORIENTATION_SENSOR_INPUT'}, "Orientation Sensor Input"),
-    put({This, 'ORIENTATION_TYPE'}, "Orientation Type"),
-    put({This, list}, 'BasicArrayListD':new()),
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        if (AllBinarySensorManager.jstatic_instance() == JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)) do
+            AllBinarySensorManager.jstatic_set_instance(AllBinarySensorManager.jnew())
+        end
+        throw({:jreturn, AllBinarySensorManager.jstatic_instance()})
+    end)
+  end
 
 
-getInstance() ->
-        case (get({'AllBinarySensorManager', instance}) =:= get({'NullUtil':getInstance(), 'NULL_OBJECT'})) of
-            true ->
-            put({'AllBinarySensorManager', instance}, 'AllBinarySensorManager':new());
-            false -> ok
-        end,
-        get({'AllBinarySensorManager', instance}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
 
-init(This) ->
-        ok.
+  def jm_init(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-getSensorNamesList(This) ->
-        get({This, list}).
 
-shutdown(This) ->
-        ok.
+  def jm_getSensorNamesList(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :list)})
+    end)
+  end
+
+
+  def jm_shutdown(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+end
+
 

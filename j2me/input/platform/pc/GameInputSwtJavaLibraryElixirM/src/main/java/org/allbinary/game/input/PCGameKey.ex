@@ -1,55 +1,74 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.input
-% import org.allbinary.logic.string.StringUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.input
 
--module('PCGameKey').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule PCGameKey do
+  def jsuper(), do: Input
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Input', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
 
-
-new(KeyCode, Name) when is_integer(KeyCode), (is_list(Name) orelse Name =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, KeyCode, Name),
-    This.
-
-'$init'(This, KeyCode, Name) when is_integer(KeyCode), (is_list(Name) orelse Name =:= undefined) ->
-        'Input':'$init'(This, KeyCode, Name),
-        Id = (get({This, '$class'})):getId(This),
-        case (Id >= 0) of
-            true ->
-            (fun(Target_N65718) -> (get({Target_N65718, '$class'})):add(Target_N65718, Id, This) end)('InputFactory':getInstance());
-            false -> ok
-        end.
-
-toString(This) ->
-        lists:concat(["PCGameKey: ", 'Input':toString(This)]).
-
-getString(KeyCode) when is_integer(KeyCode) ->
-        try
-        Input = (fun(Target_N65873) -> (get({Target_N65873, '$class'})):getInstanceById(Target_N65873, KeyCode) end)('InputFactory':getInstance()),
-        case (Input =/= undefined) of
-            true ->
-            throw({'$return', (get({Input, '$class'})):getName(Input)});
-            false ->
-            throw({'$return', get({'StringUtil':getInstance(), 'EMPTY_STRING'})})
+  def jinit(this, p_keyCode, p_name) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+      JR.lset(f, :name, p_name)
+        Input.jinit(this, JR.lget(f, :keyCode), JR.lget(f, :name))
+        PCGameKey.jinitfields(this)
+        JR.lset(f, :id, JR.call(this, :jm_getId, []))
+        if (JR.lget(f, :id) >= 0) do
+            JR.call(InputFactory.jm_getInstance(), :jm_add, [JR.lget(f, :id), this])
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
+
+  def jnew(p_keyCode, p_name) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_keyCode, p_name)
+    this
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, "PCGameKey: " <> Input.jm_toString(this)})
+    end)
+  end
+
+
+  def jm_getString(p_keyCode) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+        JR.lset(f, :input, JR.call(InputFactory.jm_getInstance(), :jm_getInstanceById, [JR.lget(f, :keyCode)]))
+        if (JR.lget(f, :input) != nil) do
+            throw({:jreturn, JR.call(JR.lget(f, :input), :jm_getName, [])})
+        else
+            throw({:jreturn, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING)})
+        end
+    end)
+  end
+end
+
 

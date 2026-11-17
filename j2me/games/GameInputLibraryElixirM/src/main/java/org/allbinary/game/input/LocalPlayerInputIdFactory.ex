@@ -1,114 +1,180 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.input
-% import org.allbinary.game.input.analog.AnalogLocationInputFactory
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.input
 
--module('LocalPlayerInputIdFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule LocalPlayerInputIdFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> LocalPlayerInputIdFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'LocalPlayerInputIdFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :MAX_NUMBER_OF_PLAYERS, 0)
+    JR.put(this, :MAX_FAST_DEVICEID, 0)
+    JR.put(this, :deviceIdToplayerId, nil)
+    JR.put(this, :playerIdToDeviceId, nil)
+    JR.put(this, :playersInPlay, nil)
+    JR.put(this, :totalDevicesMapped, 0)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :MAX_NUMBER_OF_PLAYERS, 6)
+        JR.put(this, :MAX_FAST_DEVICEID, 65)
+        JR.put(this, :deviceIdToplayerId, JR.anew(JR.get(this, :MAX_FAST_DEVICEID), 0))
+        JR.put(this, :playerIdToDeviceId, JR.anew(JR.get(this, :MAX_NUMBER_OF_PLAYERS), 0))
+        JR.put(this, :playersInPlay, JR.anew(JR.get(this, :MAX_NUMBER_OF_PLAYERS), false))
+        JR.put(this, :totalDevicesMapped, 0)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, 'MAX_NUMBER_OF_PLAYERS'}, 6),
-    put({This, 'MAX_FAST_DEVICEID'}, 65),
-    put({This, deviceIdToplayerId}, array:new(get({This, 'MAX_FAST_DEVICEID'}), {default, 0})),
-    put({This, playerIdToDeviceId}, array:new(get({This, 'MAX_NUMBER_OF_PLAYERS'}), {default, 0})),
-    put({This, playersInPlay}, array:new(get({This, 'MAX_NUMBER_OF_PLAYERS'}), {default, false})),
-    put({This, totalDevicesMapped}, 0),
-    ok.
+
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.lset(f, :index, JR.int32(JR.alength(JR.get(this, :deviceIdToplayerId)) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.aset(JR.get(this, :deviceIdToplayerId), JR.lget(f, :index), -1)
+        end)
+    end)
+  end
+
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, LocalPlayerInputIdFactory.jstatic_instance()})
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        lists:foreach(fun(Index) ->
-            put({This, deviceIdToplayerId}, array:set(Index, (-1), get({This, deviceIdToplayerId})))
-        end, lists:seq((array:size(get({This, deviceIdToplayerId})) - 1), 0, -1)).
 
-getInstance() ->
-        get({'LocalPlayerInputIdFactory', instance}).
+  def jm_getDeviceId(this, p_playerInputId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :playerInputId, p_playerInputId)
+        throw({:jreturn, JR.aget(JR.get(this, :playerIdToDeviceId), JR.lget(f, :playerInputId))})
+    end)
+  end
 
-getDeviceId(This, PlayerInputId) when is_integer(PlayerInputId) ->
-        array:get(PlayerInputId, get({This, playerIdToDeviceId})).
 
-getPlayerForDevice(This, DeviceId) when is_integer(DeviceId) ->
-        try
-        put({local, index}, 0),
-        case (DeviceId < get({This, 'MAX_FAST_DEVICEID'})) of
-            true ->
-            PlayerInputId = array:get(DeviceId, get({This, deviceIdToplayerId})),
-            case (PlayerInputId =/= (-1)) of
-                true ->
-                throw({'$return', PlayerInputId});
-                false -> ok
-            end;
-            false ->
-            lists:foreach(fun(Index) ->
-                case (array:get(get({local, index}), get({This, playerIdToDeviceId})) =:= DeviceId) of
-                    true ->
-                    throw({'$return', get({local, index})});
-                    false -> ok
-                end
-            end, lists:seq((get({This, totalDevicesMapped}) - 1), 0, -1))
-        end,
-        put({local, index}, get({This, totalDevicesMapped})),
-        case (DeviceId < get({This, 'MAX_FAST_DEVICEID'})) of
-            true ->
-            put({This, deviceIdToplayerId}, array:set(DeviceId, get({local, index}), get({This, deviceIdToplayerId})));
-            false ->
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N66738) -> (get({Target_N66738, '$class'})):toString(Target_N66738) end)((fun(Target_N66745) -> (get({Target_N66745, '$class'})):append(Target_N66745, " beyond fast Id list") end)((fun(Target_N66752) -> (get({Target_N66752, '$class'})):appendint(Target_N66752, DeviceId) end)((fun(Target_N66759) -> (get({Target_N66759, '$class'})):append(Target_N66759, "Added DeviceId: ") end)('StringMaker':new())))), This, "getPlayerForDevice")
-        end,
-        put({This, playerIdToDeviceId}, array:set(get({local, index}), DeviceId, get({This, playerIdToDeviceId}))),
-        (fun(Target_N66914) -> (get({Target_N66914, '$class'})):addPlayer(Target_N66914, get({This, totalDevicesMapped})) end)('AnalogLocationInputFactory':getInstance()),
-        put({This, totalDevicesMapped}, get({This, totalDevicesMapped}) + 1),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N66996) -> (get({Target_N66996, '$class'})):toString(Target_N66996) end)((fun(Target_N67003) -> (get({Target_N67003, '$class'})):appendint(Target_N67003, get({This, totalDevicesMapped})) end)((fun(Target_N67010) -> (get({Target_N67010, '$class'})):append(Target_N67010, " Total: ") end)((fun(Target_N67017) -> (get({Target_N67017, '$class'})):appendint(Target_N67017, get({local, index})) end)((fun(Target_N67024) -> (get({Target_N67024, '$class'})):append(Target_N67024, " at: ") end)((fun(Target_N67031) -> (get({Target_N67031, '$class'})):appendint(Target_N67031, DeviceId) end)((fun(Target_N67038) -> (get({Target_N67038, '$class'})):append(Target_N67038, "Added DeviceId: ") end)('StringMaker':new()))))))), This, "getPlayerForDevice"),
-        get({local, index})
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
-
-getTotalDevicesInPlay(This) ->
-        put({local, total}, 0),
-        lists:foreach(fun(Index) ->
-            case (array:get(Index, get({This, playersInPlay})) =:= true) of
-                true ->
-                put({local, total}, get({local, total}) + 1);
-                false -> ok
+  def jm_getPlayerForDevice(this, p_deviceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :deviceId, p_deviceId)
+        JR.lset(f, :index, 0)
+        if (JR.lget(f, :deviceId) < JR.get(this, :MAX_FAST_DEVICEID)) do
+            JR.lset(f, :playerInputId, JR.aget(JR.get(this, :deviceIdToplayerId), JR.lget(f, :deviceId)))
+            if (JR.lget(f, :playerInputId) != -1) do
+                throw({:jreturn, JR.lget(f, :playerInputId)})
             end
-        end, lists:seq((get({This, totalDevicesMapped}) - 1), 0, -1)),
-        get({local, total}).
+        else
+            JR.lset(f, :index, JR.int32(JR.get(this, :totalDevicesMapped) - 1))
+            JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+                if (JR.aget(JR.get(this, :playerIdToDeviceId), JR.lget(f, :index)) == JR.lget(f, :deviceId)) do
+                    throw({:jreturn, JR.lget(f, :index)})
+                end
+            end)
+        end
+        JR.lset(f, :index, JR.get(this, :totalDevicesMapped))
+        if (JR.lget(f, :deviceId) < JR.get(this, :MAX_FAST_DEVICEID)) do
+            JR.aset(JR.get(this, :deviceIdToplayerId), JR.lget(f, :deviceId), JR.lget(f, :index))
+        else
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["Added DeviceId: "]), :jm_appendint, [JR.lget(f, :deviceId)]), :jm_append, [" beyond fast Id list"]), :jm_toString, []), this, "getPlayerForDevice"])
+        end
+        JR.aset(JR.get(this, :playerIdToDeviceId), JR.lget(f, :index), JR.lget(f, :deviceId))
+        JR.call(AnalogLocationInputFactory.jm_getInstance(), :jm_addPlayer, [JR.get(this, :totalDevicesMapped)])
+        JR.postinc(this, :totalDevicesMapped, 1)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(JR.call(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["Added DeviceId: "]), :jm_appendint, [JR.lget(f, :deviceId)]), :jm_append, [" at: "]), :jm_appendint, [JR.lget(f, :index)]), :jm_append, [" Total: "]), :jm_appendint, [JR.get(this, :totalDevicesMapped)]), :jm_toString, []), this, "getPlayerForDevice"])
+        throw({:jreturn, JR.lget(f, :index)})
+    end)
+  end
 
-isPlayerInPlay(This, PlayerInputId) when is_integer(PlayerInputId) ->
-        array:get(PlayerInputId, get({This, playersInPlay})).
 
-setPlayerInPlay(This, PlayerInputId) when is_integer(PlayerInputId) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N67500) -> (get({Target_N67500, '$class'})):toString(Target_N67500) end)((fun(Target_N67507) -> (get({Target_N67507, '$class'})):appendint(Target_N67507, PlayerInputId) end)((fun(Target_N67514) -> (get({Target_N67514, '$class'})):append(Target_N67514, "Setting PlayerInPlay with playerInputId: ") end)('StringMaker':new()))), This, "setPlayerInPlay"),
-        put({This, playersInPlay}, array:set(PlayerInputId, true, get({This, playersInPlay}))).
+  def jm_getTotalDevicesInPlay(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :total, 0)
+        JR.lset(f, :index, JR.int32(JR.get(this, :totalDevicesMapped) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            if (JR.aget(JR.get(this, :playersInPlay), JR.lget(f, :index)) == true) do
+                JR.lpostinc(f, :total, 1)
+            end
+        end)
+        throw({:jreturn, JR.lget(f, :total)})
+    end)
+  end
 
-setPlayerOutOfPlay(This, PlayerInputId) when is_integer(PlayerInputId) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N67664) -> (get({Target_N67664, '$class'})):toString(Target_N67664) end)((fun(Target_N67671) -> (get({Target_N67671, '$class'})):appendint(Target_N67671, PlayerInputId) end)((fun(Target_N67678) -> (get({Target_N67678, '$class'})):append(Target_N67678, "Setting PlayerOutOfPlay with playerInputId: ") end)('StringMaker':new()))), This, "setPlayerOutOfPlay"),
-        put({This, playersInPlay}, array:set(PlayerInputId, false, get({This, playersInPlay}))).
 
-getPlayersInPlay(This) ->
-        get({This, playersInPlay}).
+  def jm_isPlayerInPlay(this, p_playerInputId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :playerInputId, p_playerInputId)
+        throw({:jreturn, JR.aget(JR.get(this, :playersInPlay), JR.lget(f, :playerInputId))})
+    end)
+  end
+
+
+  def jm_setPlayerInPlay(this, p_playerInputId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :playerInputId, p_playerInputId)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["Setting PlayerInPlay with playerInputId: "]), :jm_appendint, [JR.lget(f, :playerInputId)]), :jm_toString, []), this, "setPlayerInPlay"])
+        JR.aset(JR.get(this, :playersInPlay), JR.lget(f, :playerInputId), true)
+    end)
+  end
+
+
+  def jm_setPlayerOutOfPlay(this, p_playerInputId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :playerInputId, p_playerInputId)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["Setting PlayerOutOfPlay with playerInputId: "]), :jm_appendint, [JR.lget(f, :playerInputId)]), :jm_toString, []), this, "setPlayerOutOfPlay"])
+        JR.aset(JR.get(this, :playersInPlay), JR.lget(f, :playerInputId), false)
+    end)
+  end
+
+
+  def jm_getPlayersInPlay(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :playersInPlay)})
+    end)
+  end
+end
+
 

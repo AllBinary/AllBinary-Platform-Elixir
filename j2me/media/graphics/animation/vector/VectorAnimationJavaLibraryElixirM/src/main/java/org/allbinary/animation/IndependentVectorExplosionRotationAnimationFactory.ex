@@ -1,60 +1,87 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.vector.VectorInfo
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation
 
--module('IndependentVectorExplosionRotationAnimationFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements ProceduralAnimationInterfaceFactoryInterface
+defmodule IndependentVectorExplosionRotationAnimationFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, framePoints}, get({'NullUtil':getInstance(), 'NULL_INT_ARRAY_ARRAY_ARRAY'})),
-    put({This, vectorInfo}, undefined),
-    put({This, basicColor}, undefined),
-    put({This, vectorAnimationFactoryInterface}, undefined),
-    put({This, vectorExplosionGenerator}, 'VectorExplosionGenerator':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :framePoints, nil)
+    JR.put(this, :vectorInfo, nil)
+    JR.put(this, :basicColor, nil)
+    JR.put(this, :vectorAnimationFactoryInterface, nil)
+    JR.put(this, :vectorExplosionGenerator, nil)
+        JR.put(this, :framePoints, JR.get(NullUtil.jm_getInstance(), :NULL_INT_ARRAY_ARRAY_ARRAY))
+        
+        
+        
+        JR.put(this, :vectorExplosionGenerator, VectorExplosionGenerator.jm_getInstance())
+    nil
+  end
 
 
-new(VectorInfo, BasicColor, VectorAnimationFactoryInterface) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, VectorInfo, BasicColor, VectorAnimationFactoryInterface),
-    This.
+  def jinit(this, p_vectorInfo, p_basicColor, p_vectorAnimationFactoryInterface) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :vectorInfo, p_vectorInfo)
+      JR.lset(f, :basicColor, p_basicColor)
+      JR.lset(f, :vectorAnimationFactoryInterface, p_vectorAnimationFactoryInterface)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :vectorInfo, JR.lget(f, :vectorInfo))
+        JR.put(this, :basicColor, JR.lget(f, :basicColor))
+        JR.put(this, :vectorAnimationFactoryInterface, JR.lget(f, :vectorAnimationFactoryInterface))
+        JR.call(this, :jm_init, [])
+    end)
+  end
 
-'$init'(This, VectorInfo, BasicColor, VectorAnimationFactoryInterface) ->
-    init_fields(This),
-        put({This, vectorInfo}, VectorInfo),
-        put({This, basicColor}, BasicColor),
-        put({This, vectorAnimationFactoryInterface}, VectorAnimationFactoryInterface),
-        (get({This, '$class'})):init(This).
+  def jnew(p_vectorInfo, p_basicColor, p_vectorAnimationFactoryInterface) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_vectorInfo, p_basicColor, p_vectorAnimationFactoryInterface)
+    this
+  end
 
-% throws Exception
-init(This) ->
-        put({This, framePoints}, (fun(Target_N66036) -> (get({Target_N66036, '$class'})):getInstance(Target_N66036, get({This, vectorInfo})) end)('VectorRotationGenerator':getInstance())).
 
-% throws Exception
-getInstanceAnimation(This, AnimationInterface) ->
-        put({local, frame}, 0),
-        case (AnimationInterface =/= undefined) of
-            true ->
-            RotationAnimationInterface = AnimationInterface,
-            put({local, frame}, (get({RotationAnimationInterface, '$class'})):getFrame(RotationAnimationInterface));
-            false -> ok
-        end,
-        Points = (get({get({This, vectorExplosionGenerator}), '$class'})):getInstance(get({This, vectorExplosionGenerator}), array:get(get({local, frame}), get({This, framePoints})), 6, get({get({This, vectorExplosionGenerator}), 'ROTATION'})),
-        (get({get({This, vectorAnimationFactoryInterface}), '$class'})):getInstance(get({This, vectorAnimationFactoryInterface}), Points, get({This, basicColor})).
+  def jm_init(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.put(this, :framePoints, JR.call(VectorRotationGenerator.jm_getInstance(), :jm_getInstance, [JR.get(this, :vectorInfo)]))
+    end)
+  end
+
+
+  def jm_getInstanceAnimation(this, p_animationInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :animationInterface, p_animationInterface)
+        JR.lset(f, :frame, 0)
+        if (JR.lget(f, :animationInterface) != nil) do
+            JR.lset(f, :rotationAnimationInterface, JR.lget(f, :animationInterface))
+            JR.lset(f, :frame, JR.call(JR.lget(f, :rotationAnimationInterface), :jm_getFrame, []))
+        end
+        JR.lset(f, :points, JR.call(JR.get(this, :vectorExplosionGenerator), :jm_getInstance, [JR.aget(JR.get(this, :framePoints), JR.lget(f, :frame)), 6, JR.get(JR.get(this, :vectorExplosionGenerator), :ROTATION)]))
+        throw({:jreturn, JR.call(JR.get(this, :vectorAnimationFactoryInterface), :jm_getInstance, [JR.lget(f, :points), JR.get(this, :basicColor)])})
+    end)
+  end
+end
+
 

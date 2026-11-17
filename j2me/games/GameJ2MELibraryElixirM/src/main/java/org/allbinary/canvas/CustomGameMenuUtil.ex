@@ -1,49 +1,57 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.canvas
-% import org.allbinary.AppletUtil
-% import org.allbinary.J2MEUtil
-% import org.allbinary.game.commands.GameCommandsFactory
-% import org.allbinary.graphics.displayable.MyCanvas
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.canvas
 
--module('CustomGameMenuUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule CustomGameMenuUtil do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-add(Canvas) ->
-        GameCommandsFactory = 'GameCommandsFactory':getInstance(),
-        case 'AppletUtil':isAppletLoader(Canvas) of
-            true ->
-            ok;
-            false ->
-            case 'J2MEUtil':isHTML() of
-            true ->
-            ok;
-            false ->
-            (get({Canvas, '$class'})):addCommand(Canvas, get({GameCommandsFactory, 'EXIT_COMMAND'}))
+  def jm_add(p_canvas) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :canvas, p_canvas)
+        JR.lset(f, :gameCommandsFactory, GameCommandsFactory.jm_getInstance())
+        if AppletUtil.jm_isAppletLoader(JR.lget(f, :canvas)) do
+            nil
+        else
+            if J2MEUtil.jm_isHTML() do
+            nil
+        else
+            JR.call(JR.lget(f, :canvas), :jm_addCommand, [JR.get(JR.lget(f, :gameCommandsFactory), :EXIT_COMMAND)])
         end
-        end.
+        end
+    end)
+  end
+end
+
 

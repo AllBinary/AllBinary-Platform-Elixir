@@ -1,172 +1,324 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation
-% import javax.microedition.lcdui.Graphics
-% import javax.microedition.lcdui.NullImage
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.math.PrimitiveIntUtil
-% import org.allbinary.util.CircularIndexUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation
 
--module('VectorAnimation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements VectorAnimationInterface
+defmodule VectorAnimation do
+  def jsuper(), do: IndexedAnimation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('IndexedAnimation', Function, Arguments).
-
-init_fields(This) ->
-    put({This, currentPoints}, get({'NullUtil':getInstance(), 'NULL_INT_ARRAY_ARRAY_ARRAY'})),
-    put({This, circularIndexUtil}, 'CircularIndexUtil':createInstance(0)),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :currentPoints, nil)
+    JR.put(this, :circularIndexUtil, nil)
+        JR.put(this, :currentPoints, JR.get(NullUtil.jm_getInstance(), :NULL_INT_ARRAY_ARRAY_ARRAY))
+        JR.put(this, :circularIndexUtil, CircularIndexUtil.jm_createInstance(0))
+    nil
+  end
 
 
-createVectorAnimation(CurrentPoints2, BasicColor, AnimationBehavior) when (is_tuple(CurrentPoints2) orelse CurrentPoints2 =:= undefined) ->
-        CurrentPoints = ok % Otherwise - newArray - 3
-,
-        Size = array:size(CurrentPoints2),
-        lists:foreach(fun(Index) ->
-            array:set(0, array:set(Index, array:set(0, array:get(0, array:get(Index, CurrentPoints2)), array:get(Index, array:get(0, CurrentPoints))), array:get(0, CurrentPoints)), CurrentPoints),
-            array:set(0, array:set(Index, array:set(1, array:get(1, array:get(Index, CurrentPoints2)), array:get(Index, array:get(0, CurrentPoints))), array:get(0, CurrentPoints)), CurrentPoints)
-        end, lists:seq(0, Size - 1)),
-        'VectorAnimation':new(CurrentPoints, BasicColor, AnimationBehavior).
+  def jm_createVectorAnimation(p_currentPoints2, p_basicColor, p_animationBehavior) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :currentPoints2, p_currentPoints2)
+      JR.lset(f, :basicColor, p_basicColor)
+      JR.lset(f, :animationBehavior, p_animationBehavior)
+        JR.lset(f, :currentPoints, JR.anew_of(1, fn -> JR.anew_of(JR.alength(JR.lget(f, :currentPoints2)), fn -> JR.anew(2, 0) end) end))
+        JR.lset(f, :size, JR.alength(JR.lget(f, :currentPoints2)))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.aset(JR.aget(JR.aget(JR.lget(f, :currentPoints), 0), JR.lget(f, :index)), 0, JR.aget(JR.aget(JR.lget(f, :currentPoints2), JR.lget(f, :index)), 0))
+            JR.aset(JR.aget(JR.aget(JR.lget(f, :currentPoints), 0), JR.lget(f, :index)), 1, JR.aget(JR.aget(JR.lget(f, :currentPoints2), JR.lget(f, :index)), 1))
+        end)
+        throw({:jreturn, VectorAnimation.jnew(JR.lget(f, :currentPoints), JR.lget(f, :basicColor), JR.lget(f, :animationBehavior))})
+    end)
+  end
 
-new(CurrentPoints, BasicColor, AnimationBehavior) when (is_tuple(CurrentPoints) orelse CurrentPoints =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, CurrentPoints, BasicColor, AnimationBehavior),
-    This.
 
-'$init'(This, CurrentPoints, BasicColor, AnimationBehavior) when (is_tuple(CurrentPoints) orelse CurrentPoints =:= undefined) ->
-        'IndexedAnimation':'$init'(This, AnimationBehavior),
-        init_fields(This),
-        (get({This, '$class'})):setPoints(This, CurrentPoints),
-        (get({This, '$class'})):setBasicColorP(This, BasicColor).
+  def jinit(this, p_currentPoints, p_basicColor, p_animationBehavior) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :currentPoints, p_currentPoints)
+      JR.lset(f, :basicColor, p_basicColor)
+      JR.lset(f, :animationBehavior, p_animationBehavior)
+        IndexedAnimation.jinit(this, JR.lget(f, :animationBehavior))
+        VectorAnimation.jinitfields(this)
+        JR.call(this, :jm_setPoints, [JR.lget(f, :currentPoints)])
+        JR.call(this, :jm_setBasicColorP, [JR.lget(f, :basicColor)])
+    end)
+  end
 
-setBasicColorP(This, BasicColor) ->
-        put({local, changed}, false),
-        case (((get({This, '$class'})):getBasicColorP(This) =:= undefined) orelse ((fun(Target_N66628) -> (get({Target_N66628, '$class'})):intValue(Target_N66628) end)((get({This, '$class'})):getBasicColorP(This)) =/= (get({BasicColor, '$class'})):intValue(BasicColor))) of
-            true ->
-            put({local, changed}, true);
-            false -> ok
-        end,
-        'IndexedAnimation':setBasicColorP(This, BasicColor),
-        case get({local, changed}) of
-            true ->
-            (get({This, '$class'})):updateModifiers(This);
-            false -> ok
-        end.
+  def jnew(p_currentPoints, p_basicColor, p_animationBehavior) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_currentPoints, p_basicColor, p_animationBehavior)
+    this
+  end
 
-changeBasicColor(This, BasicColor) ->
-        put({local, changed}, false),
-        case (((get({This, '$class'})):getChangeBasicColor(This) =:= undefined) orelse ((fun(Target_N66878) -> (get({Target_N66878, '$class'})):intValue(Target_N66878) end)((get({This, '$class'})):getChangeBasicColor(This)) =/= (get({BasicColor, '$class'})):intValue(BasicColor))) of
-            true ->
-            put({local, changed}, true);
-            false -> ok
-        end,
-        'IndexedAnimation':changeBasicColor(This, BasicColor),
-        case get({local, changed}) of
-            true ->
-            (get({This, '$class'})):updateModifiers(This);
-            false -> ok
-        end.
 
-setAlpha(This, Alpha) when is_integer(Alpha) ->
-        put({local, changed}, false),
-        case (get({This, alphaP}) =/= Alpha) of
-            true ->
-            put({local, changed}, true);
-            false -> ok
-        end,
-        'IndexedAnimation':setAlpha(This, Alpha),
-        case get({local, changed}) of
-            true ->
-            (get({This, '$class'})):updateModifiers(This);
-            false -> ok
-        end.
+  def jm_setBasicColorP(this, p_basicColor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicColor, p_basicColor)
+        JR.lset(f, :changed, false)
+        if ((JR.call(this, :jm_getBasicColorP, []) == nil) || (JR.call(JR.call(this, :jm_getBasicColorP, []), :jm_intValue, []) != JR.call(JR.lget(f, :basicColor), :jm_intValue, []))) do
+            JR.lset(f, :changed, true)
+        end
+        IndexedAnimation.jm_setBasicColorP(this, JR.lget(f, :basicColor))
+        if JR.lget(f, :changed) do
+            JR.call(this, :jm_updateModifiers, [])
+        end
+    end)
+  end
 
-setScale(This, ScaleX, ScaleY) when is_number(ScaleX), is_number(ScaleY) ->
-        ok.
 
-setMaxScale(This, MaxScaleX, MaxScaleY) when is_number(MaxScaleX), is_number(MaxScaleY) ->
-        ok.
+  def jm_changeBasicColor(this, p_basicColor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicColor, p_basicColor)
+        JR.lset(f, :changed, false)
+        if ((JR.call(this, :jm_getChangeBasicColor, []) == nil) || (JR.call(JR.call(this, :jm_getChangeBasicColor, []), :jm_intValue, []) != JR.call(JR.lget(f, :basicColor), :jm_intValue, []))) do
+            JR.lset(f, :changed, true)
+        end
+        IndexedAnimation.jm_changeBasicColor(this, JR.lget(f, :basicColor))
+        if JR.lget(f, :changed) do
+            JR.call(this, :jm_updateModifiers, [])
+        end
+    end)
+  end
 
-updateModifiers(This) ->
-        ok.
 
-% throws Exception
-getAnimationSize(This) ->
-        (get({This, '$class'})):getSize(This).
+  def jm_setAlpha(this, p_alpha) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :alpha, p_alpha)
+        JR.lset(f, :changed, false)
+        if (JR.get(this, :alphaP) != JR.lget(f, :alpha)) do
+            JR.lset(f, :changed, true)
+        end
+        IndexedAnimation.jm_setAlpha(this, JR.lget(f, :alpha))
+        if JR.lget(f, :changed) do
+            JR.call(this, :jm_updateModifiers, [])
+        end
+    end)
+  end
 
-getSize(This) ->
-        array:size(get({This, currentPoints})).
 
-setSequence(This, Sequence) when (is_tuple(Sequence) orelse Sequence =:= undefined) ->
-        ok.
+  def jm_setScale(this, p_scaleX, p_scaleY) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :scaleX, p_scaleX)
+      JR.lset(f, :scaleY, p_scaleY)
+        nil
+    end)
+  end
 
-getSequence(This) ->
-        'PrimitiveIntUtil':getArrayInstance().
 
-nextFrame(This) ->
-        (get({get({This, circularIndexUtil}), '$class'})):next(get({This, circularIndexUtil})).
+  def jm_setMaxScale(this, p_maxScaleX, p_maxScaleY) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :maxScaleX, p_maxScaleX)
+      JR.lset(f, :maxScaleY, p_maxScaleY)
+        nil
+    end)
+  end
 
-previousFrame(This) ->
-        (get({get({This, circularIndexUtil}), '$class'})):previous(get({This, circularIndexUtil})).
 
-paintVectors(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-        try
-            put({local, nextPointX}, 0),
-            put({local, nextPointY}, 0),
-            put({local, nextPoint}, undefined),
-            put({local, point}, undefined),
-            CurrentPointsFrame = array:get((get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})), get({This, currentPoints})),
-            Size = array:size(CurrentPointsFrame),
-            put({local, index}, (Size - 2)),
-            (fun Loop() -> case (begin put({local, index}, get({local, index}) - 1), get({local, index}) end >= 0) of true ->
-                put({local, nextPoint}, array:get(get({local, index}), CurrentPointsFrame)),
-                put({local, point}, array:get((get({local, index}) + 1), CurrentPointsFrame)),
-                put({local, nextPointX}, array:get(0, get({local, nextPoint}))),
-                put({local, nextPointY}, array:get(1, get({local, nextPoint}))),
-                case (get({local, nextPointX}) =/= 1000) of
-                    true ->
-                    (get({Graphics, '$class'})):drawLine(Graphics, (array:get(0, get({local, point})) + X), (array:get(1, get({local, point})) + Y), (get({local, nextPointX}) + X), (get({local, nextPointY}) + Y));
-                    false ->
-                    put({local, index}, get({local, index}) - 1)
-                end,
-                Loop();
-            false -> ok end end)()
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, "paintVectors", E)
-        end.
+  def jm_updateModifiers(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-paintXY(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-        (get({get({This, basicSetColorUtil}), '$class'})):setBasicColorP(get({This, basicSetColorUtil}), Graphics, get({This, basicColor})),
-        (get({This, '$class'})):paintVectors(This, Graphics, X, Y).
 
-getFrame(This) ->
-        (get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})).
+  def jm_getAnimationSize(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(this, :jm_getSize, [])})
+    end)
+  end
 
-setFrame(This, Index) when is_integer(Index) ->
-        (get({get({This, circularIndexUtil}), '$class'})):setIndex(get({This, circularIndexUtil}), Index).
 
-getPoints(This, Frame) when is_integer(Frame) ->
-        array:get(Frame, get({This, currentPoints})).
+  def jm_getSize(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.alength(JR.get(this, :currentPoints))})
+    end)
+  end
 
-setPoints(This, CurrentPoints) when (is_tuple(CurrentPoints) orelse CurrentPoints =:= undefined) ->
-        put({This, currentPoints}, CurrentPoints),
-        put({This, circularIndexUtil}, 'CircularIndexUtil':createInstance(array:size(CurrentPoints))).
 
-getBasicColorP(This) ->
-        'IndexedAnimation':getBasicColorP(This).
+  def jm_setSequence(this, p_sequence) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :sequence, p_sequence)
+        nil
+    end)
+  end
+
+
+  def jm_getSequence(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, PrimitiveIntUtil.jm_getArrayInstance()})
+    end)
+  end
+
+
+  def jm_nextFrame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :circularIndexUtil), :jm_next, [])
+    end)
+  end
+
+
+  def jm_previousFrame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :circularIndexUtil), :jm_previous, [])
+    end)
+  end
+
+
+  def jm_paintVectors(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        try do
+            JR.lset(f, :nextPointX, 0)
+            JR.lset(f, :nextPointY, 0)
+            JR.lset(f, :nextPoint, nil)
+            JR.lset(f, :point, nil)
+            JR.lset(f, :currentPointsFrame, JR.aget(JR.get(this, :currentPoints), JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, [])))
+            JR.lset(f, :size, JR.alength(JR.lget(f, :currentPointsFrame)))
+            JR.lset(f, :index, JR.int32(JR.lget(f, :size) - 2))
+            JR.jwhile(fn -> (JR.lpreinc(f, :index, -1) >= 0) end, fn ->
+                JR.lset(f, :nextPoint, JR.aget(JR.lget(f, :currentPointsFrame), JR.lget(f, :index)))
+                JR.lset(f, :point, JR.aget(JR.lget(f, :currentPointsFrame), JR.int32(JR.lget(f, :index) + 1)))
+                JR.lset(f, :nextPointX, JR.aget(JR.lget(f, :nextPoint), 0))
+                JR.lset(f, :nextPointY, JR.aget(JR.lget(f, :nextPoint), 1))
+                if (JR.lget(f, :nextPointX) != 1000) do
+                    JR.call(JR.lget(f, :graphics), :jm_drawLine, [JR.int32(JR.aget(JR.lget(f, :point), 0) + JR.lget(f, :x)), JR.int32(JR.aget(JR.lget(f, :point), 1) + JR.lget(f, :y)), JR.int32(JR.lget(f, :nextPointX) + JR.lget(f, :x)), JR.int32(JR.lget(f, :nextPointY) + JR.lget(f, :y))])
+                else
+                    JR.lpostinc(f, :index, -1)
+                end
+            end)
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, "paintVectors", JR.lget(f, :e)])
+        end
+    end)
+  end
+
+
+  def jm_paintXY(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        JR.call(JR.get(this, :basicSetColorUtil), :jm_setBasicColorP, [JR.lget(f, :graphics), JR.get(this, :basicColor)])
+        JR.call(this, :jm_paintVectors, [JR.lget(f, :graphics), JR.lget(f, :x), JR.lget(f, :y)])
+    end)
+  end
+
+
+  def jm_getFrame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, [])})
+    end)
+  end
+
+
+  def jm_setFrame(this, p_index) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :index, p_index)
+        JR.call(JR.get(this, :circularIndexUtil), :jm_setIndex, [JR.lget(f, :index)])
+    end)
+  end
+
+
+  def jm_getPoints(this, p_frame) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :frame, p_frame)
+        throw({:jreturn, JR.aget(JR.get(this, :currentPoints), JR.lget(f, :frame))})
+    end)
+  end
+
+
+  def jm_setPoints(this, p_currentPoints) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :currentPoints, p_currentPoints)
+        JR.put(this, :currentPoints, JR.lget(f, :currentPoints))
+        JR.put(this, :circularIndexUtil, CircularIndexUtil.jm_createInstance(JR.alength(JR.lget(f, :currentPoints))))
+    end)
+  end
+
+
+  def jm_getBasicColorP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, IndexedAnimation.jm_getBasicColorP(this)})
+    end)
+  end
+end
+
 

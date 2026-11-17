@@ -1,36 +1,44 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.io
-% import java.io.DataOutputStream
-% import java.io.OutputStream
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
--module('AbDataOutputStream').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule AbDataOutputStream do
+  def jsuper(), do: DataOutputStream
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('DataOutputStream', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
 
+  def jinit(this, p_out) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :out, p_out)
+        DataOutputStream.jinit(this, JR.lget(f, :out))
+        AbDataOutputStream.jinitfields(this)
+    end)
+  end
 
-new(Out) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Out),
-    This.
+  def jnew(p_out) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_out)
+    this
+  end
+end
 
-'$init'(This, Out) ->
-        'DataOutputStream':'$init'(This, Out).
 

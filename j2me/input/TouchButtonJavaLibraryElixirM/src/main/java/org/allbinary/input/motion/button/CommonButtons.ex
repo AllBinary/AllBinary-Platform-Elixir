@@ -1,67 +1,77 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion.button
-% import org.allbinary.graphics.PointFactory
-% import org.allbinary.graphics.Rectangle
-% import org.allbinary.graphics.displayable.DisplayInfoSingleton
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
--module('CommonButtons').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule CommonButtons do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> CommonButtons.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'CommonButtons':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :STANDARD_BUTTON_SIZE, 0)
+    JR.put(this, :NORMAL_BUTTON, nil)
+    JR.put(this, :LARGE_BUTTON, nil)
+        
+        
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'STANDARD_BUTTON_SIZE'}, 0),
-    put({This, 'NORMAL_BUTTON'}, undefined),
-    put({This, 'LARGE_BUTTON'}, undefined),
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, CommonButtons.jstatic_instance()})
+    end)
+  end
 
 
-getInstance() ->
-        get({'CommonButtons', instance}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.lset(f, :displayInfo, DisplayInfoSingleton.jm_getInstance())
+        JR.lset(f, :commonButtonSize, 128)
+        JR.jwhile(fn -> (JR.lget(f, :commonButtonSize) > 64) end, fn ->
+            JR.lset(f, :totalColumns, (JR.call(JR.lget(f, :displayInfo), :jm_getLastWidth, []) / JR.lget(f, :commonButtonSize)))
+            JR.lset(f, :totalRows, (JR.call(JR.lget(f, :displayInfo), :jm_getLastHeight, []) / JR.lget(f, :commonButtonSize)))
+            JR.lset(f, :max, JR.lget(f, :totalColumns))
+            if (JR.lget(f, :totalRows) > JR.lget(f, :max)) do
+                JR.lset(f, :max, JR.lget(f, :totalRows))
+            end
+            if (JR.lget(f, :max) > 9) do
+                throw(:jbreak)
+            end
+            JR.lset(f, :commonButtonSize, Bitwise.bsr(JR.lget(f, :commonButtonSize), 1))
+        end)
+        JR.put(this, :STANDARD_BUTTON_SIZE, JR.lget(f, :commonButtonSize))
+        JR.put(this, :NORMAL_BUTTON, Rectangle.jnew(JR.get(PointFactory.jm_getInstance(), :ZERO_ZERO), JR.get(this, :STANDARD_BUTTON_SIZE), JR.get(this, :STANDARD_BUTTON_SIZE)))
+        JR.put(this, :LARGE_BUTTON, Rectangle.jnew(JR.get(PointFactory.jm_getInstance(), :ZERO_ZERO), JR.int32(Bitwise.bsl(JR.get(this, :STANDARD_BUTTON_SIZE), 1)), JR.int32(Bitwise.bsl(JR.get(this, :STANDARD_BUTTON_SIZE), 1))))
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+end
 
-'$init'(This) ->
-    init_fields(This),
-        DisplayInfo = 'DisplayInfoSingleton':getInstance(),
-        put({local, commonButtonSize}, 128),
-        (fun Loop() -> case (get({local, commonButtonSize}) > 64) of true ->
-            TotalColumns = ((get({DisplayInfo, '$class'})):getLastWidth(DisplayInfo) / get({local, commonButtonSize})),
-            TotalRows = ((get({DisplayInfo, '$class'})):getLastHeight(DisplayInfo) / get({local, commonButtonSize})),
-            put({local, max}, TotalColumns),
-            case (TotalRows > get({local, max})) of
-                true ->
-                put({local, max}, TotalRows);
-                false -> ok
-            end,
-            case (get({local, max}) > 9) of
-                true ->
-                throw('$break');
-                false -> ok
-            end,
-            put({local, commonButtonSize}, (get({local, commonButtonSize}) bsr 1)),
-            Loop();
-        false -> ok end end)(),
-        put({This, 'STANDARD_BUTTON_SIZE'}, get({local, commonButtonSize})),
-        put({This, 'NORMAL_BUTTON'}, 'Rectangle':new(get({'PointFactory':getInstance(), 'ZERO_ZERO'}), get({This, 'STANDARD_BUTTON_SIZE'}), get({This, 'STANDARD_BUTTON_SIZE'}))),
-        put({This, 'LARGE_BUTTON'}, 'Rectangle':new(get({'PointFactory':getInstance(), 'ZERO_ZERO'}), (get({This, 'STANDARD_BUTTON_SIZE'}) bsl 1), (get({This, 'STANDARD_BUTTON_SIZE'}) bsl 1))).
 

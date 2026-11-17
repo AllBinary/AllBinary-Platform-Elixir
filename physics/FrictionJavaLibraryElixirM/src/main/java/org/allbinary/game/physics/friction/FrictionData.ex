@@ -1,40 +1,55 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.physics.friction
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.physics.friction
 
--module('FrictionData').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule FrictionData do
+  def jsuper(), do: JObject
+def jstatic_FRICTION_DENOMINATOR(), do: JR.static_get(__MODULE__, :FRICTION_DENOMINATOR, fn -> 100 end)
+  def jstatic_set_FRICTION_DENOMINATOR(value), do: JR.static_put(__MODULE__, :FRICTION_DENOMINATOR, value)
 
-static_init() ->
-    put({?MODULE, 'FRICTION_DENOMINATOR'}, 100),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
+
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jm_getFrictionDenominator() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, FrictionData.jstatic_FRICTION_DENOMINATOR()})
+    end)
+  end
+end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
-
-getFrictionDenominator() ->
-        get({'FrictionData', 'FRICTION_DENOMINATOR'}).
 

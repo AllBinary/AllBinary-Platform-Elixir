@@ -1,50 +1,75 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.graphics.hud
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.graphics.hud
 
--module('BasicHudFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule BasicHudFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> BasicHudFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'BasicHudFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :DIRECTION_EXCEPTION, nil)
+    JR.put(this, :VERTICAL, 0)
+    JR.put(this, :HORIZONTAL, 0)
+    JR.put(this, :BOTTOMLEFT, 0)
+    JR.put(this, :BOTTOMRIGHT, 0)
+    JR.put(this, :TOPLEFT, 0)
+    JR.put(this, :TOPRIGHT, 0)
+    JR.put(this, :BOTTOMCENTER, 0)
+    JR.put(this, :TOPCENTER, 0)
+    JR.put(this, :ABSOLUTE, 0)
+        JR.put(this, :DIRECTION_EXCEPTION, "Only Horizontal Direction is Allowed Currently")
+        JR.put(this, :VERTICAL, 0)
+        JR.put(this, :HORIZONTAL, 1)
+        JR.put(this, :BOTTOMLEFT, 0)
+        JR.put(this, :BOTTOMRIGHT, 1)
+        JR.put(this, :TOPLEFT, 2)
+        JR.put(this, :TOPRIGHT, 3)
+        JR.put(this, :BOTTOMCENTER, 4)
+        JR.put(this, :TOPCENTER, 5)
+        JR.put(this, :ABSOLUTE, 6)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'DIRECTION_EXCEPTION'}, "Only Horizontal Direction is Allowed Currently"),
-    put({This, 'VERTICAL'}, 0),
-    put({This, 'HORIZONTAL'}, 1),
-    put({This, 'BOTTOMLEFT'}, 0),
-    put({This, 'BOTTOMRIGHT'}, 1),
-    put({This, 'TOPLEFT'}, 2),
-    put({This, 'TOPRIGHT'}, 3),
-    put({This, 'BOTTOMCENTER'}, 4),
-    put({This, 'TOPCENTER'}, 5),
-    put({This, 'ABSOLUTE'}, 6),
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, BasicHudFactory.jstatic_instance()})
+    end)
+  end
 
 
-getInstance() ->
-        get({'BasicHudFactory', instance}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
 

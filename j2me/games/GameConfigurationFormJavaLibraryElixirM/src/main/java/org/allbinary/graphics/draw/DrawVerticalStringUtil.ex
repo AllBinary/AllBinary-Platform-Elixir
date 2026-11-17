@@ -1,150 +1,188 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.draw
-% import javax.microedition.lcdui.Font
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.AndroidUtil
-% import org.allbinary.J2MEUtil
-% import org.allbinary.graphics.Anchor
-% import org.allbinary.graphics.opengles.OpenGLFeatureUtil
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.communication.log.PreLogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.draw
 
--module('DrawVerticalStringUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule DrawVerticalStringUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> DrawVerticalStringUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'DrawVerticalStringUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :EMPTY_STRING, nil)
+    JR.put(this, :anchor, 0)
+    JR.put(this, :charHeight, 0)
+    JR.put(this, :offsetY, 0)
+    JR.put(this, :offsetXArray, nil)
+        JR.put(this, :EMPTY_STRING, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+        JR.put(this, :anchor, Anchor.jstatic_TOP_LEFT())
+        JR.put(this, :charHeight, 0)
+        JR.put(this, :offsetY, 0)
+        JR.put(this, :offsetXArray, JR.get(NullUtil.jm_getInstance(), :NULL_INT_ARRAY))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'EMPTY_STRING'}, get({'StringUtil':getInstance(), 'EMPTY_STRING'})),
-    put({This, anchor}, get({'Anchor', 'TOP_LEFT'})),
-    put({This, charHeight}, 0),
-    put({This, offsetY}, 0),
-    put({This, offsetXArray}, get({'NullUtil':getInstance(), 'NULL_INT_ARRAY'})),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'DrawVerticalStringUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, DrawVerticalStringUtil.jstatic_instance()})
+    end)
+  end
 
-updateMeasurement(This, Graphics, String) when (is_list(String) orelse String =:= undefined) ->
-        OpenGLFeatureUtil = 'OpenGLFeatureUtil':getInstance(),
-        Font = (get({Graphics, '$class'})):getFont(Graphics),
-        put({This, charHeight}, (get({Font, '$class'})):getHeight(Font)),
-        put({This, offsetY}, 0),
-        case 'J2MEUtil':isHTML() of
-            true ->
-            put({This, charHeight}, (get({This, charHeight}) + 1));
-            false ->
-            case (get({OpenGLFeatureUtil, '$class'})):isAnyThreed(OpenGLFeatureUtil) of
-            true ->
-            put({This, charHeight}, (get({This, charHeight}) + 2)),
-            case 'AndroidUtil':isAndroid() of
-                true ->
-                ok;
-                false ->
-                put({This, offsetY}, (2 + (((get({This, charHeight}) * 2) div 3))))
-            end;
-            false -> ok
+
+  def jm_updateMeasurement(this, p_graphics, p_string) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :string, p_string)
+        JR.lset(f, :openGLFeatureUtil, OpenGLFeatureUtil.jm_getInstance())
+        JR.lset(f, :font, JR.call(JR.lget(f, :graphics), :jm_getFont, []))
+        JR.put(this, :charHeight, JR.call(JR.lget(f, :font), :jm_getHeight, []))
+        JR.put(this, :offsetY, 0)
+        if J2MEUtil.jm_isHTML() do
+            JR.put(this, :charHeight, JR.int32(JR.get(this, :charHeight) + 1))
+        else
+            if JR.call(JR.lget(f, :openGLFeatureUtil), :jm_isAnyThreed, []) do
+            JR.put(this, :charHeight, JR.int32(JR.get(this, :charHeight) + 2))
+            if AndroidUtil.jm_isAndroid() do
+                nil
+            else
+                JR.put(this, :offsetY, JR.int32(2 + (div(JR.int32(JR.get(this, :charHeight) * 2), 3))))
+            end
         end
-        end,
-        Size = string:length(String),
-        put({local, aChar}, 0),
-        OffsetXArray = array:new(Size, {default, 0}),
-        lists:foreach(fun(Index) ->
-            put({local, aChar}, lists:nth((Index) + 1, String)),
-            case (get({OpenGLFeatureUtil, '$class'})):isAnyThreed(OpenGLFeatureUtil) of
-                true ->
-                array:set(Index, ((get({Font, '$class'})):charWidth(Font, get({local, aChar})) / 2), OffsetXArray);
-                false -> ok
+        end
+        JR.lset(f, :size, byte_size(JR.lget(f, :string)))
+        JR.lset(f, :aChar, 0)
+        JR.lset(f, :offsetXArray, JR.anew(JR.lget(f, :size), 0))
+        JR.lset(f, :index, JR.int32(JR.lget(f, :size) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.lset(f, :aChar, JR.char_at(JR.lget(f, :string), JR.lget(f, :index)))
+            if JR.call(JR.lget(f, :openGLFeatureUtil), :jm_isAnyThreed, []) do
+                JR.aset(JR.lget(f, :offsetXArray), JR.lget(f, :index), (JR.call(JR.lget(f, :font), :jm_charWidth, [JR.lget(f, :aChar)]) / 2))
             end
-        end, lists:seq((Size - 1), 0, -1)),
-        put({This, offsetXArray}, OffsetXArray).
+        end)
+        JR.put(this, :offsetXArray, JR.lget(f, :offsetXArray))
+    end)
+  end
 
-paintVerticle(This, Graphics, String, X, Y, Anchor) when (is_list(String) orelse String =:= undefined), is_integer(X), is_integer(Y), is_integer(Anchor) ->
-        Size = string:length(String),
-        put({local, aChar}, 0),
-        lists:foreach(fun(Index) ->
-            put({local, aChar}, lists:nth((Index) + 1, String)),
-            (get({Graphics, '$class'})):drawChar(Graphics, get({local, aChar}), (X + array:get(Index, get({This, offsetXArray}))), ((Y + ((get({This, charHeight}) * Index))) + get({This, offsetY})), Anchor)
-        end, lists:seq((Size - 1), 0, -1)).
 
-drawCenterString(This, Graphics, String, Offset, Length, X, Y) when (is_list(String) orelse String =:= undefined), is_integer(Offset), is_integer(Length), is_integer(X), is_integer(Y) ->
-        Width = (((fun(Target_N67461) -> (get({Target_N67461, '$class'})):substringWidth(Target_N67461, String, Offset, Length) end)((get({Graphics, '$class'})):getFont(Graphics)) bsr 1)),
-        try
-            (get({Graphics, '$class'})):drawSubstring(Graphics, String, Offset, Length, (X - Width), Y, get({This, anchor}))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            'PreLogUtil':put((fun(Target_N67661) -> (get({Target_N67661, '$class'})):toString(Target_N67661) end)((fun(Target_N67668) -> (get({Target_N67668, '$class'})):appendint(Target_N67668, Length) end)((fun(Target_N67675) -> (get({Target_N67675, '$class'})):append(Target_N67675, " currentLength: ") end)((fun(Target_N67682) -> (get({Target_N67682, '$class'})):appendint(Target_N67682, Offset) end)((fun(Target_N67689) -> (get({Target_N67689, '$class'})):append(Target_N67689, " offset: ") end)((fun(Target_N67696) -> (get({Target_N67696, '$class'})):appendint(Target_N67696, string:length(String)) end)((fun(Target_N67703) -> (get({Target_N67703, '$class'})):append(Target_N67703, "Exception: stringLength: ") end)('StringMaker':new()))))))), This, "drawCenterString")
-        end.
+  def jm_paintVerticle(this, p_graphics, p_string, p_x, p_y, p_anchor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :string, p_string)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :anchor, p_anchor)
+        JR.lset(f, :size, byte_size(JR.lget(f, :string)))
+        JR.lset(f, :aChar, 0)
+        JR.lset(f, :index, JR.int32(JR.lget(f, :size) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.lset(f, :aChar, JR.char_at(JR.lget(f, :string), JR.lget(f, :index)))
+            JR.call(JR.lget(f, :graphics), :jm_drawChar, [JR.lget(f, :aChar), JR.int32(JR.lget(f, :x) + JR.aget(JR.get(this, :offsetXArray), JR.lget(f, :index))), JR.int32(JR.int32(JR.lget(f, :y) + (JR.int32(JR.get(this, :charHeight) * JR.lget(f, :index)))) + JR.get(this, :offsetY)), JR.lget(f, :anchor)])
+        end)
+    end)
+  end
 
-drawCenterStrings(This, Graphics, StringArray, MaxWidth, X, Y) when (is_tuple(StringArray) orelse StringArray =:= undefined), is_integer(MaxWidth), is_integer(X), is_integer(Y) ->
-        put({local, extraLines}, 0),
-        lists:foreach(fun(Index) ->
-            String = array:get(Index, StringArray),
-            case (String =/= get({This, 'EMPTY_STRING'})) of
-                true ->
-                Width = (fun(Target_N68083) -> (get({Target_N68083, '$class'})):stringWidth(Target_N68083, String) end)((get({Graphics, '$class'})):getFont(Graphics)),
-                put({local, minTotalLines}, 1),
-                case (Width > MaxWidth) of
-                    true ->
-                    put({local, minTotalLines}, (((Width div MaxWidth)) + 1));
-                    false -> ok
-                end,
-                LinePortion = (string:length(String) div get({local, minTotalLines})),
-                put({local, offset}, 0),
-                put({local, currentLength}, LinePortion),
-                Size = string:length(String),
-                (fun Loop() -> case (get({local, offset}) < Size) of true ->
-                    case ((get({local, offset}) + get({local, currentLength})) > Size) of
-                        true ->
-                        put({local, currentLength}, (Size - get({local, offset})));
-                        false -> ok
-                    end,
-                    case ((get({local, offset}) + get({local, currentLength})) =/= Size) of
-                        true ->
-                        (fun Loop() -> case ((get({local, currentLength}) > 0) andalso ((fun(Target_N68582) -> (get({Target_N68582, '$class'})):charAt(Target_N68582, (get({local, offset}) + get({local, currentLength}))) end)(array:get(Index, StringArray)) =/= $\s)) of true ->
-                            put({local, currentLength}, get({local, currentLength}) - 1),
-                            Loop();
-                        false -> ok end end)(),
-                        case (get({local, currentLength}) =< 4) of
-                            true ->
-                            put({local, currentLength}, LinePortion);
-                            false -> ok
-                        end;
-                        false -> ok
-                    end,
-                    (get({This, '$class'})):drawCenterString(This, Graphics, String, get({local, offset}), get({local, currentLength}), X, (Y + ((((Index + allbinary_java:first(get({local, extraLines}), put({local, extraLines}, get({local, extraLines}) + 1)))) * get({This, charHeight}))))),
-                    put({local, offset}, (get({local, offset}) + get({local, currentLength}))),
-                    put({local, currentLength}, LinePortion),
-                    Loop();
-                false -> ok end end)(),
-                put({local, extraLines}, get({local, extraLines}) - 1);
-                false -> ok
+
+  def jm_drawCenterString(this, p_graphics, p_string, p_offset, p_length, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :string, p_string)
+      JR.lset(f, :offset, p_offset)
+      JR.lset(f, :length, p_length)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        JR.lset(f, :width, (Bitwise.bsr(JR.call(JR.call(JR.lget(f, :graphics), :jm_getFont, []), :jm_substringWidth, [JR.lget(f, :string), JR.lget(f, :offset), JR.lget(f, :length)]), 1)))
+        try do
+            JR.call(JR.lget(f, :graphics), :jm_drawSubstring, [JR.lget(f, :string), JR.lget(f, :offset), JR.lget(f, :length), JR.int32(JR.lget(f, :x) - JR.lget(f, :width)), JR.lget(f, :y), JR.get(this, :anchor)])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            PreLogUtil.jm_put(JR.call(JR.call(JR.call(JR.call(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["Exception: stringLength: "]), :jm_appendint, [byte_size(JR.lget(f, :string))]), :jm_append, [" offset: "]), :jm_appendint, [JR.lget(f, :offset)]), :jm_append, [" currentLength: "]), :jm_appendint, [JR.lget(f, :length)]), :jm_toString, []), this, "drawCenterString")
+        end
+    end)
+  end
+
+
+  def jm_drawCenterStrings(this, p_graphics, p_stringArray, p_maxWidth, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :stringArray, p_stringArray)
+      JR.lset(f, :maxWidth, p_maxWidth)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        JR.lset(f, :extraLines, 0)
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.alength(JR.lget(f, :stringArray))) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :string, JR.aget(JR.lget(f, :stringArray), JR.lget(f, :index)))
+            if (JR.lget(f, :string) != JR.get(this, :EMPTY_STRING)) do
+                JR.lset(f, :width, JR.call(JR.call(JR.lget(f, :graphics), :jm_getFont, []), :jm_stringWidth, [JR.lget(f, :string)]))
+                JR.lset(f, :minTotalLines, 1)
+                if (JR.lget(f, :width) > JR.lget(f, :maxWidth)) do
+                    JR.lset(f, :minTotalLines, JR.int32((div(JR.lget(f, :width), JR.lget(f, :maxWidth))) + 1))
+                end
+                JR.lset(f, :linePortion, div(byte_size(JR.lget(f, :string)), JR.lget(f, :minTotalLines)))
+                JR.lset(f, :offset, 0)
+                JR.lset(f, :currentLength, JR.lget(f, :linePortion))
+                JR.lset(f, :size, byte_size(JR.lget(f, :string)))
+                JR.jwhile(fn -> (JR.lget(f, :offset) < JR.lget(f, :size)) end, fn ->
+                    if (JR.int32(JR.lget(f, :offset) + JR.lget(f, :currentLength)) > JR.lget(f, :size)) do
+                        JR.lset(f, :currentLength, JR.int32(JR.lget(f, :size) - JR.lget(f, :offset)))
+                    end
+                    if (JR.int32(JR.lget(f, :offset) + JR.lget(f, :currentLength)) != JR.lget(f, :size)) do
+                        JR.jwhile(fn -> ((JR.lget(f, :currentLength) > 0) && (JR.call(JR.aget(JR.lget(f, :stringArray), JR.lget(f, :index)), :jm_charAt, [JR.int32(JR.lget(f, :offset) + JR.lget(f, :currentLength))]) != ?\s)) end, fn ->
+                            JR.lpostinc(f, :currentLength, -1)
+                        end)
+                        if (JR.lget(f, :currentLength) <= 4) do
+                            JR.lset(f, :currentLength, JR.lget(f, :linePortion))
+                        end
+                    end
+                    JR.call(this, :jm_drawCenterString, [JR.lget(f, :graphics), JR.lget(f, :string), JR.lget(f, :offset), JR.lget(f, :currentLength), JR.lget(f, :x), JR.int32(JR.lget(f, :y) + (JR.int32((JR.int32(JR.lget(f, :index) + JR.lpostinc(f, :extraLines, 1))) * JR.get(this, :charHeight))))])
+                    JR.lset(f, :offset, JR.int32(JR.lget(f, :offset) + JR.lget(f, :currentLength)))
+                    JR.lset(f, :currentLength, JR.lget(f, :linePortion))
+                end)
+                JR.lpostinc(f, :extraLines, -1)
             end
-        end, lists:seq(0, array:size(StringArray) - 1)).
+        end)
+    end)
+  end
+end
+
 

@@ -1,196 +1,236 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.configuration.feature
-% import java.util.Enumeration
-% import javax.microedition.lcdui.ChoiceGroup
-% import org.allbinary.TsUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonLabels
-% import org.allbinary.util.ABHashtable
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.EnumerationUtil
-% import org.allbinary.util.HashtableUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.configuration.feature
 
--module('GameFeatureUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GameFeatureUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> GameFeatureUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'GameFeatureUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :tsUtil, nil)
+    JR.put(this, :enumerationUtil, nil)
+    JR.put(this, :ON_GAME_FEATURE_CHANGE, nil)
+    JR.put(this, :GAME_FEATURE_CHANGED, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :tsUtil, TsUtil.jm_getInstance())
+        JR.put(this, :enumerationUtil, EnumerationUtil.jm_getInstance())
+        JR.put(this, :ON_GAME_FEATURE_CHANGE, "onGameFeatureChange")
+        JR.put(this, :GAME_FEATURE_CHANGED, "Game Feature Changed: ")
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, tsUtil}, 'TsUtil':getInstance()),
-    put({This, enumerationUtil}, 'EnumerationUtil':getInstance()),
-    put({This, 'ON_GAME_FEATURE_CHANGE'}, "onGameFeatureChange"),
-    put({This, 'GAME_FEATURE_CHANGED'}, "Game Feature Changed: "),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'GameFeatureUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, GameFeatureUtil.jstatic_instance()})
+    end)
+  end
 
-% throws Exception
-setDefault(This, ChoiceGroup) ->
-        StringBuffer = 'StringMaker':new(),
-        METHOD_NAME = "setDefault",
-        SELECTED_ARRAY_RETURN = "selectedArray_return[",
-        SELECTED_SEP = "] = ",
-        SelectedArray_return = array:new((get({ChoiceGroup, '$class'})):size(ChoiceGroup), {default, false}),
-        Total = (get({ChoiceGroup, '$class'})):getSelectedFlags(ChoiceGroup, SelectedArray_return),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "Multiple Total Choices: "),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, Total),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({StringBuffer, '$class'})):toString(StringBuffer), This, METHOD_NAME),
-        Features = 'Features':getInstance(),
-        lists:foreach(fun(Index) ->
-            IsSelected = array:get(Index, SelectedArray_return),
-            (get({StringBuffer, '$class'})):delete(StringBuffer, 0, (get({StringBuffer, '$class'})):length(StringBuffer)),
-            (get({StringBuffer, '$class'})):append(StringBuffer, SELECTED_ARRAY_RETURN),
-            (get({StringBuffer, '$class'})):appendint(StringBuffer, Index),
-            (get({StringBuffer, '$class'})):append(StringBuffer, SELECTED_SEP),
-            (get({StringBuffer, '$class'})):appendboolean(StringBuffer, IsSelected),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({StringBuffer, '$class'})):toString(StringBuffer), This, METHOD_NAME),
-            SelectedChoiceLabel = (get({ChoiceGroup, '$class'})):getString(ChoiceGroup, Index),
-            GameFeature = 'Feature':getInstance(SelectedChoiceLabel),
-            case (get({Features, '$class'})):isDefault(Features, GameFeature) of
-                true ->
-                (get({Features, '$class'})):add(Features, GameFeature),
-                (get({ChoiceGroup, '$class'})):setSelectedIndex(ChoiceGroup, Index, true);
-                false ->
-                (get({Features, '$class'})):remove(Features, GameFeature),
-                (get({ChoiceGroup, '$class'})):setSelectedIndex(ChoiceGroup, Index, false)
+
+  def jm_setDefault(this, p_choiceGroup) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :choiceGroup, p_choiceGroup)
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.lset(f, :METHOD_NAME, "setDefault")
+        JR.lset(f, :SELECTED_ARRAY_RETURN, "selectedArray_return[")
+        JR.lset(f, :SELECTED_SEP, "] = ")
+        JR.lset(f, :selectedArray_return, JR.anew(JR.call(JR.lget(f, :choiceGroup), :jm_size, []), false))
+        JR.lset(f, :total, JR.call(JR.lget(f, :choiceGroup), :jm_getSelectedFlags, [JR.lget(f, :selectedArray_return)]))
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["Multiple Total Choices: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.lget(f, :total)])
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :stringBuffer), :jm_toString, []), this, JR.lget(f, :METHOD_NAME)])
+        JR.lset(f, :features, Features.jm_getInstance())
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.alength(JR.lget(f, :selectedArray_return))) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :isSelected, JR.aget(JR.lget(f, :selectedArray_return), JR.lget(f, :index)))
+            JR.call(JR.lget(f, :stringBuffer), :jm_delete, [0, JR.call(JR.lget(f, :stringBuffer), :jm_length, [])])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.lget(f, :SELECTED_ARRAY_RETURN)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.lget(f, :index)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.lget(f, :SELECTED_SEP)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_appendboolean, [JR.lget(f, :isSelected)])
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :stringBuffer), :jm_toString, []), this, JR.lget(f, :METHOD_NAME)])
+            JR.lset(f, :selectedChoiceLabel, JR.call(JR.lget(f, :choiceGroup), :jm_getString, [JR.lget(f, :index)]))
+            JR.lset(f, :gameFeature, Feature.jm_getInstance(JR.lget(f, :selectedChoiceLabel)))
+            if JR.call(JR.lget(f, :features), :jm_isDefault, [JR.lget(f, :gameFeature)]) do
+                JR.call(JR.lget(f, :features), :jm_add, [JR.lget(f, :gameFeature)])
+                JR.call(JR.lget(f, :choiceGroup), :jm_setSelectedIndex, [JR.lget(f, :index), true])
+            else
+                JR.call(JR.lget(f, :features), :jm_remove, [JR.lget(f, :gameFeature)])
+                JR.call(JR.lget(f, :choiceGroup), :jm_setSelectedIndex, [JR.lget(f, :index), false])
             end
-        end, lists:seq(0, array:size(SelectedArray_return) - 1)).
+        end)
+    end)
+  end
 
-% throws Exception
-updateMultiple(This, ChoiceGroup) ->
-        StringBuffer = 'StringMaker':new(),
-        METHOD_NAME = "updateMultiple",
-        SELECTED_ARRAY_RETURN = "selectedArray_return[",
-        SELECTED_SEP = "] = ",
-        SelectedArray_return = array:new((get({ChoiceGroup, '$class'})):size(ChoiceGroup), {default, false}),
-        Total = (get({ChoiceGroup, '$class'})):getSelectedFlags(ChoiceGroup, SelectedArray_return),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "Multiple Total Choices: "),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, Total),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({StringBuffer, '$class'})):toString(StringBuffer), This, METHOD_NAME),
-        Features = 'Features':getInstance(),
-        lists:foreach(fun(Index) ->
-            IsSelected = array:get(Index, SelectedArray_return),
-            (get({StringBuffer, '$class'})):delete(StringBuffer, 0, (get({StringBuffer, '$class'})):length(StringBuffer)),
-            (get({StringBuffer, '$class'})):append(StringBuffer, SELECTED_ARRAY_RETURN),
-            (get({StringBuffer, '$class'})):appendint(StringBuffer, Index),
-            (get({StringBuffer, '$class'})):append(StringBuffer, SELECTED_SEP),
-            (get({StringBuffer, '$class'})):appendboolean(StringBuffer, IsSelected),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({StringBuffer, '$class'})):toString(StringBuffer), This, METHOD_NAME),
-            SelectedChoiceLabel = (get({ChoiceGroup, '$class'})):getString(ChoiceGroup, Index),
-            GameFeature = 'Feature':getInstance(SelectedChoiceLabel),
-            case ((not IsSelected) andalso (get({Features, '$class'})):isFeature(Features, GameFeature)) of
-                true ->
-                (get({Features, '$class'})):remove(Features, GameFeature);
-                false ->
-                case (IsSelected andalso (not (get({Features, '$class'})):isFeature(Features, GameFeature))) of
-                true ->
-                (get({Features, '$class'})):add(Features, GameFeature);
-                false -> ok
+
+  def jm_updateMultiple(this, p_choiceGroup) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :choiceGroup, p_choiceGroup)
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.lset(f, :METHOD_NAME, "updateMultiple")
+        JR.lset(f, :SELECTED_ARRAY_RETURN, "selectedArray_return[")
+        JR.lset(f, :SELECTED_SEP, "] = ")
+        JR.lset(f, :selectedArray_return, JR.anew(JR.call(JR.lget(f, :choiceGroup), :jm_size, []), false))
+        JR.lset(f, :total, JR.call(JR.lget(f, :choiceGroup), :jm_getSelectedFlags, [JR.lget(f, :selectedArray_return)]))
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["Multiple Total Choices: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.lget(f, :total)])
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :stringBuffer), :jm_toString, []), this, JR.lget(f, :METHOD_NAME)])
+        JR.lset(f, :features, Features.jm_getInstance())
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.alength(JR.lget(f, :selectedArray_return))) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :isSelected, JR.aget(JR.lget(f, :selectedArray_return), JR.lget(f, :index)))
+            JR.call(JR.lget(f, :stringBuffer), :jm_delete, [0, JR.call(JR.lget(f, :stringBuffer), :jm_length, [])])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.lget(f, :SELECTED_ARRAY_RETURN)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.lget(f, :index)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.lget(f, :SELECTED_SEP)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_appendboolean, [JR.lget(f, :isSelected)])
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :stringBuffer), :jm_toString, []), this, JR.lget(f, :METHOD_NAME)])
+            JR.lset(f, :selectedChoiceLabel, JR.call(JR.lget(f, :choiceGroup), :jm_getString, [JR.lget(f, :index)]))
+            JR.lset(f, :gameFeature, Feature.jm_getInstance(JR.lget(f, :selectedChoiceLabel)))
+            if (!JR.lget(f, :isSelected) && JR.call(JR.lget(f, :features), :jm_isFeature, [JR.lget(f, :gameFeature)])) do
+                JR.call(JR.lget(f, :features), :jm_remove, [JR.lget(f, :gameFeature)])
+            else
+                if (JR.lget(f, :isSelected) && !JR.call(JR.lget(f, :features), :jm_isFeature, [JR.lget(f, :gameFeature)])) do
+                JR.call(JR.lget(f, :features), :jm_add, [JR.lget(f, :gameFeature)])
             end
             end
-        end, lists:seq(0, array:size(SelectedArray_return) - 1)).
+        end)
+    end)
+  end
 
-% throws Exception
-updateExclusiveForChoiceGroup(This, ChoiceGroup) ->
-        StringBuffer = 'StringMaker':new(),
-        METHOD_NAME = "updateExclusive",
-        SELECTED_ARRAY_RETURN = "selectedArray_return[",
-        SELECTED_SEP = "] = ",
-        SelectedArray_return = array:new((get({ChoiceGroup, '$class'})):size(ChoiceGroup), {default, false}),
-        Total = (get({ChoiceGroup, '$class'})):getSelectedFlags(ChoiceGroup, SelectedArray_return),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "Exclusive Total Choices: 1=="),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, Total),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({StringBuffer, '$class'})):toString(StringBuffer), This, METHOD_NAME),
-        lists:foreach(fun(Index) ->
-            IsSelected = array:get(Index, SelectedArray_return),
-            (get({StringBuffer, '$class'})):delete(StringBuffer, 0, (get({StringBuffer, '$class'})):length(StringBuffer)),
-            (get({StringBuffer, '$class'})):append(StringBuffer, SELECTED_ARRAY_RETURN),
-            (get({StringBuffer, '$class'})):appendint(StringBuffer, Index),
-            (get({StringBuffer, '$class'})):append(StringBuffer, SELECTED_SEP),
-            (get({StringBuffer, '$class'})):appendboolean(StringBuffer, IsSelected),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({StringBuffer, '$class'})):toString(StringBuffer), This, METHOD_NAME),
-            case IsSelected of
-                true ->
-                SelectedChoiceLabel = (get({ChoiceGroup, '$class'})):getString(ChoiceGroup, Index),
-                (get({This, '$class'})):updateExclusive(This, SelectedChoiceLabel);
-                false -> ok
+
+  def jm_updateExclusiveForChoiceGroup(this, p_choiceGroup) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :choiceGroup, p_choiceGroup)
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.lset(f, :METHOD_NAME, "updateExclusive")
+        JR.lset(f, :SELECTED_ARRAY_RETURN, "selectedArray_return[")
+        JR.lset(f, :SELECTED_SEP, "] = ")
+        JR.lset(f, :selectedArray_return, JR.anew(JR.call(JR.lget(f, :choiceGroup), :jm_size, []), false))
+        JR.lset(f, :total, JR.call(JR.lget(f, :choiceGroup), :jm_getSelectedFlags, [JR.lget(f, :selectedArray_return)]))
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["Exclusive Total Choices: 1=="])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.lget(f, :total)])
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :stringBuffer), :jm_toString, []), this, JR.lget(f, :METHOD_NAME)])
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.alength(JR.lget(f, :selectedArray_return))) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :isSelected, JR.aget(JR.lget(f, :selectedArray_return), JR.lget(f, :index)))
+            JR.call(JR.lget(f, :stringBuffer), :jm_delete, [0, JR.call(JR.lget(f, :stringBuffer), :jm_length, [])])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.lget(f, :SELECTED_ARRAY_RETURN)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.lget(f, :index)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.lget(f, :SELECTED_SEP)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_appendboolean, [JR.lget(f, :isSelected)])
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :stringBuffer), :jm_toString, []), this, JR.lget(f, :METHOD_NAME)])
+            if JR.lget(f, :isSelected) do
+                JR.lset(f, :selectedChoiceLabel, JR.call(JR.lget(f, :choiceGroup), :jm_getString, [JR.lget(f, :index)]))
+                JR.call(this, :jm_updateExclusive, [JR.lget(f, :selectedChoiceLabel)])
             end
-        end, lists:seq(0, array:size(SelectedArray_return) - 1)).
+        end)
+    end)
+  end
 
-isExclusive(This, ItemLabel) when (is_list(ItemLabel) orelse ItemLabel =:= undefined) ->
-        try
-        Enumeration = (fun(Target_N69273) -> (get({Target_N69273, '$class'})):keys(Target_N69273) end)((fun(Target_N69280) -> (get({Target_N69280, '$class'})):get(Target_N69280) end)('GameFeatureChoiceGroups':getExclusiveInstance())),
-        put({local, name}, undefined),
-        (fun Loop() -> case (get({get({This, enumerationUtil}), '$class'})):hasMoreElements(get({This, enumerationUtil}), Enumeration) of true ->
-            put({local, name}, (get({get({This, enumerationUtil}), '$class'})):nextElement(get({This, enumerationUtil}), Enumeration)),
-            case ((get({get({This, tsUtil}), '$class'})):compareTo(get({This, tsUtil}), ItemLabel, get({local, name})) =:= 0) of
-                true ->
-                throw({'$return', true});
-                false -> ok
-            end,
-            Loop();
-        false -> ok end end)(),
-        false
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
 
-% throws Exception
-updateExclusive(This, SelectedChoiceLabel) when (is_list(SelectedChoiceLabel) orelse SelectedChoiceLabel =:= undefined) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N69591) -> (get({Target_N69591, '$class'})):toString(Target_N69591) end)((fun(Target_N69598) -> (get({Target_N69598, '$class'})):append(Target_N69598, SelectedChoiceLabel) end)((fun(Target_N69605) -> (get({Target_N69605, '$class'})):append(Target_N69605, get({'CommonLabels':getInstance(), 'ITEM_LABEL'})) end)('StringMaker':new()))), This, "updateExclusive"),
-        GameFeature = 'Feature':getInstance(SelectedChoiceLabel),
-        Hashtable = (fun(Target_N69754) -> (get({Target_N69754, '$class'})):get(Target_N69754) end)('GameFeatureChoiceGroups':getExclusiveInstance()),
-        ObjectArray = (fun(Target_N69831) -> (get({Target_N69831, '$class'})):getKeysAsArray(Target_N69831, Hashtable) end)('HashtableUtil':getInstance()),
-        put({local, basicArrayList}, undefined),
-        put({local, anyType}, undefined),
-        Size = array:size(ObjectArray),
-        lists:foreach(fun(Index) ->
-            put({local, anyType}, array:get(Index, ObjectArray)),
-            put({local, basicArrayList}, (get({Hashtable, '$class'})):get(Hashtable, get({local, anyType}))),
-            (get({This, '$class'})):updateExclusiveList(This, GameFeature, get({local, basicArrayList}))
-        end, lists:seq(0, Size - 1)).
+  def jm_isExclusive(this, p_itemLabel) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :itemLabel, p_itemLabel)
+        JR.lset(f, :enumeration, JR.call(JR.call(GameFeatureChoiceGroups.jm_getExclusiveInstance(), :jm_get, []), :jm_keys, []))
+        JR.lset(f, :name, nil)
+        JR.jwhile(fn -> JR.call(JR.get(this, :enumerationUtil), :jm_hasMoreElements, [JR.lget(f, :enumeration)]) end, fn ->
+            JR.lset(f, :name, JR.call(JR.get(this, :enumerationUtil), :jm_nextElement, [JR.lget(f, :enumeration)]))
+            if (JR.call(JR.get(this, :tsUtil), :jm_compareTo, [JR.lget(f, :itemLabel), JR.lget(f, :name)]) == 0) do
+                throw({:jreturn, true})
+            end
+        end)
+        throw({:jreturn, false})
+    end)
+  end
 
-% throws Exception
-updateExclusiveList(This, GameFeature, List) ->
-        case (get({List, '$class'})):contains(List, GameFeature) of
-            true ->
-            Features = 'Features':getInstance(),
-            AddIndex = (get({List, '$class'})):indexOf(List, GameFeature),
-            Size = (get({List, '$class'})):size(List),
-            lists:foreach(fun(Index) ->
-                case (AddIndex =/= Index) of
-                    true ->
-                    (get({Features, '$class'})):remove(Features, array:get(Index, get({List, objectArray})));
-                    false ->
-                    (get({Features, '$class'})):add(Features, array:get(Index, get({List, objectArray})))
+
+  def jm_updateExclusive(this, p_selectedChoiceLabel) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :selectedChoiceLabel, p_selectedChoiceLabel)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(CommonLabels.jm_getInstance(), :ITEM_LABEL)]), :jm_append, [JR.lget(f, :selectedChoiceLabel)]), :jm_toString, []), this, "updateExclusive"])
+        JR.lset(f, :gameFeature, Feature.jm_getInstance(JR.lget(f, :selectedChoiceLabel)))
+        JR.lset(f, :hashtable, JR.call(GameFeatureChoiceGroups.jm_getExclusiveInstance(), :jm_get, []))
+        JR.lset(f, :objectArray, JR.call(HashtableUtil.jm_getInstance(), :jm_getKeysAsArray, [JR.lget(f, :hashtable)]))
+        JR.lset(f, :basicArrayList, nil)
+        JR.lset(f, :anyType, nil)
+        JR.lset(f, :size, JR.alength(JR.lget(f, :objectArray)))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :anyType, JR.aget(JR.lget(f, :objectArray), JR.lget(f, :index)))
+            JR.lset(f, :basicArrayList, JR.call(JR.lget(f, :hashtable), :jm_get, [JR.lget(f, :anyType)]))
+            JR.call(this, :jm_updateExclusiveList, [JR.lget(f, :gameFeature), JR.lget(f, :basicArrayList)])
+        end)
+    end)
+  end
+
+
+  def jm_updateExclusiveList(this, p_gameFeature, p_list) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameFeature, p_gameFeature)
+      JR.lset(f, :list, p_list)
+        if JR.call(JR.lget(f, :list), :jm_contains, [JR.lget(f, :gameFeature)]) do
+            JR.lset(f, :features, Features.jm_getInstance())
+            JR.lset(f, :addIndex, JR.call(JR.lget(f, :list), :jm_indexOf, [JR.lget(f, :gameFeature)]))
+            JR.lset(f, :size, JR.call(JR.lget(f, :list), :jm_size, []))
+            JR.lset(f, :index, 0)
+            JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+                if (JR.lget(f, :addIndex) != JR.lget(f, :index)) do
+                    JR.call(JR.lget(f, :features), :jm_remove, [JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index))])
+                else
+                    JR.call(JR.lget(f, :features), :jm_add, [JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index))])
                 end
-            end, lists:seq(0, Size - 1));
-            false -> ok
-        end.
+            end)
+        end
+    end)
+  end
+end
+
 

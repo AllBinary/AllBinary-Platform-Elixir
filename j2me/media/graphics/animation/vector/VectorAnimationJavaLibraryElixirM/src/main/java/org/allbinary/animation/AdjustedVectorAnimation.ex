@@ -1,44 +1,67 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.graphics.color.BasicColor
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation
 
--module('AdjustedVectorAnimation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule AdjustedVectorAnimation do
+  def jsuper(), do: VectorAnimation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('VectorAnimation', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :dx, 0)
+    JR.put(this, :dy, 0)
+        
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, dx}, 0),
-    put({This, dy}, 0),
-    ok.
+
+  def jinit(this, p_currentPoints, p_basicColor, p_dx, p_dy, p_animationBehavior) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :currentPoints, p_currentPoints)
+      JR.lset(f, :basicColor, p_basicColor)
+      JR.lset(f, :dx, p_dx)
+      JR.lset(f, :dy, p_dy)
+      JR.lset(f, :animationBehavior, p_animationBehavior)
+        VectorAnimation.jinit(this, JR.lget(f, :currentPoints), JR.lget(f, :basicColor), JR.lget(f, :animationBehavior))
+        AdjustedVectorAnimation.jinitfields(this)
+        JR.put(this, :dx, JR.lget(f, :dx))
+        JR.put(this, :dy, JR.lget(f, :dy))
+    end)
+  end
+
+  def jnew(p_currentPoints, p_basicColor, p_dx, p_dy, p_animationBehavior) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_currentPoints, p_basicColor, p_dx, p_dy, p_animationBehavior)
+    this
+  end
 
 
-new(CurrentPoints, BasicColor, Dx, Dy, AnimationBehavior) when (is_tuple(CurrentPoints) orelse CurrentPoints =:= undefined), is_integer(Dx), is_integer(Dy) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, CurrentPoints, BasicColor, Dx, Dy, AnimationBehavior),
-    This.
+  def jm_paintXY(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        VectorAnimation.jm_paintXY(this, JR.lget(f, :graphics), JR.int32(JR.lget(f, :x) + JR.get(this, :dx)), JR.int32(JR.lget(f, :y) + JR.get(this, :dy)))
+    end)
+  end
+end
 
-'$init'(This, CurrentPoints, BasicColor, Dx, Dy, AnimationBehavior) when (is_tuple(CurrentPoints) orelse CurrentPoints =:= undefined), is_integer(Dx), is_integer(Dy) ->
-        'VectorAnimation':'$init'(This, CurrentPoints, BasicColor, AnimationBehavior),
-        init_fields(This),
-        put({This, dx}, Dx),
-        put({This, dy}, Dy).
-
-paintXY(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-        'VectorAnimation':paintXY(This, Graphics, (X + get({This, dx})), (Y + get({This, dy}))).
 

@@ -1,53 +1,61 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.opengles
-% import org.allbinary.game.configuration.feature.Features
-% import org.allbinary.game.configuration.feature.GameFeatureChoiceGroups
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles
 
--module('OpenGLOptions').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule OpenGLOptions do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-init(This) ->
-        OpenGLFeatureFactory = 'OpenGLFeatureFactory':getInstance(),
-        case (fun(Target_N65757) -> (get({Target_N65757, '$class'})):isFeature(Target_N65757, get({OpenGLFeatureFactory, 'OPENGL_OPTIONS'})) end)('Features':getInstance()) of
-            true ->
-            OpenGLMultipleList = 'BasicArrayListD':new(),
-            (get({OpenGLMultipleList, '$class'})):add(OpenGLMultipleList, get({OpenGLFeatureFactory, 'OPENGL'})),
-            (fun(Target_N65886) -> (get({Target_N65886, '$class'})):add(Target_N65886, "OpenGL (Complete Restart)", OpenGLMultipleList) end)('GameFeatureChoiceGroups':getMultipleInstance()),
-            OpenGLVersionSelectorMultipleList = 'BasicArrayListD':new(),
-            (get({OpenGLVersionSelectorMultipleList, '$class'})):add(OpenGLVersionSelectorMultipleList, get({OpenGLFeatureFactory, 'OPENGL_AUTO_SELECT'})),
-            (get({OpenGLVersionSelectorMultipleList, '$class'})):add(OpenGLVersionSelectorMultipleList, get({OpenGLFeatureFactory, 'OPENGL_MINIMUM'})),
-            (fun(Target_N66046) -> (get({Target_N66046, '$class'})):add(Target_N66046, "OpenGL Version Selector", OpenGLVersionSelectorMultipleList) end)('GameFeatureChoiceGroups':getExclusiveInstance()),
-            OpenGLImageColorMultipleList = 'BasicArrayListD':new(),
-            (get({OpenGLImageColorMultipleList, '$class'})):add(OpenGLImageColorMultipleList, get({OpenGLFeatureFactory, 'IMAGE_COLOR_DEPTH_4444'})),
-            (get({OpenGLImageColorMultipleList, '$class'})):add(OpenGLImageColorMultipleList, get({OpenGLFeatureFactory, 'IMAGE_COLOR_DEPTH_8888'})),
-            (fun(Target_N66214) -> (get({Target_N66214, '$class'})):add(Target_N66214, "OpenGL Image Color RGBA", OpenGLImageColorMultipleList) end)('GameFeatureChoiceGroups':getExclusiveInstance());
-            false -> ok
-        end.
+  def jm_init(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :openGLFeatureFactory, OpenGLFeatureFactory.jm_getInstance())
+        if JR.call(Features.jm_getInstance(), :jm_isFeature, [JR.get(JR.lget(f, :openGLFeatureFactory), :OPENGL_OPTIONS)]) do
+            JR.lset(f, :openGLMultipleList, BasicArrayListD.jnew())
+            JR.call(JR.lget(f, :openGLMultipleList), :jm_add, [JR.get(JR.lget(f, :openGLFeatureFactory), :OPENGL)])
+            JR.call(GameFeatureChoiceGroups.jm_getMultipleInstance(), :jm_add, ["OpenGL (Complete Restart)", JR.lget(f, :openGLMultipleList)])
+            JR.lset(f, :openGLVersionSelectorMultipleList, BasicArrayListD.jnew())
+            JR.call(JR.lget(f, :openGLVersionSelectorMultipleList), :jm_add, [JR.get(JR.lget(f, :openGLFeatureFactory), :OPENGL_AUTO_SELECT)])
+            JR.call(JR.lget(f, :openGLVersionSelectorMultipleList), :jm_add, [JR.get(JR.lget(f, :openGLFeatureFactory), :OPENGL_MINIMUM)])
+            JR.call(GameFeatureChoiceGroups.jm_getExclusiveInstance(), :jm_add, ["OpenGL Version Selector", JR.lget(f, :openGLVersionSelectorMultipleList)])
+            JR.lset(f, :openGLImageColorMultipleList, BasicArrayListD.jnew())
+            JR.call(JR.lget(f, :openGLImageColorMultipleList), :jm_add, [JR.get(JR.lget(f, :openGLFeatureFactory), :IMAGE_COLOR_DEPTH_4444)])
+            JR.call(JR.lget(f, :openGLImageColorMultipleList), :jm_add, [JR.get(JR.lget(f, :openGLFeatureFactory), :IMAGE_COLOR_DEPTH_8888)])
+            JR.call(GameFeatureChoiceGroups.jm_getExclusiveInstance(), :jm_add, ["OpenGL Image Color RGBA", JR.lget(f, :openGLImageColorMultipleList)])
+        end
+    end)
+  end
+end
+
 

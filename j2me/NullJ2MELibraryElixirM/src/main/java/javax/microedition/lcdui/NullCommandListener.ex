@@ -1,28 +1,40 @@
-% Generated Code Do Not Modify
-% package javax.microedition.lcdui
+# Generated Code Do Not Modify
+# package javax.microedition.lcdui
 
--module('NullCommandListener').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements CommandListener
+defmodule NullCommandListener do
+  def jsuper(), do: JObject
+def jstatic_NULL_COMMAND_LISTENER(), do: JR.static_get(__MODULE__, :NULL_COMMAND_LISTENER, fn -> NullCommandListener.jnew() end)
+  def jstatic_set_NULL_COMMAND_LISTENER(value), do: JR.static_put(__MODULE__, :NULL_COMMAND_LISTENER, value)
 
-static_init() ->
-    put({?MODULE, 'NULL_COMMAND_LISTENER'}, 'NullCommandListener':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-commandAction(This, C, D) ->
-        ok.
+  def jm_commandAction(this, p_c, p_d) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :c, p_c)
+      JR.lset(f, :d, p_d)
+        nil
+    end)
+  end
+end
+
 

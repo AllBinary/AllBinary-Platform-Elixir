@@ -1,1397 +1,2425 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-%
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-%
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-%
-% Created By: Travis Berthelot
-% 
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import javax.microedition.lcdui.ChoiceGroup
-% import javax.microedition.lcdui.CommandListener
-% import javax.microedition.lcdui.Font
-% import javax.microedition.lcdui.Graphics
-% import javax.microedition.lcdui.Item
-% import javax.microedition.lcdui.NullCommandListener
-% import org.allbinary.AndroidUtil
-% import org.allbinary.J2MEUtil
-% import org.allbinary.business.advertisement.GameAdStateFactory
-% import org.allbinary.canvas.BaseGameStatistics
-% import org.allbinary.canvas.GameStatisticsFactory
-% import org.allbinary.canvas.Processor
-% import org.allbinary.canvas.RunnableCanvas
-% import org.allbinary.debug.DebugFactory
-% import org.allbinary.debug.NoDebug
-% import org.allbinary.game.GameAdState
-% import org.allbinary.game.GameInfo
-% import org.allbinary.game.GameStrings
-% import org.allbinary.game.GameTypeFactory
-% import org.allbinary.game.Intermission
-% import org.allbinary.game.IntermissionCompositeInterface
-% import org.allbinary.game.IntermissionEnableListenerInterface
-% import org.allbinary.game.IntermissionInterface
-% import org.allbinary.game.PlayerTypesFactory
-% import org.allbinary.game.commands.GameCommandsFactory
-% import org.allbinary.game.configuration.InGameFeatures
-% import org.allbinary.game.configuration.InGameOptionsForm
-% import org.allbinary.game.configuration.event.ChangedGameFeatureListener
-% import org.allbinary.game.configuration.event.GameInitializedEvent
-% import org.allbinary.game.configuration.event.GameInitializedEventHandler
-% import org.allbinary.game.configuration.feature.Features
-% import org.allbinary.game.configuration.feature.GameFeatureFactory
-% import org.allbinary.game.configuration.feature.GameFeatureUtil
-% import org.allbinary.game.configuration.feature.InputFeatureFactory
-% import org.allbinary.game.configuration.feature.MainFeatureFactory
-% import org.allbinary.game.configuration.feature.SensorFeatureFactory
-% import org.allbinary.game.configuration.feature.TouchFeatureFactory
-% import org.allbinary.game.displayable.GameLevelDisplayChangeEventListenersFactory
-% import org.allbinary.game.init.BasicBuildGameInitializerFactory
-% import org.allbinary.game.init.GameInitializationUtil
-% import org.allbinary.game.input.GameInputStrings
-% import org.allbinary.game.input.InputProcessor
-% import org.allbinary.game.input.NoPlayerGameInput
-% import org.allbinary.game.input.PlayerGameInput
-% import org.allbinary.game.input.event.GameKeyEventHandler
-% import org.allbinary.game.layer.AllBinaryGameLayerManager
-% import org.allbinary.game.layer.SWTUtil
-% import org.allbinary.game.paint.ColorFillBasePaintable
-% import org.allbinary.game.paint.ColorFillPaintableFactory
-% import org.allbinary.game.resource.ResourceLoadingLevel
-% import org.allbinary.game.resource.ResourceLoadingLevelFactory
-% import org.allbinary.game.score.HighScore
-% import org.allbinary.game.score.HighScoresHelperBaseInterface
-% import org.allbinary.game.score.HighScoresFactoryInterface
-% import org.allbinary.game.score.HighScoresPaintable
-% import org.allbinary.game.score.NullHighScoresSingletonFactory
-% import org.allbinary.game.score.displayable.HighScoreTextBox
-% import org.allbinary.game.state.GameState
-% import org.allbinary.game.state.GameStateFactory
-% import org.allbinary.graphics.GraphicsStrings
-% import org.allbinary.graphics.Rectangle
-% import org.allbinary.graphics.ScreenCapture
-% import org.allbinary.graphics.ScreenCaptureFactory
-% import org.allbinary.graphics.canvas.transition.progress.ProgressCanvas
-% import org.allbinary.graphics.canvas.transition.progress.ProgressCanvasFactory
-% import org.allbinary.graphics.color.BasicColorFactory
-% import org.allbinary.graphics.color.BasicColorSetUtil
-% import org.allbinary.graphics.displayable.CanvasStrings
-% import org.allbinary.graphics.displayable.DisplayInfoSingleton
-% import org.allbinary.graphics.displayable.GameTickDisplayInfoSingleton
-% import org.allbinary.graphics.displayable.command.MyCommandsFactory
-% import org.allbinary.graphics.displayable.event.DisplayChangeEvent
-% import org.allbinary.graphics.displayable.event.DisplayChangeEventHandler
-% import org.allbinary.graphics.displayable.event.DisplayChangeEventListener
-% import org.allbinary.graphics.font.MyFontProcessor
-% import org.allbinary.graphics.font.UpdateMyFontInterface
-% import org.allbinary.graphics.font.UpdateMyFontProcessor
-% import org.allbinary.graphics.form.CommandCurrentSelectionFormFactory
-% import org.allbinary.graphics.form.FormPaintable
-% import org.allbinary.graphics.form.FormType
-% import org.allbinary.graphics.form.FormTypeFactory
-% import org.allbinary.graphics.form.ScrollSelectionForm
-% import org.allbinary.graphics.form.ScrollSelectionFormNoneFactory
-% import org.allbinary.graphics.form.item.CommandTextItemArrayFactory
-% import org.allbinary.graphics.form.item.ABCustomItem
-% import org.allbinary.graphics.opengles.CurrentDisplayableFactory
-% import org.allbinary.graphics.opengles.OpenGLFeatureFactory
-% import org.allbinary.graphics.opengles.OpenGLFeatureUtil
-% import org.allbinary.graphics.opengles.OpenGLThreadUtil
-% import org.allbinary.graphics.paint.InitUpdatePaintable
-% import org.allbinary.graphics.paint.NullInitUpdatePaintable
-% import org.allbinary.graphics.paint.NullPaintable
-% import org.allbinary.graphics.paint.Paintable
-% import org.allbinary.graphics.paint.PaintableInterface
-% import org.allbinary.image.opengles.OpenGLImageSpecificFactory
-% import org.allbinary.input.gyro.SensorGameUpdateProcessor
-% import org.allbinary.input.gyro.SingleSensorGameUpdateProcessor
-% import org.allbinary.input.motion.button.BaseTouchInput
-% import org.allbinary.input.motion.button.NoButtonsTouchInputFactory
-% import org.allbinary.input.motion.button.TouchButtonFactory
-% import org.allbinary.input.motion.button.TouchButtonsPaintableFactory
-% import org.allbinary.input.motion.button.TouchScreenFactory
-% import org.allbinary.input.motion.gesture.observer.BasicMotionGesturesHandler
-% import org.allbinary.logic.ABSystemWrapper
-% import org.allbinary.logic.communication.log.ForcedLogUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.communication.log.PreLogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.logic.system.os.OperatingSystemFactory
-% import org.allbinary.logic.system.security.licensing.AbeClientInformationInterface
-% import org.allbinary.logic.util.event.AllBinaryEventObject
-% import org.allbinary.logic.util.event.EventStrings
-% import org.allbinary.media.audio.AllBinaryMediaManager
-% import org.allbinary.media.audio.PlayerQueue
-% import org.allbinary.media.audio.PrimaryPlayerQueueFactory
-% import org.allbinary.media.audio.SecondaryPlayerQueueFactory
-% import org.allbinary.media.audio.SelectSound
-% import org.allbinary.string.CommonSeps
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.thread.SecondaryThreadPool
-% import org.allbinary.time.GameTickTimeDelayHelper
-% import org.allbinary.time.GameTickTimeDelayHelperFactory
-% import org.allbinary.time.TimeDelayHelper
-% import org.allbinary.util.ABHashtable
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
-% import org.allbinary.util.BasicArrayListUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+#
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+#
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+#
+# Created By: Travis Berthelot
+# 
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('AllBinaryGameCanvas').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements AllBinaryGameCanvasInterface
-% implements GameCanvasRunnableInterface
-% implements MenuListener
-% implements IntermissionCompositeInterface
-% implements IntermissionEnableListenerInterface
-% implements PopupMenuInterface
-% implements DisplayChangeEventListener
-% implements UpdateMyFontInterface
+defmodule AllBinaryGameCanvas do
+  def jsuper(), do: RunnableCanvas
+def jstatic_id(), do: JR.static_get(__MODULE__, :id, fn -> 0 end)
+  def jstatic_set_id(value), do: JR.static_put(__MODULE__, :id, value)
+def jstatic_TYPE(), do: JR.static_get(__MODULE__, :TYPE, fn -> 2 end)
+  def jstatic_set_TYPE(value), do: JR.static_put(__MODULE__, :TYPE, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('RunnableCanvas', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, id}, 0),
-    put({?MODULE, 'TYPE'}, 2),
-    ok.
-
-init_fields(This) ->
-    put({This, basicColorFactory}, 'BasicColorFactory':getInstance()),
-    put({This, basicSetColorUtil}, 'BasicColorSetUtil':getInstance()),
-    put({This, touchFeatureFactory}, 'TouchFeatureFactory':getInstance()),
-    put({This, openGLFeatureFactory}, 'OpenGLFeatureFactory':getInstance()),
-    put({This, touchButtonFactory}, 'TouchButtonFactory':getInstance()),
-    put({This, gameAdStateFactory}, 'GameAdStateFactory':getInstance()),
-    put({This, gameStrings}, 'GameStrings':getInstance()),
-    put({This, gameInputStrings}, 'GameInputStrings':getInstance()),
-    put({This, gameStateFactory}, 'GameStateFactory':getInstance()),
-    put({This, gameTickTimeDelayHelper}, 'GameTickTimeDelayHelperFactory':getInstance()),
-    put({This, gameTickDisplayInfoSingleton}, 'GameTickDisplayInfoSingleton':getInstance()),
-    put({This, gameRunnable}, 'GameCanvasRunnable':new(This)),
-    put({This, gamePauseRunnable}, 'GameCanvasPauseRunnable':new(This)),
-    put({This, formUtil}, 'FormUtil':getInstance()),
-    put({This, myFormUtil}, 'MyFormUtil':getInstance()),
-    put({This, updateMyFontProcessor}, 'UpdateMyFontProcessor':new(This)),
-    put({This, myFontProcessor}, get({This, updateMyFontProcessor})),
-    put({This, gameSpecificPaintable}, 'NullPaintable':getInstance()),
-    put({This, sensorGameUpdateProcessor}, 'SingleSensorGameUpdateProcessor':new()),
-    put({This, endGameInfo}, 'EndGameInfo':new()),
-    put({This, startIntermissionInterface}, 'Intermission':new()),
-    put({This, endLevelIntermissionInterface}, 'Intermission':new()),
-    put({This, gameLayerManager}, 'AllBinaryGameLayerManager':getNullInstance()),
-    put({This, gameState}, get({get({This, gameStateFactory}), 'NO_GAME_STATE'})),
-    put({This, gameOver}, false),
-    put({This, initialized}, false),
-    put({This, gameStateTimeHelper}, 'TimeDelayHelper':new(0)),
-    put({This, highScoresHelper}, undefined),
-    put({This, highScoreSubmitted}, false),
-    put({This, realHighScoresPaintable}, 'HighScoresPaintable':new()),
-    put({This, highScoresPaintable}, 'NullPaintable':getInstance()),
-    put({This, localPlayerGameInputList}, 'BasicArrayListD':new()),
-    put({This, isCheating}, false),
-    put({This, hashtable}, get({get({This, stdUtil}), 'NULL_TABLE'})),
-    put({This, isSingleKeyRepeatableProcessing}, false),
-    put({This, gameInitializationInterfaceFactoryInterface}, get({'BasicBuildGameInitializerFactory', 'NULL_BASE_BUILD_GMAE_INITIALIZER_FACTORY'})),
-    put({This, touchButtonsPaintable}, 'NullPaintable':getInstance()),
-    put({This, touchPaintable}, 'NullPaintable':getInstance()),
-    put({This, cheatProcessor}, 'NoPlayerGameInput':getInstance()),
-    put({This, gameInputProcessor}, 'Processor':getInstance()),
-    put({This, endGameProcessor}, 'Processor':getInstance()),
-    put({This, realEndGameProcessor}, 'Processor':getInstance()),
-    put({This, startIntermissionProcessor}, 'Processor':getInstance()),
-    put({This, realStartIntermissionProcessor}, 'Processor':getInstance()),
-    put({This, endGamePaintable}, 'NullPaintable':getInstance()),
-    put({This, endGameStatePaintable}, 'NullPaintable':getInstance()),
-    put({This, nonBotPaintable}, 'NullPaintable':getInstance()),
-    put({This, intermissionPaintable}, 'NullPaintable':getInstance()),
-    put({This, startIntermissionPaintable}, 'NullInitUpdatePaintable':getInstance()),
-    put({This, mainStateProcessor}, 'Processor':getInstance()),
-    put({This, processGameProcessor}, 'Processor':getInstance()),
-    put({This, highScoresFactoryInterface}, undefined),
-    put({This, startLevel}, 0),
-    put({This, mainMenuInputProcessor}, 'NoMenuInputProcessor':getInstance()),
-    put({This, popupMenuInputProcessor}, 'NoMenuInputProcessor':getInstance()),
-    put({This, menuInputProcessor}, 'NoMenuInputProcessor':getInstance()),
-    put({This, menuForm}, 'ScrollSelectionForm':getNullScrollSelectionForm()),
-    put({This, formPaintable}, 'NullPaintable':getInstance()),
-    put({This, openMenuPaintable}, 'NullPaintable':getInstance()),
-    put({This, menuPaintable}, 'NullPaintable':getInstance()),
-    put({This, currentTouchInputFactory}, 'NoButtonsTouchInputFactory':getInstance()),
-    put({This, colorFillPaintable}, (fun(Target_N72319) -> (get({Target_N72319, '$class'})):getInstance(Target_N72319, get({get({This, basicColorFactory}), 'BLACK'}), true) end)('ColorFillPaintableFactory':getInstance())),
-    put({This, baseGameStatistics}, 'GameStatisticsFactory':getInstance()),
-    put({This, primaryPlayerQueue}, 'PrimaryPlayerQueueFactory':getInstance()),
-    put({This, secondaryPlayerQueue}, 'SecondaryPlayerQueueFactory':getInstance()),
-    put({This, 'BUILD_GAME'}, "buildGame"),
-    put({This, gameTypeFactory}, 'GameTypeFactory':getInstance()),
-    put({This, screenCapture}, 'ScreenCaptureFactory':getInstance()),
-    put({This, basicMotionGesturesHandler}, 'BasicMotionGesturesHandler':getInstance()),
-    put({This, gameKeyEventHandler}, 'GameKeyEventHandler':getInstance()),
-    put({This, gameBehavior}, undefined),
-    put({This, menuBehavior}, undefined),
-    put({This, progressPaintable}, 'ProgressCanvasFactory':getLazyInstance()),
-    put({This, fontHeightP}, 0),
-    put({This, gameCanvasStartListener}, get({'NullDemoPaintable', 'NULL_DEMO_PAINTABLE'})),
-    put({This, rawGameInputProcessor}, 'GameCanvasInputProcessor':new(This)),
-    put({This, rawInputProcessor}, 'FormInputProcessor':new(This)),
-    put({This, inputProcessor}, (get({This, '$class'})):getRawGameInputProcessor(This)),
-    put({This, 'YIELD_SLEEP'}, 100),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :basicColorFactory, nil)
+    JR.put(this, :basicSetColorUtil, nil)
+    JR.put(this, :touchFeatureFactory, nil)
+    JR.put(this, :openGLFeatureFactory, nil)
+    JR.put(this, :touchButtonFactory, nil)
+    JR.put(this, :gameAdStateFactory, nil)
+    JR.put(this, :gameStrings, nil)
+    JR.put(this, :gameInputStrings, nil)
+    JR.put(this, :gameStateFactory, nil)
+    JR.put(this, :gameTickTimeDelayHelper, nil)
+    JR.put(this, :gameTickDisplayInfoSingleton, nil)
+    JR.put(this, :gameRunnable, nil)
+    JR.put(this, :gamePauseRunnable, nil)
+    JR.put(this, :formUtil, nil)
+    JR.put(this, :myFormUtil, nil)
+    JR.put(this, :updateMyFontProcessor, nil)
+    JR.put(this, :myFontProcessor, nil)
+    JR.put(this, :gameSpecificPaintable, nil)
+    JR.put(this, :sensorGameUpdateProcessor, nil)
+    JR.put(this, :endGameInfo, nil)
+    JR.put(this, :startIntermissionInterface, nil)
+    JR.put(this, :endLevelIntermissionInterface, nil)
+    JR.put(this, :gameLayerManager, nil)
+    JR.put(this, :gameState, nil)
+    JR.put(this, :gameOver, false)
+    JR.put(this, :initialized, false)
+    JR.put(this, :gameStateTimeHelper, nil)
+    JR.put(this, :highScoresHelper, nil)
+    JR.put(this, :highScoreSubmitted, false)
+    JR.put(this, :realHighScoresPaintable, nil)
+    JR.put(this, :highScoresPaintable, nil)
+    JR.put(this, :localPlayerGameInputList, nil)
+    JR.put(this, :isCheating, false)
+    JR.put(this, :hashtable, nil)
+    JR.put(this, :isSingleKeyRepeatableProcessing, false)
+    JR.put(this, :gameInitializationInterfaceFactoryInterface, nil)
+    JR.put(this, :touchButtonsPaintable, nil)
+    JR.put(this, :touchPaintable, nil)
+    JR.put(this, :cheatProcessor, nil)
+    JR.put(this, :gameInputProcessor, nil)
+    JR.put(this, :endGameProcessor, nil)
+    JR.put(this, :realEndGameProcessor, nil)
+    JR.put(this, :startIntermissionProcessor, nil)
+    JR.put(this, :realStartIntermissionProcessor, nil)
+    JR.put(this, :endGamePaintable, nil)
+    JR.put(this, :endGameStatePaintable, nil)
+    JR.put(this, :nonBotPaintable, nil)
+    JR.put(this, :intermissionPaintable, nil)
+    JR.put(this, :startIntermissionPaintable, nil)
+    JR.put(this, :mainStateProcessor, nil)
+    JR.put(this, :processGameProcessor, nil)
+    JR.put(this, :highScoresFactoryInterface, nil)
+    JR.put(this, :startLevel, 0)
+    JR.put(this, :mainMenuInputProcessor, nil)
+    JR.put(this, :popupMenuInputProcessor, nil)
+    JR.put(this, :menuInputProcessor, nil)
+    JR.put(this, :menuForm, nil)
+    JR.put(this, :formPaintable, nil)
+    JR.put(this, :openMenuPaintable, nil)
+    JR.put(this, :menuPaintable, nil)
+    JR.put(this, :currentTouchInputFactory, nil)
+    JR.put(this, :colorFillPaintable, nil)
+    JR.put(this, :baseGameStatistics, nil)
+    JR.put(this, :primaryPlayerQueue, nil)
+    JR.put(this, :secondaryPlayerQueue, nil)
+    JR.put(this, :BUILD_GAME, nil)
+    JR.put(this, :gameTypeFactory, nil)
+    JR.put(this, :screenCapture, nil)
+    JR.put(this, :basicMotionGesturesHandler, nil)
+    JR.put(this, :gameKeyEventHandler, nil)
+    JR.put(this, :gameBehavior, nil)
+    JR.put(this, :menuBehavior, nil)
+    JR.put(this, :progressPaintable, nil)
+    JR.put(this, :fontHeightP, 0)
+    JR.put(this, :gameCanvasStartListener, nil)
+    JR.put(this, :rawGameInputProcessor, nil)
+    JR.put(this, :rawInputProcessor, nil)
+    JR.put(this, :inputProcessor, nil)
+    JR.put(this, :YIELD_SLEEP, 0)
+        JR.put(this, :basicColorFactory, BasicColorFactory.jm_getInstance())
+        JR.put(this, :basicSetColorUtil, BasicColorSetUtil.jm_getInstance())
+        JR.put(this, :touchFeatureFactory, TouchFeatureFactory.jm_getInstance())
+        JR.put(this, :openGLFeatureFactory, OpenGLFeatureFactory.jm_getInstance())
+        JR.put(this, :touchButtonFactory, TouchButtonFactory.jm_getInstance())
+        JR.put(this, :gameAdStateFactory, GameAdStateFactory.jm_getInstance())
+        JR.put(this, :gameStrings, GameStrings.jm_getInstance())
+        JR.put(this, :gameInputStrings, GameInputStrings.jm_getInstance())
+        JR.put(this, :gameStateFactory, GameStateFactory.jm_getInstance())
+        JR.put(this, :gameTickTimeDelayHelper, GameTickTimeDelayHelperFactory.jm_getInstance())
+        JR.put(this, :gameTickDisplayInfoSingleton, GameTickDisplayInfoSingleton.jm_getInstance())
+        JR.put(this, :gameRunnable, GameCanvasRunnable.jnew(this))
+        JR.put(this, :gamePauseRunnable, GameCanvasPauseRunnable.jnew(this))
+        JR.put(this, :formUtil, FormUtil.jm_getInstance())
+        JR.put(this, :myFormUtil, MyFormUtil.jm_getInstance())
+        JR.put(this, :updateMyFontProcessor, UpdateMyFontProcessor.jnew(this))
+        JR.put(this, :myFontProcessor, JR.get(this, :updateMyFontProcessor))
+        JR.put(this, :gameSpecificPaintable, NullPaintable.jm_getInstance())
+        JR.put(this, :sensorGameUpdateProcessor, SingleSensorGameUpdateProcessor.jnew())
+        JR.put(this, :endGameInfo, EndGameInfo.jnew())
+        JR.put(this, :startIntermissionInterface, Intermission.jnew())
+        JR.put(this, :endLevelIntermissionInterface, Intermission.jnew())
+        JR.put(this, :gameLayerManager, AllBinaryGameLayerManager.jm_getNullInstance())
+        JR.put(this, :gameState, JR.get(JR.get(this, :gameStateFactory), :NO_GAME_STATE))
+        JR.put(this, :gameOver, false)
+        JR.put(this, :initialized, false)
+        JR.put(this, :gameStateTimeHelper, TimeDelayHelper.jnew(0))
+        
+        JR.put(this, :highScoreSubmitted, false)
+        JR.put(this, :realHighScoresPaintable, HighScoresPaintable.jnew())
+        JR.put(this, :highScoresPaintable, NullPaintable.jm_getInstance())
+        JR.put(this, :localPlayerGameInputList, BasicArrayListD.jnew())
+        JR.put(this, :isCheating, false)
+        JR.put(this, :hashtable, JR.get(JR.get(this, :stdUtil), :NULL_TABLE))
+        JR.put(this, :isSingleKeyRepeatableProcessing, false)
+        JR.put(this, :gameInitializationInterfaceFactoryInterface, BasicBuildGameInitializerFactory.jstatic_NULL_BASE_BUILD_GMAE_INITIALIZER_FACTORY())
+        JR.put(this, :touchButtonsPaintable, NullPaintable.jm_getInstance())
+        JR.put(this, :touchPaintable, NullPaintable.jm_getInstance())
+        JR.put(this, :cheatProcessor, NoPlayerGameInput.jm_getInstance())
+        JR.put(this, :gameInputProcessor, Processor.jm_getInstance())
+        JR.put(this, :endGameProcessor, Processor.jm_getInstance())
+        JR.put(this, :realEndGameProcessor, Processor.jm_getInstance())
+        JR.put(this, :startIntermissionProcessor, Processor.jm_getInstance())
+        JR.put(this, :realStartIntermissionProcessor, Processor.jm_getInstance())
+        JR.put(this, :endGamePaintable, NullPaintable.jm_getInstance())
+        JR.put(this, :endGameStatePaintable, NullPaintable.jm_getInstance())
+        JR.put(this, :nonBotPaintable, NullPaintable.jm_getInstance())
+        JR.put(this, :intermissionPaintable, NullPaintable.jm_getInstance())
+        JR.put(this, :startIntermissionPaintable, NullInitUpdatePaintable.jm_getInstance())
+        JR.put(this, :mainStateProcessor, Processor.jm_getInstance())
+        JR.put(this, :processGameProcessor, Processor.jm_getInstance())
+        
+        JR.put(this, :startLevel, 0)
+        JR.put(this, :mainMenuInputProcessor, NoMenuInputProcessor.jm_getInstance())
+        JR.put(this, :popupMenuInputProcessor, NoMenuInputProcessor.jm_getInstance())
+        JR.put(this, :menuInputProcessor, NoMenuInputProcessor.jm_getInstance())
+        JR.put(this, :menuForm, ScrollSelectionForm.jm_getNullScrollSelectionForm())
+        JR.put(this, :formPaintable, NullPaintable.jm_getInstance())
+        JR.put(this, :openMenuPaintable, NullPaintable.jm_getInstance())
+        JR.put(this, :menuPaintable, NullPaintable.jm_getInstance())
+        JR.put(this, :currentTouchInputFactory, NoButtonsTouchInputFactory.jm_getInstance())
+        JR.put(this, :colorFillPaintable, JR.call(ColorFillPaintableFactory.jm_getInstance(), :jm_getInstance, [JR.get(JR.get(this, :basicColorFactory), :BLACK), true]))
+        JR.put(this, :baseGameStatistics, GameStatisticsFactory.jm_getInstance())
+        JR.put(this, :primaryPlayerQueue, PrimaryPlayerQueueFactory.jm_getInstance())
+        JR.put(this, :secondaryPlayerQueue, SecondaryPlayerQueueFactory.jm_getInstance())
+        JR.put(this, :BUILD_GAME, "buildGame")
+        JR.put(this, :gameTypeFactory, GameTypeFactory.jm_getInstance())
+        JR.put(this, :screenCapture, ScreenCaptureFactory.jm_getInstance())
+        JR.put(this, :basicMotionGesturesHandler, BasicMotionGesturesHandler.jm_getInstance())
+        JR.put(this, :gameKeyEventHandler, GameKeyEventHandler.jm_getInstance())
+        JR.put(this, :gameBehavior, nil)
+        JR.put(this, :menuBehavior, nil)
+        JR.put(this, :progressPaintable, ProgressCanvasFactory.jm_getLazyInstance())
+        JR.put(this, :fontHeightP, 0)
+        JR.put(this, :gameCanvasStartListener, NullDemoPaintable.jstatic_NULL_DEMO_PAINTABLE())
+        JR.put(this, :rawGameInputProcessor, GameCanvasInputProcessor.jnew(this))
+        JR.put(this, :rawInputProcessor, FormInputProcessor.jnew(this))
+        JR.put(this, :inputProcessor, JR.call(this, :jm_getRawGameInputProcessor, []))
+        JR.put(this, :YIELD_SLEEP, 100)
+    nil
+  end
 
 
-new(CommandListener, GameLayerManager, HighScoresFactoryInterface, GameInitializationInterfaceFactoryInterface, Buffered) when is_boolean(Buffered) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, CommandListener, GameLayerManager, HighScoresFactoryInterface, GameInitializationInterfaceFactoryInterface, Buffered),
-    This.
-
-'$init'(This, CommandListener, GameLayerManager, HighScoresFactoryInterface, GameInitializationInterfaceFactoryInterface, Buffered) when is_boolean(Buffered) ->
-        'RunnableCanvas':'$init'(This, CommandListener, get({'CanvasStrings':getInstance(), 'EMPTY_CHILD_NAME_LIST'}), true),
-        init_fields(This),
-        put({This, highScoresHelper}, (get({HighScoresFactoryInterface, '$class'})):createHighScoresHelper(HighScoresFactoryInterface)),
-        put({This, gameInitializationInterfaceFactoryInterface}, GameInitializationInterfaceFactoryInterface),
-        (get({This, '$class'})):init(This, GameLayerManager, Buffered),
-        put({This, highScoresFactoryInterface}, HighScoresFactoryInterface),
-        case (((fun(Target_N73101) -> (get({Target_N73101, '$class'})):getGameType(Target_N73101) end)((get({get({This, gameLayerManager}), '$class'})):getGameInfo(get({This, gameLayerManager}))) =:= get({get({This, gameTypeFactory}), 'BOT'})) orelse ((fun(Target_N73152) -> (get({Target_N73152, '$class'})):getGameType(Target_N73152) end)((get({get({This, gameLayerManager}), '$class'})):getGameInfo(get({This, gameLayerManager}))) =:= get({get({This, gameTypeFactory}), 'NONE'}))) of
-            true ->
-            put({This, gameBehavior}, 'DemoGameBehavior':getInstance()),
-            put({This, menuBehavior}, 'BaseMenuBehavior':getInstance());
-            false ->
-            put({This, gameBehavior}, 'BaseGameBehavior':getInstance()),
-            put({This, menuBehavior}, (get({This, '$class'})):getInGameMenuBehavior(This))
-        end,
-        (get({This, '$class'})):initPopupMenu(This),
-        (get({This, '$class'})):initMenu(This),
-        (get({This, '$class'})):initSpecialPaint(This),
-        (fun(Target_N73402) -> (get({Target_N73402, '$class'})):addListenerInterface(Target_N73402, This) end)('DisplayChangeEventHandler':getInstance()).
-
-updateMeasurement(This, Graphics) ->
-        try
-            Font = (get({Graphics, '$class'})):getFont(Graphics),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N73666) -> (get({Target_N73666, '$class'})):toString(Target_N73666) end)((fun(Target_N73673) -> (get({Target_N73673, '$class'})):appendint(Target_N73673, trunc((get({Font, '$class'})):getHeight(Font))) end)((fun(Target_N73680) -> (get({Target_N73680, '$class'})):append(Target_N73680, get({get({This, canvasStrings}), 'FD_HEIGHT'})) end)((fun(Target_N73687) -> (get({Target_N73687, '$class'})):appendint(Target_N73687, trunc('MyFontProcessor':defaultCharWidth(Font))) end)((fun(Target_N73694) -> (get({Target_N73694, '$class'})):append(Target_N73694, get({get({This, canvasStrings}), 'FD_WIDTH'})) end)((fun(Target_N73701) -> (get({Target_N73701, '$class'})):append(Target_N73701, get({get({This, commonStrings}), 'START'})) end)('StringMaker':new())))))), This, get({get({This, canvasStrings}), 'UPDATE_MEASUREMENT'})),
-            put({This, fontHeightP}, (get({Font, '$class'})):getHeight(Font)),
-            (get({get({This, myFormUtil}), '$class'})):updateMeasurement(get({This, myFormUtil}), Graphics),
-            PopupMenuRectangle = (get({get({This, myFormUtil}), '$class'})):getPopupMenuRectangle(get({This, myFormUtil})),
-            BasicPopupMenuPaintable = ((get({This, '$class'})):getOpenMenuPaintable(This)),
-            (get({BasicPopupMenuPaintable, '$class'})):init(BasicPopupMenuPaintable, PopupMenuRectangle),
-            case ((get({This, '$class'})):getPopupMenuInputProcessor(This) =/= 'NoMenuInputProcessor':getInstance()) of
-                true ->
-                PopupMenuInputProcessor = ((get({This, '$class'})):getPopupMenuInputProcessor(This)),
-                (get({PopupMenuInputProcessor, '$class'})):init(PopupMenuInputProcessor, PopupMenuRectangle);
-                false -> ok
-            end,
-            put({This, myFontProcessor}, 'MyFontProcessor':getInstance())
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, canvasStrings}), 'ON_DISPLAY_CHANGE_EVENT'}), E)
-        end.
-
-getInGameMenuBehavior(This) ->
-        'InGameMenuBehavior':getInstance().
-
-setCurrentThread(This) ->
-        case 'J2MEUtil':isHTML() of
-            true ->
-            'RunnableCanvas':setCurrentThreadFake(This);
-            false ->
-            'RunnableCanvas':setCurrentThread(This)
-        end.
-
-onEvent(This, EventObject) ->
-        'ForcedLogUtil':log(get({'EventStrings':getInstance(), 'PERFORMANCE_MESSAGE'}), This).
-
-onDisplayChangeEvent(This, DisplayChangeEvent) ->
-        try
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N74722) -> (get({Target_N74722, '$class'})):toString(Target_N74722) end)((fun(Target_N74729) -> (get({Target_N74729, '$class'})):append(Target_N74729, (fun(Target_N74780) -> (get({Target_N74780, '$class'})):toString(Target_N74780) end)('DisplayInfoSingleton':getInstance())) end)((fun(Target_N74736) -> (get({Target_N74736, '$class'})):append(Target_N74736, get({get({This, commonStrings}), 'START'})) end)('StringMaker':new()))), This, get({get({This, canvasStrings}), 'UPDATE_MEASUREMENT'})),
-            put({This, myFontProcessor}, get({This, updateMyFontProcessor})),
-            (get({get({This, menuBehavior}), '$class'})):onDisplayChangeEvent(get({This, menuBehavior}), This, DisplayChangeEvent)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, canvasStrings}), 'ON_DISPLAY_CHANGE_EVENT'}), E)
-        end.
-
-% throws Exception
-updateMenuFromEvent(This, DisplayChangeEvent) ->
-        FormType = (fun(Target_N75090) -> (get({Target_N75090, '$class'})):getFormType(Target_N75090) end)('FormTypeFactory':getInstance()),
-        Rectangle = (get({get({This, formUtil}), '$class'})):createFormRectangle(get({This, formUtil})),
-        (get({get({This, menuForm}), '$class'})):init(get({This, menuForm}), Rectangle, FormType),
-        case (get({This, currentTouchInputFactory}) =/= 'NoButtonsTouchInputFactory':getInstance()) of
-            true ->
-            (get({get({This, touchButtonFactory}), '$class'})):toggle(get({This, touchButtonFactory}), (get({This, '$class'})):isPaused(This), (get({get({This, currentTouchInputFactory}), '$class'})):getList(get({This, currentTouchInputFactory})));
-            false -> ok
-        end,
-        put({This, myFontProcessor}, get({This, updateMyFontProcessor})).
-
-% throws Exception
-processSleep(This) ->
-        'RunnableCanvas':processSleep(This),
-        case 'AllBinaryMediaManager':update() of
-            true ->
-            case (not (get({get({This, primaryPlayerQueue}), '$class'})):process(get({This, primaryPlayerQueue}))) of
-                true ->
-                (get({get({This, secondaryPlayerQueue}), '$class'})):process(get({This, secondaryPlayerQueue}));
-                false -> ok
-            end;
-            false -> ok
-        end,
-        case ((get({get({This, menuInputProcessor}), '$class'})):processInputList(get({This, menuInputProcessor})) =/= (-1)) of
-            true ->
-            (get({get({This, runnableCanvasRefreshHelper}), '$class'})):process(get({This, runnableCanvasRefreshHelper}));
-            false -> ok
-        end.
-
-% throws Exception
-initPopupMenu(This) ->
-        case (get({This, popupMenuInputProcessor}) =:= 'NoMenuInputProcessor':getInstance()) of
-            true ->
-            Features = 'Features':getInstance(),
-            PopupMenuRectangle = (get({get({This, myFormUtil}), '$class'})):getPopupMenuRectangle(get({This, myFormUtil})),
-            case (get({Features, '$class'})):isFeature(Features, get({get({This, touchFeatureFactory}), 'TOUCH_ENABLED'})) of
-                true ->
-                (get({This, '$class'})):setOpenMenuPaintable(This, 'BasicPopupMenuPaintable':new(PopupMenuRectangle, (get({get({This, gameLayerManager}), '$class'})):getBackgroundBasicColor(get({This, gameLayerManager})), (get({get({This, gameLayerManager}), '$class'})):getForegroundBasicColor(get({This, gameLayerManager})))),
-                (get({This, '$class'})):setPopupMenuInputProcessor(This, 'PopupMenuInputProcessor':new('BasicArrayListD':new(), (-1), This, PopupMenuRectangle));
-                false -> ok
-            end;
-            false ->
-            ok
-        end.
-
-initMenu(This) ->
-        try
-            (get({get({This, menuBehavior}), '$class'})):initMenu(get({This, menuBehavior}), This)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, "initMenu", E)
-        end.
-
-% throws Exception
-initMenu2(This) ->
-        (get({This, '$class'})):closeMenu(This),
-        FormType = (fun(Target_N76243) -> (get({Target_N76243, '$class'})):getFormType(Target_N76243) end)('FormTypeFactory':getInstance()),
-        GameLimitedCommandTextItemArrayFactory = 'GameLimitedCommandTextItemArrayFactory':getInstance(),
-        CommandTextItemArrayFactory = (get({GameLimitedCommandTextItemArrayFactory, '$class'})):getCommandTextItemArrayFactory(GameLimitedCommandTextItemArrayFactory),
-        Items = (get({CommandTextItemArrayFactory, '$class'})):getInstance(CommandTextItemArrayFactory, (get({This, '$class'})):getCommandStack(This), (get({get({This, gameLayerManager}), '$class'})):getBackgroundBasicColor(get({This, gameLayerManager})), (get({get({This, gameLayerManager}), '$class'})):getForegroundBasicColor(get({This, gameLayerManager}))),
-        Rectangle = (get({get({This, formUtil}), '$class'})):createFormRectangle(get({This, formUtil})),
-        (get({This, '$class'})):setMenuForm(This, 'CommandCurrentSelectionFormFactory':getInstance(get({'StringUtil':getInstance(), 'EMPTY_STRING'}), Items, Rectangle, FormType, 25, false, (get({get({This, gameLayerManager}), '$class'})):getBackgroundBasicColor(get({This, gameLayerManager})), (get({get({This, gameLayerManager}), '$class'})):getForegroundBasicColor(get({This, gameLayerManager})))),
-        ScrollSelectionForm = (get({This, '$class'})):getMenuForm(This),
-        Features = 'Features':getInstance(),
-        case (get({Features, '$class'})):isFeature(Features, get({get({This, touchFeatureFactory}), 'TOUCH_ENABLED'})) of
-            true ->
-            put({This, mainMenuInputProcessor}, 'PopupCommandFormInputProcessor':new('BasicArrayListD':new(), (-1), This, ScrollSelectionForm, (get({This, '$class'})):getPopupMenuInputProcessor(This)));
-            false ->
-            ok
-        end,
-        (get({This, '$class'})):setMenuInputProcessor(This, (get({This, '$class'})):getPopupMenuInputProcessor(This)),
-        case (ScrollSelectionForm =/= 'ScrollSelectionFormNoneFactory':getInstance()) of
-            true ->
-            (get({This, '$class'})):setFormPaintable(This, 'FormPaintable':new(ScrollSelectionForm));
-            false ->
-            ok
-        end,
-        (get({This, '$class'})):closeMenu(This).
-
-updateMenu(This) ->
-        try
-            (get({get({This, menuBehavior}), '$class'})):updateMenu(get({This, menuBehavior}), This)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, "initMenu", E)
-        end.
-
-% throws Exception
-updateMenu2(This) ->
-        ScrollSelectionForm = (get({This, '$class'})):getMenuForm(This),
-        (get({ScrollSelectionForm, '$class'})):deleteAll(ScrollSelectionForm),
-        GameLimitedCommandTextItemArrayFactory = 'GameLimitedCommandTextItemArrayFactory':getInstance(),
-        CommandTextItemArrayFactory = (get({GameLimitedCommandTextItemArrayFactory, '$class'})):getCommandTextItemArrayFactory(GameLimitedCommandTextItemArrayFactory),
-        Items = (get({CommandTextItemArrayFactory, '$class'})):getInstance(CommandTextItemArrayFactory, (get({This, '$class'})):getCommandStack(This), (get({get({This, gameLayerManager}), '$class'})):getBackgroundBasicColor(get({This, gameLayerManager})), (get({get({This, gameLayerManager}), '$class'})):getForegroundBasicColor(get({This, gameLayerManager}))),
-        Size = array:size(Items),
-        lists:foreach(fun(Index) ->
-            (get({ScrollSelectionForm, '$class'})):append(ScrollSelectionForm, array:get(Index, Items))
-        end, lists:seq(0, Size - 1)),
-        FormType = (fun(Target_N77696) -> (get({Target_N77696, '$class'})):getFormType(Target_N77696) end)('FormTypeFactory':getInstance()),
-        Rectangle = (get({get({This, formUtil}), '$class'})):createFormRectangle(get({This, formUtil})),
-        (get({ScrollSelectionForm, '$class'})):init(ScrollSelectionForm, Rectangle, FormType).
-
-pause(This) ->
-        (get({get({This, gameBehavior}), '$class'})):pause(get({This, gameBehavior}), This),
-        (get({This, '$class'})):closeMenu(This),
-        'RunnableCanvas':pause(This),
-        (get({get({This, touchButtonFactory}), '$class'})):toggle(get({This, touchButtonFactory}), (get({This, '$class'})):isPaused(This), (fun(Target_N77961) -> (get({Target_N77961, '$class'})):getImmutableInstance(Target_N77961) end)('BasicArrayListUtil':getInstance())),
-        (get({get({This, tsUtil}), '$class'})):gc(get({This, tsUtil})).
-
-unPause(This) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, get({get({This, gameStrings}), 'UNPAUSE'})),
-        (get({This, '$class'})):closeMenu(This),
-        (get({get({This, tsUtil}), '$class'})):gc(get({This, tsUtil})),
-        'RunnableCanvas':unPause(This),
-        (get({get({This, touchButtonFactory}), '$class'})):toggle(get({This, touchButtonFactory}), (get({This, '$class'})):isPaused(This), (fun(Target_N78209) -> (get({Target_N78209, '$class'})):getImmutableInstance(Target_N78209) end)('BasicArrayListUtil':getInstance())),
-        (get({get({This, gameBehavior}), '$class'})):unPause(get({This, gameBehavior}), This).
-
-isPausable(This) ->
-        try
-        case ((fun(Target_N78312) -> (get({Target_N78312, '$class'})):getUsedRunnable(Target_N78312) end)('CurrentDisplayableFactory':getInstance()) =:= 'NullWaitGameRunnable':getInstance()) of
-            true ->
-            throw({'$return', true});
-            false ->
-            throw({'$return', false})
+  def jinit(this, p_commandListener, p_gameLayerManager, p_highScoresFactoryInterface, p_gameInitializationInterfaceFactoryInterface, p_buffered) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :commandListener, p_commandListener)
+      JR.lset(f, :gameLayerManager, p_gameLayerManager)
+      JR.lset(f, :highScoresFactoryInterface, p_highScoresFactoryInterface)
+      JR.lset(f, :gameInitializationInterfaceFactoryInterface, p_gameInitializationInterfaceFactoryInterface)
+      JR.lset(f, :buffered, p_buffered)
+        RunnableCanvas.jinit(this, JR.lget(f, :commandListener), JR.get(CanvasStrings.jm_getInstance(), :EMPTY_CHILD_NAME_LIST), true)
+        AllBinaryGameCanvas.jinitfields(this)
+        JR.put(this, :highScoresHelper, JR.call(JR.lget(f, :highScoresFactoryInterface), :jm_createHighScoresHelper, []))
+        JR.put(this, :gameInitializationInterfaceFactoryInterface, JR.lget(f, :gameInitializationInterfaceFactoryInterface))
+        JR.call(this, :jm_init, [JR.lget(f, :gameLayerManager), JR.lget(f, :buffered)])
+        JR.put(this, :highScoresFactoryInterface, JR.lget(f, :highScoresFactoryInterface))
+        if ((JR.call(JR.call(JR.get(this, :gameLayerManager), :jm_getGameInfo, []), :jm_getGameType, []) == JR.get(JR.get(this, :gameTypeFactory), :BOT)) || (JR.call(JR.call(JR.get(this, :gameLayerManager), :jm_getGameInfo, []), :jm_getGameType, []) == JR.get(JR.get(this, :gameTypeFactory), :NONE))) do
+            JR.put(this, :gameBehavior, DemoGameBehavior.jm_getInstance())
+            JR.put(this, :menuBehavior, BaseMenuBehavior.jm_getInstance())
+        else
+            JR.put(this, :gameBehavior, BaseGameBehavior.jm_getInstance())
+            JR.put(this, :menuBehavior, JR.call(this, :jm_getInGameMenuBehavior, []))
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        JR.call(this, :jm_initPopupMenu, [])
+        JR.call(this, :jm_initMenu, [])
+        JR.call(this, :jm_initSpecialPaint, [])
+        JR.call(DisplayChangeEventHandler.jm_getInstance(), :jm_addListenerInterface, [this])
+    end)
+  end
 
-% throws Exception
-popupMenu(This) ->
-        (get({get({This, menuBehavior}), '$class'})):popupMenu(get({This, menuBehavior}), This).
+  def jnew(p_commandListener, p_gameLayerManager, p_highScoresFactoryInterface, p_gameInitializationInterfaceFactoryInterface, p_buffered) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_commandListener, p_gameLayerManager, p_highScoresFactoryInterface, p_gameInitializationInterfaceFactoryInterface, p_buffered)
+    this
+  end
 
-% throws Exception
-popupMenu2(This) ->
-        (get({get({This, primaryPlayerQueue}), '$class'})):add(get({This, primaryPlayerQueue}), 'SelectSound':getInstance()),
-        (get({This, '$class'})):setMenuPaintable(This, (get({This, '$class'})):getFormPaintable(This)),
-        (get({This, '$class'})):setMenuInputProcessor(This, get({This, mainMenuInputProcessor})),
-        (get({get({This, basicMotionGesturesHandler}), '$class'})):addListenerInterface(get({This, basicMotionGesturesHandler}), get({This, mainMenuInputProcessor})),
-        (get({get({This, gameKeyEventHandler}), '$class'})):addListener(get({This, gameKeyEventHandler}), get({This, mainMenuInputProcessor})).
 
-% throws Exception
-toggleMenu(This) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, get({get({This, gameStrings}), 'TOGGLE_MENU'})),
-        case ((get({This, '$class'})):getMenuPaintable(This) =:= (get({This, '$class'})):getOpenMenuPaintable(This)) of
-            true ->
-            (get({This, '$class'})):pause(This),
-            (get({This, '$class'})):updateMenu(This),
-            (get({This, '$class'})):popupMenu(This);
-            false ->
-            case ((get({This, '$class'})):getMenuPaintable(This) =:= (get({This, '$class'})):getFormPaintable(This)) of
-            true ->
-            (get({get({This, primaryPlayerQueue}), '$class'})):add(get({This, primaryPlayerQueue}), 'SelectSound':getInstance()),
-            (get({This, '$class'})):unPause(This);
-            false -> ok
+  def jm_updateMeasurement(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        try do
+            JR.lset(f, :font, JR.call(JR.lget(f, :graphics), :jm_getFont, []))
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :commonStrings), :START)]), :jm_append, [JR.get(JR.get(this, :canvasStrings), :FD_WIDTH)]), :jm_appendint, [JR.int32(MyFontProcessor.jm_defaultCharWidth(JR.lget(f, :font)))]), :jm_append, [JR.get(JR.get(this, :canvasStrings), :FD_HEIGHT)]), :jm_appendint, [JR.int32(JR.call(JR.lget(f, :font), :jm_getHeight, []))]), :jm_toString, []), this, JR.get(JR.get(this, :canvasStrings), :UPDATE_MEASUREMENT)])
+            JR.put(this, :fontHeightP, JR.call(JR.lget(f, :font), :jm_getHeight, []))
+            JR.call(JR.get(this, :myFormUtil), :jm_updateMeasurement, [JR.lget(f, :graphics)])
+            JR.lset(f, :popupMenuRectangle, JR.call(JR.get(this, :myFormUtil), :jm_getPopupMenuRectangle, []))
+            JR.lset(f, :basicPopupMenuPaintable, (JR.call(this, :jm_getOpenMenuPaintable, [])))
+            JR.call(JR.lget(f, :basicPopupMenuPaintable), :jm_init, [JR.lget(f, :popupMenuRectangle)])
+            if (JR.call(this, :jm_getPopupMenuInputProcessor, []) != NoMenuInputProcessor.jm_getInstance()) do
+                JR.lset(f, :popupMenuInputProcessor, (JR.call(this, :jm_getPopupMenuInputProcessor, [])))
+                JR.call(JR.lget(f, :popupMenuInputProcessor), :jm_init, [JR.lget(f, :popupMenuRectangle)])
+            end
+            JR.put(this, :myFontProcessor, MyFontProcessor.jm_getInstance())
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :canvasStrings), :ON_DISPLAY_CHANGE_EVENT), JR.lget(f, :e)])
         end
-        end.
+    end)
+  end
 
-closeMenu(This) ->
-        (get({get({This, menuBehavior}), '$class'})):closeMenu(get({This, menuBehavior}), This).
 
-closeMenu2(This) ->
-        (get({This, '$class'})):setMenuPaintable(This, (get({This, '$class'})):getOpenMenuPaintable(This)),
-        (get({get({This, basicMotionGesturesHandler}), '$class'})):removeListener(get({This, basicMotionGesturesHandler}), get({This, mainMenuInputProcessor})),
-        (get({get({This, gameKeyEventHandler}), '$class'})):removeListener(get({This, gameKeyEventHandler}), get({This, mainMenuInputProcessor})),
-        (get({This, '$class'})):setMenuInputProcessor(This, (get({This, '$class'})):getPopupMenuInputProcessor(This)).
+  def jm_getInGameMenuBehavior(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, InGameMenuBehavior.jm_getInstance()})
+    end)
+  end
 
-open(This) ->
-        (get({get({This, basicMotionGesturesHandler}), '$class'})):addListenerInterface(get({This, basicMotionGesturesHandler}), get({This, menuInputProcessor})),
-        (get({get({This, gameKeyEventHandler}), '$class'})):addListener(get({This, gameKeyEventHandler}), get({This, menuInputProcessor})).
 
-close(This) ->
-        (get({get({This, basicMotionGesturesHandler}), '$class'})):removeListener(get({This, basicMotionGesturesHandler}), get({This, menuInputProcessor})),
-        (get({get({This, gameKeyEventHandler}), '$class'})):removeListener(get({This, gameKeyEventHandler}), get({This, menuInputProcessor})),
-        (get({get({This, primaryPlayerQueue}), '$class'})):clear(get({This, primaryPlayerQueue})),
-        (get({get({This, secondaryPlayerQueue}), '$class'})):clear(get({This, secondaryPlayerQueue})).
-
-% throws Exception
-processorInit(This) ->
-        (get({This, '$class'})):setMainStateProcessor(This, 'Processor':getInstance()),
-        (get({This, '$class'})):setProcessGameProcessorInit(This).
-
-setProcessGameProcessorInit(This) ->
-        (get({This, '$class'})):setProcessGameProcessor(This, 'GameProcessor':new(This)).
-
-initSpecialPaint(This) ->
-        (get({get({This, menuBehavior}), '$class'})):initSpecialPaint(get({This, menuBehavior}), This).
-
-% throws Exception
-init(This, GameLayerManager, Buffered) when is_boolean(Buffered) ->
-        (get({get({This, gameStateTimeHelper}), '$class'})):setStartTimeTNT(get({This, gameStateTimeHelper})),
-        (get({This, '$class'})):setHighScoreSubmitted(This, false),
-        (get({This, '$class'})):setLayerManager(This, GameLayerManager),
-        case (not Buffered) of
-            true ->
-            BUFF_MESSAGE = "XXX Not Buffering Causes Concurrency Issues XXX",
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), BUFF_MESSAGE, This, get({get({This, commonStrings}), 'CONSTRUCTOR'}));
-            false ->
-            erlang:error({'Exception', "Buffering is disabled"})
-        end,
-        (get({This, '$class'})):setGameInputProcessor(This, 'Processor':getInstance()),
-        Features = 'Features':getInstance(),
-        case (get({Features, '$class'})):isFeature(Features, get({'GameFeatureFactory':getInstance(), 'CHEATING'})) of
-            true ->
-            put({This, isCheating}, true),
-            put({This, cheatProcessor}, 'CheatGameInputProcessor':new(This)),
-            (get({get({This, gameKeyEventHandler}), '$class'})):addListener(get({This, gameKeyEventHandler}), get({This, cheatProcessor}));
-            false ->
-            put({This, isCheating}, false),
-            put({This, cheatProcessor}, 'NoPlayerGameInput':getInstance())
-        end,
-        put({This, realEndGameProcessor}, 'EndGameProcessor':new(This)),
-        (get({This, '$class'})):setEndGameProcessor(This, 'Processor':getInstance()),
-        put({This, realStartIntermissionProcessor}, 'StartIntermissionProcessor':new(This)),
-        put({This, startIntermissionProcessor}, 'Processor':getInstance()),
-        (get({This, '$class'})):setEndGameStatePaintable(This, 'EndGamePaintable':new(This)),
-        (get({This, '$class'})):setEndGamePaintable(This, 'NullPaintable':getInstance()),
-        (get({This, '$class'})):setIntermissionPaintable(This, 'NullPaintable':getInstance()),
-        (fun(Target_N80495) -> (get({Target_N80495, '$class'})):setListener(Target_N80495, This) end)((get({This, '$class'})):getStartIntermissionInterface(This)).
-
-notifyIntermission(This, Enable) when is_boolean(Enable) ->
-        case Enable of
-            true ->
-            put({This, startIntermissionProcessor}, get({This, realStartIntermissionProcessor}));
-            false ->
-            put({This, startIntermissionProcessor}, 'Processor':getInstance())
-        end,
-        case Enable of
-            true ->
-            (get({This, '$class'})):setIntermissionPaintable(This, (get({This, '$class'})):getStartIntermissionPaintable(This));
-            false ->
-            (get({This, '$class'})):setIntermissionPaintable(This, 'NullPaintable':getInstance())
-        end.
-
-% throws Exception
-mediaInit(This) ->
-        'ForcedLogUtil':log(get({get({This, commonStrings}), 'NOT_IMPLEMENTED'}), This).
-
-% throws Exception
-initConfigurable(This, AbeClientInformation) ->
-        ProgressCanvas = 'ProgressCanvasFactory':getInstance(),
-        (get({ProgressCanvas, '$class'})):addNormalPortion(ProgressCanvas, 50, "Setting Configurables"),
-        (fun(Target_N80989) -> (get({Target_N80989, '$class'})):initGame(Target_N80989, AbeClientInformation, This, get({This, gameInitializationInterfaceFactoryInterface})) end)('GameInitializationUtil':getInstance()),
-        GameFeatureFactory = 'GameFeatureFactory':getInstance(),
-        ChangedGameFeatureListener = 'ChangedGameFeatureListener':getInstance(),
-        case (get({ChangedGameFeatureListener, '$class'})):isChangedFeature(ChangedGameFeatureListener, get({GameFeatureFactory, 'SOUND'})) of
-            true ->
-            Features = 'Features':getInstance(),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N81255) -> (get({Target_N81255, '$class'})):toString(Target_N81255) end)((fun(Target_N81262) -> (get({Target_N81262, '$class'})):appendboolean(Target_N81262, (get({Features, '$class'})):isFeature(Features, get({GameFeatureFactory, 'SOUND'}))) end)((fun(Target_N81269) -> (get({Target_N81269, '$class'})):append(Target_N81269, "Sound Changing To: ") end)('StringMaker':new()))), This, "initConfigurable"),
-            (get({This, '$class'})):mediaInit(This),
-            (get({ChangedGameFeatureListener, '$class'})):remove(ChangedGameFeatureListener, get({GameFeatureFactory, 'SOUND'}));
-            false -> ok
-        end,
-        SensorFeatureFactory = 'SensorFeatureFactory':getInstance(),
-        case (((get({ChangedGameFeatureListener, '$class'})):isChangedFeature(ChangedGameFeatureListener, get({SensorFeatureFactory, 'ORIENTATION_SENSORS'})) orelse (get({ChangedGameFeatureListener, '$class'})):isChangedFeature(ChangedGameFeatureListener, get({SensorFeatureFactory, 'NO_ORIENTATION'}))) orelse (get({ChangedGameFeatureListener, '$class'})):isChangedFeature(ChangedGameFeatureListener, get({SensorFeatureFactory, 'SIMULATED_ORIENTATION_SENSORS'}))) of
-            true ->
-            (get({ChangedGameFeatureListener, '$class'})):remove(ChangedGameFeatureListener, get({SensorFeatureFactory, 'NO_ORIENTATION'})),
-            (get({ChangedGameFeatureListener, '$class'})):remove(ChangedGameFeatureListener, get({SensorFeatureFactory, 'ORIENTATION_SENSORS'})),
-            (get({ChangedGameFeatureListener, '$class'})):remove(ChangedGameFeatureListener, get({SensorFeatureFactory, 'SIMULATED_ORIENTATION_SENSORS'}));
-            false -> ok
-        end,
-        ResourceLoadingLevelFactory = 'ResourceLoadingLevelFactory':getInstance(),
-        (get({This, '$class'})):loadResourceLoadingLevel(This, get({ResourceLoadingLevelFactory, 'LOAD_GAME'})).
-
-% throws Exception
-initApp(This, AbeClientInformation) ->
-        (get({This, '$class'})):initConfigurable(This, AbeClientInformation),
-        (get({This, '$class'})):processorInit(This),
-        (get({get({This, sensorGameUpdateProcessor}), '$class'})):process(get({This, sensorGameUpdateProcessor}), get({This, gameLayerManager})),
-        (get({get({This, sensorGameUpdateProcessor}), '$class'})):sendNotifications(get({This, sensorGameUpdateProcessor}), get({This, gameLayerManager})),
-        (get({This, '$class'})):initTouch(This).
-
-% throws Exception
-initTouch(This) ->
-        GameInitializedEvent = get({'GameInitializationUtil':getInstance(), 'EVENT'}),
-        ResourceLoadingLevelFactory = 'ResourceLoadingLevelFactory':getInstance(),
-        (get({GameInitializedEvent, '$class'})):setResourceLoadingLevel(GameInitializedEvent, get({ResourceLoadingLevelFactory, 'LOAD_TOUCH'})),
-        (fun(Target_N82198) -> (get({Target_N82198, '$class'})):fireEvent(Target_N82198, GameInitializedEvent) end)('GameInitializedEventHandler':getInstance()),
-        (get({get({This, touchButtonFactory}), '$class'})):defaultList(get({This, touchButtonFactory})),
-        (get({This, '$class'})):updateTouch(This),
-        (get({This, '$class'})):postInitTouch(This).
-
-% throws Exception
-updateCurrentTouchInputFactory(This, NextTouchInput) ->
-        case (NextTouchInput =/= get({This, currentTouchInputFactory})) of
-            true ->
-            put({This, currentTouchInputFactory}, NextTouchInput),
-            'PreLogUtil':put((get({get({This, currentTouchInputFactory}), '$class'})):toString(get({This, currentTouchInputFactory})), This, get({get({This, gameInputStrings}), 'UDPATE_CURRENT_TOUCH_INPUT_FACTORY'})),
-            (get({get({This, touchButtonFactory}), '$class'})):toggle(get({This, touchButtonFactory}), (get({This, '$class'})):isPaused(This), (get({get({This, currentTouchInputFactory}), '$class'})):getList(get({This, currentTouchInputFactory})));
-            false -> ok
-        end.
-
-% throws Exception
-updateTouch(This) ->
-        (get({get({This, gameBehavior}), '$class'})):updateTouch(get({This, gameBehavior}), This).
-
-% throws Exception
-updateTouch2(This) ->
-        Features = 'Features':getInstance(),
-        case (get({Features, '$class'})):isFeature(Features, get({get({This, touchFeatureFactory}), 'AUTO_HIDE_SHOW_SCREEN_BUTTONS'})) of
-            true ->
-            case (((fun(Target_N82745) -> (get({Target_N82745, '$class'})):getCurrentLevel(Target_N82745) end)((get({get({This, gameLayerManager}), '$class'})):getGameInfo(get({This, gameLayerManager}))) - (get({This, '$class'})):getStartLevel(This)) =:= 1) of
-                true ->
-                (get({This, '$class'})):setTouchPaintableP(This, 'NullPaintable':getInstance());
-                false -> ok
-            end;
-            false -> ok
-        end.
-
-% throws Exception
-postInitTouch(This) ->
-        (get({This, '$class'})):setTouchButtonsPaintable(This, 'TouchButtonsPaintableFactory':getInstance((get({get({This, gameLayerManager}), '$class'})):getForegroundBasicColor(get({This, gameLayerManager})))),
-        (get({This, '$class'})):updateScreenButtonPaintable(This).
-
-initCommands(This, CmdListener) ->
-        (get({This, '$class'})):removeAllCommands(This),
-        (get({This, '$class'})):addCommands(This),
-        (get({This, '$class'})):setCommandListener(This, CmdListener).
-
-addCommands(This) ->
-        GameCommandsFactory = 'GameCommandsFactory':getInstance(),
-        MyCommandsFactory = 'MyCommandsFactory':getInstance(),
-        case ('DebugFactory':getInstance() =/= 'NoDebug':getInstance()) of
-            true ->
-            (get({This, '$class'})):addCommand(This, get({GameCommandsFactory, 'START_TRACE'}));
-            false -> ok
-        end,
-        (get({This, '$class'})):addCommand(This, get({GameCommandsFactory, 'RESTART_COMMAND'})),
-        (get({This, '$class'})):addCommand(This, get({MyCommandsFactory, 'PAUSE_COMMAND'})),
-        (get({This, '$class'})):addCommand(This, get({GameCommandsFactory, 'QUIT_COMMAND'})),
-        IsOverScan = (fun(Target_N83391) -> (get({Target_N83391, '$class'})):isOverScan(Target_N83391) end)((fun(Target_N83398) -> (get({Target_N83398, '$class'})):getOperatingSystemInstance(Target_N83398) end)('OperatingSystemFactory':getInstance())),
-        case 'J2MEUtil':isHTML() of
-            true ->
-            ok;
-            false ->
-            case get({'SWTUtil', isSWT}) of
-            true ->
-            ok;
-            false ->
-            case (not IsOverScan) of
-            true ->
-            case ((fun(Target_N83501) -> (get({Target_N83501, '$class'})):isTouch(Target_N83501) end)('TouchScreenFactory':getInstance()) andalso (fun(Target_N83525) -> (get({Target_N83525, '$class'})):isAny(Target_N83525) end)('InGameFeatures':new())) of
-                true ->
-                (get({This, '$class'})):addCommand(This, get({'InGameOptionsForm', 'DISPLAY'}));
-                false -> ok
-            end,
-            (get({This, '$class'})):addCommand(This, get({GameCommandsFactory, 'SAVE'})),
-            (get({This, '$class'})):addCommand(This, get({GameCommandsFactory, 'DISPLAY_LOAD_FORM'}));
-            false -> ok
+  def jm_setCurrentThread(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if J2MEUtil.jm_isHTML() do
+            RunnableCanvas.jm_setCurrentThreadFake(this)
+        else
+            RunnableCanvas.jm_setCurrentThread(this)
         end
+    end)
+  end
+
+
+  def jm_onEvent(this, p_eventObject) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+        ForcedLogUtil.jm_log(JR.get(EventStrings.jm_getInstance(), :PERFORMANCE_MESSAGE), this)
+    end)
+  end
+
+
+  def jm_onDisplayChangeEvent(this, p_displayChangeEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :displayChangeEvent, p_displayChangeEvent)
+        try do
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :commonStrings), :START)]), :jm_append, [JR.call(DisplayInfoSingleton.jm_getInstance(), :jm_toString, [])]), :jm_toString, []), this, JR.get(JR.get(this, :canvasStrings), :UPDATE_MEASUREMENT)])
+            JR.put(this, :myFontProcessor, JR.get(this, :updateMyFontProcessor))
+            JR.call(JR.get(this, :menuBehavior), :jm_onDisplayChangeEvent, [this, JR.lget(f, :displayChangeEvent)])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :canvasStrings), :ON_DISPLAY_CHANGE_EVENT), JR.lget(f, :e)])
         end
-        end.
+    end)
+  end
 
-itemStateChanged(This, Item) ->
-        try
-            ItemLabel = (get({Item, '$class'})):getLabel(Item),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N83781) -> (get({Target_N83781, '$class'})):toString(Target_N83781) end)((fun(Target_N83788) -> (get({Target_N83788, '$class'})):append(Target_N83788, ItemLabel) end)((fun(Target_N83795) -> (get({Target_N83795, '$class'})):append(Target_N83795, get({get({This, commonLabels}), 'ITEM_LABEL'})) end)('StringMaker':new()))), This, "itemStateChanged"),
-            case allbinary_java:instance_of(Item, 'ChoiceGroup') of
-                true ->
-                GameFeatureUtil = 'GameFeatureUtil':getInstance(),
-                case (get({GameFeatureUtil, '$class'})):isExclusive(GameFeatureUtil, ItemLabel) of
-                    true ->
-                    (get({GameFeatureUtil, '$class'})):updateExclusiveForChoiceGroup(GameFeatureUtil, Item);
-                    false ->
-                    (get({GameFeatureUtil, '$class'})):updateMultiple(GameFeatureUtil, Item)
-                end;
-                false -> ok
-            end,
-            (get({get({This, sensorGameUpdateProcessor}), '$class'})):process(get({This, sensorGameUpdateProcessor}), get({This, gameLayerManager})),
-            (get({This, '$class'})):updateTouch(This),
-            (get({This, '$class'})):updateScreenButtonPaintable(This),
-            (get({get({This, sensorGameUpdateProcessor}), '$class'})):sendNotifications(get({This, sensorGameUpdateProcessor}), get({This, gameLayerManager}))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, "itemStateChanged", E)
-        end.
 
-% throws Exception
-updateScreenButtonPaintable(This) ->
-        (get({get({This, gameBehavior}), '$class'})):updateScreenButtonPaintable(get({This, gameBehavior}), This).
-
-updateScreenButtonPaintable2(This) ->
-        Features = 'Features':getInstance(),
-        case (get({Features, '$class'})):isFeature(Features, get({get({This, touchFeatureFactory}), 'AUTO_HIDE_SHOW_SCREEN_BUTTONS'})) of
-            true ->
-            (get({This, '$class'})):setTouchPaintableP(This, (get({This, '$class'})):getTouchButtonsPaintable(This)),
-            (get({This, '$class'})):setStartLevel(This, (fun(Target_N84753) -> (get({Target_N84753, '$class'})):getCurrentLevel(Target_N84753) end)((get({get({This, gameLayerManager}), '$class'})):getGameInfo(get({This, gameLayerManager}))));
-            false ->
-            case (get({Features, '$class'})):isFeature(Features, get({get({This, touchFeatureFactory}), 'SHOW_SCREEN_BUTTONS'})) of
-            true ->
-            (get({This, '$class'})):setTouchPaintableP(This, (get({This, '$class'})):getTouchButtonsPaintable(This));
-            false ->
-            case (get({Features, '$class'})):isFeature(Features, get({get({This, touchFeatureFactory}), 'HIDE_SCREEN_BUTTONS'})) of
-            true ->
-            (get({This, '$class'})):setTouchPaintableP(This, 'NullPaintable':getInstance());
-            false ->
-            (get({This, '$class'})):setTouchPaintableP(This, 'NullPaintable':getInstance())
+  def jm_updateMenuFromEvent(this, p_displayChangeEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :displayChangeEvent, p_displayChangeEvent)
+        JR.lset(f, :formType, JR.call(FormTypeFactory.jm_getInstance(), :jm_getFormType, []))
+        JR.lset(f, :rectangle, JR.call(JR.get(this, :formUtil), :jm_createFormRectangle, []))
+        JR.call(JR.get(this, :menuForm), :jm_init, [JR.lget(f, :rectangle), JR.lget(f, :formType)])
+        if (JR.get(this, :currentTouchInputFactory) != NoButtonsTouchInputFactory.jm_getInstance()) do
+            JR.call(JR.get(this, :touchButtonFactory), :jm_toggle, [JR.call(this, :jm_isPaused, []), JR.call(JR.get(this, :currentTouchInputFactory), :jm_getList, [])])
         end
-        end
-        end.
+        JR.put(this, :myFontProcessor, JR.get(this, :updateMyFontProcessor))
+    end)
+  end
 
-getLayerManager(This) ->
-        get({This, gameLayerManager}).
 
-setLayerManager(This, LayerManager) ->
-        put({This, gameLayerManager}, LayerManager).
-
-isGameOver(This) ->
-        get({This, gameOver}).
-
-setGameOver(This, GameOver) when is_boolean(GameOver) ->
-        put({This, gameOver}, GameOver).
-
-% throws Exception
-processGameOver(This) ->
-        'PreLogUtil':put(get({get({This, commonStrings}), 'START'}), This, get({get({This, gameStrings}), 'SET_GAME_OVER'})),
-        (get({This, '$class'})):setGameOver(This, true),
-        (get({This, '$class'})):removePauseCommand(This),
-        (get({This, '$class'})):setGameState(This, get({get({This, gameStateFactory}), 'SHOW_END_RESULT_GAME_STATE'})),
-        (get({This, '$class'})):setEndGamePaintable(This, (get({This, '$class'})):getEndGameStatePaintable(This)).
-
-isHighScoreSubmitted(This) ->
-        get({This, highScoreSubmitted}).
-
-% throws Exception
-setHighScoreSubmitted(This, HighScoreSubmitted) when is_boolean(HighScoreSubmitted) ->
-        put({This, highScoreSubmitted}, HighScoreSubmitted),
-        case HighScoreSubmitted of
-            true ->
-            (get({get({This, highScoresHelper}), '$class'})):setSelectedHighScores(get({This, highScoresHelper}), 'NullHighScoresSingletonFactory':getInstance());
-            false -> ok
-        end,
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N85455) -> (get({Target_N85455, '$class'})):toString(Target_N85455) end)((fun(Target_N85462) -> (get({Target_N85462, '$class'})):appendboolean(Target_N85462, HighScoreSubmitted) end)((fun(Target_N85469) -> (get({Target_N85469, '$class'})):append(Target_N85469, "isHighScoreSubmitted: ") end)('StringMaker':new()))), This, "setHighScoreSubmitted").
-
-getGameState(This) ->
-        get({This, gameState}).
-
-% throws Exception
-setGameState(This, GameState) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N85661) -> (get({Target_N85661, '$class'})):toString(Target_N85661) end)((fun(Target_N85668) -> (get({Target_N85668, '$class'})):append(Target_N85668, (get({get({This, stringUtil}), '$class'})):toString(get({This, stringUtil}), GameState)) end)((fun(Target_N85675) -> (get({Target_N85675, '$class'})):append(Target_N85675, get({get({This, gameStrings}), 'GAME_STATE'})) end)('StringMaker':new()))), This, get({get({This, gameStrings}), 'SET_GAME_STATE'})),
-        put({This, gameState}, GameState),
-        (get({get({This, gameStateTimeHelper}), '$class'})):setStartTimeTNT(get({This, gameStateTimeHelper})),
-        (get({This, '$class'})):updateEndGameProcessor(This),
-        (get({This, '$class'})):updateGameKeyEventProcessor(This),
-        (get({get({This, gameBehavior}), '$class'})):setGameState(get({This, gameBehavior}), This).
-
-% throws Exception
-updateGameState(This) ->
-        GameAdState = (get({get({This, gameAdStateFactory}), '$class'})):getCurrentInstance(get({This, gameAdStateFactory})),
-        (get({GameAdState, '$class'})):processAdState(GameAdState, get({This, gameState}), (fun(Target_N86049) -> (get({Target_N86049, '$class'})):getGameType(Target_N86049) end)((get({get({This, gameLayerManager}), '$class'})):getGameInfo(get({This, gameLayerManager})))),
-        case (get({This, gameState}) =/= get({get({This, gameStateFactory}), 'PLAYING_GAME_STATE'})) of
-            true ->
-            (get({GameAdState, '$class'})):processPageAdState(GameAdState);
-            false -> ok
-        end.
-
-updateGameKeyEventProcessor(This) ->
-        case (((get({This, '$class'})):getGameState(This) =/= get({get({This, gameStateFactory}), 'PLAYING_GAME_STATE'})) orelse get({This, isCheating})) of
-            true ->
-            ok;
-            false ->
-            ok
-        end.
-
-removeAllGameKeyInputListenersOnBuild(This) ->
-        (get({This, '$class'})):removeAllGameKeyInputListeners(This).
-
-removeAllGameKeyInputListeners(This) ->
-        (get({get({This, gameBehavior}), '$class'})):removeAllGameKeyInputListeners(get({This, gameBehavior}), This).
-
-removeAllGameKeyInputListeners2(This) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), "Remove PlayerInput Listeners", This, "removeAllGameKeyInputListeners"),
-        lists:foreach(fun(Index) ->
-            PlayerGameInput = (get({get({This, localPlayerGameInputList}), '$class'})):get(get({This, localPlayerGameInputList}), Index),
-            (get({This, '$class'})):removeKeyInputListener(This, PlayerGameInput),
-            (get({PlayerGameInput, '$class'})):removeNonAIInputGameKeyEvents(PlayerGameInput)
-        end, lists:seq(((get({get({This, localPlayerGameInputList}), '$class'})):size(get({This, localPlayerGameInputList})) - 1), 0, -1)).
-
-removeKeyInputListener(This, PlayerGameInput) ->
-        (get({get({This, gameKeyEventHandler}), '$class'})):removeListener(get({This, gameKeyEventHandler}), PlayerGameInput).
-
-% throws Exception
-updateEndGameProcessor(This) ->
-        (get({get({This, gameBehavior}), '$class'})):updateEndGameProcessor(get({This, gameBehavior}), This).
-
-% throws Exception
-updateEndGameProcessor2(This) ->
-        case (((get({This, '$class'})):getGameState(This) =:= get({get({This, gameStateFactory}), 'SHOW_END_RESULT_GAME_STATE'})) orelse ((get({This, '$class'})):getGameState(This) =:= get({get({This, gameStateFactory}), 'SHOW_HIGH_SCORE_GAME_STATE'}))) of
-            true ->
-            (get({This, '$class'})):setEndGameProcessor(This, get({This, realEndGameProcessor}));
-            false ->
-            (get({This, '$class'})):setEndGameProcessor(This, 'Processor':getInstance())
-        end.
-
-% throws Exception
-buildGameInit(This, IsPortion) when is_boolean(IsPortion) ->
-        ok.
-
-% throws Exception
-cleanupGame(This) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, get({get({This, commonStrings}), 'CLEANUP'})),
-        ProgressCanvas = 'ProgressCanvasFactory':getInstance(),
-        (get({ProgressCanvas, '$class'})):addNormalPortion(ProgressCanvas, 10, "Cleaning Up"),
-        (get({get({This, primaryPlayerQueue}), '$class'})):clear(get({This, primaryPlayerQueue})),
-        (get({get({This, secondaryPlayerQueue}), '$class'})):clear(get({This, secondaryPlayerQueue})),
-        (fun(Target_N87235) -> (get({Target_N87235, '$class'})):clear(Target_N87235) end)('GameLevelDisplayChangeEventListenersFactory':getInstance()).
-
-% throws Exception
-loadResourceLoadingLevel(This, ResourceLoadingLevel) ->
-        GameInitializedEvent = get({'GameInitializationUtil':getInstance(), 'EVENT'}),
-        (get({GameInitializedEvent, '$class'})):setResourceLoadingLevel(GameInitializedEvent, ResourceLoadingLevel),
-        (fun(Target_N87388) -> (get({Target_N87388, '$class'})):fireEvent(Target_N87388, GameInitializedEvent) end)('GameInitializedEventHandler':getInstance()).
-
-% throws Exception
-loadResources(This, Level) when is_integer(Level) ->
-        GameInitializedEvent = get({'GameInitializationUtil':getInstance(), 'EVENT'}),
-        (get({GameInitializedEvent, '$class'})):setLevel(GameInitializedEvent, Level),
-        (fun(Target_N87579) -> (get({Target_N87579, '$class'})):fireEvent(Target_N87579, GameInitializedEvent) end)('GameInitializedEventHandler':getInstance()).
-
-% throws Exception
-updateColor(This) ->
-        ok.
-
-% throws Exception
-buildGame(This, Portion) when is_integer(Portion) ->
-        try
-        (get({get({This, screenCapture}), '$class'})):endRecording(get({This, screenCapture})),
-        (get({get({This, screenCapture}), '$class'})):startRecording(get({This, screenCapture})),
-        ProgressCanvas = 'ProgressCanvasFactory':getInstance(),
-        Features = 'Features':getInstance(),
-        (get({ProgressCanvas, '$class'})):addNormalPortion(ProgressCanvas, Portion, "Generic Build"),
-        (get({This, '$class'})):removeAllGameKeyInputListenersOnBuild(This),
-        (get({This, '$class'})):updateTouch(This),
-        (get({ProgressCanvas, '$class'})):addNormalPortion(ProgressCanvas, Portion, "High Scores"),
-        (get({get({This, highScoresFactoryInterface}), '$class'})):fetchHighScores(get({This, highScoresFactoryInterface}), (get({get({This, gameLayerManager}), '$class'})):getGameInfo(get({This, gameLayerManager})), get({This, highScoresHelper})),
-        (get({This, '$class'})):setHighScoresPaintable(This, 'NullPaintable':getInstance()),
-        (get({ProgressCanvas, '$class'})):addNormalPortion(ProgressCanvas, Portion, "Finishing."),
-        (fun(Target_N88080) -> (get({Target_N88080, '$class'})):update(Target_N88080, (fun(Target_N88100) -> (get({Target_N88100, '$class'})):getGameInfo(Target_N88100) end)((get({This, '$class'})):getLayerManager(This)), This) end)((get({This, '$class'})):getEndGameInfoP(This)),
-        put({This, isSingleKeyRepeatableProcessing}, (get({Features, '$class'})):isFeature(Features, get({'InputFeatureFactory':getInstance(), 'SINGLE_KEY_REPEAT_PRESS'}))),
-        (get({This, '$class'})):setGameOver(This, false),
-        (get({ProgressCanvas, '$class'})):addNormalPortion(ProgressCanvas, Portion, "Finishing.."),
-        (get({This, '$class'})):updateColor(This),
-        (fun(Target_N88267) -> (get({Target_N88267, '$class'})):update(Target_N88267) end)((get({This, '$class'})):getStartIntermissionPaintable(This)),
-        case (not (get({This, '$class'})):isRunningInAnotherThread(This)) of
-            true ->
-            throw({'$return', ok});
-            false -> ok
-        end,
-        (get({ProgressCanvas, '$class'})):addNormalPortion(ProgressCanvas, Portion, "Finishing..."),
-        case ((get({This, '$class'})):isMainCanvas(This) orelse (not (get({This, '$class'})):isInitialized(This))) of
-            true ->
-            case (get({Features, '$class'})):isFeature(Features, get({'MainFeatureFactory':getInstance(), 'LOAD_ONDEMAND'})) of
-                true ->
-                case ((get({This, '$class'})):getCustomCommandListener(This) =/= undefined) of
-                    true ->
-                    (get({ProgressCanvas, '$class'})):'end'(ProgressCanvas);
-                    false -> ok
-                end;
-                false ->
-                (get({ProgressCanvas, '$class'})):'end'(ProgressCanvas)
-            end,
-            (get({This, '$class'})):setInitialized(This, true);
-            false -> ok
-        end,
-        case ((get({This, '$class'})):getCustomCommandListener(This) =:= get({'NullCommandListener', 'NULL_COMMAND_LISTENER'})) of
-            true ->
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), "Show Game Paintable in DemoCanvas Thread", This, get({This, 'BUILD_GAME'})),
-            (get({get({This, gameCanvasStartListener}), '$class'})):showGamePaintable(get({This, gameCanvasStartListener}));
-            false ->
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), "No GameCanvasStartListener", This, get({This, 'BUILD_GAME'}))
-        end,
-        (get({get({This, colorFillPaintable}), '$class'})):setBasicColorP(get({This, colorFillPaintable}), (get({get({This, gameLayerManager}), '$class'})):getBackgroundBasicColor(get({This, gameLayerManager}))),
-        (get({get({This, gameBehavior}), '$class'})):buildGame(get({This, gameBehavior}), This)
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
-
-buildGame2(This) ->
-        'PreLogUtil':put((fun(Target_N88870) -> (get({Target_N88870, '$class'})):toString(Target_N88870) end)((fun(Target_N88877) -> (get({Target_N88877, '$class'})):appendint(Target_N88877, (get({get({This, localPlayerGameInputList}), '$class'})):size(get({This, localPlayerGameInputList}))) end)((fun(Target_N88884) -> (get({Target_N88884, '$class'})):append(Target_N88884, get({get({This, gameInputStrings}), 'ENABLE_PLAYER_GAME_INPUTS'})) end)('StringMaker':new()))), This, get({This, 'BUILD_GAME'})),
-        put({local, playerGameInput}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, playerGameInput}, (get({get({This, localPlayerGameInputList}), '$class'})):get(get({This, localPlayerGameInputList}), Index)),
-            'PreLogUtil':put((fun(Target_N89085) -> (get({Target_N89085, '$class'})):toString(Target_N89085) end)((fun(Target_N89092) -> (get({Target_N89092, '$class'})):append(Target_N89092, (get({get({local, playerGameInput}), '$class'})):toString(get({local, playerGameInput}))) end)((fun(Target_N89099) -> (get({Target_N89099, '$class'})):append(Target_N89099, get({get({This, gameInputStrings}), 'ENABLE_PLAYER_GAME_INPUT'})) end)('StringMaker':new()))), This, get({This, 'BUILD_GAME'})),
-            (get({get({local, playerGameInput}), '$class'})):removeNonAIInputGameKeyEvents(get({local, playerGameInput})),
-            (get({This, '$class'})):addKeyInputListener(This, get({local, playerGameInput}))
-        end, lists:seq(((get({get({This, localPlayerGameInputList}), '$class'})):size(get({This, localPlayerGameInputList})) - 1), 0, -1)).
-
-addKeyInputListener(This, PlayerGameInput) ->
-        (fun(Target_N89339) -> (get({Target_N89339, '$class'})):addListenerForPlayer(Target_N89339, PlayerGameInput, (get({PlayerGameInput, '$class'})):getPlayerInputId(PlayerGameInput)) end)('GameKeyEventHandler':getInstance()).
-
-setGameCanvasStartListener(This, GameCanvasStartListener) ->
-        put({This, gameCanvasStartListener}, GameCanvasStartListener).
-
-% throws Exception
-loadState(This) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, get({get({This, commonStrings}), 'LOAD'})),
-        Hashtable = (get({This, '$class'})):getLoadStateHashtable(This),
-        case ((Hashtable =/= undefined) andalso ((get({Hashtable, '$class'})):size(Hashtable) > 0)) of
-            true ->
-            LevelAsString = (get({Hashtable, '$class'})):get(Hashtable, get({'GameInfo', 'LEVEL_NAME'})),
-            Level = (fun(Target_N89851) -> (get({Target_N89851, '$class'})):intValue(Target_N89851) end)(allbinary_java:to_string(LevelAsString)),
-            GameInfo = (get({get({This, gameLayerManager}), '$class'})):getGameInfo(get({This, gameLayerManager})),
-            (get({GameInfo, '$class'})):setCurrentLevel(GameInfo, Level);
-            false -> ok
-        end.
-
-% throws Exception
-getLoadStateHashtable(This) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N90044) -> (get({Target_N90044, '$class'})):toString(Target_N90044) end)((fun(Target_N90051) -> (get({Target_N90051, '$class'})):append(Target_N90051, (get({get({This, stringUtil}), '$class'})):toString(get({This, stringUtil}), get({This, hashtable}))) end)((fun(Target_N90058) -> (get({Target_N90058, '$class'})):append(Target_N90058, get({get({This, commonLabels}), 'START_LABEL'})) end)('StringMaker':new()))), This, "getLoadStateHashtable"),
-        get({This, hashtable}).
-
-setLoadStateHashtable(This, Hashtable) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N90257) -> (get({Target_N90257, '$class'})):toString(Target_N90257) end)((fun(Target_N90264) -> (get({Target_N90264, '$class'})):append(Target_N90264, (get({get({This, stringUtil}), '$class'})):toString(get({This, stringUtil}), Hashtable)) end)((fun(Target_N90271) -> (get({Target_N90271, '$class'})):append(Target_N90271, get({get({This, commonLabels}), 'START_LABEL'})) end)('StringMaker':new()))), This, "setLoadStateHashtable"),
-        put({This, hashtable}, Hashtable).
-
-getCurrentStateHashtable(This) ->
-        Hashtable = (get({get({This, stdUtil}), '$class'})):createHashtable(get({This, stdUtil})),
-        Level = (fun(Target_N90558) -> (get({Target_N90558, '$class'})):getCurrentLevel(Target_N90558) end)((get({get({This, gameLayerManager}), '$class'})):getGameInfo(get({This, gameLayerManager}))),
-        (get({Hashtable, '$class'})):put(Hashtable, (get({get({'GameInfo', 'LEVEL_NAME'}), '$class'})):toString(get({'GameInfo', 'LEVEL_NAME'})), allbinary_java:to_string(Level)),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N90694) -> (get({Target_N90694, '$class'})):toString(Target_N90694) end)((fun(Target_N90701) -> (get({Target_N90701, '$class'})):append(Target_N90701, (get({get({This, stringUtil}), '$class'})):toString(get({This, stringUtil}), Hashtable)) end)((fun(Target_N90708) -> (get({Target_N90708, '$class'})):append(Target_N90708, "End: ") end)('StringMaker':new()))), This, "getCurrentStateHashtable"),
-        Hashtable.
-
-paintGameOver(This, Graphics) ->
-        'ForcedLogUtil':log(get({get({This, commonStrings}), 'NOT_IMPLEMENTED'}), This).
-
-draw(This, Graphics) ->
-        (get({get({This, colorFillPaintable}), '$class'})):paint(get({This, colorFillPaintable}), Graphics),
-        (get({get({This, basicSetColorUtil}), '$class'})):setBasicColorP(get({This, basicSetColorUtil}), Graphics, (get({get({This, gameLayerManager}), '$class'})):getForegroundBasicColor(get({This, gameLayerManager}))),
-        (get({get({This, gameSpecificPaintable}), '$class'})):paint(get({This, gameSpecificPaintable}), Graphics).
-
-clear(This, Graphics) ->
-        (get({get({This, colorFillPaintable}), '$class'})):paint(get({This, colorFillPaintable}), Graphics).
-
-paint(This, Graphics) ->
-        (get({get({This, myFontProcessor}), '$class'})):process(get({This, myFontProcessor}), Graphics),
-        (get({get({This, baseGameStatistics}), '$class'})):nextRefresh(get({This, baseGameStatistics})),
-        (get({This, '$class'})):draw(This, Graphics),
-        (get({get({This, menuPaintable}), '$class'})):paint(get({This, menuPaintable}), Graphics),
-        (get({get({This, progressPaintable}), '$class'})):paint(get({This, progressPaintable}), Graphics).
-
-paintThreed(This, Graphics) ->
-        ok.
-
-% throws Exception
-processEndLevelIntermissionGameState(This) ->
-        ok.
-
-nonBotPaint(This, Graphics) ->
-        (get({get({This, endGamePaintable}), '$class'})):paint(get({This, endGamePaintable}), Graphics),
-        (get({get({This, intermissionPaintable}), '$class'})):paint(get({This, intermissionPaintable}), Graphics),
-        (get({This, '$class'})):paintIntermission(This, Graphics),
-        (get({get({This, touchPaintable}), '$class'})):paint(get({This, touchPaintable}), Graphics).
-
-paintIntermission(This, Graphics) ->
-        ok.
-
-keyPressed(This, KeyCode) when is_integer(KeyCode) ->
-        (get({This, '$class'})):keyPressedByDevice(This, KeyCode, 0).
-
-keyReleased(This, KeyCode) when is_integer(KeyCode) ->
-        (get({This, '$class'})):keyReleasedByDevice(This, KeyCode, 0).
-
-keyRepeated(This, KeyCode) when is_integer(KeyCode) ->
-        (get({This, '$class'})):keyRepeatedByDevice(This, KeyCode, 0).
-
-keyPressedByDevice(This, KeyCode, DeviceId) when is_integer(KeyCode), is_integer(DeviceId) ->
-        (get({get({This, inputProcessor}), '$class'})):keyPressedByDevice(get({This, inputProcessor}), KeyCode, DeviceId).
-
-keyRepeatedByDevice(This, KeyCode, DeviceId) when is_integer(KeyCode), is_integer(DeviceId) ->
-        case get({This, isSingleKeyRepeatableProcessing}) of
-            true ->
-            (get({get({This, inputProcessor}), '$class'})):keyPressedByDevice(get({This, inputProcessor}), KeyCode, DeviceId);
-            false -> ok
-        end.
-
-keyReleasedByDevice(This, KeyCode, DeviceId) when is_integer(KeyCode), is_integer(DeviceId) ->
-        (get({get({This, inputProcessor}), '$class'})):keyReleasedByDevice(get({This, inputProcessor}), This, KeyCode, DeviceId).
-
-% throws Exception
-handleRawKey(This, KeyCode, DeviceId, Repeated) when is_integer(KeyCode), is_integer(DeviceId), is_boolean(Repeated) ->
-        ok.
-
-endProgress(This, IsProgress) when is_boolean(IsProgress) ->
-        put({local, portion}, 30),
-        case (IsProgress andalso (get({This, '$class'})):isMainCanvas(This)) of
-            true ->
-            MyCommandsFactory = 'MyCommandsFactory':getInstance(),
-            ProgressCanvas = 'ProgressCanvasFactory':getInstance(),
-            (get({ProgressCanvas, '$class'})):start(ProgressCanvas),
-            (fun(Target_N92796) -> (get({Target_N92796, '$class'})):commandAction(Target_N92796, get({MyCommandsFactory, 'SET_DISPLAYABLE'}), ProgressCanvas) end)((get({This, '$class'})):getCustomCommandListener(This)),
-            put({local, portion}, 4);
-            false -> ok
-        end,
-        get({local, portion}).
-
-% throws Exception
-processPlayingGame(This) ->
-        (get({get({This, cheatProcessor}), '$class'})):update(get({This, cheatProcessor})),
-        (fun(Target_N92955) -> (get({Target_N92955, '$class'})):update(Target_N92955) end)((get({get({This, sensorGameUpdateProcessor}), '$class'})):getInputSensor(get({This, sensorGameUpdateProcessor}))),
-        (get({get({This, gameInputProcessor}), '$class'})):process(get({This, gameInputProcessor})),
-        (get({get({This, gameLayerManager}), '$class'})):process(get({This, gameLayerManager})),
-        (get({get({This, startIntermissionProcessor}), '$class'})):process(get({This, startIntermissionProcessor})).
-
-% throws Exception
-threadInit(This) ->
-        ok.
-
-% throws Exception
-processGame(This) ->
-        'RunnableCanvas':process(This),
-        case 'AllBinaryMediaManager':update() of
-            true ->
-            case (not (get({get({This, primaryPlayerQueue}), '$class'})):process(get({This, primaryPlayerQueue}))) of
-                true ->
-                (get({get({This, secondaryPlayerQueue}), '$class'})):process(get({This, secondaryPlayerQueue}));
-                false -> ok
-            end;
-            false -> ok
-        end,
-        (get({get({This, mainStateProcessor}), '$class'})):process(get({This, mainStateProcessor})),
-        (get({get({This, menuInputProcessor}), '$class'})):processInputList(get({This, menuInputProcessor})),
-        (get({get({This, endGameProcessor}), '$class'})):process(get({This, endGameProcessor})),
-        (get({get({This, baseGameStatistics}), '$class'})):nextFrame(get({This, baseGameStatistics})).
-
-notifyDonePainting(This) ->
-        begin % synchronized
-            (get({get({This, threadObjectUtil}), '$class'})):notifyObject(get({This, threadObjectUtil}), This)
-        end.
-
-% throws Exception
-shouldWait(This) ->
-        Features = 'Features':getInstance(),
-        case 'AndroidUtil':isAndroid() of
-            true ->
-            ok;
-            false ->
-            case (get({Features, '$class'})):isFeature(Features, get({get({This, openGLFeatureFactory}), 'OPENGL_2D'})) of
-            true ->
-            ok;
-            false ->
-            case (get({Features, '$class'})):isDefault(Features, get({get({This, openGLFeatureFactory}), 'OPENGL'})) of
-                true ->
-                OpenGLImageSpecificFactory = 'OpenGLImageSpecificFactory':getInstance(),
-                (fun Loop() -> case get({OpenGLImageSpecificFactory, updating}) of true ->
-                    timer:sleep(get({This, 'YIELD_SLEEP'})),
-                    Loop();
-                false -> ok end end)();
-                false -> ok
+  def jm_processSleep(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        RunnableCanvas.jm_processSleep(this)
+        if AllBinaryMediaManager.jm_update() do
+            if !JR.call(JR.get(this, :primaryPlayerQueue), :jm_process, []) do
+                JR.call(JR.get(this, :secondaryPlayerQueue), :jm_process, [])
             end
         end
-        end.
-
-run(This) ->
-        try
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START_RUNNABLE'}), This, get({get({This, commonStrings}), 'RUN'})),
-            ProgressCanvas = 'ProgressCanvasFactory':getInstance(),
-            (get({ProgressCanvas, '$class'})):addNormalPortion(ProgressCanvas, 50, "Game Thread"),
-            (get({This, '$class'})):setCurrentThread(This),
-            (get({This, '$class'})):setRunning(This, true),
-            case ((get({This, '$class'})):getCustomCommandListener(This) =:= get({'NullCommandListener', 'NULL_COMMAND_LISTENER'})) of
-                true ->
-                timer:sleep(get({This, 'YIELD_SLEEP'}));
-                false -> ok
-            end,
-            (get({This, '$class'})):shouldWait(This),
-            (get({This, '$class'})):threadInit(This),
-            case ((get({This, '$class'})):getCustomCommandListener(This) =:= get({'NullCommandListener', 'NULL_COMMAND_LISTENER'})) of
-                true ->
-                timer:sleep(get({This, 'YIELD_SLEEP'}));
-                false -> ok
-            end,
-            (get({This, '$class'})):open(This),
-            GameAdState = (get({get({This, gameAdStateFactory}), '$class'})):getCurrentInstance(get({This, gameAdStateFactory})),
-            (get({GameAdState, '$class'})):init(GameAdState),
-            (get({GameAdState, '$class'})):setGameIsReady(GameAdState, true),
-            (get({get({This, gameBehavior}), '$class'})):run(get({This, gameBehavior}), This),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'END_RUNNABLE'}), This, get({get({This, commonStrings}), 'RUN'}))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'RUN'}), E)
-        end.
-
-% throws Exception
-run2(This) ->
-        Features = 'Features':getInstance(),
-        case ((get({Features, '$class'})):isDefault(Features, get({get({This, openGLFeatureFactory}), 'OPENGL_AS_GAME_THREAD'})) orelse 'J2MEUtil':isHTML()) of
-            true ->
-            case (get({Features, '$class'})):isDefault(Features, get({get({This, openGLFeatureFactory}), 'OPENGL_AS_GAME_THREAD'})) of
-                true ->
-                (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({get({get({This, openGLFeatureFactory}), 'OPENGL_AS_GAME_THREAD'}), '$class'})):getName(get({get({This, openGLFeatureFactory}), 'OPENGL_AS_GAME_THREAD'})), This, get({get({This, commonStrings}), 'RUN'}));
-                false -> ok
-            end,
-            case 'J2MEUtil':isHTML() of
-                true ->
-                (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({'GraphicsStrings':getInstance(), 'HTML'}), This, get({get({This, commonStrings}), 'RUN'}));
-                false -> ok
-            end,
-            CurrentDisplayableFactory = 'CurrentDisplayableFactory':getInstance(),
-            (get({CurrentDisplayableFactory, '$class'})):setRunnable(CurrentDisplayableFactory, get({This, gameRunnable})),
-            (get({CurrentDisplayableFactory, '$class'})):setDisplayable(CurrentDisplayableFactory, This),
-            (fun(Target_N95284) -> (get({Target_N95284, '$class'})):onResume(Target_N95284) end)('OpenGLThreadUtil':getInstance());
-            false ->
-            case (get({Features, '$class'})):isDefault(Features, get({get({This, openGLFeatureFactory}), 'OPENGL_AND_GAME_HAVE_DIFFERENT_THREADS'})) of
-            true ->
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({get({get({This, openGLFeatureFactory}), 'OPENGL_AND_GAME_HAVE_DIFFERENT_THREADS'}), '$class'})):getName(get({get({This, openGLFeatureFactory}), 'OPENGL_AND_GAME_HAVE_DIFFERENT_THREADS'})), This, get({get({This, commonStrings}), 'RUN'})),
-            (fun(Target_N94863) -> (get({Target_N94863, '$class'})):onResume(Target_N94863) end)('OpenGLThreadUtil':getInstance()),
-            (fun Loop() -> case (get({This, '$class'})):isRunning(This) of true ->
-                (get({This, '$class'})):run3(This),
-                Loop();
-            false -> ok end end)(),
-            (get({This, '$class'})):'end'(This);
-            false ->
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), "this thread", This, get({get({This, commonStrings}), 'RUN'})),
-            (fun Loop() -> case (get({This, '$class'})):isRunning(This) of true ->
-                (get({This, '$class'})):run3(This),
-                Loop();
-            false -> ok end end)(),
-            (get({This, '$class'})):'end'(This)
+        if (JR.call(JR.get(this, :menuInputProcessor), :jm_processInputList, []) != -1) do
+            JR.call(JR.get(this, :runnableCanvasRefreshHelper), :jm_process, [])
         end
-        end.
+    end)
+  end
 
-% throws Exception
-run3(This) ->
-        (get({get({This, loopTimeHelper}), '$class'})):setStartTime(get({This, loopTimeHelper}), (get({get({This, gameTickTimeDelayHelper}), '$class'})):setStartTime(get({This, gameTickTimeDelayHelper}))),
-        (get({get({This, gameTickDisplayInfoSingleton}), '$class'})):update(get({This, gameTickDisplayInfoSingleton})),
-        (get({This, '$class'})):processGame(This),
-        (get({This, '$class'})):processLoopSleep(This).
 
-setRunning(This, Running) when is_boolean(Running) ->
-        'RunnableCanvas':setRunning(This, Running),
-        try
-            Features = 'Features':getInstance(),
-            case Running of
-                true ->
-                ok;
-                false ->
-                case ((get({Features, '$class'})):isDefault(Features, get({get({This, openGLFeatureFactory}), 'OPENGL'})) orelse get({'SWTUtil', isSWT})) of
-                    true ->
-                    case ((fun(Target_N95664) -> (get({Target_N95664, '$class'})):getGameType(Target_N95664) end)((get({get({This, gameLayerManager}), '$class'})):getGameInfo(get({This, gameLayerManager}))) =/= get({get({This, gameTypeFactory}), 'BOT'})) of
-                        true ->
-                        CurrentDisplayableFactory = 'CurrentDisplayableFactory':getInstance(),
-                        (get({CurrentDisplayableFactory, '$class'})):clearRunnable(CurrentDisplayableFactory);
-                        false -> ok
-                    end,
-                    (get({This, '$class'})):'end'(This);
-                    false -> ok
+  def jm_initPopupMenu(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.get(this, :popupMenuInputProcessor) == NoMenuInputProcessor.jm_getInstance()) do
+            JR.lset(f, :features, Features.jm_getInstance())
+            JR.lset(f, :popupMenuRectangle, JR.call(JR.get(this, :myFormUtil), :jm_getPopupMenuRectangle, []))
+            if JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.get(this, :touchFeatureFactory), :TOUCH_ENABLED)]) do
+                JR.call(this, :jm_setOpenMenuPaintable, [BasicPopupMenuPaintable.jnew(JR.lget(f, :popupMenuRectangle), JR.call(JR.get(this, :gameLayerManager), :jm_getBackgroundBasicColor, []), JR.call(JR.get(this, :gameLayerManager), :jm_getForegroundBasicColor, []))])
+                JR.call(this, :jm_setPopupMenuInputProcessor, [PopupMenuInputProcessor.jnew(BasicArrayListD.jnew(), -1, this, JR.lget(f, :popupMenuRectangle))])
+            end
+        else
+            nil
+        end
+    end)
+  end
+
+
+  def jm_initMenu(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            JR.call(JR.get(this, :menuBehavior), :jm_initMenu, [this])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, "initMenu", JR.lget(f, :e)])
+        end
+    end)
+  end
+
+
+  def jm_initMenu2(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_closeMenu, [])
+        JR.lset(f, :formType, JR.call(FormTypeFactory.jm_getInstance(), :jm_getFormType, []))
+        JR.lset(f, :gameLimitedCommandTextItemArrayFactory, GameLimitedCommandTextItemArrayFactory.jm_getInstance())
+        JR.lset(f, :commandTextItemArrayFactory, JR.call(JR.lget(f, :gameLimitedCommandTextItemArrayFactory), :jm_getCommandTextItemArrayFactory, []))
+        JR.lset(f, :items, JR.call(JR.lget(f, :commandTextItemArrayFactory), :jm_getInstance, [JR.call(this, :jm_getCommandStack, []), JR.call(JR.get(this, :gameLayerManager), :jm_getBackgroundBasicColor, []), JR.call(JR.get(this, :gameLayerManager), :jm_getForegroundBasicColor, [])]))
+        JR.lset(f, :rectangle, JR.call(JR.get(this, :formUtil), :jm_createFormRectangle, []))
+        JR.call(this, :jm_setMenuForm, [CommandCurrentSelectionFormFactory.jm_getInstance(JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), JR.lget(f, :items), JR.lget(f, :rectangle), JR.lget(f, :formType), 25, false, JR.call(JR.get(this, :gameLayerManager), :jm_getBackgroundBasicColor, []), JR.call(JR.get(this, :gameLayerManager), :jm_getForegroundBasicColor, []))])
+        JR.lset(f, :scrollSelectionForm, JR.call(this, :jm_getMenuForm, []))
+        JR.lset(f, :features, Features.jm_getInstance())
+        if JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.get(this, :touchFeatureFactory), :TOUCH_ENABLED)]) do
+            JR.put(this, :mainMenuInputProcessor, PopupCommandFormInputProcessor.jnew(BasicArrayListD.jnew(), -1, this, JR.lget(f, :scrollSelectionForm), JR.call(this, :jm_getPopupMenuInputProcessor, [])))
+        else
+            nil
+        end
+        JR.call(this, :jm_setMenuInputProcessor, [JR.call(this, :jm_getPopupMenuInputProcessor, [])])
+        if (JR.lget(f, :scrollSelectionForm) != ScrollSelectionFormNoneFactory.jm_getInstance()) do
+            JR.call(this, :jm_setFormPaintable, [FormPaintable.jnew(JR.lget(f, :scrollSelectionForm))])
+        else
+            nil
+        end
+        JR.call(this, :jm_closeMenu, [])
+    end)
+  end
+
+
+  def jm_updateMenu(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            JR.call(JR.get(this, :menuBehavior), :jm_updateMenu, [this])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, "initMenu", JR.lget(f, :e)])
+        end
+    end)
+  end
+
+
+  def jm_updateMenu2(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :scrollSelectionForm, JR.call(this, :jm_getMenuForm, []))
+        JR.call(JR.lget(f, :scrollSelectionForm), :jm_deleteAll, [])
+        JR.lset(f, :gameLimitedCommandTextItemArrayFactory, GameLimitedCommandTextItemArrayFactory.jm_getInstance())
+        JR.lset(f, :commandTextItemArrayFactory, JR.call(JR.lget(f, :gameLimitedCommandTextItemArrayFactory), :jm_getCommandTextItemArrayFactory, []))
+        JR.lset(f, :items, JR.call(JR.lget(f, :commandTextItemArrayFactory), :jm_getInstance, [JR.call(this, :jm_getCommandStack, []), JR.call(JR.get(this, :gameLayerManager), :jm_getBackgroundBasicColor, []), JR.call(JR.get(this, :gameLayerManager), :jm_getForegroundBasicColor, [])]))
+        JR.lset(f, :size, JR.alength(JR.lget(f, :items)))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.call(JR.lget(f, :scrollSelectionForm), :jm_append, [JR.aget(JR.lget(f, :items), JR.lget(f, :index))])
+        end)
+        JR.lset(f, :formType, JR.call(FormTypeFactory.jm_getInstance(), :jm_getFormType, []))
+        JR.lset(f, :rectangle, JR.call(JR.get(this, :formUtil), :jm_createFormRectangle, []))
+        JR.call(JR.lget(f, :scrollSelectionForm), :jm_init, [JR.lget(f, :rectangle), JR.lget(f, :formType)])
+    end)
+  end
+
+
+  def jm_pause(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :gameBehavior), :jm_pause, [this])
+        JR.call(this, :jm_closeMenu, [])
+        RunnableCanvas.jm_pause(this)
+        JR.call(JR.get(this, :touchButtonFactory), :jm_toggle, [JR.call(this, :jm_isPaused, []), JR.call(BasicArrayListUtil.jm_getInstance(), :jm_getImmutableInstance, [])])
+        JR.call(JR.get(this, :tsUtil), :jm_gc, [])
+    end)
+  end
+
+
+  def jm_unPause(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, JR.get(JR.get(this, :gameStrings), :UNPAUSE)])
+        JR.call(this, :jm_closeMenu, [])
+        JR.call(JR.get(this, :tsUtil), :jm_gc, [])
+        RunnableCanvas.jm_unPause(this)
+        JR.call(JR.get(this, :touchButtonFactory), :jm_toggle, [JR.call(this, :jm_isPaused, []), JR.call(BasicArrayListUtil.jm_getInstance(), :jm_getImmutableInstance, [])])
+        JR.call(JR.get(this, :gameBehavior), :jm_unPause, [this])
+    end)
+  end
+
+
+  def jm_isPausable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.call(CurrentDisplayableFactory.jm_getInstance(), :jm_getUsedRunnable, []) == NullWaitGameRunnable.jm_getInstance()) do
+            throw({:jreturn, true})
+        else
+            throw({:jreturn, false})
+        end
+    end)
+  end
+
+
+  def jm_popupMenu(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :menuBehavior), :jm_popupMenu, [this])
+    end)
+  end
+
+
+  def jm_popupMenu2(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :primaryPlayerQueue), :jm_add, [SelectSound.jm_getInstance()])
+        JR.call(this, :jm_setMenuPaintable, [JR.call(this, :jm_getFormPaintable, [])])
+        JR.call(this, :jm_setMenuInputProcessor, [JR.get(this, :mainMenuInputProcessor)])
+        JR.call(JR.get(this, :basicMotionGesturesHandler), :jm_addListenerInterface, [JR.get(this, :mainMenuInputProcessor)])
+        JR.call(JR.get(this, :gameKeyEventHandler), :jm_addListener, [JR.get(this, :mainMenuInputProcessor)])
+    end)
+  end
+
+
+  def jm_toggleMenu(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, JR.get(JR.get(this, :gameStrings), :TOGGLE_MENU)])
+        if (JR.call(this, :jm_getMenuPaintable, []) == JR.call(this, :jm_getOpenMenuPaintable, [])) do
+            JR.call(this, :jm_pause, [])
+            JR.call(this, :jm_updateMenu, [])
+            JR.call(this, :jm_popupMenu, [])
+        else
+            if (JR.call(this, :jm_getMenuPaintable, []) == JR.call(this, :jm_getFormPaintable, [])) do
+            JR.call(JR.get(this, :primaryPlayerQueue), :jm_add, [SelectSound.jm_getInstance()])
+            JR.call(this, :jm_unPause, [])
+        end
+        end
+    end)
+  end
+
+
+  def jm_closeMenu(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :menuBehavior), :jm_closeMenu, [this])
+    end)
+  end
+
+
+  def jm_closeMenu2(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_setMenuPaintable, [JR.call(this, :jm_getOpenMenuPaintable, [])])
+        JR.call(JR.get(this, :basicMotionGesturesHandler), :jm_removeListener, [JR.get(this, :mainMenuInputProcessor)])
+        JR.call(JR.get(this, :gameKeyEventHandler), :jm_removeListener, [JR.get(this, :mainMenuInputProcessor)])
+        JR.call(this, :jm_setMenuInputProcessor, [JR.call(this, :jm_getPopupMenuInputProcessor, [])])
+    end)
+  end
+
+
+  def jm_open(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :basicMotionGesturesHandler), :jm_addListenerInterface, [JR.get(this, :menuInputProcessor)])
+        JR.call(JR.get(this, :gameKeyEventHandler), :jm_addListener, [JR.get(this, :menuInputProcessor)])
+    end)
+  end
+
+
+  def jm_close(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :basicMotionGesturesHandler), :jm_removeListener, [JR.get(this, :menuInputProcessor)])
+        JR.call(JR.get(this, :gameKeyEventHandler), :jm_removeListener, [JR.get(this, :menuInputProcessor)])
+        JR.call(JR.get(this, :primaryPlayerQueue), :jm_clear, [])
+        JR.call(JR.get(this, :secondaryPlayerQueue), :jm_clear, [])
+    end)
+  end
+
+
+  def jm_processorInit(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_setMainStateProcessor, [Processor.jm_getInstance()])
+        JR.call(this, :jm_setProcessGameProcessorInit, [])
+    end)
+  end
+
+
+  def jm_setProcessGameProcessorInit(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_setProcessGameProcessor, [GameProcessor.jnew(this)])
+    end)
+  end
+
+
+  def jm_initSpecialPaint(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :menuBehavior), :jm_initSpecialPaint, [this])
+    end)
+  end
+
+
+  def jm_init(this, p_gameLayerManager, p_buffered) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameLayerManager, p_gameLayerManager)
+      JR.lset(f, :buffered, p_buffered)
+        JR.call(JR.get(this, :gameStateTimeHelper), :jm_setStartTimeTNT, [])
+        JR.call(this, :jm_setHighScoreSubmitted, [false])
+        JR.call(this, :jm_setLayerManager, [JR.lget(f, :gameLayerManager)])
+        if !JR.lget(f, :buffered) do
+            JR.lset(f, :BUFF_MESSAGE, "XXX Not Buffering Causes Concurrency Issues XXX")
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.lget(f, :BUFF_MESSAGE), this, JR.get(JR.get(this, :commonStrings), :CONSTRUCTOR)])
+        else
+            throw({:jexception, JR.exception("Exception", "Buffering is disabled")})
+        end
+        JR.call(this, :jm_setGameInputProcessor, [Processor.jm_getInstance()])
+        JR.lset(f, :features, Features.jm_getInstance())
+        if JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(GameFeatureFactory.jm_getInstance(), :CHEATING)]) do
+            JR.put(this, :isCheating, true)
+            JR.put(this, :cheatProcessor, CheatGameInputProcessor.jnew(this))
+            JR.call(JR.get(this, :gameKeyEventHandler), :jm_addListener, [JR.get(this, :cheatProcessor)])
+        else
+            JR.put(this, :isCheating, false)
+            JR.put(this, :cheatProcessor, NoPlayerGameInput.jm_getInstance())
+        end
+        JR.put(this, :realEndGameProcessor, EndGameProcessor.jnew(this))
+        JR.call(this, :jm_setEndGameProcessor, [Processor.jm_getInstance()])
+        JR.put(this, :realStartIntermissionProcessor, StartIntermissionProcessor.jnew(this))
+        JR.put(this, :startIntermissionProcessor, Processor.jm_getInstance())
+        JR.call(this, :jm_setEndGameStatePaintable, [EndGamePaintable.jnew(this)])
+        JR.call(this, :jm_setEndGamePaintable, [NullPaintable.jm_getInstance()])
+        JR.call(this, :jm_setIntermissionPaintable, [NullPaintable.jm_getInstance()])
+        JR.call(JR.call(this, :jm_getStartIntermissionInterface, []), :jm_setListener, [this])
+    end)
+  end
+
+
+  def jm_notifyIntermission(this, p_enable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :enable, p_enable)
+        if JR.lget(f, :enable) do
+            JR.put(this, :startIntermissionProcessor, JR.get(this, :realStartIntermissionProcessor))
+        else
+            JR.put(this, :startIntermissionProcessor, Processor.jm_getInstance())
+        end
+        if JR.lget(f, :enable) do
+            JR.call(this, :jm_setIntermissionPaintable, [JR.call(this, :jm_getStartIntermissionPaintable, [])])
+        else
+            JR.call(this, :jm_setIntermissionPaintable, [NullPaintable.jm_getInstance()])
+        end
+    end)
+  end
+
+
+  def jm_mediaInit(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        ForcedLogUtil.jm_log(JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED), this)
+    end)
+  end
+
+
+  def jm_initConfigurable(this, p_abeClientInformation) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+        JR.lset(f, :progressCanvas, ProgressCanvasFactory.jm_getInstance())
+        JR.call(JR.lget(f, :progressCanvas), :jm_addNormalPortion, [50, "Setting Configurables"])
+        JR.call(GameInitializationUtil.jm_getInstance(), :jm_initGame, [JR.lget(f, :abeClientInformation), this, JR.get(this, :gameInitializationInterfaceFactoryInterface)])
+        JR.lset(f, :gameFeatureFactory, GameFeatureFactory.jm_getInstance())
+        JR.lset(f, :changedGameFeatureListener, ChangedGameFeatureListener.jm_getInstance())
+        if JR.call(JR.lget(f, :changedGameFeatureListener), :jm_isChangedFeature, [JR.get(JR.lget(f, :gameFeatureFactory), :SOUND)]) do
+            JR.lset(f, :features, Features.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["Sound Changing To: "]), :jm_appendboolean, [JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.lget(f, :gameFeatureFactory), :SOUND)])]), :jm_toString, []), this, "initConfigurable"])
+            JR.call(this, :jm_mediaInit, [])
+            JR.call(JR.lget(f, :changedGameFeatureListener), :jm_remove, [JR.get(JR.lget(f, :gameFeatureFactory), :SOUND)])
+        end
+        JR.lset(f, :sensorFeatureFactory, SensorFeatureFactory.jm_getInstance())
+        if ((JR.call(JR.lget(f, :changedGameFeatureListener), :jm_isChangedFeature, [JR.get(JR.lget(f, :sensorFeatureFactory), :ORIENTATION_SENSORS)]) || JR.call(JR.lget(f, :changedGameFeatureListener), :jm_isChangedFeature, [JR.get(JR.lget(f, :sensorFeatureFactory), :NO_ORIENTATION)])) || JR.call(JR.lget(f, :changedGameFeatureListener), :jm_isChangedFeature, [JR.get(JR.lget(f, :sensorFeatureFactory), :SIMULATED_ORIENTATION_SENSORS)])) do
+            JR.call(JR.lget(f, :changedGameFeatureListener), :jm_remove, [JR.get(JR.lget(f, :sensorFeatureFactory), :NO_ORIENTATION)])
+            JR.call(JR.lget(f, :changedGameFeatureListener), :jm_remove, [JR.get(JR.lget(f, :sensorFeatureFactory), :ORIENTATION_SENSORS)])
+            JR.call(JR.lget(f, :changedGameFeatureListener), :jm_remove, [JR.get(JR.lget(f, :sensorFeatureFactory), :SIMULATED_ORIENTATION_SENSORS)])
+        end
+        JR.lset(f, :resourceLoadingLevelFactory, ResourceLoadingLevelFactory.jm_getInstance())
+        JR.call(this, :jm_loadResourceLoadingLevel, [JR.get(JR.lget(f, :resourceLoadingLevelFactory), :LOAD_GAME)])
+    end)
+  end
+
+
+  def jm_initApp(this, p_abeClientInformation) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+        JR.call(this, :jm_initConfigurable, [JR.lget(f, :abeClientInformation)])
+        JR.call(this, :jm_processorInit, [])
+        JR.call(JR.get(this, :sensorGameUpdateProcessor), :jm_process, [JR.get(this, :gameLayerManager)])
+        JR.call(JR.get(this, :sensorGameUpdateProcessor), :jm_sendNotifications, [JR.get(this, :gameLayerManager)])
+        JR.call(this, :jm_initTouch, [])
+    end)
+  end
+
+
+  def jm_initTouch(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :gameInitializedEvent, JR.get(GameInitializationUtil.jm_getInstance(), :EVENT))
+        JR.lset(f, :resourceLoadingLevelFactory, ResourceLoadingLevelFactory.jm_getInstance())
+        JR.call(JR.lget(f, :gameInitializedEvent), :jm_setResourceLoadingLevel, [JR.get(JR.lget(f, :resourceLoadingLevelFactory), :LOAD_TOUCH)])
+        JR.call(GameInitializedEventHandler.jm_getInstance(), :jm_fireEvent, [JR.lget(f, :gameInitializedEvent)])
+        JR.call(JR.get(this, :touchButtonFactory), :jm_defaultList, [])
+        JR.call(this, :jm_updateTouch, [])
+        JR.call(this, :jm_postInitTouch, [])
+    end)
+  end
+
+
+  def jm_updateCurrentTouchInputFactory(this, p_nextTouchInput) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :nextTouchInput, p_nextTouchInput)
+        if (JR.lget(f, :nextTouchInput) != JR.get(this, :currentTouchInputFactory)) do
+            JR.put(this, :currentTouchInputFactory, JR.lget(f, :nextTouchInput))
+            PreLogUtil.jm_put(JR.call(JR.get(this, :currentTouchInputFactory), :jm_toString, []), this, JR.get(JR.get(this, :gameInputStrings), :UDPATE_CURRENT_TOUCH_INPUT_FACTORY))
+            JR.call(JR.get(this, :touchButtonFactory), :jm_toggle, [JR.call(this, :jm_isPaused, []), JR.call(JR.get(this, :currentTouchInputFactory), :jm_getList, [])])
+        end
+    end)
+  end
+
+
+  def jm_updateTouch(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :gameBehavior), :jm_updateTouch, [this])
+    end)
+  end
+
+
+  def jm_updateTouch2(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :features, Features.jm_getInstance())
+        if JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.get(this, :touchFeatureFactory), :AUTO_HIDE_SHOW_SCREEN_BUTTONS)]) do
+            if ((JR.call(JR.call(JR.get(this, :gameLayerManager), :jm_getGameInfo, []), :jm_getCurrentLevel, []) - JR.call(this, :jm_getStartLevel, [])) == 1) do
+                JR.call(this, :jm_setTouchPaintableP, [NullPaintable.jm_getInstance()])
+            end
+        end
+    end)
+  end
+
+
+  def jm_postInitTouch(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_setTouchButtonsPaintable, [TouchButtonsPaintableFactory.jm_getInstance(JR.call(JR.get(this, :gameLayerManager), :jm_getForegroundBasicColor, []))])
+        JR.call(this, :jm_updateScreenButtonPaintable, [])
+    end)
+  end
+
+
+  def jm_initCommands(this, p_cmdListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cmdListener, p_cmdListener)
+        JR.call(this, :jm_removeAllCommands, [])
+        JR.call(this, :jm_addCommands, [])
+        JR.call(this, :jm_setCommandListener, [JR.lget(f, :cmdListener)])
+    end)
+  end
+
+
+  def jm_addCommands(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :gameCommandsFactory, GameCommandsFactory.jm_getInstance())
+        JR.lset(f, :myCommandsFactory, MyCommandsFactory.jm_getInstance())
+        if (DebugFactory.jm_getInstance() != NoDebug.jm_getInstance()) do
+            JR.call(this, :jm_addCommand, [JR.get(JR.lget(f, :gameCommandsFactory), :START_TRACE)])
+        end
+        JR.call(this, :jm_addCommand, [JR.get(JR.lget(f, :gameCommandsFactory), :RESTART_COMMAND)])
+        JR.call(this, :jm_addCommand, [JR.get(JR.lget(f, :myCommandsFactory), :PAUSE_COMMAND)])
+        JR.call(this, :jm_addCommand, [JR.get(JR.lget(f, :gameCommandsFactory), :QUIT_COMMAND)])
+        JR.lset(f, :isOverScan, JR.call(JR.call(OperatingSystemFactory.jm_getInstance(), :jm_getOperatingSystemInstance, []), :jm_isOverScan, []))
+        if J2MEUtil.jm_isHTML() do
+            nil
+        else
+            if SWTUtil.jstatic_isSWT() do
+            nil
+        else
+            if !JR.lget(f, :isOverScan) do
+            if (JR.call(TouchScreenFactory.jm_getInstance(), :jm_isTouch, []) && JR.call(InGameFeatures.jnew(), :jm_isAny, [])) do
+                JR.call(this, :jm_addCommand, [InGameOptionsForm.jstatic_DISPLAY()])
+            end
+            JR.call(this, :jm_addCommand, [JR.get(JR.lget(f, :gameCommandsFactory), :SAVE)])
+            JR.call(this, :jm_addCommand, [JR.get(JR.lget(f, :gameCommandsFactory), :DISPLAY_LOAD_FORM)])
+        end
+        end
+        end
+    end)
+  end
+
+
+  def jm_itemStateChanged(this, p_item) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :item, p_item)
+        try do
+            JR.lset(f, :itemLabel, JR.call(JR.lget(f, :item), :jm_getLabel, []))
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :commonLabels), :ITEM_LABEL)]), :jm_append, [JR.lget(f, :itemLabel)]), :jm_toString, []), this, "itemStateChanged"])
+            if JR.instance_of(JR.lget(f, :item), ChoiceGroup) do
+                JR.lset(f, :gameFeatureUtil, GameFeatureUtil.jm_getInstance())
+                if JR.call(JR.lget(f, :gameFeatureUtil), :jm_isExclusive, [JR.lget(f, :itemLabel)]) do
+                    JR.call(JR.lget(f, :gameFeatureUtil), :jm_updateExclusiveForChoiceGroup, [JR.lget(f, :item)])
+                else
+                    JR.call(JR.lget(f, :gameFeatureUtil), :jm_updateMultiple, [JR.lget(f, :item)])
                 end
             end
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({This, 'SET_RUNNING'}), E)
-        end.
-
-% throws Exception
-'end'(This) ->
-        (get({get({This, screenCapture}), '$class'})):endRecording(get({This, screenCapture})),
-        (get({get({This, baseGameStatistics}), '$class'})):add(get({This, baseGameStatistics}), (fun(Target_N96020) -> (get({Target_N96020, '$class'})):toString(Target_N96020) end)((fun(Target_N96027) -> (get({Target_N96027, '$class'})):append(Target_N96027, get({'CommonSeps':getInstance(), 'NEW_LINE'})) end)((fun(Target_N96034) -> (get({Target_N96034, '$class'})):append(Target_N96034, (get({get({This, baseGameStatistics}), '$class'})):toString(get({This, baseGameStatistics}))) end)('StringMaker':new())))),
-        (get({get({This, baseGameStatistics}), '$class'})):init(get({This, baseGameStatistics})),
-        (get({get({This, gameKeyEventHandler}), '$class'})):removeListener(get({This, gameKeyEventHandler}), get({This, cheatProcessor})),
-        (get({This, '$class'})):close(This),
-        (get({This, '$class'})):removeAllGameKeyInputListeners(This),
-        (get({This, '$class'})):endGameThread(This).
-
-% throws Exception
-endGameThread(This) ->
-        (fun(Target_N96252) -> (get({Target_N96252, '$class'})):removeListener(Target_N96252, This) end)('DisplayChangeEventHandler':getInstance()),
-        (fun(Target_N96286) -> (get({Target_N96286, '$class'})):clear(Target_N96286) end)('GameLevelDisplayChangeEventListenersFactory':getInstance()),
-        GameAdState = (get({get({This, gameAdStateFactory}), '$class'})):getCurrentInstance(get({This, gameAdStateFactory})),
-        (get({GameAdState, '$class'})):notPlayingAdState(GameAdState).
-
-createHighScore(This, Score) when is_integer(Score) ->
-        GameInfo = (get({get({This, gameLayerManager}), '$class'})):getGameInfo(get({This, gameLayerManager})),
-        'HighScore':new(0, "NONE", 'GameInfo':new((get({GameInfo, '$class'})):getGameType(GameInfo), (get({GameInfo, '$class'})):getGameMode(GameInfo), get({'PlayerTypesFactory':getInstance(), 'PLAYER_TYPE_ONE'}), 0, 0), Score).
-
-% throws Exception
-setHighScore(This, AbeClientInformation, Name, Score, AutoSubmit, IsLast) when (is_list(Name) orelse Name =:= undefined), is_integer(Score), is_boolean(AutoSubmit), is_boolean(IsLast) ->
-        (get({get({This, gameBehavior}), '$class'})):setHighScore(get({This, gameBehavior}), AbeClientInformation, This, Name, Score, AutoSubmit, IsLast).
-
-% throws Exception
-setHighScore2(This, AbeClientInformation, Name, Score, AutoSubmit, IsLast) when (is_list(Name) orelse Name =:= undefined), is_integer(Score), is_boolean(AutoSubmit), is_boolean(IsLast) ->
-        HighScore = (get({This, '$class'})):createHighScore(This, Score),
-        TextBox = 'HighScoreTextBox':new(get({This, highScoresFactoryInterface}), get({This, highScoresHelper}), AbeClientInformation, (get({get({This, gameLayerManager}), '$class'})):getGameInfo(get({This, gameLayerManager})), (get({This, '$class'})):getCustomCommandListener(This), Name, HighScore, (get({get({This, gameLayerManager}), '$class'})):getBackgroundBasicColor(get({This, gameLayerManager})), (get({get({This, gameLayerManager}), '$class'})):getForegroundBasicColor(get({This, gameLayerManager}))),
-        case IsLast of
-            true ->
-            (fun(Target_N97092) -> (get({Target_N97092, '$class'})):commandAction(Target_N97092, get({'GameCommandsFactory':getInstance(), 'SET_MENU_DISPLAYABLE'}), TextBox) end)((get({This, '$class'})):getCustomCommandListener(This));
-            false -> ok
-        end,
-        case AutoSubmit of
-            true ->
-            (fun(Target_N97169) -> (get({Target_N97169, '$class'})):runTask(Target_N97169, 'SaveHighScoreRunnable':new(IsLast, TextBox)) end)('SecondaryThreadPool':getInstance());
-            false -> ok
-        end.
-
-getGameStateTimeHelper(This) ->
-        get({This, gameStateTimeHelper}).
-
-setInitialized(This, Initialized) when is_boolean(Initialized) ->
-        put({This, initialized}, Initialized).
-
-isInitialized(This) ->
-        get({This, initialized}).
-
-getSourceId(This) ->
-        get({'AllBinaryGameCanvas', id}).
-
-setProgressPaintable(This, Paintable) ->
-        put({This, progressPaintable}, Paintable).
-
-getStartIntermissionInterface(This) ->
-        get({This, startIntermissionInterface}).
-
-getEndLevelIntermissionInterface(This) ->
-        get({This, endLevelIntermissionInterface}).
-
-setTouchPaintableP(This, Paintable) ->
-        put({This, touchPaintable}, Paintable).
-
-getTouchPaintableP(This) ->
-        get({This, touchPaintable}).
-
-setEndGamePaintable(This, EndGamePaintable) ->
-        put({This, endGamePaintable}, EndGamePaintable).
-
-getEndGamePaintable(This) ->
-        get({This, endGamePaintable}).
-
-setIntermissionPaintable(This, IntermissionPaintable) ->
-        put({This, intermissionPaintable}, IntermissionPaintable).
-
-getIntermissionPaintable(This) ->
-        get({This, intermissionPaintable}).
-
-getEndGameInfoP(This) ->
-        get({This, endGameInfo}).
-
-setHighScoresPaintable(This, HighScoresPaintable) ->
-        put({This, highScoresPaintable}, HighScoresPaintable).
-
-getHighScoresPaintable(This) ->
-        get({This, highScoresPaintable}).
-
-getRealHighScoresPaintable(This) ->
-        get({This, realHighScoresPaintable}).
-
-clearPlayerGameInputList(This) ->
-        put({local, playerGameInput}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, playerGameInput}, (get({get({This, localPlayerGameInputList}), '$class'})):get(get({This, localPlayerGameInputList}), Index)),
-            (get({get({This, gameKeyEventHandler}), '$class'})):removeListener(get({This, gameKeyEventHandler}), get({local, playerGameInput}))
-        end, lists:seq(((get({get({This, localPlayerGameInputList}), '$class'})):size(get({This, localPlayerGameInputList})) - 1), 0, -1)),
-        (get({get({This, localPlayerGameInputList}), '$class'})):clear(get({This, localPlayerGameInputList})).
-
-addPlayerGameInput(This, PlayerGameInput) ->
-        (get({get({This, localPlayerGameInputList}), '$class'})):add(get({This, localPlayerGameInputList}), PlayerGameInput).
-
-setMenuInputProcessor(This, MenuInputProcessor) ->
-        put({This, menuInputProcessor}, MenuInputProcessor).
-
-getMenuInputProcessor(This) ->
-        get({This, menuInputProcessor}).
-
-getMenuForm(This) ->
-        get({This, menuForm}).
-
-setMenuForm(This, MenuForm) ->
-        put({This, menuForm}, MenuForm).
-
-getStartLevel(This) ->
-        get({This, startLevel}).
-
-setStartLevel(This, StartLevel) when is_integer(StartLevel) ->
-        put({This, startLevel}, StartLevel).
-
-setTouchButtonsPaintable(This, TouchButtonsPaintable) ->
-        put({This, touchButtonsPaintable}, TouchButtonsPaintable).
-
-getTouchButtonsPaintable(This) ->
-        get({This, touchButtonsPaintable}).
-
-setGameInputProcessor(This, GameInputProcessor) ->
-        put({This, gameInputProcessor}, GameInputProcessor).
-
-getGameInputProcessor(This) ->
-        get({This, gameInputProcessor}).
-
-setEndGameProcessor(This, EndGameProcessor) ->
-        put({This, endGameProcessor}, EndGameProcessor).
-
-getEndGameProcessor(This) ->
-        get({This, endGameProcessor}).
-
-setEndGameStatePaintable(This, EndGameStatePaintable) ->
-        put({This, endGameStatePaintable}, EndGameStatePaintable).
-
-getEndGameStatePaintable(This) ->
-        get({This, endGameStatePaintable}).
-
-setNonBotPaintableP(This, NonBotPaintable) ->
-        put({This, nonBotPaintable}, NonBotPaintable).
-
-getNonBotPaintableP(This) ->
-        get({This, nonBotPaintable}).
-
-setStartIntermissionPaintable(This, StartIntermissionPaintable) ->
-        put({This, startIntermissionPaintable}, StartIntermissionPaintable).
-
-getStartIntermissionPaintable(This) ->
-        get({This, startIntermissionPaintable}).
-
-setMainStateProcessor(This, MainStateProcessor) ->
-        put({This, mainStateProcessor}, MainStateProcessor).
-
-getMainStateProcessor(This) ->
-        get({This, mainStateProcessor}).
-
-setProcessGameProcessor(This, ProcessGameProcessor) ->
-        put({This, processGameProcessor}, ProcessGameProcessor).
-
-getProcessGameProcessor(This) ->
-        get({This, processGameProcessor}).
-
-setOpenMenuPaintable(This, OpenMenuPaintable) ->
-        put({This, openMenuPaintable}, OpenMenuPaintable).
-
-getOpenMenuPaintable(This) ->
-        get({This, openMenuPaintable}).
-
-setPopupMenuInputProcessor(This, PopupMenuInputProcessor) ->
-        put({This, popupMenuInputProcessor}, PopupMenuInputProcessor).
-
-getPopupMenuInputProcessor(This) ->
-        get({This, popupMenuInputProcessor}).
-
-getSensorGameUpdateProcessor(This) ->
-        get({This, sensorGameUpdateProcessor}).
-
-getRawGameInputProcessor(This) ->
-        get({This, rawGameInputProcessor}).
-
-getRawInputProcessor(This) ->
-        get({This, rawInputProcessor}).
-
-setInputProcessor(This, InputProcessor) ->
-        put({This, inputProcessor}, InputProcessor).
-
-getInputProcessor(This) ->
-        get({This, inputProcessor}).
-
-setMenuPaintable(This, MenuPaintable) ->
-        put({This, menuPaintable}, MenuPaintable).
-
-getMenuPaintable(This) ->
-        get({This, menuPaintable}).
-
-setFormPaintable(This, FormPaintable) ->
-        put({This, formPaintable}, FormPaintable).
-
-getFormPaintable(This) ->
-        get({This, formPaintable}).
-
-setGameSpecificPaintableP(This, GameSpecificPaintable) ->
-        put({This, gameSpecificPaintable}, GameSpecificPaintable).
-
-getGameSpecificPaintableP(This) ->
-        get({This, gameSpecificPaintable}).
-
-isSingleThread(This) ->
-        ((fun(Target_N101037) -> (get({Target_N101037, '$class'})):isAnyThreed(Target_N101037) end)('OpenGLFeatureUtil':getInstance()) orelse get({'SWTUtil', isSWT})).
-
-isRunningInAnotherThread(This) ->
-        try
-        Features = 'Features':getInstance(),
-        OpenGLFeatureFactory = 'OpenGLFeatureFactory':getInstance(),
-        case (get({Features, '$class'})):isDefault(Features, get({OpenGLFeatureFactory, 'OPENGL_AS_GAME_THREAD'})) of
-            true ->
-            throw({'$return', true});
-            false ->
-            throw({'$return', (get({This, '$class'})):isRunning(This)})
+            JR.call(JR.get(this, :sensorGameUpdateProcessor), :jm_process, [JR.get(this, :gameLayerManager)])
+            JR.call(this, :jm_updateTouch, [])
+            JR.call(this, :jm_updateScreenButtonPaintable, [])
+            JR.call(JR.get(this, :sensorGameUpdateProcessor), :jm_sendNotifications, [JR.get(this, :gameLayerManager)])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, "itemStateChanged", JR.lget(f, :e)])
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-getType(This) ->
-        get({'AllBinaryGameCanvas', 'TYPE'}).
 
-getTitle(This) ->
-        'RunnableCanvas':getTitle(This).
+  def jm_updateScreenButtonPaintable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :gameBehavior), :jm_updateScreenButtonPaintable, [this])
+    end)
+  end
 
-isPaused(This) ->
-        'RunnableCanvas':isPaused(This).
+
+  def jm_updateScreenButtonPaintable2(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :features, Features.jm_getInstance())
+        if JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.get(this, :touchFeatureFactory), :AUTO_HIDE_SHOW_SCREEN_BUTTONS)]) do
+            JR.call(this, :jm_setTouchPaintableP, [JR.call(this, :jm_getTouchButtonsPaintable, [])])
+            JR.call(this, :jm_setStartLevel, [JR.call(JR.call(JR.get(this, :gameLayerManager), :jm_getGameInfo, []), :jm_getCurrentLevel, [])])
+        else
+            if JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.get(this, :touchFeatureFactory), :SHOW_SCREEN_BUTTONS)]) do
+            JR.call(this, :jm_setTouchPaintableP, [JR.call(this, :jm_getTouchButtonsPaintable, [])])
+        else
+            if JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.get(this, :touchFeatureFactory), :HIDE_SCREEN_BUTTONS)]) do
+            JR.call(this, :jm_setTouchPaintableP, [NullPaintable.jm_getInstance()])
+        else
+            JR.call(this, :jm_setTouchPaintableP, [NullPaintable.jm_getInstance()])
+        end
+        end
+        end
+    end)
+  end
+
+
+  def jm_getLayerManager(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :gameLayerManager)})
+    end)
+  end
+
+
+  def jm_setLayerManager(this, p_layerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerManager, p_layerManager)
+        JR.put(this, :gameLayerManager, JR.lget(f, :layerManager))
+    end)
+  end
+
+
+  def jm_isGameOver(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :gameOver)})
+    end)
+  end
+
+
+  def jm_setGameOver(this, p_gameOver) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameOver, p_gameOver)
+        JR.put(this, :gameOver, JR.lget(f, :gameOver))
+    end)
+  end
+
+
+  def jm_processGameOver(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        PreLogUtil.jm_put(JR.get(JR.get(this, :commonStrings), :START), this, JR.get(JR.get(this, :gameStrings), :SET_GAME_OVER))
+        JR.call(this, :jm_setGameOver, [true])
+        JR.call(this, :jm_removePauseCommand, [])
+        JR.call(this, :jm_setGameState, [JR.get(JR.get(this, :gameStateFactory), :SHOW_END_RESULT_GAME_STATE)])
+        JR.call(this, :jm_setEndGamePaintable, [JR.call(this, :jm_getEndGameStatePaintable, [])])
+    end)
+  end
+
+
+  def jm_isHighScoreSubmitted(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :highScoreSubmitted)})
+    end)
+  end
+
+
+  def jm_setHighScoreSubmitted(this, p_highScoreSubmitted) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :highScoreSubmitted, p_highScoreSubmitted)
+        JR.put(this, :highScoreSubmitted, JR.lget(f, :highScoreSubmitted))
+        if JR.lget(f, :highScoreSubmitted) do
+            JR.call(JR.get(this, :highScoresHelper), :jm_setSelectedHighScores, [NullHighScoresSingletonFactory.jm_getInstance()])
+        end
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["isHighScoreSubmitted: "]), :jm_appendboolean, [JR.lget(f, :highScoreSubmitted)]), :jm_toString, []), this, "setHighScoreSubmitted"])
+    end)
+  end
+
+
+  def jm_getGameState(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :gameState)})
+    end)
+  end
+
+
+  def jm_setGameState(this, p_gameState) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameState, p_gameState)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :gameStrings), :GAME_STATE)]), :jm_append, [JR.call(JR.get(this, :stringUtil), :jm_toString, [JR.lget(f, :gameState)])]), :jm_toString, []), this, JR.get(JR.get(this, :gameStrings), :SET_GAME_STATE)])
+        JR.put(this, :gameState, JR.lget(f, :gameState))
+        JR.call(JR.get(this, :gameStateTimeHelper), :jm_setStartTimeTNT, [])
+        JR.call(this, :jm_updateEndGameProcessor, [])
+        JR.call(this, :jm_updateGameKeyEventProcessor, [])
+        JR.call(JR.get(this, :gameBehavior), :jm_setGameState, [this])
+    end)
+  end
+
+
+  def jm_updateGameState(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :gameAdState, JR.call(JR.get(this, :gameAdStateFactory), :jm_getCurrentInstance, []))
+        JR.call(JR.lget(f, :gameAdState), :jm_processAdState, [JR.get(this, :gameState), JR.call(JR.call(JR.get(this, :gameLayerManager), :jm_getGameInfo, []), :jm_getGameType, [])])
+        if (JR.get(this, :gameState) != JR.get(JR.get(this, :gameStateFactory), :PLAYING_GAME_STATE)) do
+            JR.call(JR.lget(f, :gameAdState), :jm_processPageAdState, [])
+        end
+    end)
+  end
+
+
+  def jm_updateGameKeyEventProcessor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if ((JR.call(this, :jm_getGameState, []) != JR.get(JR.get(this, :gameStateFactory), :PLAYING_GAME_STATE)) || JR.get(this, :isCheating)) do
+            nil
+        else
+            nil
+        end
+    end)
+  end
+
+
+  def jm_removeAllGameKeyInputListenersOnBuild(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_removeAllGameKeyInputListeners, [])
+    end)
+  end
+
+
+  def jm_removeAllGameKeyInputListeners(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :gameBehavior), :jm_removeAllGameKeyInputListeners, [this])
+    end)
+  end
+
+
+  def jm_removeAllGameKeyInputListeners2(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :logUtil), :jm_putF, ["Remove PlayerInput Listeners", this, "removeAllGameKeyInputListeners"])
+        JR.lset(f, :index, JR.int32(JR.call(JR.get(this, :localPlayerGameInputList), :jm_size, []) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.lset(f, :playerGameInput, JR.call(JR.get(this, :localPlayerGameInputList), :jm_get, [JR.lget(f, :index)]))
+            JR.call(this, :jm_removeKeyInputListener, [JR.lget(f, :playerGameInput)])
+            JR.call(JR.lget(f, :playerGameInput), :jm_removeNonAIInputGameKeyEvents, [])
+        end)
+    end)
+  end
+
+
+  def jm_removeKeyInputListener(this, p_playerGameInput) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :playerGameInput, p_playerGameInput)
+        JR.call(JR.get(this, :gameKeyEventHandler), :jm_removeListener, [JR.lget(f, :playerGameInput)])
+    end)
+  end
+
+
+  def jm_updateEndGameProcessor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :gameBehavior), :jm_updateEndGameProcessor, [this])
+    end)
+  end
+
+
+  def jm_updateEndGameProcessor2(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if ((JR.call(this, :jm_getGameState, []) == JR.get(JR.get(this, :gameStateFactory), :SHOW_END_RESULT_GAME_STATE)) || (JR.call(this, :jm_getGameState, []) == JR.get(JR.get(this, :gameStateFactory), :SHOW_HIGH_SCORE_GAME_STATE))) do
+            JR.call(this, :jm_setEndGameProcessor, [JR.get(this, :realEndGameProcessor)])
+        else
+            JR.call(this, :jm_setEndGameProcessor, [Processor.jm_getInstance()])
+        end
+    end)
+  end
+
+
+  def jm_buildGameInit(this, p_isPortion) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :isPortion, p_isPortion)
+        nil
+    end)
+  end
+
+
+  def jm_cleanupGame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, JR.get(JR.get(this, :commonStrings), :CLEANUP)])
+        JR.lset(f, :progressCanvas, ProgressCanvasFactory.jm_getInstance())
+        JR.call(JR.lget(f, :progressCanvas), :jm_addNormalPortion, [10, "Cleaning Up"])
+        JR.call(JR.get(this, :primaryPlayerQueue), :jm_clear, [])
+        JR.call(JR.get(this, :secondaryPlayerQueue), :jm_clear, [])
+        JR.call(GameLevelDisplayChangeEventListenersFactory.jm_getInstance(), :jm_clear, [])
+    end)
+  end
+
+
+  def jm_loadResourceLoadingLevel(this, p_resourceLoadingLevel) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :resourceLoadingLevel, p_resourceLoadingLevel)
+        JR.lset(f, :gameInitializedEvent, JR.get(GameInitializationUtil.jm_getInstance(), :EVENT))
+        JR.call(JR.lget(f, :gameInitializedEvent), :jm_setResourceLoadingLevel, [JR.lget(f, :resourceLoadingLevel)])
+        JR.call(GameInitializedEventHandler.jm_getInstance(), :jm_fireEvent, [JR.lget(f, :gameInitializedEvent)])
+    end)
+  end
+
+
+  def jm_loadResources(this, p_level) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :level, p_level)
+        JR.lset(f, :gameInitializedEvent, JR.get(GameInitializationUtil.jm_getInstance(), :EVENT))
+        JR.call(JR.lget(f, :gameInitializedEvent), :jm_setLevel, [JR.lget(f, :level)])
+        JR.call(GameInitializedEventHandler.jm_getInstance(), :jm_fireEvent, [JR.lget(f, :gameInitializedEvent)])
+    end)
+  end
+
+
+  def jm_updateColor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_buildGame(this, p_portion) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :portion, p_portion)
+        JR.call(JR.get(this, :screenCapture), :jm_endRecording, [])
+        JR.call(JR.get(this, :screenCapture), :jm_startRecording, [])
+        JR.lset(f, :progressCanvas, ProgressCanvasFactory.jm_getInstance())
+        JR.lset(f, :features, Features.jm_getInstance())
+        JR.call(JR.lget(f, :progressCanvas), :jm_addNormalPortion, [JR.lget(f, :portion), "Generic Build"])
+        JR.call(this, :jm_removeAllGameKeyInputListenersOnBuild, [])
+        JR.call(this, :jm_updateTouch, [])
+        JR.call(JR.lget(f, :progressCanvas), :jm_addNormalPortion, [JR.lget(f, :portion), "High Scores"])
+        JR.call(JR.get(this, :highScoresFactoryInterface), :jm_fetchHighScores, [JR.call(JR.get(this, :gameLayerManager), :jm_getGameInfo, []), JR.get(this, :highScoresHelper)])
+        JR.call(this, :jm_setHighScoresPaintable, [NullPaintable.jm_getInstance()])
+        JR.call(JR.lget(f, :progressCanvas), :jm_addNormalPortion, [JR.lget(f, :portion), "Finishing."])
+        JR.call(JR.call(this, :jm_getEndGameInfoP, []), :jm_update, [JR.call(JR.call(this, :jm_getLayerManager, []), :jm_getGameInfo, []), this])
+        JR.put(this, :isSingleKeyRepeatableProcessing, JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(InputFeatureFactory.jm_getInstance(), :SINGLE_KEY_REPEAT_PRESS)]))
+        JR.call(this, :jm_setGameOver, [false])
+        JR.call(JR.lget(f, :progressCanvas), :jm_addNormalPortion, [JR.lget(f, :portion), "Finishing.."])
+        JR.call(this, :jm_updateColor, [])
+        JR.call(JR.call(this, :jm_getStartIntermissionPaintable, []), :jm_update, [])
+        if !JR.call(this, :jm_isRunningInAnotherThread, []) do
+            throw({:jreturn, nil})
+        end
+        JR.call(JR.lget(f, :progressCanvas), :jm_addNormalPortion, [JR.lget(f, :portion), "Finishing..."])
+        if (JR.call(this, :jm_isMainCanvas, []) || !JR.call(this, :jm_isInitialized, [])) do
+            if JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(MainFeatureFactory.jm_getInstance(), :LOAD_ONDEMAND)]) do
+                if (JR.call(this, :jm_getCustomCommandListener, []) != nil) do
+                    JR.call(JR.lget(f, :progressCanvas), :jm_end, [])
+                end
+            else
+                JR.call(JR.lget(f, :progressCanvas), :jm_end, [])
+            end
+            JR.call(this, :jm_setInitialized, [true])
+        end
+        if (JR.call(this, :jm_getCustomCommandListener, []) == NullCommandListener.jstatic_NULL_COMMAND_LISTENER()) do
+            JR.call(JR.get(this, :logUtil), :jm_putF, ["Show Game Paintable in DemoCanvas Thread", this, JR.get(this, :BUILD_GAME)])
+            JR.call(JR.get(this, :gameCanvasStartListener), :jm_showGamePaintable, [])
+        else
+            JR.call(JR.get(this, :logUtil), :jm_putF, ["No GameCanvasStartListener", this, JR.get(this, :BUILD_GAME)])
+        end
+        JR.call(JR.get(this, :colorFillPaintable), :jm_setBasicColorP, [JR.call(JR.get(this, :gameLayerManager), :jm_getBackgroundBasicColor, [])])
+        JR.call(JR.get(this, :gameBehavior), :jm_buildGame, [this])
+    end)
+  end
+
+
+  def jm_buildGame2(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        PreLogUtil.jm_put(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :gameInputStrings), :ENABLE_PLAYER_GAME_INPUTS)]), :jm_appendint, [JR.call(JR.get(this, :localPlayerGameInputList), :jm_size, [])]), :jm_toString, []), this, JR.get(this, :BUILD_GAME))
+        JR.lset(f, :playerGameInput, nil)
+        JR.lset(f, :index, JR.int32(JR.call(JR.get(this, :localPlayerGameInputList), :jm_size, []) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.lset(f, :playerGameInput, JR.call(JR.get(this, :localPlayerGameInputList), :jm_get, [JR.lget(f, :index)]))
+            PreLogUtil.jm_put(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :gameInputStrings), :ENABLE_PLAYER_GAME_INPUT)]), :jm_append, [JR.call(JR.lget(f, :playerGameInput), :jm_toString, [])]), :jm_toString, []), this, JR.get(this, :BUILD_GAME))
+            JR.call(JR.lget(f, :playerGameInput), :jm_removeNonAIInputGameKeyEvents, [])
+            JR.call(this, :jm_addKeyInputListener, [JR.lget(f, :playerGameInput)])
+        end)
+    end)
+  end
+
+
+  def jm_addKeyInputListener(this, p_playerGameInput) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :playerGameInput, p_playerGameInput)
+        JR.call(GameKeyEventHandler.jm_getInstance(), :jm_addListenerForPlayer, [JR.lget(f, :playerGameInput), JR.call(JR.lget(f, :playerGameInput), :jm_getPlayerInputId, [])])
+    end)
+  end
+
+
+  def jm_setGameCanvasStartListener(this, p_gameCanvasStartListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameCanvasStartListener, p_gameCanvasStartListener)
+        JR.put(this, :gameCanvasStartListener, JR.lget(f, :gameCanvasStartListener))
+    end)
+  end
+
+
+  def jm_loadState(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, JR.get(JR.get(this, :commonStrings), :LOAD)])
+        JR.lset(f, :hashtable, JR.call(this, :jm_getLoadStateHashtable, []))
+        if ((JR.lget(f, :hashtable) != nil) && (JR.call(JR.lget(f, :hashtable), :jm_size, []) > 0)) do
+            JR.lset(f, :levelAsString, JR.call(JR.lget(f, :hashtable), :jm_get, [GameInfo.jstatic_LEVEL_NAME()]))
+            JR.lset(f, :level, JR.call(JR.str(JR.lget(f, :levelAsString)), :jm_intValue, []))
+            JR.lset(f, :gameInfo, JR.call(JR.get(this, :gameLayerManager), :jm_getGameInfo, []))
+            JR.call(JR.lget(f, :gameInfo), :jm_setCurrentLevel, [JR.lget(f, :level)])
+        end
+    end)
+  end
+
+
+  def jm_getLoadStateHashtable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :commonLabels), :START_LABEL)]), :jm_append, [JR.call(JR.get(this, :stringUtil), :jm_toString, [JR.get(this, :hashtable)])]), :jm_toString, []), this, "getLoadStateHashtable"])
+        throw({:jreturn, JR.get(this, :hashtable)})
+    end)
+  end
+
+
+  def jm_setLoadStateHashtable(this, p_hashtable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :hashtable, p_hashtable)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :commonLabels), :START_LABEL)]), :jm_append, [JR.call(JR.get(this, :stringUtil), :jm_toString, [JR.lget(f, :hashtable)])]), :jm_toString, []), this, "setLoadStateHashtable"])
+        JR.put(this, :hashtable, JR.lget(f, :hashtable))
+    end)
+  end
+
+
+  def jm_getCurrentStateHashtable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :hashtable, JR.call(JR.get(this, :stdUtil), :jm_createHashtable, []))
+        JR.lset(f, :level, JR.call(JR.call(JR.get(this, :gameLayerManager), :jm_getGameInfo, []), :jm_getCurrentLevel, []))
+        JR.call(JR.lget(f, :hashtable), :jm_put, [JR.call(GameInfo.jstatic_LEVEL_NAME(), :jm_toString, []), JR.str(JR.lget(f, :level))])
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["End: "]), :jm_append, [JR.call(JR.get(this, :stringUtil), :jm_toString, [JR.lget(f, :hashtable)])]), :jm_toString, []), this, "getCurrentStateHashtable"])
+        throw({:jreturn, JR.lget(f, :hashtable)})
+    end)
+  end
+
+
+  def jm_paintGameOver(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        ForcedLogUtil.jm_log(JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED), this)
+    end)
+  end
+
+
+  def jm_draw(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.get(this, :colorFillPaintable), :jm_paint, [JR.lget(f, :graphics)])
+        JR.call(JR.get(this, :basicSetColorUtil), :jm_setBasicColorP, [JR.lget(f, :graphics), JR.call(JR.get(this, :gameLayerManager), :jm_getForegroundBasicColor, [])])
+        JR.call(JR.get(this, :gameSpecificPaintable), :jm_paint, [JR.lget(f, :graphics)])
+    end)
+  end
+
+
+  def jm_clear(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.get(this, :colorFillPaintable), :jm_paint, [JR.lget(f, :graphics)])
+    end)
+  end
+
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.get(this, :myFontProcessor), :jm_process, [JR.lget(f, :graphics)])
+        JR.call(JR.get(this, :baseGameStatistics), :jm_nextRefresh, [])
+        JR.call(this, :jm_draw, [JR.lget(f, :graphics)])
+        JR.call(JR.get(this, :menuPaintable), :jm_paint, [JR.lget(f, :graphics)])
+        JR.call(JR.get(this, :progressPaintable), :jm_paint, [JR.lget(f, :graphics)])
+    end)
+  end
+
+
+  def jm_paintThreed(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        nil
+    end)
+  end
+
+
+  def jm_processEndLevelIntermissionGameState(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_nonBotPaint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.get(this, :endGamePaintable), :jm_paint, [JR.lget(f, :graphics)])
+        JR.call(JR.get(this, :intermissionPaintable), :jm_paint, [JR.lget(f, :graphics)])
+        JR.call(this, :jm_paintIntermission, [JR.lget(f, :graphics)])
+        JR.call(JR.get(this, :touchPaintable), :jm_paint, [JR.lget(f, :graphics)])
+    end)
+  end
+
+
+  def jm_paintIntermission(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        nil
+    end)
+  end
+
+
+  def jm_keyPressed(this, p_keyCode) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+        JR.call(this, :jm_keyPressedByDevice, [JR.lget(f, :keyCode), 0])
+    end)
+  end
+
+
+  def jm_keyReleased(this, p_keyCode) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+        JR.call(this, :jm_keyReleasedByDevice, [JR.lget(f, :keyCode), 0])
+    end)
+  end
+
+
+  def jm_keyRepeated(this, p_keyCode) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+        JR.call(this, :jm_keyRepeatedByDevice, [JR.lget(f, :keyCode), 0])
+    end)
+  end
+
+
+  def jm_keyPressedByDevice(this, p_keyCode, p_deviceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+      JR.lset(f, :deviceId, p_deviceId)
+        JR.call(JR.get(this, :inputProcessor), :jm_keyPressedByDevice, [JR.lget(f, :keyCode), JR.lget(f, :deviceId)])
+    end)
+  end
+
+
+  def jm_keyRepeatedByDevice(this, p_keyCode, p_deviceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+      JR.lset(f, :deviceId, p_deviceId)
+        if JR.get(this, :isSingleKeyRepeatableProcessing) do
+            JR.call(JR.get(this, :inputProcessor), :jm_keyPressedByDevice, [JR.lget(f, :keyCode), JR.lget(f, :deviceId)])
+        end
+    end)
+  end
+
+
+  def jm_keyReleasedByDevice(this, p_keyCode, p_deviceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+      JR.lset(f, :deviceId, p_deviceId)
+        JR.call(JR.get(this, :inputProcessor), :jm_keyReleasedByDevice, [this, JR.lget(f, :keyCode), JR.lget(f, :deviceId)])
+    end)
+  end
+
+
+  def jm_handleRawKey(this, p_keyCode, p_deviceId, p_repeated) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+      JR.lset(f, :deviceId, p_deviceId)
+      JR.lset(f, :repeated, p_repeated)
+        nil
+    end)
+  end
+
+
+  def jm_endProgress(this, p_isProgress) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :isProgress, p_isProgress)
+        JR.lset(f, :portion, 30)
+        if (JR.lget(f, :isProgress) && JR.call(this, :jm_isMainCanvas, [])) do
+            JR.lset(f, :myCommandsFactory, MyCommandsFactory.jm_getInstance())
+            JR.lset(f, :progressCanvas, ProgressCanvasFactory.jm_getInstance())
+            JR.call(JR.lget(f, :progressCanvas), :jm_start, [])
+            JR.call(JR.call(this, :jm_getCustomCommandListener, []), :jm_commandAction, [JR.get(JR.lget(f, :myCommandsFactory), :SET_DISPLAYABLE), JR.lget(f, :progressCanvas)])
+            JR.lset(f, :portion, 4)
+        end
+        throw({:jreturn, JR.lget(f, :portion)})
+    end)
+  end
+
+
+  def jm_processPlayingGame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :cheatProcessor), :jm_update, [])
+        JR.call(JR.call(JR.get(this, :sensorGameUpdateProcessor), :jm_getInputSensor, []), :jm_update, [])
+        JR.call(JR.get(this, :gameInputProcessor), :jm_process, [])
+        JR.call(JR.get(this, :gameLayerManager), :jm_process, [])
+        JR.call(JR.get(this, :startIntermissionProcessor), :jm_process, [])
+    end)
+  end
+
+
+  def jm_threadInit(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_processGame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        RunnableCanvas.jm_process(this)
+        if AllBinaryMediaManager.jm_update() do
+            if !JR.call(JR.get(this, :primaryPlayerQueue), :jm_process, []) do
+                JR.call(JR.get(this, :secondaryPlayerQueue), :jm_process, [])
+            end
+        end
+        JR.call(JR.get(this, :mainStateProcessor), :jm_process, [])
+        JR.call(JR.get(this, :menuInputProcessor), :jm_processInputList, [])
+        JR.call(JR.get(this, :endGameProcessor), :jm_process, [])
+        JR.call(JR.get(this, :baseGameStatistics), :jm_nextFrame, [])
+    end)
+  end
+
+
+  def jm_notifyDonePainting(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        (
+            JR.call(JR.get(this, :threadObjectUtil), :jm_notifyObject, [this])
+        )
+    end)
+  end
+
+
+  def jm_shouldWait(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :features, Features.jm_getInstance())
+        if AndroidUtil.jm_isAndroid() do
+            nil
+        else
+            if JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.get(this, :openGLFeatureFactory), :OPENGL_2D)]) do
+            nil
+        else
+            if JR.call(JR.lget(f, :features), :jm_isDefault, [JR.get(JR.get(this, :openGLFeatureFactory), :OPENGL)]) do
+                JR.lset(f, :openGLImageSpecificFactory, OpenGLImageSpecificFactory.jm_getInstance())
+                JR.jwhile(fn -> JR.get(JR.lget(f, :openGLImageSpecificFactory), :updating) end, fn ->
+                    J.Thread.jm_sleep(JR.get(this, :YIELD_SLEEP))
+                end)
+            end
+        end
+        end
+    end)
+  end
+
+
+  def jm_run(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START_RUNNABLE), this, JR.get(JR.get(this, :commonStrings), :RUN)])
+            JR.lset(f, :progressCanvas, ProgressCanvasFactory.jm_getInstance())
+            JR.call(JR.lget(f, :progressCanvas), :jm_addNormalPortion, [50, "Game Thread"])
+            JR.call(this, :jm_setCurrentThread, [])
+            JR.call(this, :jm_setRunning, [true])
+            if (JR.call(this, :jm_getCustomCommandListener, []) == NullCommandListener.jstatic_NULL_COMMAND_LISTENER()) do
+                J.Thread.jm_sleep(JR.get(this, :YIELD_SLEEP))
+            end
+            JR.call(this, :jm_shouldWait, [])
+            JR.call(this, :jm_threadInit, [])
+            if (JR.call(this, :jm_getCustomCommandListener, []) == NullCommandListener.jstatic_NULL_COMMAND_LISTENER()) do
+                J.Thread.jm_sleep(JR.get(this, :YIELD_SLEEP))
+            end
+            JR.call(this, :jm_open, [])
+            JR.lset(f, :gameAdState, JR.call(JR.get(this, :gameAdStateFactory), :jm_getCurrentInstance, []))
+            JR.call(JR.lget(f, :gameAdState), :jm_init, [])
+            JR.call(JR.lget(f, :gameAdState), :jm_setGameIsReady, [true])
+            JR.call(JR.get(this, :gameBehavior), :jm_run, [this])
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :END_RUNNABLE), this, JR.get(JR.get(this, :commonStrings), :RUN)])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :RUN), JR.lget(f, :e)])
+        end
+    end)
+  end
+
+
+  def jm_run2(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :features, Features.jm_getInstance())
+        if (JR.call(JR.lget(f, :features), :jm_isDefault, [JR.get(JR.get(this, :openGLFeatureFactory), :OPENGL_AS_GAME_THREAD)]) || J2MEUtil.jm_isHTML()) do
+            if JR.call(JR.lget(f, :features), :jm_isDefault, [JR.get(JR.get(this, :openGLFeatureFactory), :OPENGL_AS_GAME_THREAD)]) do
+                JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.get(JR.get(this, :openGLFeatureFactory), :OPENGL_AS_GAME_THREAD), :jm_getName, []), this, JR.get(JR.get(this, :commonStrings), :RUN)])
+            end
+            if J2MEUtil.jm_isHTML() do
+                JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(GraphicsStrings.jm_getInstance(), :HTML), this, JR.get(JR.get(this, :commonStrings), :RUN)])
+            end
+            JR.lset(f, :currentDisplayableFactory, CurrentDisplayableFactory.jm_getInstance())
+            JR.call(JR.lget(f, :currentDisplayableFactory), :jm_setRunnable, [JR.get(this, :gameRunnable)])
+            JR.call(JR.lget(f, :currentDisplayableFactory), :jm_setDisplayable, [this])
+            JR.call(OpenGLThreadUtil.jm_getInstance(), :jm_onResume, [])
+        else
+            if JR.call(JR.lget(f, :features), :jm_isDefault, [JR.get(JR.get(this, :openGLFeatureFactory), :OPENGL_AND_GAME_HAVE_DIFFERENT_THREADS)]) do
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.get(JR.get(this, :openGLFeatureFactory), :OPENGL_AND_GAME_HAVE_DIFFERENT_THREADS), :jm_getName, []), this, JR.get(JR.get(this, :commonStrings), :RUN)])
+            JR.call(OpenGLThreadUtil.jm_getInstance(), :jm_onResume, [])
+            JR.jwhile(fn -> JR.call(this, :jm_isRunning, []) end, fn ->
+                JR.call(this, :jm_run3, [])
+            end)
+            JR.call(this, :jm_end, [])
+        else
+            JR.call(JR.get(this, :logUtil), :jm_putF, ["this thread", this, JR.get(JR.get(this, :commonStrings), :RUN)])
+            JR.jwhile(fn -> JR.call(this, :jm_isRunning, []) end, fn ->
+                JR.call(this, :jm_run3, [])
+            end)
+            JR.call(this, :jm_end, [])
+        end
+        end
+    end)
+  end
+
+
+  def jm_run3(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :loopTimeHelper), :jm_setStartTime, [JR.call(JR.get(this, :gameTickTimeDelayHelper), :jm_setStartTime, [])])
+        JR.call(JR.get(this, :gameTickDisplayInfoSingleton), :jm_update, [])
+        JR.call(this, :jm_processGame, [])
+        JR.call(this, :jm_processLoopSleep, [])
+    end)
+  end
+
+
+  def jm_setRunning(this, p_running) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :running, p_running)
+        RunnableCanvas.jm_setRunning(this, JR.lget(f, :running))
+        try do
+            JR.lset(f, :features, Features.jm_getInstance())
+            if JR.lget(f, :running) do
+                nil
+            else
+                if (JR.call(JR.lget(f, :features), :jm_isDefault, [JR.get(JR.get(this, :openGLFeatureFactory), :OPENGL)]) || SWTUtil.jstatic_isSWT()) do
+                    if (JR.call(JR.call(JR.get(this, :gameLayerManager), :jm_getGameInfo, []), :jm_getGameType, []) != JR.get(JR.get(this, :gameTypeFactory), :BOT)) do
+                        JR.lset(f, :currentDisplayableFactory, CurrentDisplayableFactory.jm_getInstance())
+                        JR.call(JR.lget(f, :currentDisplayableFactory), :jm_clearRunnable, [])
+                    end
+                    JR.call(this, :jm_end, [])
+                end
+            end
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(this, :SET_RUNNING), JR.lget(f, :e)])
+        end
+    end)
+  end
+
+
+  def jm_end(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :screenCapture), :jm_endRecording, [])
+        JR.call(JR.get(this, :baseGameStatistics), :jm_add, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.call(JR.get(this, :baseGameStatistics), :jm_toString, [])]), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :NEW_LINE)]), :jm_toString, [])])
+        JR.call(JR.get(this, :baseGameStatistics), :jm_init, [])
+        JR.call(JR.get(this, :gameKeyEventHandler), :jm_removeListener, [JR.get(this, :cheatProcessor)])
+        JR.call(this, :jm_close, [])
+        JR.call(this, :jm_removeAllGameKeyInputListeners, [])
+        JR.call(this, :jm_endGameThread, [])
+    end)
+  end
+
+
+  def jm_endGameThread(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(DisplayChangeEventHandler.jm_getInstance(), :jm_removeListener, [this])
+        JR.call(GameLevelDisplayChangeEventListenersFactory.jm_getInstance(), :jm_clear, [])
+        JR.lset(f, :gameAdState, JR.call(JR.get(this, :gameAdStateFactory), :jm_getCurrentInstance, []))
+        JR.call(JR.lget(f, :gameAdState), :jm_notPlayingAdState, [])
+    end)
+  end
+
+
+  def jm_createHighScore(this, p_score) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :score, p_score)
+        JR.lset(f, :gameInfo, JR.call(JR.get(this, :gameLayerManager), :jm_getGameInfo, []))
+        throw({:jreturn, HighScore.jnew(0, "NONE", GameInfo.jnew(JR.call(JR.lget(f, :gameInfo), :jm_getGameType, []), JR.call(JR.lget(f, :gameInfo), :jm_getGameMode, []), JR.get(PlayerTypesFactory.jm_getInstance(), :PLAYER_TYPE_ONE), 0, 0), JR.lget(f, :score))})
+    end)
+  end
+
+
+  def jm_setHighScore(this, p_abeClientInformation, p_name, p_score, p_autoSubmit, p_isLast) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :score, p_score)
+      JR.lset(f, :autoSubmit, p_autoSubmit)
+      JR.lset(f, :isLast, p_isLast)
+        JR.call(JR.get(this, :gameBehavior), :jm_setHighScore, [JR.lget(f, :abeClientInformation), this, JR.lget(f, :name), JR.lget(f, :score), JR.lget(f, :autoSubmit), JR.lget(f, :isLast)])
+    end)
+  end
+
+
+  def jm_setHighScore2(this, p_abeClientInformation, p_name, p_score, p_autoSubmit, p_isLast) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :score, p_score)
+      JR.lset(f, :autoSubmit, p_autoSubmit)
+      JR.lset(f, :isLast, p_isLast)
+        JR.lset(f, :highScore, JR.call(this, :jm_createHighScore, [JR.lget(f, :score)]))
+        JR.lset(f, :textBox, HighScoreTextBox.jnew(JR.get(this, :highScoresFactoryInterface), JR.get(this, :highScoresHelper), JR.lget(f, :abeClientInformation), JR.call(JR.get(this, :gameLayerManager), :jm_getGameInfo, []), JR.call(this, :jm_getCustomCommandListener, []), JR.lget(f, :name), JR.lget(f, :highScore), JR.call(JR.get(this, :gameLayerManager), :jm_getBackgroundBasicColor, []), JR.call(JR.get(this, :gameLayerManager), :jm_getForegroundBasicColor, [])))
+        if JR.lget(f, :isLast) do
+            JR.call(JR.call(this, :jm_getCustomCommandListener, []), :jm_commandAction, [JR.get(GameCommandsFactory.jm_getInstance(), :SET_MENU_DISPLAYABLE), JR.lget(f, :textBox)])
+        end
+        if JR.lget(f, :autoSubmit) do
+            JR.call(SecondaryThreadPool.jm_getInstance(), :jm_runTask, [SaveHighScoreRunnable.jnew(JR.lget(f, :isLast), JR.lget(f, :textBox))])
+        end
+    end)
+  end
+
+
+  def jm_getGameStateTimeHelper(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :gameStateTimeHelper)})
+    end)
+  end
+
+
+  def jm_setInitialized(this, p_initialized) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :initialized, p_initialized)
+        JR.put(this, :initialized, JR.lget(f, :initialized))
+    end)
+  end
+
+
+  def jm_isInitialized(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :initialized)})
+    end)
+  end
+
+
+  def jm_getSourceId(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, AllBinaryGameCanvas.jstatic_id()})
+    end)
+  end
+
+
+  def jm_setProgressPaintable(this, p_paintable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :paintable, p_paintable)
+        JR.put(this, :progressPaintable, JR.lget(f, :paintable))
+    end)
+  end
+
+
+  def jm_getStartIntermissionInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :startIntermissionInterface)})
+    end)
+  end
+
+
+  def jm_getEndLevelIntermissionInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :endLevelIntermissionInterface)})
+    end)
+  end
+
+
+  def jm_setTouchPaintableP(this, p_paintable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :paintable, p_paintable)
+        JR.put(this, :touchPaintable, JR.lget(f, :paintable))
+    end)
+  end
+
+
+  def jm_getTouchPaintableP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :touchPaintable)})
+    end)
+  end
+
+
+  def jm_setEndGamePaintable(this, p_endGamePaintable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :endGamePaintable, p_endGamePaintable)
+        JR.put(this, :endGamePaintable, JR.lget(f, :endGamePaintable))
+    end)
+  end
+
+
+  def jm_getEndGamePaintable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :endGamePaintable)})
+    end)
+  end
+
+
+  def jm_setIntermissionPaintable(this, p_intermissionPaintable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :intermissionPaintable, p_intermissionPaintable)
+        JR.put(this, :intermissionPaintable, JR.lget(f, :intermissionPaintable))
+    end)
+  end
+
+
+  def jm_getIntermissionPaintable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :intermissionPaintable)})
+    end)
+  end
+
+
+  def jm_getEndGameInfoP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :endGameInfo)})
+    end)
+  end
+
+
+  def jm_setHighScoresPaintable(this, p_highScoresPaintable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :highScoresPaintable, p_highScoresPaintable)
+        JR.put(this, :highScoresPaintable, JR.lget(f, :highScoresPaintable))
+    end)
+  end
+
+
+  def jm_getHighScoresPaintable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :highScoresPaintable)})
+    end)
+  end
+
+
+  def jm_getRealHighScoresPaintable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :realHighScoresPaintable)})
+    end)
+  end
+
+
+  def jm_clearPlayerGameInputList(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :playerGameInput, nil)
+        JR.lset(f, :index, JR.int32(JR.call(JR.get(this, :localPlayerGameInputList), :jm_size, []) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.lset(f, :playerGameInput, JR.call(JR.get(this, :localPlayerGameInputList), :jm_get, [JR.lget(f, :index)]))
+            JR.call(JR.get(this, :gameKeyEventHandler), :jm_removeListener, [JR.lget(f, :playerGameInput)])
+        end)
+        JR.call(JR.get(this, :localPlayerGameInputList), :jm_clear, [])
+    end)
+  end
+
+
+  def jm_addPlayerGameInput(this, p_playerGameInput) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :playerGameInput, p_playerGameInput)
+        JR.call(JR.get(this, :localPlayerGameInputList), :jm_add, [JR.lget(f, :playerGameInput)])
+    end)
+  end
+
+
+  def jm_setMenuInputProcessor(this, p_menuInputProcessor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :menuInputProcessor, p_menuInputProcessor)
+        JR.put(this, :menuInputProcessor, JR.lget(f, :menuInputProcessor))
+    end)
+  end
+
+
+  def jm_getMenuInputProcessor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :menuInputProcessor)})
+    end)
+  end
+
+
+  def jm_getMenuForm(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :menuForm)})
+    end)
+  end
+
+
+  def jm_setMenuForm(this, p_menuForm) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :menuForm, p_menuForm)
+        JR.put(this, :menuForm, JR.lget(f, :menuForm))
+    end)
+  end
+
+
+  def jm_getStartLevel(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :startLevel)})
+    end)
+  end
+
+
+  def jm_setStartLevel(this, p_startLevel) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :startLevel, p_startLevel)
+        JR.put(this, :startLevel, JR.lget(f, :startLevel))
+    end)
+  end
+
+
+  def jm_setTouchButtonsPaintable(this, p_touchButtonsPaintable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :touchButtonsPaintable, p_touchButtonsPaintable)
+        JR.put(this, :touchButtonsPaintable, JR.lget(f, :touchButtonsPaintable))
+    end)
+  end
+
+
+  def jm_getTouchButtonsPaintable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :touchButtonsPaintable)})
+    end)
+  end
+
+
+  def jm_setGameInputProcessor(this, p_gameInputProcessor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameInputProcessor, p_gameInputProcessor)
+        JR.put(this, :gameInputProcessor, JR.lget(f, :gameInputProcessor))
+    end)
+  end
+
+
+  def jm_getGameInputProcessor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :gameInputProcessor)})
+    end)
+  end
+
+
+  def jm_setEndGameProcessor(this, p_endGameProcessor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :endGameProcessor, p_endGameProcessor)
+        JR.put(this, :endGameProcessor, JR.lget(f, :endGameProcessor))
+    end)
+  end
+
+
+  def jm_getEndGameProcessor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :endGameProcessor)})
+    end)
+  end
+
+
+  def jm_setEndGameStatePaintable(this, p_endGameStatePaintable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :endGameStatePaintable, p_endGameStatePaintable)
+        JR.put(this, :endGameStatePaintable, JR.lget(f, :endGameStatePaintable))
+    end)
+  end
+
+
+  def jm_getEndGameStatePaintable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :endGameStatePaintable)})
+    end)
+  end
+
+
+  def jm_setNonBotPaintableP(this, p_nonBotPaintable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :nonBotPaintable, p_nonBotPaintable)
+        JR.put(this, :nonBotPaintable, JR.lget(f, :nonBotPaintable))
+    end)
+  end
+
+
+  def jm_getNonBotPaintableP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :nonBotPaintable)})
+    end)
+  end
+
+
+  def jm_setStartIntermissionPaintable(this, p_startIntermissionPaintable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :startIntermissionPaintable, p_startIntermissionPaintable)
+        JR.put(this, :startIntermissionPaintable, JR.lget(f, :startIntermissionPaintable))
+    end)
+  end
+
+
+  def jm_getStartIntermissionPaintable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :startIntermissionPaintable)})
+    end)
+  end
+
+
+  def jm_setMainStateProcessor(this, p_mainStateProcessor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :mainStateProcessor, p_mainStateProcessor)
+        JR.put(this, :mainStateProcessor, JR.lget(f, :mainStateProcessor))
+    end)
+  end
+
+
+  def jm_getMainStateProcessor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :mainStateProcessor)})
+    end)
+  end
+
+
+  def jm_setProcessGameProcessor(this, p_processGameProcessor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :processGameProcessor, p_processGameProcessor)
+        JR.put(this, :processGameProcessor, JR.lget(f, :processGameProcessor))
+    end)
+  end
+
+
+  def jm_getProcessGameProcessor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :processGameProcessor)})
+    end)
+  end
+
+
+  def jm_setOpenMenuPaintable(this, p_openMenuPaintable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :openMenuPaintable, p_openMenuPaintable)
+        JR.put(this, :openMenuPaintable, JR.lget(f, :openMenuPaintable))
+    end)
+  end
+
+
+  def jm_getOpenMenuPaintable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :openMenuPaintable)})
+    end)
+  end
+
+
+  def jm_setPopupMenuInputProcessor(this, p_popupMenuInputProcessor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :popupMenuInputProcessor, p_popupMenuInputProcessor)
+        JR.put(this, :popupMenuInputProcessor, JR.lget(f, :popupMenuInputProcessor))
+    end)
+  end
+
+
+  def jm_getPopupMenuInputProcessor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :popupMenuInputProcessor)})
+    end)
+  end
+
+
+  def jm_getSensorGameUpdateProcessor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :sensorGameUpdateProcessor)})
+    end)
+  end
+
+
+  def jm_getRawGameInputProcessor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :rawGameInputProcessor)})
+    end)
+  end
+
+
+  def jm_getRawInputProcessor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :rawInputProcessor)})
+    end)
+  end
+
+
+  def jm_setInputProcessor(this, p_inputProcessor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :inputProcessor, p_inputProcessor)
+        JR.put(this, :inputProcessor, JR.lget(f, :inputProcessor))
+    end)
+  end
+
+
+  def jm_getInputProcessor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :inputProcessor)})
+    end)
+  end
+
+
+  def jm_setMenuPaintable(this, p_menuPaintable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :menuPaintable, p_menuPaintable)
+        JR.put(this, :menuPaintable, JR.lget(f, :menuPaintable))
+    end)
+  end
+
+
+  def jm_getMenuPaintable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :menuPaintable)})
+    end)
+  end
+
+
+  def jm_setFormPaintable(this, p_formPaintable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :formPaintable, p_formPaintable)
+        JR.put(this, :formPaintable, JR.lget(f, :formPaintable))
+    end)
+  end
+
+
+  def jm_getFormPaintable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :formPaintable)})
+    end)
+  end
+
+
+  def jm_setGameSpecificPaintableP(this, p_gameSpecificPaintable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameSpecificPaintable, p_gameSpecificPaintable)
+        JR.put(this, :gameSpecificPaintable, JR.lget(f, :gameSpecificPaintable))
+    end)
+  end
+
+
+  def jm_getGameSpecificPaintableP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :gameSpecificPaintable)})
+    end)
+  end
+
+
+  def jm_isSingleThread(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, (JR.call(OpenGLFeatureUtil.jm_getInstance(), :jm_isAnyThreed, []) || SWTUtil.jstatic_isSWT())})
+    end)
+  end
+
+
+  def jm_isRunningInAnotherThread(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :features, Features.jm_getInstance())
+        JR.lset(f, :openGLFeatureFactory, OpenGLFeatureFactory.jm_getInstance())
+        if JR.call(JR.lget(f, :features), :jm_isDefault, [JR.get(JR.lget(f, :openGLFeatureFactory), :OPENGL_AS_GAME_THREAD)]) do
+            throw({:jreturn, true})
+        else
+            throw({:jreturn, JR.call(this, :jm_isRunning, [])})
+        end
+    end)
+  end
+
+
+  def jm_getType(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, AllBinaryGameCanvas.jstatic_TYPE()})
+    end)
+  end
+
+
+  def jm_getTitle(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, RunnableCanvas.jm_getTitle(this)})
+    end)
+  end
+
+
+  def jm_isPaused(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, RunnableCanvas.jm_isPaused(this)})
+    end)
+  end
+end
+
 

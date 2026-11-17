@@ -1,40 +1,65 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.image
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.image
 
--module('GameFeatureImageCacheFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule GameFeatureImageCacheFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        'ImageCacheFactory':getInstance().
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, ImageCacheFactory.jm_getInstance()})
+    end)
+  end
 
-init() ->
-        'ImageCacheFactory':init().
 
-releaseAll() ->
-        (fun(Target_N65693) -> (get({Target_N65693, '$class'})):releaseAll(Target_N65693) end)('ImageCacheFactory':getInstance()).
+  def jm_init() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        ImageCacheFactory.jm_init()
+    end)
+  end
+
+
+  def jm_releaseAll() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        JR.call(ImageCacheFactory.jm_getInstance(), :jm_releaseAll, [])
+    end)
+  end
+end
+
 

@@ -1,82 +1,128 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.ai
-% import org.allbinary.game.input.GameInput
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.AllBinaryLayerManager
-% import org.allbinary.util.HashtableUtil
-% import org.allbinary.game.ai.BasicAI
-% import org.allbinary.util.ABHashtable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
--module('KeyPressesAI').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule KeyPressesAI do
+  def jsuper(), do: BasicAI
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicAI', Function, Arguments).
-
-init_fields(This) ->
-    put({This, on}, true),
-    put({This, keys}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :on, false)
+    JR.put(this, :keys, nil)
+        JR.put(this, :on, true)
+        
+    nil
+  end
 
 
-new(Hashtable, OwnerLayerInterface, GameInput) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Hashtable, OwnerLayerInterface, GameInput),
-    This.
+  def jinit(this, p_hashtable, p_ownerLayerInterface, p_gameInput) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :hashtable, p_hashtable)
+      JR.lset(f, :ownerLayerInterface, p_ownerLayerInterface)
+      JR.lset(f, :gameInput, p_gameInput)
+        BasicAI.jinit(this, JR.lget(f, :ownerLayerInterface), JR.lget(f, :gameInput))
+        KeyPressesAI.jinitfields(this)
+        JR.put(this, :keys, JR.anew(JR.call(JR.lget(f, :hashtable), :jm_size, []), nil))
+        JR.lset(f, :objectArray, JR.call(HashtableUtil.jm_getInstance(), :jm_getKeysAsArray, [JR.lget(f, :hashtable)]))
+        JR.lset(f, :size, JR.alength(JR.lget(f, :objectArray)))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.aset(JR.get(this, :keys), JR.lget(f, :index), JR.call(JR.lget(f, :hashtable), :jm_get, [JR.aget(JR.lget(f, :objectArray), JR.lget(f, :index))]))
+        end)
+    end)
+  end
 
-'$init'(This, Hashtable, OwnerLayerInterface, GameInput) ->
-        'BasicAI':'$init'(This, OwnerLayerInterface, GameInput),
-        init_fields(This),
-        put({This, keys}, array:new((get({Hashtable, '$class'})):size(Hashtable), {default, undefined})),
-        ObjectArray = (fun(Target_N65922) -> (get({Target_N65922, '$class'})):getKeysAsArray(Target_N65922, Hashtable) end)('HashtableUtil':getInstance()),
-        Size = array:size(ObjectArray),
-        lists:foreach(fun(Index) ->
-            put({This, keys}, array:set(Index, (get({Hashtable, '$class'})):get(Hashtable, array:get(Index, ObjectArray)), get({This, keys})))
-        end, lists:seq(0, Size - 1)).
+  def jnew(p_hashtable, p_ownerLayerInterface, p_gameInput) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_hashtable, p_ownerLayerInterface, p_gameInput)
+    this
+  end
 
-% throws Exception
-processAI(This, AllBinaryLayerManager) ->
-        case get({This, on}) of
-            true ->
-            lists:foreach(fun(Index) ->
-                'BasicAI':processKeyAI(This, (fun(Target_N66323) -> (get({Target_N66323, '$class'})):intValue(Target_N66323) end)(array:get(Index, get({This, keys}))))
-            end, lists:seq(0, array:size(get({This, keys})) - 1));
-            false -> ok
-        end.
 
-% throws Exception
-toggle(This) ->
-        case (get({This, '$class'})):isOn(This) of
-            true ->
-            (get({This, '$class'})):setOn(This, false);
-            false ->
-            (get({This, '$class'})):setOn(This, true)
-        end.
+  def jm_processAI(this, p_allBinaryLayerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerManager, p_allBinaryLayerManager)
+        if JR.get(this, :on) do
+            JR.lset(f, :index, 0)
+            JR.jfor(fn -> (JR.lget(f, :index) < JR.alength(JR.get(this, :keys))) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+                BasicAI.jm_processKeyAI(this, JR.call(JR.aget(JR.get(this, :keys), JR.lget(f, :index)), :jm_intValue, []))
+            end)
+        end
+    end)
+  end
 
-% throws Exception
-disable(This) ->
-        (get({This, '$class'})):setOn(This, false).
 
-% throws Exception
-enable(This) ->
-        (get({This, '$class'})):setOn(This, true).
+  def jm_toggle(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if JR.call(this, :jm_isOn, []) do
+            JR.call(this, :jm_setOn, [false])
+        else
+            JR.call(this, :jm_setOn, [true])
+        end
+    end)
+  end
 
-setOn(This, On) when is_boolean(On) ->
-        put({This, on}, On).
 
-isOn(This) ->
-        get({This, on}).
+  def jm_disable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_setOn, [false])
+    end)
+  end
+
+
+  def jm_enable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_setOn, [true])
+    end)
+  end
+
+
+  def jm_setOn(this, p_on) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :on, p_on)
+        JR.put(this, :on, JR.lget(f, :on))
+    end)
+  end
+
+
+  def jm_isOn(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :on)})
+    end)
+  end
+end
+
 

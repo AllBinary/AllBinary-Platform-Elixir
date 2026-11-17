@@ -1,77 +1,91 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer.hud.event
-% import org.allbinary.logic.util.event.AllBinaryEventObject
-% import org.allbinary.logic.util.event.EventListenerInterface
-% import org.allbinary.logic.util.event.NullEventListener
-% import org.allbinary.logic.util.event.handler.BasicEventHandler
-% import org.allbinary.util.BasicArrayList
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer.hud.event
 
--module('GameNotificationEventHandler').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GameNotificationEventHandler do
+  def jsuper(), do: BasicEventHandler
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> GameNotificationEventHandler.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicEventHandler', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, instance}, 'GameNotificationEventHandler':new()),
-    ok.
-
-init_fields(This) ->
-    put({This, enabled}, true),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :enabled, false)
+        JR.put(this, :enabled, true)
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      BasicEventHandler.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    'BasicEventHandler':'$init'(This),
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-removeAllListeners(This) ->
-        put({local, eventListenerInterface}, get({'NullEventListener', 'NULL_EVENT_LISTENER'})),
-        List = get({This, eventListenerInterfaceList}),
-        case ((get({List, '$class'})):size(List) > 0) of
-            true ->
-            put({local, eventListenerInterface}, array:get(0, get({List, objectArray})));
-            false -> ok
-        end,
-        'BasicEventHandler':removeAllListeners(This),
-        case (get({local, eventListenerInterface}) =/= get({'NullEventListener', 'NULL_EVENT_LISTENER'})) of
-            true ->
-            (get({This, '$class'})):addListenerInterface(This, get({local, eventListenerInterface}));
-            false -> ok
-        end.
 
-getInstance() ->
-        get({'GameNotificationEventHandler', instance}).
+  def jm_removeAllListeners(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :eventListenerInterface, NullEventListener.jstatic_NULL_EVENT_LISTENER())
+        JR.lset(f, :list, JR.get(this, :eventListenerInterfaceList))
+        if (JR.call(JR.lget(f, :list), :jm_size, []) > 0) do
+            JR.lset(f, :eventListenerInterface, JR.aget(JR.get(JR.lget(f, :list), :objectArray), 0))
+        end
+        BasicEventHandler.jm_removeAllListeners(this)
+        if (JR.lget(f, :eventListenerInterface) != NullEventListener.jstatic_NULL_EVENT_LISTENER()) do
+            JR.call(this, :jm_addListenerInterface, [JR.lget(f, :eventListenerInterface)])
+        end
+    end)
+  end
 
-% throws Exception
-process(This, EventObject, EventListenerInterface) ->
-        try
-        case (not get({This, enabled})) of
-            true ->
-            throw({'$return', ok});
-            false -> ok
-        end,
-        GameNotificationListenerInterface = EventListenerInterface,
-        (get({GameNotificationListenerInterface, '$class'})):onGameNotificationEvent(GameNotificationListenerInterface, EventObject)
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, GameNotificationEventHandler.jstatic_instance()})
+    end)
+  end
+
+
+  def jm_process(this, p_eventObject, p_eventListenerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+      JR.lset(f, :eventListenerInterface, p_eventListenerInterface)
+        if !JR.get(this, :enabled) do
+            throw({:jreturn, nil})
+        end
+        JR.lset(f, :gameNotificationListenerInterface, JR.lget(f, :eventListenerInterface))
+        JR.call(JR.lget(f, :gameNotificationListenerInterface), :jm_onGameNotificationEvent, [JR.lget(f, :eventObject)])
+    end)
+  end
+end
+
 

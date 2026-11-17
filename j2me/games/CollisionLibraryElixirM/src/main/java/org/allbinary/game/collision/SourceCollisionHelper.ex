@@ -1,46 +1,58 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.collision
-% import org.allbinary.game.layer.CollidableCompositeLayer
-% import org.allbinary.layer.AllBinaryLayer
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.collision
 
--module('SourceCollisionHelper').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule SourceCollisionHelper do
+  def jsuper(), do: CollisionHelper
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('CollisionHelper', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+
+  def jinit(this, p_layerInterface) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+        CollisionHelper.jinit(this, JR.lget(f, :layerInterface))
+        SourceCollisionHelper.jinitfields(this)
+    end)
+  end
+
+  def jnew(p_layerInterface) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_layerInterface)
+    this
+  end
 
 
-new(LayerInterface) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, LayerInterface),
-    This.
+  def jm_isCollidable(this, p_layerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+        if (JR.get(this, :sourceLayerInterface) != JR.lget(f, :layerInterface)) do
+            throw({:jreturn, true})
+        end
+        throw({:jreturn, false})
+    end)
+  end
+end
 
-'$init'(This, LayerInterface) ->
-        'CollisionHelper':'$init'(This, LayerInterface).
-
-isCollidable(This, LayerInterface) ->
-        try
-        case (get({This, sourceLayerInterface}) =/= LayerInterface) of
-            true ->
-            throw({'$return', true});
-            false -> ok
-        end,
-        false
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
 

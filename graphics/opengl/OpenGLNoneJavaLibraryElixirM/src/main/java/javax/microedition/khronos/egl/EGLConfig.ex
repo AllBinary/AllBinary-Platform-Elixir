@@ -1,20 +1,32 @@
-% Generated Code Do Not Modify
-% package javax.microedition.khronos.egl
+# Generated Code Do Not Modify
+# package javax.microedition.khronos.egl
 
--module('EGLConfig').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule EGLConfig do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        throw({:jexception, JR.exception("RuntimeException", "")})
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        erlang:error({'RuntimeException'}).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+end
+
 

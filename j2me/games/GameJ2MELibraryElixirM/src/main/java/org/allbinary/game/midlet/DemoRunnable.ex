@@ -1,58 +1,77 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.midlet
-% import org.allbinary.graphics.canvas.transition.progress.ProgressCanvasFactory
-% import org.allbinary.graphics.displayable.command.MyCommandsFactory
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonLabels
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
--module('DemoRunnable').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements Runnable
+defmodule DemoRunnable do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, demoGameMidlet}, undefined),
-    put({This, startDemoGameMidletEvent}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :demoGameMidlet, nil)
+    JR.put(this, :startDemoGameMidletEvent, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        
+        
+    nil
+  end
 
 
-new(DemoGameMidlet) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, DemoGameMidlet),
-    This.
+  def jinit(this, p_demoGameMidlet) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :demoGameMidlet, p_demoGameMidlet)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :demoGameMidlet, JR.lget(f, :demoGameMidlet))
+        JR.put(this, :startDemoGameMidletEvent, DemoGameMidletEvent.jnew(JR.get(this, :demoGameMidlet), JR.get(DemoGameMidletStateFactory.jm_getInstance(), :START_DEMO)))
+    end)
+  end
 
-'$init'(This, DemoGameMidlet) ->
-    init_fields(This),
-        put({This, demoGameMidlet}, DemoGameMidlet),
-        put({This, startDemoGameMidletEvent}, 'DemoGameMidletEvent':new(get({This, demoGameMidlet}), get({'DemoGameMidletStateFactory':getInstance(), 'START_DEMO'}))).
+  def jnew(p_demoGameMidlet) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_demoGameMidlet)
+    this
+  end
 
-run(This) ->
-        try
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N66131) -> (get({Target_N66131, '$class'})):toString(Target_N66131) end)((fun(Target_N66138) -> (get({Target_N66138, '$class'})):append(Target_N66138, "GameCanvasRunnableInterface") end)((fun(Target_N66145) -> (get({Target_N66145, '$class'})):append(Target_N66145, get({'CommonLabels':getInstance(), 'START_LABEL'})) end)('StringMaker':new()))), This, get({get({This, commonStrings}), 'RUN'})),
-            (get({get({This, demoGameMidlet}), '$class'})):commandAction(get({This, demoGameMidlet}), get({'MyCommandsFactory':getInstance(), 'SET_DISPLAYABLE'}), 'ProgressCanvasFactory':getInstance()),
-            (get({get({This, demoGameMidlet}), '$class'})):setGameCanvasRunnableInterface(get({This, demoGameMidlet}), (get({get({This, demoGameMidlet}), '$class'})):createDemoGameCanvasRunnableInterface(get({This, demoGameMidlet}))),
-            (get({get({This, demoGameMidlet}), '$class'})):demoSetup(get({This, demoGameMidlet})),
-            (fun(Target_N66371) -> (get({Target_N66371, '$class'})):fireEvent(Target_N66371, get({This, startDemoGameMidletEvent})) end)('DemoGameMidletEventHandler':getInstance()),
-            (get({get({This, demoGameMidlet}), '$class'})):startGameCanvasRunnableInterface(get({This, demoGameMidlet})),
-            (get({get({This, demoGameMidlet}), '$class'})):postDemoSetup(get({This, demoGameMidlet})),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'END_RUNNABLE'}), This, get({get({This, commonStrings}), 'RUN'}))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'RUN'}), E)
-        end.
+
+  def jm_run(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(CommonLabels.jm_getInstance(), :START_LABEL)]), :jm_append, ["GameCanvasRunnableInterface"]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :RUN)])
+            JR.call(JR.get(this, :demoGameMidlet), :jm_commandAction, [JR.get(MyCommandsFactory.jm_getInstance(), :SET_DISPLAYABLE), ProgressCanvasFactory.jm_getInstance()])
+            JR.call(JR.get(this, :demoGameMidlet), :jm_setGameCanvasRunnableInterface, [JR.call(JR.get(this, :demoGameMidlet), :jm_createDemoGameCanvasRunnableInterface, [])])
+            JR.call(JR.get(this, :demoGameMidlet), :jm_demoSetup, [])
+            JR.call(DemoGameMidletEventHandler.jm_getInstance(), :jm_fireEvent, [JR.get(this, :startDemoGameMidletEvent)])
+            JR.call(JR.get(this, :demoGameMidlet), :jm_startGameCanvasRunnableInterface, [])
+            JR.call(JR.get(this, :demoGameMidlet), :jm_postDemoSetup, [])
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :END_RUNNABLE), this, JR.get(JR.get(this, :commonStrings), :RUN)])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :RUN), JR.lget(f, :e)])
+        end
+    end)
+  end
+end
+
 

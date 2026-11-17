@@ -1,91 +1,176 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion.button
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
--module('TouchScreenFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule TouchScreenFactory do
+  def jsuper(), do: JObject
+def jstatic_SINGLETON(), do: JR.static_get(__MODULE__, :SINGLETON, fn -> TouchScreenFactory.jnew() end)
+  def jstatic_set_SINGLETON(value), do: JR.static_put(__MODULE__, :SINGLETON, value)
 
-static_init() ->
-    put({?MODULE, 'SINGLETON'}, 'TouchScreenFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :touch, false)
+    JR.put(this, :multiTouch, false)
+    JR.put(this, :multiTouchDistinct, false)
+    JR.put(this, :touchScreenType, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :touch, false)
+        JR.put(this, :multiTouch, false)
+        JR.put(this, :multiTouchDistinct, false)
+        JR.put(this, :touchScreenType, JR.get(TouchScreenTypesFactory.jm_getInstance(), :NOTOUCH))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, touch}, false),
-    put({This, multiTouch}, false),
-    put({This, multiTouchDistinct}, false),
-    put({This, touchScreenType}, get({'TouchScreenTypesFactory':getInstance(), 'NOTOUCH'})),
-    ok.
+
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        try do
+            JR.call(this, :jm_setTouch, [true])
+            JR.call(this, :jm_setMultiTouch, [false])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), TouchScreenFactory.jstatic_SINGLETON(), JR.get(JR.lget(f, :commonStrings), :GET_INSTANCE), JR.lget(f, :e)])
+        end
+    end)
+  end
+
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, TouchScreenFactory.jstatic_SINGLETON()})
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        try
-            (get({This, '$class'})):setTouch(This, true),
-            (get({This, '$class'})):setMultiTouch(This, false)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), get({'TouchScreenFactory', 'SINGLETON'}), get({CommonStrings, 'GET_INSTANCE'}), E)
-        end.
 
-getInstance() ->
-        get({'TouchScreenFactory', 'SINGLETON'}).
+  def jm_setMultiTouch(this, p_multiTouch) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :multiTouch, p_multiTouch)
+        JR.put(this, :multiTouch, JR.lget(f, :multiTouch))
+    end)
+  end
 
-setMultiTouch(This, MultiTouch) when is_boolean(MultiTouch) ->
-        put({This, multiTouch}, MultiTouch).
 
-isMultiTouch(This) ->
-        get({This, multiTouch}).
+  def jm_isMultiTouch(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :multiTouch)})
+    end)
+  end
 
-setTouch(This, Touch) when is_boolean(Touch) ->
-        put({This, touch}, Touch).
 
-isTouch(This) ->
-        get({This, touch}).
+  def jm_setTouch(this, p_touch) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :touch, p_touch)
+        JR.put(this, :touch, JR.lget(f, :touch))
+    end)
+  end
 
-setMultiTouchDistinct(This, MultiTouchDistinct) when is_boolean(MultiTouchDistinct) ->
-        put({This, multiTouchDistinct}, MultiTouchDistinct).
 
-isMultiTouchDistinct(This) ->
-        get({This, multiTouchDistinct}).
+  def jm_isTouch(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :touch)})
+    end)
+  end
 
-setTouchScreenType(This, TouchScreenType) ->
-        put({This, touchScreenType}, TouchScreenType).
 
-getTouchScreenType(This) ->
-        get({This, touchScreenType}).
+  def jm_setMultiTouchDistinct(this, p_multiTouchDistinct) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :multiTouchDistinct, p_multiTouchDistinct)
+        JR.put(this, :multiTouchDistinct, JR.lget(f, :multiTouchDistinct))
+    end)
+  end
 
-toString(This) ->
-        StringBuffer = 'StringMaker':new(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "TouchScreen: "),
-        (get({StringBuffer, '$class'})):appendboolean(StringBuffer, (get({This, '$class'})):isTouch(This)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, " MultiTouch: "),
-        (get({StringBuffer, '$class'})):appendboolean(StringBuffer, (get({This, '$class'})):isMultiTouch(This)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, " Distinct MultiTouch: "),
-        (get({StringBuffer, '$class'})):appendboolean(StringBuffer, (get({This, '$class'})):isMultiTouchDistinct(This)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, " TouchScreenType: "),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (fun(Target_N66975) -> (get({Target_N66975, '$class'})):toString(Target_N66975, (get({This, '$class'})):getTouchScreenType(This)) end)('StringUtil':getInstance())),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+
+  def jm_isMultiTouchDistinct(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :multiTouchDistinct)})
+    end)
+  end
+
+
+  def jm_setTouchScreenType(this, p_touchScreenType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :touchScreenType, p_touchScreenType)
+        JR.put(this, :touchScreenType, JR.lget(f, :touchScreenType))
+    end)
+  end
+
+
+  def jm_getTouchScreenType(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :touchScreenType)})
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["TouchScreen: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendboolean, [JR.call(this, :jm_isTouch, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [" MultiTouch: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendboolean, [JR.call(this, :jm_isMultiTouch, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [" Distinct MultiTouch: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendboolean, [JR.call(this, :jm_isMultiTouchDistinct, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [" TouchScreenType: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(StringUtil.jm_getInstance(), :jm_toString, [JR.call(this, :jm_getTouchScreenType, [])])])
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+end
+
 

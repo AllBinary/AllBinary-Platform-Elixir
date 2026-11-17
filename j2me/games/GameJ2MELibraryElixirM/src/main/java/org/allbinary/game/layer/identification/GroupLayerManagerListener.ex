@@ -1,212 +1,308 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer.identification
-% import org.allbinary.game.identification.Group
-% import org.allbinary.game.identification.GroupInterfaceCompositeInterface
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.event.LayerManagerEvent
-% import org.allbinary.layer.event.LayerManagerEventHandler
-% import org.allbinary.layer.event.LayerManagerEventListener
-% import org.allbinary.logic.communication.log.ForcedLogUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.util.event.AllBinaryEventObject
-% import org.allbinary.logic.util.event.EventStrings
-% import org.allbinary.string.CommonLabels
-% import org.allbinary.string.CommonSeps
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer.identification
 
--module('GroupLayerManagerListener').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GroupLayerManagerListener do
+  def jsuper(), do: LayerManagerEventListener
+def jstatic_SINGLETON(), do: JR.static_get(__MODULE__, :SINGLETON, fn -> GroupLayerManagerListener.jnew() end)
+  def jstatic_set_SINGLETON(value), do: JR.static_put(__MODULE__, :SINGLETON, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('LayerManagerEventListener', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'SINGLETON'}, 'GroupLayerManagerListener':new()),
-    ok.
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, list}, 'BasicArrayListD':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :list, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :list, BasicArrayListD.jnew())
+    nil
+  end
 
 
-getInstance() ->
-        get({'GroupLayerManagerListener', 'SINGLETON'}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, GroupLayerManagerListener.jstatic_SINGLETON()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-    'LayerManagerEventListener':'$init'(This),
-    init_fields(This),
-        (fun(Target_N66255) -> (get({Target_N66255, '$class'})):addListener(Target_N66255, This) end)('LayerManagerEventHandler':getInstance()).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      LayerManagerEventListener.jinit(this)
+      jinitfields(this)
+        JR.call(LayerManagerEventHandler.jm_getInstance(), :jm_addListener, [this])
+    end)
+  end
 
-clear(This) ->
-        put({local, groupList}, undefined),
-        Size = (get({get({This, list}), '$class'})):size(get({This, list})),
-        lists:foreach(fun(Index) ->
-            put({local, groupList}, array:get(Index, get({get({This, list}), objectArray}))),
-            (get({get({local, groupList}), '$class'})):clear(get({local, groupList}))
-        end, lists:seq((Size - 1), 0, -1)).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-getGroupSizeFromInterface(This, GroupInterfaceCompositeInterface) ->
-        GroupInterfaceArray = (get({GroupInterfaceCompositeInterface, '$class'})):getGroupInterface(GroupInterfaceCompositeInterface),
-        (get({This, '$class'})):getGroupSize(This, array:get(0, GroupInterfaceArray)).
 
-getGroupSize(This, GroupInterface) ->
-        Id = trunc((get({GroupInterface, '$class'})):getGroupId(GroupInterface)),
-        (get({This, '$class'})):getGroupSizeById(This, Id).
+  def jm_clear(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :groupList, nil)
+        JR.lset(f, :size, JR.call(JR.get(this, :list), :jm_size, []))
+        JR.lset(f, :index, JR.int32(JR.lget(f, :size) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.lset(f, :groupList, JR.aget(JR.get(JR.get(this, :list), :objectArray), JR.lget(f, :index)))
+            JR.call(JR.lget(f, :groupList), :jm_clear, [])
+        end)
+    end)
+  end
 
-getList(This, GroupInterface) ->
-        Id = trunc((get({GroupInterface, '$class'})):getGroupId(GroupInterface)),
-        (get({This, '$class'})):getListById(This, Id).
 
-getListById(This, GroupId) when is_integer(GroupId) ->
-        GroupList = array:get(GroupId, get({get({This, list}), objectArray})),
-        GroupList.
+  def jm_getGroupSizeFromInterface(this, p_groupInterfaceCompositeInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :groupInterfaceCompositeInterface, p_groupInterfaceCompositeInterface)
+        JR.lset(f, :groupInterfaceArray, JR.call(JR.lget(f, :groupInterfaceCompositeInterface), :jm_getGroupInterface, []))
+        throw({:jreturn, JR.call(this, :jm_getGroupSize, [JR.aget(JR.lget(f, :groupInterfaceArray), 0)])})
+    end)
+  end
 
-getGroupSizeById(This, GroupId) when is_integer(GroupId) ->
-        GroupList = array:get(GroupId, get({get({This, list}), objectArray})),
-        Size = (get({GroupList, '$class'})):size(GroupList),
-        Size.
 
-areAllOtherGroupsEmpty(This, GroupInterface) ->
-        try
-        Id = trunc((get({GroupInterface, '$class'})):getGroupId(GroupInterface)),
-        Size = (get({get({This, list}), '$class'})):size(get({This, list})),
-        lists:foreach(fun(Index) ->
-            case (Id =/= Index) of
-                true ->
-                GroupSize = (get({This, '$class'})):getGroupSizeById(This, Index),
-                case (GroupSize =/= 0) of
-                    true ->
-                    (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N67540) -> (get({Target_N67540, '$class'})):toString(Target_N67540) end)((fun(Target_N67547) -> (get({Target_N67547, '$class'})):appendint(Target_N67547, GroupSize) end)((fun(Target_N67554) -> (get({Target_N67554, '$class'})):append(Target_N67554, "Group Size: ") end)('StringMaker':new()))), This, "areAllOtherGroupsEmpty"),
-                    throw({'$return', false});
-                    false -> ok
-                end;
-                false -> ok
-            end
-        end, lists:seq((Size - 1), 0, -1)),
-        true
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+  def jm_getGroupSize(this, p_groupInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :groupInterface, p_groupInterface)
+        JR.lset(f, :id, JR.int32(JR.call(JR.lget(f, :groupInterface), :jm_getGroupId, [])))
+        throw({:jreturn, JR.call(this, :jm_getGroupSizeById, [JR.lget(f, :id)])})
+    end)
+  end
 
-isIdInList(This, Id, ExcludeGroupList) when is_integer(Id) ->
-        try
-        Size = (get({ExcludeGroupList, '$class'})):size(ExcludeGroupList),
-        put({local, groupInterfaceArray}, undefined),
-        put({local, groupInterface}, undefined),
-        put({local, groupId}, 0),
-        lists:foreach(fun(Index) ->
-            put({local, groupInterfaceArray}, array:get(Index, get({ExcludeGroupList, objectArray}))),
-            Size2 = array:size(get({local, groupInterfaceArray})),
-            lists:foreach(fun(Index2) ->
-                put({local, groupInterface}, array:get(Index2, get({local, groupInterfaceArray}))),
-                put({local, groupId}, trunc((get({get({local, groupInterface}), '$class'})):getGroupId(get({local, groupInterface})))),
-                case (get({local, groupId}) =:= Id) of
-                    true ->
-                    throw({'$return', true});
-                    false -> ok
+
+  def jm_getList(this, p_groupInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :groupInterface, p_groupInterface)
+        JR.lset(f, :id, JR.int32(JR.call(JR.lget(f, :groupInterface), :jm_getGroupId, [])))
+        throw({:jreturn, JR.call(this, :jm_getListById, [JR.lget(f, :id)])})
+    end)
+  end
+
+
+  def jm_getListById(this, p_groupId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :groupId, p_groupId)
+        JR.lset(f, :groupList, JR.aget(JR.get(JR.get(this, :list), :objectArray), JR.lget(f, :groupId)))
+        throw({:jreturn, JR.lget(f, :groupList)})
+    end)
+  end
+
+
+  def jm_getGroupSizeById(this, p_groupId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :groupId, p_groupId)
+        JR.lset(f, :groupList, JR.aget(JR.get(JR.get(this, :list), :objectArray), JR.lget(f, :groupId)))
+        JR.lset(f, :size, JR.call(JR.lget(f, :groupList), :jm_size, []))
+        throw({:jreturn, JR.lget(f, :size)})
+    end)
+  end
+
+
+  def jm_areAllOtherGroupsEmpty(this, p_groupInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :groupInterface, p_groupInterface)
+        JR.lset(f, :id, JR.int32(JR.call(JR.lget(f, :groupInterface), :jm_getGroupId, [])))
+        JR.lset(f, :size, JR.call(JR.get(this, :list), :jm_size, []))
+        JR.lset(f, :index, JR.int32(JR.lget(f, :size) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            if (JR.lget(f, :id) != JR.lget(f, :index)) do
+                JR.lset(f, :groupSize, JR.call(this, :jm_getGroupSizeById, [JR.lget(f, :index)]))
+                if (JR.lget(f, :groupSize) != 0) do
+                    JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["Group Size: "]), :jm_appendint, [JR.lget(f, :groupSize)]), :jm_toString, []), this, "areAllOtherGroupsEmpty"])
+                    throw({:jreturn, false})
                 end
-            end, lists:seq(0, Size2 - 1))
-        end, lists:seq((Size - 1), 0, -1)),
-        false
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
-
-areAllOtherGroupsLessThan(This, ExcludeGroupList, MaxSize) when is_integer(MaxSize) ->
-        try
-        Size = (get({get({This, list}), '$class'})):size(get({This, list})),
-        lists:foreach(fun(Index) ->
-            case (not (get({This, '$class'})):isIdInList(This, Index, ExcludeGroupList)) of
-                true ->
-                GroupSize = (get({This, '$class'})):getGroupSizeById(This, Index),
-                case (GroupSize >= MaxSize) of
-                    true ->
-                    throw({'$return', false});
-                    false -> ok
-                end;
-                false -> ok
             end
-        end, lists:seq((Size - 1), 0, -1)),
-        true
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        end)
+        throw({:jreturn, true})
+    end)
+  end
 
-init(This, Total) when is_integer(Total) ->
-        (fun Loop() -> case ((get({get({This, list}), '$class'})):size(get({This, list})) =< (Total + 1)) of true ->
-            (get({get({This, list}), '$class'})):add(get({This, list}), 'BasicArrayListD':new()),
-            Loop();
-        false -> ok end end)().
 
-onEvent(This, EventObject) ->
-        'ForcedLogUtil':log(get({'EventStrings':getInstance(), 'PERFORMANCE_MESSAGE'}), This).
+  def jm_isIdInList(this, p_id, p_excludeGroupList) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :id, p_id)
+      JR.lset(f, :excludeGroupList, p_excludeGroupList)
+        JR.lset(f, :size, JR.call(JR.lget(f, :excludeGroupList), :jm_size, []))
+        JR.lset(f, :groupInterfaceArray, nil)
+        JR.lset(f, :groupInterface, nil)
+        JR.lset(f, :groupId, 0)
+        JR.lset(f, :index, JR.int32(JR.lget(f, :size) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.lset(f, :groupInterfaceArray, JR.aget(JR.get(JR.lget(f, :excludeGroupList), :objectArray), JR.lget(f, :index)))
+            JR.lset(f, :size2, JR.alength(JR.lget(f, :groupInterfaceArray)))
+            JR.lset(f, :index2, 0)
+            JR.jfor(fn -> (JR.lget(f, :index2) < JR.lget(f, :size2)) end, fn -> JR.lpostinc(f, :index2, 1) end, fn ->
+                JR.lset(f, :groupInterface, JR.aget(JR.lget(f, :groupInterfaceArray), JR.lget(f, :index2)))
+                JR.lset(f, :groupId, JR.int32(JR.call(JR.lget(f, :groupInterface), :jm_getGroupId, [])))
+                if (JR.lget(f, :groupId) == JR.lget(f, :id)) do
+                    throw({:jreturn, true})
+                end
+            end)
+        end)
+        throw({:jreturn, false})
+    end)
+  end
 
-% throws Exception
-onCreateLayerManagerEvent(This, LayerManagerEvent) ->
-        LayerInterface = (get({LayerManagerEvent, '$class'})):getLayerInterface(LayerManagerEvent),
-        GroupInterfaceArray = (get({LayerInterface, '$class'})):getGroupInterface(LayerInterface),
-        Size = array:size(GroupInterfaceArray),
-        put({local, id}, 0),
-        put({local, groupList}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, id}, trunc((fun(Target_N69177) -> (get({Target_N69177, '$class'})):getGroupId(Target_N69177) end)(array:get(Index, GroupInterfaceArray)))),
-            put({local, groupList}, array:get(get({local, id}), get({get({This, list}), objectArray}))),
-            case (get({local, groupList}) =:= undefined) of
-                true ->
-                (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N69319) -> (get({Target_N69319, '$class'})):toString(Target_N69319) end)((fun(Target_N69326) -> (get({Target_N69326, '$class'})):appendint(Target_N69326, get({local, id})) end)((fun(Target_N69333) -> (get({Target_N69333, '$class'})):append(Target_N69333, "id: ") end)('StringMaker':new()))), This, "onCreateLayerManagerEvent");
-                false -> ok
-            end,
-            case (not (get({get({local, groupList}), '$class'})):contains(get({local, groupList}), LayerInterface)) of
-                true ->
-                (get({get({local, groupList}), '$class'})):add(get({local, groupList}), LayerInterface);
-                false ->
-                ok
+
+  def jm_areAllOtherGroupsLessThan(this, p_excludeGroupList, p_maxSize) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :excludeGroupList, p_excludeGroupList)
+      JR.lset(f, :maxSize, p_maxSize)
+        JR.lset(f, :size, JR.call(JR.get(this, :list), :jm_size, []))
+        JR.lset(f, :index, JR.int32(JR.lget(f, :size) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            if !JR.call(this, :jm_isIdInList, [JR.lget(f, :index), JR.lget(f, :excludeGroupList)]) do
+                JR.lset(f, :groupSize, JR.call(this, :jm_getGroupSizeById, [JR.lget(f, :index)]))
+                if (JR.lget(f, :groupSize) >= JR.lget(f, :maxSize)) do
+                    throw({:jreturn, false})
+                end
             end
-        end, lists:seq(0, Size - 1)).
+        end)
+        throw({:jreturn, true})
+    end)
+  end
 
-% throws Exception
-onDeleteLayerManagerEvent(This, LayerManagerEvent) ->
-        LayerInterface = (get({LayerManagerEvent, '$class'})):getLayerInterface(LayerManagerEvent),
-        GroupInterfaceArray = (get({LayerInterface, '$class'})):getGroupInterface(LayerInterface),
-        Size = array:size(GroupInterfaceArray),
-        put({local, id}, 0),
-        put({local, groupList}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, id}, trunc((fun(Target_N69842) -> (get({Target_N69842, '$class'})):getGroupId(Target_N69842) end)(array:get(Index, GroupInterfaceArray)))),
-            put({local, groupList}, array:get(get({local, id}), get({get({This, list}), objectArray}))),
-            (get({get({local, groupList}), '$class'})):remove(get({local, groupList}), LayerInterface)
-        end, lists:seq(0, Size - 1)).
 
-log(This) ->
-        StringBuffer = 'StringMaker':new(),
-        GROUP = "Group: ",
-        SPACE = get({'CommonSeps':getInstance(), 'SPACE'}),
-        TOTAL_LABEL = get({'CommonLabels':getInstance(), 'TOTAL_LABEL'}),
-        Size = (get({get({This, list}), '$class'})):size(get({This, list})),
-        lists:foreach(fun(Index) ->
-            GroupList = array:get(Index, get({get({This, list}), objectArray})),
-            (get({StringBuffer, '$class'})):append(StringBuffer, GROUP),
-            (get({StringBuffer, '$class'})):appendint(StringBuffer, Index),
-            (get({StringBuffer, '$class'})):append(StringBuffer, SPACE),
-            (get({StringBuffer, '$class'})):append(StringBuffer, TOTAL_LABEL),
-            (get({StringBuffer, '$class'})):appendint(StringBuffer, (get({GroupList, '$class'})):size(GroupList)),
-            (get({StringBuffer, '$class'})):append(StringBuffer, SPACE)
-        end, lists:seq((Size - 1), 0, -1)),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({StringBuffer, '$class'})):toString(StringBuffer), This, "log").
+  def jm_init(this, p_total) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :total, p_total)
+        JR.jwhile(fn -> (JR.call(JR.get(this, :list), :jm_size, []) <= JR.int32(JR.lget(f, :total) + 1)) end, fn ->
+            JR.call(JR.get(this, :list), :jm_add, [BasicArrayListD.jnew()])
+        end)
+    end)
+  end
+
+
+  def jm_onEvent(this, p_eventObject) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+        ForcedLogUtil.jm_log(JR.get(EventStrings.jm_getInstance(), :PERFORMANCE_MESSAGE), this)
+    end)
+  end
+
+
+  def jm_onCreateLayerManagerEvent(this, p_layerManagerEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerManagerEvent, p_layerManagerEvent)
+        JR.lset(f, :layerInterface, JR.call(JR.lget(f, :layerManagerEvent), :jm_getLayerInterface, []))
+        JR.lset(f, :groupInterfaceArray, JR.call(JR.lget(f, :layerInterface), :jm_getGroupInterface, []))
+        JR.lset(f, :size, JR.alength(JR.lget(f, :groupInterfaceArray)))
+        JR.lset(f, :id, 0)
+        JR.lset(f, :groupList, nil)
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :id, JR.int32(JR.call(JR.aget(JR.lget(f, :groupInterfaceArray), JR.lget(f, :index)), :jm_getGroupId, [])))
+            JR.lset(f, :groupList, JR.aget(JR.get(JR.get(this, :list), :objectArray), JR.lget(f, :id)))
+            if (JR.lget(f, :groupList) == nil) do
+                JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["id: "]), :jm_appendint, [JR.lget(f, :id)]), :jm_toString, []), this, "onCreateLayerManagerEvent"])
+            end
+            if !JR.call(JR.lget(f, :groupList), :jm_contains, [JR.lget(f, :layerInterface)]) do
+                JR.call(JR.lget(f, :groupList), :jm_add, [JR.lget(f, :layerInterface)])
+            else
+                nil
+            end
+        end)
+    end)
+  end
+
+
+  def jm_onDeleteLayerManagerEvent(this, p_layerManagerEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerManagerEvent, p_layerManagerEvent)
+        JR.lset(f, :layerInterface, JR.call(JR.lget(f, :layerManagerEvent), :jm_getLayerInterface, []))
+        JR.lset(f, :groupInterfaceArray, JR.call(JR.lget(f, :layerInterface), :jm_getGroupInterface, []))
+        JR.lset(f, :size, JR.alength(JR.lget(f, :groupInterfaceArray)))
+        JR.lset(f, :id, 0)
+        JR.lset(f, :groupList, nil)
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :id, JR.int32(JR.call(JR.aget(JR.lget(f, :groupInterfaceArray), JR.lget(f, :index)), :jm_getGroupId, [])))
+            JR.lset(f, :groupList, JR.aget(JR.get(JR.get(this, :list), :objectArray), JR.lget(f, :id)))
+            JR.call(JR.lget(f, :groupList), :jm_remove, [JR.lget(f, :layerInterface)])
+        end)
+    end)
+  end
+
+
+  def jm_log(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.lset(f, :GROUP, "Group: ")
+        JR.lset(f, :SPACE, JR.get(CommonSeps.jm_getInstance(), :SPACE))
+        JR.lset(f, :TOTAL_LABEL, JR.get(CommonLabels.jm_getInstance(), :TOTAL_LABEL))
+        JR.lset(f, :size, JR.call(JR.get(this, :list), :jm_size, []))
+        JR.lset(f, :index, JR.int32(JR.lget(f, :size) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.lset(f, :groupList, JR.aget(JR.get(JR.get(this, :list), :objectArray), JR.lget(f, :index)))
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.lget(f, :GROUP)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.lget(f, :index)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.lget(f, :SPACE)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.lget(f, :TOTAL_LABEL)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.call(JR.lget(f, :groupList), :jm_size, [])])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.lget(f, :SPACE)])
+        end)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :stringBuffer), :jm_toString, []), this, "log"])
+    end)
+  end
+end
+
 

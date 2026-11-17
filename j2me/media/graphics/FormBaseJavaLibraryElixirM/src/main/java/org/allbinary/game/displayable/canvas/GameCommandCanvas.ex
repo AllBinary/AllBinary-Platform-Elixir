@@ -1,263 +1,409 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import javax.microedition.lcdui.CommandListener
-% import javax.microedition.lcdui.Font
-% import javax.microedition.lcdui.Graphics
-% import javax.microedition.lcdui.NullCommandListener
-% import org.allbinary.canvas.Processor
-% import org.allbinary.game.commands.GameCommandsFactory
-% import org.allbinary.game.configuration.feature.Features
-% import org.allbinary.game.configuration.feature.InputFeatureFactory
-% import org.allbinary.game.displayable.RepaintBehavior
-% import org.allbinary.game.input.GameInputStrings
-% import org.allbinary.game.input.GameKey
-% import org.allbinary.game.input.GameKeyFactory
-% import org.allbinary.game.input.PlatformInputMappingFactory
-% import org.allbinary.game.input.event.DownGameKeyEventHandler
-% import org.allbinary.game.input.event.GameKeyEvent
-% import org.allbinary.game.input.event.GameKeyEventFactory
-% import org.allbinary.game.input.event.GameKeyEventHandler
-% import org.allbinary.game.input.event.UpGameKeyEventHandler
-% import org.allbinary.game.input.mapping.InputToGameKeyMapping
-% import org.allbinary.graphics.PointFactory
-% import org.allbinary.graphics.Rectangle
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.displayable.CanvasStrings
-% import org.allbinary.graphics.displayable.DisplayInfoSingleton
-% import org.allbinary.graphics.displayable.MyCanvas
-% import org.allbinary.graphics.displayable.event.DisplayChangeEvent
-% import org.allbinary.graphics.displayable.event.DisplayChangeEventHandler
-% import org.allbinary.graphics.displayable.event.DisplayChangeEventListener
-% import org.allbinary.graphics.displayable.screen.ScreenRepaintProcessorFactory
-% import org.allbinary.graphics.font.MyFontProcessor
-% import org.allbinary.graphics.font.UpdateMyFontInterface
-% import org.allbinary.graphics.font.UpdateMyFontProcessor
-% import org.allbinary.graphics.form.CommandCurrentSelectionFormFactory
-% import org.allbinary.graphics.form.FormPaintable
-% import org.allbinary.graphics.form.FormTypeFactory
-% import org.allbinary.graphics.form.PaintableForm
-% import org.allbinary.graphics.form.ScrollSelectionForm
-% import org.allbinary.graphics.form.ScrollSelectionFormNoneFactory
-% import org.allbinary.graphics.form.item.CommandTextItemArrayFactory
-% import org.allbinary.graphics.form.item.ABCustomItem
-% import org.allbinary.graphics.form.item.validation.AllCommandsVisitor
-% import org.allbinary.graphics.paint.NullPaintable
-% import org.allbinary.graphics.paint.Paintable
-% import org.allbinary.input.motion.gesture.observer.BasicMotionGesturesHandler
-% import org.allbinary.logic.communication.log.ForcedLogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.logic.util.event.AllBinaryEventObject
-% import org.allbinary.logic.util.event.EventStrings
-% import org.allbinary.string.CommonSeps
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('GameCommandCanvas').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements MenuListener
-% implements DisplayChangeEventListener
-% implements UpdateMyFontInterface
+defmodule GameCommandCanvas do
+  def jsuper(), do: MyCanvas
+def jstatic_id(), do: JR.static_get(__MODULE__, :id, fn -> 0 end)
+  def jstatic_set_id(value), do: JR.static_put(__MODULE__, :id, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('MyCanvas', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, id}, 0),
-    ok.
-
-init_fields(This) ->
-    put({This, repaintProcessor}, (fun(Target_N67235) -> (get({Target_N67235, '$class'})):create(Target_N67235, This) end)('ScreenRepaintProcessorFactory':getInstance())),
-    put({This, gameInputStrings}, 'GameInputStrings':getInstance()),
-    put({This, foregroundBasicColor}, undefined),
-    put({This, backgroundBasicColor}, undefined),
-    put({This, inputToGameKeyMapping}, (fun(Target_N67455) -> (get({Target_N67455, '$class'})):getInputMapping(Target_N67455) end)((fun(Target_N67462) -> (get({Target_N67462, '$class'})):getPersistentInputMappingInstance(Target_N67462) end)('PlatformInputMappingFactory':getInstance()))),
-    put({This, gameKeyFactory}, 'GameKeyFactory':getInstance()),
-    put({This, gameKeyEventFactory}, 'GameKeyEventFactory':getInstance()),
-    put({This, downGameKeyEventHandler}, 'DownGameKeyEventHandler':getInstance()),
-    put({This, upGameKeyEventHandler}, 'UpGameKeyEventHandler':getInstance()),
-    put({This, repaintBehavior}, undefined),
-    put({This, updateMyFontProcessor}, 'UpdateMyFontProcessor':new(This)),
-    put({This, myFontProcessor}, get({This, updateMyFontProcessor})),
-    put({This, foregroundColor}, 0),
-    put({This, backgroundColor}, 0),
-    put({This, menuInputProcessor}, 'NoMenuInputProcessor':getInstance()),
-    put({This, menuPaintable}, 'NullPaintable':getInstance()),
-    put({This, menuForm}, 'PaintableForm':getNullPaintableForm()),
-    put({This, isSingleKeyRepeatableProcessing}, (fun(Target_N68034) -> (get({Target_N68034, '$class'})):isFeature(Target_N68034, get({'InputFeatureFactory':getInstance(), 'SINGLE_KEY_REPEAT_PRESS'})) end)('Features':getInstance())),
-    put({This, fontHeight}, 0),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :repaintProcessor, nil)
+    JR.put(this, :gameInputStrings, nil)
+    JR.put(this, :foregroundBasicColor, nil)
+    JR.put(this, :backgroundBasicColor, nil)
+    JR.put(this, :inputToGameKeyMapping, nil)
+    JR.put(this, :gameKeyFactory, nil)
+    JR.put(this, :gameKeyEventFactory, nil)
+    JR.put(this, :downGameKeyEventHandler, nil)
+    JR.put(this, :upGameKeyEventHandler, nil)
+    JR.put(this, :repaintBehavior, nil)
+    JR.put(this, :updateMyFontProcessor, nil)
+    JR.put(this, :myFontProcessor, nil)
+    JR.put(this, :foregroundColor, 0)
+    JR.put(this, :backgroundColor, 0)
+    JR.put(this, :menuInputProcessor, nil)
+    JR.put(this, :menuPaintable, nil)
+    JR.put(this, :menuForm, nil)
+    JR.put(this, :isSingleKeyRepeatableProcessing, false)
+    JR.put(this, :fontHeight, 0)
+        JR.put(this, :repaintProcessor, JR.call(ScreenRepaintProcessorFactory.jm_getInstance(), :jm_create, [this]))
+        JR.put(this, :gameInputStrings, GameInputStrings.jm_getInstance())
+        
+        
+        JR.put(this, :inputToGameKeyMapping, JR.call(JR.call(PlatformInputMappingFactory.jm_getInstance(), :jm_getPersistentInputMappingInstance, []), :jm_getInputMapping, []))
+        JR.put(this, :gameKeyFactory, GameKeyFactory.jm_getInstance())
+        JR.put(this, :gameKeyEventFactory, GameKeyEventFactory.jm_getInstance())
+        JR.put(this, :downGameKeyEventHandler, DownGameKeyEventHandler.jm_getInstance())
+        JR.put(this, :upGameKeyEventHandler, UpGameKeyEventHandler.jm_getInstance())
+        
+        JR.put(this, :updateMyFontProcessor, UpdateMyFontProcessor.jnew(this))
+        JR.put(this, :myFontProcessor, JR.get(this, :updateMyFontProcessor))
+        
+        
+        JR.put(this, :menuInputProcessor, NoMenuInputProcessor.jm_getInstance())
+        JR.put(this, :menuPaintable, NullPaintable.jm_getInstance())
+        JR.put(this, :menuForm, PaintableForm.jm_getNullPaintableForm())
+        JR.put(this, :isSingleKeyRepeatableProcessing, JR.call(Features.jm_getInstance(), :jm_isFeature, [JR.get(InputFeatureFactory.jm_getInstance(), :SINGLE_KEY_REPEAT_PRESS)]))
+        JR.put(this, :fontHeight, 0)
+    nil
+  end
 
 
-new(CmdListener, Name, BackgroundBasicColor, ForegroundBasicColor) when (is_list(Name) orelse Name =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, CmdListener, Name, BackgroundBasicColor, ForegroundBasicColor),
-    This.
-
-'$init'(This, CmdListener, Name, BackgroundBasicColor, ForegroundBasicColor) when (is_list(Name) orelse Name =:= undefined) ->
-        'MyCanvas':'$init'(This, Name, get({'CanvasStrings':getInstance(), 'EMPTY_CHILD_NAME_LIST'})),
-        init_fields(This),
-        put({This, repaintBehavior}, 'RepaintBehavior':getInstance()),
-        put({This, foregroundBasicColor}, ForegroundBasicColor),
-        put({This, backgroundBasicColor}, BackgroundBasicColor),
-        put({This, foregroundColor}, (get({get({This, foregroundBasicColor}), '$class'})):intValue(get({This, foregroundBasicColor}))),
-        put({This, backgroundColor}, (get({get({This, backgroundBasicColor}), '$class'})):intValue(get({This, backgroundBasicColor}))),
-        (get({This, '$class'})):initCommands(This, CmdListener),
-        case (CmdListener =/= get({'NullCommandListener', 'NULL_COMMAND_LISTENER'})) of
-            true ->
-            try
-                (get({This, '$class'})):initMenu(This),
-                (get({get({This, repaintProcessor}), '$class'})):process(get({This, repaintProcessor}))
-            catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-                erlang:error({'RuntimeException'})
-            end;
-            false -> ok
-        end.
-
-updateMeasurement(This, Graphics) ->
-        try
-            Font = (get({Graphics, '$class'})):getFont(Graphics),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N68716) -> (get({Target_N68716, '$class'})):toString(Target_N68716) end)((fun(Target_N68723) -> (get({Target_N68723, '$class'})):appendint(Target_N68723, trunc((get({Font, '$class'})):getHeight(Font))) end)((fun(Target_N68730) -> (get({Target_N68730, '$class'})):append(Target_N68730, get({get({This, canvasStrings}), 'FD_HEIGHT'})) end)((fun(Target_N68737) -> (get({Target_N68737, '$class'})):appendint(Target_N68737, trunc('MyFontProcessor':defaultCharWidth(Font))) end)((fun(Target_N68744) -> (get({Target_N68744, '$class'})):append(Target_N68744, get({get({This, canvasStrings}), 'FD_WIDTH'})) end)((fun(Target_N68751) -> (get({Target_N68751, '$class'})):append(Target_N68751, get({get({This, commonStrings}), 'START'})) end)('StringMaker':new())))))), This, get({get({This, canvasStrings}), 'UPDATE_MEASUREMENT'})),
-            put({This, fontHeight}, (get({Font, '$class'})):getHeight(Font)),
-            Rectangle = (get({This, '$class'})):createRectangle(This, (get({get({This, menuForm}), '$class'})):size(get({This, menuForm}))),
-            (get({get({This, menuForm}), '$class'})):init(get({This, menuForm}), Rectangle, get({'FormTypeFactory':getInstance(), 'VERTICAL_CENTER_FORM'})),
-            (get({This, '$class'})):update(This)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, canvasStrings}), 'ON_DISPLAY_CHANGE_EVENT'}), E)
-        end,
-        put({This, myFontProcessor}, 'MyFontProcessor':getInstance()).
-
-onEvent(This, EventObject) ->
-        'ForcedLogUtil':log(get({'EventStrings':getInstance(), 'PERFORMANCE_MESSAGE'}), This).
-
-onDisplayChangeEvent(This, DisplayChangeEvent) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N69440) -> (get({Target_N69440, '$class'})):toString(Target_N69440) end)((fun(Target_N69447) -> (get({Target_N69447, '$class'})):append(Target_N69447, (fun(Target_N69498) -> (get({Target_N69498, '$class'})):toString(Target_N69498) end)('DisplayInfoSingleton':getInstance())) end)((fun(Target_N69454) -> (get({Target_N69454, '$class'})):append(Target_N69454, get({get({This, commonStrings}), 'START'})) end)('StringMaker':new()))), This, get({get({This, canvasStrings}), 'ON_DISPLAY_CHANGE_EVENT'})),
-        put({This, myFontProcessor}, get({This, updateMyFontProcessor})).
-
-initCommands(This, CmdListener) ->
-        (get({This, '$class'})):removeAllCommands(This),
-        (get({This, '$class'})):addCommand(This, get({'GameCommandsFactory':getInstance(), 'CLOSE_AND_SHOW_GAME_CANVAS'})),
-        (get({This, '$class'})):setCommandListener(This, CmdListener).
-
-% throws Exception
-initMenu(This) ->
-        Form = (get({This, '$class'})):createForm(This),
-        put({This, menuForm}, Form),
-        case (Form =/= 'ScrollSelectionFormNoneFactory':getInstance()) of
-            true ->
-            (get({This, '$class'})):setMenuInputProcessor(This, 'ImmediateCommandFormInputProcessor':new('BasicArrayListD':new(), (-1), This, Form)),
-            put({This, menuPaintable}, 'FormPaintable':new(Form));
-            false -> ok
-        end,
-        (get({get({This, repaintBehavior}), '$class'})):onChangeRepaint(get({This, repaintBehavior}), This).
-
-% throws Exception
-createForm(This) ->
-        Items = (fun(Target_N70091) -> (get({Target_N70091, '$class'})):getInstance(Target_N70091, (get({This, '$class'})):getCommandStack(This), get({This, backgroundBasicColor}), get({This, foregroundBasicColor})) end)('CommandTextItemArrayFactory':new('AllCommandsVisitor':new())),
-        Rectangle = (get({This, '$class'})):createRectangle(This, array:size(Items)),
-        'CommandCurrentSelectionFormFactory':getInstance(get({'StringUtil':getInstance(), 'EMPTY_STRING'}), Items, Rectangle, get({'FormTypeFactory':getInstance(), 'VERTICAL_CENTER_FORM'}), 15, false, get({This, backgroundBasicColor}), get({This, foregroundBasicColor})).
-
-createRectangle(This, Size) when is_integer(Size) ->
-        Height = (Size * get({This, fontHeight})),
-        StartY = (((((get({get({This, displayInfo}), '$class'})):getLastHeight(get({This, displayInfo})) * 2) / 3)) - Height),
-        PointFactory = 'PointFactory':getInstance(),
-        Rectangle = 'Rectangle':new((get({PointFactory, '$class'})):createXY(PointFactory, 30, StartY), ((get({get({This, displayInfo}), '$class'})):getLastWidth(get({This, displayInfo})) - 30), StartY),
-        Rectangle.
-
-open(This) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, "open"),
-        (fun(Target_N70837) -> (get({Target_N70837, '$class'})):addListenerInterface(Target_N70837, (get({This, '$class'})):getMenuInputProcessor(This)) end)('BasicMotionGesturesHandler':getInstance()),
-        (fun(Target_N70879) -> (get({Target_N70879, '$class'})):addListener(Target_N70879, (get({This, '$class'})):getMenuInputProcessor(This)) end)('GameKeyEventHandler':getInstance()),
-        (fun(Target_N70921) -> (get({Target_N70921, '$class'})):addListenerInterface(Target_N70921, This) end)('DisplayChangeEventHandler':getInstance()).
-
-% throws Exception
-close(This) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, get({get({This, commonStrings}), 'CLOSE'})),
-        (fun(Target_N71058) -> (get({Target_N71058, '$class'})):removeListener(Target_N71058, (get({This, '$class'})):getMenuInputProcessor(This)) end)('BasicMotionGesturesHandler':getInstance()),
-        (fun(Target_N71100) -> (get({Target_N71100, '$class'})):removeListener(Target_N71100, (get({This, '$class'})):getMenuInputProcessor(This)) end)('GameKeyEventHandler':getInstance()),
-        (fun(Target_N71142) -> (get({Target_N71142, '$class'})):removeListener(Target_N71142, This) end)('DisplayChangeEventHandler':getInstance()).
-
-% throws Exception
-update(This) ->
-        (get({get({This, repaintProcessor}), '$class'})):process(get({This, repaintProcessor})).
-
-getSourceId(This) ->
-        get({'GameCommandCanvas', id}).
-
-keyPressed(This, KeyCode) when is_integer(KeyCode) ->
-        (get({This, '$class'})):keyPressedByDevice(This, KeyCode, 0).
-
-keyReleased(This, KeyCode) when is_integer(KeyCode) ->
-        (get({This, '$class'})):keyReleasedByDevice(This, KeyCode, 0).
-
-keyRepeated(This, KeyCode) when is_integer(KeyCode) ->
-        (get({This, '$class'})):keyRepeatedByDevice(This, KeyCode, 0).
-
-keyPressedByDevice(This, KeyCode, DeviceId) when is_integer(KeyCode), is_integer(DeviceId) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N71626) -> (get({Target_N71626, '$class'})):toString(Target_N71626) end)((fun(Target_N71633) -> (get({Target_N71633, '$class'})):appendint(Target_N71633, KeyCode) end)((fun(Target_N71640) -> (get({Target_N71640, '$class'})):append(Target_N71640, get({'CommonSeps':getInstance(), 'SPACE'})) end)('StringMaker':new()))), This, get({get({This, gameInputStrings}), 'KEY_PRESSED'})),
-        (get({This, '$class'})):addGameKeyEvent(This, KeyCode, 0, false).
-
-keyReleasedByDevice(This, KeyCode, DeviceId) when is_integer(KeyCode), is_integer(DeviceId) ->
-        (get({This, '$class'})):removeGameKeyEvent(This, KeyCode, DeviceId, false).
-
-keyRepeatedByDevice(This, KeyCode, DeviceId) when is_integer(KeyCode), is_integer(DeviceId) ->
-        case get({This, isSingleKeyRepeatableProcessing}) of
-            true ->
-            (get({This, '$class'})):addGameKeyEvent(This, KeyCode, DeviceId, true);
-            false -> ok
-        end.
-
-addGameKeyEvent(This, KeyCode, DeviceId, Repeated) when is_integer(KeyCode), is_integer(DeviceId), is_boolean(Repeated) ->
-        try
-            GameKey = (get({get({This, inputToGameKeyMapping}), '$class'})):getInstanceForCanvas(get({This, inputToGameKeyMapping}), This, KeyCode),
-            case (GameKey =/= get({get({This, gameKeyFactory}), 'NONE'})) of
-                true ->
-                GameKeyEvent = (get({get({This, gameKeyEventFactory}), '$class'})):getInstanceForInput(get({This, gameKeyEventFactory}), This, GameKey),
-                (get({get({This, downGameKeyEventHandler}), '$class'})):fireEvent(get({This, downGameKeyEventHandler}), GameKeyEvent),
-                (fun(Target_N72453) -> (get({Target_N72453, '$class'})):fireEvent(Target_N72453, GameKeyEvent) end)((get({get({This, downGameKeyEventHandler}), '$class'})):getInstanceForDevice(get({This, downGameKeyEventHandler}), DeviceId));
-                false ->
-                (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N72244) -> (get({Target_N72244, '$class'})):toString(Target_N72244) end)((fun(Target_N72251) -> (get({Target_N72251, '$class'})):appendint(Target_N72251, KeyCode) end)((fun(Target_N72258) -> (get({Target_N72258, '$class'})):append(Target_N72258, get({get({This, gameInputStrings}), 'NO_KEY'})) end)('StringMaker':new()))), This, get({get({This, gameInputStrings}), 'ADD_KEY_EVENT'}))
+  def jinit(this, p_cmdListener, p_name, p_backgroundBasicColor, p_foregroundBasicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cmdListener, p_cmdListener)
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :backgroundBasicColor, p_backgroundBasicColor)
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+        MyCanvas.jinit(this, JR.lget(f, :name), JR.get(CanvasStrings.jm_getInstance(), :EMPTY_CHILD_NAME_LIST))
+        GameCommandCanvas.jinitfields(this)
+        JR.put(this, :repaintBehavior, RepaintBehavior.jm_getInstance())
+        JR.put(this, :foregroundBasicColor, JR.lget(f, :foregroundBasicColor))
+        JR.put(this, :backgroundBasicColor, JR.lget(f, :backgroundBasicColor))
+        JR.put(this, :foregroundColor, JR.call(JR.get(this, :foregroundBasicColor), :jm_intValue, []))
+        JR.put(this, :backgroundColor, JR.call(JR.get(this, :backgroundBasicColor), :jm_intValue, []))
+        JR.call(this, :jm_initCommands, [JR.lget(f, :cmdListener)])
+        if (JR.lget(f, :cmdListener) != NullCommandListener.jstatic_NULL_COMMAND_LISTENER()) do
+            try do
+                JR.call(this, :jm_initMenu, [])
+                JR.call(JR.get(this, :repaintProcessor), :jm_process, [])
+            catch
+                {:jexception, jexception} ->
+                    JR.lset(f, :e, jexception)
+                throw({:jexception, JR.exception("RuntimeException", "")})
             end
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), "Key Event Error", This, get({get({This, gameInputStrings}), 'ADD_KEY_EVENT'}), E)
-        end.
+        end
+    end)
+  end
 
-removeGameKeyEvent(This, KeyCode, DeviceId, Repeated) when is_integer(KeyCode), is_integer(DeviceId), is_boolean(Repeated) ->
-        try
-            GameKey = (get({get({This, inputToGameKeyMapping}), '$class'})):getInstanceForCanvas(get({This, inputToGameKeyMapping}), This, KeyCode),
-            case (GameKey =/= get({get({This, gameKeyFactory}), 'NONE'})) of
-                true ->
-                GameKeyEvent = (get({get({This, gameKeyEventFactory}), '$class'})):getInstanceForInput(get({This, gameKeyEventFactory}), This, GameKey),
-                (get({get({This, upGameKeyEventHandler}), '$class'})):fireEvent(get({This, upGameKeyEventHandler}), GameKeyEvent),
-                (fun(Target_N73043) -> (get({Target_N73043, '$class'})):fireEvent(Target_N73043, GameKeyEvent) end)((get({get({This, upGameKeyEventHandler}), '$class'})):getInstanceForDevice(get({This, upGameKeyEventHandler}), DeviceId));
-                false ->
-                (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N72834) -> (get({Target_N72834, '$class'})):toString(Target_N72834) end)((fun(Target_N72841) -> (get({Target_N72841, '$class'})):appendint(Target_N72841, KeyCode) end)((fun(Target_N72848) -> (get({Target_N72848, '$class'})):append(Target_N72848, get({get({This, gameInputStrings}), 'NO_KEY'})) end)('StringMaker':new()))), This, get({get({This, gameInputStrings}), 'REMOVE_KEY_EVENT'}))
+  def jnew(p_cmdListener, p_name, p_backgroundBasicColor, p_foregroundBasicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_cmdListener, p_name, p_backgroundBasicColor, p_foregroundBasicColor)
+    this
+  end
+
+
+  def jm_updateMeasurement(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        try do
+            JR.lset(f, :font, JR.call(JR.lget(f, :graphics), :jm_getFont, []))
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :commonStrings), :START)]), :jm_append, [JR.get(JR.get(this, :canvasStrings), :FD_WIDTH)]), :jm_appendint, [JR.int32(MyFontProcessor.jm_defaultCharWidth(JR.lget(f, :font)))]), :jm_append, [JR.get(JR.get(this, :canvasStrings), :FD_HEIGHT)]), :jm_appendint, [JR.int32(JR.call(JR.lget(f, :font), :jm_getHeight, []))]), :jm_toString, []), this, JR.get(JR.get(this, :canvasStrings), :UPDATE_MEASUREMENT)])
+            JR.put(this, :fontHeight, JR.call(JR.lget(f, :font), :jm_getHeight, []))
+            JR.lset(f, :rectangle, JR.call(this, :jm_createRectangle, [JR.call(JR.get(this, :menuForm), :jm_size, [])]))
+            JR.call(JR.get(this, :menuForm), :jm_init, [JR.lget(f, :rectangle), JR.get(FormTypeFactory.jm_getInstance(), :VERTICAL_CENTER_FORM)])
+            JR.call(this, :jm_update, [])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :canvasStrings), :ON_DISPLAY_CHANGE_EVENT), JR.lget(f, :e)])
+        end
+        JR.put(this, :myFontProcessor, MyFontProcessor.jm_getInstance())
+    end)
+  end
+
+
+  def jm_onEvent(this, p_eventObject) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+        ForcedLogUtil.jm_log(JR.get(EventStrings.jm_getInstance(), :PERFORMANCE_MESSAGE), this)
+    end)
+  end
+
+
+  def jm_onDisplayChangeEvent(this, p_displayChangeEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :displayChangeEvent, p_displayChangeEvent)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :commonStrings), :START)]), :jm_append, [JR.call(DisplayInfoSingleton.jm_getInstance(), :jm_toString, [])]), :jm_toString, []), this, JR.get(JR.get(this, :canvasStrings), :ON_DISPLAY_CHANGE_EVENT)])
+        JR.put(this, :myFontProcessor, JR.get(this, :updateMyFontProcessor))
+    end)
+  end
+
+
+  def jm_initCommands(this, p_cmdListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cmdListener, p_cmdListener)
+        JR.call(this, :jm_removeAllCommands, [])
+        JR.call(this, :jm_addCommand, [JR.get(GameCommandsFactory.jm_getInstance(), :CLOSE_AND_SHOW_GAME_CANVAS)])
+        JR.call(this, :jm_setCommandListener, [JR.lget(f, :cmdListener)])
+    end)
+  end
+
+
+  def jm_initMenu(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :form, JR.call(this, :jm_createForm, []))
+        JR.put(this, :menuForm, JR.lget(f, :form))
+        if (JR.lget(f, :form) != ScrollSelectionFormNoneFactory.jm_getInstance()) do
+            JR.call(this, :jm_setMenuInputProcessor, [ImmediateCommandFormInputProcessor.jnew(BasicArrayListD.jnew(), -1, this, JR.lget(f, :form))])
+            JR.put(this, :menuPaintable, FormPaintable.jnew(JR.lget(f, :form)))
+        end
+        JR.call(JR.get(this, :repaintBehavior), :jm_onChangeRepaint, [this])
+    end)
+  end
+
+
+  def jm_createForm(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :items, JR.call(CommandTextItemArrayFactory.jnew(AllCommandsVisitor.jnew()), :jm_getInstance, [JR.call(this, :jm_getCommandStack, []), JR.get(this, :backgroundBasicColor), JR.get(this, :foregroundBasicColor)]))
+        JR.lset(f, :rectangle, JR.call(this, :jm_createRectangle, [JR.alength(JR.lget(f, :items))]))
+        throw({:jreturn, CommandCurrentSelectionFormFactory.jm_getInstance(JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), JR.lget(f, :items), JR.lget(f, :rectangle), JR.get(FormTypeFactory.jm_getInstance(), :VERTICAL_CENTER_FORM), 15, false, JR.get(this, :backgroundBasicColor), JR.get(this, :foregroundBasicColor))})
+    end)
+  end
+
+
+  def jm_createRectangle(this, p_size) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :size, p_size)
+        JR.lset(f, :height, JR.int32(JR.lget(f, :size) * JR.get(this, :fontHeight)))
+        JR.lset(f, :startY, ((((JR.call(JR.get(this, :displayInfo), :jm_getLastHeight, []) * 2) / 3)) - JR.lget(f, :height)))
+        JR.lset(f, :pointFactory, PointFactory.jm_getInstance())
+        JR.lset(f, :rectangle, Rectangle.jnew(JR.call(JR.lget(f, :pointFactory), :jm_createXY, [30, JR.lget(f, :startY)]), (JR.call(JR.get(this, :displayInfo), :jm_getLastWidth, []) - 30), JR.lget(f, :startY)))
+        throw({:jreturn, JR.lget(f, :rectangle)})
+    end)
+  end
+
+
+  def jm_open(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, "open"])
+        JR.call(BasicMotionGesturesHandler.jm_getInstance(), :jm_addListenerInterface, [JR.call(this, :jm_getMenuInputProcessor, [])])
+        JR.call(GameKeyEventHandler.jm_getInstance(), :jm_addListener, [JR.call(this, :jm_getMenuInputProcessor, [])])
+        JR.call(DisplayChangeEventHandler.jm_getInstance(), :jm_addListenerInterface, [this])
+    end)
+  end
+
+
+  def jm_close(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, JR.get(JR.get(this, :commonStrings), :CLOSE)])
+        JR.call(BasicMotionGesturesHandler.jm_getInstance(), :jm_removeListener, [JR.call(this, :jm_getMenuInputProcessor, [])])
+        JR.call(GameKeyEventHandler.jm_getInstance(), :jm_removeListener, [JR.call(this, :jm_getMenuInputProcessor, [])])
+        JR.call(DisplayChangeEventHandler.jm_getInstance(), :jm_removeListener, [this])
+    end)
+  end
+
+
+  def jm_update(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :repaintProcessor), :jm_process, [])
+    end)
+  end
+
+
+  def jm_getSourceId(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, GameCommandCanvas.jstatic_id()})
+    end)
+  end
+
+
+  def jm_keyPressed(this, p_keyCode) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+        JR.call(this, :jm_keyPressedByDevice, [JR.lget(f, :keyCode), 0])
+    end)
+  end
+
+
+  def jm_keyReleased(this, p_keyCode) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+        JR.call(this, :jm_keyReleasedByDevice, [JR.lget(f, :keyCode), 0])
+    end)
+  end
+
+
+  def jm_keyRepeated(this, p_keyCode) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+        JR.call(this, :jm_keyRepeatedByDevice, [JR.lget(f, :keyCode), 0])
+    end)
+  end
+
+
+  def jm_keyPressedByDevice(this, p_keyCode, p_deviceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+      JR.lset(f, :deviceId, p_deviceId)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :SPACE)]), :jm_appendint, [JR.lget(f, :keyCode)]), :jm_toString, []), this, JR.get(JR.get(this, :gameInputStrings), :KEY_PRESSED)])
+        JR.call(this, :jm_addGameKeyEvent, [JR.lget(f, :keyCode), 0, false])
+    end)
+  end
+
+
+  def jm_keyReleasedByDevice(this, p_keyCode, p_deviceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+      JR.lset(f, :deviceId, p_deviceId)
+        JR.call(this, :jm_removeGameKeyEvent, [JR.lget(f, :keyCode), JR.lget(f, :deviceId), false])
+    end)
+  end
+
+
+  def jm_keyRepeatedByDevice(this, p_keyCode, p_deviceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+      JR.lset(f, :deviceId, p_deviceId)
+        if JR.get(this, :isSingleKeyRepeatableProcessing) do
+            JR.call(this, :jm_addGameKeyEvent, [JR.lget(f, :keyCode), JR.lget(f, :deviceId), true])
+        end
+    end)
+  end
+
+
+  def jm_addGameKeyEvent(this, p_keyCode, p_deviceId, p_repeated) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+      JR.lset(f, :deviceId, p_deviceId)
+      JR.lset(f, :repeated, p_repeated)
+        try do
+            JR.lset(f, :gameKey, JR.call(JR.get(this, :inputToGameKeyMapping), :jm_getInstanceForCanvas, [this, JR.lget(f, :keyCode)]))
+            if (JR.lget(f, :gameKey) != JR.get(JR.get(this, :gameKeyFactory), :NONE)) do
+                JR.lset(f, :gameKeyEvent, JR.call(JR.get(this, :gameKeyEventFactory), :jm_getInstanceForInput, [this, JR.lget(f, :gameKey)]))
+                JR.call(JR.get(this, :downGameKeyEventHandler), :jm_fireEvent, [JR.lget(f, :gameKeyEvent)])
+                JR.call(JR.call(JR.get(this, :downGameKeyEventHandler), :jm_getInstanceForDevice, [JR.lget(f, :deviceId)]), :jm_fireEvent, [JR.lget(f, :gameKeyEvent)])
+            else
+                JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :gameInputStrings), :NO_KEY)]), :jm_appendint, [JR.lget(f, :keyCode)]), :jm_toString, []), this, JR.get(JR.get(this, :gameInputStrings), :ADD_KEY_EVENT)])
             end
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), "Key Event Error", This, get({get({This, gameInputStrings}), 'REMOVE_KEY_EVENT'}), E)
-        end.
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, ["Key Event Error", this, JR.get(JR.get(this, :gameInputStrings), :ADD_KEY_EVENT), JR.lget(f, :e)])
+        end
+    end)
+  end
 
-paint(This, Graphics) ->
-        (get({get({This, myFontProcessor}), '$class'})):process(get({This, myFontProcessor}), Graphics),
-        (get({get({This, menuPaintable}), '$class'})):paint(get({This, menuPaintable}), Graphics),
-        (get({get({This, repaintBehavior}), '$class'})):repaint(get({This, repaintBehavior}), This).
 
-setMenuInputProcessor(This, MenuInputProcessor) ->
-        put({This, menuInputProcessor}, MenuInputProcessor).
+  def jm_removeGameKeyEvent(this, p_keyCode, p_deviceId, p_repeated) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :keyCode, p_keyCode)
+      JR.lset(f, :deviceId, p_deviceId)
+      JR.lset(f, :repeated, p_repeated)
+        try do
+            JR.lset(f, :gameKey, JR.call(JR.get(this, :inputToGameKeyMapping), :jm_getInstanceForCanvas, [this, JR.lget(f, :keyCode)]))
+            if (JR.lget(f, :gameKey) != JR.get(JR.get(this, :gameKeyFactory), :NONE)) do
+                JR.lset(f, :gameKeyEvent, JR.call(JR.get(this, :gameKeyEventFactory), :jm_getInstanceForInput, [this, JR.lget(f, :gameKey)]))
+                JR.call(JR.get(this, :upGameKeyEventHandler), :jm_fireEvent, [JR.lget(f, :gameKeyEvent)])
+                JR.call(JR.call(JR.get(this, :upGameKeyEventHandler), :jm_getInstanceForDevice, [JR.lget(f, :deviceId)]), :jm_fireEvent, [JR.lget(f, :gameKeyEvent)])
+            else
+                JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :gameInputStrings), :NO_KEY)]), :jm_appendint, [JR.lget(f, :keyCode)]), :jm_toString, []), this, JR.get(JR.get(this, :gameInputStrings), :REMOVE_KEY_EVENT)])
+            end
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, ["Key Event Error", this, JR.get(JR.get(this, :gameInputStrings), :REMOVE_KEY_EVENT), JR.lget(f, :e)])
+        end
+    end)
+  end
 
-getMenuInputProcessor(This) ->
-        get({This, menuInputProcessor}).
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.get(this, :myFontProcessor), :jm_process, [JR.lget(f, :graphics)])
+        JR.call(JR.get(this, :menuPaintable), :jm_paint, [JR.lget(f, :graphics)])
+        JR.call(JR.get(this, :repaintBehavior), :jm_repaint, [this])
+    end)
+  end
+
+
+  def jm_setMenuInputProcessor(this, p_menuInputProcessor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :menuInputProcessor, p_menuInputProcessor)
+        JR.put(this, :menuInputProcessor, JR.lget(f, :menuInputProcessor))
+    end)
+  end
+
+
+  def jm_getMenuInputProcessor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :menuInputProcessor)})
+    end)
+  end
+end
+
 

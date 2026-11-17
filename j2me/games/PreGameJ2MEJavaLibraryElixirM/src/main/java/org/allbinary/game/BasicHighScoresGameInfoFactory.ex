@@ -1,41 +1,53 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game
 
--module('BasicHighScoresGameInfoFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule BasicHighScoresGameInfoFactory do
+  def jsuper(), do: JObject
+def jstatic_SINGLETON(), do: JR.static_get(__MODULE__, :SINGLETON, fn -> BasicHighScoresGameInfoFactory.jnew() end)
+  def jstatic_set_SINGLETON(value), do: JR.static_put(__MODULE__, :SINGLETON, value)
 
-static_init() ->
-    put({?MODULE, 'SINGLETON'}, 'BasicHighScoresGameInfoFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :MULTI_PLAYER_SERVER, nil)
+    JR.put(this, :SINGLE_PLAYER_SERVER, nil)
+        JR.put(this, :MULTI_PLAYER_SERVER, GameInfo.jnew(JR.get(GameTypeFactory.jm_getInstance(), :MULTI_PLAYER), GameMode.jstatic_SERVER(), JR.get(PlayerTypesFactory.jm_getInstance(), :PLAYER_TYPE_ONE), 0, 0))
+        JR.put(this, :SINGLE_PLAYER_SERVER, GameInfo.jnew(JR.get(GameTypeFactory.jm_getInstance(), :SINGLE_PLAYER), GameMode.jstatic_SERVER(), JR.get(PlayerTypesFactory.jm_getInstance(), :PLAYER_TYPE_ONE), 0, 0))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'MULTI_PLAYER_SERVER'}, 'GameInfo':new(get({'GameTypeFactory':getInstance(), 'MULTI_PLAYER'}), get({'GameMode', 'SERVER'}), get({'PlayerTypesFactory':getInstance(), 'PLAYER_TYPE_ONE'}), 0, 0)),
-    put({This, 'SINGLE_PLAYER_SERVER'}, 'GameInfo':new(get({'GameTypeFactory':getInstance(), 'SINGLE_PLAYER'}), get({'GameMode', 'SERVER'}), get({'PlayerTypesFactory':getInstance(), 'PLAYER_TYPE_ONE'}), 0, 0)),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'BasicHighScoresGameInfoFactory', 'SINGLETON'}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, BasicHighScoresGameInfoFactory.jstatic_SINGLETON()})
+    end)
+  end
+end
+
 

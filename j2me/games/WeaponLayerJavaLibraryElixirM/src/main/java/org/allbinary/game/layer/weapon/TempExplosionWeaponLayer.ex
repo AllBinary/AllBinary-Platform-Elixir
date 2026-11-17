@@ -1,45 +1,57 @@
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer.weapon
-% import org.allbinary.animation.Animation
-% import org.allbinary.game.combat.weapon.WeaponProperties
-% import org.allbinary.game.multiplayer.layer.RemoteInfo
-% import org.allbinary.graphics.Rectangle
-% import org.allbinary.layer.AllBinaryLayerManager
-% import org.allbinary.physics.movement.Movement
-% import org.allbinary.time.GameTickTimeDelayHelperFactory
-% import org.allbinary.time.TimeDelayHelper
-% import org.allbinary.view.ViewPositionBase
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer.weapon
 
--module('TempExplosionWeaponLayer').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule TempExplosionWeaponLayer do
+  def jsuper(), do: SimpleWeaponLayer
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('SimpleWeaponLayer', Function, Arguments).
-
-init_fields(This) ->
-    put({This, weaponProperties}, 'WeaponProperties':new((-1), (-1), 0, 1000, 0)),
-    put({This, timeDelayHelper}, 'TimeDelayHelper':new(0)),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :weaponProperties, nil)
+    JR.put(this, :timeDelayHelper, nil)
+        JR.put(this, :weaponProperties, WeaponProperties.jnew(-1, -1, 0, 1000, JR.int16(0)))
+        JR.put(this, :timeDelayHelper, TimeDelayHelper.jnew(0))
+    nil
+  end
 
 
-new(Name, Movement, AnimationInterface, Rectangle, ViewPosition, TimeDelay) when (is_list(Name) orelse Name =:= undefined), is_integer(TimeDelay) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Name, Movement, AnimationInterface, Rectangle, ViewPosition, TimeDelay),
-    This.
+  def jinit(this, p_name, p_movement, p_animationInterface, p_rectangle, p_viewPosition, p_timeDelay) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :movement, p_movement)
+      JR.lset(f, :animationInterface, p_animationInterface)
+      JR.lset(f, :rectangle, p_rectangle)
+      JR.lset(f, :viewPosition, p_viewPosition)
+      JR.lset(f, :timeDelay, p_timeDelay)
+        SimpleWeaponLayer.jinit(this, JR.lget(f, :name), RemoteInfo.jstatic_REMOTE_INFO(), -1, JR.lget(f, :movement), JR.lget(f, :animationInterface), SimpleWeaponLayer.jm_createDestroyed(), JR.lget(f, :rectangle), JR.lget(f, :viewPosition))
+        TempExplosionWeaponLayer.jinitfields(this)
+        JR.put(JR.get(this, :timeDelayHelper), :delay, JR.lget(f, :timeDelay))
+    end)
+  end
 
-'$init'(This, Name, Movement, AnimationInterface, Rectangle, ViewPosition, TimeDelay) when (is_list(Name) orelse Name =:= undefined), is_integer(TimeDelay) ->
-        'SimpleWeaponLayer':'$init'(This, Name, get({'RemoteInfo', 'REMOTE_INFO'}), (-1), Movement, AnimationInterface, 'SimpleWeaponLayer':createDestroyed(), Rectangle, ViewPosition),
-        init_fields(This),
-        put({get({This, timeDelayHelper}), delay}, TimeDelay).
+  def jnew(p_name, p_movement, p_animationInterface, p_rectangle, p_viewPosition, p_timeDelay) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_name, p_movement, p_animationInterface, p_rectangle, p_viewPosition, p_timeDelay)
+    this
+  end
 
-% throws Exception
-processTick(This, AllBinaryLayerManager) ->
-        case (get({get({This, timeDelayHelper}), '$class'})):isTime(get({This, timeDelayHelper}), get({'GameTickTimeDelayHelperFactory':getInstance(), startTime})) of
-            true ->
-            (fun(Target_N66355) -> (get({Target_N66355, '$class'})):collide(Target_N66355, This, This) end)((get({This, '$class'})):getCollidableInferface(This)),
-            put({This, totalDamage}, ((get({This, '$class'})):getInitDamage(This) + 1));
-            false -> ok
-        end,
-        'SimpleWeaponLayer':processTick(This, AllBinaryLayerManager).
+
+  def jm_processTick(this, p_allBinaryLayerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerManager, p_allBinaryLayerManager)
+        if JR.call(JR.get(this, :timeDelayHelper), :jm_isTime, [JR.get(GameTickTimeDelayHelperFactory.jm_getInstance(), :startTime)]) do
+            JR.call(JR.call(this, :jm_getCollidableInferface, []), :jm_collide, [this, this])
+            JR.put(this, :totalDamage, (JR.call(this, :jm_getInitDamage, []) + 1))
+        end
+        SimpleWeaponLayer.jm_processTick(this, JR.lget(f, :allBinaryLayerManager))
+    end)
+  end
+end
+
 

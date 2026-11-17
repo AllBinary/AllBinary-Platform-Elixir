@@ -1,68 +1,83 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.ai
-% import org.allbinary.animation.IndexedAnimation
-% import org.allbinary.animation.RotationAnimationInterface
-% import org.allbinary.animation.RotationAnimationInterfaceCompositeInterface
-% import org.allbinary.game.ag.ai.tactical.LurchAI
-% import org.allbinary.game.input.GameInput
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.math.AngleIncrementInfo
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
--module('LurchRotationAI').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule LurchRotationAI do
+  def jsuper(), do: LurchAI
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('LurchAI', Function, Arguments).
-
-init_fields(This) ->
-    put({This, rotationAnimationInterface}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :rotationAnimationInterface, nil)
+        
+    nil
+  end
 
 
-new(OwnerLayerInterface, GameInput) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, OwnerLayerInterface, GameInput),
-    This.
+  def jinit(this, p_ownerLayerInterface, p_gameInput) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownerLayerInterface, p_ownerLayerInterface)
+      JR.lset(f, :gameInput, p_gameInput)
+        LurchAI.jinit(this, JR.lget(f, :ownerLayerInterface), JR.lget(f, :gameInput))
+        LurchRotationAI.jinitfields(this)
+        JR.lset(f, :rotationAnimationInterfaceCompositeInterface, JR.call(this, :jm_getOwnerLayerInterface, []))
+        JR.put(this, :rotationAnimationInterface, JR.call(JR.lget(f, :rotationAnimationInterfaceCompositeInterface), :jm_getRotationAnimationInterface, []))
+        JR.call(this, :jm_update, [])
+    end)
+  end
 
-'$init'(This, OwnerLayerInterface, GameInput) ->
-        'LurchAI':'$init'(This, OwnerLayerInterface, GameInput),
-        init_fields(This),
-        RotationAnimationInterfaceCompositeInterface = (get({This, '$class'})):getOwnerLayerInterface(This),
-        put({This, rotationAnimationInterface}, (get({RotationAnimationInterfaceCompositeInterface, '$class'})):getRotationAnimationInterface(RotationAnimationInterfaceCompositeInterface)),
-        (get({This, '$class'})):update(This).
+  def jnew(p_ownerLayerInterface, p_gameInput) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_ownerLayerInterface, p_gameInput)
+    this
+  end
 
-reverse(This) ->
-        'LurchAI':reverse(This),
-        (get({This, '$class'})):update(This).
 
-update(This) ->
-        case (get({This, currentRelativeAngle}) =:= 0) of
-            true ->
-            put({local, rotationAnimationInterface}, get({This, rotationAnimationInterface})),
-            put({local, angleIncrementInfo}, (fun(Target_N66442) -> (get({Target_N66442, '$class'})):getAngleIncrementInfo(Target_N66442) end)((get({get({local, rotationAnimationInterface}), '$class'})):getAngleInfoP(get({local, rotationAnimationInterface})))),
-            put({local, rotationAnimationInterfaceCompositeInterface}, (get({This, '$class'})):getOwnerLayerInterface(This)),
-            (get({get({local, rotationAnimationInterfaceCompositeInterface}), '$class'})):setFrame(get({local, rotationAnimationInterfaceCompositeInterface}), (get({get({get({local, angleIncrementInfo}), 'RIGHT_FRAME'}), '$class'})):intValue(get({get({local, angleIncrementInfo}), 'RIGHT_FRAME'})));
-            false ->
-            case (get({This, currentRelativeAngle}) =:= 180) of
-            true ->
-            put({local, rotationAnimationInterface}, get({This, rotationAnimationInterface})),
-            put({local, angleIncrementInfo}, (fun(Target_N66215) -> (get({Target_N66215, '$class'})):getAngleIncrementInfo(Target_N66215) end)((get({get({local, rotationAnimationInterface}), '$class'})):getAngleInfoP(get({local, rotationAnimationInterface})))),
-            put({local, rotationAnimationInterfaceCompositeInterface}, (get({This, '$class'})):getOwnerLayerInterface(This)),
-            (get({get({local, rotationAnimationInterfaceCompositeInterface}), '$class'})):setFrame(get({local, rotationAnimationInterfaceCompositeInterface}), (get({get({get({local, angleIncrementInfo}), 'LEFT_FRAME'}), '$class'})):intValue(get({get({local, angleIncrementInfo}), 'LEFT_FRAME'})));
-            false -> ok
+  def jm_reverse(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        LurchAI.jm_reverse(this)
+        JR.call(this, :jm_update, [])
+    end)
+  end
+
+
+  def jm_update(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.get(this, :currentRelativeAngle) == 0) do
+            JR.lset(f, :rotationAnimationInterface, JR.get(this, :rotationAnimationInterface))
+            JR.lset(f, :angleIncrementInfo, JR.call(JR.call(JR.lget(f, :rotationAnimationInterface), :jm_getAngleInfoP, []), :jm_getAngleIncrementInfo, []))
+            JR.lset(f, :rotationAnimationInterfaceCompositeInterface, JR.call(this, :jm_getOwnerLayerInterface, []))
+            JR.call(JR.lget(f, :rotationAnimationInterfaceCompositeInterface), :jm_setFrame, [JR.call(JR.get(JR.lget(f, :angleIncrementInfo), :RIGHT_FRAME), :jm_intValue, [])])
+        else
+            if (JR.get(this, :currentRelativeAngle) == 180) do
+            JR.lset(f, :rotationAnimationInterface, JR.get(this, :rotationAnimationInterface))
+            JR.lset(f, :angleIncrementInfo, JR.call(JR.call(JR.lget(f, :rotationAnimationInterface), :jm_getAngleInfoP, []), :jm_getAngleIncrementInfo, []))
+            JR.lset(f, :rotationAnimationInterfaceCompositeInterface, JR.call(this, :jm_getOwnerLayerInterface, []))
+            JR.call(JR.lget(f, :rotationAnimationInterfaceCompositeInterface), :jm_setFrame, [JR.call(JR.get(JR.lget(f, :angleIncrementInfo), :LEFT_FRAME), :jm_intValue, [])])
         end
-        end.
+        end
+    end)
+  end
+end
+
 

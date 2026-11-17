@@ -1,57 +1,77 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.canvas
-% import org.allbinary.logic.string.StringMaker
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.canvas
 
--module('GameStatisticsFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+#ActualPlatform
+defmodule GameStatisticsFactory do
+  def jsuper(), do: BaseGameStatistics
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> GameStatisticsFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BaseGameStatistics', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :stringBuffer, nil)
+        JR.put(this, :stringBuffer, StringMaker.jnew())
+    nil
+  end
 
-static_init() ->
-    put({?MODULE, instance}, 'GameStatisticsFactory':new()),
-    ok.
+  def jinit(this) do
+    BaseGameStatistics.jinit(this)
+    jinitfields(this)
+  end
 
-init_fields(This) ->
-    put({This, stringBuffer}, 'StringMaker':new()),
-    ok.
-
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    'BaseGameStatistics':'$init'(This),
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'GameStatisticsFactory', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, GameStatisticsFactory.jstatic_instance()})
+    end)
+  end
 
-add(This, String) when (is_list(String) orelse String =:= undefined) ->
-        case ((get({get({This, stringBuffer}), '$class'})):length(get({This, stringBuffer})) > 12000) of
-            true ->
-            (get({get({This, stringBuffer}), '$class'})):delete(get({This, stringBuffer}), 0, (get({get({This, stringBuffer}), '$class'})):length(get({This, stringBuffer}))),
-            (get({get({This, stringBuffer}), '$class'})):append(get({This, stringBuffer}), "Old Stats Cleared");
-            false -> ok
-        end,
-        (get({get({This, stringBuffer}), '$class'})):append(get({This, stringBuffer}), String).
 
-toString(This) ->
-        (fun(Target_N65997) -> (get({Target_N65997, '$class'})):toString(Target_N65997) end)((fun(Target_N66004) -> (get({Target_N66004, '$class'})):append(Target_N66004, (get({get({This, stringBuffer}), '$class'})):toString(get({This, stringBuffer}))) end)((fun(Target_N66011) -> (get({Target_N66011, '$class'})):append(Target_N66011, 'BaseGameStatistics':toString(This)) end)('StringMaker':new()))).
+  def jm_add(this, p_string) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :string, p_string)
+        if (JR.call(JR.get(this, :stringBuffer), :jm_length, []) > 12000) do
+            JR.call(JR.get(this, :stringBuffer), :jm_delete, [0, JR.call(JR.get(this, :stringBuffer), :jm_length, [])])
+            JR.call(JR.get(this, :stringBuffer), :jm_append, ["Old Stats Cleared"])
+        end
+        JR.call(JR.get(this, :stringBuffer), :jm_append, [JR.lget(f, :string)])
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [BaseGameStatistics.jm_toString(this)]), :jm_append, [JR.call(JR.get(this, :stringBuffer), :jm_toString, [])]), :jm_toString, [])})
+    end)
+  end
+end
+
 

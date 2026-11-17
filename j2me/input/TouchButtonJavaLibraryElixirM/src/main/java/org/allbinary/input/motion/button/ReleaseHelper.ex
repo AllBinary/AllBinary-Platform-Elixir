@@ -1,46 +1,68 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-%
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-%
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-%
-% Created By: Travis Berthelot
-% 
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion.button
-% import org.allbinary.game.input.event.GameKeyEvent
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+#
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+#
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+#
+# Created By: Travis Berthelot
+# 
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
--module('ReleaseHelper').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule ReleaseHelper do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, touchButtonRecognizer}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :touchButtonRecognizer, nil)
+        
+    nil
+  end
 
 
-new(TouchButtonRecognizer) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, TouchButtonRecognizer),
-    This.
+  def jinit(this, p_touchButtonRecognizer) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :touchButtonRecognizer, p_touchButtonRecognizer)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :touchButtonRecognizer, JR.lget(f, :touchButtonRecognizer))
+    end)
+  end
 
-'$init'(This, TouchButtonRecognizer) ->
-    init_fields(This),
-        put({This, touchButtonRecognizer}, TouchButtonRecognizer).
+  def jnew(p_touchButtonRecognizer) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_touchButtonRecognizer)
+    this
+  end
 
-% throws Exception
-release(This, TouchButtonInput, DeviceId) when is_integer(DeviceId) ->
-        put({local, nextTouchButtonInput}, undefined),
-        put({local, gameKeyEvent}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, nextTouchButtonInput}, (get({get({get({This, touchButtonRecognizer}), currentlyPressedTouchButtonSingleton}), '$class'})):get(get({get({This, touchButtonRecognizer}), currentlyPressedTouchButtonSingleton}), Index)),
-            put({local, gameKeyEvent}, (get({get({local, nextTouchButtonInput}), '$class'})):getGameKeyEvent(get({local, nextTouchButtonInput}))),
-            (get({get({get({This, touchButtonRecognizer}), upGameKeyEventHandler}), '$class'})):fireEvent(get({get({This, touchButtonRecognizer}), upGameKeyEventHandler}), get({local, gameKeyEvent})),
-            (fun(Target_N65937) -> (get({Target_N65937, '$class'})):fireEvent(Target_N65937, get({local, gameKeyEvent})) end)((get({get({get({This, touchButtonRecognizer}), upGameKeyEventHandler}), '$class'})):getInstanceForDevice(get({get({This, touchButtonRecognizer}), upGameKeyEventHandler}), DeviceId)),
-            (get({get({get({This, touchButtonRecognizer}), currentlyPressedTouchButtonSingleton}), '$class'})):removeAt(get({get({This, touchButtonRecognizer}), currentlyPressedTouchButtonSingleton}), Index)
-        end, lists:seq(((get({get({get({This, touchButtonRecognizer}), currentlyPressedTouchButtonSingleton}), '$class'})):size(get({get({This, touchButtonRecognizer}), currentlyPressedTouchButtonSingleton})) - 1), 0, -1)).
+
+  def jm_release(this, p_touchButtonInput, p_deviceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :touchButtonInput, p_touchButtonInput)
+      JR.lset(f, :deviceId, p_deviceId)
+        JR.lset(f, :nextTouchButtonInput, nil)
+        JR.lset(f, :gameKeyEvent, nil)
+        JR.lset(f, :index, JR.int32(JR.call(JR.get(JR.get(this, :touchButtonRecognizer), :currentlyPressedTouchButtonSingleton), :jm_size, []) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.lset(f, :nextTouchButtonInput, JR.call(JR.get(JR.get(this, :touchButtonRecognizer), :currentlyPressedTouchButtonSingleton), :jm_get, [JR.lget(f, :index)]))
+            JR.lset(f, :gameKeyEvent, JR.call(JR.lget(f, :nextTouchButtonInput), :jm_getGameKeyEvent, []))
+            JR.call(JR.get(JR.get(this, :touchButtonRecognizer), :upGameKeyEventHandler), :jm_fireEvent, [JR.lget(f, :gameKeyEvent)])
+            JR.call(JR.call(JR.get(JR.get(this, :touchButtonRecognizer), :upGameKeyEventHandler), :jm_getInstanceForDevice, [JR.lget(f, :deviceId)]), :jm_fireEvent, [JR.lget(f, :gameKeyEvent)])
+            JR.call(JR.get(JR.get(this, :touchButtonRecognizer), :currentlyPressedTouchButtonSingleton), :jm_removeAt, [JR.lget(f, :index)])
+        end)
+    end)
+  end
+end
+
 

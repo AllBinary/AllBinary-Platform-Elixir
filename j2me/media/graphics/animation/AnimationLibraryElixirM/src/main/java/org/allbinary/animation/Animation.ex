@@ -1,107 +1,266 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation
-% import javax.microedition.khronos.opengles.GL
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.color.BasicColorFactory
-% import org.allbinary.graphics.color.BasicColorSetUtil
-% import org.allbinary.image.opengles.OpenGLSurfaceChangedInterface
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation
 
--module('Animation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements AnimationInterface
-% implements OpenGLSurfaceChangedInterface
+defmodule Animation do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, basicSetColorUtil}, 'BasicColorSetUtil':getInstance()),
-    put({This, basicColor}, get({'BasicColorFactory':getInstance(), 'WHITE'})),
-    put({This, colorP}, 0),
-    put({This, changeBasicColorP}, get({'BasicColorFactory':getInstance(), 'NULL_COLOR'})),
-    put({This, changeColorP}, 0),
-    put({This, alphaP}, 0),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :basicSetColorUtil, nil)
+    JR.put(this, :basicColor, nil)
+    JR.put(this, :colorP, 0)
+    JR.put(this, :changeBasicColorP, nil)
+    JR.put(this, :changeColorP, 0)
+    JR.put(this, :alphaP, 0)
+        JR.put(this, :basicSetColorUtil, BasicColorSetUtil.jm_getInstance())
+        JR.put(this, :basicColor, JR.get(BasicColorFactory.jm_getInstance(), :WHITE))
+        JR.put(this, :colorP, 0)
+        JR.put(this, :changeBasicColorP, JR.get(BasicColorFactory.jm_getInstance(), :NULL_COLOR))
+        JR.put(this, :changeColorP, 0)
+        JR.put(this, :alphaP, 0)
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-setAlpha(This, Alpha) when is_integer(Alpha) ->
-        put({This, alphaP}, Alpha).
 
-% throws Exception
-nextFrame(This) ->
-        ok.
+  def jm_setAlpha(this, p_alpha) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :alpha, p_alpha)
+        JR.put(this, :alphaP, JR.lget(f, :alpha))
+    end)
+  end
 
-paintXY(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-        (get({get({This, basicSetColorUtil}), '$class'})):setBasicColorP3(get({This, basicSetColorUtil}), Graphics, (get({This, '$class'})):getBasicColorP(This), (get({This, '$class'})):getColor(This)).
 
-paintThreedXYZ(This, Graphics, X, Y, Z) when is_integer(X), is_integer(Y), is_integer(Z) ->
-        ok.
+  def jm_nextFrame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-isThreed(This) ->
-        false.
 
-getBasicColorP(This) ->
-        get({This, basicColor}).
+  def jm_paintXY(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        JR.call(JR.get(this, :basicSetColorUtil), :jm_setBasicColorP3, [JR.lget(f, :graphics), JR.call(this, :jm_getBasicColorP, []), JR.call(this, :jm_getColor, [])])
+    end)
+  end
 
-setBasicColorP(This, BasicColor) ->
-        put({This, basicColor}, BasicColor),
-        put({This, colorP}, (get({get({This, basicColor}), '$class'})):intValue(get({This, basicColor}))).
 
-setBackgroundBasicColorP(This, BasicColor) ->
-        ok.
+  def jm_paintThreedXYZ(this, p_graphics, p_x, p_y, p_z) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :z, p_z)
+        nil
+    end)
+  end
 
-getChangeBasicColor(This) ->
-        get({This, changeBasicColorP}).
 
-changeBasicColor(This, BasicColor) ->
-        put({This, changeBasicColorP}, BasicColor),
-        put({This, changeColorP}, (get({get({This, changeBasicColorP}), '$class'})):intValue(get({This, changeBasicColorP}))).
+  def jm_isThreed(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
 
-getChangeColor(This) ->
-        get({This, changeColorP}).
 
-getColor(This) ->
-        get({This, colorP}).
+  def jm_getBasicColorP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :basicColor)})
+    end)
+  end
 
-setScale(This, ScaleX, ScaleY) when is_number(ScaleX), is_number(ScaleY) ->
-        ok.
 
-setMaxScale(This, MaxScaleX, MaxScaleY) when is_number(MaxScaleX), is_number(MaxScaleY) ->
-        ok.
+  def jm_setBasicColorP(this, p_basicColor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicColor, p_basicColor)
+        JR.put(this, :basicColor, JR.lget(f, :basicColor))
+        JR.put(this, :colorP, JR.call(JR.get(this, :basicColor), :jm_intValue, []))
+    end)
+  end
 
-% throws Exception
-set(This, Gl) ->
-        ok.
 
-setDx(This, Dx) when is_integer(Dx) ->
-        ok.
+  def jm_setBackgroundBasicColorP(this, p_basicColor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicColor, p_basicColor)
+        nil
+    end)
+  end
 
-getDx(This) ->
-        0.
 
-setDy(This, Dy) when is_integer(Dy) ->
-        ok.
+  def jm_getChangeBasicColor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :changeBasicColorP)})
+    end)
+  end
 
-getDy(This) ->
-        0.
+
+  def jm_changeBasicColor(this, p_basicColor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicColor, p_basicColor)
+        JR.put(this, :changeBasicColorP, JR.lget(f, :basicColor))
+        JR.put(this, :changeColorP, JR.call(JR.get(this, :changeBasicColorP), :jm_intValue, []))
+    end)
+  end
+
+
+  def jm_getChangeColor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :changeColorP)})
+    end)
+  end
+
+
+  def jm_getColor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :colorP)})
+    end)
+  end
+
+
+  def jm_setScale(this, p_scaleX, p_scaleY) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :scaleX, p_scaleX)
+      JR.lset(f, :scaleY, p_scaleY)
+        nil
+    end)
+  end
+
+
+  def jm_setMaxScale(this, p_maxScaleX, p_maxScaleY) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :maxScaleX, p_maxScaleX)
+      JR.lset(f, :maxScaleY, p_maxScaleY)
+        nil
+    end)
+  end
+
+
+  def jm_set(this, p_gl) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+        nil
+    end)
+  end
+
+
+  def jm_setDx(this, p_dx) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :dx, p_dx)
+        nil
+    end)
+  end
+
+
+  def jm_getDx(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0})
+    end)
+  end
+
+
+  def jm_setDy(this, p_dy) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :dy, p_dy)
+        nil
+    end)
+  end
+
+
+  def jm_getDy(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0})
+    end)
+  end
+end
+
 

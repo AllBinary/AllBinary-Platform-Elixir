@@ -1,89 +1,107 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.combat.damage
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.game.rand.MyRandomFactory
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.color.BasicColorArrayIndexer
-% import org.allbinary.graphics.color.BasicColorFactory
-% import org.allbinary.graphics.color.BasicColorSetUtil
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.logic.java.character.CharArrayFactory
-% import org.allbinary.logic.math.PrimitiveLongUtil
-% import org.allbinary.util.CircularIndexUtil
-% import org.allbinary.view.ViewPosition
-% import org.allbinary.view.ViewPositionBase
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.combat.damage
 
--module('PtsDamageFloaters').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule PtsDamageFloaters do
+  def jsuper(), do: DamageFloaters
+def jstatic_basicColorArrayIndexer(), do: JR.static_get(__MODULE__, :basicColorArrayIndexer, fn -> BasicColorArrayIndexer.jnew(JR.afrom([JR.get(BasicColorFactory.jm_getInstance(), :WHITE), JR.get(BasicColorFactory.jm_getInstance(), :RED), JR.get(BasicColorFactory.jm_getInstance(), :YELLOW), JR.get(BasicColorFactory.jm_getInstance(), :BLUE)])) end)
+  def jstatic_set_basicColorArrayIndexer(value), do: JR.static_put(__MODULE__, :basicColorArrayIndexer, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('DamageFloaters', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, basicColorArrayIndexer}, 'BasicColorArrayIndexer':new(array:from_list([get({'BasicColorFactory':getInstance(), 'WHITE'}), get({'BasicColorFactory':getInstance(), 'RED'}), get({'BasicColorFactory':getInstance(), 'YELLOW'}), get({'BasicColorFactory':getInstance(), 'BLUE'})]))),
-    ok.
-
-init_fields(This) ->
-    put({This, basicSetColorUtil}, 'BasicColorSetUtil':getInstance()),
-    put({This, layerInterface}, undefined),
-    put({This, lastDamage}, array:new(5, {default, 0})),
-    put({This, lastDamageString}, array:new(5, {default, array:new(0, {default, 0})})),
-    put({This, lastDamageStringSizeArray}, array:new(5, {default, 0})),
-    put({This, circularIndexUtil}, 'CircularIndexUtil':createInstance(5)),
-    put({This, primitiveLongUtil}, undefined),
-    put({This, myRandomFactory}, 'MyRandomFactory':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :basicSetColorUtil, nil)
+    JR.put(this, :layerInterface, nil)
+    JR.put(this, :lastDamage, nil)
+    JR.put(this, :lastDamageString, nil)
+    JR.put(this, :lastDamageStringSizeArray, nil)
+    JR.put(this, :circularIndexUtil, nil)
+    JR.put(this, :primitiveLongUtil, nil)
+    JR.put(this, :myRandomFactory, nil)
+        JR.put(this, :basicSetColorUtil, BasicColorSetUtil.jm_getInstance())
+        
+        JR.put(this, :lastDamage, JR.anew(5, 0))
+        JR.put(this, :lastDamageString, JR.anew_of(5, fn -> JR.anew(0, 0) end))
+        JR.put(this, :lastDamageStringSizeArray, JR.anew(5, 0))
+        JR.put(this, :circularIndexUtil, CircularIndexUtil.jm_createInstance(5))
+        
+        JR.put(this, :myRandomFactory, MyRandomFactory.jm_getInstance())
+    nil
+  end
 
 
-new(LayerInterface) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, LayerInterface),
-    This.
+  def jinit(this, p_layerInterface) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+      DamageFloaters.jinit(this)
+      jinitfields(this)
+        JR.put(this, :primitiveLongUtil, PrimitiveLongUtil.jm_createPowerOfTen(100000))
+        JR.put(this, :layerInterface, JR.lget(f, :layerInterface))
+        JR.lset(f, :CHAR_ARRAY, JR.call(CharArrayFactory.jm_getInstance(), :jm_getZeroCharArray, []))
+        JR.lset(f, :index, JR.int32(JR.alength(JR.get(this, :lastDamageString)) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.aset(JR.get(this, :lastDamageString), JR.lget(f, :index), JR.lget(f, :CHAR_ARRAY))
+        end)
+    end)
+  end
 
-'$init'(This, LayerInterface) ->
-    'DamageFloaters':'$init'(This),
-    init_fields(This),
-        put({This, primitiveLongUtil}, 'PrimitiveLongUtil':createPowerOfTen(100000)),
-        put({This, layerInterface}, LayerInterface),
-        CHAR_ARRAY = (fun(Target_N66537) -> (get({Target_N66537, '$class'})):getZeroCharArray(Target_N66537) end)('CharArrayFactory':getInstance()),
-        lists:foreach(fun(Index) ->
-            put({This, lastDamageString}, array:set(Index, CHAR_ARRAY, get({This, lastDamageString})))
-        end, lists:seq((array:size(get({This, lastDamageString})) - 1), 0, -1)).
+  def jnew(p_layerInterface) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_layerInterface)
+    this
+  end
 
-add(This, Damage) when is_integer(Damage) ->
-        Index = (get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})),
-        put({This, lastDamage}, array:set(Index, Damage, get({This, lastDamage}))),
-        put({This, lastDamageString}, array:set(Index, (get({get({This, primitiveLongUtil}), '$class'})):getCharArray(get({This, primitiveLongUtil}), array:get(Index, get({This, lastDamage}))), get({This, lastDamageString}))),
-        put({This, lastDamageStringSizeArray}, array:set(Index, (get({get({This, primitiveLongUtil}), '$class'})):getCurrentTotalDigits(get({This, primitiveLongUtil})), get({This, lastDamageStringSizeArray}))),
-        (get({get({This, circularIndexUtil}), '$class'})):next(get({This, circularIndexUtil})).
 
-paint(This, Graphics) ->
-        ViewPosition = (get({get({This, layerInterface}), '$class'})):getViewPosition(get({This, layerInterface})),
-        X = (get({ViewPosition, '$class'})):getX(ViewPosition),
-        Y = (get({ViewPosition, '$class'})):getY(ViewPosition),
-        lists:foreach(fun(Index) ->
-            case (array:get(Index, get({This, lastDamage})) =/= 0) of
-                true ->
-                Delta = (10 * ((Index + 2))),
-                (get({get({This, basicSetColorUtil}), '$class'})):setBasicColorP(get({This, basicSetColorUtil}), Graphics, (get({get({'PtsDamageFloaters', basicColorArrayIndexer}), '$class'})):get(get({'PtsDamageFloaters', basicColorArrayIndexer}))),
-                (get({Graphics, '$class'})):drawChars(Graphics, array:get(Index, get({This, lastDamageString})), 0, array:get(Index, get({This, lastDamageStringSizeArray})), (X - (get({get({This, myRandomFactory}), '$class'})):getNextInt(get({This, myRandomFactory}), Delta)), (Y - Delta), 0),
-                (get({get({'PtsDamageFloaters', basicColorArrayIndexer}), '$class'})):next(get({'PtsDamageFloaters', basicColorArrayIndexer}));
-                false -> ok
-            end,
-            put({This, lastDamage}, array:set(Index, 0, get({This, lastDamage})))
-        end, lists:seq((array:size(get({This, lastDamage})) - 1), 0, -1)).
+  def jm_add(this, p_damage) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :damage, p_damage)
+        JR.lset(f, :index, JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, []))
+        JR.aset(JR.get(this, :lastDamage), JR.lget(f, :index), JR.lget(f, :damage))
+        JR.aset(JR.get(this, :lastDamageString), JR.lget(f, :index), JR.call(JR.get(this, :primitiveLongUtil), :jm_getCharArray, [JR.aget(JR.get(this, :lastDamage), JR.lget(f, :index))]))
+        JR.aset(JR.get(this, :lastDamageStringSizeArray), JR.lget(f, :index), JR.call(JR.get(this, :primitiveLongUtil), :jm_getCurrentTotalDigits, []))
+        JR.call(JR.get(this, :circularIndexUtil), :jm_next, [])
+    end)
+  end
+
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.lset(f, :viewPosition, JR.call(JR.get(this, :layerInterface), :jm_getViewPosition, []))
+        JR.lset(f, :x, JR.call(JR.lget(f, :viewPosition), :jm_getX, []))
+        JR.lset(f, :y, JR.call(JR.lget(f, :viewPosition), :jm_getY, []))
+        JR.lset(f, :index, JR.int32(JR.alength(JR.get(this, :lastDamage)) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            if (JR.aget(JR.get(this, :lastDamage), JR.lget(f, :index)) != 0) do
+                JR.lset(f, :delta, JR.int32(10 * (JR.int32(JR.lget(f, :index) + 2))))
+                JR.call(JR.get(this, :basicSetColorUtil), :jm_setBasicColorP, [JR.lget(f, :graphics), JR.call(PtsDamageFloaters.jstatic_basicColorArrayIndexer(), :jm_get, [])])
+                JR.call(JR.lget(f, :graphics), :jm_drawChars, [JR.aget(JR.get(this, :lastDamageString), JR.lget(f, :index)), 0, JR.aget(JR.get(this, :lastDamageStringSizeArray), JR.lget(f, :index)), (JR.lget(f, :x) - JR.call(JR.get(this, :myRandomFactory), :jm_getNextInt, [JR.lget(f, :delta)])), JR.int32(JR.lget(f, :y) - JR.lget(f, :delta)), 0])
+                JR.call(PtsDamageFloaters.jstatic_basicColorArrayIndexer(), :jm_next, [])
+            end
+            JR.aset(JR.get(this, :lastDamage), JR.lget(f, :index), 0)
+        end)
+    end)
+  end
+end
+
 

@@ -1,30 +1,42 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion.gesture.observer
-% import org.allbinary.logic.util.event.EventListenerInterface
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture.observer
 
--module('BaseMotionGestureEventListener').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
-
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('EventListenerInterface', Function, Arguments).
+defmodule BaseMotionGestureEventListener do
+  def jsuper(), do: JObject
 
 
-onMotionGestureEvent(This, MotionGestureEvent) ->
-    erlang:error({abstract_method, onMotionGestureEvent}).
+  def jm_onMotionGestureEvent(this, p_motionGestureEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :motionGestureEvent, p_motionGestureEvent)
+      throw({:jexception, JR.exception("AbstractMethodError", "onMotionGestureEvent")})
+    end)
+  end
 
-onScrolledMotionGestureEvent(This, MotionGestureEvent) ->
-    erlang:error({abstract_method, onScrolledMotionGestureEvent}).
+
+  def jm_onScrolledMotionGestureEvent(this, p_motionGestureEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :motionGestureEvent, p_motionGestureEvent)
+      throw({:jexception, JR.exception("AbstractMethodError", "onScrolledMotionGestureEvent")})
+    end)
+  end
+end
+
 

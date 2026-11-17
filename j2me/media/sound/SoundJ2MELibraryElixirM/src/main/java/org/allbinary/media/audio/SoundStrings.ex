@@ -1,45 +1,61 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2025 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.media.audio
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2025 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
--module('SoundStrings').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule SoundStrings do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> SoundStrings.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'SoundStrings':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :STOP_ALL, nil)
+    JR.put(this, :CLOSE_ALL, nil)
+    JR.put(this, :SOUND, nil)
+    JR.put(this, :INIT_SOUND, nil)
+    JR.put(this, :STOPPING_SOUND, nil)
+    JR.put(this, :CLOSING_SOUND, nil)
+        JR.put(this, :STOP_ALL, "stopAll")
+        JR.put(this, :CLOSE_ALL, "closeAll")
+        JR.put(this, :SOUND, " Sound: ")
+        JR.put(this, :INIT_SOUND, "Initializing Sound: ")
+        JR.put(this, :STOPPING_SOUND, "Stopping Sound: ")
+        JR.put(this, :CLOSING_SOUND, "Closing Sound: ")
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'STOP_ALL'}, "stopAll"),
-    put({This, 'CLOSE_ALL'}, "closeAll"),
-    put({This, 'SOUND'}, " Sound: "),
-    put({This, 'INIT_SOUND'}, "Initializing Sound: "),
-    put({This, 'STOPPING_SOUND'}, "Stopping Sound: "),
-    put({This, 'CLOSING_SOUND'}, "Closing Sound: "),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'SoundStrings', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, SoundStrings.jstatic_instance()})
+    end)
+  end
+end
+
 

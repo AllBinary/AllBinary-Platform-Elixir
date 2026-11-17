@@ -1,55 +1,75 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.collision
-% import org.allbinary.game.configuration.feature.Features
-% import org.allbinary.game.configuration.feature.GameFeatureFactory
-% import org.allbinary.graphics.opengles.OpenGLFeatureUtil
-% import org.allbinary.layer.AllBinaryLayer
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.collision
 
--module('LayerCollisionUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule LayerCollisionUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> LayerCollisionUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'LayerCollisionUtil':new()),
-    ok.
-
-init_fields(This) ->
-    put({This, collisionProcessor}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :collisionProcessor, nil)
+        JR.put(this, :collisionProcessor, nil)
+    nil
+  end
 
 
-getInstance() ->
-        get({'LayerCollisionUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, LayerCollisionUtil.jstatic_instance()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-    init_fields(This),
-        Features = 'Features':getInstance(),
-        GameFeatureFactory = 'GameFeatureFactory':getInstance(),
-        case ((fun(Target_N65947) -> (get({Target_N65947, '$class'})):isAnyThreed(Target_N65947) end)('OpenGLFeatureUtil':getInstance()) andalso (not (get({Features, '$class'})):isFeature(Features, get({GameFeatureFactory, 'COLLISIONS_FORCED_TWO_DIMENSIONAL'})))) of
-            true ->
-            put({This, collisionProcessor}, 'CollisionThreedProcessor':new());
-            false ->
-            put({This, collisionProcessor}, 'Collision2DProcessor':new())
-        end.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.lset(f, :features, Features.jm_getInstance())
+        JR.lset(f, :gameFeatureFactory, GameFeatureFactory.jm_getInstance())
+        if (JR.call(OpenGLFeatureUtil.jm_getInstance(), :jm_isAnyThreed, []) && !JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.lget(f, :gameFeatureFactory), :COLLISIONS_FORCED_TWO_DIMENSIONAL)])) do
+            JR.put(this, :collisionProcessor, CollisionThreedProcessor.jnew())
+        else
+            JR.put(this, :collisionProcessor, Collision2DProcessor.jnew())
+        end
+    end)
+  end
 
-isCollision(This, MyLayer, MyLayer2) ->
-        (get({get({This, collisionProcessor}), '$class'})):isCollision(get({This, collisionProcessor}), MyLayer, MyLayer2).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+
+
+  def jm_isCollision(this, p_myLayer, p_myLayer2) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :myLayer, p_myLayer)
+      JR.lset(f, :myLayer2, p_myLayer2)
+        throw({:jreturn, JR.call(JR.get(this, :collisionProcessor), :jm_isCollision, [JR.lget(f, :myLayer), JR.lget(f, :myLayer2)])})
+    end)
+  end
+end
+
 

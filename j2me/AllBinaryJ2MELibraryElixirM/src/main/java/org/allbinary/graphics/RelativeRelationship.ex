@@ -1,61 +1,110 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics
 
--module('RelativeRelationship').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule RelativeRelationship do
+  def jsuper(), do: JObject
+def jstatic_NULL_RELATIVE_RELATIONSHIP(), do: JR.static_get(__MODULE__, :NULL_RELATIVE_RELATIONSHIP, fn -> RelativeRelationship.jnew(JR.get(PointFactory.jm_getInstance(), :ZERO_ZERO), JR.call(BasicArrayListUtil.jm_getInstance(), :jm_getImmutableInstance, [])) end)
+  def jstatic_set_NULL_RELATIVE_RELATIONSHIP(value), do: JR.static_put(__MODULE__, :NULL_RELATIVE_RELATIONSHIP, value)
 
-static_init() ->
-    put({?MODULE, 'NULL_RELATIVE_RELATIONSHIP'}, 'RelativeRelationship':new(get({'PointFactory':getInstance(), 'ZERO_ZERO'}), (fun(Target_N65692) -> (get({Target_N65692, '$class'})):getImmutableInstance(Target_N65692) end)('BasicArrayListUtil':getInstance()))),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :typesAllowedList, nil)
+    JR.put(this, :x, 0)
+    JR.put(this, :y, 0)
+    JR.put(this, :z, 0)
+        
+        
+        
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, typesAllowedList}, undefined),
-    put({This, x}, 0),
-    put({This, y}, 0),
-    put({This, z}, 0),
-    ok.
+
+  def jinit(this, p_point, p_typesAllowedList) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :point, p_point)
+      JR.lset(f, :typesAllowedList, p_typesAllowedList)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :x, JR.call(JR.lget(f, :point), :jm_getX, []))
+        JR.put(this, :y, JR.call(JR.lget(f, :point), :jm_getY, []))
+        JR.put(this, :z, JR.call(JR.lget(f, :point), :jm_getZ, []))
+        JR.put(this, :typesAllowedList, JR.lget(f, :typesAllowedList))
+    end)
+  end
+
+  def jnew(p_point, p_typesAllowedList) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_point, p_typesAllowedList)
+    this
+  end
 
 
-new(Point, TypesAllowedList) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Point, TypesAllowedList),
-    This.
+  def jm_getX(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :x)})
+    end)
+  end
 
-'$init'(This, Point, TypesAllowedList) ->
-    init_fields(This),
-        put({This, x}, (get({Point, '$class'})):getX(Point)),
-        put({This, y}, (get({Point, '$class'})):getY(Point)),
-        put({This, z}, (get({Point, '$class'})):getZ(Point)),
-        put({This, typesAllowedList}, TypesAllowedList).
 
-getX(This) ->
-        get({This, x}).
+  def jm_getY(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :y)})
+    end)
+  end
 
-getY(This) ->
-        get({This, y}).
 
-getZ(This) ->
-        get({This, z}).
+  def jm_getZ(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :z)})
+    end)
+  end
 
-getTypesAllowedList(This) ->
-        get({This, typesAllowedList}).
 
-setTypesAllowedList(This, TypesAllowedList) ->
-        put({This, typesAllowedList}, TypesAllowedList).
+  def jm_getTypesAllowedList(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :typesAllowedList)})
+    end)
+  end
+
+
+  def jm_setTypesAllowedList(this, p_typesAllowedList) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :typesAllowedList, p_typesAllowedList)
+        JR.put(this, :typesAllowedList, JR.lget(f, :typesAllowedList))
+    end)
+  end
+end
+
 

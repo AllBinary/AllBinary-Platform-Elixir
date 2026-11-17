@@ -1,45 +1,58 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.physics.movement
-% import org.allbinary.game.layer.AllBinaryGameLayer
-% import org.allbinary.game.physics.acceleration.GravityUtil
-% import org.allbinary.game.physics.velocity.VelocityProperties
-% import org.allbinary.logic.math.BasicDecimal
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.physics.movement
 
--module('SimpleGravityVelocityMovement').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule SimpleGravityVelocityMovement do
+  def jsuper(), do: BasicConstantVelocityMovement
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicConstantVelocityMovement', Function, Arguments).
-
-init_fields(This) ->
-    put({This, gravityUtil}, 'GravityUtil':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :gravityUtil, nil)
+        JR.put(this, :gravityUtil, GravityUtil.jm_getInstance())
+    nil
+  end
 
 
-new(SpeedBasicDecimal) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, SpeedBasicDecimal),
-    This.
+  def jinit(this, p_speedBasicDecimal) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :speedBasicDecimal, p_speedBasicDecimal)
+        BasicConstantVelocityMovement.jinit(this, JR.lget(f, :speedBasicDecimal), VelocityProperties.jnew(JR.int32(JR.call(JR.lget(f, :speedBasicDecimal), :jm_getUnscaled, [])), JR.int32(JR.call(JR.lget(f, :speedBasicDecimal), :jm_getUnscaled, []))))
+        SimpleGravityVelocityMovement.jinitfields(this)
+    end)
+  end
 
-'$init'(This, SpeedBasicDecimal) ->
-        'BasicConstantVelocityMovement':'$init'(This, SpeedBasicDecimal, 'VelocityProperties':new(trunc((get({SpeedBasicDecimal, '$class'})):getUnscaled(SpeedBasicDecimal)), trunc((get({SpeedBasicDecimal, '$class'})):getUnscaled(SpeedBasicDecimal)))),
-        init_fields(This).
+  def jnew(p_speedBasicDecimal) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_speedBasicDecimal)
+    this
+  end
 
-% throws Exception
-process(This, Layer) ->
-        (get({get({This, gravityUtil}), '$class'})):process(get({This, gravityUtil}), (get({This, '$class'})):getVelocityProperties(This), get({get({This, gravityUtil}), 'GAME_GRAVITY_VELOCITY'})),
-        'BasicConstantVelocityMovement':process(This, Layer).
+
+  def jm_process(this, p_layer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layer, p_layer)
+        JR.call(JR.get(this, :gravityUtil), :jm_process, [JR.call(this, :jm_getVelocityProperties, []), JR.get(JR.get(this, :gravityUtil), :GAME_GRAVITY_VELOCITY)])
+        BasicConstantVelocityMovement.jm_process(this, JR.lget(f, :layer))
+    end)
+  end
+end
+
 

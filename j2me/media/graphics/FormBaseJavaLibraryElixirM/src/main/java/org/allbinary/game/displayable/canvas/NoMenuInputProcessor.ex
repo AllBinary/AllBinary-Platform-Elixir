@@ -1,55 +1,87 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import javax.microedition.lcdui.NullCanvas
-% import org.allbinary.game.input.event.GameKeyEvent
-% import org.allbinary.input.motion.gesture.observer.MotionGestureEvent
-% import org.allbinary.util.BasicArrayListUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('NoMenuInputProcessor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule NoMenuInputProcessor do
+  def jsuper(), do: BasicMenuInputProcessor
+def jstatic_SINGLETON(), do: JR.static_get(__MODULE__, :SINGLETON, fn -> NoMenuInputProcessor.jnew() end)
+  def jstatic_set_SINGLETON(value), do: JR.static_put(__MODULE__, :SINGLETON, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicMenuInputProcessor', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'SINGLETON'}, 'NoMenuInputProcessor':new()),
-    ok.
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-getInstance() ->
-        get({'NoMenuInputProcessor', 'SINGLETON'}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, NoMenuInputProcessor.jstatic_SINGLETON()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-        'BasicMenuInputProcessor':'$init'(This, (fun(Target_N65846) -> (get({Target_N65846, '$class'})):getImmutableInstance(Target_N65846) end)('BasicArrayListUtil':getInstance()), (-1), get({'NullCanvas', 'NULL_CANVAS'})).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        BasicMenuInputProcessor.jinit(this, JR.call(BasicArrayListUtil.jm_getInstance(), :jm_getImmutableInstance, []), -1, NullCanvas.jstatic_NULL_CANVAS())
+        NoMenuInputProcessor.jinitfields(this)
+    end)
+  end
 
-onDownGameKeyEvent(This, GameKeyEvent) ->
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-onUpGameKeyEvent(This, GameKeyEvent) ->
-        ok.
 
-onMotionGestureEvent(This, MotionGestureEvent) ->
-        ok.
+  def jm_onDownGameKeyEvent(this, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        nil
+    end)
+  end
+
+
+  def jm_onUpGameKeyEvent(this, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        nil
+    end)
+  end
+
+
+  def jm_onMotionGestureEvent(this, p_motionGestureEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :motionGestureEvent, p_motionGestureEvent)
+        nil
+    end)
+  end
+end
+
 

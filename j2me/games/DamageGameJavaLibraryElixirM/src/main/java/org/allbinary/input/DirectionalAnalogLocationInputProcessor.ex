@@ -1,114 +1,130 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input
-% import org.allbinary.android.input.motion.AnalogLocationInputProcessor
-% import org.allbinary.game.input.GameInputProcessor
-% import org.allbinary.game.input.GameKeyEventSourceInterface
-% import org.allbinary.game.input.GameKeyFactory
-% import org.allbinary.game.input.analog.AnalogLocationInput
-% import org.allbinary.game.input.event.GameKeyEvent
-% import org.allbinary.game.input.event.GameKeyEventFactory
-% import org.allbinary.graphics.CustomGPoint
-% import org.allbinary.layer.AllBinaryLayerManager
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input
 
--module('DirectionalAnalogLocationInputProcessor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements GameKeyEventSourceInterface
+defmodule DirectionalAnalogLocationInputProcessor do
+  def jsuper(), do: AnalogLocationInputProcessor
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AnalogLocationInputProcessor', Function, Arguments).
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, inputProcessorArray}, undefined),
-    put({This, gameKeyFactory}, 'GameKeyFactory':getInstance()),
-    put({This, leftGameKeyEvent}, get({'GameKeyEvent', 'NONE'})),
-    put({This, rightGameKeyEvent}, get({'GameKeyEvent', 'NONE'})),
-    put({This, upGameKeyEvent}, get({'GameKeyEvent', 'NONE'})),
-    put({This, downGameKeyEvent}, get({'GameKeyEvent', 'NONE'})),
-    put({This, leftTriggerGameKeyEvent}, get({'GameKeyEvent', 'NONE'})),
-    put({This, rightTriggerGameKeyEvent}, get({'GameKeyEvent', 'NONE'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :inputProcessorArray, nil)
+    JR.put(this, :gameKeyFactory, nil)
+    JR.put(this, :leftGameKeyEvent, nil)
+    JR.put(this, :rightGameKeyEvent, nil)
+    JR.put(this, :upGameKeyEvent, nil)
+    JR.put(this, :downGameKeyEvent, nil)
+    JR.put(this, :leftTriggerGameKeyEvent, nil)
+    JR.put(this, :rightTriggerGameKeyEvent, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        
+        JR.put(this, :gameKeyFactory, GameKeyFactory.jm_getInstance())
+        JR.put(this, :leftGameKeyEvent, GameKeyEvent.jstatic_NONE())
+        JR.put(this, :rightGameKeyEvent, GameKeyEvent.jstatic_NONE())
+        JR.put(this, :upGameKeyEvent, GameKeyEvent.jstatic_NONE())
+        JR.put(this, :downGameKeyEvent, GameKeyEvent.jstatic_NONE())
+        JR.put(this, :leftTriggerGameKeyEvent, GameKeyEvent.jstatic_NONE())
+        JR.put(this, :rightTriggerGameKeyEvent, GameKeyEvent.jstatic_NONE())
+    nil
+  end
 
 
-new(InputProcessorArray) when (is_tuple(InputProcessorArray) orelse InputProcessorArray =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, InputProcessorArray),
-    This.
+  def jinit(this, p_inputProcessorArray) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :inputProcessorArray, p_inputProcessorArray)
+      AnalogLocationInputProcessor.jinit(this)
+      jinitfields(this)
+        JR.put(this, :inputProcessorArray, JR.lget(f, :inputProcessorArray))
+        try do
+            JR.put(this, :leftGameKeyEvent, JR.call(GameKeyEventFactory.jm_getInstance(), :jm_getInstanceForInput, [this, JR.get(JR.get(this, :gameKeyFactory), :LEFT)]))
+            JR.put(this, :rightGameKeyEvent, JR.call(GameKeyEventFactory.jm_getInstance(), :jm_getInstanceForInput, [this, JR.get(JR.get(this, :gameKeyFactory), :RIGHT)]))
+            JR.put(this, :upGameKeyEvent, JR.call(GameKeyEventFactory.jm_getInstance(), :jm_getInstanceForInput, [this, JR.get(JR.get(this, :gameKeyFactory), :UP)]))
+            JR.put(this, :downGameKeyEvent, JR.call(GameKeyEventFactory.jm_getInstance(), :jm_getInstanceForInput, [this, JR.get(JR.get(this, :gameKeyFactory), :DOWN)]))
+            JR.put(this, :leftTriggerGameKeyEvent, JR.call(GameKeyEventFactory.jm_getInstance(), :jm_getInstanceForInput, [this, JR.get(JR.get(this, :gameKeyFactory), :KEY_NUM0)]))
+            JR.put(this, :rightTriggerGameKeyEvent, JR.call(GameKeyEventFactory.jm_getInstance(), :jm_getInstanceForInput, [this, JR.get(JR.get(this, :gameKeyFactory), :KEY_NUM5)]))
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, JR.get(JR.lget(f, :commonStrings), :CONSTRUCTOR), JR.lget(f, :e)])
+        end
+    end)
+  end
 
-'$init'(This, InputProcessorArray) when (is_tuple(InputProcessorArray) orelse InputProcessorArray =:= undefined) ->
-    'AnalogLocationInputProcessor':'$init'(This),
-    init_fields(This),
-        put({This, inputProcessorArray}, InputProcessorArray),
-        try
-            put({This, leftGameKeyEvent}, (fun(Target_N66417) -> (get({Target_N66417, '$class'})):getInstanceForInput(Target_N66417, This, get({get({This, gameKeyFactory}), 'LEFT'})) end)('GameKeyEventFactory':getInstance())),
-            put({This, rightGameKeyEvent}, (fun(Target_N66486) -> (get({Target_N66486, '$class'})):getInstanceForInput(Target_N66486, This, get({get({This, gameKeyFactory}), 'RIGHT'})) end)('GameKeyEventFactory':getInstance())),
-            put({This, upGameKeyEvent}, (fun(Target_N66555) -> (get({Target_N66555, '$class'})):getInstanceForInput(Target_N66555, This, get({get({This, gameKeyFactory}), 'UP'})) end)('GameKeyEventFactory':getInstance())),
-            put({This, downGameKeyEvent}, (fun(Target_N66624) -> (get({Target_N66624, '$class'})):getInstanceForInput(Target_N66624, This, get({get({This, gameKeyFactory}), 'DOWN'})) end)('GameKeyEventFactory':getInstance())),
-            put({This, leftTriggerGameKeyEvent}, (fun(Target_N66693) -> (get({Target_N66693, '$class'})):getInstanceForInput(Target_N66693, This, get({get({This, gameKeyFactory}), 'KEY_NUM0'})) end)('GameKeyEventFactory':getInstance())),
-            put({This, rightTriggerGameKeyEvent}, (fun(Target_N66762) -> (get({Target_N66762, '$class'})):getInstanceForInput(Target_N66762, This, get({get({This, gameKeyFactory}), 'KEY_NUM5'})) end)('GameKeyEventFactory':getInstance()))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), This, get({CommonStrings, 'CONSTRUCTOR'}), E)
-        end.
+  def jnew(p_inputProcessorArray) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_inputProcessorArray)
+    this
+  end
 
-process(This, AllbinaryLayerManager, AnalogLocationInput) ->
-        try
-            put({local, customGPoint}, undefined),
-            put({local, customGPoint}, (get({AnalogLocationInput, '$class'})):getCustomGPoint(AnalogLocationInput)),
-            X = (get({get({local, customGPoint}), '$class'})):getX(get({local, customGPoint})),
-            Y = (get({get({local, customGPoint}), '$class'})):getY(get({local, customGPoint})),
-            LeftTrigger = (get({AnalogLocationInput, '$class'})):getLeftTrigger(AnalogLocationInput),
-            RightTrigger = (get({AnalogLocationInput, '$class'})):getRightTrigger(AnalogLocationInput),
-            case (X < 0) of
-                true ->
-                (fun(Target_N67369) -> (get({Target_N67369, '$class'})):processAnalog(Target_N67369, AllbinaryLayerManager, get({This, leftGameKeyEvent}), X) end)(array:get((get({get({This, leftGameKeyEvent}), '$class'})):getKey(get({This, leftGameKeyEvent})), get({This, inputProcessorArray})));
-                false ->
-                case (X > 0) of
-                true ->
-                (fun(Target_N67285) -> (get({Target_N67285, '$class'})):processAnalog(Target_N67285, AllbinaryLayerManager, get({This, rightGameKeyEvent}), X) end)(array:get((get({get({This, rightGameKeyEvent}), '$class'})):getKey(get({This, rightGameKeyEvent})), get({This, inputProcessorArray})));
-                false -> ok
+
+  def jm_process(this, p_allbinaryLayerManager, p_analogLocationInput) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allbinaryLayerManager, p_allbinaryLayerManager)
+      JR.lset(f, :analogLocationInput, p_analogLocationInput)
+        try do
+            JR.lset(f, :customGPoint, nil)
+            JR.lset(f, :customGPoint, JR.call(JR.lget(f, :analogLocationInput), :jm_getCustomGPoint, []))
+            JR.lset(f, :x, JR.call(JR.lget(f, :customGPoint), :jm_getX, []))
+            JR.lset(f, :y, JR.call(JR.lget(f, :customGPoint), :jm_getY, []))
+            JR.lset(f, :leftTrigger, JR.call(JR.lget(f, :analogLocationInput), :jm_getLeftTrigger, []))
+            JR.lset(f, :rightTrigger, JR.call(JR.lget(f, :analogLocationInput), :jm_getRightTrigger, []))
+            if (JR.lget(f, :x) < 0) do
+                JR.call(JR.aget(JR.get(this, :inputProcessorArray), JR.call(JR.get(this, :leftGameKeyEvent), :jm_getKey, [])), :jm_processAnalog, [JR.lget(f, :allbinaryLayerManager), JR.get(this, :leftGameKeyEvent), JR.lget(f, :x)])
+            else
+                if (JR.lget(f, :x) > 0) do
+                JR.call(JR.aget(JR.get(this, :inputProcessorArray), JR.call(JR.get(this, :rightGameKeyEvent), :jm_getKey, [])), :jm_processAnalog, [JR.lget(f, :allbinaryLayerManager), JR.get(this, :rightGameKeyEvent), JR.lget(f, :x)])
             end
-            end,
-            case (Y < 0) of
-                true ->
-                (fun(Target_N67577) -> (get({Target_N67577, '$class'})):processAnalog(Target_N67577, AllbinaryLayerManager, get({This, downGameKeyEvent}), Y) end)(array:get((get({get({This, downGameKeyEvent}), '$class'})):getKey(get({This, downGameKeyEvent})), get({This, inputProcessorArray})));
-                false ->
-                case (Y > 0) of
-                true ->
-                (fun(Target_N67493) -> (get({Target_N67493, '$class'})):processAnalog(Target_N67493, AllbinaryLayerManager, get({This, upGameKeyEvent}), Y) end)(array:get((get({get({This, upGameKeyEvent}), '$class'})):getKey(get({This, upGameKeyEvent})), get({This, inputProcessorArray})));
-                false -> ok
             end
-            end,
-            case (LeftTrigger > 0) of
-                true ->
-                (fun(Target_N67681) -> (get({Target_N67681, '$class'})):processAnalog(Target_N67681, AllbinaryLayerManager, get({This, leftTriggerGameKeyEvent}), LeftTrigger) end)(array:get((get({get({This, leftTriggerGameKeyEvent}), '$class'})):getKey(get({This, leftTriggerGameKeyEvent})), get({This, inputProcessorArray})));
-                false -> ok
-            end,
-            case (RightTrigger > 0) of
-                true ->
-                (fun(Target_N67789) -> (get({Target_N67789, '$class'})):processAnalog(Target_N67789, AllbinaryLayerManager, get({This, rightTriggerGameKeyEvent}), RightTrigger) end)(array:get((get({get({This, rightTriggerGameKeyEvent}), '$class'})):getKey(get({This, rightTriggerGameKeyEvent})), get({This, inputProcessorArray})));
-                false -> ok
+            if (JR.lget(f, :y) < 0) do
+                JR.call(JR.aget(JR.get(this, :inputProcessorArray), JR.call(JR.get(this, :downGameKeyEvent), :jm_getKey, [])), :jm_processAnalog, [JR.lget(f, :allbinaryLayerManager), JR.get(this, :downGameKeyEvent), JR.lget(f, :y)])
+            else
+                if (JR.lget(f, :y) > 0) do
+                JR.call(JR.aget(JR.get(this, :inputProcessorArray), JR.call(JR.get(this, :upGameKeyEvent), :jm_getKey, [])), :jm_processAnalog, [JR.lget(f, :allbinaryLayerManager), JR.get(this, :upGameKeyEvent), JR.lget(f, :y)])
             end
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), "Unable to process analog input", This, get({CommonStrings, 'PROCESS'}), E)
-        end.
+            end
+            if (JR.lget(f, :leftTrigger) > 0) do
+                JR.call(JR.aget(JR.get(this, :inputProcessorArray), JR.call(JR.get(this, :leftTriggerGameKeyEvent), :jm_getKey, [])), :jm_processAnalog, [JR.lget(f, :allbinaryLayerManager), JR.get(this, :leftTriggerGameKeyEvent), JR.lget(f, :leftTrigger)])
+            end
+            if (JR.lget(f, :rightTrigger) > 0) do
+                JR.call(JR.aget(JR.get(this, :inputProcessorArray), JR.call(JR.get(this, :rightTriggerGameKeyEvent), :jm_getKey, [])), :jm_processAnalog, [JR.lget(f, :allbinaryLayerManager), JR.get(this, :rightTriggerGameKeyEvent), JR.lget(f, :rightTrigger)])
+            end
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_put, ["Unable to process analog input", this, JR.get(JR.lget(f, :commonStrings), :PROCESS), JR.lget(f, :e)])
+        end
+    end)
+  end
 
-getSourceId(This) ->
-        0.
+
+  def jm_getSourceId(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0})
+    end)
+  end
+end
+
 

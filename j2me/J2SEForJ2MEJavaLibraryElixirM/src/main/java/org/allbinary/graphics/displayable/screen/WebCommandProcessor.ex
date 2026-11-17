@@ -1,63 +1,77 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2022 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-% 
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.displayable.screen
-% import java.awt.Desktop
-% import java.net.URI
-% import javax.microedition.lcdui.Canvas
-% import javax.microedition.lcdui.Command
-% import javax.microedition.lcdui.CommandListener
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2022 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+# 
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable.screen
 
--module('WebCommandProcessor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule WebCommandProcessor do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> WebCommandProcessor.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'WebCommandProcessor':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :aboutCommandProcessor, nil)
+    JR.put(this, :list, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :aboutCommandProcessor, AboutCommandProcessor.jm_getInstance())
+        JR.put(this, :list, BasicArrayListD.jnew())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, aboutCommandProcessor}, 'AboutCommandProcessor':getInstance()),
-    put({This, list}, 'BasicArrayListD':new()),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'WebCommandProcessor', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, WebCommandProcessor.jstatic_instance()})
+    end)
+  end
 
-process(This, MidletCommandListener, Command, Canvas) ->
-        try
-            case ('Desktop':isDesktopSupported() andalso (fun(Target_N66114) -> (get({Target_N66114, '$class'})):isSupported(Target_N66114, get({get({'Desktop', 'Action'}), 'BROWSE'})) end)('Desktop':getDesktop())) of
-                true ->
-                (fun(Target_N66174) -> (get({Target_N66174, '$class'})):browse(Target_N66174, 'URI':new((get({get({This, list}), '$class'})):removeAt(get({This, list}), 0))) end)('Desktop':getDesktop());
-                false -> ok
+
+  def jm_process(this, p_midletCommandListener, p_command, p_canvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :midletCommandListener, p_midletCommandListener)
+      JR.lset(f, :command, p_command)
+      JR.lset(f, :canvas, p_canvas)
+        try do
+            if (Desktop.jm_isDesktopSupported() && JR.call(Desktop.jm_getDesktop(), :jm_isSupported, [JR.get(Desktop.jstatic_Action(), :BROWSE)])) do
+                JR.call(Desktop.jm_getDesktop(), :jm_browse, [URI.jnew(JR.call(JR.get(this, :list), :jm_removeAt, [0]))])
             end
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), This, get({CommonStrings, 'PROCESS'}), E)
-        end.
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, JR.get(JR.lget(f, :commonStrings), :PROCESS), JR.lget(f, :e)])
+        end
+    end)
+  end
+end
+
 

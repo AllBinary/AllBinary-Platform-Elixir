@@ -1,51 +1,66 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.resource
-% import org.allbinary.animation.FeaturedAnimationInterfaceFactoryInterfaceFactory
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.resource
 
--module('FeatureResourceInitializationUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule FeatureResourceInitializationUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> FeatureResourceInitializationUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'FeatureResourceInitializationUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'FeatureResourceInitializationUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, FeatureResourceInitializationUtil.jstatic_instance()})
+    end)
+  end
 
-% throws Exception
-init(This, Level) when is_integer(Level) ->
-        CommonStrings = 'CommonStrings':getInstance(),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({CommonStrings, 'START'}), This, get({CommonStrings, 'INIT'})),
-        FeaturedResourceFactory = 'FeaturedAnimationInterfaceFactoryInterfaceFactory':getInstance(),
-        (get({FeaturedResourceFactory, '$class'})):init(FeaturedResourceFactory, Level),
-        (fun(Target_N66018) -> (get({Target_N66018, '$class'})):init(Target_N66018, Level) end)('FeaturedResourceRelativeRelationshipFactory':getInstance()).
+
+  def jm_init(this, p_level) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :level, p_level)
+        JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.lget(f, :commonStrings), :START), this, JR.get(JR.lget(f, :commonStrings), :INIT)])
+        JR.lset(f, :featuredResourceFactory, FeaturedAnimationInterfaceFactoryInterfaceFactory.jm_getInstance())
+        JR.call(JR.lget(f, :featuredResourceFactory), :jm_init, [JR.lget(f, :level)])
+        JR.call(FeaturedResourceRelativeRelationshipFactory.jm_getInstance(), :jm_init, [JR.lget(f, :level)])
+    end)
+  end
+end
+
 

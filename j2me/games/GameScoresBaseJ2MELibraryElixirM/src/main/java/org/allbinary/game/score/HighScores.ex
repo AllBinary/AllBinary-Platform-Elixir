@@ -1,82 +1,168 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.score
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonLabels
-% import org.allbinary.string.CommonSeps
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.score
 
--module('HighScores').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements HighScoresInterface
+defmodule HighScores do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, orderedHighScoresList}, 'BasicArrayListD':new()),
-    put({This, name}, undefined),
-    put({This, heading}, undefined),
-    put({This, columnOneHeading}, "Name"),
-    put({This, columnTwoHeading}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :orderedHighScoresList, nil)
+    JR.put(this, :name, nil)
+    JR.put(this, :heading, nil)
+    JR.put(this, :columnOneHeading, nil)
+    JR.put(this, :columnTwoHeading, nil)
+        JR.put(this, :orderedHighScoresList, BasicArrayListD.jnew())
+        
+        
+        JR.put(this, :columnOneHeading, "Name")
+        
+    nil
+  end
 
 
-new(Name, Heading, ColumnTwoHeading) when (is_list(Name) orelse Name =:= undefined), (is_list(Heading) orelse Heading =:= undefined), (is_list(ColumnTwoHeading) orelse ColumnTwoHeading =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Name, Heading, ColumnTwoHeading),
-    This.
+  def jinit(this, p_name, p_heading, p_columnTwoHeading) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :heading, p_heading)
+      JR.lset(f, :columnTwoHeading, p_columnTwoHeading)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :name, JR.lget(f, :name))
+        JR.put(this, :heading, JR.lget(f, :heading))
+        JR.put(this, :columnTwoHeading, JR.lget(f, :columnTwoHeading))
+    end)
+  end
 
-'$init'(This, Name, Heading, ColumnTwoHeading) when (is_list(Name) orelse Name =:= undefined), (is_list(Heading) orelse Heading =:= undefined), (is_list(ColumnTwoHeading) orelse ColumnTwoHeading =:= undefined) ->
-    init_fields(This),
-        put({This, name}, Name),
-        put({This, heading}, Heading),
-        put({This, columnTwoHeading}, ColumnTwoHeading).
+  def jnew(p_name, p_heading, p_columnTwoHeading) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_name, p_heading, p_columnTwoHeading)
+    this
+  end
 
-setList(This, OrderedHighScoresList) ->
-        put({This, orderedHighScoresList}, OrderedHighScoresList).
 
-getList(This) ->
-        get({This, orderedHighScoresList}).
+  def jm_setList(this, p_orderedHighScoresList) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :orderedHighScoresList, p_orderedHighScoresList)
+        JR.put(this, :orderedHighScoresList, JR.lget(f, :orderedHighScoresList))
+    end)
+  end
 
-getName(This) ->
-        get({This, name}).
 
-getTotal(This) ->
-        (fun(Target_N66255) -> (get({Target_N66255, '$class'})):size(Target_N66255) end)((get({This, '$class'})):getList(This)).
+  def jm_getList(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :orderedHighScoresList)})
+    end)
+  end
 
-addHighScore(This, NewHighScore) ->
-        (get({get({This, orderedHighScoresList}), '$class'})):add(get({This, orderedHighScoresList}), NewHighScore).
 
-getHeading(This) ->
-        get({This, heading}).
+  def jm_getName(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :name)})
+    end)
+  end
 
-getColumnOneHeading(This) ->
-        get({This, columnOneHeading}).
 
-getColumnTwoHeading(This) ->
-        get({This, columnTwoHeading}).
+  def jm_getTotal(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.call(this, :jm_getList, []), :jm_size, [])})
+    end)
+  end
 
-% throws Exception
-isBestScore(This, NewHighScore) ->
-        false.
 
-toString(This) ->
-        StringBuffer = 'StringMaker':new(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "HighScores: "),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({This, heading})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({'CommonSeps':getInstance(), 'SPACE'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({'CommonLabels':getInstance(), 'TOTAL_LABEL'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, (get({get({This, orderedHighScoresList}), '$class'})):size(get({This, orderedHighScoresList}))),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+  def jm_addHighScore(this, p_newHighScore) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :newHighScore, p_newHighScore)
+        JR.call(JR.get(this, :orderedHighScoresList), :jm_add, [JR.lget(f, :newHighScore)])
+    end)
+  end
+
+
+  def jm_getHeading(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :heading)})
+    end)
+  end
+
+
+  def jm_getColumnOneHeading(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :columnOneHeading)})
+    end)
+  end
+
+
+  def jm_getColumnTwoHeading(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :columnTwoHeading)})
+    end)
+  end
+
+
+  def jm_isBestScore(this, p_newHighScore) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :newHighScore, p_newHighScore)
+        throw({:jreturn, false})
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["HighScores: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(this, :heading)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :SPACE)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(CommonLabels.jm_getInstance(), :TOTAL_LABEL)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.call(JR.get(this, :orderedHighScoresList), :jm_size, [])])
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+end
+
 

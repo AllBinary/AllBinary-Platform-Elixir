@@ -1,35 +1,44 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.view.event
-% import org.allbinary.logic.util.event.AllBinaryEventObject
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.view.event
 
--module('ViewPositionEvent').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule ViewPositionEvent do
+  def jsuper(), do: AllBinaryEventObject
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AllBinaryEventObject', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
 
+  def jinit(this, p_anyType) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+        AllBinaryEventObject.jinit(this, JR.lget(f, :anyType))
+        ViewPositionEvent.jinitfields(this)
+    end)
+  end
 
-new(AnyType) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, AnyType),
-    This.
+  def jnew(p_anyType) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_anyType)
+    this
+  end
+end
 
-'$init'(This, AnyType) ->
-        'AllBinaryEventObject':'$init'(This, AnyType).
 

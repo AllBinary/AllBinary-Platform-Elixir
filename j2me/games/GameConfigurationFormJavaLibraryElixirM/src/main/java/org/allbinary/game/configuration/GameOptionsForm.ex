@@ -1,163 +1,190 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.configuration
-% import javax.microedition.lcdui.Choice
-% import javax.microedition.lcdui.Command
-% import javax.microedition.lcdui.CommandListener
-% import javax.microedition.lcdui.Item
-% import javax.microedition.lcdui.TextField
-% import org.allbinary.MIDPUtil
-% import org.allbinary.game.commands.GameCommandsFactory
-% import org.allbinary.game.configuration.feature.GameFeatureChoiceGroups
-% import org.allbinary.game.configuration.feature.GameFeatureFormUtil
-% import org.allbinary.game.configuration.feature.GameFeatureItemCommandListener
-% import org.allbinary.game.configuration.feature.GameFeatureItemStateListener
-% import org.allbinary.game.configuration.feature.SensorFeatureFactory
-% import org.allbinary.game.configuration.persistance.GameConfigurationPersistanceSingleton
-% import org.allbinary.game.configuration.persistance.KeyValuePersistance
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.displayable.command.MyCommandsFactory
-% import org.allbinary.graphics.displayable.screen.CommandForm
-% import org.allbinary.input.gyro.OrientationData
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.system.security.licensing.AbeClientInformationInterface
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.HashtableUtil
-% import org.allbinary.logic.StdUtil
-% import org.allbinary.util.ABHashtable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.configuration
 
--module('GameOptionsForm').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule GameOptionsForm do
+  def jsuper(), do: CommandForm
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('CommandForm', Function, Arguments).
-
-init_fields(This) ->
-    put({This, meUtil}, 'MIDPUtil':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :meUtil, nil)
+        JR.put(this, :meUtil, MIDPUtil.jm_getInstance())
+    nil
+  end
 
 
-new(CommandListener, Title, BackgrounBasicColor, ForegroundBasicColor) when (is_list(Title) orelse Title =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, CommandListener, Title, BackgrounBasicColor, ForegroundBasicColor),
-    This.
+  def jinit(this, p_commandListener, p_title, p_backgrounBasicColor, p_foregroundBasicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :commandListener, p_commandListener)
+      JR.lset(f, :title, p_title)
+      JR.lset(f, :backgrounBasicColor, p_backgrounBasicColor)
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+        CommandForm.jinit(this, JR.lget(f, :commandListener), JR.lget(f, :title), JR.lget(f, :backgrounBasicColor), JR.lget(f, :foregroundBasicColor))
+        GameOptionsForm.jinitfields(this)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, JR.get(JR.get(this, :commonStrings), :CONSTRUCTOR)])
+        JR.call(this, :jm_addConfiguration, [])
+        JR.lset(f, :gameFeatureFormUtil, GameFeatureFormUtil.jm_getInstance())
+        JR.call(JR.lget(f, :gameFeatureFormUtil), :jm_addChoiceGroup, [this, JR.call(GameFeatureChoiceGroups.jm_getExclusiveInstance(), :jm_get, []), Choice.jstatic_EXCLUSIVE()])
+        JR.call(JR.lget(f, :gameFeatureFormUtil), :jm_addChoiceGroup, [this, JR.call(GameFeatureChoiceGroups.jm_getMultipleInstance(), :jm_get, []), Choice.jstatic_MULTIPLE()])
+        JR.call(this, :jm_initCommands, [JR.lget(f, :commandListener)])
+        JR.call(this, :jm_setItemStateListener, [GameFeatureItemStateListener.jnew(this)])
+        JR.call(this, :jm_addTextFieldsIfSimulated, [])
+    end)
+  end
 
-'$init'(This, CommandListener, Title, BackgrounBasicColor, ForegroundBasicColor) when (is_list(Title) orelse Title =:= undefined) ->
-        'CommandForm':'$init'(This, CommandListener, Title, BackgrounBasicColor, ForegroundBasicColor),
-        init_fields(This),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, get({get({This, commonStrings}), 'CONSTRUCTOR'})),
-        (get({This, '$class'})):addConfiguration(This),
-        GameFeatureFormUtil = 'GameFeatureFormUtil':getInstance(),
-        (get({GameFeatureFormUtil, '$class'})):addChoiceGroup(GameFeatureFormUtil, This, (fun(Target_N66571) -> (get({Target_N66571, '$class'})):get(Target_N66571) end)('GameFeatureChoiceGroups':getExclusiveInstance()), get({'Choice', 'EXCLUSIVE'})),
-        (get({GameFeatureFormUtil, '$class'})):addChoiceGroup(GameFeatureFormUtil, This, (fun(Target_N66637) -> (get({Target_N66637, '$class'})):get(Target_N66637) end)('GameFeatureChoiceGroups':getMultipleInstance()), get({'Choice', 'MULTIPLE'})),
-        (get({This, '$class'})):initCommands(This, CommandListener),
-        (get({This, '$class'})):setItemStateListener(This, 'GameFeatureItemStateListener':new(This)),
-        (get({This, '$class'})):addTextFieldsIfSimulated(This).
+  def jnew(p_commandListener, p_title, p_backgrounBasicColor, p_foregroundBasicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_commandListener, p_title, p_backgrounBasicColor, p_foregroundBasicColor)
+    this
+  end
 
-% throws Exception
-closeClientInformation(This, AbeClientInformation) ->
-        'CommandForm':close(This),
-        (get({This, '$class'})):save(This, AbeClientInformation).
 
-addTextFieldsIfSimulated(This) ->
-        Key = get({'OrientationData':getInstance(), 'ORIENTATION_SENSOR_INPUT'}),
-        Hashtable = (fun(Target_N67066) -> (get({Target_N67066, '$class'})):get(Target_N67066) end)('GameFeatureChoiceGroups':getExclusiveInstance()),
-        case (Hashtable =/= undefined) of
-            true ->
-            ListCanBeNull = (get({Hashtable, '$class'})):get(Hashtable, Key),
-            case (ListCanBeNull =/= undefined) of
-                true ->
-                List = ListCanBeNull,
-                case (get({List, '$class'})):contains(List, get({'SensorFeatureFactory':getInstance(), 'SIMULATED_ORIENTATION_SENSORS'})) of
-                    true ->
-                    (get({This, '$class'})):addTextFields(This);
-                    false -> ok
-                end;
-                false -> ok
-            end;
-            false -> ok
-        end.
+  def jm_closeClientInformation(this, p_abeClientInformation) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+        CommandForm.jm_close(this)
+        JR.call(this, :jm_save, [JR.lget(f, :abeClientInformation)])
+    end)
+  end
 
-addTextFields(This) ->
-        Hashtable = 'GameConfigurationTextInput':getHashtable(),
-        Size = (get({Hashtable, '$class'})):size(Hashtable),
-        ObjectArray = (fun(Target_N67514) -> (get({Target_N67514, '$class'})):getKeysAsArray(Target_N67514, Hashtable) end)('HashtableUtil':getInstance()),
-        put({local, gameConfigurationTextInput}, undefined),
-        put({local, textField}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, gameConfigurationTextInput}, (get({Hashtable, '$class'})):get(Hashtable, array:get(Index, ObjectArray))),
-            put({local, textField}, 'TextField':new((get({get({local, gameConfigurationTextInput}), '$class'})):getLabel(get({local, gameConfigurationTextInput})), (get({get({local, gameConfigurationTextInput}), '$class'})):getText(get({local, gameConfigurationTextInput})), 30, get({'TextField', 'ANY'}))),
-            (get({get({This, meUtil}), '$class'})):appendItem(get({This, meUtil}), This, get({local, textField}))
-        end, lists:seq(0, Size - 1)).
 
-addConfiguration(This) ->
-        METHOD_NAME = "addConfiguration",
-        NAME = "Name: ",
-        List = (fun(Target_N68018) -> (get({Target_N68018, '$class'})):getOptionsBasicArrayList(Target_N68018) end)('GameConfigurationSingleton':getInstance()),
-        GAUGE_CHANGE = get({'MyCommandsFactory':getInstance(), 'GAUGE_CHANGE'}),
-        StringMaker = 'StringMaker':new(),
-        Size = (get({List, '$class'})):size(List),
-        put({local, gameConfiguration}, undefined),
-        put({local, gauge}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, gameConfiguration}, array:get(Index, get({List, objectArray}))),
-            (get({StringMaker, '$class'})):delete(StringMaker, 0, (get({StringMaker, '$class'})):length(StringMaker)),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N68393) -> (get({Target_N68393, '$class'})):toString(Target_N68393) end)((fun(Target_N68400) -> (get({Target_N68400, '$class'})):append(Target_N68400, (get({get({local, gameConfiguration}), '$class'})):toString(get({local, gameConfiguration}))) end)((get({StringMaker, '$class'})):append(StringMaker, NAME))), This, METHOD_NAME),
-            put({local, gauge}, 'GameConfigurationGauge':new(get({local, gameConfiguration}))),
-            (get({get({local, gauge}), '$class'})):setDefaultCommand(get({local, gauge}), GAUGE_CHANGE),
-            (get({get({local, gauge}), '$class'})):setItemCommandListener(get({local, gauge}), 'GameFeatureItemCommandListener':new(This)),
-            (get({get({This, meUtil}), '$class'})):appendItem(get({This, meUtil}), This, get({local, gauge}))
-        end, lists:seq(0, Size - 1)).
+  def jm_addTextFieldsIfSimulated(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :key, JR.get(OrientationData.jm_getInstance(), :ORIENTATION_SENSOR_INPUT))
+        JR.lset(f, :hashtable, JR.call(GameFeatureChoiceGroups.jm_getExclusiveInstance(), :jm_get, []))
+        if (JR.lget(f, :hashtable) != nil) do
+            JR.lset(f, :listCanBeNull, JR.call(JR.lget(f, :hashtable), :jm_get, [JR.lget(f, :key)]))
+            if (JR.lget(f, :listCanBeNull) != nil) do
+                JR.lset(f, :list, JR.lget(f, :listCanBeNull))
+                if JR.call(JR.lget(f, :list), :jm_contains, [JR.get(SensorFeatureFactory.jm_getInstance(), :SIMULATED_ORIENTATION_SENSORS)]) do
+                    JR.call(this, :jm_addTextFields, [])
+                end
+            end
+        end
+    end)
+  end
 
-initCommands(This, CmdListener) ->
-        GameCommandsFactory = 'GameCommandsFactory':getInstance(),
-        (get({This, '$class'})):removeAllCommands(This),
-        (get({This, '$class'})):addCommand(This, get({GameCommandsFactory, 'CLOSE_OPTIONS'})),
-        (get({This, '$class'})):addCommand(This, get({GameCommandsFactory, 'DEFAULT_OPTIONS'})),
-        (get({This, '$class'})):setCommandListener(This, CmdListener).
 
-% throws Exception
-save(This, AbeClientInformation) ->
-        Size = (get({This, '$class'})):size(This),
-        put({local, item}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, item}, (get({This, '$class'})):get(This, Index)),
-            case allbinary_java:instance_of(get({local, item}), 'GameConfigurationGauge') of
-                true ->
-                (fun(Target_N69155) -> (get({Target_N69155, '$class'})):update(Target_N69155, get({local, item})) end)('GameConfigurationUtil':getInstance());
-                false ->
-                case allbinary_java:instance_of(get({local, item}), 'TextField') of
-                true ->
-                'GameConfigurationTextInput':update(get({local, item}));
-                false -> ok
+  def jm_addTextFields(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :hashtable, GameConfigurationTextInput.jm_getHashtable())
+        JR.lset(f, :size, JR.call(JR.lget(f, :hashtable), :jm_size, []))
+        JR.lset(f, :objectArray, JR.call(HashtableUtil.jm_getInstance(), :jm_getKeysAsArray, [JR.lget(f, :hashtable)]))
+        JR.lset(f, :gameConfigurationTextInput, nil)
+        JR.lset(f, :textField, nil)
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :gameConfigurationTextInput, JR.call(JR.lget(f, :hashtable), :jm_get, [JR.aget(JR.lget(f, :objectArray), JR.lget(f, :index))]))
+            JR.lset(f, :textField, TextField.jnew(JR.call(JR.lget(f, :gameConfigurationTextInput), :jm_getLabel, []), JR.call(JR.lget(f, :gameConfigurationTextInput), :jm_getText, []), 30, TextField.jstatic_ANY()))
+            JR.call(JR.get(this, :meUtil), :jm_appendItem, [this, JR.lget(f, :textField)])
+        end)
+    end)
+  end
+
+
+  def jm_addConfiguration(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :METHOD_NAME, "addConfiguration")
+        JR.lset(f, :NAME, "Name: ")
+        JR.lset(f, :list, JR.call(GameConfigurationSingleton.jm_getInstance(), :jm_getOptionsBasicArrayList, []))
+        JR.lset(f, :GAUGE_CHANGE, JR.get(MyCommandsFactory.jm_getInstance(), :GAUGE_CHANGE))
+        JR.lset(f, :stringMaker, StringMaker.jnew())
+        JR.lset(f, :size, JR.call(JR.lget(f, :list), :jm_size, []))
+        JR.lset(f, :gameConfiguration, nil)
+        JR.lset(f, :gauge, nil)
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :gameConfiguration, JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index)))
+            JR.call(JR.lget(f, :stringMaker), :jm_delete, [0, JR.call(JR.lget(f, :stringMaker), :jm_length, [])])
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(JR.lget(f, :stringMaker), :jm_append, [JR.lget(f, :NAME)]), :jm_append, [JR.call(JR.lget(f, :gameConfiguration), :jm_toString, [])]), :jm_toString, []), this, JR.lget(f, :METHOD_NAME)])
+            JR.lset(f, :gauge, GameConfigurationGauge.jnew(JR.lget(f, :gameConfiguration)))
+            JR.call(JR.lget(f, :gauge), :jm_setDefaultCommand, [JR.lget(f, :GAUGE_CHANGE)])
+            JR.call(JR.lget(f, :gauge), :jm_setItemCommandListener, [GameFeatureItemCommandListener.jnew(this)])
+            JR.call(JR.get(this, :meUtil), :jm_appendItem, [this, JR.lget(f, :gauge)])
+        end)
+    end)
+  end
+
+
+  def jm_initCommands(this, p_cmdListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cmdListener, p_cmdListener)
+        JR.lset(f, :gameCommandsFactory, GameCommandsFactory.jm_getInstance())
+        JR.call(this, :jm_removeAllCommands, [])
+        JR.call(this, :jm_addCommand, [JR.get(JR.lget(f, :gameCommandsFactory), :CLOSE_OPTIONS)])
+        JR.call(this, :jm_addCommand, [JR.get(JR.lget(f, :gameCommandsFactory), :DEFAULT_OPTIONS)])
+        JR.call(this, :jm_setCommandListener, [JR.lget(f, :cmdListener)])
+    end)
+  end
+
+
+  def jm_save(this, p_abeClientInformation) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+        JR.lset(f, :size, JR.call(this, :jm_size, []))
+        JR.lset(f, :item, nil)
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :item, JR.call(this, :jm_get, [JR.lget(f, :index)]))
+            if JR.instance_of(JR.lget(f, :item), GameConfigurationGauge) do
+                JR.call(GameConfigurationUtil.jm_getInstance(), :jm_update, [JR.lget(f, :item)])
+            else
+                if JR.instance_of(JR.lget(f, :item), TextField) do
+                GameConfigurationTextInput.jm_update(JR.lget(f, :item))
             end
             end
-        end, lists:seq(0, Size - 1)),
-        (fun(Target_N69275) -> (get({Target_N69275, '$class'})):updateCompetitionValue(Target_N69275) end)('GameConfigurationUtil':getInstance()),
-        Hashtable = (fun(Target_N69318) -> (get({Target_N69318, '$class'})):createHashtable(Target_N69318) end)('StdUtil':getInstance()),
-        SCALE = get({'GameConfigurationCentral':getInstance(), 'SCALE'}),
-        (get({Hashtable, '$class'})):put(Hashtable, (get({SCALE, '$class'})):getName(SCALE), allbinary_java:to_string((fun(Target_N69488) -> (get({Target_N69488, '$class'})):intValue(Target_N69488) end)((get({SCALE, '$class'})):getValue(SCALE)))),
-        KeyValuePersistance = 'GameConfigurationPersistanceSingleton':getInstance(),
-        (get({KeyValuePersistance, '$class'})):clear(KeyValuePersistance),
-        (get({KeyValuePersistance, '$class'})):loadAll(KeyValuePersistance, AbeClientInformation),
-        List = (get({KeyValuePersistance, '$class'})):getIds(KeyValuePersistance),
-        (get({KeyValuePersistance, '$class'})):save(KeyValuePersistance, AbeClientInformation, Hashtable),
-        Size2 = (get({List, '$class'})):size(List),
-        put({local, integer}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, integer}, array:get(Index, get({List, objectArray}))),
-            (get({KeyValuePersistance, '$class'})):delete(KeyValuePersistance, AbeClientInformation, (get({get({local, integer}), '$class'})):intValue(get({local, integer})))
-        end, lists:seq(0, Size2 - 1)).
+        end)
+        JR.call(GameConfigurationUtil.jm_getInstance(), :jm_updateCompetitionValue, [])
+        JR.lset(f, :hashtable, JR.call(StdUtil.jm_getInstance(), :jm_createHashtable, []))
+        JR.lset(f, :SCALE, JR.get(GameConfigurationCentral.jm_getInstance(), :SCALE))
+        JR.call(JR.lget(f, :hashtable), :jm_put, [JR.call(JR.lget(f, :SCALE), :jm_getName, []), JR.str(JR.call(JR.call(JR.lget(f, :SCALE), :jm_getValue, []), :jm_intValue, []))])
+        JR.lset(f, :keyValuePersistance, GameConfigurationPersistanceSingleton.jm_getInstance())
+        JR.call(JR.lget(f, :keyValuePersistance), :jm_clear, [])
+        JR.call(JR.lget(f, :keyValuePersistance), :jm_loadAll, [JR.lget(f, :abeClientInformation)])
+        JR.lset(f, :list, JR.call(JR.lget(f, :keyValuePersistance), :jm_getIds, []))
+        JR.call(JR.lget(f, :keyValuePersistance), :jm_save, [JR.lget(f, :abeClientInformation), JR.lget(f, :hashtable)])
+        JR.lset(f, :size2, JR.call(JR.lget(f, :list), :jm_size, []))
+        JR.lset(f, :integer, nil)
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size2)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :integer, JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index)))
+            JR.call(JR.lget(f, :keyValuePersistance), :jm_delete, [JR.lget(f, :abeClientInformation), JR.call(JR.lget(f, :integer), :jm_intValue, [])])
+        end)
+    end)
+  end
+end
+
 

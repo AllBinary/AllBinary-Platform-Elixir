@@ -1,56 +1,64 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.form.item
-% import javax.microedition.lcdui.Command
-% import org.allbinary.game.commands.GameCommandsFactory
-% import org.allbinary.graphics.displayable.DisplayInfoSingleton
-% import org.allbinary.graphics.form.ScreenInfo
-% import org.allbinary.logic.java.bool.BooleanFactory
-% import org.allbinary.logic.util.visitor.Visitor
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item
 
--module('LimitCommandsVisitor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule LimitCommandsVisitor do
+  def jsuper(), do: Visitor
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Visitor', Function, Arguments).
-
-init_fields(This) ->
-    put({This, isNotSmallDisplay}, false),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :isNotSmallDisplay, false)
+        
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      Visitor.jinit(this)
+      jinitfields(this)
+        JR.lset(f, :displayInfo, DisplayInfoSingleton.jm_getInstance())
+        JR.put(this, :isNotSmallDisplay, (((JR.call(JR.lget(f, :displayInfo), :jm_isPortrait, []) && (JR.call(JR.lget(f, :displayInfo), :jm_getLastHeight, []) > JR.get(ScreenInfo.jm_getInstance(), :SMALL_WIDTH)))) || ((!JR.call(JR.lget(f, :displayInfo), :jm_isPortrait, []) && (JR.call(JR.lget(f, :displayInfo), :jm_getLastHeight, []) > JR.get(ScreenInfo.jm_getInstance(), :SMALL_HEIGHT))))))
+    end)
+  end
 
-'$init'(This) ->
-    'Visitor':'$init'(This),
-    init_fields(This),
-        DisplayInfo = 'DisplayInfoSingleton':getInstance(),
-        put({This, isNotSmallDisplay}, ((((get({DisplayInfo, '$class'})):isPortrait(DisplayInfo) andalso ((get({DisplayInfo, '$class'})):getLastHeight(DisplayInfo) > get({'ScreenInfo':getInstance(), 'SMALL_WIDTH'})))) orelse (((not (get({DisplayInfo, '$class'})):isPortrait(DisplayInfo)) andalso ((get({DisplayInfo, '$class'})):getLastHeight(DisplayInfo) > get({'ScreenInfo':getInstance(), 'SMALL_HEIGHT'})))))).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-visit(This, AnyType) ->
-        try
-        Command = AnyType,
-        BooleanFactory = 'BooleanFactory':getInstance(),
-        case (((get({This, isNotSmallDisplay}) orelse ((get({Command, '$class'})):getPriority(Command) =:= 1)) orelse (Command =:= get({'GameCommandsFactory':getInstance(), 'EXIT_COMMAND'}))) orelse (Command =:= get({'GameCommandsFactory':getInstance(), 'EXIT_WITHOUT_PROGRESS_COMMAND'}))) of
-            true ->
-            throw({'$return', get({BooleanFactory, 'TRUE'})});
-            false ->
-            throw({'$return', get({BooleanFactory, 'FALSE'})})
+
+  def jm_visit(this, p_anyType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+        JR.lset(f, :command, JR.lget(f, :anyType))
+        JR.lset(f, :booleanFactory, BooleanFactory.jm_getInstance())
+        if (((JR.get(this, :isNotSmallDisplay) || (JR.call(JR.lget(f, :command), :jm_getPriority, []) == 1)) || (JR.lget(f, :command) == JR.get(GameCommandsFactory.jm_getInstance(), :EXIT_COMMAND))) || (JR.lget(f, :command) == JR.get(GameCommandsFactory.jm_getInstance(), :EXIT_WITHOUT_PROGRESS_COMMAND))) do
+            throw({:jreturn, JR.get(JR.lget(f, :booleanFactory), :TRUE)})
+        else
+            throw({:jreturn, JR.get(JR.lget(f, :booleanFactory), :FALSE)})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
+end
+
 

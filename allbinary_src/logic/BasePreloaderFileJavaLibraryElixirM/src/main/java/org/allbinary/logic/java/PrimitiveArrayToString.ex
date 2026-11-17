@@ -1,39 +1,53 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.java
-% import org.allbinary.logic.string.StringMaker
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.java
 
--module('PrimitiveArrayToString').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule PrimitiveArrayToString do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-toString(Floats) when (is_tuple(Floats) orelse Floats =:= undefined) ->
-        StringBuffer = 'StringMaker':new(),
-        lists:foreach(fun(Index) ->
-            (get({StringBuffer, '$class'})):appendfloat(StringBuffer, array:get(Index, Floats))
-        end, lists:seq(0, array:size(Floats) - 1)),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+  def jm_toString(p_floats) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :floats, p_floats)
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.alength(JR.lget(f, :floats))) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.call(JR.lget(f, :stringBuffer), :jm_appendfloat, [JR.aget(JR.lget(f, :floats), JR.lget(f, :index))])
+        end)
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+end
+
 

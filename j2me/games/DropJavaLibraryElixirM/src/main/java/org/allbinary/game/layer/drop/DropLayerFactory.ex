@@ -1,61 +1,110 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer.drop
-% import org.allbinary.game.layer.pickup.PickedUpLayerInterfaceFactoryInterface
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
-% import org.allbinary.util.BasicArrayListUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer.drop
 
--module('DropLayerFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule DropLayerFactory do
+  def jsuper(), do: JObject
+def jstatic_DROP_LAYER_FACTORY(), do: JR.static_get(__MODULE__, :DROP_LAYER_FACTORY, fn -> DropLayerFactory.jnew() end)
+  def jstatic_set_DROP_LAYER_FACTORY(value), do: JR.static_put(__MODULE__, :DROP_LAYER_FACTORY, value)
 
-static_init() ->
-    put({?MODULE, 'DROP_LAYER_FACTORY'}, 'DropLayerFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :list, nil)
+    JR.put(this, :basicArrayListUtil, nil)
+        JR.put(this, :list, BasicArrayListD.jnew())
+        JR.put(this, :basicArrayListUtil, BasicArrayListUtil.jm_getInstance())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, list}, 'BasicArrayListD':new()),
-    put({This, basicArrayListUtil}, 'BasicArrayListUtil':getInstance()),
-    ok.
+
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
+
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jm_clear(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :list), :jm_clear, [])
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
 
-clear(This) ->
-        (get({get({This, list}), '$class'})):clear(get({This, list})).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, DropLayerFactory.jstatic_DROP_LAYER_FACTORY()})
+    end)
+  end
 
-getInstance() ->
-        get({'DropLayerFactory', 'DROP_LAYER_FACTORY'}).
 
-getSize(This) ->
-        (get({get({This, list}), '$class'})):size(get({This, list})).
+  def jm_getSize(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.get(this, :list), :jm_size, [])})
+    end)
+  end
 
-getRandomInstance(This) ->
-        (get({get({This, basicArrayListUtil}), '$class'})):getRandom(get({This, basicArrayListUtil}), get({This, list})).
 
-add(This, LayerInterfaceFactoryInterface) ->
-        (get({get({This, list}), '$class'})):add(get({This, list}), LayerInterfaceFactoryInterface).
+  def jm_getRandomInstance(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.get(this, :basicArrayListUtil), :jm_getRandom, [JR.get(this, :list)])})
+    end)
+  end
 
-getList(This) ->
-        get({This, list}).
+
+  def jm_add(this, p_layerInterfaceFactoryInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterfaceFactoryInterface, p_layerInterfaceFactoryInterface)
+        JR.call(JR.get(this, :list), :jm_add, [JR.lget(f, :layerInterfaceFactoryInterface)])
+    end)
+  end
+
+
+  def jm_getList(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :list)})
+    end)
+  end
+end
+
 

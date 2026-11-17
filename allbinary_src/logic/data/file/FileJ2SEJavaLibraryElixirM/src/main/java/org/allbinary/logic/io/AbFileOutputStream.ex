@@ -1,54 +1,87 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.io
-% import java.io.FileNotFoundException
-% import java.io.FileOutputStream
-% import org.allbinary.logic.io.file.AbFile
-% import org.allbinary.logic.io.file.AbFileNativeUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
--module('AbFileOutputStream').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule AbFileOutputStream do
+  def jsuper(), do: FileOutputStream
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('FileOutputStream', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-% throws FileNotFoundException
-createFromAbFile(File) ->
-        'AbFileOutputStream':new((get({File, '$class'})):getPath(File), false).
+  def jm_createFromAbFile(p_file) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :file, p_file)
+        throw({:jreturn, AbFileOutputStream.jnew(JR.call(JR.lget(f, :file), :jm_getPath, []), false)})
+    end)
+  end
 
-% throws FileNotFoundException
-createFromAbFileAppend(File, Append) when is_boolean(Append) ->
-        'AbFileOutputStream':new((get({File, '$class'})):getPath(File), Append).
 
-% throws FileNotFoundException
-createFromFilePath(Name) when (is_list(Name) orelse Name =:= undefined) ->
-        'AbFileOutputStream':new(Name, false).
+  def jm_createFromAbFileAppend(p_file, p_append) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :file, p_file)
+      JR.lset(f, :append, p_append)
+        throw({:jreturn, AbFileOutputStream.jnew(JR.call(JR.lget(f, :file), :jm_getPath, []), JR.lget(f, :append))})
+    end)
+  end
 
-% throws FileNotFoundException
-createFromFilePathAppend(Name, Append) when (is_list(Name) orelse Name =:= undefined), is_boolean(Append) ->
-        'AbFileOutputStream':new(Name, Append).
 
-new(Name, Append) when (is_list(Name) orelse Name =:= undefined), is_boolean(Append) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Name, Append),
-    This.
+  def jm_createFromFilePath(p_name) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+        throw({:jreturn, AbFileOutputStream.jnew(JR.lget(f, :name), false)})
+    end)
+  end
 
-'$init'(This, Name, Append) when (is_list(Name) orelse Name =:= undefined), is_boolean(Append) ->
-        'FileOutputStream':'$init'(This, Name, Append).
+
+  def jm_createFromFilePathAppend(p_name, p_append) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :append, p_append)
+        throw({:jreturn, AbFileOutputStream.jnew(JR.lget(f, :name), JR.lget(f, :append))})
+    end)
+  end
+
+
+  def jinit(this, p_name, p_append) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :append, p_append)
+        FileOutputStream.jinit(this, JR.lget(f, :name), JR.lget(f, :append))
+        AbFileOutputStream.jinitfields(this)
+    end)
+  end
+
+  def jnew(p_name, p_append) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_name, p_append)
+    this
+  end
+end
+
 

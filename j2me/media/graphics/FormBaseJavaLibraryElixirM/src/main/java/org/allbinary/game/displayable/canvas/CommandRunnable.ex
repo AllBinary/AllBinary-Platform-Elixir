@@ -1,54 +1,75 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import javax.microedition.lcdui.Command
-% import javax.microedition.lcdui.CommandListener
-% import org.allbinary.graphics.displayable.MyCanvas
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('CommandRunnable').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements Runnable
+defmodule CommandRunnable do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, commandFormInputProcessor}, undefined),
-    put({This, command}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :commandFormInputProcessor, nil)
+    JR.put(this, :command, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        
+        
+    nil
+  end
 
 
-new(CommandFormInputProcessor, Command) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, CommandFormInputProcessor, Command),
-    This.
+  def jinit(this, p_commandFormInputProcessor, p_command) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :commandFormInputProcessor, p_commandFormInputProcessor)
+      JR.lset(f, :command, p_command)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :commandFormInputProcessor, JR.lget(f, :commandFormInputProcessor))
+        JR.put(this, :command, JR.lget(f, :command))
+    end)
+  end
 
-'$init'(This, CommandFormInputProcessor, Command) ->
-    init_fields(This),
-        put({This, commandFormInputProcessor}, CommandFormInputProcessor),
-        put({This, command}, Command).
+  def jnew(p_commandFormInputProcessor, p_command) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_commandFormInputProcessor, p_command)
+    this
+  end
 
-run(This) ->
-        try
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START_RUNNABLE'}), This, get({get({This, commonStrings}), 'RUN'})),
-            Canvas = (get({get({This, commandFormInputProcessor}), '$class'})):getCanvas(get({This, commandFormInputProcessor})),
-            CommandListener = (get({Canvas, '$class'})):getCustomCommandListener(Canvas),
-            (get({CommandListener, '$class'})):commandAction(CommandListener, get({This, command}), Canvas),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'END_RUNNABLE'}), This, get({get({This, commonStrings}), 'RUN'}))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'RUN'}), E)
-        end.
+
+  def jm_run(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START_RUNNABLE), this, JR.get(JR.get(this, :commonStrings), :RUN)])
+            JR.lset(f, :canvas, JR.call(JR.get(this, :commandFormInputProcessor), :jm_getCanvas, []))
+            JR.lset(f, :commandListener, JR.call(JR.lget(f, :canvas), :jm_getCustomCommandListener, []))
+            JR.call(JR.lget(f, :commandListener), :jm_commandAction, [JR.get(this, :command), JR.lget(f, :canvas)])
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :END_RUNNABLE), this, JR.get(JR.get(this, :commonStrings), :RUN)])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :RUN), JR.lget(f, :e)])
+        end
+    end)
+  end
+end
+
 

@@ -1,102 +1,154 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2002 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.displayable.screen
-% import javax.microedition.lcdui.Command
-% import javax.microedition.lcdui.CommandListener
-% import javax.microedition.lcdui.Form
-% import javax.microedition.lcdui.NullCommandListener
-% import org.allbinary.canvas.Processor
-% import org.allbinary.game.displayable.canvas.MenuListener
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.color.BasicColorFactory
-% import org.allbinary.graphics.displayable.command.MyCommandInterface
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.logic.StdUtil
-% import org.allbinary.util.ABStack
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2002 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable.screen
 
--module('CommandForm').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements MyCommandInterface
-% implements MenuListener
+defmodule CommandForm do
+  def jsuper(), do: Form
+def jstatic_NULL_COMMAND_FORM(), do: JR.static_get(__MODULE__, :NULL_COMMAND_FORM, fn -> JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT) end)
+  def jstatic_set_NULL_COMMAND_FORM(value), do: JR.static_put(__MODULE__, :NULL_COMMAND_FORM, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Form', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'NULL_COMMAND_FORM'}, get({'NullUtil':getInstance(), 'NULL_OBJECT'})),
-    ok.
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, repaintProcessor}, (fun(Target_N66465) -> (get({Target_N66465, '$class'})):create(Target_N66465, This) end)('ScreenRepaintProcessorFactory':getInstance())),
-    put({This, commandStack}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :repaintProcessor, nil)
+    JR.put(this, :commandStack, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        JR.put(this, :repaintProcessor, JR.call(ScreenRepaintProcessorFactory.jm_getInstance(), :jm_create, [this]))
+        
+    nil
+  end
 
 
-getNullCommandForm() ->
-        case (get({'CommandForm', 'NULL_COMMAND_FORM'}) =:= get({'NullUtil':getInstance(), 'NULL_OBJECT'})) of
-            true ->
-            put({'CommandForm', 'NULL_COMMAND_FORM'}, 'CommandForm':new(get({'NullCommandListener', 'NULL_COMMAND_LISTENER'}), get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'BasicColorFactory':getInstance(), 'BLACK'}), get({'BasicColorFactory':getInstance(), 'WHITE'})));
-            false -> ok
-        end,
-        get({'CommandForm', 'NULL_COMMAND_FORM'}).
+  def jm_getNullCommandForm() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        if (CommandForm.jstatic_NULL_COMMAND_FORM() == JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)) do
+            CommandForm.jstatic_set_NULL_COMMAND_FORM(CommandForm.jnew(NullCommandListener.jstatic_NULL_COMMAND_LISTENER(), JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), JR.get(BasicColorFactory.jm_getInstance(), :BLACK), JR.get(BasicColorFactory.jm_getInstance(), :WHITE)))
+        end
+        throw({:jreturn, CommandForm.jstatic_NULL_COMMAND_FORM()})
+    end)
+  end
 
-new(CommandListener, FormTitle, BackgrounBasicColor, ForegroundBasicColor) when (is_list(FormTitle) orelse FormTitle =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, CommandListener, FormTitle, BackgrounBasicColor, ForegroundBasicColor),
-    This.
 
-'$init'(This, CommandListener, FormTitle, BackgrounBasicColor, ForegroundBasicColor) when (is_list(FormTitle) orelse FormTitle =:= undefined) ->
-        'Form':'$init'(This, FormTitle),
-        init_fields(This),
-        put({This, commandStack}, (fun(Target_N66593) -> (get({Target_N66593, '$class'})):createStack(Target_N66593) end)('StdUtil':getInstance())),
-        try
-            (get({get({This, repaintProcessor}), '$class'})):process(get({This, repaintProcessor}))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'CONSTRUCTOR'}), E)
-        end.
+  def jinit(this, p_commandListener, p_formTitle, p_backgrounBasicColor, p_foregroundBasicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :commandListener, p_commandListener)
+      JR.lset(f, :formTitle, p_formTitle)
+      JR.lset(f, :backgrounBasicColor, p_backgrounBasicColor)
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+        Form.jinit(this, JR.lget(f, :formTitle))
+        CommandForm.jinitfields(this)
+        JR.put(this, :commandStack, JR.call(StdUtil.jm_getInstance(), :jm_createStack, []))
+        try do
+            JR.call(JR.get(this, :repaintProcessor), :jm_process, [])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :CONSTRUCTOR), JR.lget(f, :e)])
+        end
+    end)
+  end
 
-initCommands(This, CmdListener) ->
-        ok.
+  def jnew(p_commandListener, p_formTitle, p_backgrounBasicColor, p_foregroundBasicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_commandListener, p_formTitle, p_backgrounBasicColor, p_foregroundBasicColor)
+    this
+  end
 
-open(This) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, "open").
 
-% throws Exception
-close(This) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, get({get({This, commonStrings}), 'CLOSE'})).
+  def jm_initCommands(this, p_cmdListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cmdListener, p_cmdListener)
+        nil
+    end)
+  end
 
-% throws Exception
-update(This) ->
-        (get({get({This, repaintProcessor}), '$class'})):process(get({This, repaintProcessor})).
 
-getSourceId(This) ->
-        0.
+  def jm_open(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, "open"])
+    end)
+  end
 
-addCommand(This, Command) ->
-        (get({get({This, commandStack}), '$class'})):push(get({This, commandStack}), Command),
-        'Form':addCommand(This, Command).
 
-removeAllCommands(This) ->
-        Size = (get({get({This, commandStack}), '$class'})):size(get({This, commandStack})),
-        lists:foreach(fun(Index) ->
-            'Form':removeCommand(This, (get({get({This, commandStack}), '$class'})):pop(get({This, commandStack})))
-        end, lists:seq(0, Size - 1)).
+  def jm_close(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, JR.get(JR.get(this, :commonStrings), :CLOSE)])
+    end)
+  end
+
+
+  def jm_update(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :repaintProcessor), :jm_process, [])
+    end)
+  end
+
+
+  def jm_getSourceId(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 0})
+    end)
+  end
+
+
+  def jm_addCommand(this, p_command) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :command, p_command)
+        JR.call(JR.get(this, :commandStack), :jm_push, [JR.lget(f, :command)])
+        Form.jm_addCommand(this, JR.lget(f, :command))
+    end)
+  end
+
+
+  def jm_removeAllCommands(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :size, JR.call(JR.get(this, :commandStack), :jm_size, []))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            Form.jm_removeCommand(this, JR.call(JR.get(this, :commandStack), :jm_pop, []))
+        end)
+    end)
+  end
+end
+
 

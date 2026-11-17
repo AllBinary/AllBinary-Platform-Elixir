@@ -1,28 +1,39 @@
-% Generated Code Do Not Modify
-% package org.allbinary.logic.util.cache
+# Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
--module('PoolTypeFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule PoolTypeFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> PoolTypeFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'PoolTypeFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :VECTOR_POOL, nil)
+        JR.put(this, :VECTOR_POOL, PoolType.jnew(JR.get(CacheTypeFactory.jm_getInstance(), :NO_CACHE)))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'VECTOR_POOL'}, 'PoolType':new(get({'CacheTypeFactory':getInstance(), 'NO_CACHE'}))),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'PoolTypeFactory', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, PoolTypeFactory.jstatic_instance()})
+    end)
+  end
+end
+
 

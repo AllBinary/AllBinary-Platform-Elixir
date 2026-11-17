@@ -1,61 +1,106 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation.caption
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.animation.Animation
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation.caption
 
--module('CaptionAnimation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule CaptionAnimation do
+  def jsuper(), do: Animation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Animation', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :animationInterface, nil)
+    JR.put(this, :overlayAnimationInterface, nil)
+    JR.put(this, :captionDx, 0)
+    JR.put(this, :captionDy, 0)
+    JR.put(this, :dx, 0)
+    JR.put(this, :dy, 0)
+        
+        
+        
+        
+        
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, animationInterface}, undefined),
-    put({This, overlayAnimationInterface}, undefined),
-    put({This, captionDx}, 0),
-    put({This, captionDy}, 0),
-    put({This, dx}, 0),
-    put({This, dy}, 0),
-    ok.
+
+  def jinit(this, p_animationInterface, p_overlayAnimationInterface, p_captionDx, p_captionDy, p_dx, p_dy) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :animationInterface, p_animationInterface)
+      JR.lset(f, :overlayAnimationInterface, p_overlayAnimationInterface)
+      JR.lset(f, :captionDx, p_captionDx)
+      JR.lset(f, :captionDy, p_captionDy)
+      JR.lset(f, :dx, p_dx)
+      JR.lset(f, :dy, p_dy)
+      Animation.jinit(this)
+      jinitfields(this)
+        JR.put(this, :animationInterface, JR.lget(f, :animationInterface))
+        JR.put(this, :overlayAnimationInterface, JR.lget(f, :overlayAnimationInterface))
+        JR.put(this, :captionDx, JR.lget(f, :captionDx))
+        JR.put(this, :captionDy, JR.lget(f, :captionDy))
+        JR.put(this, :dx, JR.lget(f, :dx))
+        JR.put(this, :dy, JR.lget(f, :dy))
+    end)
+  end
+
+  def jnew(p_animationInterface, p_overlayAnimationInterface, p_captionDx, p_captionDy, p_dx, p_dy) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_animationInterface, p_overlayAnimationInterface, p_captionDx, p_captionDy, p_dx, p_dy)
+    this
+  end
 
 
-new(AnimationInterface, OverlayAnimationInterface, CaptionDx, CaptionDy, Dx, Dy) when is_integer(CaptionDx), is_integer(CaptionDy), is_integer(Dx), is_integer(Dy) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, AnimationInterface, OverlayAnimationInterface, CaptionDx, CaptionDy, Dx, Dy),
-    This.
+  def jm_nextFrame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-'$init'(This, AnimationInterface, OverlayAnimationInterface, CaptionDx, CaptionDy, Dx, Dy) when is_integer(CaptionDx), is_integer(CaptionDy), is_integer(Dx), is_integer(Dy) ->
-    'Animation':'$init'(This),
-    init_fields(This),
-        put({This, animationInterface}, AnimationInterface),
-        put({This, overlayAnimationInterface}, OverlayAnimationInterface),
-        put({This, captionDx}, CaptionDx),
-        put({This, captionDy}, CaptionDy),
-        put({This, dx}, Dx),
-        put({This, dy}, Dy).
 
-% throws Exception
-nextFrame(This) ->
-        ok.
+  def jm_paintXY(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        JR.call(JR.get(this, :animationInterface), :jm_paintXY, [JR.lget(f, :graphics), JR.int32(JR.lget(f, :x) + JR.get(this, :captionDx)), JR.int32(JR.lget(f, :y) + JR.get(this, :captionDy))])
+        JR.call(JR.get(this, :overlayAnimationInterface), :jm_paintXY, [JR.lget(f, :graphics), JR.int32(JR.int32(JR.lget(f, :x) + JR.get(this, :captionDx)) + JR.get(this, :dx)), JR.int32(JR.int32(JR.lget(f, :y) + JR.get(this, :captionDy)) + JR.get(this, :dy))])
+    end)
+  end
 
-paintXY(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-        (get({get({This, animationInterface}), '$class'})):paintXY(get({This, animationInterface}), Graphics, (X + get({This, captionDx})), (Y + get({This, captionDy}))),
-        (get({get({This, overlayAnimationInterface}), '$class'})):paintXY(get({This, overlayAnimationInterface}), Graphics, ((X + get({This, captionDx})) + get({This, dx})), ((Y + get({This, captionDy})) + get({This, dy}))).
 
-paintThreedXYZ(This, Graphics, X, Y, Z) when is_integer(X), is_integer(Y), is_integer(Z) ->
-        (get({get({This, animationInterface}), '$class'})):paintThreedXYZ(get({This, animationInterface}), Graphics, (X + get({This, captionDx})), (Y + get({This, captionDy})), Z),
-        (get({get({This, overlayAnimationInterface}), '$class'})):paintThreedXYZ(get({This, overlayAnimationInterface}), Graphics, ((X + get({This, captionDx})) + get({This, dx})), ((Y + get({This, captionDy})) + get({This, dy})), Z).
+  def jm_paintThreedXYZ(this, p_graphics, p_x, p_y, p_z) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :z, p_z)
+        JR.call(JR.get(this, :animationInterface), :jm_paintThreedXYZ, [JR.lget(f, :graphics), JR.int32(JR.lget(f, :x) + JR.get(this, :captionDx)), JR.int32(JR.lget(f, :y) + JR.get(this, :captionDy)), JR.lget(f, :z)])
+        JR.call(JR.get(this, :overlayAnimationInterface), :jm_paintThreedXYZ, [JR.lget(f, :graphics), JR.int32(JR.int32(JR.lget(f, :x) + JR.get(this, :captionDx)) + JR.get(this, :dx)), JR.int32(JR.int32(JR.lget(f, :y) + JR.get(this, :captionDy)) + JR.get(this, :dy)), JR.lget(f, :z)])
+    end)
+  end
+end
+
 

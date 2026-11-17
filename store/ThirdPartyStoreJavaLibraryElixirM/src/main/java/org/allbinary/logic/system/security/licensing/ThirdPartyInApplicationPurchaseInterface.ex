@@ -1,56 +1,149 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.system.security.licensing
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.licensing
 
--module('ThirdPartyInApplicationPurchaseInterface').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
+defmodule ThirdPartyInApplicationPurchaseInterface do
+  def jsuper(), do: JObject
 
 
-isPurchased(This, LockableFeature) ->
-    erlang:error({abstract_method, isPurchased}).
+  def jm_isPurchased(this, p_lockableFeature) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :lockableFeature, p_lockableFeature)
+      throw({:jexception, JR.exception("AbstractMethodError", "isPurchased")})
+    end)
+  end
 
-onCreate(This, AnyType, StateObject) ->
-    erlang:error({abstract_method, onCreate}).
 
-onDestroy(This) ->
-    erlang:error({abstract_method, onDestroy}).
+  def jm_onCreate(this, p_anyType, p_stateObject) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+      JR.lset(f, :stateObject, p_stateObject)
+      throw({:jexception, JR.exception("AbstractMethodError", "onCreate")})
+    end)
+  end
 
-onStart(This) ->
-    erlang:error({abstract_method, onStart}).
 
-onActivityResult(This, RequestCode, ResultCode, DataObject) when is_integer(RequestCode), is_integer(ResultCode) ->
-    erlang:error({abstract_method, onActivityResult}).
+  def jm_onDestroy(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "onDestroy")})
+    end)
+  end
 
-onSaveInstanceState(This, AnyType) ->
-    erlang:error({abstract_method, onSaveInstanceState}).
 
-onStop(This) ->
-    erlang:error({abstract_method, onStop}).
+  def jm_onStart(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "onStart")})
+    end)
+  end
 
-requestPurchase(This, LockableFeature) ->
-    erlang:error({abstract_method, requestPurchase}).
 
-requestReceipts(This) ->
-    erlang:error({abstract_method, requestReceipts}).
+  def jm_onActivityResult(this, p_requestCode, p_resultCode, p_dataObject) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :requestCode, p_requestCode)
+      JR.lset(f, :resultCode, p_resultCode)
+      JR.lset(f, :dataObject, p_dataObject)
+      throw({:jexception, JR.exception("AbstractMethodError", "onActivityResult")})
+    end)
+  end
 
-add(This, LockableFeature) ->
-    erlang:error({abstract_method, add}).
 
-getUserName(This) ->
-    erlang:error({abstract_method, getUserName}).
+  def jm_onSaveInstanceState(this, p_anyType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+      throw({:jexception, JR.exception("AbstractMethodError", "onSaveInstanceState")})
+    end)
+  end
 
-isEnabled(This) ->
-    erlang:error({abstract_method, isEnabled}).
+
+  def jm_onStop(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "onStop")})
+    end)
+  end
+
+
+  def jm_requestPurchase(this, p_lockableFeature) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :lockableFeature, p_lockableFeature)
+      throw({:jexception, JR.exception("AbstractMethodError", "requestPurchase")})
+    end)
+  end
+
+
+  def jm_requestReceipts(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "requestReceipts")})
+    end)
+  end
+
+
+  def jm_add(this, p_lockableFeature) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :lockableFeature, p_lockableFeature)
+      throw({:jexception, JR.exception("AbstractMethodError", "add")})
+    end)
+  end
+
+
+  def jm_getUserName(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "getUserName")})
+    end)
+  end
+
+
+  def jm_isEnabled(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "isEnabled")})
+    end)
+  end
+end
+
 

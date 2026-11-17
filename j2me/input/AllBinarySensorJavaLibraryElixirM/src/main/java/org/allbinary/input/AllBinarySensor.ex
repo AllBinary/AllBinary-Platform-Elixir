@@ -1,66 +1,121 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input
-% import org.allbinary.logic.communication.log.ForcedLogUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input
 
--module('AllBinarySensor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements AllBinarySensorListener
+defmodule AllBinarySensor do
+  def jsuper(), do: JObject
+def jstatic_NULL_ALLBINARY_SENSOR(), do: JR.static_get(__MODULE__, :NULL_ALLBINARY_SENSOR, fn -> AllBinarySensor.jnew() end)
+  def jstatic_set_NULL_ALLBINARY_SENSOR(value), do: JR.static_put(__MODULE__, :NULL_ALLBINARY_SENSOR, value)
+def jstatic_max(), do: JR.static_get(__MODULE__, :max, fn -> 100 end)
+  def jstatic_set_max(value), do: JR.static_put(__MODULE__, :max, value)
 
-static_init() ->
-    put({?MODULE, 'NULL_ALLBINARY_SENSOR'}, 'AllBinarySensor':new()),
-    put({?MODULE, max}, 100),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    ok.
+
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
+
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jm_init(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
 
-init(This) ->
-        ok.
+  def jm_update(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-% throws Exception
-update(This) ->
-        ok.
 
-setMax(Max) when is_integer(Max) ->
-        put({'AllBinarySensor', max}, Max).
+  def jm_setMax(p_max) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :max, p_max)
+        AllBinarySensor.jstatic_set_max(JR.lget(f, :max))
+    end)
+  end
 
-getMax() ->
-        get({'AllBinarySensor', max}).
 
-getId(This) ->
-        'AllBinarySensor':getMax().
+  def jm_getMax() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, AllBinarySensor.jstatic_max()})
+    end)
+  end
 
-shutdown(This) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, "shutdown").
 
-onSensorChange(This) ->
-        'ForcedLogUtil':log(get({get({This, commonStrings}), 'NOT_IMPLEMENTED'}), This).
+  def jm_getId(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, AllBinarySensor.jm_getMax()})
+    end)
+  end
+
+
+  def jm_shutdown(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, "shutdown"])
+    end)
+  end
+
+
+  def jm_onSensorChange(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        ForcedLogUtil.jm_log(JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED), this)
+    end)
+  end
+end
+
 

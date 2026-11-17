@@ -1,87 +1,100 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.input
-% import javax.microedition.rms.RecordEnumeration
-% import javax.microedition.rms.RecordStore
-% import org.allbinary.game.configuration.persistance.BasicPersitance
-% import org.allbinary.game.configuration.persistance.NullRecordComparator
-% import org.allbinary.game.configuration.persistance.NullRecordFilter
-% import org.allbinary.logic.communication.log.PreLogUtil
-% import org.allbinary.logic.math.SmallIntegerSingletonFactory
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.logic.system.security.licensing.AbeClientInformationInterface
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.HashtableUtil
-% import org.allbinary.logic.StdUtil
-% import org.allbinary.util.ABHashtable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.input
 
--module('InputPersistance').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+#GameInputNoPersistanceLibrary
+defmodule InputPersistance do
+  def jsuper(), do: BasicPersitance
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicPersitance', Function, Arguments).
-
-init_fields(This) ->
-    put({This, hashtableUtil}, 'HashtableUtil':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :hashtableUtil, nil)
+        JR.put(this, :hashtableUtil, HashtableUtil.jm_getInstance())
+    nil
+  end
 
 
-new(Name) when (is_list(Name) orelse Name =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Name),
-    This.
+  def jinit(this, p_name) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+        BasicPersitance.jinit(this, JR.lget(f, :name))
+        InputPersistance.jinitfields(this)
+    end)
+  end
 
-'$init'(This, Name) when (is_list(Name) orelse Name =:= undefined) ->
-        'BasicPersitance':'$init'(This, Name),
-        init_fields(This).
+  def jnew(p_name) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_name)
+    this
+  end
 
-% throws Exception
-loadAll(This, AbeClientInformation) ->
-        RecordStore = 'RecordStore':openRecordStore((get({This, '$class'})):getRecordId(This, AbeClientInformation), true),
-        RecordEnum = (get({RecordStore, '$class'})):enumerateRecords(RecordStore, get({'NullRecordFilter', 'NULL_RECORD_FILTER'}), get({'NullRecordComparator', 'NULL_RECORD_COMPARATOR'}), true),
-        put({local, hashtable}, undefined),
-        StringBuffer = 'StringMaker':new(),
-        SmallIntegerSingletonFactory = 'SmallIntegerSingletonFactory':getInstance(),
-        put({local, id}, 0),
-        (fun Loop() -> case (get({RecordEnum, '$class'})):hasNextElement(RecordEnum) of true ->
-            put({local, id}, (get({RecordEnum, '$class'})):nextRecordId(RecordEnum)),
-            (get({StringBuffer, '$class'})):delete(StringBuffer, 0, (get({StringBuffer, '$class'})):length(StringBuffer)),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N66582) -> (get({Target_N66582, '$class'})):toString(Target_N66582) end)((fun(Target_N66589) -> (get({Target_N66589, '$class'})):appendint(Target_N66589, get({local, id})) end)((get({StringBuffer, '$class'})):append(StringBuffer, get({get({This, persistanceStrings}), 'LOADING_ID'})))), This, get({get({This, persistanceStrings}), 'LOAD_ALL'})),
-            put({local, hashtable}, (fun(Target_N66687) -> (get({Target_N66687, '$class'})):createHashtable(Target_N66687) end)('StdUtil':getInstance())),
-            (get({get({This, valueList}), '$class'})):add(get({This, valueList}), get({local, hashtable})),
-            (get({get({This, idList}), '$class'})):add(get({This, idList}), (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, get({local, id}))),
-            Loop();
-        false -> ok end end)(),
-        (get({RecordStore, '$class'})):closeRecordStore(RecordStore).
 
-% throws Exception
-save(This, AbeClientInformation, Hashtable) ->
-        'PreLogUtil':put((fun(Target_N66930) -> (get({Target_N66930, '$class'})):toString(Target_N66930) end)((fun(Target_N66937) -> (get({Target_N66937, '$class'})):append(Target_N66937, (fun(Target_N66988) -> (get({Target_N66988, '$class'})):toString(Target_N66988, Hashtable) end)('StringUtil':getInstance())) end)((fun(Target_N66944) -> (get({Target_N66944, '$class'})):append(Target_N66944, get({get({This, persistanceStrings}), 'NOT_SAVING'})) end)('StringMaker':new()))), This, get({get({This, commonStrings}), 'SAVE'})),
-        RecordStore = 'RecordStore':openRecordStore((get({This, '$class'})):getRecordId(This, AbeClientInformation), true),
-        put({local, gameActionInput}, undefined),
-        put({local, list}, undefined),
-        put({local, input}, undefined),
-        InputObjectArray = (get({get({This, hashtableUtil}), '$class'})):getKeysAsArray(get({This, hashtableUtil}), Hashtable),
-        Size = array:size(InputObjectArray),
-        lists:foreach(fun(Index) ->
-            put({local, gameActionInput}, array:get(Index, InputObjectArray)),
-            put({local, list}, (get({Hashtable, '$class'})):get(Hashtable, array:get(Index, InputObjectArray))),
-            lists:foreach(fun(Index2) ->
-                put({local, input}, (get({get({local, list}), '$class'})):get(get({local, list}), Index2))
-            end, lists:seq(0, (get({get({local, list}), '$class'})):size(get({local, list})) - 1))
-        end, lists:seq(0, Size - 1)),
-        (get({RecordStore, '$class'})):closeRecordStore(RecordStore).
+  def jm_loadAll(this, p_abeClientInformation) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+        JR.lset(f, :recordStore, RecordStore.jm_openRecordStore(JR.call(this, :jm_getRecordId, [JR.lget(f, :abeClientInformation)]), true))
+        JR.lset(f, :recordEnum, JR.call(JR.lget(f, :recordStore), :jm_enumerateRecords, [NullRecordFilter.jstatic_NULL_RECORD_FILTER(), NullRecordComparator.jstatic_NULL_RECORD_COMPARATOR(), true]))
+        JR.lset(f, :hashtable, nil)
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.lset(f, :smallIntegerSingletonFactory, SmallIntegerSingletonFactory.jm_getInstance())
+        JR.lset(f, :id, 0)
+        JR.jwhile(fn -> JR.call(JR.lget(f, :recordEnum), :jm_hasNextElement, []) end, fn ->
+            JR.lset(f, :id, JR.call(JR.lget(f, :recordEnum), :jm_nextRecordId, []))
+            JR.call(JR.lget(f, :stringBuffer), :jm_delete, [0, JR.call(JR.lget(f, :stringBuffer), :jm_length, [])])
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.get(this, :persistanceStrings), :LOADING_ID)]), :jm_appendint, [JR.lget(f, :id)]), :jm_toString, []), this, JR.get(JR.get(this, :persistanceStrings), :LOAD_ALL)])
+            JR.lset(f, :hashtable, JR.call(StdUtil.jm_getInstance(), :jm_createHashtable, []))
+            JR.call(JR.get(this, :valueList), :jm_add, [JR.lget(f, :hashtable)])
+            JR.call(JR.get(this, :idList), :jm_add, [JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [JR.lget(f, :id)])])
+        end)
+        JR.call(JR.lget(f, :recordStore), :jm_closeRecordStore, [])
+    end)
+  end
+
+
+  def jm_save(this, p_abeClientInformation, p_hashtable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+      JR.lset(f, :hashtable, p_hashtable)
+        PreLogUtil.jm_put(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :persistanceStrings), :NOT_SAVING)]), :jm_append, [JR.call(StringUtil.jm_getInstance(), :jm_toString, [JR.lget(f, :hashtable)])]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :SAVE))
+        JR.lset(f, :recordStore, RecordStore.jm_openRecordStore(JR.call(this, :jm_getRecordId, [JR.lget(f, :abeClientInformation)]), true))
+        JR.lset(f, :gameActionInput, nil)
+        JR.lset(f, :list, nil)
+        JR.lset(f, :input, nil)
+        JR.lset(f, :inputObjectArray, JR.call(JR.get(this, :hashtableUtil), :jm_getKeysAsArray, [JR.lget(f, :hashtable)]))
+        JR.lset(f, :size, JR.alength(JR.lget(f, :inputObjectArray)))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :gameActionInput, JR.aget(JR.lget(f, :inputObjectArray), JR.lget(f, :index)))
+            JR.lset(f, :list, JR.call(JR.lget(f, :hashtable), :jm_get, [JR.aget(JR.lget(f, :inputObjectArray), JR.lget(f, :index))]))
+            JR.lset(f, :index2, 0)
+            JR.jfor(fn -> (JR.lget(f, :index2) < JR.call(JR.lget(f, :list), :jm_size, [])) end, fn -> JR.lpostinc(f, :index2, 1) end, fn ->
+                JR.lset(f, :input, JR.call(JR.lget(f, :list), :jm_get, [JR.lget(f, :index2)]))
+            end)
+        end)
+        JR.call(JR.lget(f, :recordStore), :jm_closeRecordStore, [])
+    end)
+  end
+end
+
 

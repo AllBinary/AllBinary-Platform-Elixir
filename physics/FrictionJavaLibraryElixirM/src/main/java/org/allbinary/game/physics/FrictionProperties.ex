@@ -1,38 +1,56 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.physics
-% import org.allbinary.game.physics.friction.FrictionData
-% import org.allbinary.game.physics.velocity.DragVelocityBehavior
-% import org.allbinary.game.physics.velocity.VelocityProperties
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.physics
 
--module('FrictionProperties').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule FrictionProperties do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-friction(This, VelocityProperties, Nominator) when is_integer(Nominator) ->
-        (get({get({'DragVelocityBehavior', instance}), '$class'})):reduce(get({'DragVelocityBehavior', instance}), VelocityProperties, Nominator, 'FrictionData':getFrictionDenominator()).
+
+  def jm_friction(this, p_velocityProperties, p_nominator) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :velocityProperties, p_velocityProperties)
+      JR.lset(f, :nominator, p_nominator)
+        JR.call(DragVelocityBehavior.jstatic_instance(), :jm_reduce, [JR.lget(f, :velocityProperties), JR.lget(f, :nominator), FrictionData.jm_getFrictionDenominator()])
+    end)
+  end
+end
+
 

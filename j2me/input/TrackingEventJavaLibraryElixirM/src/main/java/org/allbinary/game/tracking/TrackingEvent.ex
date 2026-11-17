@@ -1,63 +1,106 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.tracking
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.util.event.AllBinaryEventObject
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.tracking
 
--module('TrackingEvent').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule TrackingEvent do
+  def jsuper(), do: AllBinaryEventObject
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AllBinaryEventObject', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :layerInterface, nil)
+        JR.put(this, :layerInterface, AllBinaryLayer.jstatic_NULL_ALLBINARY_LAYER())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, layerInterface}, get({'AllBinaryLayer', 'NULL_ALLBINARY_LAYER'})),
-    ok.
+
+  def jinit(this, p_allBinaryLayerInterface) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerInterface, p_allBinaryLayerInterface)
+        AllBinaryEventObject.jinit(this, JR.lget(f, :allBinaryLayerInterface))
+        TrackingEvent.jinitfields(this)
+        if (JR.lget(f, :allBinaryLayerInterface) != TrackingEventHandler.jm_getInstance()) do
+            JR.call(this, :jm_setLayerInterface, [JR.lget(f, :allBinaryLayerInterface)])
+        end
+    end)
+  end
+
+  def jnew(p_allBinaryLayerInterface) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_allBinaryLayerInterface)
+    this
+  end
 
 
-new(AllBinaryLayerInterface) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, AllBinaryLayerInterface),
-    This.
+  def jm_init(this, p_anyType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+        JR.call(this, :jm_setSource, [JR.lget(f, :anyType)])
+    end)
+  end
 
-'$init'(This, AllBinaryLayerInterface) ->
-        'AllBinaryEventObject':'$init'(This, AllBinaryLayerInterface),
-        init_fields(This),
-        case (AllBinaryLayerInterface =/= 'TrackingEventHandler':getInstance()) of
-            true ->
-            (get({This, '$class'})):setLayerInterface(This, AllBinaryLayerInterface);
-            false -> ok
-        end.
 
-init(This, AnyType) ->
-        (get({This, '$class'})):setSource(This, AnyType).
+  def jm_getLayerInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :layerInterface)})
+    end)
+  end
 
-getLayerInterface(This) ->
-        get({This, layerInterface}).
 
-setLayerInterface(This, LayerInterface) ->
-        put({This, layerInterface}, LayerInterface).
+  def jm_setLayerInterface(this, p_layerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+        JR.put(this, :layerInterface, JR.lget(f, :layerInterface))
+    end)
+  end
 
-setLayerInterfaceForCircularStaticPool(This, LayerInterface) ->
-        put({This, layerInterface}, LayerInterface).
 
-toString(This) ->
-        StringBuffer = 'StringMaker':new(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "TrackingEvent: \n"),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "LayerInterface: "),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({get({This, layerInterface}), '$class'})):toString(get({This, layerInterface}))),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+  def jm_setLayerInterfaceForCircularStaticPool(this, p_layerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+        JR.put(this, :layerInterface, JR.lget(f, :layerInterface))
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["TrackingEvent: \n"])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["LayerInterface: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(this, :layerInterface), :jm_toString, [])])
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+end
+
 

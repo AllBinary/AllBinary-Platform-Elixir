@@ -1,44 +1,60 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.android.input.motion
-% import org.allbinary.game.input.analog.AnalogLocationInput
-% import org.allbinary.game.input.analog.AnalogLocationInputFactory
-% import org.allbinary.layer.AllBinaryLayerManager
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.android.input.motion
 
--module('SingleAnalogControllerVisitor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule SingleAnalogControllerVisitor do
+  def jsuper(), do: AnalogControllerVisitor
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AnalogControllerVisitor', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :playerInputId, 0)
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, playerInputId}, 0),
-    ok.
+
+  def jinit(this, p_playerInputId) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :playerInputId, p_playerInputId)
+      AnalogControllerVisitor.jinit(this)
+      jinitfields(this)
+        JR.put(this, :playerInputId, JR.lget(f, :playerInputId))
+    end)
+  end
+
+  def jnew(p_playerInputId) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_playerInputId)
+    this
+  end
 
 
-new(PlayerInputId) when is_integer(PlayerInputId) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, PlayerInputId),
-    This.
+  def jm_process(this, p_allbinaryLayerManager, p_analogLocationInputProcessor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allbinaryLayerManager, p_allbinaryLayerManager)
+      JR.lset(f, :analogLocationInputProcessor, p_analogLocationInputProcessor)
+        JR.lset(f, :analogLocationInput, JR.call(AnalogLocationInputFactory.jm_getInstance(), :jm_getInstanceForPlayer, [JR.get(this, :playerInputId)]))
+        JR.call(JR.lget(f, :analogLocationInputProcessor), :jm_process, [JR.lget(f, :allbinaryLayerManager), JR.lget(f, :analogLocationInput)])
+    end)
+  end
+end
 
-'$init'(This, PlayerInputId) when is_integer(PlayerInputId) ->
-    'AnalogControllerVisitor':'$init'(This),
-    init_fields(This),
-        put({This, playerInputId}, PlayerInputId).
-
-process(This, AllbinaryLayerManager, AnalogLocationInputProcessor) ->
-        AnalogLocationInput = (fun(Target_N65823) -> (get({Target_N65823, '$class'})):getInstanceForPlayer(Target_N65823, get({This, playerInputId})) end)('AnalogLocationInputFactory':getInstance()),
-        (get({AnalogLocationInputProcessor, '$class'})):process(AnalogLocationInputProcessor, AllbinaryLayerManager, AnalogLocationInput).
 

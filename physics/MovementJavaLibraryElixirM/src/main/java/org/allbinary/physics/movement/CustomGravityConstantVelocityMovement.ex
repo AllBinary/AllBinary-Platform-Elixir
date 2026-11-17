@@ -1,49 +1,64 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.physics.movement
-% import org.allbinary.game.layer.AllBinaryGameLayer
-% import org.allbinary.game.physics.acceleration.GravityUtil
-% import org.allbinary.game.physics.velocity.VelocityProperties
-% import org.allbinary.logic.math.BasicDecimal
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.physics.movement
 
--module('CustomGravityConstantVelocityMovement').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule CustomGravityConstantVelocityMovement do
+  def jsuper(), do: BasicConstantVelocityMovement
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicConstantVelocityMovement', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :customGravity, 0)
+    JR.put(this, :gravityUtil, nil)
+        
+        JR.put(this, :gravityUtil, GravityUtil.jm_getInstance())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, customGravity}, 0),
-    put({This, gravityUtil}, 'GravityUtil':getInstance()),
-    ok.
+
+  def jinit(this, p_speedBasicDecimal, p_customGravity) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :speedBasicDecimal, p_speedBasicDecimal)
+      JR.lset(f, :customGravity, p_customGravity)
+        BasicConstantVelocityMovement.jinit(this, JR.lget(f, :speedBasicDecimal), VelocityProperties.jnew(JR.int32(JR.call(JR.lget(f, :speedBasicDecimal), :jm_getUnscaled, [])), JR.int32(JR.call(JR.lget(f, :speedBasicDecimal), :jm_getUnscaled, []))))
+        CustomGravityConstantVelocityMovement.jinitfields(this)
+        JR.put(this, :customGravity, JR.lget(f, :customGravity))
+    end)
+  end
+
+  def jnew(p_speedBasicDecimal, p_customGravity) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_speedBasicDecimal, p_customGravity)
+    this
+  end
 
 
-new(SpeedBasicDecimal, CustomGravity) when is_integer(CustomGravity) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, SpeedBasicDecimal, CustomGravity),
-    This.
+  def jm_process(this, p_layer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layer, p_layer)
+        BasicConstantVelocityMovement.jm_process(this, JR.lget(f, :layer))
+        JR.call(JR.get(this, :gravityUtil), :jm_process, [JR.call(this, :jm_getVelocityProperties, []), JR.get(this, :customGravity)])
+        JR.lset(f, :velocityProperties, JR.call(this, :jm_getVelocityProperties, []))
+        JR.call(JR.lget(f, :velocityProperties), :jm_limitMaxYForwardVelocity, [])
+    end)
+  end
+end
 
-'$init'(This, SpeedBasicDecimal, CustomGravity) when is_integer(CustomGravity) ->
-        'BasicConstantVelocityMovement':'$init'(This, SpeedBasicDecimal, 'VelocityProperties':new(trunc((get({SpeedBasicDecimal, '$class'})):getUnscaled(SpeedBasicDecimal)), trunc((get({SpeedBasicDecimal, '$class'})):getUnscaled(SpeedBasicDecimal)))),
-        init_fields(This),
-        put({This, customGravity}, CustomGravity).
-
-% throws Exception
-process(This, Layer) ->
-        'BasicConstantVelocityMovement':process(This, Layer),
-        (get({get({This, gravityUtil}), '$class'})):process(get({This, gravityUtil}), (get({This, '$class'})):getVelocityProperties(This), get({This, customGravity})),
-        VelocityProperties = (get({This, '$class'})):getVelocityProperties(This),
-        (get({VelocityProperties, '$class'})):limitMaxYForwardVelocity(VelocityProperties).
 

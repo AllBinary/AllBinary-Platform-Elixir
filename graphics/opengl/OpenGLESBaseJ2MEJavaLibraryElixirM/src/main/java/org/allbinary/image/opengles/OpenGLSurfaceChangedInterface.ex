@@ -1,13 +1,19 @@
-% Generated Code Do Not Modify
-% package org.allbinary.image.opengles
-% import javax.microedition.khronos.opengles.GL
+# Generated Code Do Not Modify
+# package org.allbinary.image.opengles
 
--module('OpenGLSurfaceChangedInterface').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
+defmodule OpenGLSurfaceChangedInterface do
+  def jsuper(), do: JObject
 
 
-% throws Exception
-set(This, Gl) ->
-    erlang:error({abstract_method, set}).
+  def jm_set(this, p_gl) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+      throw({:jexception, JR.exception("AbstractMethodError", "set")})
+    end)
+  end
+end
+
 

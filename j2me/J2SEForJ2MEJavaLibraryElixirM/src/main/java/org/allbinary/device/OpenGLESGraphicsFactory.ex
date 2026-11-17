@@ -1,22 +1,36 @@
-% Generated Code Do Not Modify
-% package org.allbinary.device
+# Generated Code Do Not Modify
+# package org.allbinary.device
 
--module('OpenGLESGraphicsFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule OpenGLESGraphicsFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getOpenGLESGraphicsInstance(This) ->
-        'OpenGLESNullGraphicsFactory':getInstance().
+  def jm_getOpenGLESGraphicsInstance(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, OpenGLESNullGraphicsFactory.jm_getInstance()})
+    end)
+  end
+end
+
 

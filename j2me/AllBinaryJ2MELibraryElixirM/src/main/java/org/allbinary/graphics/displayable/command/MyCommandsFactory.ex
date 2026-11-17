@@ -1,47 +1,65 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.displayable.command
-% import javax.microedition.lcdui.Command
-% import org.allbinary.logic.string.StringUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable.command
 
--module('MyCommandsFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule MyCommandsFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> MyCommandsFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'MyCommandsFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :NO_COMMAND, nil)
+    JR.put(this, :GAUGE_CHANGE, nil)
+    JR.put(this, :SET_DISPLAYABLE, nil)
+    JR.put(this, :PAUSE_COMMAND, nil)
+    JR.put(this, :RESUME_COMMAND, nil)
+        JR.put(this, :NO_COMMAND, Command.jnew(JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), -1, -1))
+        JR.put(this, :GAUGE_CHANGE, Command.jnew("GAUGE_CHANGE", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_ITEM(), 1))
+        JR.put(this, :SET_DISPLAYABLE, Command.jnew("Display", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 2))
+        JR.put(this, :PAUSE_COMMAND, Command.jnew("Pause", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 0))
+        JR.put(this, :RESUME_COMMAND, Command.jnew("Resume", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 0))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'NO_COMMAND'}, 'Command':new(get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'StringUtil':getInstance(), 'EMPTY_STRING'}), (-1), (-1))),
-    put({This, 'GAUGE_CHANGE'}, 'Command':new("GAUGE_CHANGE", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'ITEM'}), 1)),
-    put({This, 'SET_DISPLAYABLE'}, 'Command':new("Display", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 2)),
-    put({This, 'PAUSE_COMMAND'}, 'Command':new("Pause", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 0)),
-    put({This, 'RESUME_COMMAND'}, 'Command':new("Resume", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 0)),
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, MyCommandsFactory.jstatic_instance()})
+    end)
+  end
 
 
-getInstance() ->
-        get({'MyCommandsFactory', instance}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
 

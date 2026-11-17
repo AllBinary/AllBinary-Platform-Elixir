@@ -1,60 +1,104 @@
-% Generated Code Do Not Modify
-% package org.allbinary.game.score
-% import org.allbinary.game.GameInfo
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.system.SoftwareInformation
-% import org.allbinary.logic.system.security.licensing.AbeClientInformationInterface
+# Generated Code Do Not Modify
+# package org.allbinary.game.score
 
--module('BasicHighScoresFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule BasicHighScoresFactory do
+  def jsuper(), do: HighScoresBase
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('HighScoresBase', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :abeClientInformation, nil)
+    JR.put(this, :highScoresArray, nil)
+    JR.put(this, :TOP, nil)
+    JR.put(this, :SCORES, nil)
+    JR.put(this, :PERSONAL_HIGH_SCORES, nil)
+    JR.put(this, :FETCH, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        
+        JR.put(this, :highScoresArray, JR.anew(1, nil))
+        JR.put(this, :TOP, "Top")
+        JR.put(this, :SCORES, "Scores")
+        JR.put(this, :PERSONAL_HIGH_SCORES, "Personal Top Scores")
+        JR.put(this, :FETCH, "fetchHighScores")
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, abeClientInformation}, undefined),
-    put({This, highScoresArray}, array:new(1, {default, undefined})),
-    put({This, 'TOP'}, "Top"),
-    put({This, 'SCORES'}, "Scores"),
-    put({This, 'PERSONAL_HIGH_SCORES'}, "Personal Top Scores"),
-    put({This, 'FETCH'}, "fetchHighScores"),
-    ok.
+
+  def jinit(this, p_abeClientInformation, p_softwareInformation) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+      JR.lset(f, :softwareInformation, p_softwareInformation)
+      HighScoresBase.jinit(this)
+      jinitfields(this)
+        JR.put(this, :abeClientInformation, JR.lget(f, :abeClientInformation))
+    end)
+  end
+
+  def jnew(p_abeClientInformation, p_softwareInformation) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_abeClientInformation, p_softwareInformation)
+    this
+  end
 
 
-new(AbeClientInformation, SoftwareInformation) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, AbeClientInformation, SoftwareInformation),
-    This.
+  def jm_fetchHighScores(this, p_gameInfo, p_highScoresResultsListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameInfo, p_gameInfo)
+      JR.lset(f, :highScoresResultsListener, p_highScoresResultsListener)
+        JR.call(JR.get(this, :logUtil), :jm_putF, ["Getting Local HighScores", this, JR.get(this, :FETCH)])
+        JR.call(this, :jm_fetchHighScoresPreload, [JR.lget(f, :gameInfo), JR.lget(f, :highScoresResultsListener), true])
+    end)
+  end
 
-'$init'(This, AbeClientInformation, SoftwareInformation) ->
-    'HighScoresBase':'$init'(This),
-    init_fields(This),
-        put({This, abeClientInformation}, AbeClientInformation).
 
-fetchHighScores(This, GameInfo, HighScoresResultsListener) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), "Getting Local HighScores", This, get({This, 'FETCH'})),
-        (get({This, '$class'})):fetchHighScoresPreload(This, GameInfo, HighScoresResultsListener, true).
+  def jm_fetchHighScoresPreload(this, p_gameInfo, p_highScoresResultsListener, p_preload) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameInfo, p_gameInfo)
+      JR.lset(f, :highScoresResultsListener, p_highScoresResultsListener)
+      JR.lset(f, :preload, p_preload)
+        try do
+            JR.aset(JR.get(this, :highScoresArray), 0, RecordStoreHighScores.jm_getInstance(JR.get(this, :abeClientInformation), JR.lget(f, :gameInfo), JR.get(this, :TOP), JR.get(this, :PERSONAL_HIGH_SCORES), JR.get(this, :SCORES), ScoreComparator.jnew(true)))
+            JR.call(JR.lget(f, :highScoresResultsListener), :jm_setHighScoresArray, [JR.get(this, :highScoresArray)])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(this, :FETCH), JR.lget(f, :e)])
+        end
+    end)
+  end
 
-fetchHighScoresPreload(This, GameInfo, HighScoresResultsListener, Preload) when is_boolean(Preload) ->
-        try
-            put({This, highScoresArray}, array:set(0, 'RecordStoreHighScores':getInstance(get({This, abeClientInformation}), GameInfo, get({This, 'TOP'}), get({This, 'PERSONAL_HIGH_SCORES'}), get({This, 'SCORES'}), 'ScoreComparator':new(true)), get({This, highScoresArray}))),
-            (get({HighScoresResultsListener, '$class'})):setHighScoresArray(HighScoresResultsListener, get({This, highScoresArray}))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({This, 'FETCH'}), E)
-        end.
 
-createHighScoresHelper(This) ->
-        'HighScoresHelper2':new().
+  def jm_createHighScoresHelper(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, HighScoresHelper2.jnew()})
+    end)
+  end
 
-loaded(Index2) when is_integer(Index2) ->
-        try
-        case (Index2 >= 0) of
-            true ->
-            throw({'$return', true});
-            false -> ok
-        end,
-        false
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+
+  def jm_loaded(p_index2) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :index2, p_index2)
+        if (JR.lget(f, :index2) >= 0) do
+            throw({:jreturn, true})
+        end
+        throw({:jreturn, false})
+    end)
+  end
+end
+
 

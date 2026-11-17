@@ -1,26 +1,32 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.input.mapping
-% import org.allbinary.game.input.GameKey
-% import org.allbinary.game.input.Input
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.input.mapping
 
--module('InputMappingInterface').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
+defmodule InputMappingInterface do
+  def jsuper(), do: JObject
 
 
-% throws Exception
-processInputMapping(This, GameKey, Input) ->
-    erlang:error({abstract_method, processInputMapping}).
+  def jm_processInputMapping(this, p_gameKey, p_input) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKey, p_gameKey)
+      JR.lset(f, :input, p_input)
+      throw({:jexception, JR.exception("AbstractMethodError", "processInputMapping")})
+    end)
+  end
+end
+
 

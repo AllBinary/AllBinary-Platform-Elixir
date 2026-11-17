@@ -1,139 +1,236 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.string.CommonSeps
-% import org.allbinary.logic.StdUtil
-% import org.allbinary.string.CommonLabels
-% import org.allbinary.util.ABHashtable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game
 
--module('GameInfo').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GameInfo do
+  def jsuper(), do: JObject
+def jstatic_NONE(), do: JR.static_get(__MODULE__, :NONE, fn -> GameInfo.jnew(JR.get(GameTypeFactory.jm_getInstance(), :NONE), GameMode.jstatic_NONE(), JR.get(PlayerTypesFactory.jm_getInstance(), :PLAYER_TYPE_ONE), -1, -1) end)
+  def jstatic_set_NONE(value), do: JR.static_put(__MODULE__, :NONE, value)
+def jstatic_LEVEL_NAME(), do: JR.static_get(__MODULE__, :LEVEL_NAME, fn -> "LEVEL" end)
+  def jstatic_set_LEVEL_NAME(value), do: JR.static_put(__MODULE__, :LEVEL_NAME, value)
 
-static_init() ->
-    put({?MODULE, 'NONE'}, 'GameInfo':new(get({'GameTypeFactory':getInstance(), 'NONE'}), get({'GameMode', 'NONE'}), get({'PlayerTypesFactory':getInstance(), 'PLAYER_TYPE_ONE'}), (-1), (-1))),
-    put({?MODULE, 'LEVEL_NAME'}, "LEVEL"),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :gameInfoData, nil)
+    JR.put(this, :gameType, nil)
+    JR.put(this, :gameMode, nil)
+    JR.put(this, :playerType, nil)
+    JR.put(this, :highestLevel, 0)
+    JR.put(this, :currentLevel, 0)
+    JR.put(this, :NEW_LEVEL, nil)
+    JR.put(this, :SET_CURRENT_LEVEL, nil)
+    JR.put(this, :NEXT_GAME_LEVEL, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :gameInfoData, GameInfoData.jm_getInstance())
+        
+        
+        
+        JR.put(this, :highestLevel, 0)
+        
+        JR.put(this, :NEW_LEVEL, "New Level: ")
+        JR.put(this, :SET_CURRENT_LEVEL, "setCurrentLevel")
+        JR.put(this, :NEXT_GAME_LEVEL, "nextGameLevel")
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, gameInfoData}, 'GameInfoData':getInstance()),
-    put({This, gameType}, undefined),
-    put({This, gameMode}, undefined),
-    put({This, playerType}, undefined),
-    put({This, highestLevel}, 0),
-    put({This, currentLevel}, 0),
-    put({This, 'NEW_LEVEL'}, "New Level: "),
-    put({This, 'SET_CURRENT_LEVEL'}, "setCurrentLevel"),
-    put({This, 'NEXT_GAME_LEVEL'}, "nextGameLevel"),
-    ok.
+
+  def jinit(this, p_gameType, p_gameMode, p_playerType, p_highestLevel, p_currentLevel) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameType, p_gameType)
+      JR.lset(f, :gameMode, p_gameMode)
+      JR.lset(f, :playerType, p_playerType)
+      JR.lset(f, :highestLevel, p_highestLevel)
+      JR.lset(f, :currentLevel, p_currentLevel)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :gameType, JR.lget(f, :gameType))
+        JR.put(this, :gameMode, JR.lget(f, :gameMode))
+        JR.call(this, :jm_setHighestLevel, [JR.lget(f, :highestLevel)])
+        JR.put(this, :currentLevel, JR.lget(f, :currentLevel))
+        JR.put(this, :playerType, JR.lget(f, :playerType))
+    end)
+  end
+
+  def jnew(p_gameType, p_gameMode, p_playerType, p_highestLevel, p_currentLevel) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_gameType, p_gameMode, p_playerType, p_highestLevel, p_currentLevel)
+    this
+  end
 
 
-new(GameType, GameMode, PlayerType, HighestLevel, CurrentLevel) when is_integer(HighestLevel), is_integer(CurrentLevel) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, GameType, GameMode, PlayerType, HighestLevel, CurrentLevel),
-    This.
+  def jm_getGameType(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :gameType)})
+    end)
+  end
 
-'$init'(This, GameType, GameMode, PlayerType, HighestLevel, CurrentLevel) when is_integer(HighestLevel), is_integer(CurrentLevel) ->
-    init_fields(This),
-        put({This, gameType}, GameType),
-        put({This, gameMode}, GameMode),
-        (get({This, '$class'})):setHighestLevel(This, HighestLevel),
-        put({This, currentLevel}, CurrentLevel),
-        put({This, playerType}, PlayerType).
 
-getGameType(This) ->
-        get({This, gameType}).
+  def jm_getGameMode(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :gameMode)})
+    end)
+  end
 
-getGameMode(This) ->
-        get({This, gameMode}).
 
-getPlayerType(This) ->
-        get({This, playerType}).
+  def jm_getPlayerType(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :playerType)})
+    end)
+  end
 
-getHighestLevel(This) ->
-        get({This, highestLevel}).
 
-setHighestLevel(This, HighestLevel) when is_integer(HighestLevel) ->
-        put({This, highestLevel}, HighestLevel).
+  def jm_getHighestLevel(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :highestLevel)})
+    end)
+  end
 
-getCurrentLevel(This) ->
-        get({This, currentLevel}).
 
-setCurrentLevel(This, CurrentLevel) when is_integer(CurrentLevel) ->
-        put({This, currentLevel}, CurrentLevel),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N66893) -> (get({Target_N66893, '$class'})):toString(Target_N66893) end)((fun(Target_N66900) -> (get({Target_N66900, '$class'})):appendint(Target_N66900, (get({This, '$class'})):getCurrentLevel(This)) end)((fun(Target_N66907) -> (get({Target_N66907, '$class'})):append(Target_N66907, get({This, 'NEW_LEVEL'})) end)('StringMaker':new()))), This, get({This, 'SET_CURRENT_LEVEL'})).
+  def jm_setHighestLevel(this, p_highestLevel) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :highestLevel, p_highestLevel)
+        JR.put(this, :highestLevel, JR.lget(f, :highestLevel))
+    end)
+  end
 
-nextGameLevel(This) ->
-        case ((get({This, '$class'})):getCurrentLevel(This) < (get({This, '$class'})):getHighestLevel(This)) of
-            true ->
-            put({This, currentLevel}, get({This, currentLevel}) + 1);
-            false -> ok
-        end,
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N67141) -> (get({Target_N67141, '$class'})):toString(Target_N67141) end)((fun(Target_N67148) -> (get({Target_N67148, '$class'})):appendint(Target_N67148, (get({This, '$class'})):getCurrentLevel(This)) end)((fun(Target_N67155) -> (get({Target_N67155, '$class'})):append(Target_N67155, get({This, 'NEW_LEVEL'})) end)((fun(Target_N67162) -> (get({Target_N67162, '$class'})):append(Target_N67162, get({'CommonSeps':getInstance(), 'SPACE'})) end)((fun(Target_N67169) -> (get({Target_N67169, '$class'})):append(Target_N67169, get({'CommonLabels':getInstance(), 'NEXT'})) end)('StringMaker':new()))))), This, get({This, 'NEXT_GAME_LEVEL'})).
 
-previousGameLevel(This) ->
-        case ((get({This, '$class'})):getCurrentLevel(This) > 1) of
-            true ->
-            put({This, currentLevel}, get({This, currentLevel}) - 1);
-            false -> ok
-        end.
+  def jm_getCurrentLevel(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :currentLevel)})
+    end)
+  end
 
-isLastLevel(This) ->
-        try
-        case ((get({This, '$class'})):getCurrentLevel(This) >= (get({This, '$class'})):getHighestLevel(This)) of
-            true ->
-            throw({'$return', true});
-            false ->
-            throw({'$return', false})
+
+  def jm_setCurrentLevel(this, p_currentLevel) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :currentLevel, p_currentLevel)
+        JR.put(this, :currentLevel, JR.lget(f, :currentLevel))
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(this, :NEW_LEVEL)]), :jm_appendint, [JR.call(this, :jm_getCurrentLevel, [])]), :jm_toString, []), this, JR.get(this, :SET_CURRENT_LEVEL)])
+    end)
+  end
+
+
+  def jm_nextGameLevel(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.call(this, :jm_getCurrentLevel, []) < JR.call(this, :jm_getHighestLevel, [])) do
+            JR.postinc(this, :currentLevel, 1)
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(CommonLabels.jm_getInstance(), :NEXT)]), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :SPACE)]), :jm_append, [JR.get(this, :NEW_LEVEL)]), :jm_appendint, [JR.call(this, :jm_getCurrentLevel, [])]), :jm_toString, []), this, JR.get(this, :NEXT_GAME_LEVEL)])
+    end)
+  end
 
-toHashtable(This) ->
-        Hashtable = (fun(Target_N67491) -> (get({Target_N67491, '$class'})):createHashtable(Target_N67491) end)('StdUtil':getInstance()),
-        (get({Hashtable, '$class'})):put(Hashtable, get({get({This, gameInfoData}), 'GAME_TYPE'}), (fun(Target_N67589) -> (get({Target_N67589, '$class'})):toString(Target_N67589) end)((get({This, '$class'})):getGameType(This))),
-        (get({Hashtable, '$class'})):put(Hashtable, get({get({This, gameInfoData}), 'GAME_MODE'}), (get({get({This, gameMode}), '$class'})):toString(get({This, gameMode}))),
-        (get({Hashtable, '$class'})):put(Hashtable, get({get({This, gameInfoData}), 'PLAYER_TYPE'}), (get({get({This, playerType}), '$class'})):toString(get({This, playerType}))),
-        (get({Hashtable, '$class'})):put(Hashtable, get({get({This, gameInfoData}), 'HIGHEST_LEVEL'}), allbinary_java:to_string((get({This, '$class'})):getHighestLevel(This))),
-        (get({Hashtable, '$class'})):put(Hashtable, get({get({This, gameInfoData}), 'CURRENT_LEVEL'}), allbinary_java:to_string(get({This, currentLevel}))),
-        Hashtable.
 
-toString(This) ->
-        StringBuffer = 'StringMaker':new(),
-        CommonSeps = 'CommonSeps':getInstance(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({get({This, gameInfoData}), 'GAME_TYPE'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'EQUALS'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (fun(Target_N68135) -> (get({Target_N68135, '$class'})):toString(Target_N68135) end)((get({This, '$class'})):getGameType(This))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'COMMA_SEP'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({get({This, gameInfoData}), 'GAME_MODE'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'EQUALS'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({get({This, gameMode}), '$class'})):toString(get({This, gameMode}))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'COMMA_SEP'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({get({This, gameInfoData}), 'PLAYER_TYPE'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'EQUALS'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (fun(Target_N68459) -> (get({Target_N68459, '$class'})):toString(Target_N68459, get({This, playerType})) end)('StringUtil':getInstance())),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'COMMA_SEP'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({get({This, gameInfoData}), 'HIGHEST_LEVEL'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'EQUALS'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, (get({This, '$class'})):getHighestLevel(This)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'COMMA_SEP'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({get({This, gameInfoData}), 'CURRENT_LEVEL'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'EQUALS'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, get({This, currentLevel})),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+  def jm_previousGameLevel(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.call(this, :jm_getCurrentLevel, []) > 1) do
+            JR.postinc(this, :currentLevel, -1)
+        end
+    end)
+  end
+
+
+  def jm_isLastLevel(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.call(this, :jm_getCurrentLevel, []) >= JR.call(this, :jm_getHighestLevel, [])) do
+            throw({:jreturn, true})
+        else
+            throw({:jreturn, false})
+        end
+    end)
+  end
+
+
+  def jm_toHashtable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :hashtable, JR.call(StdUtil.jm_getInstance(), :jm_createHashtable, []))
+        JR.call(JR.lget(f, :hashtable), :jm_put, [JR.get(JR.get(this, :gameInfoData), :GAME_TYPE), JR.call(JR.call(this, :jm_getGameType, []), :jm_toString, [])])
+        JR.call(JR.lget(f, :hashtable), :jm_put, [JR.get(JR.get(this, :gameInfoData), :GAME_MODE), JR.call(JR.get(this, :gameMode), :jm_toString, [])])
+        JR.call(JR.lget(f, :hashtable), :jm_put, [JR.get(JR.get(this, :gameInfoData), :PLAYER_TYPE), JR.call(JR.get(this, :playerType), :jm_toString, [])])
+        JR.call(JR.lget(f, :hashtable), :jm_put, [JR.get(JR.get(this, :gameInfoData), :HIGHEST_LEVEL), JR.str(JR.call(this, :jm_getHighestLevel, []))])
+        JR.call(JR.lget(f, :hashtable), :jm_put, [JR.get(JR.get(this, :gameInfoData), :CURRENT_LEVEL), JR.str(JR.get(this, :currentLevel))])
+        throw({:jreturn, JR.lget(f, :hashtable)})
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.lset(f, :commonSeps, CommonSeps.jm_getInstance())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.get(this, :gameInfoData), :GAME_TYPE)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :EQUALS)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.call(this, :jm_getGameType, []), :jm_toString, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :COMMA_SEP)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.get(this, :gameInfoData), :GAME_MODE)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :EQUALS)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(this, :gameMode), :jm_toString, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :COMMA_SEP)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.get(this, :gameInfoData), :PLAYER_TYPE)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :EQUALS)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(StringUtil.jm_getInstance(), :jm_toString, [JR.get(this, :playerType)])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :COMMA_SEP)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.get(this, :gameInfoData), :HIGHEST_LEVEL)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :EQUALS)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.call(this, :jm_getHighestLevel, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :COMMA_SEP)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.get(this, :gameInfoData), :CURRENT_LEVEL)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :EQUALS)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.get(this, :currentLevel)])
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+end
+
 

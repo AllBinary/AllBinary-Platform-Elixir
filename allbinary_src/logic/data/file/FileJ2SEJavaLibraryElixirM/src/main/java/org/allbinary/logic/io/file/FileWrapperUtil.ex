@@ -1,53 +1,77 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.io.file
-% import java.io.File
-% import org.allbinary.logic.communication.log.PreLogUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.io.file
 
--module('FileWrapperUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule FileWrapperUtil do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-wrapFiles(Files) when (is_tuple(Files) orelse Files =:= undefined) ->
-        try
-            AbFileArray = array:new(array:size(Files), {default, undefined}),
-            lists:foreach(fun(Index) ->
-                array:set(Index, 'AbFile':new(array:get(Index, Files)), AbFileArray)
-            end, lists:seq((array:size(Files) - 1), 0, -1)),
-            AbFileArray
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            'PreLogUtil':putSE("Exception Wrapping Files", "FileWrapperUtil", "wrapFiles", E),
-            array:new(0, {default, undefined})
-        end.
+  def jm_wrapFiles(p_files) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :files, p_files)
+        try do
+            JR.lset(f, :abFileArray, JR.anew(JR.alength(JR.lget(f, :files)), nil))
+            JR.lset(f, :index, JR.int32(JR.alength(JR.lget(f, :files)) - 1))
+            JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+                JR.aset(JR.lget(f, :abFileArray), JR.lget(f, :index), AbFile.jnew(JR.aget(JR.lget(f, :files), JR.lget(f, :index))))
+            end)
+            throw({:jreturn, JR.lget(f, :abFileArray)})
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            PreLogUtil.jm_putSE("Exception Wrapping Files", "FileWrapperUtil", "wrapFiles", JR.lget(f, :e))
+            throw({:jreturn, JR.anew(0, nil)})
+        end
+    end)
+  end
 
-wrapFile(File) ->
-        try
-            'AbFile':new(File)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            'PreLogUtil':putSE("Exception Wrapping File", "FileWrapperUtil", "wrapFile", E),
-            get({'AbFile', 'NULL_FILE'})
-        end.
+
+  def jm_wrapFile(p_file) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :file, p_file)
+        try do
+            throw({:jreturn, AbFile.jnew(JR.lget(f, :file))})
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            PreLogUtil.jm_putSE("Exception Wrapping File", "FileWrapperUtil", "wrapFile", JR.lget(f, :e))
+            throw({:jreturn, AbFile.jstatic_NULL_FILE()})
+        end
+    end)
+  end
+end
+
 

@@ -1,92 +1,155 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.configuration.persistance
-% import javax.microedition.rms.RecordStore
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.communication.log.PreLogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.system.security.licensing.AbeClientInformationInterface
-% import org.allbinary.persistance.PlatformRecordIdUtil
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.configuration.persistance
 
--module('BasicPersitance').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule BasicPersitance do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, persistanceStrings}, 'PersistanceStrings':getInstance()),
-    put({This, platformRecordIdUtil}, 'PlatformRecordIdUtil':getInstance()),
-    put({This, recordId}, undefined),
-    put({This, valueList}, 'BasicArrayListD':new()),
-    put({This, idList}, 'BasicArrayListD':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :persistanceStrings, nil)
+    JR.put(this, :platformRecordIdUtil, nil)
+    JR.put(this, :recordId, nil)
+    JR.put(this, :valueList, nil)
+    JR.put(this, :idList, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        JR.put(this, :persistanceStrings, PersistanceStrings.jm_getInstance())
+        JR.put(this, :platformRecordIdUtil, PlatformRecordIdUtil.jm_getInstance())
+        
+        JR.put(this, :valueList, BasicArrayListD.jnew())
+        JR.put(this, :idList, BasicArrayListD.jnew())
+    nil
+  end
 
 
-new(RecordId) when (is_list(RecordId) orelse RecordId =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, RecordId),
-    This.
+  def jinit(this, p_recordId) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :recordId, p_recordId)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :recordId, JR.lget(f, :recordId))
+    end)
+  end
 
-'$init'(This, RecordId) when (is_list(RecordId) orelse RecordId =:= undefined) ->
-    init_fields(This),
-        put({This, recordId}, RecordId).
+  def jnew(p_recordId) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_recordId)
+    this
+  end
 
-% throws Exception
-deleteRecoreStore(This, AbeClientInformation) ->
-        'RecordStore':deleteRecordStore((get({This, '$class'})):getRecordId(This, AbeClientInformation)).
 
-% throws Exception
-deleteAll(This, AbeClientInformation) ->
-        Size = (get({get({This, idList}), '$class'})):size(get({This, idList})),
-        lists:foreach(fun(Index) ->
-            Integer = array:get(Index, get({get({This, idList}), objectArray})),
-            (get({This, '$class'})):delete(This, AbeClientInformation, (get({Integer, '$class'})):intValue(Integer))
-        end, lists:seq(0, Size - 1)),
-        (get({This, '$class'})):clear(This).
+  def jm_deleteRecoreStore(this, p_abeClientInformation) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+        RecordStore.jm_deleteRecordStore(JR.call(this, :jm_getRecordId, [JR.lget(f, :abeClientInformation)]))
+    end)
+  end
 
-% throws Exception
-delete(This, AbeClientInformation, DeleteId) when is_integer(DeleteId) ->
-        put({local, recordStore}, get({'NullRecordStore', 'NULL_RECORD_STORE'})),
-        try
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N66874) -> (get({Target_N66874, '$class'})):toString(Target_N66874) end)((fun(Target_N66881) -> (get({Target_N66881, '$class'})):appendint(Target_N66881, DeleteId) end)((fun(Target_N66888) -> (get({Target_N66888, '$class'})):append(Target_N66888, get({get({This, persistanceStrings}), 'DELETING_WITH_ID'})) end)('StringMaker':new()))), This, get({get({This, commonStrings}), delete})),
-            put({local, recordStore}, 'RecordStore':openRecordStore((get({This, '$class'})):getRecordId(This, AbeClientInformation), true)),
-            (get({get({local, recordStore}), '$class'})):deleteRecord(get({local, recordStore}), DeleteId)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            erlang:error(E)
+
+  def jm_deleteAll(this, p_abeClientInformation) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+        JR.lset(f, :size, JR.call(JR.get(this, :idList), :jm_size, []))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :integer, JR.aget(JR.get(JR.get(this, :idList), :objectArray), JR.lget(f, :index)))
+            JR.call(this, :jm_delete, [JR.lget(f, :abeClientInformation), JR.call(JR.lget(f, :integer), :jm_intValue, [])])
+        end)
+        JR.call(this, :jm_clear, [])
+    end)
+  end
+
+
+  def jm_delete(this, p_abeClientInformation, p_deleteId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+      JR.lset(f, :deleteId, p_deleteId)
+        JR.lset(f, :recordStore, NullRecordStore.jstatic_NULL_RECORD_STORE())
+        try do
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :persistanceStrings), :DELETING_WITH_ID)]), :jm_appendint, [JR.lget(f, :deleteId)]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :delete)])
+            JR.lset(f, :recordStore, RecordStore.jm_openRecordStore(JR.call(this, :jm_getRecordId, [JR.lget(f, :abeClientInformation)]), true))
+            JR.call(JR.lget(f, :recordStore), :jm_deleteRecord, [JR.lget(f, :deleteId)])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            throw({:jexception, JR.lget(f, :e)})
         after
-            case (get({local, recordStore}) =/= undefined) of
-                true ->
-                'PreLogUtil':put(get({get({This, persistanceStrings}), 'CLOSING_RECORDSTORE'}), This, get({get({This, commonStrings}), delete})),
-                (get({get({local, recordStore}), '$class'})):closeRecordStore(get({local, recordStore}));
-                false -> ok
+            if (JR.lget(f, :recordStore) != nil) do
+                PreLogUtil.jm_put(JR.get(JR.get(this, :persistanceStrings), :CLOSING_RECORDSTORE), this, JR.get(JR.get(this, :commonStrings), :delete))
+                JR.call(JR.lget(f, :recordStore), :jm_closeRecordStore, [])
             end
-        end.
+        end
+    end)
+  end
 
-getRecordId(This, AbeClientInformation) ->
-        (get({get({This, platformRecordIdUtil}), '$class'})):getRecordId(get({This, platformRecordIdUtil}), AbeClientInformation, get({This, recordId})).
 
-getList(This) ->
-        get({This, valueList}).
+  def jm_getRecordId(this, p_abeClientInformation) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+        throw({:jreturn, JR.call(JR.get(this, :platformRecordIdUtil), :jm_getRecordId, [JR.lget(f, :abeClientInformation), JR.get(this, :recordId)])})
+    end)
+  end
 
-getIds(This) ->
-        get({This, idList}).
 
-clear(This) ->
-        (get({get({This, valueList}), '$class'})):clear(get({This, valueList})),
-        (get({get({This, idList}), '$class'})):clear(get({This, idList})).
+  def jm_getList(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :valueList)})
+    end)
+  end
+
+
+  def jm_getIds(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :idList)})
+    end)
+  end
+
+
+  def jm_clear(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :valueList), :jm_clear, [])
+        JR.call(JR.get(this, :idList), :jm_clear, [])
+    end)
+  end
+end
+
 

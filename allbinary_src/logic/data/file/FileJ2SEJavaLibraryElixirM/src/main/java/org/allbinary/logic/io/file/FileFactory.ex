@@ -1,59 +1,88 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.io.file
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.io.file
 
--module('FileFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule FileFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> FileFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'FileFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'FileFactory', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, FileFactory.jstatic_instance()})
+    end)
+  end
 
-% throws Exception
-getInstance(This, FilePath) when (is_list(FilePath) orelse FilePath =:= undefined) ->
-        'AbFile':createAbFileFromRawPath(FilePath).
 
-% throws Exception
-getInstance(This, File, ChildFilePath) when (is_list(ChildFilePath) orelse ChildFilePath =:= undefined) ->
-        'AbFile':createAbFileWithChild(File, ChildFilePath).
+  def jm_getInstance(this, p_filePath) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :filePath, p_filePath)
+        throw({:jreturn, AbFile.jm_createAbFileFromRawPath(JR.lget(f, :filePath))})
+    end)
+  end
 
-% throws Exception
-isFile(This, Path) when (is_list(Path) orelse Path =:= undefined) ->
-        try
-        File = 'AbFile':createAbFile(Path),
-        case (get({File, '$class'})):exists(File) of
-            true ->
-            throw({'$return', true});
-            false ->
-            throw({'$return', false})
+
+  def jm_getInstance(this, p_file, p_childFilePath) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :file, p_file)
+      JR.lset(f, :childFilePath, p_childFilePath)
+        throw({:jreturn, AbFile.jm_createAbFileWithChild(JR.lget(f, :file), JR.lget(f, :childFilePath))})
+    end)
+  end
+
+
+  def jm_isFile(this, p_path) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :path, p_path)
+        JR.lset(f, :file, AbFile.jm_createAbFile(JR.lget(f, :path)))
+        if JR.call(JR.lget(f, :file), :jm_exists, []) do
+            throw({:jreturn, true})
+        else
+            throw({:jreturn, false})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
+end
+
 

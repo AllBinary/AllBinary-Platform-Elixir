@@ -1,54 +1,70 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation.image
-% import org.allbinary.logic.util.cache.BasicArrayListResetablePool
-% import org.allbinary.logic.util.cache.CacheableInterface
-% import org.allbinary.logic.util.cache.CacheableInterfaceFactoryInterface
-% import org.allbinary.logic.util.cache.PoolInterface
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
--module('ImageArrayRotationAnimationPool').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule ImageArrayRotationAnimationPool do
+  def jsuper(), do: BasicArrayListResetablePool
+def jstatic_IMAGE_ROTATION_ANIMATION_POOL(), do: JR.static_get(__MODULE__, :IMAGE_ROTATION_ANIMATION_POOL, fn -> ImageArrayRotationAnimationPool.jnew(ImageArrayRotationAnimationCacheableInterfaceFactory.jnew()) end)
+  def jstatic_set_IMAGE_ROTATION_ANIMATION_POOL(value), do: JR.static_put(__MODULE__, :IMAGE_ROTATION_ANIMATION_POOL, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicArrayListResetablePool', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'IMAGE_ROTATION_ANIMATION_POOL'}, 'ImageArrayRotationAnimationPool':new('ImageArrayRotationAnimationCacheableInterfaceFactory':new())),
-    ok.
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new(CacheableInterfaceFactoryInterface) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, CacheableInterfaceFactoryInterface),
-    This.
+  def jinit(this, p_cacheableInterfaceFactoryInterface) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cacheableInterfaceFactoryInterface, p_cacheableInterfaceFactoryInterface)
+        BasicArrayListResetablePool.jinit(this, JR.lget(f, :cacheableInterfaceFactoryInterface))
+        ImageArrayRotationAnimationPool.jinitfields(this)
+    end)
+  end
 
-'$init'(This, CacheableInterfaceFactoryInterface) ->
-        'BasicArrayListResetablePool':'$init'(This, CacheableInterfaceFactoryInterface).
+  def jnew(p_cacheableInterfaceFactoryInterface) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_cacheableInterfaceFactoryInterface)
+    this
+  end
 
-getInstance() ->
-        get({'ImageArrayRotationAnimationPool', 'IMAGE_ROTATION_ANIMATION_POOL'}).
 
-% throws Exception
-remove(This, Key) ->
-        CacheableInterface = 'BasicArrayListResetablePool':remove(This, Key),
-        AllBinaryImageRotationAnimationInfo = Key,
-        ImageArrayRotationAnimationCacheable = (CacheableInterface),
-        (get({ImageArrayRotationAnimationCacheable, '$class'})):setImageArray(ImageArrayRotationAnimationCacheable, (get({AllBinaryImageRotationAnimationInfo, '$class'})):getImageArray(AllBinaryImageRotationAnimationInfo)),
-        CacheableInterface.
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, ImageArrayRotationAnimationPool.jstatic_IMAGE_ROTATION_ANIMATION_POOL()})
+    end)
+  end
+
+
+  def jm_remove(this, p_key) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :key, p_key)
+        JR.lset(f, :cacheableInterface, BasicArrayListResetablePool.jm_remove(this, JR.lget(f, :key)))
+        JR.lset(f, :allBinaryImageRotationAnimationInfo, JR.lget(f, :key))
+        JR.lset(f, :imageArrayRotationAnimationCacheable, (JR.lget(f, :cacheableInterface)))
+        JR.call(JR.lget(f, :imageArrayRotationAnimationCacheable), :jm_setImageArray, [JR.call(JR.lget(f, :allBinaryImageRotationAnimationInfo), :jm_getImageArray, [])])
+        throw({:jreturn, JR.lget(f, :cacheableInterface)})
+    end)
+  end
+end
+
 

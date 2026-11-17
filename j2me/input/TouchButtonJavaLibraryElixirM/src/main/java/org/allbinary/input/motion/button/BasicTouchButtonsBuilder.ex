@@ -1,61 +1,70 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion.button
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
-% import org.allbinary.util.BasicArrayListUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
--module('BasicTouchButtonsBuilder').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule BasicTouchButtonsBuilder do
+  def jsuper(), do: BaseTouchInput
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BaseTouchInput', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    ok.
+  def jinit(this) do
+    BaseTouchInput.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    'BaseTouchInput':'$init'(This),
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getList(This) ->
-        try
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, get({get({This, commonStrings}), 'CONSTRUCTOR'})),
-            List = 'BasicArrayListD':new(),
-            CommonButtons = 'CommonButtons':getInstance(),
-            TouchButtonLocationHelper = 'TouchButtonLocationHelper':new(),
-            BasicTouchButtonCellPositionFactory = 'BasicTouchButtonCellPositionFactory':new(),
-            UP = 'TouchButton':createButton(get({'BasicTouchInputFactory':getInstance(), 'UP'}), 'TouchButtonUpResource':getInstance(), get({CommonButtons, 'NORMAL_BUTTON'}), get({BasicTouchButtonCellPositionFactory, 'SECOND_FROM_BOTTOM_LEFT'}), (get({TouchButtonLocationHelper, '$class'})):getColumnsRemainderHalf(TouchButtonLocationHelper), (get({TouchButtonLocationHelper, '$class'})):getRowsRemainderHalf(TouchButtonLocationHelper)),
-            DOWN = 'TouchButton':createButton(get({'BasicTouchInputFactory':getInstance(), 'DOWN'}), 'TouchButtonDownResource':getInstance(), get({CommonButtons, 'NORMAL_BUTTON'}), get({BasicTouchButtonCellPositionFactory, 'BOTTOM_LEFT'}), (get({TouchButtonLocationHelper, '$class'})):getColumnsRemainderHalf(TouchButtonLocationHelper), (get({TouchButtonLocationHelper, '$class'})):getRowsRemainderHalf(TouchButtonLocationHelper)),
-            LEFT = 'TouchButton':createButton(get({'BasicTouchInputFactory':getInstance(), 'SPECIAL_BUTTON_FOUR'}), 'TouchButtonTurnLeftResource':getInstance(), get({CommonButtons, 'NORMAL_BUTTON'}), get({BasicTouchButtonCellPositionFactory, 'BOTTOM_SECOND_FROM_RIGHT'}), (get({TouchButtonLocationHelper, '$class'})):getColumnsRemainderHalf(TouchButtonLocationHelper), (get({TouchButtonLocationHelper, '$class'})):getRowsRemainderHalf(TouchButtonLocationHelper)),
-            RIGHT = 'TouchButton':createButton(get({'BasicTouchInputFactory':getInstance(), 'SPECIAL_BUTTON_THREE'}), 'TouchButtonTurnRightResource':getInstance(), get({CommonButtons, 'NORMAL_BUTTON'}), get({BasicTouchButtonCellPositionFactory, 'BOTTOM_RIGHT'}), (get({TouchButtonLocationHelper, '$class'})):getColumnsRemainderHalf(TouchButtonLocationHelper), (get({TouchButtonLocationHelper, '$class'})):getRowsRemainderHalf(TouchButtonLocationHelper)),
-            (get({List, '$class'})):add(List, UP),
-            (get({List, '$class'})):add(List, LEFT),
-            (get({List, '$class'})):add(List, RIGHT),
-            (get({List, '$class'})):add(List, DOWN),
-            List
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'GET_LIST'}), E),
-            (fun(Target_N66864) -> (get({Target_N66864, '$class'})):getImmutableInstance(Target_N66864) end)('BasicArrayListUtil':getInstance())
-        end.
+  def jm_getList(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, JR.get(JR.get(this, :commonStrings), :CONSTRUCTOR)])
+            JR.lset(f, :list, BasicArrayListD.jnew())
+            JR.lset(f, :commonButtons, CommonButtons.jm_getInstance())
+            JR.lset(f, :touchButtonLocationHelper, TouchButtonLocationHelper.jnew())
+            JR.lset(f, :basicTouchButtonCellPositionFactory, BasicTouchButtonCellPositionFactory.jnew())
+            JR.lset(f, :UP, TouchButton.jm_createButton(JR.get(BasicTouchInputFactory.jm_getInstance(), :UP), TouchButtonUpResource.jm_getInstance(), JR.get(JR.lget(f, :commonButtons), :NORMAL_BUTTON), JR.get(JR.lget(f, :basicTouchButtonCellPositionFactory), :SECOND_FROM_BOTTOM_LEFT), JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getColumnsRemainderHalf, []), JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getRowsRemainderHalf, [])))
+            JR.lset(f, :DOWN, TouchButton.jm_createButton(JR.get(BasicTouchInputFactory.jm_getInstance(), :DOWN), TouchButtonDownResource.jm_getInstance(), JR.get(JR.lget(f, :commonButtons), :NORMAL_BUTTON), JR.get(JR.lget(f, :basicTouchButtonCellPositionFactory), :BOTTOM_LEFT), JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getColumnsRemainderHalf, []), JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getRowsRemainderHalf, [])))
+            JR.lset(f, :LEFT, TouchButton.jm_createButton(JR.get(BasicTouchInputFactory.jm_getInstance(), :SPECIAL_BUTTON_FOUR), TouchButtonTurnLeftResource.jm_getInstance(), JR.get(JR.lget(f, :commonButtons), :NORMAL_BUTTON), JR.get(JR.lget(f, :basicTouchButtonCellPositionFactory), :BOTTOM_SECOND_FROM_RIGHT), JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getColumnsRemainderHalf, []), JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getRowsRemainderHalf, [])))
+            JR.lset(f, :RIGHT, TouchButton.jm_createButton(JR.get(BasicTouchInputFactory.jm_getInstance(), :SPECIAL_BUTTON_THREE), TouchButtonTurnRightResource.jm_getInstance(), JR.get(JR.lget(f, :commonButtons), :NORMAL_BUTTON), JR.get(JR.lget(f, :basicTouchButtonCellPositionFactory), :BOTTOM_RIGHT), JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getColumnsRemainderHalf, []), JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getRowsRemainderHalf, [])))
+            JR.call(JR.lget(f, :list), :jm_add, [JR.lget(f, :UP)])
+            JR.call(JR.lget(f, :list), :jm_add, [JR.lget(f, :LEFT)])
+            JR.call(JR.lget(f, :list), :jm_add, [JR.lget(f, :RIGHT)])
+            JR.call(JR.lget(f, :list), :jm_add, [JR.lget(f, :DOWN)])
+            throw({:jreturn, JR.lget(f, :list)})
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :GET_LIST), JR.lget(f, :e)])
+            throw({:jreturn, JR.call(BasicArrayListUtil.jm_getInstance(), :jm_getImmutableInstance, [])})
+        end
+    end)
+  end
+end
+
 

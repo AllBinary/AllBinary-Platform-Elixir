@@ -1,71 +1,148 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation.image
-% import javax.microedition.lcdui.Graphics
-% import javax.microedition.lcdui.Image
-% import org.allbinary.animation.AnimationBehavior
-% import org.allbinary.math.AngleInfo
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
--module('AdjustedImageArrayRotationAnimation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+#TWB - Adjustments should be done in the resource creation and not at the animation level
+defmodule AdjustedImageArrayRotationAnimation do
+  def jsuper(), do: ImageArrayRotationAnimation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ImageArrayRotationAnimation', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :dx, 0)
+    JR.put(this, :dy, 0)
+        JR.put(this, :dx, 0)
+        JR.put(this, :dy, 0)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, dx}, 0),
-    put({This, dy}, 0),
-    ok.
+
+  def jm_createAdjustedImageArrayRotationAnimationInfo(p_anyType, p_animationBehavior) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+      JR.lset(f, :animationBehavior, p_animationBehavior)
+        JR.lset(f, :imageRotationAnimationInfo, JR.lget(f, :anyType))
+        throw({:jreturn, AdjustedImageArrayRotationAnimation.jnew(JR.call(JR.lget(f, :imageRotationAnimationInfo), :jm_getImageArray, []), JR.call(JR.lget(f, :imageRotationAnimationInfo), :jm_getAngleInfoP, []), JR.call(JR.lget(f, :imageRotationAnimationInfo), :jm_getTotalAngle, []), JR.call(JR.lget(f, :imageRotationAnimationInfo), :jm_getDx, []), JR.call(JR.lget(f, :imageRotationAnimationInfo), :jm_getDy, []), JR.lget(f, :animationBehavior))})
+    end)
+  end
 
 
-% throws Exception
-createAdjustedImageArrayRotationAnimationInfo(AnyType, AnimationBehavior) ->
-        ImageRotationAnimationInfo = AnyType,
-        'AdjustedImageArrayRotationAnimation':new((get({ImageRotationAnimationInfo, '$class'})):getImageArray(ImageRotationAnimationInfo), (get({ImageRotationAnimationInfo, '$class'})):getAngleInfoP(ImageRotationAnimationInfo), (get({ImageRotationAnimationInfo, '$class'})):getTotalAngle(ImageRotationAnimationInfo), (get({ImageRotationAnimationInfo, '$class'})):getDx(ImageRotationAnimationInfo), (get({ImageRotationAnimationInfo, '$class'})):getDy(ImageRotationAnimationInfo), AnimationBehavior).
+  def jm_createAnimation(p_imageArray, p_angleInfo, p_totalAngle, p_animationBehavior) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :imageArray, p_imageArray)
+      JR.lset(f, :angleInfo, p_angleInfo)
+      JR.lset(f, :totalAngle, p_totalAngle)
+      JR.lset(f, :animationBehavior, p_animationBehavior)
+        throw({:jreturn, AdjustedImageArrayRotationAnimation.jnew(JR.lget(f, :imageArray), JR.lget(f, :angleInfo), JR.lget(f, :totalAngle), -(Bitwise.bsr(JR.call(JR.aget(JR.lget(f, :imageArray), 0), :jm_getWidth, []), 2)), -(Bitwise.bsr(JR.call(JR.aget(JR.lget(f, :imageArray), 0), :jm_getHeight, []), 2)), JR.lget(f, :animationBehavior))})
+    end)
+  end
 
-% throws Exception
-createAnimation(ImageArray, AngleInfo, TotalAngle, AnimationBehavior) when (is_tuple(ImageArray) orelse ImageArray =:= undefined), is_integer(TotalAngle) ->
-        'AdjustedImageArrayRotationAnimation':new(ImageArray, AngleInfo, TotalAngle, (-(((fun(Target_N66018) -> (get({Target_N66018, '$class'})):getWidth(Target_N66018) end)(array:get(0, ImageArray)) bsr 2))), (-(((fun(Target_N66060) -> (get({Target_N66060, '$class'})):getHeight(Target_N66060) end)(array:get(0, ImageArray)) bsr 2))), AnimationBehavior).
 
-new(ImageArray, AngleInfo, TotalAngle, Dx, Dy, AnimationBehavior) when (is_tuple(ImageArray) orelse ImageArray =:= undefined), is_integer(TotalAngle), is_integer(Dx), is_integer(Dy) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, ImageArray, AngleInfo, TotalAngle, Dx, Dy, AnimationBehavior),
-    This.
+  def jinit(this, p_imageArray, p_angleInfo, p_totalAngle, p_dx, p_dy, p_animationBehavior) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :imageArray, p_imageArray)
+      JR.lset(f, :angleInfo, p_angleInfo)
+      JR.lset(f, :totalAngle, p_totalAngle)
+      JR.lset(f, :dx, p_dx)
+      JR.lset(f, :dy, p_dy)
+      JR.lset(f, :animationBehavior, p_animationBehavior)
+        ImageArrayRotationAnimation.jinit(this, JR.lget(f, :imageArray), JR.lget(f, :angleInfo), JR.lget(f, :totalAngle), JR.lget(f, :animationBehavior))
+        AdjustedImageArrayRotationAnimation.jinitfields(this)
+        JR.call(this, :jm_init, [JR.lget(f, :dx), JR.lget(f, :dy)])
+    end)
+  end
 
-'$init'(This, ImageArray, AngleInfo, TotalAngle, Dx, Dy, AnimationBehavior) when (is_tuple(ImageArray) orelse ImageArray =:= undefined), is_integer(TotalAngle), is_integer(Dx), is_integer(Dy) ->
-        'ImageArrayRotationAnimation':'$init'(This, ImageArray, AngleInfo, TotalAngle, AnimationBehavior),
-        init_fields(This),
-        (get({This, '$class'})):init(This, Dx, Dy).
+  def jnew(p_imageArray, p_angleInfo, p_totalAngle, p_dx, p_dy, p_animationBehavior) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_imageArray, p_angleInfo, p_totalAngle, p_dx, p_dy, p_animationBehavior)
+    this
+  end
 
-% throws Exception
-init(This, Dx, Dy) when is_integer(Dx), is_integer(Dy) ->
-        (get({This, '$class'})):setDx(This, Dx),
-        (get({This, '$class'})):setDy(This, Dy).
 
-paintXY(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-        'ImageArrayRotationAnimation':paintXY(This, Graphics, (X + get({This, dx})), (Y + get({This, dy}))).
+  def jm_init(this, p_dx, p_dy) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :dx, p_dx)
+      JR.lset(f, :dy, p_dy)
+        JR.call(this, :jm_setDx, [JR.lget(f, :dx)])
+        JR.call(this, :jm_setDy, [JR.lget(f, :dy)])
+    end)
+  end
 
-setDx(This, Dx) when is_integer(Dx) ->
-        put({This, dx}, Dx).
 
-getDx(This) ->
-        get({This, dx}).
+  def jm_paintXY(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        ImageArrayRotationAnimation.jm_paintXY(this, JR.lget(f, :graphics), JR.int32(JR.lget(f, :x) + JR.get(this, :dx)), JR.int32(JR.lget(f, :y) + JR.get(this, :dy)))
+    end)
+  end
 
-setDy(This, Dy) when is_integer(Dy) ->
-        put({This, dy}, Dy).
 
-getDy(This) ->
-        get({This, dy}).
+  def jm_setDx(this, p_dx) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :dx, p_dx)
+        JR.put(this, :dx, JR.lget(f, :dx))
+    end)
+  end
+
+
+  def jm_getDx(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :dx)})
+    end)
+  end
+
+
+  def jm_setDy(this, p_dy) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :dy, p_dy)
+        JR.put(this, :dy, JR.lget(f, :dy))
+    end)
+  end
+
+
+  def jm_getDy(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :dy)})
+    end)
+  end
+end
+
 

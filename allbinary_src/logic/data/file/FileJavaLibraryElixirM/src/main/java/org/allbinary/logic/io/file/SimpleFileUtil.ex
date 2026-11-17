@@ -1,130 +1,170 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2025 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.logic.io.file
-% import java.io.ByteArrayOutputStream
-% import java.io.InputStream
-% import java.io.OutputStream
-% import java.io.Reader
-% import java.io.Writer
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.io.NullOutputStream
-% import org.allbinary.logic.io.NullReader
-% import org.allbinary.logic.io.NullWriter
-% import org.allbinary.logic.io.StreamUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2025 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.logic.io.file
 
--module('SimpleFileUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule SimpleFileUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> SimpleFileUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'SimpleFileUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :NULL_WRITER, nil)
+    JR.put(this, :NULL_READER, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :nullUtil, nil)
+    JR.put(this, :streamUtil, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :NULL_WRITER, SimpleFileUtil.jm_nullWriter())
+        JR.put(this, :NULL_READER, SimpleFileUtil.jm_nullReader())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        JR.put(this, :nullUtil, NullUtil.jm_getInstance())
+        JR.put(this, :streamUtil, StreamUtil.jm_getInstance())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, 'NULL_WRITER'}, 'SimpleFileUtil':nullWriter()),
-    put({This, 'NULL_READER'}, 'SimpleFileUtil':nullReader()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, nullUtil}, 'NullUtil':getInstance()),
-    put({This, streamUtil}, 'StreamUtil':getInstance()),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'SimpleFileUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, SimpleFileUtil.jstatic_instance()})
+    end)
+  end
 
-nullOutputStream() ->
-        get({'NullOutputStream', 'NULL_OUTPUT_STREAM'}).
 
-nullWriter() ->
-        get({'NullWriter', 'NULL_WRITER'}).
+  def jm_nullOutputStream() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, NullOutputStream.jstatic_NULL_OUTPUT_STREAM()})
+    end)
+  end
 
-nullReader() ->
-        get({'NullReader', 'NULL_READER'}).
 
-loadFileAsList(This, InputStream, Max, ByteArray1) when is_integer(Max), (is_tuple(ByteArray1) orelse ByteArray1 =:= undefined) ->
-        (get({This, '$class'})):loadFileAsListReturnLine(This, InputStream, Max, ByteArray1, 0).
+  def jm_nullWriter() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, NullWriter.jstatic_NULL_WRITER()})
+    end)
+  end
 
-loadFileAsListReturnLine(This, InputStream, Max, ByteArray1, IncludeReturnLine) when is_integer(Max), (is_tuple(ByteArray1) orelse ByteArray1 =:= undefined), is_integer(IncludeReturnLine) ->
-        try
-        StringList = 'BasicArrayListD':new(),
-        case (InputStream =:= undefined) of
-            true ->
-            throw({'$return', StringList});
-            false -> ok
-        end,
-        put({local, byteArray}, get({get({This, nullUtil}), 'NULL_BYTE_ARRAY'})),
-        try
-            OutputStream2 = 'ByteArrayOutputStream':new(Max),
-            put({local, byteArray}, (get({get({This, streamUtil}), '$class'})):getByteArray(get({This, streamUtil}), InputStream, OutputStream2, ByteArray1)),
-            (get({get({This, streamUtil}), '$class'})):close(get({This, streamUtil}), InputStream)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, streamUtil}), '$class'})):close(get({This, streamUtil}), InputStream),
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'ADD'}), E)
-        end,
-        case (get({local, byteArray}) =:= undefined) of
-            true ->
-            throw({'$return', StringList});
-            false -> ok
-        end,
-        Size = array:size(get({local, byteArray})),
-        put({local, index}, 0),
-        put({local, startIndex}, 0),
-        put({local, returnLine}, 0),
-        (fun Loop() -> case (get({local, index}) < Size) of true ->
-            put({local, startIndex}, get({local, index})),
-            (fun Loop() -> case ((get({local, index}) < (Size - 1)) andalso (array:get(get({local, index}), get({local, byteArray})) =/= $\n)) of true ->
-                put({local, index}, get({local, index}) + 1),
-                Loop();
-            false -> ok end end)(),
-            case (IncludeReturnLine =:= 0) of
-                true ->
-                case ((get({local, index}) > 0) andalso (array:get((get({local, index}) - 1), get({local, byteArray})) =:= $\r)) of
-                    true ->
-                    put({local, returnLine}, 1);
-                    false ->
-                    put({local, returnLine}, 0)
-                end;
-                false -> ok
-            end,
-            S = allbinary_java:to_string(get({local, byteArray}), get({local, startIndex}), ((((get({local, index}) + IncludeReturnLine) - get({local, returnLine})) - get({local, startIndex})))),
-            (get({StringList, '$class'})):add(StringList, S),
-            put({local, index}, get({local, index}) + 1),
-            Loop();
-        false -> ok end end)(),
-        StringList
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
 
-createStringFromArrayOfStrings(This, StringArray) when (is_tuple(StringArray) orelse StringArray =:= undefined) ->
-        StringMaker = 'StringMaker':new(),
-        Size = array:size(StringArray),
-        lists:foreach(fun(Index) ->
-            (get({StringMaker, '$class'})):append(StringMaker, array:get(Index, StringArray))
-        end, lists:seq(0, Size - 1)),
-        (get({StringMaker, '$class'})):toString(StringMaker).
+  def jm_nullReader() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, NullReader.jstatic_NULL_READER()})
+    end)
+  end
+
+
+  def jm_loadFileAsList(this, p_inputStream, p_max, p_byteArray1) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :inputStream, p_inputStream)
+      JR.lset(f, :max, p_max)
+      JR.lset(f, :byteArray1, p_byteArray1)
+        throw({:jreturn, JR.call(this, :jm_loadFileAsListReturnLine, [JR.lget(f, :inputStream), JR.lget(f, :max), JR.lget(f, :byteArray1), 0])})
+    end)
+  end
+
+
+  def jm_loadFileAsListReturnLine(this, p_inputStream, p_max, p_byteArray1, p_includeReturnLine) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :inputStream, p_inputStream)
+      JR.lset(f, :max, p_max)
+      JR.lset(f, :byteArray1, p_byteArray1)
+      JR.lset(f, :includeReturnLine, p_includeReturnLine)
+        JR.lset(f, :stringList, BasicArrayListD.jnew())
+        if (JR.lget(f, :inputStream) == nil) do
+            throw({:jreturn, JR.lget(f, :stringList)})
+        end
+        JR.lset(f, :byteArray, JR.get(JR.get(this, :nullUtil), :NULL_BYTE_ARRAY))
+        try do
+            JR.lset(f, :outputStream2, J.ByteArrayOutputStream.jnew(JR.lget(f, :max)))
+            JR.lset(f, :byteArray, JR.call(JR.get(this, :streamUtil), :jm_getByteArray, [JR.lget(f, :inputStream), JR.lget(f, :outputStream2), JR.lget(f, :byteArray1)]))
+            JR.call(JR.get(this, :streamUtil), :jm_close, [JR.lget(f, :inputStream)])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :streamUtil), :jm_close, [JR.lget(f, :inputStream)])
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :ADD), JR.lget(f, :e)])
+        end
+        if (JR.lget(f, :byteArray) == nil) do
+            throw({:jreturn, JR.lget(f, :stringList)})
+        end
+        JR.lset(f, :size, JR.alength(JR.lget(f, :byteArray)))
+        JR.lset(f, :index, 0)
+        JR.lset(f, :startIndex, 0)
+        JR.lset(f, :returnLine, 0)
+        JR.jwhile(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn ->
+            JR.lset(f, :startIndex, JR.lget(f, :index))
+            JR.jwhile(fn -> ((JR.lget(f, :index) < JR.int32(JR.lget(f, :size) - 1)) && (JR.aget(JR.lget(f, :byteArray), JR.lget(f, :index)) != JR.int8(?\n))) end, fn ->
+                JR.lpostinc(f, :index, 1)
+            end)
+            if (JR.lget(f, :includeReturnLine) == 0) do
+                if ((JR.lget(f, :index) > 0) && (JR.aget(JR.lget(f, :byteArray), JR.int32(JR.lget(f, :index) - 1)) == JR.int8(?\r))) do
+                    JR.lset(f, :returnLine, 1)
+                else
+                    JR.lset(f, :returnLine, 0)
+                end
+            end
+            JR.lset(f, :s, JR.from_chars(JR.lget(f, :byteArray), JR.lget(f, :startIndex), (JR.int32(JR.int32(JR.int32(JR.lget(f, :index) + JR.lget(f, :includeReturnLine)) - JR.lget(f, :returnLine)) - JR.lget(f, :startIndex)))))
+            JR.call(JR.lget(f, :stringList), :jm_add, [JR.lget(f, :s)])
+            JR.lpostinc(f, :index, 1)
+        end)
+        throw({:jreturn, JR.lget(f, :stringList)})
+    end)
+  end
+
+
+  def jm_createStringFromArrayOfStrings(this, p_stringArray) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :stringArray, p_stringArray)
+        JR.lset(f, :stringMaker, StringMaker.jnew())
+        JR.lset(f, :size, JR.alength(JR.lget(f, :stringArray)))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.call(JR.lget(f, :stringMaker), :jm_append, [JR.aget(JR.lget(f, :stringArray), JR.lget(f, :index))])
+        end)
+        throw({:jreturn, JR.call(JR.lget(f, :stringMaker), :jm_toString, [])})
+    end)
+  end
+end
+
 

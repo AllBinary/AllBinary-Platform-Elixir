@@ -1,58 +1,80 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.resource
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.resource
 
--module('ResourceLoadingLevelFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule ResourceLoadingLevelFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> ResourceLoadingLevelFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'ResourceLoadingLevelFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :LOAD_EARLY, nil)
+    JR.put(this, :LOAD_TOUCH, nil)
+    JR.put(this, :LOAD_GAME, nil)
+    JR.put(this, :LEVEL, nil)
+    JR.put(this, :MAX_LEVEL, nil)
+    JR.put(this, :LOAD_ALL, nil)
+    JR.put(this, :RESOURCE_LOADING_LEVEL_ARRAY, nil)
+        JR.put(this, :LOAD_EARLY, ResourceLoadingLevel.jnew("Load Early", J.Integer.jstatic_MAX_VALUE()))
+        JR.put(this, :LOAD_TOUCH, ResourceLoadingLevel.jnew("Load Touch", JR.int32(J.Integer.jstatic_MAX_VALUE() - 1)))
+        JR.put(this, :LOAD_GAME, ResourceLoadingLevel.jnew("Load Game", JR.int32(J.Integer.jstatic_MAX_VALUE() - 2)))
+        JR.put(this, :LEVEL, ResourceLoadingLevel.jnew("Level", JR.int32(J.Integer.jstatic_MAX_VALUE() - 99)))
+        JR.put(this, :MAX_LEVEL, ResourceLoadingLevel.jnew("Max Level", JR.int32(J.Integer.jstatic_MAX_VALUE() - 100)))
+        JR.put(this, :LOAD_ALL, ResourceLoadingLevel.jnew("Load All", -1))
+        JR.put(this, :RESOURCE_LOADING_LEVEL_ARRAY, JR.afrom([JR.get(this, :LOAD_ALL), JR.get(this, :MAX_LEVEL), JR.get(this, :LEVEL), JR.get(this, :LOAD_GAME), JR.get(this, :LOAD_TOUCH), JR.get(this, :LOAD_EARLY)]))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'LOAD_EARLY'}, 'ResourceLoadingLevel':new("Load Early", get({'Integer', 'MAX_VALUE'}))),
-    put({This, 'LOAD_TOUCH'}, 'ResourceLoadingLevel':new("Load Touch", (get({'Integer', 'MAX_VALUE'}) - 1))),
-    put({This, 'LOAD_GAME'}, 'ResourceLoadingLevel':new("Load Game", (get({'Integer', 'MAX_VALUE'}) - 2))),
-    put({This, 'LEVEL'}, 'ResourceLoadingLevel':new("Level", (get({'Integer', 'MAX_VALUE'}) - 99))),
-    put({This, 'MAX_LEVEL'}, 'ResourceLoadingLevel':new("Max Level", (get({'Integer', 'MAX_VALUE'}) - 100))),
-    put({This, 'LOAD_ALL'}, 'ResourceLoadingLevel':new("Load All", (-1))),
-    put({This, 'RESOURCE_LOADING_LEVEL_ARRAY'}, array:from_list([get({This, 'LOAD_ALL'}), get({This, 'MAX_LEVEL'}), get({This, 'LEVEL'}), get({This, 'LOAD_GAME'}), get({This, 'LOAD_TOUCH'}), get({This, 'LOAD_EARLY'})])),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'ResourceLoadingLevelFactory', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, ResourceLoadingLevelFactory.jstatic_instance()})
+    end)
+  end
 
-getLevelString(This, Level) when is_integer(Level) ->
-        try
-        lists:foreach(fun(Index) ->
-            case (Level =:= (fun(Target_N66274) -> (get({Target_N66274, '$class'})):getLevel(Target_N66274) end)(array:get(Index, get({This, 'RESOURCE_LOADING_LEVEL_ARRAY'})))) of
-                true ->
-                throw({'$return', (fun(Target_N66314) -> (get({Target_N66314, '$class'})):getName(Target_N66314) end)(array:get(Index, get({This, 'RESOURCE_LOADING_LEVEL_ARRAY'})))});
-                false -> ok
+
+  def jm_getLevelString(this, p_level) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :level, p_level)
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.alength(JR.get(this, :RESOURCE_LOADING_LEVEL_ARRAY))) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            if (JR.lget(f, :level) == JR.call(JR.aget(JR.get(this, :RESOURCE_LOADING_LEVEL_ARRAY), JR.lget(f, :index)), :jm_getLevel, [])) do
+                throw({:jreturn, JR.call(JR.aget(JR.get(this, :RESOURCE_LOADING_LEVEL_ARRAY), JR.lget(f, :index)), :jm_getName, [])})
             end
-        end, lists:seq(0, array:size(get({This, 'RESOURCE_LOADING_LEVEL_ARRAY'})) - 1)),
-        allbinary_java:to_string(Level)
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        end)
+        throw({:jreturn, JR.str(JR.lget(f, :level))})
+    end)
+  end
+end
+
 

@@ -1,69 +1,126 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation.vector
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.AndroidUtil
-% import org.allbinary.graphics.color.BasicColor
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation.vector
 
--module('AdjustedCircleAnimation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule AdjustedCircleAnimation do
+  def jsuper(), do: CircleAnimation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('CircleAnimation', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :xAdjustment, 0)
+    JR.put(this, :yAdjustment, 0)
+        JR.put(this, :xAdjustment, 0)
+        JR.put(this, :yAdjustment, 0)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, xAdjustment}, 0),
-    put({This, yAdjustment}, 0),
-    ok.
+
+  def jm_createAnimation(p_width, p_height, p_xAdjustment, p_yAdjustment, p_basicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+      JR.lset(f, :xAdjustment, p_xAdjustment)
+      JR.lset(f, :yAdjustment, p_yAdjustment)
+      JR.lset(f, :basicColor, p_basicColor)
+        JR.lset(f, :adjustedCircleAnimation, AdjustedCircleAnimation.jnew(JR.lget(f, :width), JR.lget(f, :height), JR.lget(f, :basicColor)))
+        JR.call(JR.lget(f, :adjustedCircleAnimation), :jm_initXY, [JR.lget(f, :xAdjustment), JR.lget(f, :yAdjustment)])
+        throw({:jreturn, JR.lget(f, :adjustedCircleAnimation)})
+    end)
+  end
 
 
-createAnimation(Width, Height, XAdjustment, YAdjustment, BasicColor) when is_integer(Width), is_integer(Height), is_integer(XAdjustment), is_integer(YAdjustment) ->
-        AdjustedCircleAnimation = 'AdjustedCircleAnimation':new(Width, Height, BasicColor),
-        (get({AdjustedCircleAnimation, '$class'})):initXY(AdjustedCircleAnimation, XAdjustment, YAdjustment),
-        AdjustedCircleAnimation.
+  def jm_createW(p_width, p_height, p_innerWidth, p_basicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+      JR.lset(f, :innerWidth, p_innerWidth)
+      JR.lset(f, :basicColor, p_basicColor)
+        JR.lset(f, :adjustedCircleAnimation, AdjustedCircleAnimation.jnew(JR.lget(f, :width), JR.lget(f, :height), JR.lget(f, :basicColor)))
+        JR.call(JR.lget(f, :adjustedCircleAnimation), :jm_init, [JR.lget(f, :innerWidth)])
+        throw({:jreturn, JR.lget(f, :adjustedCircleAnimation)})
+    end)
+  end
 
-createW(Width, Height, InnerWidth, BasicColor) when is_integer(Width), is_integer(Height), is_integer(InnerWidth) ->
-        AdjustedCircleAnimation = 'AdjustedCircleAnimation':new(Width, Height, BasicColor),
-        (get({AdjustedCircleAnimation, '$class'})):init(AdjustedCircleAnimation, InnerWidth),
-        AdjustedCircleAnimation.
 
-new(Width, Height, BasicColor) when is_integer(Width), is_integer(Height) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Width, Height, BasicColor),
-    This.
+  def jinit(this, p_width, p_height, p_basicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+      JR.lset(f, :basicColor, p_basicColor)
+        CircleAnimation.jinit(this, JR.lget(f, :width), JR.lget(f, :height), JR.lget(f, :basicColor))
+        AdjustedCircleAnimation.jinitfields(this)
+    end)
+  end
 
-'$init'(This, Width, Height, BasicColor) when is_integer(Width), is_integer(Height) ->
-        'CircleAnimation':'$init'(This, Width, Height, BasicColor),
-        init_fields(This).
+  def jnew(p_width, p_height, p_basicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_width, p_height, p_basicColor)
+    this
+  end
 
-initXY(This, XAdjustment, YAdjustment) when is_integer(XAdjustment), is_integer(YAdjustment) ->
-        put({This, xAdjustment}, XAdjustment),
-        put({This, yAdjustment}, YAdjustment).
 
-init(This, InnerWidth) when is_integer(InnerWidth) ->
-        case 'AndroidUtil':isAndroid() of
-            true ->
-            WidthPortion = ((((((InnerWidth div 3)) * 10)) div 7)),
-            put({This, xAdjustment}, (-((((get({This, width}) bsr 1)) - WidthPortion)))),
-            put({This, yAdjustment}, get({This, xAdjustment}));
-            false ->
-            put({This, xAdjustment}, (-((((get({This, width}) bsr 1)) - InnerWidth)))),
-            put({This, yAdjustment}, get({This, xAdjustment}))
-        end.
+  def jm_initXY(this, p_xAdjustment, p_yAdjustment) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :xAdjustment, p_xAdjustment)
+      JR.lset(f, :yAdjustment, p_yAdjustment)
+        JR.put(this, :xAdjustment, JR.lget(f, :xAdjustment))
+        JR.put(this, :yAdjustment, JR.lget(f, :yAdjustment))
+    end)
+  end
 
-paintXY(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-        (get({get({This, basicSetColorUtil}), '$class'})):setBasicColorP3(get({This, basicSetColorUtil}), Graphics, (get({This, '$class'})):getBasicColorP(This), (get({This, '$class'})):getColor(This)),
-        (get({Graphics, '$class'})):drawArc(Graphics, (X + get({This, xAdjustment})), (Y + get({This, yAdjustment})), get({This, width}), get({This, height}), 0, get({This, 'TOTAL_ANGLE'})).
+
+  def jm_init(this, p_innerWidth) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :innerWidth, p_innerWidth)
+        if AndroidUtil.jm_isAndroid() do
+            JR.lset(f, :widthPortion, (div((JR.int32((div(JR.lget(f, :innerWidth), 3)) * 10)), 7)))
+            JR.put(this, :xAdjustment, -(((Bitwise.bsr(JR.get(this, :width), 1)) - JR.lget(f, :widthPortion))))
+            JR.put(this, :yAdjustment, JR.get(this, :xAdjustment))
+        else
+            JR.put(this, :xAdjustment, -(((Bitwise.bsr(JR.get(this, :width), 1)) - JR.lget(f, :innerWidth))))
+            JR.put(this, :yAdjustment, JR.get(this, :xAdjustment))
+        end
+    end)
+  end
+
+
+  def jm_paintXY(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        JR.call(JR.get(this, :basicSetColorUtil), :jm_setBasicColorP3, [JR.lget(f, :graphics), JR.call(this, :jm_getBasicColorP, []), JR.call(this, :jm_getColor, [])])
+        JR.call(JR.lget(f, :graphics), :jm_drawArc, [JR.int32(JR.lget(f, :x) + JR.get(this, :xAdjustment)), JR.int32(JR.lget(f, :y) + JR.get(this, :yAdjustment)), JR.get(this, :width), JR.get(this, :height), 0, JR.get(this, :TOTAL_ANGLE)])
+    end)
+  end
+end
+
 

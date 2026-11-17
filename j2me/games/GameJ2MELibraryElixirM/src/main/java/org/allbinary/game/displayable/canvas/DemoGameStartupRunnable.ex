@@ -1,62 +1,83 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.thread.ABRunnable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('DemoGameStartupRunnable').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule DemoGameStartupRunnable do
+  def jsuper(), do: ABRunnable
+def jstatic_TYPE(), do: JR.static_get(__MODULE__, :TYPE, fn -> 4 end)
+  def jstatic_set_TYPE(value), do: JR.static_put(__MODULE__, :TYPE, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ABRunnable', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'TYPE'}, 4),
-    ok.
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, demoCanvas}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :demoCanvas, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        
+    nil
+  end
 
 
-new(DemoCanvas) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, DemoCanvas),
-    This.
+  def jinit(this, p_demoCanvas) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :demoCanvas, p_demoCanvas)
+      ABRunnable.jinit(this)
+      jinitfields(this)
+        JR.put(this, :demoCanvas, JR.lget(f, :demoCanvas))
+    end)
+  end
 
-'$init'(This, DemoCanvas) ->
-    'ABRunnable':'$init'(This),
-    init_fields(This),
-        put({This, demoCanvas}, DemoCanvas).
+  def jnew(p_demoCanvas) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_demoCanvas)
+    this
+  end
 
-run(This) ->
-        try
-            (get({This, '$class'})):setRunning(This, true),
-            (get({get({This, demoCanvas}), '$class'})):stopGameDemo(get({This, demoCanvas})),
-            (get({get({This, demoCanvas}), '$class'})):create(get({This, demoCanvas})),
-            (get({get({This, demoCanvas}), '$class'})):start(get({This, demoCanvas})),
-            (get({This, '$class'})):setRunning(This, false)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({This, '$class'})):setRunning(This, false),
-            CommonStrings = 'CommonStrings':getInstance(),
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), This, get({CommonStrings, 'RUN'}), E)
-        end.
 
-getType(This) ->
-        get({'DemoGameStartupRunnable', 'TYPE'}).
+  def jm_run(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            JR.call(this, :jm_setRunning, [true])
+            JR.call(JR.get(this, :demoCanvas), :jm_stopGameDemo, [])
+            JR.call(JR.get(this, :demoCanvas), :jm_create, [])
+            JR.call(JR.get(this, :demoCanvas), :jm_start, [])
+            JR.call(this, :jm_setRunning, [false])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(this, :jm_setRunning, [false])
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, JR.get(JR.lget(f, :commonStrings), :RUN), JR.lget(f, :e)])
+        end
+    end)
+  end
+
+
+  def jm_getType(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, DemoGameStartupRunnable.jstatic_TYPE()})
+    end)
+  end
+end
+
 

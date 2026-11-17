@@ -1,57 +1,104 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation
-% import org.allbinary.direction.Direction
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.math.Angle
-% import org.allbinary.math.AngleFactory
-% import org.allbinary.math.AngleInfo
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation
 
--module('VectorRotationAnimation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule VectorRotationAnimation do
+  def jsuper(), do: VectorBaseRotationAnimation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('VectorBaseRotationAnimation', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new(CurrentPoints, BasicColor, AnimationBehavior) when (is_tuple(CurrentPoints) orelse CurrentPoints =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, CurrentPoints, BasicColor, AnimationBehavior),
-    This.
+  def jinit(this, p_currentPoints, p_basicColor, p_animationBehavior) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :currentPoints, p_currentPoints)
+      JR.lset(f, :basicColor, p_basicColor)
+      JR.lset(f, :animationBehavior, p_animationBehavior)
+        VectorBaseRotationAnimation.jinit(this, AngleInfo.jm_getInstance(JR.int16(((JR.get(AngleFactory.jm_getInstance(), :TOTAL_ANGLE) / JR.alength(JR.lget(f, :currentPoints)))))), JR.lget(f, :currentPoints), JR.lget(f, :basicColor), JR.lget(f, :animationBehavior))
+        VectorRotationAnimation.jinitfields(this)
+        JR.call(JR.get(this, :angleInfo), :jm_adjustAngle, [JR.call(this, :jm_getFrame, [])])
+    end)
+  end
 
-'$init'(This, CurrentPoints, BasicColor, AnimationBehavior) when (is_tuple(CurrentPoints) orelse CurrentPoints =:= undefined) ->
-        'VectorBaseRotationAnimation':'$init'(This, 'AngleInfo':getInstance(trunc(((get({'AngleFactory':getInstance(), 'TOTAL_ANGLE'}) / array:size(CurrentPoints))))), CurrentPoints, BasicColor, AnimationBehavior),
-        (get({get({This, angleInfo}), '$class'})):adjustAngle(get({This, angleInfo}), (get({This, '$class'})):getFrame(This)).
+  def jnew(p_currentPoints, p_basicColor, p_animationBehavior) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_currentPoints, p_basicColor, p_animationBehavior)
+    this
+  end
 
-setFrameByDirection(This, Direction) ->
-        Angle = (get({get({This, directionUtil}), '$class'})):getFrameAngle(get({This, directionUtil}), Direction),
-        (get({This, '$class'})):adjustFrameToAngle(This, Angle).
 
-setFrameToAngle(This, Angle) ->
-        (get({This, '$class'})):adjustFrameToAngle(This, Angle).
+  def jm_setFrameByDirection(this, p_direction) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :direction, p_direction)
+        JR.lset(f, :angle, JR.call(JR.get(this, :directionUtil), :jm_getFrameAngle, [JR.lget(f, :direction)]))
+        JR.call(this, :jm_adjustFrameToAngle, [JR.lget(f, :angle)])
+    end)
+  end
 
-setFrame(This, Index) when is_integer(Index) ->
-        'VectorBaseRotationAnimation':setFrame(This, Index),
-        (get({get({This, angleInfo}), '$class'})):adjustAngle(get({This, angleInfo}), (get({This, '$class'})):getFrame(This)).
 
-adjustFrame(This, NewAngle) when is_integer(NewAngle) ->
-        (get({This, '$class'})):setFrame(This, (get({get({This, frameUtil}), '$class'})):getFrameForAngle(get({This, frameUtil}), NewAngle, trunc((fun(Target_N66402) -> (get({Target_N66402, '$class'})):getAngleIncrement(Target_N66402) end)((get({get({This, angleInfo}), '$class'})):getAngleIncrementInfo(get({This, angleInfo})))))).
+  def jm_setFrameToAngle(this, p_angle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :angle, p_angle)
+        JR.call(this, :jm_adjustFrameToAngle, [JR.lget(f, :angle)])
+    end)
+  end
 
-adjustFrameToAngle(This, NewAngle) ->
-        (get({This, '$class'})):adjustFrame(This, (get({NewAngle, '$class'})):getValue(NewAngle)).
+
+  def jm_setFrame(this, p_index) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :index, p_index)
+        VectorBaseRotationAnimation.jm_setFrame(this, JR.lget(f, :index))
+        JR.call(JR.get(this, :angleInfo), :jm_adjustAngle, [JR.call(this, :jm_getFrame, [])])
+    end)
+  end
+
+
+  def jm_adjustFrame(this, p_newAngle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :newAngle, p_newAngle)
+        JR.call(this, :jm_setFrame, [JR.call(JR.get(this, :frameUtil), :jm_getFrameForAngle, [JR.lget(f, :newAngle), JR.int32(JR.call(JR.call(JR.get(this, :angleInfo), :jm_getAngleIncrementInfo, []), :jm_getAngleIncrement, []))])])
+    end)
+  end
+
+
+  def jm_adjustFrameToAngle(this, p_newAngle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :newAngle, p_newAngle)
+        JR.call(this, :jm_adjustFrame, [JR.call(JR.lget(f, :newAngle), :jm_getValue, [])])
+    end)
+  end
+end
+
 

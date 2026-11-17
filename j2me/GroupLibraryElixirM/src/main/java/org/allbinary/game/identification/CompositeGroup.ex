@@ -1,68 +1,105 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.identification
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.identification
 
--module('CompositeGroup').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule CompositeGroup do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, groupInterface}, undefined),
-    put({This, list}, 'BasicArrayListD':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :groupInterface, nil)
+    JR.put(this, :list, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        
+        JR.put(this, :list, BasicArrayListD.jnew())
+    nil
+  end
 
 
-new(GroupInterface) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, GroupInterface),
-    This.
+  def jinit(this, p_groupInterface) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :groupInterface, p_groupInterface)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :groupInterface, JR.lget(f, :groupInterface))
+    end)
+  end
 
-'$init'(This, GroupInterface) ->
-    init_fields(This),
-        put({This, groupInterface}, GroupInterface).
+  def jnew(p_groupInterface) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_groupInterface)
+    this
+  end
 
-clear(This) ->
-        (get({get({This, list}), '$class'})):clear(get({This, list})).
 
-add(This, GroupInterface) ->
-        CommonStrings = 'CommonStrings':getInstance(),
-        GroupCommonFactory = 'GroupCommonFactory':getInstance(),
-        StringBuffer = 'StringMaker':new(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({GroupCommonFactory, 'ADDING_LABEL'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({GroupInterface, '$class'})):toString(GroupInterface)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({GroupCommonFactory, 'TO_LABEL'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (fun(Target_N66299) -> (get({Target_N66299, '$class'})):toString(Target_N66299, get({This, groupInterface})) end)('StringUtil':getInstance())),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({StringBuffer, '$class'})):toString(StringBuffer), This, get({CommonStrings, 'ADD'})),
-        (get({get({This, list}), '$class'})):add(get({This, list}), GroupInterface).
+  def jm_clear(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :list), :jm_clear, [])
+    end)
+  end
 
-isInGroup(This, GroupInterface) ->
-        try
-        case (get({get({This, list}), '$class'})):contains(get({This, list}), GroupInterface) of
-            true ->
-            throw({'$return', true});
-            false ->
-            throw({'$return', false})
+
+  def jm_add(this, p_groupInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :groupInterface, p_groupInterface)
+        JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+        JR.lset(f, :groupCommonFactory, GroupCommonFactory.jm_getInstance())
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :groupCommonFactory), :ADDING_LABEL)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.lget(f, :groupInterface), :jm_toString, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :groupCommonFactory), :TO_LABEL)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(StringUtil.jm_getInstance(), :jm_toString, [JR.get(this, :groupInterface)])])
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :stringBuffer), :jm_toString, []), this, JR.get(JR.lget(f, :commonStrings), :ADD)])
+        JR.call(JR.get(this, :list), :jm_add, [JR.lget(f, :groupInterface)])
+    end)
+  end
+
+
+  def jm_isInGroup(this, p_groupInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :groupInterface, p_groupInterface)
+        if JR.call(JR.get(this, :list), :jm_contains, [JR.lget(f, :groupInterface)]) do
+            throw({:jreturn, true})
+        else
+            throw({:jreturn, false})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-getGroup(This) ->
-        get({This, groupInterface}).
+
+  def jm_getGroup(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :groupInterface)})
+    end)
+  end
+end
+
 

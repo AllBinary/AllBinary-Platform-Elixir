@@ -1,135 +1,214 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.health
-% import org.allbinary.logic.communication.log.ForcedLogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonSeps
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.health
 
--module('Health').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements HealthInterface
+defmodule Health do
+  def jsuper(), do: JObject
+def jstatic_NULL_HEALTH(), do: JR.static_get(__MODULE__, :NULL_HEALTH, fn -> Health.jnew(0) end)
+  def jstatic_set_NULL_HEALTH(value), do: JR.static_put(__MODULE__, :NULL_HEALTH, value)
+def jstatic_NAME(), do: JR.static_get(__MODULE__, :NAME, fn -> "Health Resource" end)
+  def jstatic_set_NAME(value), do: JR.static_put(__MODULE__, :NAME, value)
+def jstatic_HEALTH_LABEL(), do: JR.static_get(__MODULE__, :HEALTH_LABEL, fn -> "Health: " end)
+  def jstatic_set_HEALTH_LABEL(value), do: JR.static_put(__MODULE__, :HEALTH_LABEL, value)
+def jstatic_MAX_HEALTH_LABEL(), do: JR.static_get(__MODULE__, :MAX_HEALTH_LABEL, fn -> " Max: " end)
+  def jstatic_set_MAX_HEALTH_LABEL(value), do: JR.static_put(__MODULE__, :MAX_HEALTH_LABEL, value)
 
-static_init() ->
-    put({?MODULE, 'NULL_HEALTH'}, 'Health':new(0)),
-    put({?MODULE, 'NAME'}, "Health Resource"),
-    put({?MODULE, 'HEALTH_LABEL'}, "Health: "),
-    put({?MODULE, 'MAX_HEALTH_LABEL'}, " Max: "),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :health, 0)
+    JR.put(this, :maxHealth, 0)
+    JR.put(this, :healthListenerInterface, nil)
+        JR.put(this, :health, 0)
+        JR.put(this, :maxHealth, 0)
+        JR.put(this, :healthListenerInterface, NullHealthListener.jstatic_NULL_HEALTH_LISTENER())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, health}, 0),
-    put({This, maxHealth}, 0),
-    put({This, healthListenerInterface}, get({'NullHealthListener', 'NULL_HEALTH_LISTENER'})),
-    ok.
+
+  def jinit(this, p_maxHealth) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :maxHealth, p_maxHealth)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.call(this, :jm_setMaxHealth, [JR.lget(f, :maxHealth)])
+        JR.call(this, :jm_setHealth, [JR.lget(f, :maxHealth)])
+    end)
+  end
+
+  def jnew(p_maxHealth) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_maxHealth)
+    this
+  end
 
 
-new(MaxHealth) when is_integer(MaxHealth) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, MaxHealth),
-    This.
-
-'$init'(This, MaxHealth) when is_integer(MaxHealth) ->
-    init_fields(This),
-        (get({This, '$class'})):setMaxHealth(This, MaxHealth),
-        (get({This, '$class'})):setHealth(This, MaxHealth).
-
-heal(This, Ahealth) when is_integer(Ahealth) ->
-        NewHealth = ((get({This, '$class'})):getHealth(This) + Ahealth),
-        case (NewHealth > (get({This, '$class'})):getMaxHealth(This)) of
-            true ->
-            (get({This, '$class'})):setHealth(This, (get({This, '$class'})):getMaxHealth(This));
-            false ->
-            (get({This, '$class'})):setHealth(This, NewHealth)
-        end.
-
-healMax(This) ->
-        (get({This, '$class'})):setHealth(This, (get({This, '$class'})):getMaxHealth(This)).
-
-isDamaged(This) ->
-        try
-        case ((get({This, '$class'})):getHealth(This) =/= (get({This, '$class'})):getMaxHealth(This)) of
-            true ->
-            throw({'$return', true});
-            false ->
-            throw({'$return', false})
+  def jm_heal(this, p_ahealth) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ahealth, p_ahealth)
+        JR.lset(f, :newHealth, JR.int32(JR.call(this, :jm_getHealth, []) + JR.lget(f, :ahealth)))
+        if (JR.lget(f, :newHealth) > JR.call(this, :jm_getMaxHealth, [])) do
+            JR.call(this, :jm_setHealth, [JR.call(this, :jm_getMaxHealth, [])])
+        else
+            JR.call(this, :jm_setHealth, [JR.lget(f, :newHealth)])
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-damage(This, Ahealth) when is_integer(Ahealth) ->
-        try
-        case (Ahealth < 0) of
-            true ->
-            StringBuffer = 'StringMaker':new(),
-            (get({StringBuffer, '$class'})):append(StringBuffer, "******* Trying to heal when damaging. Damage: "),
-            (get({StringBuffer, '$class'})):appendint(StringBuffer, Ahealth),
-            (get({StringBuffer, '$class'})):append(StringBuffer, get({'CommonSeps':getInstance(), 'SPACE'})),
-            (get({StringBuffer, '$class'})):append(StringBuffer, (get({This, '$class'})):toString(This)),
-            'ForcedLogUtil':log((get({StringBuffer, '$class'})):toString(StringBuffer), This),
-            throw({'$return', ok});
-            false -> ok
-        end,
-        Health = ((get({This, '$class'})):getHealth(This) - Ahealth),
-        (get({This, '$class'})):setHealth(This, Health)
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
 
-isAlive(This) ->
-        try
-        case ((get({This, '$class'})):getHealth(This) =< 0) of
-            true ->
-            throw({'$return', false});
-            false ->
-            throw({'$return', true})
+  def jm_healMax(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_setHealth, [JR.call(this, :jm_getMaxHealth, [])])
+    end)
+  end
+
+
+  def jm_isDamaged(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.call(this, :jm_getHealth, []) != JR.call(this, :jm_getMaxHealth, [])) do
+            throw({:jreturn, true})
+        else
+            throw({:jreturn, false})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-getMaxHealth(This) ->
-        get({This, maxHealth}).
 
-setMaxHealth(This, MaxHealth) when is_integer(MaxHealth) ->
-        put({This, maxHealth}, MaxHealth).
-
-setHealth(This, Health) when is_integer(Health) ->
-        case (Health > (get({This, '$class'})):getMaxHealth(This)) of
-            true ->
-            put({This, health}, (get({This, '$class'})):getMaxHealth(This));
-            false ->
-            case (Health < 0) of
-            true ->
-            put({This, health}, 0);
-            false ->
-            put({This, health}, Health)
+  def jm_damage(this, p_ahealth) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ahealth, p_ahealth)
+        if (JR.lget(f, :ahealth) < 0) do
+            JR.lset(f, :stringBuffer, StringMaker.jnew())
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, ["******* Trying to heal when damaging. Damage: "])
+            JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.lget(f, :ahealth)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :SPACE)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(this, :jm_toString, [])])
+            ForcedLogUtil.jm_log(JR.call(JR.lget(f, :stringBuffer), :jm_toString, []), this)
+            throw({:jreturn, nil})
         end
-        end,
-        case (get({This, healthListenerInterface}) =/= undefined) of
-            true ->
-            (get({get({This, healthListenerInterface}), '$class'})):onHealthChange(get({This, healthListenerInterface}));
-            false -> ok
-        end.
+        JR.lset(f, :health, JR.int32(JR.call(this, :jm_getHealth, []) - JR.lget(f, :ahealth)))
+        JR.call(this, :jm_setHealth, [JR.lget(f, :health)])
+    end)
+  end
 
-getHealth(This) ->
-        get({This, health}).
 
-addListener(This, HealthGraphic) ->
-        put({This, healthListenerInterface}, HealthGraphic).
+  def jm_isAlive(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.call(this, :jm_getHealth, []) <= 0) do
+            throw({:jreturn, false})
+        else
+            throw({:jreturn, true})
+        end
+    end)
+  end
 
-toString(This) ->
-        StringBuffer = 'StringMaker':new(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({'Health', 'HEALTH_LABEL'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, get({This, health})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({'Health', 'MAX_HEALTH_LABEL'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, get({This, maxHealth})),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+
+  def jm_getMaxHealth(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :maxHealth)})
+    end)
+  end
+
+
+  def jm_setMaxHealth(this, p_maxHealth) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :maxHealth, p_maxHealth)
+        JR.put(this, :maxHealth, JR.lget(f, :maxHealth))
+    end)
+  end
+
+
+  def jm_setHealth(this, p_health) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :health, p_health)
+        if (JR.lget(f, :health) > JR.call(this, :jm_getMaxHealth, [])) do
+            JR.put(this, :health, JR.call(this, :jm_getMaxHealth, []))
+        else
+            if (JR.lget(f, :health) < 0) do
+            JR.put(this, :health, 0)
+        else
+            JR.put(this, :health, JR.lget(f, :health))
+        end
+        end
+        if (JR.get(this, :healthListenerInterface) != nil) do
+            JR.call(JR.get(this, :healthListenerInterface), :jm_onHealthChange, [])
+        end
+    end)
+  end
+
+
+  def jm_getHealth(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :health)})
+    end)
+  end
+
+
+  def jm_addListener(this, p_healthGraphic) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :healthGraphic, p_healthGraphic)
+        JR.put(this, :healthListenerInterface, JR.lget(f, :healthGraphic))
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [Health.jstatic_HEALTH_LABEL()])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.get(this, :health)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [Health.jstatic_MAX_HEALTH_LABEL()])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.get(this, :maxHealth)])
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+end
+
 

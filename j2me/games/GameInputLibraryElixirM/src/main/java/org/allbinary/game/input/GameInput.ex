@@ -1,107 +1,169 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.input
-% import org.allbinary.game.configuration.feature.Features
-% import org.allbinary.game.configuration.feature.InputFeatureFactory
-% import org.allbinary.game.input.event.GameKeyEvent
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.BasicArrayList
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.input
 
--module('GameInput').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule GameInput do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, gameKeyEventList}, undefined),
-    put({This, removalGameKeyEventList}, undefined),
-    put({This, isRemoveDuplicateKeyPresses}, false),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :gameKeyEventList, nil)
+    JR.put(this, :removalGameKeyEventList, nil)
+    JR.put(this, :isRemoveDuplicateKeyPresses, false)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        
+        
+        
+    nil
+  end
 
 
-new(GameKeyEventList, RemovalGameKeyEventList) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, GameKeyEventList, RemovalGameKeyEventList),
-    This.
+  def jinit(this, p_gameKeyEventList, p_removalGameKeyEventList) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEventList, p_gameKeyEventList)
+      JR.lset(f, :removalGameKeyEventList, p_removalGameKeyEventList)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :gameKeyEventList, JR.lget(f, :gameKeyEventList))
+        JR.put(this, :removalGameKeyEventList, JR.lget(f, :removalGameKeyEventList))
+        JR.put(this, :isRemoveDuplicateKeyPresses, JR.call(Features.jm_getInstance(), :jm_isFeature, [JR.get(InputFeatureFactory.jm_getInstance(), :REMOVE_DUPLICATE_KEY_PRESSES)]))
+    end)
+  end
 
-'$init'(This, GameKeyEventList, RemovalGameKeyEventList) ->
-    init_fields(This),
-        put({This, gameKeyEventList}, GameKeyEventList),
-        put({This, removalGameKeyEventList}, RemovalGameKeyEventList),
-        put({This, isRemoveDuplicateKeyPresses}, (fun(Target_N66053) -> (get({Target_N66053, '$class'})):isFeature(Target_N66053, get({'InputFeatureFactory':getInstance(), 'REMOVE_DUPLICATE_KEY_PRESSES'})) end)('Features':getInstance())).
+  def jnew(p_gameKeyEventList, p_removalGameKeyEventList) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_gameKeyEventList, p_removalGameKeyEventList)
+    this
+  end
 
-add(This, GameKeyEvent) ->
-        try
-        case (get({This, isRemoveDuplicateKeyPresses}) andalso (get({get({This, gameKeyEventList}), '$class'})):contains(get({This, gameKeyEventList}), GameKeyEvent)) of
-            true ->
-            throw({'$return', ok});
-            false -> ok
-        end,
-        case (GameKeyEvent =/= undefined) of
-            true ->
-            (get({get({This, gameKeyEventList}), '$class'})):add(get({This, gameKeyEventList}), GameKeyEvent);
-            false ->
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), "Danger Passed Null GameKeyEvent", This, get({get({This, commonStrings}), 'ADD'}))
+
+  def jm_add(this, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        if (JR.get(this, :isRemoveDuplicateKeyPresses) && JR.call(JR.get(this, :gameKeyEventList), :jm_contains, [JR.lget(f, :gameKeyEvent)])) do
+            throw({:jreturn, nil})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        if (JR.lget(f, :gameKeyEvent) != nil) do
+            JR.call(JR.get(this, :gameKeyEventList), :jm_add, [JR.lget(f, :gameKeyEvent)])
+        else
+            JR.call(JR.get(this, :logUtil), :jm_putF, ["Danger Passed Null GameKeyEvent", this, JR.get(JR.get(this, :commonStrings), :ADD)])
+        end
+    end)
+  end
 
-addForRemoval(This, GameKeyEvent) ->
-        (get({get({This, removalGameKeyEventList}), '$class'})):add(get({This, removalGameKeyEventList}), GameKeyEvent).
 
-isForRemoval(This, GameKeyEvent) ->
-        (get({get({This, removalGameKeyEventList}), '$class'})):contains(get({This, removalGameKeyEventList}), GameKeyEvent).
+  def jm_addForRemoval(this, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        JR.call(JR.get(this, :removalGameKeyEventList), :jm_add, [JR.lget(f, :gameKeyEvent)])
+    end)
+  end
 
-clear(This) ->
-        (get({get({This, gameKeyEventList}), '$class'})):clear(get({This, gameKeyEventList})).
 
-removeNonAIInputGameKeyEvents(This) ->
-        List = get({This, gameKeyEventList}),
-        put({local, gameKeyEvent}, undefined),
-        put({local, index}, (get({List, '$class'})):size(List)),
-        (fun Loop() -> case (begin put({local, index}, get({local, index}) - 1), get({local, index}) end >= 0) of true ->
-            put({local, gameKeyEvent}, array:get(get({local, index}), get({List, objectArray}))),
-            case ((get({get({local, gameKeyEvent}), '$class'})):getSourceId(get({local, gameKeyEvent})) =/= 1) of
-                true ->
-                (get({List, '$class'})):removeAt(List, get({local, index}));
-                false -> ok
-            end,
-            Loop();
-        false -> ok end end)().
+  def jm_isForRemoval(this, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        throw({:jreturn, JR.call(JR.get(this, :removalGameKeyEventList), :jm_contains, [JR.lget(f, :gameKeyEvent)])})
+    end)
+  end
 
-update(This) ->
-        RemoveList = get({This, removalGameKeyEventList}),
-        List = get({This, gameKeyEventList}),
-        Size = (get({RemoveList, '$class'})):size(RemoveList),
-        lists:foreach(fun(Index) ->
-            AnyType = array:get(Index, get({RemoveList, objectArray})),
-            put({local, index2}, (get({List, '$class'})):size(List)),
-            (fun Loop() -> case (begin put({local, index2}, get({local, index2}) - 1), get({local, index2}) end >= 0) of true ->
-                case (array:get(get({local, index2}), get({List, objectArray})) =:= AnyType) of
-                    true ->
-                    (get({List, '$class'})):removeAt(List, get({local, index2}));
-                    false -> ok
-                end,
-                Loop();
-            false -> ok end end)()
-        end, lists:seq(0, Size - 1)),
-        (get({RemoveList, '$class'})):clear(RemoveList).
 
-getRemovalGameKeyEventList(This) ->
-        get({This, removalGameKeyEventList}).
+  def jm_clear(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :gameKeyEventList), :jm_clear, [])
+    end)
+  end
 
-getGameKeyEventList(This) ->
-        get({This, gameKeyEventList}).
+
+  def jm_removeNonAIInputGameKeyEvents(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :list, JR.get(this, :gameKeyEventList))
+        JR.lset(f, :gameKeyEvent, nil)
+        JR.lset(f, :index, JR.call(JR.lget(f, :list), :jm_size, []))
+        JR.jfor(fn -> (JR.lpreinc(f, :index, -1) >= 0) end, fn -> nil end, fn ->
+            JR.lset(f, :gameKeyEvent, JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index)))
+            if (JR.call(JR.lget(f, :gameKeyEvent), :jm_getSourceId, []) != 1) do
+                JR.call(JR.lget(f, :list), :jm_removeAt, [JR.lget(f, :index)])
+            end
+        end)
+    end)
+  end
+
+
+  def jm_update(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :removeList, JR.get(this, :removalGameKeyEventList))
+        JR.lset(f, :list, JR.get(this, :gameKeyEventList))
+        JR.lset(f, :size, JR.call(JR.lget(f, :removeList), :jm_size, []))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :anyType, JR.aget(JR.get(JR.lget(f, :removeList), :objectArray), JR.lget(f, :index)))
+            JR.lset(f, :index2, JR.call(JR.lget(f, :list), :jm_size, []))
+            JR.jfor(fn -> (JR.lpreinc(f, :index2, -1) >= 0) end, fn -> nil end, fn ->
+                if (JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index2)) == JR.lget(f, :anyType)) do
+                    JR.call(JR.lget(f, :list), :jm_removeAt, [JR.lget(f, :index2)])
+                end
+            end)
+        end)
+        JR.call(JR.lget(f, :removeList), :jm_clear, [])
+    end)
+  end
+
+
+  def jm_getRemovalGameKeyEventList(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :removalGameKeyEventList)})
+    end)
+  end
+
+
+  def jm_getGameKeyEventList(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :gameKeyEventList)})
+    end)
+  end
+end
+
 

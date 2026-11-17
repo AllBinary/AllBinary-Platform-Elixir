@@ -1,58 +1,86 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.draw
-% import javax.microedition.lcdui.Font
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.graphics.font.MyFontProcessor
-% import org.allbinary.graphics.font.UpdateMyFontInterface
-% import org.allbinary.graphics.font.UpdateMyFontProcessor
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.draw
 
--module('CanvasDrawLineString').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements UpdateMyFontInterface
+defmodule CanvasDrawLineString do
+  def jsuper(), do: JObject
+def jstatic_NULL_CANVAS_DRAW_LINE_STRING(), do: JR.static_get(__MODULE__, :NULL_CANVAS_DRAW_LINE_STRING, fn -> CanvasDrawLineString.jnew(0, 0) end)
+  def jstatic_set_NULL_CANVAS_DRAW_LINE_STRING(value), do: JR.static_put(__MODULE__, :NULL_CANVAS_DRAW_LINE_STRING, value)
 
-static_init() ->
-    put({?MODULE, 'NULL_CANVAS_DRAW_LINE_STRING'}, 'CanvasDrawLineString':new(0, 0)),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :drawStringUtil, nil)
+    JR.put(this, :myFontProcessor, nil)
+    JR.put(this, :x, 0)
+    JR.put(this, :y, 0)
+    JR.put(this, :fontHeight, 0)
+        JR.put(this, :drawStringUtil, DrawStringUtil.jm_getInstance())
+        JR.put(this, :myFontProcessor, UpdateMyFontProcessor.jnew(this))
+        
+        
+        JR.put(this, :fontHeight, 0)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, drawStringUtil}, 'DrawStringUtil':getInstance()),
-    put({This, myFontProcessor}, 'UpdateMyFontProcessor':new(This)),
-    put({This, x}, 0),
-    put({This, y}, 0),
-    put({This, fontHeight}, 0),
-    ok.
+
+  def jinit(this, p_x, p_y) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :x, JR.lget(f, :x))
+        JR.put(this, :y, JR.lget(f, :y))
+    end)
+  end
+
+  def jnew(p_x, p_y) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_x, p_y)
+    this
+  end
 
 
-new(X, Y) when is_integer(X), is_integer(Y) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, X, Y),
-    This.
+  def jm_updateMeasurement(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.lset(f, :font, JR.call(JR.lget(f, :graphics), :jm_getFont, []))
+        JR.put(this, :fontHeight, JR.call(JR.lget(f, :font), :jm_getHeight, []))
+        JR.put(this, :myFontProcessor, MyFontProcessor.jm_getInstance())
+    end)
+  end
 
-'$init'(This, X, Y) when is_integer(X), is_integer(Y) ->
-    init_fields(This),
-        put({This, x}, X),
-        put({This, y}, Y).
 
-updateMeasurement(This, Graphics) ->
-        Font = (get({Graphics, '$class'})):getFont(Graphics),
-        put({This, fontHeight}, (get({Font, '$class'})):getHeight(Font)),
-        put({This, myFontProcessor}, 'MyFontProcessor':getInstance()).
+  def jm_paint(this, p_graphics, p_string, p_line) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :string, p_string)
+      JR.lset(f, :line, p_line)
+        JR.call(JR.get(this, :myFontProcessor), :jm_process, [JR.lget(f, :graphics)])
+        JR.call(JR.get(this, :drawStringUtil), :jm_drawCenterString, [JR.lget(f, :graphics), JR.lget(f, :string), 0, byte_size(JR.lget(f, :string)), JR.get(this, :x), JR.int32(JR.get(this, :y) + (JR.int32(JR.lget(f, :line) * JR.get(this, :fontHeight))))])
+    end)
+  end
+end
 
-paint(This, Graphics, String, Line) when (is_list(String) orelse String =:= undefined), is_integer(Line) ->
-        (get({get({This, myFontProcessor}), '$class'})):process(get({This, myFontProcessor}), Graphics),
-        (get({get({This, drawStringUtil}), '$class'})):drawCenterString(get({This, drawStringUtil}), Graphics, String, 0, string:length(String), get({This, x}), (get({This, y}) + ((Line * get({This, fontHeight}))))).
 

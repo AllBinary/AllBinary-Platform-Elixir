@@ -1,53 +1,66 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.paint
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.logic.system.os.GenericOperatingSystem
-% import org.allbinary.logic.system.os.OperatingSystemFactory
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.paint
 
--module('ColorFillPaintableFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule ColorFillPaintableFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> ColorFillPaintableFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'ColorFillPaintableFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'ColorFillPaintableFactory', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, ColorFillPaintableFactory.jstatic_instance()})
+    end)
+  end
 
-getInstance(This, BasicColor, ForThreedCanvas) when is_boolean(ForThreedCanvas) ->
-        try
-        OperatingSystem = (fun(Target_N65813) -> (get({Target_N65813, '$class'})):getOperatingSystemInstance(Target_N65813) end)('OperatingSystemFactory':getInstance()),
-        case (get({OperatingSystem, '$class'})):isOverScan(OperatingSystem) of
-            true ->
-            throw({'$return', 'OverScanColorFillPaintable':new(BasicColor)});
-            false ->
-            throw({'$return', 'ColorFillPaintable':new(BasicColor)})
+
+  def jm_getInstance(this, p_basicColor, p_forThreedCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicColor, p_basicColor)
+      JR.lset(f, :forThreedCanvas, p_forThreedCanvas)
+        JR.lset(f, :operatingSystem, JR.call(OperatingSystemFactory.jm_getInstance(), :jm_getOperatingSystemInstance, []))
+        if JR.call(JR.lget(f, :operatingSystem), :jm_isOverScan, []) do
+            throw({:jreturn, OverScanColorFillPaintable.jnew(JR.lget(f, :basicColor))})
+        else
+            throw({:jreturn, ColorFillPaintable.jnew(JR.lget(f, :basicColor))})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
+end
+
 

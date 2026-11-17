@@ -1,66 +1,128 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2011 AllBinary 
-% 
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-% 
-% Created By: Travis Berthelot 
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.emulator.device
-% import javax.microedition.khronos.opengles.GL10
-% import javax.microedition.lcdui.Image
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.image.opengles.OpenGLESImage
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2011 AllBinary 
+# 
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+# 
+# Created By: Travis Berthelot 
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.emulator.device
 
--module('TrueTypeFontUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule TrueTypeFontUtil do
+  def jsuper(), do: TrueTypeFontUtilBase
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> TrueTypeFontUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('TrueTypeFontUtilBase', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, instance}, 'TrueTypeFontUtil':new()),
-    ok.
-
-init_fields(This) ->
-    put({This, fontImage}, get({'OpenGLESImage', 'NULL_OPENGL_IMAGE'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :fontImage, nil)
+        JR.put(this, :fontImage, OpenGLESImage.jstatic_NULL_OPENGL_IMAGE())
+    nil
+  end
 
 
-getInstance() ->
-        get({'TrueTypeFontUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, TrueTypeFontUtil.jstatic_instance()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-        'TrueTypeFontUtilBase':'$init'(This, 1),
-        init_fields(This).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        TrueTypeFontUtilBase.jinit(this, 1)
+        TrueTypeFontUtil.jinitfields(this)
+    end)
+  end
 
-getAsTextureSize(This, TextureSize) when is_integer(TextureSize) ->
-        erlang:error({'RuntimeException'}).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-getCellSize(This, CellSize) when is_integer(CellSize) ->
-        erlang:error({'RuntimeException'}).
 
-getFontBitmap(This, Filename, FontSize, CellSize, BasicColor) when (is_list(Filename) orelse Filename =:= undefined), is_integer(FontSize), is_integer(CellSize) ->
-        erlang:error({'RuntimeException'}).
+  def jm_getAsTextureSize(this, p_textureSize) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :textureSize, p_textureSize)
+        throw({:jexception, JR.exception("RuntimeException", "")})
+    end)
+  end
 
-saveFontAtlasAsFile(This) ->
-        ok.
 
-getFontBitmapGL(This, Gl, Filename, CellSize, BasicColor) when (is_list(Filename) orelse Filename =:= undefined), is_integer(CellSize) ->
-        erlang:error({'RuntimeException'}).
+  def jm_getCellSize(this, p_cellSize) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cellSize, p_cellSize)
+        throw({:jexception, JR.exception("RuntimeException", "")})
+    end)
+  end
 
-getFontWidths(This, Filename, FontSize) when (is_list(Filename) orelse Filename =:= undefined), is_integer(FontSize) ->
-        erlang:error({'RuntimeException'}).
+
+  def jm_getFontBitmap(this, p_filename, p_fontSize, p_cellSize, p_basicColor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :filename, p_filename)
+      JR.lset(f, :fontSize, p_fontSize)
+      JR.lset(f, :cellSize, p_cellSize)
+      JR.lset(f, :basicColor, p_basicColor)
+        throw({:jexception, JR.exception("RuntimeException", "")})
+    end)
+  end
+
+
+  def jm_saveFontAtlasAsFile(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_getFontBitmapGL(this, p_gl, p_filename, p_cellSize, p_basicColor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+      JR.lset(f, :filename, p_filename)
+      JR.lset(f, :cellSize, p_cellSize)
+      JR.lset(f, :basicColor, p_basicColor)
+        throw({:jexception, JR.exception("RuntimeException", "")})
+    end)
+  end
+
+
+  def jm_getFontWidths(this, p_filename, p_fontSize) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :filename, p_filename)
+      JR.lset(f, :fontSize, p_fontSize)
+        throw({:jexception, JR.exception("RuntimeException", "")})
+    end)
+  end
+end
+
 

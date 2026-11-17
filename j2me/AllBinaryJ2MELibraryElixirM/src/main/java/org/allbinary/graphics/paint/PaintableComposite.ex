@@ -1,48 +1,75 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.paint
-% import javax.microedition.lcdui.Graphics
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.paint
 
--module('PaintableComposite').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule PaintableComposite do
+  def jsuper(), do: Paintable
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Paintable', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :paintableArray, nil)
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, paintableArray}, undefined),
-    ok.
+
+  def jinit(this, p_paintableArray) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :paintableArray, p_paintableArray)
+      Paintable.jinit(this)
+      jinitfields(this)
+        JR.put(this, :paintableArray, JR.lget(f, :paintableArray))
+    end)
+  end
+
+  def jnew(p_paintableArray) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_paintableArray)
+    this
+  end
 
 
-new(PaintableArray) when (is_tuple(PaintableArray) orelse PaintableArray =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, PaintableArray),
-    This.
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.lset(f, :index, JR.int32(JR.alength(JR.get(this, :paintableArray)) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.call(JR.aget(JR.get(this, :paintableArray), JR.lget(f, :index)), :jm_paint, [JR.lget(f, :graphics)])
+        end)
+    end)
+  end
 
-'$init'(This, PaintableArray) when (is_tuple(PaintableArray) orelse PaintableArray =:= undefined) ->
-    'Paintable':'$init'(This),
-    init_fields(This),
-        put({This, paintableArray}, PaintableArray).
 
-paint(This, Graphics) ->
-        lists:foreach(fun(Index) ->
-            (fun(Target_N65759) -> (get({Target_N65759, '$class'})):paint(Target_N65759, Graphics) end)(array:get(Index, get({This, paintableArray})))
-        end, lists:seq((array:size(get({This, paintableArray})) - 1), 0, -1)).
+  def jm_paintThreed(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.lset(f, :index, JR.int32(JR.alength(JR.get(this, :paintableArray)) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.call(JR.aget(JR.get(this, :paintableArray), JR.lget(f, :index)), :jm_paintThreed, [JR.lget(f, :graphics)])
+        end)
+    end)
+  end
+end
 
-paintThreed(This, Graphics) ->
-        lists:foreach(fun(Index) ->
-            (fun(Target_N65962) -> (get({Target_N65962, '$class'})):paintThreed(Target_N65962, Graphics) end)(array:get(Index, get({This, paintableArray})))
-        end, lists:seq((array:size(get({This, paintableArray})) - 1), 0, -1)).
 

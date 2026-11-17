@@ -1,14 +1,20 @@
-% Generated Code Do Not Modify
-% package org.apache.xmlrpc
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+# Generated Code Do Not Modify
+# package org.apache.xmlrpc
 
--module('XmlRpcHandler').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
+defmodule XmlRpcHandler do
+  def jsuper(), do: JObject
 
 
-% throws Exception
-execute(This, Method, Params) when (is_list(Method) orelse Method =:= undefined) ->
-    erlang:error({abstract_method, execute}).
+  def jm_execute(this, p_method, p_params) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :method, p_method)
+      JR.lset(f, :params, p_params)
+      throw({:jexception, JR.exception("AbstractMethodError", "execute")})
+    end)
+  end
+end
+
 

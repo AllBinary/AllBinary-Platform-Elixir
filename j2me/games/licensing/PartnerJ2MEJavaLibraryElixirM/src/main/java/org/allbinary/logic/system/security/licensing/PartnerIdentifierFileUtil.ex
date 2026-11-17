@@ -1,68 +1,81 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.system.security.licensing
-% import java.io.InputStream
-% import java.io.InputStreamReader
-% import org.allbinary.data.resource.ResourceUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.licensing
 
--module('PartnerIdentifierFileUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule PartnerIdentifierFileUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> PartnerIdentifierFileUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'PartnerIdentifierFileUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :FILE_NAME, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :FILE_NAME, "partner.txt")
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, 'FILE_NAME'}, "partner.txt"),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'PartnerIdentifierFileUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, PartnerIdentifierFileUtil.jstatic_instance()})
+    end)
+  end
 
-get(This) ->
-        try
-            ResourceUtil = 'ResourceUtil':getInstance(),
-            InputStream = (get({ResourceUtil, '$class'})):getResourceAsStream(ResourceUtil, get({This, 'FILE_NAME'})),
-            InputStreamReader = 'InputStreamReader':new(InputStream),
-            Chars = array:new(30, {default, 0}),
-            Size = (get({InputStreamReader, '$class'})):read(InputStreamReader, Chars),
-            put({local, partnerString}, get({'StringUtil':getInstance(), 'EMPTY_STRING'})),
-            case (Size > 0) of
-                true ->
-                put({local, partnerString}, allbinary_java:to_string(Chars, 0, Size));
-                false -> ok
-            end,
-            (get({InputStreamReader, '$class'})):close(InputStreamReader),
-            get({local, partnerString})
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), This, get({CommonStrings, 'GET'}), E),
-            get({'StringUtil':getInstance(), 'NULL_STRING'})
-        end.
+
+  def jm_get(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            JR.lset(f, :resourceUtil, ResourceUtil.jm_getInstance())
+            JR.lset(f, :inputStream, JR.call(JR.lget(f, :resourceUtil), :jm_getResourceAsStream, [JR.get(this, :FILE_NAME)]))
+            JR.lset(f, :inputStreamReader, InputStreamReader.jnew(JR.lget(f, :inputStream)))
+            JR.lset(f, :chars, JR.anew(30, 0))
+            JR.lset(f, :size, JR.call(JR.lget(f, :inputStreamReader), :jm_read, [JR.lget(f, :chars)]))
+            JR.lset(f, :partnerString, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+            if (JR.lget(f, :size) > 0) do
+                JR.lset(f, :partnerString, JR.from_chars(JR.lget(f, :chars), 0, JR.lget(f, :size)))
+            end
+            JR.call(JR.lget(f, :inputStreamReader), :jm_close, [])
+            throw({:jreturn, JR.lget(f, :partnerString)})
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, JR.get(JR.lget(f, :commonStrings), :GET), JR.lget(f, :e)])
+            throw({:jreturn, JR.get(StringUtil.jm_getInstance(), :NULL_STRING)})
+        end
+    end)
+  end
+end
+
 

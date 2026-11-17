@@ -1,56 +1,85 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2025 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.opengles.shader
-% import javax.microedition.khronos.egl.EGLConfig
-% import javax.microedition.khronos.opengles.GL10
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.string.CommonSeps
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2025 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles.shader
 
--module('CompositeShaderUpdater').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule CompositeShaderUpdater do
+  def jsuper(), do: ShaderUpdater
+def jstatic_instanceC(), do: JR.static_get(__MODULE__, :instanceC, fn -> CompositeShaderUpdater.jnew(JR.call(StringUtil.jm_getInstance(), :jm_getArrayInstance, []), JR.call(StringUtil.jm_getInstance(), :jm_getArrayInstance, []), JR.call(StringUtil.jm_getInstance(), :jm_getArrayInstance, []), JR.get(NullUtil.jm_getInstance(), :NULL_INT_ARRAY)) end)
+  def jstatic_set_instanceC(value), do: JR.static_put(__MODULE__, :instanceC, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ShaderUpdater', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, instanceC}, 'CompositeShaderUpdater':new((fun(Target_N65829) -> (get({Target_N65829, '$class'})):getArrayInstance(Target_N65829) end)('StringUtil':getInstance()), (fun(Target_N65853) -> (get({Target_N65853, '$class'})):getArrayInstance(Target_N65853) end)('StringUtil':getInstance()), (fun(Target_N65877) -> (get({Target_N65877, '$class'})):getArrayInstance(Target_N65877) end)('StringUtil':getInstance()), get({'NullUtil':getInstance(), 'NULL_INT_ARRAY'}))),
-    ok.
-
-init_fields(This) ->
-    put({This, commonSeps}, 'CommonSeps':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :commonSeps, nil)
+        JR.put(this, :commonSeps, CommonSeps.jm_getInstance())
+    nil
+  end
 
 
-getInstance() ->
-        get({'CompositeShaderUpdater', instanceC}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, CompositeShaderUpdater.jstatic_instanceC()})
+    end)
+  end
 
-new(UniformBlockArray, UniformArray, AttributeArray, AttributeHandleArray) when (is_tuple(UniformBlockArray) orelse UniformBlockArray =:= undefined), (is_tuple(UniformArray) orelse UniformArray =:= undefined), (is_tuple(AttributeArray) orelse AttributeArray =:= undefined), (is_tuple(AttributeHandleArray) orelse AttributeHandleArray =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, UniformBlockArray, UniformArray, AttributeArray, AttributeHandleArray),
-    This.
 
-'$init'(This, UniformBlockArray, UniformArray, AttributeArray, AttributeHandleArray) when (is_tuple(UniformBlockArray) orelse UniformBlockArray =:= undefined), (is_tuple(UniformArray) orelse UniformArray =:= undefined), (is_tuple(AttributeArray) orelse AttributeArray =:= undefined), (is_tuple(AttributeHandleArray) orelse AttributeHandleArray =:= undefined) ->
-    'ShaderUpdater':'$init'(This),
-    init_fields(This),
-        ok.
+  def jinit(this, p_uniformBlockArray, p_uniformArray, p_attributeArray, p_attributeHandleArray) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :uniformBlockArray, p_uniformBlockArray)
+      JR.lset(f, :uniformArray, p_uniformArray)
+      JR.lset(f, :attributeArray, p_attributeArray)
+      JR.lset(f, :attributeHandleArray, p_attributeHandleArray)
+      ShaderUpdater.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-onSurfaceCreated(This, Gl, EglConfig, ProgramHandle) when is_integer(ProgramHandle) ->
-        ok.
+  def jnew(p_uniformBlockArray, p_uniformArray, p_attributeArray, p_attributeHandleArray) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_uniformBlockArray, p_uniformArray, p_attributeArray, p_attributeHandleArray)
+    this
+  end
 
-onSurfaceDestroyed(This, Gl) ->
-        ok.
+
+  def jm_onSurfaceCreated(this, p_gl, p_eglConfig, p_programHandle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+      JR.lset(f, :eglConfig, p_eglConfig)
+      JR.lset(f, :programHandle, p_programHandle)
+        nil
+    end)
+  end
+
+
+  def jm_onSurfaceDestroyed(this, p_gl) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+        nil
+    end)
+  end
+end
+
 

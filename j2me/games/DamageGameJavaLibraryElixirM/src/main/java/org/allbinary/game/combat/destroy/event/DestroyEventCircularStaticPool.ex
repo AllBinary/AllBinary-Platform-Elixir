@@ -1,53 +1,81 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.combat.destroy.event
-% import org.allbinary.game.displayable.canvas.AllBinaryGameCanvas
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.logic.util.event.AllBinaryEventCircularPool
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.combat.destroy.event
 
--module('DestroyEventCircularStaticPool').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule DestroyEventCircularStaticPool do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> DestroyEventCircularStaticPool.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'DestroyEventCircularStaticPool':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :EVENT_POOL, nil)
+        JR.put(this, :EVENT_POOL, AllBinaryEventCircularPool.jnew(20))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'EVENT_POOL'}, 'AllBinaryEventCircularPool':new(20)),
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, DestroyEventCircularStaticPool.jstatic_instance()})
+    end)
+  end
 
 
-getInstance() ->
-        get({'DestroyEventCircularStaticPool', instance}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
 
-init(This, CombatGameCanvas) ->
-        (get({get({This, 'EVENT_POOL'}), '$class'})):initAllBinaryEventCircularPool(get({This, 'EVENT_POOL'}), 'DestroyEventFactory':new(CombatGameCanvas)).
+  def jm_init(this, p_combatGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :combatGameCanvas, p_combatGameCanvas)
+        JR.call(JR.get(this, :EVENT_POOL), :jm_initAllBinaryEventCircularPool, [DestroyEventFactory.jnew(JR.lget(f, :combatGameCanvas))])
+    end)
+  end
 
-% throws Exception
-getInstanceForLayer(This, LayerInterface) ->
-        DestroyedEvent = (get({get({This, 'EVENT_POOL'}), '$class'})):getNextInstance(get({This, 'EVENT_POOL'})),
-        (get({DestroyedEvent, '$class'})):setLayerInterfaceForCircularStaticPool(DestroyedEvent, LayerInterface),
-        DestroyedEvent.
+
+  def jm_getInstanceForLayer(this, p_layerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+        JR.lset(f, :destroyedEvent, JR.call(JR.get(this, :EVENT_POOL), :jm_getNextInstance, []))
+        JR.call(JR.lget(f, :destroyedEvent), :jm_setLayerInterfaceForCircularStaticPool, [JR.lget(f, :layerInterface)])
+        throw({:jreturn, JR.lget(f, :destroyedEvent)})
+    end)
+  end
+end
+
 

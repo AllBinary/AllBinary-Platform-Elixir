@@ -1,42 +1,61 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.form
-% import org.allbinary.graphics.form.item.ABCustomItem
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
--module('TempHorizontalItemIndexDx').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule TempHorizontalItemIndexDx do
+  def jsuper(), do: ItemIndexDx
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ItemIndexDx', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :scrollCurrentSelectionForm, nil)
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, scrollCurrentSelectionForm}, undefined),
-    ok.
+
+  def jinit(this, p_scrollCurrentSelectionForm) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :scrollCurrentSelectionForm, p_scrollCurrentSelectionForm)
+      ItemIndexDx.jinit(this)
+      jinitfields(this)
+        JR.put(this, :scrollCurrentSelectionForm, JR.lget(f, :scrollCurrentSelectionForm))
+    end)
+  end
+
+  def jnew(p_scrollCurrentSelectionForm) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_scrollCurrentSelectionForm)
+    this
+  end
 
 
-new(ScrollCurrentSelectionForm) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, ScrollCurrentSelectionForm),
-    This.
+  def jm_getDx(this, p_index, p_item, p_dx, p_dy) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :index, p_index)
+      JR.lset(f, :item, p_item)
+      JR.lset(f, :dx, p_dx)
+      JR.lset(f, :dy, p_dy)
+        throw({:jreturn, JR.call(JR.get(this, :scrollCurrentSelectionForm), :jm_getXTempHorizontalForm, [JR.lget(f, :index), JR.lget(f, :item), JR.lget(f, :dx), JR.lget(f, :dy)])})
+    end)
+  end
+end
 
-'$init'(This, ScrollCurrentSelectionForm) ->
-    'ItemIndexDx':'$init'(This),
-    init_fields(This),
-        put({This, scrollCurrentSelectionForm}, ScrollCurrentSelectionForm).
-
-% throws Exception
-getDx(This, Index, Item, Dx, Dy) when is_integer(Index), is_integer(Dx), is_integer(Dy) ->
-        (get({get({This, scrollCurrentSelectionForm}), '$class'})):getXTempHorizontalForm(get({This, scrollCurrentSelectionForm}), Index, Item, Dx, Dy).
 

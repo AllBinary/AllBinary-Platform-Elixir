@@ -1,279 +1,574 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer.special
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.game.collision.CollidableNeverCollideBehaviorFactory
-% import org.allbinary.game.combat.damage.DamageableInterface
-% import org.allbinary.game.combat.destroy.DestroyableInterface
-% import org.allbinary.game.combat.destroy.event.DestroyedEvent
-% import org.allbinary.game.identification.BasicGroupFactory
-% import org.allbinary.game.identification.Group
-% import org.allbinary.game.input.event.GameKeyEvent
-% import org.allbinary.game.layer.AllBinaryGameLayerManager
-% import org.allbinary.game.layer.CollidableCompositeLayer
-% import org.allbinary.game.layer.pickup.PickedUpLayerInterfaceFactoryInterface
-% import org.allbinary.game.layer.pickup.PickupBehavior
-% import org.allbinary.game.layer.pickup.PickupCompositeInterface
-% import org.allbinary.game.part.PartInterface
-% import org.allbinary.game.part.PartInterfaceUtil
-% import org.allbinary.graphics.Rectangle
-% import org.allbinary.graphics.RectangleFactory
-% import org.allbinary.layer.AllBinaryLayerManager
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.math.PositionStrings
-% import org.allbinary.string.CommonSeps
-% import org.allbinary.view.ViewPositionBase
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer.special
 
--module('CollidableDestroyableDamageableLayer').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements DestroyableInterface
-% implements DamageableInterface
-% implements PickupCompositeInterface
-% implements SpecialGameInputInterface
+defmodule CollidableDestroyableDamageableLayer do
+  def jsuper(), do: CollidableCompositeLayer
+def jstatic_NULL_COLLIDABLE_DESTROYABLE_DAMAGE_LAYER(), do: JR.static_get(__MODULE__, :NULL_COLLIDABLE_DESTROYABLE_DAMAGE_LAYER, fn -> JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT) end)
+  def jstatic_set_NULL_COLLIDABLE_DESTROYABLE_DAMAGE_LAYER(value), do: JR.static_put(__MODULE__, :NULL_COLLIDABLE_DESTROYABLE_DAMAGE_LAYER, value)
+def jstatic_READYFOREXPLOSION(), do: JR.static_get(__MODULE__, :READYFOREXPLOSION, fn -> "ReadyForExplosion: " end)
+  def jstatic_set_READYFOREXPLOSION(value), do: JR.static_put(__MODULE__, :READYFOREXPLOSION, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('CollidableCompositeLayer', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'NULL_COLLIDABLE_DESTROYABLE_DAMAGE_LAYER'}, get({'NullUtil':getInstance(), 'NULL_OBJECT'})),
-    put({?MODULE, 'READYFOREXPLOSION'}, "ReadyForExplosion: "),
-    ok.
-
-init_fields(This) ->
-    put({This, groupInterface}, undefined),
-    put({This, readyForExplosion}, false),
-    put({This, initWidth}, 0),
-    put({This, initHeight}, 0),
-    put({This, initX}, 0),
-    put({This, initY}, 0),
-    put({This, initZ}, 0),
-    put({This, partInterfaceArrayP}, 'PartInterfaceUtil':getZeroArray()),
-    put({This, pickupBehavior}, undefined),
-    put({This, allBinaryGameLayerManagerP}, 'AllBinaryGameLayerManager':getNullInstance()),
-    put({This, isDraggable}, false),
-    put({This, isDragged}, false),
-    put({This, isDropped}, false),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :groupInterface, nil)
+    JR.put(this, :readyForExplosion, false)
+    JR.put(this, :initWidth, 0)
+    JR.put(this, :initHeight, 0)
+    JR.put(this, :initX, 0)
+    JR.put(this, :initY, 0)
+    JR.put(this, :initZ, 0)
+    JR.put(this, :partInterfaceArrayP, nil)
+    JR.put(this, :pickupBehavior, nil)
+    JR.put(this, :allBinaryGameLayerManagerP, nil)
+    JR.put(this, :isDraggable, false)
+    JR.put(this, :isDragged, false)
+    JR.put(this, :isDropped, false)
+        
+        JR.put(this, :readyForExplosion, false)
+        
+        
+        JR.put(this, :initX, 0)
+        JR.put(this, :initY, 0)
+        JR.put(this, :initZ, 0)
+        JR.put(this, :partInterfaceArrayP, PartInterfaceUtil.jm_getZeroArray())
+        
+        JR.put(this, :allBinaryGameLayerManagerP, AllBinaryGameLayerManager.jm_getNullInstance())
+        JR.put(this, :isDraggable, false)
+        JR.put(this, :isDragged, false)
+        JR.put(this, :isDropped, false)
+    nil
+  end
 
 
-getNullInstance() ->
-        case (get({'CollidableDestroyableDamageableLayer', 'NULL_COLLIDABLE_DESTROYABLE_DAMAGE_LAYER'}) =:= get({'NullUtil':getInstance(), 'NULL_OBJECT'})) of
-            true ->
-            put({'CollidableDestroyableDamageableLayer', 'NULL_COLLIDABLE_DESTROYABLE_DAMAGE_LAYER'}, 'CollidableDestroyableDamageableLayer':new(get({'BasicGroupFactory':getInstance(), 'NONE_ARRAY'}), get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'RectangleFactory', 'SINGLETON'}), get({'ViewPositionBase', 'NULL_VIEW_POSITION'})));
-            false -> ok
-        end,
-        get({'CollidableDestroyableDamageableLayer', 'NULL_COLLIDABLE_DESTROYABLE_DAMAGE_LAYER'}).
+  def jm_getNullInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        if (CollidableDestroyableDamageableLayer.jstatic_NULL_COLLIDABLE_DESTROYABLE_DAMAGE_LAYER() == JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)) do
+            CollidableDestroyableDamageableLayer.jstatic_set_NULL_COLLIDABLE_DESTROYABLE_DAMAGE_LAYER(CollidableDestroyableDamageableLayer.jnew(JR.get(BasicGroupFactory.jm_getInstance(), :NONE_ARRAY), JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), RectangleFactory.jstatic_SINGLETON(), ViewPositionBase.jstatic_NULL_VIEW_POSITION()))
+        end
+        throw({:jreturn, CollidableDestroyableDamageableLayer.jstatic_NULL_COLLIDABLE_DESTROYABLE_DAMAGE_LAYER()})
+    end)
+  end
 
-new(GroupInterface, Name, LayerInfo, ViewPosition) when (is_tuple(GroupInterface) orelse GroupInterface =:= undefined), (is_list(Name) orelse Name =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, GroupInterface, Name, LayerInfo, ViewPosition),
-    This.
 
-'$init'(This, GroupInterface, Name, LayerInfo, ViewPosition) when (is_tuple(GroupInterface) orelse GroupInterface =:= undefined), (is_list(Name) orelse Name =:= undefined) ->
-        'CollidableCompositeLayer':'$init'(This, Name, LayerInfo, ViewPosition, 'CollidableNeverCollideBehaviorFactory':getInstance()),
-        init_fields(This),
-        put({This, initWidth}, (get({LayerInfo, '$class'})):getWidth(LayerInfo)),
-        put({This, initHeight}, (get({LayerInfo, '$class'})):getHeight(LayerInfo)),
-        put({This, groupInterface}, GroupInterface),
-        put({This, pickupBehavior}, 'PickupBehavior':getNullInstance()).
+  def jinit(this, p_groupInterface, p_name, p_layerInfo, p_viewPosition) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :groupInterface, p_groupInterface)
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :layerInfo, p_layerInfo)
+      JR.lset(f, :viewPosition, p_viewPosition)
+        CollidableCompositeLayer.jinit(this, JR.lget(f, :name), JR.lget(f, :layerInfo), JR.lget(f, :viewPosition), CollidableNeverCollideBehaviorFactory.jm_getInstance())
+        CollidableDestroyableDamageableLayer.jinitfields(this)
+        JR.put(this, :initWidth, JR.call(JR.lget(f, :layerInfo), :jm_getWidth, []))
+        JR.put(this, :initHeight, JR.call(JR.lget(f, :layerInfo), :jm_getHeight, []))
+        JR.put(this, :groupInterface, JR.lget(f, :groupInterface))
+        JR.put(this, :pickupBehavior, PickupBehavior.jm_getNullInstance())
+    end)
+  end
 
-% throws Exception
-initPosition(This) ->
-        (get({This, '$class'})):setPosition(This, get({This, initX}), get({This, initY}), get({This, initZ})).
+  def jnew(p_groupInterface, p_name, p_layerInfo, p_viewPosition) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_groupInterface, p_name, p_layerInfo, p_viewPosition)
+    this
+  end
 
-% throws Exception
-initPositionXYZ(This, X, Y, Z) when is_integer(X), is_integer(Y), is_integer(Z) ->
-        put({This, initX}, X),
-        put({This, initY}, Y),
-        put({This, initZ}, Z).
 
-paint(This, Graphics) ->
-        'CollidableCompositeLayer':paint(This, Graphics).
+  def jm_initPosition(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_setPosition, [JR.get(this, :initX), JR.get(this, :initY), JR.get(this, :initZ)])
+    end)
+  end
 
-% throws Exception
-damage(This, Damage, DamageType) when is_integer(Damage), is_integer(DamageType) ->
-        erlang:error({'Exception', get({get({This, commonStrings}), 'NOT_IMPLEMENTED'})}).
 
-% throws Exception
-getDamage(This, DamageType) when is_integer(DamageType) ->
-        erlang:error({'Exception', get({get({This, commonStrings}), 'NOT_IMPLEMENTED'})}).
+  def jm_initPositionXYZ(this, p_x, p_y, p_z) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :z, p_z)
+        JR.put(this, :initX, JR.lget(f, :x))
+        JR.put(this, :initY, JR.lget(f, :y))
+        JR.put(this, :initZ, JR.lget(f, :z))
+    end)
+  end
 
-% throws Exception
-isDestroyed(This) ->
-        erlang:error({'Exception', get({get({This, commonStrings}), 'NOT_IMPLEMENTED'})}).
 
-getGroupInterface(This) ->
-        get({This, groupInterface}).
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        CollidableCompositeLayer.jm_paint(this, JR.lget(f, :graphics))
+    end)
+  end
 
-setGroupInterface(This, TeamInterface) when (is_tuple(TeamInterface) orelse TeamInterface =:= undefined) ->
-        put({This, groupInterface}, TeamInterface).
 
-% throws Exception
-setAllBinaryGameLayerManager(This, AllBinaryGameLayerManager) ->
-        put({This, allBinaryGameLayerManagerP}, AllBinaryGameLayerManager),
-        case (get({This, allBinaryGameLayerManagerP}) =:= undefined) of
-            true ->
-            erlang:error({'RuntimeException'});
-            false -> ok
-        end.
+  def jm_damage(this, p_damage, p_damageType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :damage, p_damage)
+      JR.lset(f, :damageType, p_damageType)
+        throw({:jexception, JR.exception("Exception", JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED))})
+    end)
+  end
 
-isReadyForExplosion(This) ->
-        get({This, readyForExplosion}).
 
-setReadyForExplosion(This, IsReadyForExplosion) when is_boolean(IsReadyForExplosion) ->
-        put({This, readyForExplosion}, IsReadyForExplosion).
+  def jm_getDamage(this, p_damageType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :damageType, p_damageType)
+        throw({:jexception, JR.exception("Exception", JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED))})
+    end)
+  end
 
-getInitWidth(This) ->
-        get({This, initWidth}).
 
-getInitHeight(This) ->
-        get({This, initHeight}).
+  def jm_isDestroyed(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jexception, JR.exception("Exception", JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED))})
+    end)
+  end
 
-getInitX(This) ->
-        get({This, initX}).
 
-getInitY(This) ->
-        get({This, initY}).
+  def jm_getGroupInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :groupInterface)})
+    end)
+  end
 
-% throws Exception
-up(This) ->
-        ok.
 
-% throws Exception
-down(This) ->
-        ok.
+  def jm_setGroupInterface(this, p_teamInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :teamInterface, p_teamInterface)
+        JR.put(this, :groupInterface, JR.lget(f, :teamInterface))
+    end)
+  end
 
-% throws Exception
-right(This) ->
-        ok.
 
-% throws Exception
-left(This) ->
-        ok.
+  def jm_setAllBinaryGameLayerManager(this, p_allBinaryGameLayerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameLayerManager, p_allBinaryGameLayerManager)
+        JR.put(this, :allBinaryGameLayerManagerP, JR.lget(f, :allBinaryGameLayerManager))
+        if (JR.get(this, :allBinaryGameLayerManagerP) == nil) do
+            throw({:jexception, JR.exception("RuntimeException", "")})
+        end
+    end)
+  end
 
-% throws Exception
-strafeLeft(This) ->
-        ok.
 
-% throws Exception
-strafeRight(This) ->
-        ok.
+  def jm_isReadyForExplosion(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :readyForExplosion)})
+    end)
+  end
 
-% throws Exception
-fire(This, LayerManager, GameKeyEvent) ->
-        ok.
 
-% throws Exception
-special1(This, LayerManager, GameKeyEvent) ->
-        ok.
+  def jm_setReadyForExplosion(this, p_isReadyForExplosion) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :isReadyForExplosion, p_isReadyForExplosion)
+        JR.put(this, :readyForExplosion, JR.lget(f, :isReadyForExplosion))
+    end)
+  end
 
-% throws Exception
-special2(This, LayerManager, GameKeyEvent) ->
-        ok.
 
-% throws Exception
-special3(This, LayerManager, GameKeyEvent) ->
-        ok.
+  def jm_getInitWidth(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :initWidth)})
+    end)
+  end
 
-% throws Exception
-special4(This, LayerManager, GameKeyEvent) ->
-        ok.
 
-% throws Exception
-special5(This, LayerManager, GameKeyEvent) ->
-        ok.
+  def jm_getInitHeight(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :initHeight)})
+    end)
+  end
 
-% throws Exception
-upAnalog(This, YAnalogValue) when is_integer(YAnalogValue) ->
-        ok.
 
-% throws Exception
-downAnalog(This, YAnalogValue) when is_integer(YAnalogValue) ->
-        ok.
+  def jm_getInitX(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :initX)})
+    end)
+  end
 
-% throws Exception
-rightAnalog(This, XAnalogValue) when is_integer(XAnalogValue) ->
-        ok.
 
-% throws Exception
-leftAnalog(This, XAnalogValue) when is_integer(XAnalogValue) ->
-        ok.
+  def jm_getInitY(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :initY)})
+    end)
+  end
 
-% throws Exception
-rightTrigger(This, LayerManager, GameKeyEvent, XAnalogValue) when is_integer(XAnalogValue) ->
-        ok.
 
-% throws Exception
-leftTrigger(This, LayerManager, GameKeyEvent, XAnalogValue) when is_integer(XAnalogValue) ->
-        ok.
+  def jm_up(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-onDestroyed(This, DestroyedEvent) ->
-        ok.
 
-getPickupBehavior(This) ->
-        get({This, pickupBehavior}).
+  def jm_down(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-setPickupBehavior(This, PickupBehavior) ->
-        put({This, pickupBehavior}, PickupBehavior).
 
-% throws Exception
-addPart(This, PickedUpLayerInterfaceFactoryInterface) ->
-        ok.
+  def jm_right(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-setPartInterfaceArray(This, PartInterfaceArray) when (is_tuple(PartInterfaceArray) orelse PartInterfaceArray =:= undefined) ->
-        put({This, partInterfaceArrayP}, PartInterfaceArray).
 
-getPartInterfaceArray(This) ->
-        get({This, partInterfaceArrayP}).
+  def jm_left(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-toStringAppend(This, StringBuffer) ->
-        CommonSeps = 'CommonSeps':getInstance(),
-        PositionStrings = 'PositionStrings':getInstance(),
-        'CollidableCompositeLayer':toStringAppend(This, StringBuffer),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'NEW_LINE'})),
-        GroupInterfaceArray = (get({This, '$class'})):getGroupInterface(This),
-        Size = array:size(GroupInterfaceArray),
-        lists:foreach(fun(Index) ->
-            (get({StringBuffer, '$class'})):append(StringBuffer, (fun(Target_N70634) -> (get({Target_N70634, '$class'})):toString(Target_N70634) end)(array:get(Index, GroupInterfaceArray))),
-            (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'COMMA'}))
-        end, lists:seq(0, Size - 1)),
-        PickupBehavior = (get({This, '$class'})):getPickupBehavior(This),
-        case (PickupBehavior =/= undefined) of
-            true ->
-            (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'NEW_LINE'})),
-            (get({StringBuffer, '$class'})):append(StringBuffer, (get({PickupBehavior, '$class'})):toString(PickupBehavior));
-            false -> ok
-        end,
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'NEW_LINE'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({'CollidableDestroyableDamageableLayer', 'READYFOREXPLOSION'})),
-        (get({StringBuffer, '$class'})):appendboolean(StringBuffer, get({This, readyForExplosion})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'NEW_LINE'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({get({This, commonStrings}), 'INIT'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'SPACE'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({PositionStrings, 'X_LABEL'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, get({This, initX})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({PositionStrings, 'Y_LABEL'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, get({This, initX})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({PositionStrings, 'Z_LABEL'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, get({This, initZ})).
 
-toString(This) ->
-        StringBuffer = 'StringMaker':new(),
-        (get({This, '$class'})):toStringAppend(This, StringBuffer),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+  def jm_strafeLeft(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_strafeRight(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_fire(this, p_layerManager, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerManager, p_layerManager)
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        nil
+    end)
+  end
+
+
+  def jm_special1(this, p_layerManager, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerManager, p_layerManager)
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        nil
+    end)
+  end
+
+
+  def jm_special2(this, p_layerManager, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerManager, p_layerManager)
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        nil
+    end)
+  end
+
+
+  def jm_special3(this, p_layerManager, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerManager, p_layerManager)
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        nil
+    end)
+  end
+
+
+  def jm_special4(this, p_layerManager, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerManager, p_layerManager)
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        nil
+    end)
+  end
+
+
+  def jm_special5(this, p_layerManager, p_gameKeyEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerManager, p_layerManager)
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+        nil
+    end)
+  end
+
+
+  def jm_upAnalog(this, p_yAnalogValue) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :yAnalogValue, p_yAnalogValue)
+        nil
+    end)
+  end
+
+
+  def jm_downAnalog(this, p_yAnalogValue) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :yAnalogValue, p_yAnalogValue)
+        nil
+    end)
+  end
+
+
+  def jm_rightAnalog(this, p_xAnalogValue) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :xAnalogValue, p_xAnalogValue)
+        nil
+    end)
+  end
+
+
+  def jm_leftAnalog(this, p_xAnalogValue) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :xAnalogValue, p_xAnalogValue)
+        nil
+    end)
+  end
+
+
+  def jm_rightTrigger(this, p_layerManager, p_gameKeyEvent, p_xAnalogValue) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerManager, p_layerManager)
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+      JR.lset(f, :xAnalogValue, p_xAnalogValue)
+        nil
+    end)
+  end
+
+
+  def jm_leftTrigger(this, p_layerManager, p_gameKeyEvent, p_xAnalogValue) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerManager, p_layerManager)
+      JR.lset(f, :gameKeyEvent, p_gameKeyEvent)
+      JR.lset(f, :xAnalogValue, p_xAnalogValue)
+        nil
+    end)
+  end
+
+
+  def jm_onDestroyed(this, p_destroyedEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :destroyedEvent, p_destroyedEvent)
+        nil
+    end)
+  end
+
+
+  def jm_getPickupBehavior(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :pickupBehavior)})
+    end)
+  end
+
+
+  def jm_setPickupBehavior(this, p_pickupBehavior) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :pickupBehavior, p_pickupBehavior)
+        JR.put(this, :pickupBehavior, JR.lget(f, :pickupBehavior))
+    end)
+  end
+
+
+  def jm_addPart(this, p_pickedUpLayerInterfaceFactoryInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :pickedUpLayerInterfaceFactoryInterface, p_pickedUpLayerInterfaceFactoryInterface)
+        nil
+    end)
+  end
+
+
+  def jm_setPartInterfaceArray(this, p_partInterfaceArray) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :partInterfaceArray, p_partInterfaceArray)
+        JR.put(this, :partInterfaceArrayP, JR.lget(f, :partInterfaceArray))
+    end)
+  end
+
+
+  def jm_getPartInterfaceArray(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :partInterfaceArrayP)})
+    end)
+  end
+
+
+  def jm_toStringAppend(this, p_stringBuffer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :stringBuffer, p_stringBuffer)
+        JR.lset(f, :commonSeps, CommonSeps.jm_getInstance())
+        JR.lset(f, :positionStrings, PositionStrings.jm_getInstance())
+        CollidableCompositeLayer.jm_toStringAppend(this, JR.lget(f, :stringBuffer))
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :NEW_LINE)])
+        JR.lset(f, :groupInterfaceArray, JR.call(this, :jm_getGroupInterface, []))
+        JR.lset(f, :size, JR.alength(JR.lget(f, :groupInterfaceArray)))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.aget(JR.lget(f, :groupInterfaceArray), JR.lget(f, :index)), :jm_toString, [])])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :COMMA)])
+        end)
+        JR.lset(f, :pickupBehavior, JR.call(this, :jm_getPickupBehavior, []))
+        if (JR.lget(f, :pickupBehavior) != nil) do
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :NEW_LINE)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.lget(f, :pickupBehavior), :jm_toString, [])])
+        end
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :NEW_LINE)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [CollidableDestroyableDamageableLayer.jstatic_READYFOREXPLOSION()])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendboolean, [JR.get(this, :readyForExplosion)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :NEW_LINE)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.get(this, :commonStrings), :INIT)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :SPACE)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :positionStrings), :X_LABEL)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.get(this, :initX)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :positionStrings), :Y_LABEL)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.get(this, :initX)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :positionStrings), :Z_LABEL)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.get(this, :initZ)])
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(this, :jm_toStringAppend, [JR.lget(f, :stringBuffer)])
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+end
+
 

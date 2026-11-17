@@ -1,125 +1,157 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.form.item.validation
-% import org.allbinary.graphics.form.item.ABTextFieldItem
-% import org.allbinary.logic.control.validate.ValidatorBase
-% import org.allbinary.logic.java.bool.BooleanFactory
-% import org.allbinary.logic.math.SmallIntegerSingletonFactory
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item.validation
 
--module('NumberTextFieldItemValidator').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule NumberTextFieldItemValidator do
+  def jsuper(), do: ValidatorBase
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ValidatorBase', Function, Arguments).
-
-init_fields(This) ->
-    put({This, textFieldItem}, undefined),
-    put({This, min}, 0),
-    put({This, max}, 0),
-    put({This, maxChars}, 0),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :textFieldItem, nil)
+    JR.put(this, :min, 0)
+    JR.put(this, :max, 0)
+    JR.put(this, :maxChars, 0)
+        
+        
+        
+        
+    nil
+  end
 
 
-new(TextFieldItem, MaxChars, Min, Max) when is_integer(MaxChars), is_integer(Min), is_integer(Max) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, TextFieldItem, MaxChars, Min, Max),
-    This.
+  def jinit(this, p_textFieldItem, p_maxChars, p_min, p_max) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :textFieldItem, p_textFieldItem)
+      JR.lset(f, :maxChars, p_maxChars)
+      JR.lset(f, :min, p_min)
+      JR.lset(f, :max, p_max)
+      ValidatorBase.jinit(this)
+      jinitfields(this)
+        JR.put(this, :textFieldItem, JR.lget(f, :textFieldItem))
+        JR.put(this, :min, JR.lget(f, :min))
+        JR.put(this, :max, JR.lget(f, :max))
+        JR.put(this, :maxChars, JR.lget(f, :maxChars))
+    end)
+  end
 
-'$init'(This, TextFieldItem, MaxChars, Min, Max) when is_integer(MaxChars), is_integer(Min), is_integer(Max) ->
-    'ValidatorBase':'$init'(This),
-    init_fields(This),
-        put({This, textFieldItem}, TextFieldItem),
-        put({This, min}, Min),
-        put({This, max}, Max),
-        put({This, maxChars}, MaxChars).
+  def jnew(p_textFieldItem, p_maxChars, p_min, p_max) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_textFieldItem, p_maxChars, p_min, p_max)
+    this
+  end
 
-isNumberValid(This, Value) ->
-        get({'BooleanFactory':getInstance(), 'TRUE'}).
 
-toNumberVector(This, Value) ->
-        'BasicArrayListD':new().
+  def jm_isNumberValid(this, p_value) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :value, p_value)
+        throw({:jreturn, JR.get(BooleanFactory.jm_getInstance(), :TRUE)})
+    end)
+  end
 
-isValid(This) ->
-        put({local, result}, get({'BooleanFactory':getInstance(), 'TRUE'})),
-        String = (get({get({This, textFieldItem}), '$class'})):getString(get({This, textFieldItem})),
-        TextLength = string:length(String),
-        case ((TextLength > 0) andalso (TextLength < get({This, maxChars}))) of
-            true ->
-            try
-                list_to_integer((get({get({This, textFieldItem}), '$class'})):getString(get({This, textFieldItem})))
-            catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-                put({local, result}, get({'BooleanFactory':getInstance(), 'FALSE'}))
-            end;
-            false ->
-            case (TextLength < 1) of
-                true ->
-                put({local, result}, get({'BooleanFactory':getInstance(), 'FALSE'}));
-                false ->
-                case (TextLength > get({This, maxChars})) of
-                true ->
-                put({local, result}, get({'BooleanFactory':getInstance(), 'FALSE'}));
-                false -> ok
+
+  def jm_toNumberVector(this, p_value) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :value, p_value)
+        throw({:jreturn, BasicArrayListD.jnew()})
+    end)
+  end
+
+
+  def jm_isValid(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :result, JR.get(BooleanFactory.jm_getInstance(), :TRUE))
+        JR.lset(f, :string, JR.call(JR.get(this, :textFieldItem), :jm_getString, []))
+        JR.lset(f, :textLength, byte_size(JR.lget(f, :string)))
+        if ((JR.lget(f, :textLength) > 0) && (JR.lget(f, :textLength) < JR.get(this, :maxChars))) do
+            try do
+                String.to_integer(String.trim(JR.call(JR.get(this, :textFieldItem), :jm_getString, [])))
+            catch
+                {:jexception, jexception} ->
+                    JR.lset(f, :e, jexception)
+                JR.lset(f, :result, JR.get(BooleanFactory.jm_getInstance(), :FALSE))
+            end
+        else
+            if (JR.lget(f, :textLength) < 1) do
+                JR.lset(f, :result, JR.get(BooleanFactory.jm_getInstance(), :FALSE))
+            else
+                if (JR.lget(f, :textLength) > JR.get(this, :maxChars)) do
+                JR.lset(f, :result, JR.get(BooleanFactory.jm_getInstance(), :FALSE))
             end
             end
-        end,
-        get({local, result}).
+        end
+        throw({:jreturn, JR.lget(f, :result)})
+    end)
+  end
 
-toList(This) ->
-        List = 'BasicArrayListD':new(),
-        String = (get({get({This, textFieldItem}), '$class'})):getString(get({This, textFieldItem})),
-        TextLength = string:length(String),
-        Label = (get({get({This, textFieldItem}), '$class'})):getLabel(get({This, textFieldItem})),
-        Name = string:slice(Label, 0, ((string:length(Label) - 2)) - (0)),
-        SmallIntegerSingletonFactory = 'SmallIntegerSingletonFactory':getInstance(),
-        StringMaker = 'StringMaker':new(),
-        case ((TextLength > 0) andalso (TextLength < get({This, maxChars}))) of
-            true ->
-            try
-                Number = (get({SmallIntegerSingletonFactory, '$class'})):createInstance(SmallIntegerSingletonFactory, list_to_integer((get({get({This, textFieldItem}), '$class'})):getString(get({This, textFieldItem})))),
-                case ((get({Number, '$class'})):intValue(Number) > get({This, min})) of
-                    true ->
-                    (get({StringMaker, '$class'})):delete(StringMaker, 0, (get({StringMaker, '$class'})):length(StringMaker)),
-                    (get({List, '$class'})):add(List, (fun(Target_N67909) -> (get({Target_N67909, '$class'})):toString(Target_N67909) end)((fun(Target_N67916) -> (get({Target_N67916, '$class'})):append(Target_N67916, " is to small") end)((get({StringMaker, '$class'})):append(StringMaker, Name))));
-                    false ->
-                    case ((get({Number, '$class'})):intValue(Number) > get({This, max})) of
-                    true ->
-                    (get({StringMaker, '$class'})):delete(StringMaker, 0, (get({StringMaker, '$class'})):length(StringMaker)),
-                    (get({List, '$class'})):add(List, (fun(Target_N67785) -> (get({Target_N67785, '$class'})):toString(Target_N67785) end)((fun(Target_N67792) -> (get({Target_N67792, '$class'})):append(Target_N67792, " is to large") end)((get({StringMaker, '$class'})):append(StringMaker, Name))));
-                    false -> ok
+
+  def jm_toList(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :list, BasicArrayListD.jnew())
+        JR.lset(f, :string, JR.call(JR.get(this, :textFieldItem), :jm_getString, []))
+        JR.lset(f, :textLength, byte_size(JR.lget(f, :string)))
+        JR.lset(f, :label, JR.call(JR.get(this, :textFieldItem), :jm_getLabel, []))
+        JR.lset(f, :name, JR.substring(JR.lget(f, :label), 0, JR.int32(byte_size(JR.lget(f, :label)) - 2)))
+        JR.lset(f, :smallIntegerSingletonFactory, SmallIntegerSingletonFactory.jm_getInstance())
+        JR.lset(f, :stringMaker, StringMaker.jnew())
+        if ((JR.lget(f, :textLength) > 0) && (JR.lget(f, :textLength) < JR.get(this, :maxChars))) do
+            try do
+                JR.lset(f, :number, JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_createInstance, [String.to_integer(String.trim(JR.call(JR.get(this, :textFieldItem), :jm_getString, [])))]))
+                if (JR.call(JR.lget(f, :number), :jm_intValue, []) > JR.get(this, :min)) do
+                    JR.call(JR.lget(f, :stringMaker), :jm_delete, [0, JR.call(JR.lget(f, :stringMaker), :jm_length, [])])
+                    JR.call(JR.lget(f, :list), :jm_add, [JR.call(JR.call(JR.call(JR.lget(f, :stringMaker), :jm_append, [JR.lget(f, :name)]), :jm_append, [" is to small"]), :jm_toString, [])])
+                else
+                    if (JR.call(JR.lget(f, :number), :jm_intValue, []) > JR.get(this, :max)) do
+                    JR.call(JR.lget(f, :stringMaker), :jm_delete, [0, JR.call(JR.lget(f, :stringMaker), :jm_length, [])])
+                    JR.call(JR.lget(f, :list), :jm_add, [JR.call(JR.call(JR.call(JR.lget(f, :stringMaker), :jm_append, [JR.lget(f, :name)]), :jm_append, [" is to large"]), :jm_toString, [])])
                 end
                 end
-            catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-                (get({StringMaker, '$class'})):delete(StringMaker, 0, (get({StringMaker, '$class'})):length(StringMaker)),
-                (get({List, '$class'})):add(List, (fun(Target_N68044) -> (get({Target_N68044, '$class'})):toString(Target_N68044) end)((fun(Target_N68051) -> (get({Target_N68051, '$class'})):append(Target_N68051, " is not a number") end)((get({StringMaker, '$class'})):append(StringMaker, Name))))
-            end;
-            false ->
-            case (TextLength < 1) of
-                true ->
-                (get({StringMaker, '$class'})):delete(StringMaker, 0, (get({StringMaker, '$class'})):length(StringMaker)),
-                (get({List, '$class'})):add(List, (fun(Target_N67492) -> (get({Target_N67492, '$class'})):toString(Target_N67492) end)((fun(Target_N67499) -> (get({Target_N67499, '$class'})):append(Target_N67499, " is to short") end)((get({StringMaker, '$class'})):append(StringMaker, Name))));
-                false ->
-                case (TextLength > get({This, maxChars})) of
-                true ->
-                (get({StringMaker, '$class'})):delete(StringMaker, 0, (get({StringMaker, '$class'})):length(StringMaker)),
-                (get({List, '$class'})):add(List, (fun(Target_N67368) -> (get({Target_N67368, '$class'})):toString(Target_N67368) end)((fun(Target_N67375) -> (get({Target_N67375, '$class'})):append(Target_N67375, " is to long") end)((get({StringMaker, '$class'})):append(StringMaker, Name))));
-                false -> ok
+            catch
+                {:jexception, jexception} ->
+                    JR.lset(f, :e, jexception)
+                JR.call(JR.lget(f, :stringMaker), :jm_delete, [0, JR.call(JR.lget(f, :stringMaker), :jm_length, [])])
+                JR.call(JR.lget(f, :list), :jm_add, [JR.call(JR.call(JR.call(JR.lget(f, :stringMaker), :jm_append, [JR.lget(f, :name)]), :jm_append, [" is not a number"]), :jm_toString, [])])
+            end
+        else
+            if (JR.lget(f, :textLength) < 1) do
+                JR.call(JR.lget(f, :stringMaker), :jm_delete, [0, JR.call(JR.lget(f, :stringMaker), :jm_length, [])])
+                JR.call(JR.lget(f, :list), :jm_add, [JR.call(JR.call(JR.call(JR.lget(f, :stringMaker), :jm_append, [JR.lget(f, :name)]), :jm_append, [" is to short"]), :jm_toString, [])])
+            else
+                if (JR.lget(f, :textLength) > JR.get(this, :maxChars)) do
+                JR.call(JR.lget(f, :stringMaker), :jm_delete, [0, JR.call(JR.lget(f, :stringMaker), :jm_length, [])])
+                JR.call(JR.lget(f, :list), :jm_add, [JR.call(JR.call(JR.call(JR.lget(f, :stringMaker), :jm_append, [JR.lget(f, :name)]), :jm_append, [" is to long"]), :jm_toString, [])])
             end
             end
-        end,
-        List.
+        end
+        throw({:jreturn, JR.lget(f, :list)})
+    end)
+  end
+end
+
 

@@ -1,116 +1,193 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.combat.weapon
-% import org.allbinary.logic.communication.log.PreLogUtil
-% import org.allbinary.logic.math.BasicDecimal
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonSeps
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.combat.weapon
 
--module('WeaponProperties').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule WeaponProperties do
+  def jsuper(), do: SimpleWeaponProperties
+def jstatic_NULL_WEAPON_PROPERTIES(), do: JR.static_get(__MODULE__, :NULL_WEAPON_PROPERTIES, fn -> WeaponProperties.jnew(0, 0, 0, 0, JR.int16(0)) end)
+  def jstatic_set_NULL_WEAPON_PROPERTIES(value), do: JR.static_put(__MODULE__, :NULL_WEAPON_PROPERTIES, value)
+def jstatic_messageSent(), do: JR.static_get(__MODULE__, :messageSent, fn -> false end)
+  def jstatic_set_messageSent(value), do: JR.static_put(__MODULE__, :messageSent, value)
+def jstatic_DAMAGE(), do: JR.static_get(__MODULE__, :DAMAGE, fn -> "Damage: " end)
+  def jstatic_set_DAMAGE(value), do: JR.static_put(__MODULE__, :DAMAGE, value)
+def jstatic_RANGE(), do: JR.static_get(__MODULE__, :RANGE, fn -> "Range: " end)
+  def jstatic_set_RANGE(value), do: JR.static_put(__MODULE__, :RANGE, value)
+def jstatic_RELOAD(), do: JR.static_get(__MODULE__, :RELOAD, fn -> "Reload: " end)
+  def jstatic_set_RELOAD(value), do: JR.static_put(__MODULE__, :RELOAD, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('SimpleWeaponProperties', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'NULL_WEAPON_PROPERTIES'}, 'WeaponProperties':new(0, 0, 0, 0, 0)),
-    put({?MODULE, messageSent}, false),
-    put({?MODULE, 'DAMAGE'}, "Damage: "),
-    put({?MODULE, 'RANGE'}, "Range: "),
-    put({?MODULE, 'RELOAD'}, "Reload: "),
-    ok.
-
-init_fields(This) ->
-    put({This, reloadTime}, 0),
-    put({This, targetingTime}, 0),
-    put({This, speed}, get({'BasicDecimal', 'ZERO_BIGDECIMAL'})),
-    put({This, 'MAX'}, 10240),
-    put({This, 'ZERO'}, 0),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :reloadTime, 0)
+    JR.put(this, :targetingTime, 0)
+    JR.put(this, :speed, nil)
+    JR.put(this, :MAX, 0)
+    JR.put(this, :ZERO, 0)
+        JR.put(this, :reloadTime, 0)
+        JR.put(this, :targetingTime, 0)
+        JR.put(this, :speed, BasicDecimal.jstatic_ZERO_BIGDECIMAL())
+        JR.put(this, :MAX, 10240)
+        JR.put(this, :ZERO, 0)
+    nil
+  end
 
 
-new(ReloadTime, TargetingTime, Speed, Damage, Dissipation) when is_integer(ReloadTime), is_integer(TargetingTime), is_integer(Speed), is_integer(Damage), is_integer(Dissipation) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, ReloadTime, TargetingTime, Speed, Damage, Dissipation),
-    This.
+  def jinit(this, p_reloadTime, p_targetingTime, p_speed, p_damage, p_dissipation) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :reloadTime, p_reloadTime)
+      JR.lset(f, :targetingTime, p_targetingTime)
+      JR.lset(f, :speed, p_speed)
+      JR.lset(f, :damage, p_damage)
+      JR.lset(f, :dissipation, p_dissipation)
+      SimpleWeaponProperties.jinit(this)
+      jinitfields(this)
+        if (((JR.lget(f, :speed) < JR.get(this, :MAX)) && (JR.lget(f, :speed) != 0)) && !WeaponProperties.jstatic_messageSent()) do
+            JR.lset(f, :MESSAGE, "Danger Danger Danger: Speed probably to slow if using 1 degree calculations as velocity for a single axis could be below 1024: ")
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            PreLogUtil.jm_put(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.lget(f, :MESSAGE)]), :jm_appendlong, [JR.lget(f, :speed)]), :jm_toString, []), this, JR.get(JR.lget(f, :commonStrings), :CONSTRUCTOR))
+            WeaponProperties.jstatic_set_messageSent(true)
+        end
+        JR.call(this, :jm_setReloadTime, [JR.lget(f, :reloadTime)])
+        JR.call(this, :jm_setTargetingTime, [JR.lget(f, :targetingTime)])
+        JR.call(this, :jm_setDamage, [JR.lget(f, :damage)])
+        JR.call(this, :jm_setDissipation, [JR.lget(f, :dissipation)])
+        JR.call(this, :jm_setSpeed, [BasicDecimal.jnew(JR.lget(f, :speed))])
+        if (JR.lget(f, :dissipation) != JR.get(this, :ZERO)) do
+            JR.lset(f, :unscaledDamage, (JR.call(JR.get(this, :speed), :jm_getUnscaled, []) * JR.lget(f, :damage)))
+            JR.lset(f, :scaledDissipation, (JR.lget(f, :dissipation) * JR.call(JR.get(this, :speed), :jm_getScaledFactorValue, [])))
+            JR.lset(f, :value, (div(JR.lget(f, :unscaledDamage), JR.lget(f, :scaledDissipation))))
+            JR.call(this, :jm_setRange, [div(JR.int32((JR.int64(JR.lget(f, :value) * 9))), 10)])
+        end
+    end)
+  end
 
-'$init'(This, ReloadTime, TargetingTime, Speed, Damage, Dissipation) when is_integer(ReloadTime), is_integer(TargetingTime), is_integer(Speed), is_integer(Damage), is_integer(Dissipation) ->
-    'SimpleWeaponProperties':'$init'(This),
-    init_fields(This),
-        case (((Speed < get({This, 'MAX'})) andalso (Speed =/= 0)) andalso (not get({'WeaponProperties', messageSent}))) of
-            true ->
-            MESSAGE = "Danger Danger Danger: Speed probably to slow if using 1 degree calculations as velocity for a single axis could be below 1024: ",
-            CommonStrings = 'CommonStrings':getInstance(),
-            'PreLogUtil':put((fun(Target_N66229) -> (get({Target_N66229, '$class'})):toString(Target_N66229) end)((fun(Target_N66236) -> (get({Target_N66236, '$class'})):appendlong(Target_N66236, Speed) end)((fun(Target_N66243) -> (get({Target_N66243, '$class'})):append(Target_N66243, MESSAGE) end)('StringMaker':new()))), This, get({CommonStrings, 'CONSTRUCTOR'})),
-            put({'WeaponProperties', messageSent}, true);
-            false -> ok
-        end,
-        (get({This, '$class'})):setReloadTime(This, ReloadTime),
-        (get({This, '$class'})):setTargetingTime(This, TargetingTime),
-        (get({This, '$class'})):setDamage(This, Damage),
-        (get({This, '$class'})):setDissipation(This, Dissipation),
-        (get({This, '$class'})):setSpeed(This, 'BasicDecimal':new(Speed)),
-        case (Dissipation =/= get({This, 'ZERO'})) of
-            true ->
-            UnscaledDamage = ((get({get({This, speed}), '$class'})):getUnscaled(get({This, speed})) * Damage),
-            ScaledDissipation = (Dissipation * (get({get({This, speed}), '$class'})):getScaledFactorValue(get({This, speed}))),
-            Value = ((UnscaledDamage div ScaledDissipation)),
-            (get({This, '$class'})):setRange(This, (((Value * 9)) div 10));
-            false -> ok
-        end.
+  def jnew(p_reloadTime, p_targetingTime, p_speed, p_damage, p_dissipation) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_reloadTime, p_targetingTime, p_speed, p_damage, p_dissipation)
+    this
+  end
 
-setReloadTime(This, ReloadTime) when is_integer(ReloadTime) ->
-        put({This, reloadTime}, ReloadTime).
 
-getReloadTime(This) ->
-        get({This, reloadTime}).
+  def jm_setReloadTime(this, p_reloadTime) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :reloadTime, p_reloadTime)
+        JR.put(this, :reloadTime, JR.lget(f, :reloadTime))
+    end)
+  end
 
-setTargetingTime(This, TargetingTime) when is_integer(TargetingTime) ->
-        put({This, targetingTime}, TargetingTime).
 
-getTargetingTime(This) ->
-        get({This, targetingTime}).
+  def jm_getReloadTime(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :reloadTime)})
+    end)
+  end
 
-getSpeed(This) ->
-        get({This, speed}).
 
-setSpeed(This, Speed) ->
-        put({This, speed}, Speed).
+  def jm_setTargetingTime(this, p_targetingTime) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :targetingTime, p_targetingTime)
+        JR.put(this, :targetingTime, JR.lget(f, :targetingTime))
+    end)
+  end
 
-getDamageI(This, Range) when is_integer(Range) ->
-        ((get({This, '$class'})):getDamage(This) - (((((get({This, '$class'})):getDissipation(This) * Range)) / (get({get({This, speed}), '$class'})):getScaled(get({This, speed}))))).
 
-toStringArray(This) ->
-        put({local, index}, 0),
-        StringArray = array:new(3, {default, undefined}),
-        StringBuffer = 'StringMaker':new(),
-        array:set(allbinary_java:first(get({local, index}), put({local, index}, get({local, index}) + 1)), (fun(Target_N67607) -> (get({Target_N67607, '$class'})):toString(Target_N67607) end)((fun(Target_N67614) -> (get({Target_N67614, '$class'})):appendint(Target_N67614, trunc((get({This, '$class'})):getDamage(This))) end)((get({StringBuffer, '$class'})):append(StringBuffer, get({'WeaponProperties', 'DAMAGE'})))), StringArray),
-        (get({StringBuffer, '$class'})):delete(StringBuffer, 0, (get({StringBuffer, '$class'})):length(StringBuffer)),
-        array:set(allbinary_java:first(get({local, index}), put({local, index}, get({local, index}) + 1)), (fun(Target_N67749) -> (get({Target_N67749, '$class'})):toString(Target_N67749) end)((fun(Target_N67756) -> (get({Target_N67756, '$class'})):appendint(Target_N67756, trunc((get({This, '$class'})):getRange(This))) end)((get({StringBuffer, '$class'})):append(StringBuffer, get({'WeaponProperties', 'RANGE'})))), StringArray),
-        (get({StringBuffer, '$class'})):delete(StringBuffer, 0, (get({StringBuffer, '$class'})):length(StringBuffer)),
-        array:set(allbinary_java:first(get({local, index}), put({local, index}, get({local, index}) + 1)), (fun(Target_N67895) -> (get({Target_N67895, '$class'})):toString(Target_N67895) end)((fun(Target_N67902) -> (get({Target_N67902, '$class'})):appendlong(Target_N67902, (get({This, '$class'})):getReloadTime(This)) end)((get({StringBuffer, '$class'})):append(StringBuffer, get({'WeaponProperties', 'RELOAD'})))), StringArray),
-        StringArray.
+  def jm_getTargetingTime(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :targetingTime)})
+    end)
+  end
 
-toString(This) ->
-        StringBuffer = 'StringMaker':new(),
-        (fun(Target_N68058) -> (get({Target_N68058, '$class'})):appendint(Target_N68058, trunc((get({This, '$class'})):getDamage(This))) end)((get({StringBuffer, '$class'})):append(StringBuffer, get({'WeaponProperties', 'DAMAGE'}))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({'CommonSeps':getInstance(), 'SPACE'})),
-        (fun(Target_N68166) -> (get({Target_N68166, '$class'})):appendint(Target_N68166, trunc((get({This, '$class'})):getRange(This))) end)((get({StringBuffer, '$class'})):append(StringBuffer, get({'WeaponProperties', 'RANGE'}))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({'CommonSeps':getInstance(), 'SPACE'})),
-        (fun(Target_N68274) -> (get({Target_N68274, '$class'})):appendlong(Target_N68274, (get({This, '$class'})):getReloadTime(This)) end)((get({StringBuffer, '$class'})):append(StringBuffer, get({'WeaponProperties', 'RELOAD'}))),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+
+  def jm_getSpeed(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :speed)})
+    end)
+  end
+
+
+  def jm_setSpeed(this, p_speed) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :speed, p_speed)
+        JR.put(this, :speed, JR.lget(f, :speed))
+    end)
+  end
+
+
+  def jm_getDamageI(this, p_range) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :range, p_range)
+        throw({:jreturn, (JR.call(this, :jm_getDamage, []) - ((((JR.call(this, :jm_getDissipation, []) * JR.lget(f, :range))) / JR.call(JR.get(this, :speed), :jm_getScaled, []))))})
+    end)
+  end
+
+
+  def jm_toStringArray(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :index, 0)
+        JR.lset(f, :stringArray, JR.anew(3, nil))
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.aset(JR.lget(f, :stringArray), JR.lpostinc(f, :index, 1), JR.call(JR.call(JR.call(JR.lget(f, :stringBuffer), :jm_append, [WeaponProperties.jstatic_DAMAGE()]), :jm_appendint, [JR.int32(JR.call(this, :jm_getDamage, []))]), :jm_toString, []))
+        JR.call(JR.lget(f, :stringBuffer), :jm_delete, [0, JR.call(JR.lget(f, :stringBuffer), :jm_length, [])])
+        JR.aset(JR.lget(f, :stringArray), JR.lpostinc(f, :index, 1), JR.call(JR.call(JR.call(JR.lget(f, :stringBuffer), :jm_append, [WeaponProperties.jstatic_RANGE()]), :jm_appendint, [JR.int32(JR.call(this, :jm_getRange, []))]), :jm_toString, []))
+        JR.call(JR.lget(f, :stringBuffer), :jm_delete, [0, JR.call(JR.lget(f, :stringBuffer), :jm_length, [])])
+        JR.aset(JR.lget(f, :stringArray), JR.lpostinc(f, :index, 1), JR.call(JR.call(JR.call(JR.lget(f, :stringBuffer), :jm_append, [WeaponProperties.jstatic_RELOAD()]), :jm_appendlong, [JR.call(this, :jm_getReloadTime, [])]), :jm_toString, []))
+        throw({:jreturn, JR.lget(f, :stringArray)})
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.call(JR.lget(f, :stringBuffer), :jm_append, [WeaponProperties.jstatic_DAMAGE()]), :jm_appendint, [JR.int32(JR.call(this, :jm_getDamage, []))])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :SPACE)])
+        JR.call(JR.call(JR.lget(f, :stringBuffer), :jm_append, [WeaponProperties.jstatic_RANGE()]), :jm_appendint, [JR.int32(JR.call(this, :jm_getRange, []))])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :SPACE)])
+        JR.call(JR.call(JR.lget(f, :stringBuffer), :jm_append, [WeaponProperties.jstatic_RELOAD()]), :jm_appendlong, [JR.call(this, :jm_getReloadTime, [])])
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+end
+
 

@@ -1,146 +1,182 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.ai.scroller
-% import javax.microedition.lcdui.Canvas
-% import org.allbinary.direction.Direction
-% import org.allbinary.direction.DirectionCompositeInterface
-% import org.allbinary.direction.DirectionFactory
-% import org.allbinary.game.input.GameInput
-% import org.allbinary.game.tracking.TrackingEvent
-% import org.allbinary.game.tracking.TrackingEventHandler
-% import org.allbinary.game.tracking.TrackingEventListenerInterface
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.AllBinaryLayerManager
-% import org.allbinary.layer.LayerInterface
-% import org.allbinary.logic.communication.log.ForcedLogUtil
-% import org.allbinary.logic.util.event.AllBinaryEventObject
-% import org.allbinary.logic.util.event.EventStrings
-% import org.allbinary.util.ABHashtable
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai.scroller
 
--module('PacePatrolAI').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements TrackingEventListenerInterface
+defmodule PacePatrolAI do
+  def jsuper(), do: BasePatrolAI
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasePatrolAI', Function, Arguments).
-
-init_fields(This) ->
-    put({This, trackingList}, undefined),
-    put({This, firingDistance}, 0),
-    put({This, isFollowLimitedByTerrain}, false),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :trackingList, nil)
+    JR.put(this, :firingDistance, 0)
+    JR.put(this, :isFollowLimitedByTerrain, false)
+        
+        JR.put(this, :firingDistance, 0)
+        JR.put(this, :isFollowLimitedByTerrain, false)
+    nil
+  end
 
 
-new(Hashtable, OwnerLayerInterface, GameInput) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Hashtable, OwnerLayerInterface, GameInput),
-    This.
+  def jinit(this, p_hashtable, p_ownerLayerInterface, p_gameInput) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :hashtable, p_hashtable)
+      JR.lset(f, :ownerLayerInterface, p_ownerLayerInterface)
+      JR.lset(f, :gameInput, p_gameInput)
+        BasePatrolAI.jinit(this, JR.lget(f, :hashtable), JR.lget(f, :ownerLayerInterface), JR.lget(f, :gameInput))
+        PacePatrolAI.jinitfields(this)
+        JR.call(TrackingEventHandler.jm_getInstance(), :jm_addListenerInterface, [this])
+        JR.put(this, :trackingList, BasicArrayListD.jnew())
+    end)
+  end
 
-'$init'(This, Hashtable, OwnerLayerInterface, GameInput) ->
-        'BasePatrolAI':'$init'(This, Hashtable, OwnerLayerInterface, GameInput),
-        init_fields(This),
-        (fun(Target_N66223) -> (get({Target_N66223, '$class'})):addListenerInterface(Target_N66223, This) end)('TrackingEventHandler':getInstance()),
-        put({This, trackingList}, 'BasicArrayListD':new()).
+  def jnew(p_hashtable, p_ownerLayerInterface, p_gameInput) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_hashtable, p_ownerLayerInterface, p_gameInput)
+    this
+  end
 
-% throws Exception
-processAI(This, AllBinaryLayerManager) ->
-        (get({This, '$class'})):update(This),
-        Direction = (get({This, '$class'})):setFiringDirectionForTargetIfInRange(This),
-        DirectionFactory = 'DirectionFactory':getInstance(),
-        case (Direction =:= get({DirectionFactory, 'LEFT'})) of
-            true ->
-            case ((get({This, lastKeyDirection}) =/= get({This, keyDirection})) orelse (not get({This, isFollowLimitedByTerrain}))) of
-                true ->
-                'BasePatrolAI':processKeyAI(This, get({'Canvas', 'LEFT'}));
-                false -> ok
-            end,
-            put({This, keyDirection}, get({'Canvas', 'LEFT'})),
-            put({This, lastKeyDirection}, get({This, keyDirection})),
-            put({This, xTotalDistance}, 0),
-            'BasePatrolAI':processKeyAI(This, get({'Canvas', 'KEY_NUM1'}));
-            false ->
-            case (Direction =:= get({DirectionFactory, 'RIGHT'})) of
-            true ->
-            case ((get({This, lastKeyDirection}) =/= get({This, keyDirection})) orelse (not get({This, isFollowLimitedByTerrain}))) of
-                true ->
-                'BasePatrolAI':processKeyAI(This, get({'Canvas', 'RIGHT'}));
-                false -> ok
-            end,
-            put({This, keyDirection}, get({'Canvas', 'RIGHT'})),
-            put({This, lastKeyDirection}, get({This, keyDirection})),
-            put({This, xTotalDistance}, 0),
-            'BasePatrolAI':processKeyAI(This, get({'Canvas', 'KEY_NUM1'}));
-            false ->
-            'BasePatrolAI':processKeyAI(This, get({This, keyDirection}))
-        end
-        end.
 
-setFiringDirectionForTargetIfInRange(This) ->
-        DirectionFactory = 'DirectionFactory':getInstance(),
-        OwnerLayerInterface = (get({This, '$class'})):getOwnerLayerInterface(This),
-        put({local, direction}, get({DirectionFactory, 'NOT_BORDERED_WITH'})),
-        put({local, lastTrackingEvent}, undefined),
-        put({local, lastTrackingLayerInterface}, undefined),
-        put({local, directionCompositeInterface}, undefined),
-        Size = (get({get({This, trackingList}), '$class'})):size(get({This, trackingList})),
-        lists:foreach(fun(Index) ->
-            put({local, lastTrackingEvent}, (get({get({This, trackingList}), '$class'})):get(get({This, trackingList}), 0)),
-            put({local, lastTrackingLayerInterface}, (get({get({local, lastTrackingEvent}), '$class'})):getLayerInterface(get({local, lastTrackingEvent}))),
-            X = (get({get({local, lastTrackingLayerInterface}), '$class'})):getXP(get({local, lastTrackingLayerInterface})),
-            Y = (get({get({local, lastTrackingLayerInterface}), '$class'})):getYP(get({local, lastTrackingLayerInterface})),
-            YDistance = (((get({OwnerLayerInterface, '$class'})):getYP(OwnerLayerInterface) - Y) - (get({OwnerLayerInterface, '$class'})):getHeight(OwnerLayerInterface)),
-            XDistance = (((get({OwnerLayerInterface, '$class'})):getXP(OwnerLayerInterface) - X) - (get({OwnerLayerInterface, '$class'})):getWidth(OwnerLayerInterface)),
-            AbsXDistance = erlang:abs(XDistance),
-            AbsYDistance = erlang:abs(YDistance),
-            case (AbsYDistance =< 100) of
-                true ->
-                case (AbsXDistance < ((get({This, '$class'})):getFiringDistance(This) div 2)) of
-                    true ->
-                    put({local, directionCompositeInterface}, (get({This, '$class'})):getOwnerLayerInterface(This)),
-                    case ((XDistance < 0) andalso ((get({get({local, directionCompositeInterface}), '$class'})):getDirection(get({local, directionCompositeInterface})) =:= get({DirectionFactory, 'RIGHT'}))) of
-                        true ->
-                        put({local, direction}, get({DirectionFactory, 'RIGHT'}));
-                        false ->
-                        case ((XDistance > 0) andalso ((get({get({local, directionCompositeInterface}), '$class'})):getDirection(get({local, directionCompositeInterface})) =:= get({DirectionFactory, 'LEFT'}))) of
-                        true ->
-                        put({local, direction}, get({DirectionFactory, 'LEFT'}));
-                        false -> ok
-                    end
-                    end;
-                    false -> ok
-                end;
-                false -> ok
+  def jm_processAI(this, p_allBinaryLayerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerManager, p_allBinaryLayerManager)
+        JR.call(this, :jm_update, [])
+        JR.lset(f, :direction, JR.call(this, :jm_setFiringDirectionForTargetIfInRange, []))
+        JR.lset(f, :directionFactory, DirectionFactory.jm_getInstance())
+        if (JR.lget(f, :direction) == JR.get(JR.lget(f, :directionFactory), :LEFT)) do
+            if ((JR.get(this, :lastKeyDirection) != JR.get(this, :keyDirection)) || !JR.get(this, :isFollowLimitedByTerrain)) do
+                BasePatrolAI.jm_processKeyAI(this, Canvas.jstatic_LEFT())
             end
-        end, lists:seq(0, Size - 1)),
-        get({local, direction}).
+            JR.put(this, :keyDirection, Canvas.jstatic_LEFT())
+            JR.put(this, :lastKeyDirection, JR.get(this, :keyDirection))
+            JR.put(this, :xTotalDistance, 0)
+            BasePatrolAI.jm_processKeyAI(this, Canvas.jstatic_KEY_NUM1())
+        else
+            if (JR.lget(f, :direction) == JR.get(JR.lget(f, :directionFactory), :RIGHT)) do
+            if ((JR.get(this, :lastKeyDirection) != JR.get(this, :keyDirection)) || !JR.get(this, :isFollowLimitedByTerrain)) do
+                BasePatrolAI.jm_processKeyAI(this, Canvas.jstatic_RIGHT())
+            end
+            JR.put(this, :keyDirection, Canvas.jstatic_RIGHT())
+            JR.put(this, :lastKeyDirection, JR.get(this, :keyDirection))
+            JR.put(this, :xTotalDistance, 0)
+            BasePatrolAI.jm_processKeyAI(this, Canvas.jstatic_KEY_NUM1())
+        else
+            BasePatrolAI.jm_processKeyAI(this, JR.get(this, :keyDirection))
+        end
+        end
+    end)
+  end
 
-disable(This) ->
-        ok.
 
-onEvent(This, EventObject) ->
-        'ForcedLogUtil':log(get({'EventStrings':getInstance(), 'PERFORMANCE_MESSAGE'}), This).
+  def jm_setFiringDirectionForTargetIfInRange(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :directionFactory, DirectionFactory.jm_getInstance())
+        JR.lset(f, :ownerLayerInterface, JR.call(this, :jm_getOwnerLayerInterface, []))
+        JR.lset(f, :direction, JR.get(JR.lget(f, :directionFactory), :NOT_BORDERED_WITH))
+        JR.lset(f, :lastTrackingEvent, nil)
+        JR.lset(f, :lastTrackingLayerInterface, nil)
+        JR.lset(f, :directionCompositeInterface, nil)
+        JR.lset(f, :size, JR.call(JR.get(this, :trackingList), :jm_size, []))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :lastTrackingEvent, JR.call(JR.get(this, :trackingList), :jm_get, [0]))
+            JR.lset(f, :lastTrackingLayerInterface, JR.call(JR.lget(f, :lastTrackingEvent), :jm_getLayerInterface, []))
+            JR.lset(f, :x, JR.call(JR.lget(f, :lastTrackingLayerInterface), :jm_getXP, []))
+            JR.lset(f, :y, JR.call(JR.lget(f, :lastTrackingLayerInterface), :jm_getYP, []))
+            JR.lset(f, :yDistance, ((JR.call(JR.lget(f, :ownerLayerInterface), :jm_getYP, []) - JR.lget(f, :y)) - JR.call(JR.lget(f, :ownerLayerInterface), :jm_getHeight, [])))
+            JR.lset(f, :xDistance, ((JR.call(JR.lget(f, :ownerLayerInterface), :jm_getXP, []) - JR.lget(f, :x)) - JR.call(JR.lget(f, :ownerLayerInterface), :jm_getWidth, [])))
+            JR.lset(f, :absXDistance, abs(JR.lget(f, :xDistance)))
+            JR.lset(f, :absYDistance, abs(JR.lget(f, :yDistance)))
+            if (JR.lget(f, :absYDistance) <= 100) do
+                if (JR.lget(f, :absXDistance) < div(JR.call(this, :jm_getFiringDistance, []), 2)) do
+                    JR.lset(f, :directionCompositeInterface, JR.call(this, :jm_getOwnerLayerInterface, []))
+                    if ((JR.lget(f, :xDistance) < 0) && (JR.call(JR.lget(f, :directionCompositeInterface), :jm_getDirection, []) == JR.get(JR.lget(f, :directionFactory), :RIGHT))) do
+                        JR.lset(f, :direction, JR.get(JR.lget(f, :directionFactory), :RIGHT))
+                    else
+                        if ((JR.lget(f, :xDistance) > 0) && (JR.call(JR.lget(f, :directionCompositeInterface), :jm_getDirection, []) == JR.get(JR.lget(f, :directionFactory), :LEFT))) do
+                        JR.lset(f, :direction, JR.get(JR.lget(f, :directionFactory), :LEFT))
+                    end
+                    end
+                end
+            end
+        end)
+        throw({:jreturn, JR.lget(f, :direction)})
+    end)
+  end
 
-onMovement(This, TrackingEvent) ->
-        (get({get({This, trackingList}), '$class'})):clear(get({This, trackingList})),
-        (get({get({This, trackingList}), '$class'})):add(get({This, trackingList}), TrackingEvent).
 
-getFiringDistance(This) ->
-        get({This, firingDistance}).
+  def jm_disable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-setFiringDistance(This, FiringDistance) when is_integer(FiringDistance) ->
-        put({This, firingDistance}, FiringDistance).
+
+  def jm_onEvent(this, p_eventObject) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :eventObject, p_eventObject)
+        ForcedLogUtil.jm_log(JR.get(EventStrings.jm_getInstance(), :PERFORMANCE_MESSAGE), this)
+    end)
+  end
+
+
+  def jm_onMovement(this, p_trackingEvent) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :trackingEvent, p_trackingEvent)
+        JR.call(JR.get(this, :trackingList), :jm_clear, [])
+        JR.call(JR.get(this, :trackingList), :jm_add, [JR.lget(f, :trackingEvent)])
+    end)
+  end
+
+
+  def jm_getFiringDistance(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :firingDistance)})
+    end)
+  end
+
+
+  def jm_setFiringDistance(this, p_firingDistance) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :firingDistance, p_firingDistance)
+        JR.put(this, :firingDistance, JR.lget(f, :firingDistance))
+    end)
+  end
+end
+
 

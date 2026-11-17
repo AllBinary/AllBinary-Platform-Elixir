@@ -1,25 +1,30 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2026 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.game.midlet
-% import org.allbinary.game.displayable.canvas.GameCanvasRunnableInterface
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2026 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
--module('DemoGameMidletJs').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
+defmodule DemoGameMidletJs do
+  def jsuper(), do: JObject
 
 
-% throws Exception
-createDemoGameCanvasRunnableInterface(This) ->
-    erlang:error({abstract_method, createDemoGameCanvasRunnableInterface}).
+  def jm_createDemoGameCanvasRunnableInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "createDemoGameCanvasRunnableInterface")})
+    end)
+  end
+end
+
 

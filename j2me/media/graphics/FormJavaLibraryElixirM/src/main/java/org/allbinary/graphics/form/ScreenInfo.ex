@@ -1,31 +1,45 @@
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.form
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
--module('ScreenInfo').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule ScreenInfo do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> ScreenInfo.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'ScreenInfo':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :SMALL_WIDTH, 0)
+    JR.put(this, :SMALL_HEIGHT, 0)
+    JR.put(this, :MEDIUM_WIDTH, 0)
+    JR.put(this, :MEDIUM_HEIGHT, 0)
+        JR.put(this, :SMALL_WIDTH, 320)
+        JR.put(this, :SMALL_HEIGHT, 240)
+        JR.put(this, :MEDIUM_WIDTH, 800)
+        JR.put(this, :MEDIUM_HEIGHT, 600)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'SMALL_WIDTH'}, 320),
-    put({This, 'SMALL_HEIGHT'}, 240),
-    put({This, 'MEDIUM_WIDTH'}, 800),
-    put({This, 'MEDIUM_HEIGHT'}, 600),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'ScreenInfo', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, ScreenInfo.jstatic_instance()})
+    end)
+  end
+end
+
 

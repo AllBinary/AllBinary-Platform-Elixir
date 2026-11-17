@@ -1,37 +1,42 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2025 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package javax.microedition.lcdui
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2025 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package javax.microedition.lcdui
 
--module('NullImage').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule NullImage do
+  def jsuper(), do: JObject
+def jstatic_NULL_IMAGE_ARRAY(), do: JR.static_get(__MODULE__, :NULL_IMAGE_ARRAY, fn -> JR.anew(0, nil) end)
+  def jstatic_set_NULL_IMAGE_ARRAY(value), do: JR.static_put(__MODULE__, :NULL_IMAGE_ARRAY, value)
+def jstatic_NULL_IMAGE(), do: JR.static_get(__MODULE__, :NULL_IMAGE, fn -> Image.jnew() end)
+  def jstatic_set_NULL_IMAGE(value), do: JR.static_put(__MODULE__, :NULL_IMAGE, value)
 
-static_init() ->
-    put({?MODULE, 'NULL_IMAGE_ARRAY'}, array:new(0, {default, undefined})),
-    put({?MODULE, 'NULL_IMAGE'}, 'Image':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+end
 
 

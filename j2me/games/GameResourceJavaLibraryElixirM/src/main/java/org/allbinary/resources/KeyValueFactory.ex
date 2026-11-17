@@ -1,52 +1,65 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.resources
-% import org.allbinary.logic.StdUtil
-% import org.allbinary.util.ABHashtable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.resources
 
--module('KeyValueFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule KeyValueFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> KeyValueFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'KeyValueFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :MAP, nil)
+        JR.put(this, :MAP, JR.call(StdUtil.jm_getInstance(), :jm_createHashtable, []))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'MAP'}, (fun(Target_N65759) -> (get({Target_N65759, '$class'})):createHashtable(Target_N65759) end)('StdUtil':getInstance())),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'KeyValueFactory', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, KeyValueFactory.jstatic_instance()})
+    end)
+  end
 
-get(This, Key) when (is_list(Key) orelse Key =:= undefined) ->
-        try
-        case (not (get({get({This, 'MAP'}), '$class'})):containsKey(get({This, 'MAP'}), Key)) of
-            true ->
-            throw({'$return', Key});
-            false -> ok
-        end,
-        (get({get({This, 'MAP'}), '$class'})):get(get({This, 'MAP'}), Key)
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+
+  def jm_get(this, p_key) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :key, p_key)
+        if !JR.call(JR.get(this, :MAP), :jm_containsKey, [JR.lget(f, :key)]) do
+            throw({:jreturn, JR.lget(f, :key)})
+        end
+        throw({:jreturn, JR.call(JR.get(this, :MAP), :jm_get, [JR.lget(f, :key)])})
+    end)
+  end
+end
+
 

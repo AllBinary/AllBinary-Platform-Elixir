@@ -1,42 +1,61 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2022 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.animation
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.animation
 
--module('IndexedAnimationBehaviorFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule IndexedAnimationBehaviorFactory do
+  def jsuper(), do: AnimationBehaviorFactory
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AnimationBehaviorFactory', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :frameDelayTime, 0)
+    JR.put(this, :loopTotal, 0)
+        
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, frameDelayTime}, 0),
-    put({This, loopTotal}, 0),
-    ok.
+
+  def jinit(this, p_loopTotal, p_frameDelayTime) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :loopTotal, p_loopTotal)
+      JR.lset(f, :frameDelayTime, p_frameDelayTime)
+      AnimationBehaviorFactory.jinit(this)
+      jinitfields(this)
+        JR.put(this, :loopTotal, JR.lget(f, :loopTotal))
+        JR.put(this, :frameDelayTime, JR.lget(f, :frameDelayTime))
+    end)
+  end
+
+  def jnew(p_loopTotal, p_frameDelayTime) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_loopTotal, p_frameDelayTime)
+    this
+  end
 
 
-new(LoopTotal, FrameDelayTime) when is_integer(LoopTotal), is_integer(FrameDelayTime) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, LoopTotal, FrameDelayTime),
-    This.
+  def jm_getOrCreateInstance(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, IndexedAnimationBehavior.jnew(JR.get(this, :loopTotal), JR.get(this, :frameDelayTime))})
+    end)
+  end
+end
 
-'$init'(This, LoopTotal, FrameDelayTime) when is_integer(LoopTotal), is_integer(FrameDelayTime) ->
-    'AnimationBehaviorFactory':'$init'(This),
-    init_fields(This),
-        put({This, loopTotal}, LoopTotal),
-        put({This, frameDelayTime}, FrameDelayTime).
-
-getOrCreateInstance(This) ->
-        'IndexedAnimationBehavior':new(get({This, loopTotal}), get({This, frameDelayTime})).
 

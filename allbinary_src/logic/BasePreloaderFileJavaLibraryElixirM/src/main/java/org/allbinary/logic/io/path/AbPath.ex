@@ -1,163 +1,240 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.io.path
-% import org.allbinary.logic.io.file.FilePathData
-% import org.allbinary.logic.io.file.FilePathUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.logic.string.StringValidationUtil
-% import org.allbinary.string.CommonSeps
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.io.path
 
--module('AbPath').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule AbPath do
+  def jsuper(), do: JObject
+def jstatic_NETWORK_SEP(), do: JR.static_get(__MODULE__, :NETWORK_SEP, fn -> ":/" end)
+  def jstatic_set_NETWORK_SEP(value), do: JR.static_put(__MODULE__, :NETWORK_SEP, value)
 
-static_init() ->
-    put({?MODULE, 'NETWORK_SEP'}, ":/"),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :commonSeps, nil)
+    JR.put(this, :abPathData, nil)
+    JR.put(this, :abPathUtil, nil)
+    JR.put(this, :EMPTY_STRING, nil)
+    JR.put(this, :schema, nil)
+    JR.put(this, :path, nil)
+    JR.put(this, :nameP, nil)
+    JR.put(this, :hasSchemaP, false)
+    JR.put(this, :numberOfSeps, 0)
+        JR.put(this, :commonSeps, CommonSeps.jm_getInstance())
+        JR.put(this, :abPathData, AbPathData.jm_getInstance())
+        JR.put(this, :abPathUtil, PathUtil.jm_getInstance())
+        JR.put(this, :EMPTY_STRING, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+        JR.put(this, :schema, JR.get(this, :EMPTY_STRING))
+        JR.put(this, :path, JR.get(this, :EMPTY_STRING))
+        JR.put(this, :nameP, JR.get(this, :EMPTY_STRING))
+        JR.put(this, :hasSchemaP, false)
+        JR.put(this, :numberOfSeps, 0)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, commonSeps}, 'CommonSeps':getInstance()),
-    put({This, abPathData}, 'AbPathData':getInstance()),
-    put({This, abPathUtil}, 'PathUtil':getInstance()),
-    put({This, 'EMPTY_STRING'}, get({'StringUtil':getInstance(), 'EMPTY_STRING'})),
-    put({This, schema}, get({This, 'EMPTY_STRING'})),
-    put({This, path}, get({This, 'EMPTY_STRING'})),
-    put({This, nameP}, get({This, 'EMPTY_STRING'})),
-    put({This, hasSchemaP}, false),
-    put({This, numberOfSeps}, 0),
-    ok.
 
-
-createAbPath() ->
-        try
-            EMPTY_STRING = get({'StringUtil':getInstance(), 'EMPTY_STRING'}),
-            'AbPath':new(EMPTY_STRING, EMPTY_STRING)
-        catch _:Ex when Ex =/= '$break', Ex =/= '$continue', (not is_tuple(Ex) orelse element(1, Ex) =/= '$return') ->
-            erlang:error({'RuntimeException'})
-        end.
-
-new(APath, Name) when (is_list(APath) orelse APath =:= undefined), (is_list(Name) orelse Name =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, APath, Name),
-    This.
-
-'$init'(This, APath, Name) when (is_list(APath) orelse APath =:= undefined), (is_list(Name) orelse Name =:= undefined) ->
-    init_fields(This),
-        StringValidationUtil = 'StringValidationUtil':getInstance(),
-        case (not (get({StringValidationUtil, '$class'})):isEmpty(StringValidationUtil, APath)) of
-            true ->
-            put({This, schema}, (get({This, '$class'})):getSchema(This, APath)),
-            put({This, nameP}, Name),
-            put({This, path}, (get({get({This, abPathUtil}), '$class'})):adjustEnd(get({This, abPathUtil}), (get({get({This, abPathUtil}), '$class'})):adjust(get({This, abPathUtil}), (get({This, '$class'})):getPathFromPath(This, APath))));
-            false ->
-            (get({This, '$class'})):init(This),
-            case (not (get({StringValidationUtil, '$class'})):isEmpty(StringValidationUtil, Name)) of
-                true ->
-                put({This, nameP}, Name);
-                false -> ok
-            end
-        end.
-
-init(This) ->
-        put({This, schema}, get({This, 'EMPTY_STRING'})),
-        (get({This, '$class'})):setPath(This, get({get({This, abPathData}), 'SEPARATOR'})),
-        put({This, nameP}, get({This, 'EMPTY_STRING'})).
-
-getSchema(This, APath) when (is_list(APath) orelse APath =:= undefined) ->
-        try
-        BeginIndex = allbinary_java:index_of(APath, get({get({This, commonSeps}), 'COLON'})),
-        case (BeginIndex >= 0) of
-            true ->
-            put({This, hasSchemaP}, true),
-            throw({'$return', string:slice(APath, 0, (BeginIndex) - (0))});
-            false -> ok
-        end,
-        put({This, hasSchemaP}, false),
-        get({This, 'EMPTY_STRING'})
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
-
-hasSchema(This) ->
-        get({This, hasSchemaP}).
-
-% throws Exception
-getPathFromPath(This, APath) when (is_list(APath) orelse APath =:= undefined) ->
-        FilePathData = 'FilePathData':getInstance(),
-        put({local, tempPath}, APath),
-        case (not (get({This, '$class'})):hasSchema(This)) of
-            true ->
-            put({local, tempPath}, (get({get({This, abPathUtil}), '$class'})):adjustStart(get({This, abPathUtil}), get({local, tempPath})));
-            false ->
-            put({local, beginIndex}, allbinary_java:index_of(get({local, tempPath}), get({get({This, commonSeps}), 'COLON'}))),
-            case (get({local, beginIndex}) >= 0) of
-                true ->
-                put({local, beginIndex}, get({local, beginIndex}) + 1),
-                (fun Loop() -> case ((lists:nth((get({local, beginIndex})) + 1, get({local, tempPath})) =:= get({get({This, abPathData}), 'SEPARATORCHAR'})) orelse (lists:nth((get({local, beginIndex})) + 1, get({local, tempPath})) =:= get({FilePathData, 'SEPARATORCHAR'}))) of true ->
-                    put({local, beginIndex}, get({local, beginIndex}) + 1),
-                    put({This, numberOfSeps}, get({This, numberOfSeps}) + 1),
-                    case (get({This, numberOfSeps}) > 2) of
-                        true ->
-                        erlang:error({'Exception', "Should Not Have More Than Two Seps"});
-                        false -> ok
-                    end,
-                    Loop();
-                false -> ok end end)(),
-                put({local, tempPath}, string:slice(get({local, tempPath}), get({local, beginIndex}), (string:length(get({local, tempPath}))) - (get({local, beginIndex}))));
-                false -> ok
-            end
-        end,
-        get({local, tempPath}).
-
-setName(This, Name) when (is_list(Name) orelse Name =:= undefined) ->
-        put({This, nameP}, Name).
-
-getName(This) ->
-        get({This, nameP}).
-
-toString(This) ->
-        StringBuffer = 'StringMaker':new(),
-        case (get({This, '$class'})):hasSchema(This) of
-            true ->
-            (get({StringBuffer, '$class'})):append(StringBuffer, get({This, schema})),
-            (get({StringBuffer, '$class'})):append(StringBuffer, get({'AbPath', 'NETWORK_SEP'}));
-            false -> ok
-        end,
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({This, '$class'})):getPath(This)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({This, nameP})),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
-
-toFileSystemString(This) ->
-        try
-        case (get({This, '$class'})):hasSchema(This) of
-            true ->
-            FilePathData = 'FilePathData':getInstance(),
-            StringBuffer = 'StringMaker':new(),
-            (get({StringBuffer, '$class'})):append(StringBuffer, get({This, schema})),
-            (get({StringBuffer, '$class'})):append(StringBuffer, get({get({This, commonSeps}), 'COLON'})),
-            (get({StringBuffer, '$class'})):append(StringBuffer, get({FilePathData, 'PATH_START'})),
-            (get({StringBuffer, '$class'})):append(StringBuffer, 'FilePathUtil':adjust((get({This, '$class'})):getPath(This))),
-            (get({StringBuffer, '$class'})):append(StringBuffer, get({This, nameP})),
-            throw({'$return', (get({StringBuffer, '$class'})):toString(StringBuffer)});
-            false ->
-            throw({'$return', lists:concat(['FilePathUtil':adjust((get({This, '$class'})):getPath(This)), get({This, nameP})])})
+  def jm_createAbPath() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        try do
+            JR.lset(f, :EMPTY_STRING, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+            throw({:jreturn, AbPath.jnew(JR.lget(f, :EMPTY_STRING), JR.lget(f, :EMPTY_STRING))})
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :ex, jexception)
+            throw({:jexception, JR.exception("RuntimeException", "")})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-getPath(This) ->
-        get({This, path}).
 
-setPath(This, Path) when (is_list(Path) orelse Path =:= undefined) ->
-        put({This, path}, Path).
+  def jinit(this, p_aPath, p_name) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :aPath, p_aPath)
+      JR.lset(f, :name, p_name)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.lset(f, :stringValidationUtil, StringValidationUtil.jm_getInstance())
+        if !JR.call(JR.lget(f, :stringValidationUtil), :jm_isEmpty, [JR.lget(f, :aPath)]) do
+            JR.put(this, :schema, JR.call(this, :jm_getSchema, [JR.lget(f, :aPath)]))
+            JR.put(this, :nameP, JR.lget(f, :name))
+            JR.put(this, :path, JR.call(JR.get(this, :abPathUtil), :jm_adjustEnd, [JR.call(JR.get(this, :abPathUtil), :jm_adjust, [JR.call(this, :jm_getPathFromPath, [JR.lget(f, :aPath)])])]))
+        else
+            JR.call(this, :jm_init, [])
+            if !JR.call(JR.lget(f, :stringValidationUtil), :jm_isEmpty, [JR.lget(f, :name)]) do
+                JR.put(this, :nameP, JR.lget(f, :name))
+            end
+        end
+    end)
+  end
+
+  def jnew(p_aPath, p_name) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_aPath, p_name)
+    this
+  end
+
+
+  def jm_init(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.put(this, :schema, JR.get(this, :EMPTY_STRING))
+        JR.call(this, :jm_setPath, [JR.get(JR.get(this, :abPathData), :SEPARATOR)])
+        JR.put(this, :nameP, JR.get(this, :EMPTY_STRING))
+    end)
+  end
+
+
+  def jm_getSchema(this, p_aPath) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :aPath, p_aPath)
+        JR.lset(f, :beginIndex, JR.index_of(JR.lget(f, :aPath), JR.get(JR.get(this, :commonSeps), :COLON)))
+        if (JR.lget(f, :beginIndex) >= 0) do
+            JR.put(this, :hasSchemaP, true)
+            throw({:jreturn, JR.substring(JR.lget(f, :aPath), 0, JR.lget(f, :beginIndex))})
+        end
+        JR.put(this, :hasSchemaP, false)
+        throw({:jreturn, JR.get(this, :EMPTY_STRING)})
+    end)
+  end
+
+
+  def jm_hasSchema(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :hasSchemaP)})
+    end)
+  end
+
+
+  def jm_getPathFromPath(this, p_aPath) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :aPath, p_aPath)
+        JR.lset(f, :filePathData, FilePathData.jm_getInstance())
+        JR.lset(f, :tempPath, JR.lget(f, :aPath))
+        if !JR.call(this, :jm_hasSchema, []) do
+            JR.lset(f, :tempPath, JR.call(JR.get(this, :abPathUtil), :jm_adjustStart, [JR.lget(f, :tempPath)]))
+        else
+            JR.lset(f, :beginIndex, JR.index_of(JR.lget(f, :tempPath), JR.get(JR.get(this, :commonSeps), :COLON)))
+            if (JR.lget(f, :beginIndex) >= 0) do
+                JR.lpostinc(f, :beginIndex, 1)
+                JR.jwhile(fn -> ((JR.char_at(JR.lget(f, :tempPath), JR.lget(f, :beginIndex)) == JR.get(JR.get(this, :abPathData), :SEPARATORCHAR)) || (JR.char_at(JR.lget(f, :tempPath), JR.lget(f, :beginIndex)) == JR.get(JR.lget(f, :filePathData), :SEPARATORCHAR))) end, fn ->
+                    JR.lpostinc(f, :beginIndex, 1)
+                    JR.postinc(this, :numberOfSeps, 1)
+                    if (JR.get(this, :numberOfSeps) > 2) do
+                        throw({:jexception, JR.exception("Exception", "Should Not Have More Than Two Seps")})
+                    end
+                end)
+                JR.lset(f, :tempPath, JR.substring(JR.lget(f, :tempPath), JR.lget(f, :beginIndex), byte_size(JR.lget(f, :tempPath))))
+            end
+        end
+        throw({:jreturn, JR.lget(f, :tempPath)})
+    end)
+  end
+
+
+  def jm_setName(this, p_name) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+        JR.put(this, :nameP, JR.lget(f, :name))
+    end)
+  end
+
+
+  def jm_getName(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :nameP)})
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        if JR.call(this, :jm_hasSchema, []) do
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(this, :schema)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [AbPath.jstatic_NETWORK_SEP()])
+        end
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(this, :jm_getPath, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(this, :nameP)])
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+
+
+  def jm_toFileSystemString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if JR.call(this, :jm_hasSchema, []) do
+            JR.lset(f, :filePathData, FilePathData.jm_getInstance())
+            JR.lset(f, :stringBuffer, StringMaker.jnew())
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(this, :schema)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.get(this, :commonSeps), :COLON)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :filePathData), :PATH_START)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [FilePathUtil.jm_adjust(JR.call(this, :jm_getPath, []))])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(this, :nameP)])
+            throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+        else
+            throw({:jreturn, JR.str(FilePathUtil.jm_adjust(JR.call(this, :jm_getPath, []))) <> JR.get(this, :nameP)})
+        end
+    end)
+  end
+
+
+  def jm_getPath(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :path)})
+    end)
+  end
+
+
+  def jm_setPath(this, p_path) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :path, p_path)
+        JR.put(this, :path, JR.lget(f, :path))
+    end)
+  end
+end
+
 

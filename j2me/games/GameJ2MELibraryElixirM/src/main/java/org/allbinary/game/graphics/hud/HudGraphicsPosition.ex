@@ -1,54 +1,95 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.graphics.hud
-% import org.allbinary.graphics.GPoint
-% import org.allbinary.graphics.PointFactory
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.graphics.hud
 
--module('HudGraphicsPosition').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule HudGraphicsPosition do
+  def jsuper(), do: JObject
+def jstatic_NULL_HUD_GRAPHICS_POSITION(), do: JR.static_get(__MODULE__, :NULL_HUD_GRAPHICS_POSITION, fn -> HudGraphicsPosition.jnew(JR.get(PointFactory.jm_getInstance(), :ZERO_ZERO), 9) end)
+  def jstatic_set_NULL_HUD_GRAPHICS_POSITION(value), do: JR.static_put(__MODULE__, :NULL_HUD_GRAPHICS_POSITION, value)
 
-static_init() ->
-    put({?MODULE, 'NULL_HUD_GRAPHICS_POSITION'}, 'HudGraphicsPosition':new(get({'PointFactory':getInstance(), 'ZERO_ZERO'}), 9)),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :anchor, 0)
+    JR.put(this, :point, nil)
+        JR.put(this, :anchor, 0)
+        JR.put(this, :point, JR.get(PointFactory.jm_getInstance(), :ZERO_ZERO))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, anchor}, 0),
-    put({This, point}, get({'PointFactory':getInstance(), 'ZERO_ZERO'})),
-    ok.
+
+  def jinit(this, p_point, p_anchor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :point, p_point)
+      JR.lset(f, :anchor, p_anchor)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.call(this, :jm_setAnchor, [JR.lget(f, :anchor)])
+        JR.call(this, :jm_setPoint, [JR.lget(f, :point)])
+    end)
+  end
+
+  def jnew(p_point, p_anchor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_point, p_anchor)
+    this
+  end
 
 
-new(Point, Anchor) when is_integer(Anchor) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Point, Anchor),
-    This.
+  def jm_getAnchor(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :anchor)})
+    end)
+  end
 
-'$init'(This, Point, Anchor) when is_integer(Anchor) ->
-    init_fields(This),
-        (get({This, '$class'})):setAnchor(This, Anchor),
-        (get({This, '$class'})):setPoint(This, Point).
 
-getAnchor(This) ->
-        get({This, anchor}).
+  def jm_setAnchor(this, p_anchor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anchor, p_anchor)
+        JR.put(this, :anchor, JR.lget(f, :anchor))
+    end)
+  end
 
-setAnchor(This, Anchor) when is_integer(Anchor) ->
-        put({This, anchor}, Anchor).
 
-getPoint(This) ->
-        get({This, point}).
+  def jm_getPoint(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :point)})
+    end)
+  end
 
-setPoint(This, Point) ->
-        put({This, point}, Point).
+
+  def jm_setPoint(this, p_point) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :point, p_point)
+        JR.put(this, :point, JR.lget(f, :point))
+    end)
+  end
+end
+
 

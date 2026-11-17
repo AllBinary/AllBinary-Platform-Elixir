@@ -1,59 +1,125 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2022 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.media.image
-% import javax.microedition.lcdui.Image
-% import org.allbinary.graphics.color.BasicColor
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.media.image
 
--module('ImageModifierUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule ImageModifierUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> ImageModifierUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'ImageModifierUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstanceOrCreate() ->
-        get({'ImageModifierUtil', instance}).
+  def jm_getInstanceOrCreate() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, ImageModifierUtil.jstatic_instance()})
+    end)
+  end
 
-setColor(This, UnusedOriginalImage, Image, ImageIndex, BasicColor) when is_integer(ImageIndex) ->
-        ok.
 
-changeColor(This, UnusedOriginalImage, Image, ImageIndex, BasicColor) when is_integer(ImageIndex) ->
-        ok.
+  def jm_setColor(this, p_unusedOriginalImage, p_image, p_imageIndex, p_basicColor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :unusedOriginalImage, p_unusedOriginalImage)
+      JR.lset(f, :image, p_image)
+      JR.lset(f, :imageIndex, p_imageIndex)
+      JR.lset(f, :basicColor, p_basicColor)
+        nil
+    end)
+  end
 
-setAlpha(This, OriginalImage, Image, ImageIndex, AlphaInt) when is_integer(ImageIndex), is_integer(AlphaInt) ->
-        ok.
 
-getImageArray(This, OriginalImageArray) when (is_tuple(OriginalImageArray) orelse OriginalImageArray =:= undefined) ->
-        OriginalImageArray.
+  def jm_changeColor(this, p_unusedOriginalImage, p_image, p_imageIndex, p_basicColor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :unusedOriginalImage, p_unusedOriginalImage)
+      JR.lset(f, :image, p_image)
+      JR.lset(f, :imageIndex, p_imageIndex)
+      JR.lset(f, :basicColor, p_basicColor)
+        nil
+    end)
+  end
 
-handleImage(This, ImageArray, Index, Image) when (is_tuple(ImageArray) orelse ImageArray =:= undefined), is_integer(Index) ->
-        ok.
 
-reset(This) ->
-        ok.
+  def jm_setAlpha(this, p_originalImage, p_image, p_imageIndex, p_alphaInt) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :originalImage, p_originalImage)
+      JR.lset(f, :image, p_image)
+      JR.lset(f, :imageIndex, p_imageIndex)
+      JR.lset(f, :alphaInt, p_alphaInt)
+        nil
+    end)
+  end
+
+
+  def jm_getImageArray(this, p_originalImageArray) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :originalImageArray, p_originalImageArray)
+        throw({:jreturn, JR.lget(f, :originalImageArray)})
+    end)
+  end
+
+
+  def jm_handleImage(this, p_imageArray, p_index, p_image) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :imageArray, p_imageArray)
+      JR.lset(f, :index, p_index)
+      JR.lset(f, :image, p_image)
+        nil
+    end)
+  end
+
+
+  def jm_reset(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+end
+
 

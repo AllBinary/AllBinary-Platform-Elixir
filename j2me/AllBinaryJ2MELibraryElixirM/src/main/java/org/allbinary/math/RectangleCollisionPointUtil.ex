@@ -1,68 +1,92 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.math
-% import org.allbinary.graphics.GPoint
-% import org.allbinary.util.BasicArrayList
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.math
 
--module('RectangleCollisionPointUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule RectangleCollisionPointUtil do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-allPointsInside(RectX1, RectY1, RectX2, RectY2, List) when is_integer(RectX1), is_integer(RectY1), is_integer(RectX2), is_integer(RectY2) ->
-        try
-        RectangleCollisionUtil = 'RectangleCollisionUtil':getInstance(),
-        put({local, point}, undefined),
-        put({local, index}, (get({List, '$class'})):size(List)),
-        (fun Loop() -> case (begin put({local, index}, get({local, index}) - 1), get({local, index}) end >= 0) of true ->
-            put({local, point}, array:get(get({local, index}), get({List, objectArray}))),
-            case (not (get({RectangleCollisionUtil, '$class'})):isInside(RectangleCollisionUtil, RectX1, RectY1, RectX2, RectY2, (get({get({local, point}), '$class'})):getX(get({local, point})), (get({get({local, point}), '$class'})):getY(get({local, point})))) of
-                true ->
-                throw({'$return', false});
-                false -> ok
-            end,
-            Loop();
-        false -> ok end end)(),
-        true
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
 
-allPointsInsideCell(RectX1, RectY1, RectX2, RectY2, List, XCellSize, YCellSize) when is_integer(RectX1), is_integer(RectY1), is_integer(RectX2), is_integer(RectY2), is_integer(XCellSize), is_integer(YCellSize) ->
-        try
-        RectangleCollisionUtil = 'RectangleCollisionUtil':getInstance(),
-        put({local, point}, undefined),
-        put({local, index}, (get({List, '$class'})):size(List)),
-        (fun Loop() -> case (begin put({local, index}, get({local, index}) - 1), get({local, index}) end >= 0) of true ->
-            put({local, point}, array:get(get({local, index}), get({List, objectArray}))),
-            case (not (get({RectangleCollisionUtil, '$class'})):isInside(RectangleCollisionUtil, RectX1, RectY1, RectX2, RectY2, ((get({get({local, point}), '$class'})):getX(get({local, point})) * XCellSize), ((get({get({local, point}), '$class'})):getY(get({local, point})) * YCellSize))) of
-                true ->
-                throw({'$return', false});
-                false -> ok
-            end,
-            Loop();
-        false -> ok end end)(),
-        true
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+  def jm_allPointsInside(p_rectX1, p_rectY1, p_rectX2, p_rectY2, p_list) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :rectX1, p_rectX1)
+      JR.lset(f, :rectY1, p_rectY1)
+      JR.lset(f, :rectX2, p_rectX2)
+      JR.lset(f, :rectY2, p_rectY2)
+      JR.lset(f, :list, p_list)
+        JR.lset(f, :rectangleCollisionUtil, RectangleCollisionUtil.jm_getInstance())
+        JR.lset(f, :point, nil)
+        JR.lset(f, :index, JR.call(JR.lget(f, :list), :jm_size, []))
+        JR.jfor(fn -> (JR.lpreinc(f, :index, -1) >= 0) end, fn -> nil end, fn ->
+            JR.lset(f, :point, JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index)))
+            if !JR.call(JR.lget(f, :rectangleCollisionUtil), :jm_isInside, [JR.lget(f, :rectX1), JR.lget(f, :rectY1), JR.lget(f, :rectX2), JR.lget(f, :rectY2), JR.call(JR.lget(f, :point), :jm_getX, []), JR.call(JR.lget(f, :point), :jm_getY, [])]) do
+                throw({:jreturn, false})
+            end
+        end)
+        throw({:jreturn, true})
+    end)
+  end
+
+
+  def jm_allPointsInsideCell(p_rectX1, p_rectY1, p_rectX2, p_rectY2, p_list, p_xCellSize, p_yCellSize) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :rectX1, p_rectX1)
+      JR.lset(f, :rectY1, p_rectY1)
+      JR.lset(f, :rectX2, p_rectX2)
+      JR.lset(f, :rectY2, p_rectY2)
+      JR.lset(f, :list, p_list)
+      JR.lset(f, :xCellSize, p_xCellSize)
+      JR.lset(f, :yCellSize, p_yCellSize)
+        JR.lset(f, :rectangleCollisionUtil, RectangleCollisionUtil.jm_getInstance())
+        JR.lset(f, :point, nil)
+        JR.lset(f, :index, JR.call(JR.lget(f, :list), :jm_size, []))
+        JR.jfor(fn -> (JR.lpreinc(f, :index, -1) >= 0) end, fn -> nil end, fn ->
+            JR.lset(f, :point, JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index)))
+            if !JR.call(JR.lget(f, :rectangleCollisionUtil), :jm_isInside, [JR.lget(f, :rectX1), JR.lget(f, :rectY1), JR.lget(f, :rectX2), JR.lget(f, :rectY2), (JR.call(JR.lget(f, :point), :jm_getX, []) * JR.lget(f, :xCellSize)), (JR.call(JR.lget(f, :point), :jm_getY, []) * JR.lget(f, :yCellSize))]) do
+                throw({:jreturn, false})
+            end
+        end)
+        throw({:jreturn, true})
+    end)
+  end
+end
+
 

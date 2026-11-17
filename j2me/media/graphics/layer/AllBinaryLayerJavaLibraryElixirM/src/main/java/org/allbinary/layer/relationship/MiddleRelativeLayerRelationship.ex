@@ -1,37 +1,44 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.layer.relationship
-% import org.allbinary.graphics.PointFactory
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.util.BasicArrayListUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.layer.relationship
 
--module('MiddleRelativeLayerRelationship').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule MiddleRelativeLayerRelationship do
+  def jsuper(), do: RelativeLayerRelationship
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('RelativeLayerRelationship', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new(Layer) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Layer),
-    This.
+  def jinit(this, p_layer) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layer, p_layer)
+        RelativeLayerRelationship.jinit(this, JR.lget(f, :layer), JR.call(PointFactory.jm_getInstance(), :jm_createXY, [JR.call(JR.lget(f, :layer), :jm_getHalfWidth, []), JR.call(JR.lget(f, :layer), :jm_getHalfHeight, [])]), JR.call(BasicArrayListUtil.jm_getInstance(), :jm_getImmutableInstance, []))
+        MiddleRelativeLayerRelationship.jinitfields(this)
+    end)
+  end
 
-'$init'(This, Layer) ->
-        'RelativeLayerRelationship':'$init'(This, Layer, (fun(Target_N65691) -> (get({Target_N65691, '$class'})):createXY(Target_N65691, (get({Layer, '$class'})):getHalfWidth(Layer), (get({Layer, '$class'})):getHalfHeight(Layer)) end)('PointFactory':getInstance()), (fun(Target_N65750) -> (get({Target_N65750, '$class'})):getImmutableInstance(Target_N65750) end)('BasicArrayListUtil':getInstance())).
+  def jnew(p_layer) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_layer)
+    this
+  end
+end
+
 

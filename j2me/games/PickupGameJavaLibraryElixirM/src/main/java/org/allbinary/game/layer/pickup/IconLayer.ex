@@ -1,59 +1,83 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer.pickup
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.animation.Animation
-% import org.allbinary.animation.NullAnimationFactory
-% import org.allbinary.graphics.PointFactory
-% import org.allbinary.graphics.Rectangle
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.view.ViewPosition
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer.pickup
 
--module('IconLayer').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule IconLayer do
+  def jsuper(), do: AllBinaryLayer
+def jstatic_NULL_ICON_LAYER(), do: JR.static_get(__MODULE__, :NULL_ICON_LAYER, fn -> IconLayer.jnew(JR.call(NullAnimationFactory.jm_getFactoryInstance(), :jm_getInstance, [0]), 0, 0) end)
+  def jstatic_set_NULL_ICON_LAYER(value), do: JR.static_put(__MODULE__, :NULL_ICON_LAYER, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AllBinaryLayer', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'NULL_ICON_LAYER'}, 'IconLayer':new((fun(Target_N65840) -> (get({Target_N65840, '$class'})):getInstance(Target_N65840, 0) end)('NullAnimationFactory':getFactoryInstance()), 0, 0)),
-    ok.
-
-init_fields(This) ->
-    put({This, animationInterface}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :animationInterface, nil)
+        
+    nil
+  end
 
 
-new(AnimationInterface, Width, Height) when is_integer(Width), is_integer(Height) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, AnimationInterface, Width, Height),
-    This.
+  def jinit(this, p_animationInterface, p_width, p_height) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :animationInterface, p_animationInterface)
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+        AllBinaryLayer.jinit(this, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Rectangle.jnew(JR.get(PointFactory.jm_getInstance(), :ZERO_ZERO), JR.lget(f, :width), JR.lget(f, :height)), ViewPosition.jm_getInstanceD())
+        IconLayer.jinitfields(this)
+        JR.put(this, :animationInterface, JR.lget(f, :animationInterface))
+    end)
+  end
 
-'$init'(This, AnimationInterface, Width, Height) when is_integer(Width), is_integer(Height) ->
-        'AllBinaryLayer':'$init'(This, get({'StringUtil':getInstance(), 'EMPTY_STRING'}), 'Rectangle':new(get({'PointFactory':getInstance(), 'ZERO_ZERO'}), Width, Height), 'ViewPosition':getInstanceD()),
-        init_fields(This),
-        put({This, animationInterface}, AnimationInterface).
+  def jnew(p_animationInterface, p_width, p_height) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_animationInterface, p_width, p_height)
+    this
+  end
 
-paint(This, Graphics) ->
-        (get({get({This, animationInterface}), '$class'})):paintXY(get({This, animationInterface}), Graphics, get({This, x}), get({This, y})).
 
-paintThreed(This, Graphics) ->
-        (get({get({This, animationInterface}), '$class'})):paintThreedXYZ(get({This, animationInterface}), Graphics, get({This, x}), get({This, y}), get({This, z})).
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.get(this, :animationInterface), :jm_paintXY, [JR.lget(f, :graphics), JR.get(this, :x), JR.get(this, :y)])
+    end)
+  end
 
-getAnimationInterface(This) ->
-        get({This, animationInterface}).
+
+  def jm_paintThreed(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.get(this, :animationInterface), :jm_paintThreedXYZ, [JR.lget(f, :graphics), JR.get(this, :x), JR.get(this, :y), JR.get(this, :z)])
+    end)
+  end
+
+
+  def jm_getAnimationInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :animationInterface)})
+    end)
+  end
+end
+
 

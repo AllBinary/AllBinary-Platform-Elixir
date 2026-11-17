@@ -1,47 +1,63 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.ai.sequence
-% import org.allbinary.ai.ArtificialIntelligenceInterface
-% import org.allbinary.game.input.GameInput
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.AllBinaryLayerManager
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai.sequence
 
--module('ComboSequenceAI').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule ComboSequenceAI do
+  def jsuper(), do: SequenceAI
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('SequenceAI', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new(ArtificialIntelligenceInterface, OwnerLayerInterface, GameInput) when (is_tuple(ArtificialIntelligenceInterface) orelse ArtificialIntelligenceInterface =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, ArtificialIntelligenceInterface, OwnerLayerInterface, GameInput),
-    This.
+  def jinit(this, p_artificialIntelligenceInterface, p_ownerLayerInterface, p_gameInput) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :artificialIntelligenceInterface, p_artificialIntelligenceInterface)
+      JR.lset(f, :ownerLayerInterface, p_ownerLayerInterface)
+      JR.lset(f, :gameInput, p_gameInput)
+        SequenceAI.jinit(this, JR.lget(f, :artificialIntelligenceInterface), JR.lget(f, :ownerLayerInterface), JR.lget(f, :gameInput))
+        ComboSequenceAI.jinitfields(this)
+    end)
+  end
 
-'$init'(This, ArtificialIntelligenceInterface, OwnerLayerInterface, GameInput) when (is_tuple(ArtificialIntelligenceInterface) orelse ArtificialIntelligenceInterface =:= undefined) ->
-        'SequenceAI':'$init'(This, ArtificialIntelligenceInterface, OwnerLayerInterface, GameInput).
+  def jnew(p_artificialIntelligenceInterface, p_ownerLayerInterface, p_gameInput) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_artificialIntelligenceInterface, p_ownerLayerInterface, p_gameInput)
+    this
+  end
 
-% throws Exception
-processAI(This, AllBinaryLayerManager) ->
-        ArtificialIntelligenceInterfaceArray = (get({This, '$class'})):getArtificialIntelligenceInterface(This),
-        Size = array:size(ArtificialIntelligenceInterfaceArray),
-        lists:foreach(fun(Index) ->
-            (get({This, '$class'})):setIndex(This, Index),
-            'SequenceAI':processAI(This, AllBinaryLayerManager)
-        end, lists:seq(0, Size - 1)).
+
+  def jm_processAI(this, p_allBinaryLayerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerManager, p_allBinaryLayerManager)
+        JR.lset(f, :artificialIntelligenceInterfaceArray, JR.call(this, :jm_getArtificialIntelligenceInterface, []))
+        JR.lset(f, :size, JR.alength(JR.lget(f, :artificialIntelligenceInterfaceArray)))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.call(this, :jm_setIndex, [JR.lget(f, :index)])
+            SequenceAI.jm_processAI(this, JR.lget(f, :allBinaryLayerManager))
+        end)
+    end)
+  end
+end
+
 

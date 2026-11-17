@@ -1,116 +1,115 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import org.allbinary.game.input.GameKeyFactory
-% import org.allbinary.game.input.PlayerGameInput
-% import org.allbinary.game.input.event.GameKeyEvent
-% import org.allbinary.game.input.event.GameKeyEventUtil
-% import org.allbinary.game.layer.AllBinaryGameLayerManager
-% import org.allbinary.game.layer.special.SpecialGameInputFactory
-% import org.allbinary.game.layer.special.SpecialGameInputInterface
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('CheatGameInputProcessor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule CheatGameInputProcessor do
+  def jsuper(), do: PlayerGameInput
+def jstatic_inputProcessor(), do: JR.static_get(__MODULE__, :inputProcessor, fn -> SpecialGameInputFactory.jstatic_NO_SPECIAL_GAME_INPUT() end)
+  def jstatic_set_inputProcessor(value), do: JR.static_put(__MODULE__, :inputProcessor, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('PlayerGameInput', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, inputProcessor}, get({'SpecialGameInputFactory', 'NO_SPECIAL_GAME_INPUT'})),
-    ok.
-
-init_fields(This) ->
-    put({This, 'PROCESS_GAME'}, "processGame"),
-    put({This, gameCanvas}, undefined),
-    put({This, gameKeyFactory}, 'GameKeyFactory':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :PROCESS_GAME, nil)
+    JR.put(this, :gameCanvas, nil)
+    JR.put(this, :gameKeyFactory, nil)
+        JR.put(this, :PROCESS_GAME, "processGame")
+        
+        JR.put(this, :gameKeyFactory, GameKeyFactory.jm_getInstance())
+    nil
+  end
 
 
-new(GameCanvas) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, GameCanvas),
-    This.
+  def jinit(this, p_gameCanvas) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameCanvas, p_gameCanvas)
+        PlayerGameInput.jinit(this, BasicArrayListD.jnew(), BasicArrayListD.jnew(), -1)
+        CheatGameInputProcessor.jinitfields(this)
+        JR.put(this, :gameCanvas, JR.lget(f, :gameCanvas))
+    end)
+  end
 
-'$init'(This, GameCanvas) ->
-        'PlayerGameInput':'$init'(This, 'BasicArrayListD':new(), 'BasicArrayListD':new(), (-1)),
-        init_fields(This),
-        put({This, gameCanvas}, GameCanvas).
+  def jnew(p_gameCanvas) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_gameCanvas)
+    this
+  end
 
-update(This) ->
-        try
-            GameLayerManager = (get({get({This, gameCanvas}), '$class'})):getLayerManager(get({This, gameCanvas})),
-            List = (get({This, '$class'})):getGameKeyEventList(This),
-            Size = (get({List, '$class'})):size(List),
-            lists:foreach(fun(Index) ->
-                AnyType = array:get(Index, get({List, objectArray})),
-                Key = 'GameKeyEventUtil':getKey(AnyType),
-                case (Key =:= (get({get({get({This, gameKeyFactory}), 'LEVEL_DOWN'}), '$class'})):getId(get({get({This, gameKeyFactory}), 'LEVEL_DOWN'}))) of
-                    true ->
-                    (get({get({'CheatGameInputProcessor', inputProcessor}), '$class'})):strafeLeft(get({'CheatGameInputProcessor', inputProcessor})),
-                    throw('$break');
-                    false ->
-                    case (Key =:= (get({get({get({This, gameKeyFactory}), 'LEVEL_UP'}), '$class'})):getId(get({get({This, gameKeyFactory}), 'LEVEL_UP'}))) of
-                    true ->
-                    (get({get({'CheatGameInputProcessor', inputProcessor}), '$class'})):strafeRight(get({'CheatGameInputProcessor', inputProcessor})),
-                    throw('$break');
-                    false -> ok
+
+  def jm_update(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            JR.lset(f, :gameLayerManager, JR.call(JR.get(this, :gameCanvas), :jm_getLayerManager, []))
+            JR.lset(f, :list, JR.call(this, :jm_getGameKeyEventList, []))
+            JR.lset(f, :size, JR.call(JR.lget(f, :list), :jm_size, []))
+            JR.lset(f, :index, 0)
+            JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+                JR.lset(f, :anyType, JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index)))
+                JR.lset(f, :key, GameKeyEventUtil.jm_getKey(JR.lget(f, :anyType)))
+                if (JR.lget(f, :key) == JR.call(JR.get(JR.get(this, :gameKeyFactory), :LEVEL_DOWN), :jm_getId, [])) do
+                    JR.call(CheatGameInputProcessor.jstatic_inputProcessor(), :jm_strafeLeft, [])
+                    throw(:jbreak)
+                else
+                    if (JR.lget(f, :key) == JR.call(JR.get(JR.get(this, :gameKeyFactory), :LEVEL_UP), :jm_getId, [])) do
+                    JR.call(CheatGameInputProcessor.jstatic_inputProcessor(), :jm_strafeRight, [])
+                    throw(:jbreak)
                 end
-                end,
-                case (Key =:= (get({get({get({This, gameKeyFactory}), 'LEFT'}), '$class'})):getId(get({get({This, gameKeyFactory}), 'LEFT'}))) of
-                    true ->
-                    (get({get({'CheatGameInputProcessor', inputProcessor}), '$class'})):left(get({'CheatGameInputProcessor', inputProcessor})),
-                    throw('$break');
-                    false ->
-                    case (Key =:= (get({get({get({This, gameKeyFactory}), 'RIGHT'}), '$class'})):getId(get({get({This, gameKeyFactory}), 'RIGHT'}))) of
-                    true ->
-                    (get({get({'CheatGameInputProcessor', inputProcessor}), '$class'})):right(get({'CheatGameInputProcessor', inputProcessor})),
-                    throw('$break');
-                    false ->
-                    case (Key =:= (get({get({get({This, gameKeyFactory}), 'UP'}), '$class'})):getId(get({get({This, gameKeyFactory}), 'UP'}))) of
-                    true ->
-                    (get({get({'CheatGameInputProcessor', inputProcessor}), '$class'})):up(get({'CheatGameInputProcessor', inputProcessor})),
-                    throw('$break');
-                    false ->
-                    case (Key =:= (get({get({get({This, gameKeyFactory}), 'DOWN'}), '$class'})):getId(get({get({This, gameKeyFactory}), 'DOWN'}))) of
-                    true ->
-                    (get({get({'CheatGameInputProcessor', inputProcessor}), '$class'})):down(get({'CheatGameInputProcessor', inputProcessor})),
-                    throw('$break');
-                    false ->
-                    case (Key =:= (get({get({get({This, gameKeyFactory}), 'KEY_NUM1'}), '$class'})):getId(get({get({This, gameKeyFactory}), 'KEY_NUM1'}))) of
-                    true ->
-                    (get({get({'CheatGameInputProcessor', inputProcessor}), '$class'})):special1(get({'CheatGameInputProcessor', inputProcessor}), GameLayerManager, get({'GameKeyEvent', 'NONE'})),
-                    throw('$break');
-                    false ->
-                    case (Key =:= (get({get({get({This, gameKeyFactory}), 'KEY_NUM3'}), '$class'})):getId(get({get({This, gameKeyFactory}), 'KEY_NUM3'}))) of
-                    true ->
-                    (get({get({'CheatGameInputProcessor', inputProcessor}), '$class'})):special2(get({'CheatGameInputProcessor', inputProcessor}), GameLayerManager, get({'GameKeyEvent', 'NONE'})),
-                    throw('$break');
-                    false -> ok
+                end
+                if (JR.lget(f, :key) == JR.call(JR.get(JR.get(this, :gameKeyFactory), :LEFT), :jm_getId, [])) do
+                    JR.call(CheatGameInputProcessor.jstatic_inputProcessor(), :jm_left, [])
+                    throw(:jbreak)
+                else
+                    if (JR.lget(f, :key) == JR.call(JR.get(JR.get(this, :gameKeyFactory), :RIGHT), :jm_getId, [])) do
+                    JR.call(CheatGameInputProcessor.jstatic_inputProcessor(), :jm_right, [])
+                    throw(:jbreak)
+                else
+                    if (JR.lget(f, :key) == JR.call(JR.get(JR.get(this, :gameKeyFactory), :UP), :jm_getId, [])) do
+                    JR.call(CheatGameInputProcessor.jstatic_inputProcessor(), :jm_up, [])
+                    throw(:jbreak)
+                else
+                    if (JR.lget(f, :key) == JR.call(JR.get(JR.get(this, :gameKeyFactory), :DOWN), :jm_getId, [])) do
+                    JR.call(CheatGameInputProcessor.jstatic_inputProcessor(), :jm_down, [])
+                    throw(:jbreak)
+                else
+                    if (JR.lget(f, :key) == JR.call(JR.get(JR.get(this, :gameKeyFactory), :KEY_NUM1), :jm_getId, [])) do
+                    JR.call(CheatGameInputProcessor.jstatic_inputProcessor(), :jm_special1, [JR.lget(f, :gameLayerManager), GameKeyEvent.jstatic_NONE()])
+                    throw(:jbreak)
+                else
+                    if (JR.lget(f, :key) == JR.call(JR.get(JR.get(this, :gameKeyFactory), :KEY_NUM3), :jm_getId, [])) do
+                    JR.call(CheatGameInputProcessor.jstatic_inputProcessor(), :jm_special2, [JR.lget(f, :gameLayerManager), GameKeyEvent.jstatic_NONE()])
+                    throw(:jbreak)
                 end
                 end
                 end
                 end
                 end
                 end
-            end, lists:seq(0, Size - 1)),
-            (get({List, '$class'})):clear(List)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'UPDATE'}), E)
-        end.
+            end)
+            JR.call(JR.lget(f, :list), :jm_clear, [])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :UPDATE), JR.lget(f, :e)])
+        end
+    end)
+  end
+end
+
 

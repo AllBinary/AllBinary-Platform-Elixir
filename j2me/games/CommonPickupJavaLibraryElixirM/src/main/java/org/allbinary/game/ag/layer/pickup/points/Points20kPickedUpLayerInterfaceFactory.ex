@@ -1,65 +1,86 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.layer.pickup.points
-% import org.allbinary.animation.FeaturedAnimationInterfaceFactoryInterfaceFactory
-% import org.allbinary.game.configuration.GameConfigurationUtil
-% import org.allbinary.game.layer.pickup.CountedPickedUpLayerInterfaceFactory
-% import org.allbinary.game.layer.pickup.IconLayerFactory
-% import org.allbinary.game.layer.pickup.PickedUpLayerInterfaceFactory
-% import org.allbinary.game.layer.pickup.PickedUpLayerInterfaceFactoryInterface
-% import org.allbinary.game.layer.pickup.PickedUpLayerTypeFactory
-% import org.allbinary.game.layer.pickup.PickupProcessorInterface
-% import org.allbinary.layer.AllBinaryLayer
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.pickup.points
 
--module('Points20kPickedUpLayerInterfaceFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements PickupProcessorInterface
+defmodule Points20kPickedUpLayerInterfaceFactory do
+  def jsuper(), do: PickedUpLayerInterfaceFactory
+def jstatic_pickedUpLayerInterfaceFactoryInterface(), do: JR.static_get(__MODULE__, :pickedUpLayerInterfaceFactoryInterface, fn -> CountedPickedUpLayerInterfaceFactory.jstatic_NULL_COUNTED_PICKUP_LAYER_FACTORY() end)
+  def jstatic_set_pickedUpLayerInterfaceFactoryInterface(value), do: JR.static_put(__MODULE__, :pickedUpLayerInterfaceFactoryInterface, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('PickedUpLayerInterfaceFactory', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, pickedUpLayerInterfaceFactoryInterface}, get({'CountedPickedUpLayerInterfaceFactory', 'NULL_COUNTED_PICKUP_LAYER_FACTORY'})),
-    ok.
-
-init_fields(This) ->
-    put({This, pool}, 'PointsLayerCircularStaticPool':new('PointsLayerFactory':new(((fun(Target_N66082) -> (get({Target_N66082, '$class'})):getCompetitionValue(Target_N66082) end)('GameConfigurationUtil':getInstance()) * 20000)), 1)),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :pool, nil)
+        JR.put(this, :pool, PointsLayerCircularStaticPool.jnew(PointsLayerFactory.jnew((JR.call(GameConfigurationUtil.jm_getInstance(), :jm_getCompetitionValue, []) * 20000)), 1))
+    nil
+  end
 
 
-% throws Exception
-init() ->
-        put({'Points20kPickedUpLayerInterfaceFactory', pickedUpLayerInterfaceFactoryInterface}, 'Points20kPickedUpLayerInterfaceFactory':new()).
+  def jm_init() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        Points20kPickedUpLayerInterfaceFactory.jstatic_set_pickedUpLayerInterfaceFactoryInterface(Points20kPickedUpLayerInterfaceFactory.jnew())
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-        'PickedUpLayerInterfaceFactory':'$init'(This, get({'PickedUpLayerTypeFactory':getInstance(), 'POINTS'}), 'IconLayerFactory':getInstance((fun(Target_N66189) -> (get({Target_N66189, '$class'})):getInstance(Target_N66189, 0) end)((fun(Target_N66196) -> (get({Target_N66196, '$class'})):get(Target_N66196, get({'PointsResources':getInstance(), 'RESOURCE_2'})) end)('FeaturedAnimationInterfaceFactoryInterfaceFactory':getInstance())), 10, 10), (fun(Target_N66265) -> (get({Target_N66265, '$class'})):getInstance(Target_N66265, 0) end)((fun(Target_N66272) -> (get({Target_N66272, '$class'})):get(Target_N66272, get({'PointsResources':getInstance(), 'RESOURCE_2'})) end)('FeaturedAnimationInterfaceFactoryInterfaceFactory':getInstance()))),
-        init_fields(This).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        PickedUpLayerInterfaceFactory.jinit(this, JR.get(PickedUpLayerTypeFactory.jm_getInstance(), :POINTS), IconLayerFactory.jm_getInstance(JR.call(JR.call(FeaturedAnimationInterfaceFactoryInterfaceFactory.jm_getInstance(), :jm_get, [JR.get(PointsResources.jm_getInstance(), :RESOURCE_2)]), :jm_getInstance, [0]), 10, 10), JR.call(JR.call(FeaturedAnimationInterfaceFactoryInterfaceFactory.jm_getInstance(), :jm_get, [JR.get(PointsResources.jm_getInstance(), :RESOURCE_2)]), :jm_getInstance, [0]))
+        Points20kPickedUpLayerInterfaceFactory.jinitfields(this)
+    end)
+  end
 
-getTotal(This) ->
-        1.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-getInstance() ->
-        get({'Points20kPickedUpLayerInterfaceFactory', pickedUpLayerInterfaceFactoryInterface}).
 
-% throws Exception
-process(This, SourceLayerInterface) ->
-        (get({get({This, pool}), '$class'})):visit(get({This, pool}), SourceLayerInterface).
+  def jm_getTotal(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, 1})
+    end)
+  end
+
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, Points20kPickedUpLayerInterfaceFactory.jstatic_pickedUpLayerInterfaceFactoryInterface()})
+    end)
+  end
+
+
+  def jm_process(this, p_sourceLayerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :sourceLayerInterface, p_sourceLayerInterface)
+        JR.call(JR.get(this, :pool), :jm_visit, [JR.lget(f, :sourceLayerInterface)])
+    end)
+  end
+end
+
 

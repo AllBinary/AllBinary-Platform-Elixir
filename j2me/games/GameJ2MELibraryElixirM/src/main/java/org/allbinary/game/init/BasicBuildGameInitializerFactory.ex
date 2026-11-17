@@ -1,40 +1,50 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.init
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.init
 
--module('BasicBuildGameInitializerFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements GameInitializationInterfaceFactoryInterface
+defmodule BasicBuildGameInitializerFactory do
+  def jsuper(), do: JObject
+def jstatic_NULL_BASE_BUILD_GMAE_INITIALIZER_FACTORY(), do: JR.static_get(__MODULE__, :NULL_BASE_BUILD_GMAE_INITIALIZER_FACTORY, fn -> BasicBuildGameInitializerFactory.jnew() end)
+  def jstatic_set_NULL_BASE_BUILD_GMAE_INITIALIZER_FACTORY(value), do: JR.static_put(__MODULE__, :NULL_BASE_BUILD_GMAE_INITIALIZER_FACTORY, value)
 
-static_init() ->
-    put({?MODULE, 'NULL_BASE_BUILD_GMAE_INITIALIZER_FACTORY'}, 'BasicBuildGameInitializerFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance(This) ->
-        get({'BaseGameInitialization', 'NULL_BASE_GAME_INITIALIZATION'}).
+  def jm_getInstance(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, BaseGameInitialization.jstatic_NULL_BASE_GAME_INITIALIZATION()})
+    end)
+  end
+end
+
 

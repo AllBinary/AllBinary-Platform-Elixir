@@ -1,101 +1,142 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.data.resource
-% import java.io.InputStream
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonSeps
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.data.resource
 
--module('ResourceUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+#J2SE - J2ME
+defmodule ResourceUtil do
+  def jsuper(), do: JObject
+def jstatic_classLoader(), do: JR.static_get(__MODULE__, :classLoader, fn -> JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT) end)
+  def jstatic_set_classLoader(value), do: JR.static_put(__MODULE__, :classLoader, value)
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> ResourceUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, classLoader}, get({'NullUtil':getInstance(), 'NULL_OBJECT'})),
-    put({?MODULE, instance}, 'ResourceUtil':new()),
-    ok.
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+    nil
+  end
 
 
-getInstance() ->
-        get({'ResourceUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, ResourceUtil.jstatic_instance()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-setLoadingPaths(This, Path, Ext) when (is_list(Path) orelse Path =:= undefined), (is_list(Ext) orelse Ext =:= undefined) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({'CommonStrings':getInstance(), 'NOT_IMPLEMENTED'}), This, "setLoadingPaths").
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-setClassLoader(This, ClassLoader) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N66127) -> (get({Target_N66127, '$class'})):toString(Target_N66127) end)((fun(Target_N66134) -> (get({Target_N66134, '$class'})):append(Target_N66134, atom_to_list(get({ClassLoader, '$class'}))) end)((fun(Target_N66141) -> (get({Target_N66141, '$class'})):append(Target_N66141, "Resource Loader: ") end)('StringMaker':new()))), This, "setClassLoader"),
-        put({'ResourceUtil', classLoader}, ClassLoader).
 
-% throws Exception
-getResourceAsStream(This, Resource) when (is_list(Resource) orelse Resource =:= undefined) ->
-        put({local, inputStream}, (get({This, '$class'})):getResourceAsStreamAtStart(This, Resource, 2)),
-        case (get({local, inputStream}) =:= undefined) of
-            true ->
-            put({local, inputStream}, (get({This, '$class'})):getResourceAsStreamAtStart(This, Resource, 1)),
-            case (get({local, inputStream}) =:= undefined) of
-                true ->
-                erlang:error({'Exception', (fun(Target_N66456) -> (get({Target_N66456, '$class'})):toString(Target_N66456) end)((fun(Target_N66463) -> (get({Target_N66463, '$class'})):append(Target_N66463, Resource) end)((fun(Target_N66470) -> (get({Target_N66470, '$class'})):append(Target_N66470, "Unable to obtain: ") end)('StringMaker':new())))});
-                false -> ok
-            end;
-            false -> ok
-        end,
-        get({local, inputStream}).
+  def jm_setLoadingPaths(this, p_path, p_ext) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :path, p_path)
+      JR.lset(f, :ext, p_ext)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(CommonStrings.jm_getInstance(), :NOT_IMPLEMENTED), this, "setLoadingPaths"])
+    end)
+  end
 
-% throws Exception
-getResourceAsStreamAtStart(This, Resource, StartIndex) when (is_list(Resource) orelse Resource =:= undefined), is_integer(StartIndex) ->
-        try
-        CommonSeps = 'CommonSeps':getInstance(),
-        Index = allbinary_java:index_of(Resource, get({CommonSeps, 'COLON'})),
-        ResourcePath = string:slice(Resource, (Index + StartIndex)),
-        put({local, inputStream}, (get({get({Resource, '$class'}), '$class'})):getResourceAsStream(get({Resource, '$class'}), ResourcePath)),
-        case (get({local, inputStream}) =/= undefined) of
-            true ->
-            throw({'$return', get({local, inputStream})});
-            false -> ok
-        end,
-        ClassLoader = get({'ResourceUtil', classLoader}),
-        put({local, inputStream}, (get({ClassLoader, '$class'})):getResourceAsStream(ClassLoader, ResourcePath)),
-        case (get({local, inputStream}) =/= undefined) of
-            true ->
-            throw({'$return', get({local, inputStream})});
-            false -> ok
-        end,
-        put({local, inputStream}, (fun(Target_N67073) -> (get({Target_N67073, '$class'})):getResourceAsStream(Target_N67073, ResourcePath) end)((fun(Target_N67080) -> (get({Target_N67080, '$class'})):getContextClassLoader(Target_N67080) end)('Thread':currentThread()))),
-        case (get({local, inputStream}) =/= undefined) of
-            true ->
-            throw({'$return', get({local, inputStream})});
-            false -> ok
-        end,
-        get({local, inputStream})
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
 
-addResource(This, Resource, Value) when (is_list(Resource) orelse Resource =:= undefined) ->
-        ok.
+  def jm_setClassLoader(this, p_classLoader) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :classLoader, p_classLoader)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["Resource Loader: "]), :jm_append, [JR.class_name(JR.lget(f, :classLoader))]), :jm_toString, []), this, "setClassLoader"])
+        ResourceUtil.jstatic_set_classLoader(JR.lget(f, :classLoader))
+    end)
+  end
+
+
+  def jm_getResourceAsStream(this, p_resource) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :resource, p_resource)
+        JR.lset(f, :inputStream, JR.call(this, :jm_getResourceAsStreamAtStart, [JR.lget(f, :resource), 2]))
+        if (JR.lget(f, :inputStream) == nil) do
+            JR.lset(f, :inputStream, JR.call(this, :jm_getResourceAsStreamAtStart, [JR.lget(f, :resource), 1]))
+            if (JR.lget(f, :inputStream) == nil) do
+                throw({:jexception, JR.exception("Exception", JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["Unable to obtain: "]), :jm_append, [JR.lget(f, :resource)]), :jm_toString, []))})
+            end
+        end
+        throw({:jreturn, JR.lget(f, :inputStream)})
+    end)
+  end
+
+
+  def jm_getResourceAsStreamAtStart(this, p_resource, p_startIndex) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :resource, p_resource)
+      JR.lset(f, :startIndex, p_startIndex)
+        JR.lset(f, :commonSeps, CommonSeps.jm_getInstance())
+        JR.lset(f, :index, JR.index_of(JR.lget(f, :resource), JR.get(JR.lget(f, :commonSeps), :COLON)))
+        JR.lset(f, :resourcePath, JR.substring(JR.lget(f, :resource), JR.int32(JR.lget(f, :index) + JR.lget(f, :startIndex))))
+        JR.lset(f, :inputStream, JR.call(JR.class_name(JR.lget(f, :resource)), :jm_getResourceAsStream, [JR.lget(f, :resourcePath)]))
+        if (JR.lget(f, :inputStream) != nil) do
+            throw({:jreturn, JR.lget(f, :inputStream)})
+        end
+        JR.lset(f, :classLoader, ResourceUtil.jstatic_classLoader())
+        JR.lset(f, :inputStream, JR.call(JR.lget(f, :classLoader), :jm_getResourceAsStream, [JR.lget(f, :resourcePath)]))
+        if (JR.lget(f, :inputStream) != nil) do
+            throw({:jreturn, JR.lget(f, :inputStream)})
+        end
+        JR.lset(f, :inputStream, JR.call(JR.call(J.Thread.jm_currentThread(), :jm_getContextClassLoader, []), :jm_getResourceAsStream, [JR.lget(f, :resourcePath)]))
+        if (JR.lget(f, :inputStream) != nil) do
+            throw({:jreturn, JR.lget(f, :inputStream)})
+        end
+        throw({:jreturn, JR.lget(f, :inputStream)})
+    end)
+  end
+
+
+  def jm_addResource(this, p_resource, p_value) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :resource, p_resource)
+      JR.lset(f, :value, p_value)
+        nil
+    end)
+  end
+end
+
 

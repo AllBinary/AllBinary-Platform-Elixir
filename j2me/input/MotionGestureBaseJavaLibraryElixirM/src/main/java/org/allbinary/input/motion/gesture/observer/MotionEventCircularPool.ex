@@ -1,45 +1,70 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion.gesture.observer
-% import org.allbinary.game.input.InputFactory
-% import org.allbinary.input.motion.gesture.MotionGestureInput
-% import org.allbinary.input.motion.gesture.TouchMotionGestureFactory
-% import org.allbinary.logic.util.event.AllBinaryEventCircularPool
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture.observer
 
--module('MotionEventCircularPool').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule MotionEventCircularPool do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, 'MIN'}, (fun(Target_N65824) -> (get({Target_N65824, '$class'})):getId(Target_N65824) end)(get({'TouchMotionGestureFactory':getInstance(), 'LAST_MOTION'}))),
-    put({This, eventPool}, 'AllBinaryEventCircularPool':new((((get({'InputFactory':getInstance(), 'MAX'}) - 1)) - get({This, 'MIN'})))),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :MIN, 0)
+    JR.put(this, :eventPool, nil)
+        JR.put(this, :MIN, JR.call(JR.get(TouchMotionGestureFactory.jm_getInstance(), :LAST_MOTION), :jm_getId, []))
+        JR.put(this, :eventPool, AllBinaryEventCircularPool.jnew((((JR.get(InputFactory.jm_getInstance(), :MAX) - 1)) - JR.get(this, :MIN))))
+    nil
+  end
 
 
-createPool(Id) when is_integer(Id) ->
-        'MotionEventCircularPool':new(Id).
+  def jm_createPool(p_id) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :id, p_id)
+        throw({:jreturn, MotionEventCircularPool.jnew(JR.lget(f, :id))})
+    end)
+  end
 
-new(Id) when is_integer(Id) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Id),
-    This.
 
-'$init'(This, Id) when is_integer(Id) ->
-    init_fields(This),
-        (get({get({This, eventPool}), '$class'})):initAllBinaryEventCircularPool(get({This, eventPool}), 'MotionEventFactory':new(get({This, eventPool}), Id)).
+  def jinit(this, p_id) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :id, p_id)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.call(JR.get(this, :eventPool), :jm_initAllBinaryEventCircularPool, [MotionEventFactory.jnew(JR.get(this, :eventPool), JR.lget(f, :id))])
+    end)
+  end
 
-% throws Exception
-getInstance(This, MotionGestureInput) ->
-        (get({get({This, eventPool}), '$class'})):getInstance(get({This, eventPool}), ((get({MotionGestureInput, '$class'})):getId(MotionGestureInput) - get({This, 'MIN'}))).
+  def jnew(p_id) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_id)
+    this
+  end
+
+
+  def jm_getInstance(this, p_motionGestureInput) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :motionGestureInput, p_motionGestureInput)
+        throw({:jreturn, JR.call(JR.get(this, :eventPool), :jm_getInstance, [(JR.call(JR.lget(f, :motionGestureInput), :jm_getId, []) - JR.get(this, :MIN))])})
+    end)
+  end
+end
+
 

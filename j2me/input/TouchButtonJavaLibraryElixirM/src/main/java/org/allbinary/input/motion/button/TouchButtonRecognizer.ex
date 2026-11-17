@@ -1,123 +1,150 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion.button
-% import org.allbinary.game.input.event.DownGameKeyEventHandler
-% import org.allbinary.game.input.event.GameKeyEvent
-% import org.allbinary.game.input.event.UpGameKeyEventHandler
-% import org.allbinary.graphics.GPoint
-% import org.allbinary.graphics.Rectangle
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.math.RectangleCollisionUtil
-% import org.allbinary.util.BasicArrayList
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
--module('TouchButtonRecognizer').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule TouchButtonRecognizer do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, rectangleCollisionUtil}, 'RectangleCollisionUtil':getInstance()),
-    put({This, upGameKeyEventHandler}, 'UpGameKeyEventHandler':getInstance()),
-    put({This, downGameKeyEventHandler}, 'DownGameKeyEventHandler':getInstance()),
-    put({This, lastPressedTouchButtonInput}, get({'BasicTouchInputFactory':getInstance(), 'NONE'})),
-    put({This, currentlyPressedTouchButtonSingleton}, 'CurrentlyPressedTouchButtonSingleton':getInstance()),
-    put({This, releaseHelper}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :rectangleCollisionUtil, nil)
+    JR.put(this, :upGameKeyEventHandler, nil)
+    JR.put(this, :downGameKeyEventHandler, nil)
+    JR.put(this, :lastPressedTouchButtonInput, nil)
+    JR.put(this, :currentlyPressedTouchButtonSingleton, nil)
+    JR.put(this, :releaseHelper, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :rectangleCollisionUtil, RectangleCollisionUtil.jm_getInstance())
+        JR.put(this, :upGameKeyEventHandler, UpGameKeyEventHandler.jm_getInstance())
+        JR.put(this, :downGameKeyEventHandler, DownGameKeyEventHandler.jm_getInstance())
+        JR.put(this, :lastPressedTouchButtonInput, JR.get(BasicTouchInputFactory.jm_getInstance(), :NONE))
+        JR.put(this, :currentlyPressedTouchButtonSingleton, CurrentlyPressedTouchButtonSingleton.jm_getInstance())
+        JR.put(this, :releaseHelper, nil)
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        if JR.call(TouchScreenFactory.jm_getInstance(), :jm_isMultiTouch, []) do
+            JR.put(this, :releaseHelper, MultitouchReleaseHelper.jnew(this))
+        else
+            JR.put(this, :releaseHelper, ReleaseHelper.jnew(this))
+        end
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        case (fun(Target_N66177) -> (get({Target_N66177, '$class'})):isMultiTouch(Target_N66177) end)('TouchScreenFactory':getInstance()) of
-            true ->
-            put({This, releaseHelper}, 'MultitouchReleaseHelper':new(This));
-            false ->
-            put({This, releaseHelper}, 'ReleaseHelper':new(This))
-        end.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-% throws Exception
-processRelease(This, TouchButtonInput, DeviceId) when is_integer(DeviceId) ->
-        (get({get({This, releaseHelper}), '$class'})):release(get({This, releaseHelper}), TouchButtonInput, DeviceId),
-        GameKeyEvent = (get({TouchButtonInput, '$class'})):getGameKeyEvent(TouchButtonInput),
-        (get({get({This, upGameKeyEventHandler}), '$class'})):fireEvent(get({This, upGameKeyEventHandler}), GameKeyEvent),
-        (fun(Target_N66459) -> (get({Target_N66459, '$class'})):fireEvent(Target_N66459, GameKeyEvent) end)((get({get({This, upGameKeyEventHandler}), '$class'})):getInstanceForDevice(get({This, upGameKeyEventHandler}), DeviceId)),
-        (get({get({This, currentlyPressedTouchButtonSingleton}), '$class'})):remove(get({This, currentlyPressedTouchButtonSingleton}), TouchButtonInput).
 
-% throws Exception
-releaseTouchButtonInput(This, X, Y, DeviceId) when is_integer(X), is_integer(Y), is_integer(DeviceId) ->
-        try
-        put({local, touchButtonInput}, get({This, lastPressedTouchButtonInput})),
-        case (get({get({This, currentlyPressedTouchButtonSingleton}), '$class'})):contains(get({This, currentlyPressedTouchButtonSingleton}), get({local, touchButtonInput})) of
-            true ->
-            put({This, lastPressedTouchButtonInput}, get({'BasicTouchInputFactory':getInstance(), 'NONE'})),
-            (get({This, '$class'})):processRelease(This, get({local, touchButtonInput}), DeviceId),
-            throw({'$return', true});
-            false ->
-            List = (fun(Target_N66725) -> (get({Target_N66725, '$class'})):getList(Target_N66725) end)('TouchButtonFactory':getInstance()),
-            put({local, rectangle}, undefined),
-            put({local, point}, undefined),
-            put({local, touchButton}, undefined),
-            lists:foreach(fun(Index) ->
-                put({local, touchButton}, array:get(Index, get({List, objectArray}))),
-                put({local, rectangle}, (get({get({local, touchButton}), '$class'})):getRectangle(get({local, touchButton}))),
-                put({local, point}, (get({get({local, rectangle}), '$class'})):getPoint(get({local, rectangle}))),
-                case (get({get({This, rectangleCollisionUtil}), '$class'})):isInside(get({This, rectangleCollisionUtil}), (get({get({local, point}), '$class'})):getX(get({local, point})), (get({get({local, point}), '$class'})):getY(get({local, point})), (get({get({local, rectangle}), '$class'})):getMaxX(get({local, rectangle})), (get({get({local, rectangle}), '$class'})):getMaxY(get({local, rectangle})), X, Y) of
-                    true ->
-                    put({local, touchButtonInput}, (get({get({local, touchButton}), '$class'})):getTouchButtonInput(get({local, touchButton}))),
-                    (get({This, '$class'})):processRelease(This, get({local, touchButtonInput}), DeviceId),
-                    throw({'$return', true});
-                    false -> ok
+  def jm_processRelease(this, p_touchButtonInput, p_deviceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :touchButtonInput, p_touchButtonInput)
+      JR.lset(f, :deviceId, p_deviceId)
+        JR.call(JR.get(this, :releaseHelper), :jm_release, [JR.lget(f, :touchButtonInput), JR.lget(f, :deviceId)])
+        JR.lset(f, :gameKeyEvent, JR.call(JR.lget(f, :touchButtonInput), :jm_getGameKeyEvent, []))
+        JR.call(JR.get(this, :upGameKeyEventHandler), :jm_fireEvent, [JR.lget(f, :gameKeyEvent)])
+        JR.call(JR.call(JR.get(this, :upGameKeyEventHandler), :jm_getInstanceForDevice, [JR.lget(f, :deviceId)]), :jm_fireEvent, [JR.lget(f, :gameKeyEvent)])
+        JR.call(JR.get(this, :currentlyPressedTouchButtonSingleton), :jm_remove, [JR.lget(f, :touchButtonInput)])
+    end)
+  end
+
+
+  def jm_releaseTouchButtonInput(this, p_x, p_y, p_deviceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :deviceId, p_deviceId)
+        JR.lset(f, :touchButtonInput, JR.get(this, :lastPressedTouchButtonInput))
+        if JR.call(JR.get(this, :currentlyPressedTouchButtonSingleton), :jm_contains, [JR.lget(f, :touchButtonInput)]) do
+            JR.put(this, :lastPressedTouchButtonInput, JR.get(BasicTouchInputFactory.jm_getInstance(), :NONE))
+            JR.call(this, :jm_processRelease, [JR.lget(f, :touchButtonInput), JR.lget(f, :deviceId)])
+            throw({:jreturn, true})
+        else
+            JR.lset(f, :list, JR.call(TouchButtonFactory.jm_getInstance(), :jm_getList, []))
+            JR.lset(f, :rectangle, nil)
+            JR.lset(f, :point, nil)
+            JR.lset(f, :touchButton, nil)
+            JR.lset(f, :index, JR.int32(JR.call(JR.lget(f, :list), :jm_size, []) - 1))
+            JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+                JR.lset(f, :touchButton, JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index)))
+                JR.lset(f, :rectangle, JR.call(JR.lget(f, :touchButton), :jm_getRectangle, []))
+                JR.lset(f, :point, JR.call(JR.lget(f, :rectangle), :jm_getPoint, []))
+                if JR.call(JR.get(this, :rectangleCollisionUtil), :jm_isInside, [JR.call(JR.lget(f, :point), :jm_getX, []), JR.call(JR.lget(f, :point), :jm_getY, []), JR.call(JR.lget(f, :rectangle), :jm_getMaxX, []), JR.call(JR.lget(f, :rectangle), :jm_getMaxY, []), JR.lget(f, :x), JR.lget(f, :y)]) do
+                    JR.lset(f, :touchButtonInput, JR.call(JR.lget(f, :touchButton), :jm_getTouchButtonInput, []))
+                    JR.call(this, :jm_processRelease, [JR.lget(f, :touchButtonInput), JR.lget(f, :deviceId)])
+                    throw({:jreturn, true})
                 end
-            end, lists:seq(((get({List, '$class'})):size(List) - 1), 0, -1))
-        end,
-        false
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+            end)
+        end
+        throw({:jreturn, false})
+    end)
+  end
 
-% throws Exception
-pressTouchButtonInput(This, X, Y, DeviceId) when is_integer(X), is_integer(Y), is_integer(DeviceId) ->
-        try
-        List = (fun(Target_N67465) -> (get({Target_N67465, '$class'})):getList(Target_N67465) end)('TouchButtonFactory':getInstance()),
-        put({local, rectangle}, undefined),
-        put({local, point}, undefined),
-        put({local, touchButton}, undefined),
-        put({local, touchButtonInput}, undefined),
-        put({local, gameKeyEvent}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, touchButton}, array:get(Index, get({List, objectArray}))),
-            put({local, rectangle}, (get({get({local, touchButton}), '$class'})):getRectangle(get({local, touchButton}))),
-            put({local, point}, (get({get({local, rectangle}), '$class'})):getPoint(get({local, rectangle}))),
-            case (get({get({This, rectangleCollisionUtil}), '$class'})):isInside(get({This, rectangleCollisionUtil}), (get({get({local, point}), '$class'})):getX(get({local, point})), (get({get({local, point}), '$class'})):getY(get({local, point})), (get({get({local, rectangle}), '$class'})):getMaxX(get({local, rectangle})), (get({get({local, rectangle}), '$class'})):getMaxY(get({local, rectangle})), X, Y) of
-                true ->
-                put({local, touchButtonInput}, (get({get({local, touchButton}), '$class'})):getTouchButtonInput(get({local, touchButton}))),
-                case (not (get({get({This, currentlyPressedTouchButtonSingleton}), '$class'})):contains(get({This, currentlyPressedTouchButtonSingleton}), get({local, touchButtonInput}))) of
-                    true ->
-                    (get({get({This, releaseHelper}), '$class'})):release(get({This, releaseHelper}), get({local, touchButtonInput}), DeviceId),
-                    put({This, lastPressedTouchButtonInput}, get({local, touchButtonInput})),
-                    (get({get({This, currentlyPressedTouchButtonSingleton}), '$class'})):add(get({This, currentlyPressedTouchButtonSingleton}), get({local, touchButtonInput})),
-                    put({local, gameKeyEvent}, (get({get({local, touchButtonInput}), '$class'})):getGameKeyEvent(get({local, touchButtonInput}))),
-                    (get({get({This, downGameKeyEventHandler}), '$class'})):fireEvent(get({This, downGameKeyEventHandler}), get({local, gameKeyEvent})),
-                    (fun(Target_N68143) -> (get({Target_N68143, '$class'})):fireEvent(Target_N68143, get({local, gameKeyEvent})) end)((get({get({This, downGameKeyEventHandler}), '$class'})):getInstanceForDevice(get({This, downGameKeyEventHandler}), DeviceId));
-                    false -> ok
-                end,
-                throw({'$return', true});
-                false -> ok
+
+  def jm_pressTouchButtonInput(this, p_x, p_y, p_deviceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :deviceId, p_deviceId)
+        JR.lset(f, :list, JR.call(TouchButtonFactory.jm_getInstance(), :jm_getList, []))
+        JR.lset(f, :rectangle, nil)
+        JR.lset(f, :point, nil)
+        JR.lset(f, :touchButton, nil)
+        JR.lset(f, :touchButtonInput, nil)
+        JR.lset(f, :gameKeyEvent, nil)
+        JR.lset(f, :index, JR.int32(JR.call(JR.lget(f, :list), :jm_size, []) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.lset(f, :touchButton, JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index)))
+            JR.lset(f, :rectangle, JR.call(JR.lget(f, :touchButton), :jm_getRectangle, []))
+            JR.lset(f, :point, JR.call(JR.lget(f, :rectangle), :jm_getPoint, []))
+            if JR.call(JR.get(this, :rectangleCollisionUtil), :jm_isInside, [JR.call(JR.lget(f, :point), :jm_getX, []), JR.call(JR.lget(f, :point), :jm_getY, []), JR.call(JR.lget(f, :rectangle), :jm_getMaxX, []), JR.call(JR.lget(f, :rectangle), :jm_getMaxY, []), JR.lget(f, :x), JR.lget(f, :y)]) do
+                JR.lset(f, :touchButtonInput, JR.call(JR.lget(f, :touchButton), :jm_getTouchButtonInput, []))
+                if !JR.call(JR.get(this, :currentlyPressedTouchButtonSingleton), :jm_contains, [JR.lget(f, :touchButtonInput)]) do
+                    JR.call(JR.get(this, :releaseHelper), :jm_release, [JR.lget(f, :touchButtonInput), JR.lget(f, :deviceId)])
+                    JR.put(this, :lastPressedTouchButtonInput, JR.lget(f, :touchButtonInput))
+                    JR.call(JR.get(this, :currentlyPressedTouchButtonSingleton), :jm_add, [JR.lget(f, :touchButtonInput)])
+                    JR.lset(f, :gameKeyEvent, JR.call(JR.lget(f, :touchButtonInput), :jm_getGameKeyEvent, []))
+                    JR.call(JR.get(this, :downGameKeyEventHandler), :jm_fireEvent, [JR.lget(f, :gameKeyEvent)])
+                    JR.call(JR.call(JR.get(this, :downGameKeyEventHandler), :jm_getInstanceForDevice, [JR.lget(f, :deviceId)]), :jm_fireEvent, [JR.lget(f, :gameKeyEvent)])
+                end
+                throw({:jreturn, true})
             end
-        end, lists:seq(((get({List, '$class'})):size(List) - 1), 0, -1)),
-        false
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        end)
+        throw({:jreturn, false})
+    end)
+  end
+end
+
 

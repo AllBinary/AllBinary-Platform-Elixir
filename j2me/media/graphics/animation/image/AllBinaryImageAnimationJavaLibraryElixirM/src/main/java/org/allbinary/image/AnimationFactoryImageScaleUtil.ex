@@ -1,88 +1,104 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2022 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.image
-% import javax.microedition.lcdui.Image
-% import org.allbinary.animation.image.AnimationFactoryInitializationVisitor
-% import org.allbinary.animation.image.BaseImageAnimationFactory
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.media.ScaleProperties
-% import org.allbinary.media.image.ImageJ2MEScaleUtil
-% import org.allbinary.string.CommonLabels
-% import org.allbinary.string.CommonStrings
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.image
 
--module('AnimationFactoryImageScaleUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule AnimationFactoryImageScaleUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> AnimationFactoryImageScaleUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'AnimationFactoryImageScaleUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :imageScaleUtil, nil)
+        JR.put(this, :imageScaleUtil, ImageJ2MEScaleUtil.jm_getInstance())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, imageScaleUtil}, 'ImageJ2MEScaleUtil':getInstance()),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'AnimationFactoryImageScaleUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, AnimationFactoryImageScaleUtil.jstatic_instance()})
+    end)
+  end
 
-% throws Exception
-createImage(This, Image, Width, Height, ScaleWidth, ScaleHeight) when is_integer(Width), is_integer(Height), is_integer(ScaleWidth), is_integer(ScaleHeight) ->
-        put({local, scaledImage}, undefined),
-        case ((ScaleWidth =/= 0) andalso (ScaleHeight =/= 0)) of
-            true ->
-            ScaleX = ((float(ScaleWidth)) / (float(Width))),
-            ScaleY = ((float(ScaleHeight)) / (float(Height))),
-            case ((((ScaleX == 1.0) andalso (ScaleY == 1.0))) orelse (((ScaleX == 0.0) orelse (ScaleY == 0.0)))) of
-                true ->
-                put({local, scaledImage}, Image);
-                false ->
-                ScaledWidth = trunc(((ScaleX * float(Width)))),
-                ScaledHeight = trunc(((ScaleY * float(Height)))),
-                put({local, scaledImage}, (get({get({This, imageScaleUtil}), '$class'})):scale(get({This, imageScaleUtil}), Image, ScaledWidth, ScaledHeight))
-            end;
-            false ->
-            put({local, scaledImage}, Image)
-        end,
-        get({local, scaledImage}).
 
-% throws Exception
-processAdjust(This, BaseImageAnimationFactory) ->
-        ScaleProperties = (get({BaseImageAnimationFactory, '$class'})):getScalePropertiesP(BaseImageAnimationFactory),
-        case ((get({ScaleProperties, scaleWidth}) =/= 0) andalso (get({ScaleProperties, scaleHeight}) =/= 0)) of
-            true ->
-            AnimationFactoryInitializationVisitor = (get({BaseImageAnimationFactory, '$class'})):getAnimationFactoryInitializationVisitorP(BaseImageAnimationFactory),
-            ScaleX = ((float(get({ScaleProperties, scaleWidth}))) / (float(get({AnimationFactoryInitializationVisitor, width})))),
-            ScaleY = ((float(get({ScaleProperties, scaleHeight}))) / (float(get({AnimationFactoryInitializationVisitor, height})))),
-            case ((((ScaleX == 1.0) andalso (ScaleY == 1.0))) orelse (((ScaleX == 0.0) orelse (ScaleY == 0.0)))) of
-                true ->
-                ok;
-                false ->
-                put({AnimationFactoryInitializationVisitor, dx}, trunc(((get({AnimationFactoryInitializationVisitor, originalDx}) * ScaleX)))),
-                put({AnimationFactoryInitializationVisitor, dy}, trunc(((get({AnimationFactoryInitializationVisitor, originalDy}) * ScaleY))))
-            end;
-            false ->
-            ok
-        end.
+  def jm_createImage(this, p_image, p_width, p_height, p_scaleWidth, p_scaleHeight) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :image, p_image)
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+      JR.lset(f, :scaleWidth, p_scaleWidth)
+      JR.lset(f, :scaleHeight, p_scaleHeight)
+        JR.lset(f, :scaledImage, nil)
+        if ((JR.lget(f, :scaleWidth) != 0) && (JR.lget(f, :scaleHeight) != 0)) do
+            JR.lset(f, :scaleX, (((JR.lget(f, :scaleWidth) * 1.0)) / ((JR.lget(f, :width) * 1.0))))
+            JR.lset(f, :scaleY, (((JR.lget(f, :scaleHeight) * 1.0)) / ((JR.lget(f, :height) * 1.0))))
+            if ((((JR.lget(f, :scaleX) == 1.0) && (JR.lget(f, :scaleY) == 1.0))) || (((JR.lget(f, :scaleX) == 0.0) || (JR.lget(f, :scaleY) == 0.0)))) do
+                JR.lset(f, :scaledImage, JR.lget(f, :image))
+            else
+                JR.lset(f, :scaledWidth, JR.int32(JR.d2i(((JR.lget(f, :scaleX) * (JR.lget(f, :width) * 1.0))))))
+                JR.lset(f, :scaledHeight, JR.int32(JR.d2i(((JR.lget(f, :scaleY) * (JR.lget(f, :height) * 1.0))))))
+                JR.lset(f, :scaledImage, JR.call(JR.get(this, :imageScaleUtil), :jm_scale, [JR.lget(f, :image), JR.lget(f, :scaledWidth), JR.lget(f, :scaledHeight)]))
+            end
+        else
+            JR.lset(f, :scaledImage, JR.lget(f, :image))
+        end
+        throw({:jreturn, JR.lget(f, :scaledImage)})
+    end)
+  end
+
+
+  def jm_processAdjust(this, p_baseImageAnimationFactory) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :baseImageAnimationFactory, p_baseImageAnimationFactory)
+        JR.lset(f, :scaleProperties, JR.call(JR.lget(f, :baseImageAnimationFactory), :jm_getScalePropertiesP, []))
+        if ((JR.get(JR.lget(f, :scaleProperties), :scaleWidth) != 0) && (JR.get(JR.lget(f, :scaleProperties), :scaleHeight) != 0)) do
+            JR.lset(f, :animationFactoryInitializationVisitor, JR.call(JR.lget(f, :baseImageAnimationFactory), :jm_getAnimationFactoryInitializationVisitorP, []))
+            JR.lset(f, :scaleX, (((JR.get(JR.lget(f, :scaleProperties), :scaleWidth) * 1.0)) / ((JR.get(JR.lget(f, :animationFactoryInitializationVisitor), :width) * 1.0))))
+            JR.lset(f, :scaleY, (((JR.get(JR.lget(f, :scaleProperties), :scaleHeight) * 1.0)) / ((JR.get(JR.lget(f, :animationFactoryInitializationVisitor), :height) * 1.0))))
+            if ((((JR.lget(f, :scaleX) == 1.0) && (JR.lget(f, :scaleY) == 1.0))) || (((JR.lget(f, :scaleX) == 0.0) || (JR.lget(f, :scaleY) == 0.0)))) do
+                nil
+            else
+                JR.put(JR.lget(f, :animationFactoryInitializationVisitor), :dx, JR.int32(((JR.get(JR.lget(f, :animationFactoryInitializationVisitor), :originalDx) * JR.lget(f, :scaleX)))))
+                JR.put(JR.lget(f, :animationFactoryInitializationVisitor), :dy, JR.int32(((JR.get(JR.lget(f, :animationFactoryInitializationVisitor), :originalDy) * JR.lget(f, :scaleY)))))
+            end
+        else
+            nil
+        end
+    end)
+  end
+end
+
 

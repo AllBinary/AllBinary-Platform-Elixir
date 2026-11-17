@@ -1,41 +1,57 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.layer.weapon.mine
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.AllBinaryLayerFactoryInterface
-% import org.allbinary.view.ViewPositionFactoryInterface
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.weapon.mine
 
--module('MineLayerFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements AllBinaryLayerFactoryInterface
+defmodule MineLayerFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, viewPositionFactoryInterface}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :viewPositionFactoryInterface, nil)
+        
+    nil
+  end
 
 
-new(ViewPositionFactoryInterface) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, ViewPositionFactoryInterface),
-    This.
+  def jinit(this, p_viewPositionFactoryInterface) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :viewPositionFactoryInterface, p_viewPositionFactoryInterface)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :viewPositionFactoryInterface, JR.lget(f, :viewPositionFactoryInterface))
+    end)
+  end
 
-'$init'(This, ViewPositionFactoryInterface) ->
-    init_fields(This),
-        put({This, viewPositionFactoryInterface}, ViewPositionFactoryInterface).
+  def jnew(p_viewPositionFactoryInterface) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_viewPositionFactoryInterface)
+    this
+  end
 
-% throws Exception
-getInstance(This) ->
-        'MineLayer':new((get({get({This, viewPositionFactoryInterface}), '$class'})):getInstance(get({This, viewPositionFactoryInterface}))).
+
+  def jm_getInstance(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, MineLayer.jnew(JR.call(JR.get(this, :viewPositionFactoryInterface), :jm_getInstance, []))})
+    end)
+  end
+end
+
 

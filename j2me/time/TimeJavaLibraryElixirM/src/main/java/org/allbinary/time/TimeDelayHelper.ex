@@ -130,7 +130,7 @@ defmodule TimeDelayHelper do
       _ = this
       f = JR.frame()
       _ = f
-        throw({:jreturn, (:os.system_time(:millisecond) - JR.get(this, :startTime))})
+        throw({:jreturn, JR.int64(:os.system_time(:millisecond) - JR.get(this, :startTime))})
     end)
   end
 
@@ -225,7 +225,7 @@ defmodule TimeDelayHelper do
       f = JR.frame()
       _ = f
         if (JR.get(this, :elapsedTimeAtPause) != J.Long.jstatic_MIN_VALUE()) do
-            JR.put(this, :startTime, (:os.system_time(:millisecond) + JR.get(this, :elapsedTimeAtPause)))
+            JR.put(this, :startTime, JR.int64(:os.system_time(:millisecond) + JR.get(this, :elapsedTimeAtPause)))
             JR.put(this, :elapsedTimeAtPause, J.Long.jstatic_MIN_VALUE())
             JR.call(this, :jm_setStartTimeTNT, [])
             throw({:jreturn, true})

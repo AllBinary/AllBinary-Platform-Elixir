@@ -1,46 +1,63 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2022 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.persistance
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.system.security.licensing.AbeClientInformationInterface
-% import org.allbinary.string.CommonSeps
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.persistance
 
--module('PlatformRecordIdUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule PlatformRecordIdUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> PlatformRecordIdUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'PlatformRecordIdUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :PLATFORM_SHORT_NAME, nil)
+        JR.put(this, :PLATFORM_SHORT_NAME, "JSE")
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'PLATFORM_SHORT_NAME'}, "JSE"),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'PlatformRecordIdUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, PlatformRecordIdUtil.jstatic_instance()})
+    end)
+  end
 
-getRecordId(This, AbeClientInformation, BaseRecordId) when (is_list(BaseRecordId) orelse BaseRecordId =:= undefined) ->
-        (fun(Target_N65834) -> (get({Target_N65834, '$class'})):toString(Target_N65834) end)((fun(Target_N65841) -> (get({Target_N65841, '$class'})):append(Target_N65841, BaseRecordId) end)((fun(Target_N65848) -> (get({Target_N65848, '$class'})):append(Target_N65848, get({This, 'PLATFORM_SHORT_NAME'})) end)((fun(Target_N65855) -> (get({Target_N65855, '$class'})):append(Target_N65855, get({'CommonSeps':getInstance(), 'UNDERSCORE'})) end)((fun(Target_N65862) -> (get({Target_N65862, '$class'})):append(Target_N65862, (get({AbeClientInformation, '$class'})):toShortString(AbeClientInformation)) end)('StringMaker':new()))))).
+
+  def jm_getRecordId(this, p_abeClientInformation, p_baseRecordId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+      JR.lset(f, :baseRecordId, p_baseRecordId)
+        throw({:jreturn, JR.call(JR.call(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.call(JR.lget(f, :abeClientInformation), :jm_toShortString, [])]), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :UNDERSCORE)]), :jm_append, [JR.get(this, :PLATFORM_SHORT_NAME)]), :jm_append, [JR.lget(f, :baseRecordId)]), :jm_toString, [])})
+    end)
+  end
+end
+
 

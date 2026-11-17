@@ -1,43 +1,57 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.midlet
-% import javax.microedition.midlet.MIDlet
-% import org.allbinary.canvas.Processor
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.midlet
 
--module('MidletExitProcessor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule MidletExitProcessor do
+  def jsuper(), do: Processor
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Processor', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :midlet, nil)
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, midlet}, undefined),
-    ok.
+
+  def jinit(this, p_midlet) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :midlet, p_midlet)
+      Processor.jinit(this)
+      jinitfields(this)
+        JR.put(this, :midlet, JR.lget(f, :midlet))
+    end)
+  end
+
+  def jnew(p_midlet) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_midlet)
+    this
+  end
 
 
-new(Midlet) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Midlet),
-    This.
+  def jm_process(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        J.System.jm_exit(0)
+    end)
+  end
+end
 
-'$init'(This, Midlet) ->
-    'Processor':'$init'(This),
-    init_fields(This),
-        put({This, midlet}, Midlet).
-
-% throws Exception
-process(This) ->
-        erlang:halt(0).
 

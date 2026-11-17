@@ -1,52 +1,86 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.globals
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.globals
 
--module('URLGLOBALS').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule URLGLOBALS do
+  def jsuper(), do: JObject
+def jstatic_urlGlobalsInterface(), do: JR.static_get(__MODULE__, :urlGlobalsInterface, fn -> AppUrlGlobals.jstatic_NULL_APP_URL_GLOBALS() end)
+  def jstatic_set_urlGlobalsInterface(value), do: JR.static_put(__MODULE__, :urlGlobalsInterface, value)
 
-static_init() ->
-    put({?MODULE, urlGlobalsInterface}, get({'AppUrlGlobals', 'NULL_APP_URL_GLOBALS'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-init(UrlGlobalsInterface) ->
-        put({get({'URLGLOBALS', 'URLGLOBALS'}), urlGlobalsInterface}, UrlGlobalsInterface).
+  def jm_init(p_urlGlobalsInterface) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :urlGlobalsInterface, p_urlGlobalsInterface)
+        URLGLOBALS.jstatic_set_urlGlobalsInterface(JR.lget(f, :urlGlobalsInterface))
+    end)
+  end
 
-isTestingMode() ->
-        (get({get({get({'URLGLOBALS', 'URLGLOBALS'}), urlGlobalsInterface}), '$class'})):isTestingMode(get({get({'URLGLOBALS', 'URLGLOBALS'}), urlGlobalsInterface})).
 
-getWebappPath() ->
-        (get({get({get({'URLGLOBALS', 'URLGLOBALS'}), urlGlobalsInterface}), '$class'})):getWebappPath(get({get({'URLGLOBALS', 'URLGLOBALS'}), urlGlobalsInterface})).
+  def jm_isTestingMode() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(URLGLOBALS.jstatic_urlGlobalsInterface(), :jm_isTestingMode, [])})
+    end)
+  end
 
-getTestHtmlPath() ->
-        (get({get({get({'URLGLOBALS', 'URLGLOBALS'}), urlGlobalsInterface}), '$class'})):getTestHtmlPath(get({get({'URLGLOBALS', 'URLGLOBALS'}), urlGlobalsInterface})).
 
-% throws Exception
-getMainPath() ->
-        (get({get({get({'URLGLOBALS', 'URLGLOBALS'}), urlGlobalsInterface}), '$class'})):getMainPath(get({get({'URLGLOBALS', 'URLGLOBALS'}), urlGlobalsInterface})).
+  def jm_getWebappPath() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(URLGLOBALS.jstatic_urlGlobalsInterface(), :jm_getWebappPath, [])})
+    end)
+  end
+
+
+  def jm_getTestHtmlPath() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(URLGLOBALS.jstatic_urlGlobalsInterface(), :jm_getTestHtmlPath, [])})
+    end)
+  end
+
+
+  def jm_getMainPath() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(URLGLOBALS.jstatic_urlGlobalsInterface(), :jm_getMainPath, [])})
+    end)
+  end
+end
+
 

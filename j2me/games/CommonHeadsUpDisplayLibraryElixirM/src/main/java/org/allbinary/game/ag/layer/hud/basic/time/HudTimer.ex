@@ -1,90 +1,152 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.layer.hud.basic.time
-% import org.allbinary.logic.math.PrimitiveLongSingleton
-% import org.allbinary.logic.math.PrimitiveLongUtil
-% import org.allbinary.time.GameTickTimeDelayHelper
-% import org.allbinary.time.GameTickTimeDelayHelperFactory
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.hud.basic.time
 
--module('HudTimer').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule HudTimer do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, startTime}, (-1)),
-    put({This, hundredthTime}, 0),
-    put({This, maxTime}, 0),
-    put({This, modifier}, 0),
-    put({This, hundrethsString}, get({'PrimitiveLongSingleton':getInstance(), 'ZERO'})),
-    put({This, totalDigits}, 1),
-    put({This, primitiveLongUtil}, undefined),
-    put({This, 'MAX'}, array:from_list([$L, $O, $L])),
-    put({This, gameTickTimeDelayHelper}, 'GameTickTimeDelayHelperFactory':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :startTime, 0)
+    JR.put(this, :hundredthTime, 0)
+    JR.put(this, :maxTime, 0)
+    JR.put(this, :modifier, 0)
+    JR.put(this, :hundrethsString, nil)
+    JR.put(this, :totalDigits, 0)
+    JR.put(this, :primitiveLongUtil, nil)
+    JR.put(this, :MAX, nil)
+    JR.put(this, :gameTickTimeDelayHelper, nil)
+        JR.put(this, :startTime, -1)
+        JR.put(this, :hundredthTime, 0)
+        
+        JR.put(this, :modifier, 0)
+        JR.put(this, :hundrethsString, JR.get(PrimitiveLongSingleton.jm_getInstance(), :ZERO))
+        JR.put(this, :totalDigits, 1)
+        
+        JR.put(this, :MAX, JR.afrom([?L, ?O, ?L]))
+        JR.put(this, :gameTickTimeDelayHelper, GameTickTimeDelayHelperFactory.jm_getInstance())
+    nil
+  end
 
 
-new(MaxTime) when is_integer(MaxTime) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, MaxTime),
-    This.
+  def jinit(this, p_maxTime) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :maxTime, p_maxTime)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :primitiveLongUtil, PrimitiveLongUtil.jm_createPowerOfTen(JR.lget(f, :maxTime)))
+        JR.put(this, :maxTime, JR.lget(f, :maxTime))
+    end)
+  end
 
-'$init'(This, MaxTime) when is_integer(MaxTime) ->
-    init_fields(This),
-        put({This, primitiveLongUtil}, 'PrimitiveLongUtil':createPowerOfTen(MaxTime)),
-        put({This, maxTime}, MaxTime).
+  def jnew(p_maxTime) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_maxTime)
+    this
+  end
 
-start(This) ->
-        put({This, hundredthTime}, 0),
-        put({This, startTime}, get({get({This, gameTickTimeDelayHelper}), startTime})).
 
-get(This) ->
-        get({This, hundredthTime}).
+  def jm_start(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.put(this, :hundredthTime, 0)
+        JR.put(this, :startTime, JR.get(JR.get(this, :gameTickTimeDelayHelper), :startTime))
+    end)
+  end
 
-update(This) ->
-        LastLowerTime = get({This, hundredthTime}),
-        put({local, currentTime}, ((((get({This, modifier}) + get({get({This, gameTickTimeDelayHelper}), startTime}))) - get({This, startTime})))),
-        case (get({local, currentTime}) < 0) of
-            true ->
-            put({local, currentTime}, 0);
-            false -> ok
-        end,
-        put({This, hundredthTime}, (get({local, currentTime}) div 100)),
-        case (get({This, hundredthTime}) >= get({This, maxTime})) of
-            true ->
-            case (get({This, startTime}) > 0) of
-                true ->
-                put({This, hundrethsString}, get({This, 'MAX'}));
-                false -> ok
-            end;
-            false ->
-            case (LastLowerTime =/= get({This, hundredthTime})) of
-            true ->
-            put({This, hundrethsString}, (get({get({This, primitiveLongUtil}), '$class'})):getCharArray(get({This, primitiveLongUtil}), get({This, hundredthTime}))),
-            put({This, totalDigits}, (get({get({This, primitiveLongUtil}), '$class'})):getCurrentTotalDigits(get({This, primitiveLongUtil})));
-            false -> ok
+
+  def jm_get(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :hundredthTime)})
+    end)
+  end
+
+
+  def jm_update(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :lastLowerTime, JR.get(this, :hundredthTime))
+        JR.lset(f, :currentTime, ((((JR.get(this, :modifier) + JR.get(JR.get(this, :gameTickTimeDelayHelper), :startTime))) - JR.get(this, :startTime))))
+        if (JR.lget(f, :currentTime) < 0) do
+            JR.lset(f, :currentTime, 0)
         end
-        end.
+        JR.put(this, :hundredthTime, div(JR.lget(f, :currentTime), 100))
+        if (JR.get(this, :hundredthTime) >= JR.get(this, :maxTime)) do
+            if (JR.get(this, :startTime) > 0) do
+                JR.put(this, :hundrethsString, JR.get(this, :MAX))
+            end
+        else
+            if (JR.lget(f, :lastLowerTime) != JR.get(this, :hundredthTime)) do
+            JR.put(this, :hundrethsString, JR.call(JR.get(this, :primitiveLongUtil), :jm_getCharArray, [JR.int32(JR.get(this, :hundredthTime))]))
+            JR.put(this, :totalDigits, JR.call(JR.get(this, :primitiveLongUtil), :jm_getCurrentTotalDigits, []))
+        end
+        end
+    end)
+  end
 
-reduce(This, Value) when is_integer(Value) ->
-        put({This, modifier}, (get({This, modifier}) - Value)).
 
-add(This, Value) when is_integer(Value) ->
-        put({This, modifier}, (get({This, modifier}) + Value)).
+  def jm_reduce(this, p_value) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :value, p_value)
+        JR.put(this, :modifier, JR.int64(JR.get(this, :modifier) - JR.lget(f, :value)))
+    end)
+  end
 
-getTimeChars(This) ->
-        get({This, hundrethsString}).
 
-getCurrentTotalDigits(This) ->
-        get({This, totalDigits}).
+  def jm_add(this, p_value) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :value, p_value)
+        JR.put(this, :modifier, JR.int64(JR.get(this, :modifier) + JR.lget(f, :value)))
+    end)
+  end
+
+
+  def jm_getTimeChars(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :hundrethsString)})
+    end)
+  end
+
+
+  def jm_getCurrentTotalDigits(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :totalDigits)})
+    end)
+  end
+end
+
 

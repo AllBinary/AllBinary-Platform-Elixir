@@ -1,113 +1,206 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import javax.microedition.lcdui.CommandListener
-% import javax.microedition.lcdui.Graphics
-% import javax.microedition.lcdui.NullCommandListener
-% import org.allbinary.game.init.BasicBuildGameInitializerFactory
-% import org.allbinary.game.layer.AllBinaryGameLayerManager
-% import org.allbinary.game.score.NoHighScoresFactory
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('NullGameCanvas').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule NullGameCanvas do
+  def jsuper(), do: AllBinaryGameCanvas
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT) end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
+def jstatic_NO_GAME(), do: JR.static_get(__MODULE__, :NO_GAME, fn -> "No Background Game" end)
+  def jstatic_set_NO_GAME(value), do: JR.static_put(__MODULE__, :NO_GAME, value)
+def jstatic_TYPE(), do: JR.static_get(__MODULE__, :TYPE, fn -> 1 end)
+  def jstatic_set_TYPE(value), do: JR.static_put(__MODULE__, :TYPE, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AllBinaryGameCanvas', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, instance}, get({'NullUtil':getInstance(), 'NULL_OBJECT'})),
-    put({?MODULE, 'NO_GAME'}, "No Background Game"),
-    put({?MODULE, 'TYPE'}, 1),
-    ok.
-
-init_fields(This) ->
-    put({This, runningNull}, true),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :runningNull, false)
+        JR.put(this, :runningNull, true)
+    nil
+  end
 
 
-createNull() ->
-        try
-            'NullGameCanvas':new('AllBinaryGameLayerManager':getNullInstance())
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (fun(Target_N65915) -> (get({Target_N65915, '$class'})):put(Target_N65915, get({'CommonStrings':getInstance(), 'EXCEPTION'}), "NullGameCanvas", get({'CommonStrings':getInstance(), 'GET_INSTANCE'}), E) end)('LogUtil':getInstance()),
-            erlang:error({'RuntimeException'})
-        end.
+  def jm_createNull() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        try do
+            throw({:jreturn, NullGameCanvas.jnew(AllBinaryGameLayerManager.jm_getNullInstance())})
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(LogUtil.jm_getInstance(), :jm_put, [JR.get(CommonStrings.jm_getInstance(), :EXCEPTION), "NullGameCanvas", JR.get(CommonStrings.jm_getInstance(), :GET_INSTANCE), JR.lget(f, :e)])
+            throw({:jexception, JR.exception("RuntimeException", "")})
+        end
+    end)
+  end
 
-getInstance() ->
-        case (get({'NullGameCanvas', instance}) =:= get({'NullUtil':getInstance(), 'NULL_OBJECT'})) of
-            true ->
-            put({'NullGameCanvas', instance}, 'NullGameCanvas':createNull());
-            false -> ok
-        end,
-        get({'NullGameCanvas', instance}).
 
-% throws Exception
-createCanvas(GameLayerManager) ->
-        NullGameCanvas = 'NullGameCanvas':new(GameLayerManager),
-        (get({NullGameCanvas, '$class'})):setInitialized(NullGameCanvas, true),
-        (get({NullGameCanvas, '$class'})):setTitle(NullGameCanvas, get({'NullGameCanvas', 'NO_GAME'})),
-        NullGameCanvas.
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        if (NullGameCanvas.jstatic_instance() == JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)) do
+            NullGameCanvas.jstatic_set_instance(NullGameCanvas.jm_createNull())
+        end
+        throw({:jreturn, NullGameCanvas.jstatic_instance()})
+    end)
+  end
 
-new(GameLayerManager) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, GameLayerManager),
-    This.
 
-'$init'(This, GameLayerManager) ->
-        'AllBinaryGameCanvas':'$init'(This, get({'NullCommandListener', 'NULL_COMMAND_LISTENER'}), GameLayerManager, 'NoHighScoresFactory':getInstance(), get({'BasicBuildGameInitializerFactory', 'NULL_BASE_BUILD_GMAE_INITIALIZER_FACTORY'}), false),
-        init_fields(This),
-        'AllBinaryGameCanvas':setWait(This, 1200).
+  def jm_createCanvas(p_gameLayerManager) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameLayerManager, p_gameLayerManager)
+        JR.lset(f, :nullGameCanvas, NullGameCanvas.jnew(JR.lget(f, :gameLayerManager)))
+        JR.call(JR.lget(f, :nullGameCanvas), :jm_setInitialized, [true])
+        JR.call(JR.lget(f, :nullGameCanvas), :jm_setTitle, [NullGameCanvas.jstatic_NO_GAME()])
+        throw({:jreturn, JR.lget(f, :nullGameCanvas)})
+    end)
+  end
 
-isGameOver(This) ->
-        false.
 
-setRunning(This, Running) when is_boolean(Running) ->
-        put({This, runningNull}, Running).
+  def jinit(this, p_gameLayerManager) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameLayerManager, p_gameLayerManager)
+        AllBinaryGameCanvas.jinit(this, NullCommandListener.jstatic_NULL_COMMAND_LISTENER(), JR.lget(f, :gameLayerManager), NoHighScoresFactory.jm_getInstance(), BasicBuildGameInitializerFactory.jstatic_NULL_BASE_BUILD_GMAE_INITIALIZER_FACTORY(), false)
+        NullGameCanvas.jinitfields(this)
+        AllBinaryGameCanvas.jm_setWait(this, 1200)
+    end)
+  end
 
-isRunning(This) ->
-        get({This, runningNull}).
+  def jnew(p_gameLayerManager) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_gameLayerManager)
+    this
+  end
 
-pause(This) ->
-        (get({This, '$class'})):setPaused(This, true).
 
-unPause(This) ->
-        (get({This, '$class'})):setPaused(This, false).
+  def jm_isGameOver(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
 
-initCommands(This, CmdListener) ->
-        (get({This, '$class'})):removeAllCommands(This),
-        (get({This, '$class'})):setCommandListener(This, CmdListener).
 
-% throws Exception
-buildGameInit(This, IsProgress) when is_boolean(IsProgress) ->
-        ok.
+  def jm_setRunning(this, p_running) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :running, p_running)
+        JR.put(this, :runningNull, JR.lget(f, :running))
+    end)
+  end
 
-draw(This, Graphics) ->
-        ok.
 
-run(This) ->
-        try
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START_RUNNABLE'}), This, get({get({This, commonStrings}), 'RUN'})),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'END_RUNNABLE'}), This, get({get({This, commonStrings}), 'RUN'}))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'RUN'}), E)
-        end.
+  def jm_isRunning(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :runningNull)})
+    end)
+  end
 
-getType(This) ->
-        get({'NullGameCanvas', 'TYPE'}).
+
+  def jm_pause(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_setPaused, [true])
+    end)
+  end
+
+
+  def jm_unPause(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_setPaused, [false])
+    end)
+  end
+
+
+  def jm_initCommands(this, p_cmdListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cmdListener, p_cmdListener)
+        JR.call(this, :jm_removeAllCommands, [])
+        JR.call(this, :jm_setCommandListener, [JR.lget(f, :cmdListener)])
+    end)
+  end
+
+
+  def jm_buildGameInit(this, p_isProgress) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :isProgress, p_isProgress)
+        nil
+    end)
+  end
+
+
+  def jm_draw(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        nil
+    end)
+  end
+
+
+  def jm_run(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START_RUNNABLE), this, JR.get(JR.get(this, :commonStrings), :RUN)])
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :END_RUNNABLE), this, JR.get(JR.get(this, :commonStrings), :RUN)])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :RUN), JR.lget(f, :e)])
+        end
+    end)
+  end
+
+
+  def jm_getType(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, NullGameCanvas.jstatic_TYPE()})
+    end)
+  end
+end
+
 

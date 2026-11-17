@@ -1,45 +1,53 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2026 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.logic
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonStrings
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2026 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.logic
 
--module('PropertyInitUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule PropertyInitUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> PropertyInitUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'PropertyInitUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance(Value) when is_integer(Value) ->
-        CommonStrings = 'CommonStrings':getInstance(),
-        LogUtil = 'LogUtil':getInstance(),
-        (get({LogUtil, '$class'})):putF(LogUtil, (fun(Target_N65850) -> (get({Target_N65850, '$class'})):toString(Target_N65850) end)((fun(Target_N65857) -> (get({Target_N65857, '$class'})):appendint(Target_N65857, Value) end)((fun(Target_N65864) -> (get({Target_N65864, '$class'})):append(Target_N65864, "PropertyInitUtil: ") end)('StringMaker':new()))), LogUtil, get({CommonStrings, 'CONSTRUCTOR'})),
-        get({'PropertyInitUtil', instance}).
+  def jm_getInstance(p_value) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :value, p_value)
+        JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+        JR.lset(f, :logUtil, LogUtil.jm_getInstance())
+        JR.call(JR.lget(f, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["PropertyInitUtil: "]), :jm_appendint, [JR.lget(f, :value)]), :jm_toString, []), JR.lget(f, :logUtil), JR.get(JR.lget(f, :commonStrings), :CONSTRUCTOR)])
+        throw({:jreturn, PropertyInitUtil.jstatic_instance()})
+    end)
+  end
+end
+
 

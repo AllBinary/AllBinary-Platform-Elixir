@@ -1,53 +1,76 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import org.allbinary.canvas.RunnableCanvas
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('RunnableCanvasSingleThreadStartRunnable').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule RunnableCanvasSingleThreadStartRunnable do
+  def jsuper(), do: GameRunnable
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('GameRunnable', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :runnableCanvas, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, runnableCanvas}, undefined),
-    ok.
+
+  def jinit(this, p_demoCanvas) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :demoCanvas, p_demoCanvas)
+      GameRunnable.jinit(this)
+      jinitfields(this)
+        JR.put(this, :runnableCanvas, JR.lget(f, :demoCanvas))
+    end)
+  end
+
+  def jnew(p_demoCanvas) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_demoCanvas)
+    this
+  end
 
 
-new(DemoCanvas) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, DemoCanvas),
-    This.
+  def jm_run(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            JR.call(JR.get(this, :runnableCanvas), :jm_run, [])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, JR.get(JR.lget(f, :commonStrings), :RUN), JR.lget(f, :e)])
+        end
+    end)
+  end
 
-'$init'(This, DemoCanvas) ->
-    'GameRunnable':'$init'(This),
-    init_fields(This),
-        put({This, runnableCanvas}, DemoCanvas).
 
-run(This) ->
-        try
-            (get({get({This, runnableCanvas}), '$class'})):run(get({This, runnableCanvas}))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), This, get({CommonStrings, 'RUN'}), E)
-        end.
+  def jm_processLoopSleep(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :runnableCanvas), :jm_processLoopSleep, [])
+    end)
+  end
+end
 
-% throws Exception
-processLoopSleep(This) ->
-        (get({get({This, runnableCanvas}), '$class'})):processLoopSleep(get({This, runnableCanvas})).
 

@@ -1,64 +1,85 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.layer.hud.basic.notification
-% import org.allbinary.game.layer.hud.event.GameNotificationEvent
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.color.BasicColorFactory
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.java.bool.BooleanFactory
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.hud.basic.notification
 
--module('GameNotification').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GameNotification do
+  def jsuper(), do: JObject
+def jstatic_NULL_GAME_NOTIFICATION_EVENT(), do: JR.static_get(__MODULE__, :NULL_GAME_NOTIFICATION_EVENT, fn -> GameNotificationEvent.jnew(JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT), JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), 0, JR.get(BasicColorFactory.jm_getInstance(), :RED), JR.get(BooleanFactory.jm_getInstance(), :FALSE)) end)
+  def jstatic_set_NULL_GAME_NOTIFICATION_EVENT(value), do: JR.static_put(__MODULE__, :NULL_GAME_NOTIFICATION_EVENT, value)
 
-static_init() ->
-    put({?MODULE, 'NULL_GAME_NOTIFICATION_EVENT'}, 'GameNotificationEvent':new(get({'NullUtil':getInstance(), 'NULL_OBJECT'}), get({'StringUtil':getInstance(), 'EMPTY_STRING'}), 0, get({'BasicColorFactory':getInstance(), 'RED'}), get({'BooleanFactory':getInstance(), 'FALSE'}))),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :stringList, nil)
+    JR.put(this, :timeList, nil)
+    JR.put(this, :colorList, nil)
+        JR.put(this, :stringList, BasicArrayListD.jnew())
+        JR.put(this, :timeList, BasicArrayListD.jnew())
+        JR.put(this, :colorList, BasicArrayListD.jnew())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, stringList}, 'BasicArrayListD':new()),
-    put({This, timeList}, 'BasicArrayListD':new()),
-    put({This, colorList}, 'BasicArrayListD':new()),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-add(This, String, Seconds, BasicColor) when (is_list(String) orelse String =:= undefined) ->
-        case (not (get({get({This, stringList}), '$class'})):contains(get({This, stringList}), String)) of
-            true ->
-            (get({get({This, stringList}), '$class'})):add(get({This, stringList}), String),
-            (get({get({This, timeList}), '$class'})):add(get({This, timeList}), Seconds),
-            (get({get({This, colorList}), '$class'})):add(get({This, colorList}), BasicColor);
-            false -> ok
-        end.
+  def jm_add(this, p_string, p_seconds, p_basicColor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :string, p_string)
+      JR.lset(f, :seconds, p_seconds)
+      JR.lset(f, :basicColor, p_basicColor)
+        if !JR.call(JR.get(this, :stringList), :jm_contains, [JR.lget(f, :string)]) do
+            JR.call(JR.get(this, :stringList), :jm_add, [JR.lget(f, :string)])
+            JR.call(JR.get(this, :timeList), :jm_add, [JR.lget(f, :seconds)])
+            JR.call(JR.get(this, :colorList), :jm_add, [JR.lget(f, :basicColor)])
+        end
+    end)
+  end
 
-clear(This) ->
-        (get({get({This, stringList}), '$class'})):clear(get({This, stringList})),
-        (get({get({This, timeList}), '$class'})):clear(get({This, timeList})),
-        (get({get({This, colorList}), '$class'})):clear(get({This, colorList})).
 
-getSize(This) ->
-        (get({get({This, stringList}), '$class'})):size(get({This, stringList})).
+  def jm_clear(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :stringList), :jm_clear, [])
+        JR.call(JR.get(this, :timeList), :jm_clear, [])
+        JR.call(JR.get(this, :colorList), :jm_clear, [])
+    end)
+  end
+
+
+  def jm_getSize(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.get(this, :stringList), :jm_size, [])})
+    end)
+  end
+end
+
 

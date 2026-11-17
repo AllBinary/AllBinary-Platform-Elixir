@@ -1,76 +1,166 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.collision
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.game.layer.CollidableCompositeLayer
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonLabels
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.collision
 
--module('CollidableBaseBehavior').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements CollidableInterface
+defmodule CollidableBaseBehavior do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, layerCollisionUtil}, 'LayerCollisionUtil':getInstance()),
-    put({This, collidable}, true),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :layerCollisionUtil, nil)
+    JR.put(this, :collidable, false)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        JR.put(this, :layerCollisionUtil, LayerCollisionUtil.jm_getInstance())
+        JR.put(this, :collidable, true)
+    nil
+  end
 
 
-new(Collidable) when is_boolean(Collidable) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Collidable),
-    This.
+  def jinit(this, p_collidable) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :collidable, p_collidable)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :collidable, JR.lget(f, :collidable))
+    end)
+  end
 
-'$init'(This, Collidable) when is_boolean(Collidable) ->
-    init_fields(This),
-        put({This, collidable}, Collidable).
+  def jnew(p_collidable) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_collidable)
+    this
+  end
 
-update(This) ->
-        ok.
 
-getName(This) ->
-        atom_to_list(get({This, '$class'})).
+  def jm_update(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-setCollidable(This, Collidable) when is_boolean(Collidable) ->
-        put({This, collidable}, Collidable).
 
-isCollidable(This, OwnerLayer) ->
-        get({This, collidable}).
+  def jm_getName(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.class_name(this)})
+    end)
+  end
 
-% throws Exception
-collide(This, OwnerLayer, AllbinaryCollidableLayer) ->
-        erlang:error({'Exception', (fun(Target_N66307) -> (get({Target_N66307, '$class'})):toString(Target_N66307) end)((fun(Target_N66314) -> (get({Target_N66314, '$class'})):append(Target_N66314, atom_to_list(get({This, '$class'}))) end)((fun(Target_N66321) -> (get({Target_N66321, '$class'})):append(Target_N66321, get({'CommonLabels':getInstance(), 'COLON_SEP'})) end)((fun(Target_N66328) -> (get({Target_N66328, '$class'})):append(Target_N66328, get({get({This, commonStrings}), 'NOT_IMPLEMENTED'})) end)('StringMaker':new()))))}).
 
-isCollision(This, OwnerLayer, CollisionLayer) ->
-        (get({get({This, layerCollisionUtil}), '$class'})):isCollision(get({This, layerCollisionUtil}), OwnerLayer, CollisionLayer).
+  def jm_setCollidable(this, p_collidable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :collidable, p_collidable)
+        JR.put(this, :collidable, JR.lget(f, :collidable))
+    end)
+  end
 
-isCollisionInterface(This, OwnerLayer, CollidableInterfaceCompositeInterface) ->
-        (get({get({This, layerCollisionUtil}), '$class'})):isCollision(get({This, layerCollisionUtil}), OwnerLayer, CollidableInterfaceCompositeInterface).
 
-% throws Exception
-collideInterface(This, OwnerLayer, CollidableInterfaceCompositeInterface) ->
-        erlang:error({'Exception', get({get({This, commonStrings}), 'NOT_IMPLEMENTED'})}).
+  def jm_isCollidable(this, p_ownerLayer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownerLayer, p_ownerLayer)
+        throw({:jreturn, JR.get(this, :collidable)})
+    end)
+  end
 
-paint(This, OwnerLayer, Graphics) ->
-        ok.
 
-getCollisionTypeWith(This, LayerInterface) ->
-        get({'CollisionTypeFactory':getInstance(), 'NONE'}).
+  def jm_collide(this, p_ownerLayer, p_allbinaryCollidableLayer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownerLayer, p_ownerLayer)
+      JR.lset(f, :allbinaryCollidableLayer, p_allbinaryCollidableLayer)
+        throw({:jexception, JR.exception("Exception", JR.call(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED)]), :jm_append, [JR.get(CommonLabels.jm_getInstance(), :COLON_SEP)]), :jm_append, [JR.class_name(this)]), :jm_toString, []))})
+    end)
+  end
+
+
+  def jm_isCollision(this, p_ownerLayer, p_collisionLayer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownerLayer, p_ownerLayer)
+      JR.lset(f, :collisionLayer, p_collisionLayer)
+        throw({:jreturn, JR.call(JR.get(this, :layerCollisionUtil), :jm_isCollision, [JR.lget(f, :ownerLayer), JR.lget(f, :collisionLayer)])})
+    end)
+  end
+
+
+  def jm_isCollisionInterface(this, p_ownerLayer, p_collidableInterfaceCompositeInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownerLayer, p_ownerLayer)
+      JR.lset(f, :collidableInterfaceCompositeInterface, p_collidableInterfaceCompositeInterface)
+        throw({:jreturn, JR.call(JR.get(this, :layerCollisionUtil), :jm_isCollision, [JR.lget(f, :ownerLayer), JR.lget(f, :collidableInterfaceCompositeInterface)])})
+    end)
+  end
+
+
+  def jm_collideInterface(this, p_ownerLayer, p_collidableInterfaceCompositeInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownerLayer, p_ownerLayer)
+      JR.lset(f, :collidableInterfaceCompositeInterface, p_collidableInterfaceCompositeInterface)
+        throw({:jexception, JR.exception("Exception", JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED))})
+    end)
+  end
+
+
+  def jm_paint(this, p_ownerLayer, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownerLayer, p_ownerLayer)
+      JR.lset(f, :graphics, p_graphics)
+        nil
+    end)
+  end
+
+
+  def jm_getCollisionTypeWith(this, p_layerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+        throw({:jreturn, JR.get(CollisionTypeFactory.jm_getInstance(), :NONE)})
+    end)
+  end
+end
+
 

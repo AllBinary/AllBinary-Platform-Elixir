@@ -1,106 +1,134 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion.button
-% import org.allbinary.graphics.CellPosition
-% import org.allbinary.graphics.CellPositionFactory
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
--module('BasicTouchButtonCellPositionFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule BasicTouchButtonCellPositionFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, 'TOP_RIGHT'}, undefined),
-    put({This, 'TOP_LEFT'}, undefined),
-    put({This, 'SECOND_FROM_TOP_LEFT'}, undefined),
-    put({This, 'SECOND_FROM_TOP_RIGHT'}, undefined),
-    put({This, 'TOP_SECOND_FROM_LEFT'}, undefined),
-    put({This, 'TOP_SECOND_FROM_RIGHT'}, undefined),
-    put({This, 'BOTTOM_RIGHT'}, undefined),
-    put({This, 'BOTTOM_SECOND_FROM_RIGHT'}, undefined),
-    put({This, 'SECOND_FROM_BOTTOM_RIGHT'}, undefined),
-    put({This, 'THIRD_FROM_BOTTOM_RIGHT'}, undefined),
-    put({This, 'FOURTH_FROM_BOTTOM_RIGHT'}, undefined),
-    put({This, 'SECOND_FROM_BOTTOM_SECOND_FROM_RIGHT'}, undefined),
-    put({This, 'SECOND_FROM_BOTTOM_THIRD_FROM_RIGHT'}, undefined),
-    put({This, 'SECOND_FROM_BOTTOM_FOURTH_FROM_RIGHT'}, undefined),
-    put({This, 'BOTTOM_THIRD_FROM_RIGHT'}, undefined),
-    put({This, 'BOTTOM_FOURTH_FROM_RIGHT'}, undefined),
-    put({This, 'BOTTOM_SECOND_FROM_LEFT'}, undefined),
-    put({This, 'SECOND_FROM_BOTTOM_LEFT'}, undefined),
-    put({This, 'THIRD_FROM_BOTTOM_LEFT'}, undefined),
-    put({This, 'BOTTOM_LEFT'}, undefined),
-    put({This, 'SECOND_FROM_BOTTOM_SECOND_FROM_LEFT'}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :TOP_RIGHT, nil)
+    JR.put(this, :TOP_LEFT, nil)
+    JR.put(this, :SECOND_FROM_TOP_LEFT, nil)
+    JR.put(this, :SECOND_FROM_TOP_RIGHT, nil)
+    JR.put(this, :TOP_SECOND_FROM_LEFT, nil)
+    JR.put(this, :TOP_SECOND_FROM_RIGHT, nil)
+    JR.put(this, :BOTTOM_RIGHT, nil)
+    JR.put(this, :BOTTOM_SECOND_FROM_RIGHT, nil)
+    JR.put(this, :SECOND_FROM_BOTTOM_RIGHT, nil)
+    JR.put(this, :THIRD_FROM_BOTTOM_RIGHT, nil)
+    JR.put(this, :FOURTH_FROM_BOTTOM_RIGHT, nil)
+    JR.put(this, :SECOND_FROM_BOTTOM_SECOND_FROM_RIGHT, nil)
+    JR.put(this, :SECOND_FROM_BOTTOM_THIRD_FROM_RIGHT, nil)
+    JR.put(this, :SECOND_FROM_BOTTOM_FOURTH_FROM_RIGHT, nil)
+    JR.put(this, :BOTTOM_THIRD_FROM_RIGHT, nil)
+    JR.put(this, :BOTTOM_FOURTH_FROM_RIGHT, nil)
+    JR.put(this, :BOTTOM_SECOND_FROM_LEFT, nil)
+    JR.put(this, :SECOND_FROM_BOTTOM_LEFT, nil)
+    JR.put(this, :THIRD_FROM_BOTTOM_LEFT, nil)
+    JR.put(this, :BOTTOM_LEFT, nil)
+    JR.put(this, :SECOND_FROM_BOTTOM_SECOND_FROM_LEFT, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        
+        
+        JR.put(this, :SECOND_FROM_TOP_LEFT, nil)
+        JR.put(this, :SECOND_FROM_TOP_RIGHT, nil)
+        JR.put(this, :TOP_SECOND_FROM_LEFT, nil)
+        JR.put(this, :TOP_SECOND_FROM_RIGHT, nil)
+        
+        
+        
+        JR.put(this, :THIRD_FROM_BOTTOM_RIGHT, nil)
+        JR.put(this, :FOURTH_FROM_BOTTOM_RIGHT, nil)
+        
+        JR.put(this, :SECOND_FROM_BOTTOM_THIRD_FROM_RIGHT, nil)
+        JR.put(this, :SECOND_FROM_BOTTOM_FOURTH_FROM_RIGHT, nil)
+        JR.put(this, :BOTTOM_THIRD_FROM_RIGHT, nil)
+        JR.put(this, :BOTTOM_FOURTH_FROM_RIGHT, nil)
+        
+        
+        JR.put(this, :THIRD_FROM_BOTTOM_LEFT, nil)
+        
+        
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, JR.get(JR.get(this, :commonStrings), :CONSTRUCTOR)])
+        JR.lset(f, :touchButtonLocationHelper, TouchButtonLocationHelper.jnew())
+        JR.lset(f, :cellPositionFactory, CellPositionFactory.jm_getInstance())
+        JR.call(JR.lget(f, :cellPositionFactory), :jm_init, [JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalColumns, []), JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalRows, [])])
+        JR.put(this, :TOP_LEFT, JR.call(JR.lget(f, :cellPositionFactory), :jm_getInstanceColRow, [0, 0]))
+        JR.put(this, :TOP_RIGHT, JR.call(JR.lget(f, :cellPositionFactory), :jm_getInstanceColRow, [(JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalColumns, []) - 1), 0]))
+        JR.put(this, :BOTTOM_LEFT, JR.call(JR.lget(f, :cellPositionFactory), :jm_getInstanceColRow, [0, (JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalRows, []) - 1)]))
+        JR.put(this, :BOTTOM_RIGHT, JR.call(JR.lget(f, :cellPositionFactory), :jm_getInstanceColRow, [(JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalColumns, []) - 1), (JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalRows, []) - 1)]))
+        JR.put(this, :BOTTOM_SECOND_FROM_RIGHT, JR.call(JR.lget(f, :cellPositionFactory), :jm_getInstanceColRow, [(JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalColumns, []) - 2), (JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalRows, []) - 1)]))
+        JR.put(this, :SECOND_FROM_BOTTOM_RIGHT, JR.call(JR.lget(f, :cellPositionFactory), :jm_getInstanceColRow, [(JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalColumns, []) - 1), (JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalRows, []) - 2)]))
+        JR.put(this, :SECOND_FROM_BOTTOM_SECOND_FROM_RIGHT, JR.call(JR.lget(f, :cellPositionFactory), :jm_getInstanceColRow, [(JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalColumns, []) - 2), (JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalRows, []) - 2)]))
+        JR.put(this, :BOTTOM_SECOND_FROM_LEFT, JR.call(JR.lget(f, :cellPositionFactory), :jm_getInstanceColRow, [1, (JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalRows, []) - 1)]))
+        JR.put(this, :SECOND_FROM_BOTTOM_LEFT, JR.call(JR.lget(f, :cellPositionFactory), :jm_getInstanceColRow, [0, (JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalRows, []) - 2)]))
+        JR.put(this, :SECOND_FROM_BOTTOM_SECOND_FROM_LEFT, JR.call(JR.lget(f, :cellPositionFactory), :jm_getInstanceColRow, [1, (JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalRows, []) - 2)]))
+        if (JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalRows, []) > 2) do
+            JR.put(this, :SECOND_FROM_TOP_LEFT, JR.call(JR.lget(f, :cellPositionFactory), :jm_getInstanceColRow, [0, 1]))
+            JR.put(this, :SECOND_FROM_TOP_RIGHT, JR.call(JR.lget(f, :cellPositionFactory), :jm_getInstanceColRow, [(JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalColumns, []) - 1), 1]))
+        else
+            JR.put(this, :SECOND_FROM_TOP_LEFT, JR.get(JR.lget(f, :cellPositionFactory), :NONE))
+            JR.put(this, :SECOND_FROM_TOP_RIGHT, JR.get(JR.lget(f, :cellPositionFactory), :NONE))
+        end
+        if (JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalRows, []) >= 4) do
+            JR.put(this, :THIRD_FROM_BOTTOM_RIGHT, JR.call(JR.lget(f, :cellPositionFactory), :jm_getInstanceColRow, [(JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalColumns, []) - 1), (JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalRows, []) - 3)]))
+            JR.put(this, :FOURTH_FROM_BOTTOM_RIGHT, JR.call(JR.lget(f, :cellPositionFactory), :jm_getInstanceColRow, [(JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalColumns, []) - 1), (JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalRows, []) - 4)]))
+            JR.put(this, :THIRD_FROM_BOTTOM_LEFT, JR.call(JR.lget(f, :cellPositionFactory), :jm_getInstanceColRow, [0, (JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalRows, []) - 3)]))
+        else
+            JR.put(this, :THIRD_FROM_BOTTOM_RIGHT, JR.get(JR.lget(f, :cellPositionFactory), :NONE))
+            JR.put(this, :FOURTH_FROM_BOTTOM_RIGHT, JR.get(JR.lget(f, :cellPositionFactory), :NONE))
+            JR.put(this, :THIRD_FROM_BOTTOM_LEFT, JR.get(JR.lget(f, :cellPositionFactory), :NONE))
+        end
+        if (JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalColumns, []) >= 4) do
+            JR.put(this, :SECOND_FROM_BOTTOM_THIRD_FROM_RIGHT, JR.call(JR.lget(f, :cellPositionFactory), :jm_getInstanceColRow, [(JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalColumns, []) - 3), (JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalRows, []) - 2)]))
+            JR.put(this, :SECOND_FROM_BOTTOM_FOURTH_FROM_RIGHT, JR.call(JR.lget(f, :cellPositionFactory), :jm_getInstanceColRow, [(JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalColumns, []) - 4), (JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalRows, []) - 2)]))
+            JR.put(this, :BOTTOM_THIRD_FROM_RIGHT, JR.call(JR.lget(f, :cellPositionFactory), :jm_getInstanceColRow, [(JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalColumns, []) - 3), (JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalRows, []) - 1)]))
+            JR.put(this, :BOTTOM_FOURTH_FROM_RIGHT, JR.call(JR.lget(f, :cellPositionFactory), :jm_getInstanceColRow, [(JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalColumns, []) - 4), (JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalRows, []) - 1)]))
+            JR.put(this, :TOP_SECOND_FROM_LEFT, JR.call(JR.lget(f, :cellPositionFactory), :jm_getInstanceColRow, [1, 0]))
+            JR.put(this, :TOP_SECOND_FROM_RIGHT, JR.call(JR.lget(f, :cellPositionFactory), :jm_getInstanceColRow, [(JR.call(JR.lget(f, :touchButtonLocationHelper), :jm_getTotalColumns, []) - 2), 0]))
+        else
+            JR.put(this, :SECOND_FROM_BOTTOM_THIRD_FROM_RIGHT, JR.get(JR.lget(f, :cellPositionFactory), :NONE))
+            JR.put(this, :SECOND_FROM_BOTTOM_FOURTH_FROM_RIGHT, JR.get(JR.lget(f, :cellPositionFactory), :NONE))
+            JR.put(this, :BOTTOM_THIRD_FROM_RIGHT, JR.get(JR.lget(f, :cellPositionFactory), :NONE))
+            JR.put(this, :BOTTOM_FOURTH_FROM_RIGHT, JR.get(JR.lget(f, :cellPositionFactory), :NONE))
+            JR.put(this, :TOP_SECOND_FROM_LEFT, JR.get(JR.lget(f, :cellPositionFactory), :NONE))
+            JR.put(this, :TOP_SECOND_FROM_RIGHT, JR.get(JR.lget(f, :cellPositionFactory), :NONE))
+        end
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, get({get({This, commonStrings}), 'CONSTRUCTOR'})),
-        TouchButtonLocationHelper = 'TouchButtonLocationHelper':new(),
-        CellPositionFactory = 'CellPositionFactory':getInstance(),
-        (get({CellPositionFactory, '$class'})):init(CellPositionFactory, (get({TouchButtonLocationHelper, '$class'})):getTotalColumns(TouchButtonLocationHelper), (get({TouchButtonLocationHelper, '$class'})):getTotalRows(TouchButtonLocationHelper)),
-        put({This, 'TOP_LEFT'}, (get({CellPositionFactory, '$class'})):getInstanceColRow(CellPositionFactory, 0, 0)),
-        put({This, 'TOP_RIGHT'}, (get({CellPositionFactory, '$class'})):getInstanceColRow(CellPositionFactory, ((get({TouchButtonLocationHelper, '$class'})):getTotalColumns(TouchButtonLocationHelper) - 1), 0)),
-        put({This, 'BOTTOM_LEFT'}, (get({CellPositionFactory, '$class'})):getInstanceColRow(CellPositionFactory, 0, ((get({TouchButtonLocationHelper, '$class'})):getTotalRows(TouchButtonLocationHelper) - 1))),
-        put({This, 'BOTTOM_RIGHT'}, (get({CellPositionFactory, '$class'})):getInstanceColRow(CellPositionFactory, ((get({TouchButtonLocationHelper, '$class'})):getTotalColumns(TouchButtonLocationHelper) - 1), ((get({TouchButtonLocationHelper, '$class'})):getTotalRows(TouchButtonLocationHelper) - 1))),
-        put({This, 'BOTTOM_SECOND_FROM_RIGHT'}, (get({CellPositionFactory, '$class'})):getInstanceColRow(CellPositionFactory, ((get({TouchButtonLocationHelper, '$class'})):getTotalColumns(TouchButtonLocationHelper) - 2), ((get({TouchButtonLocationHelper, '$class'})):getTotalRows(TouchButtonLocationHelper) - 1))),
-        put({This, 'SECOND_FROM_BOTTOM_RIGHT'}, (get({CellPositionFactory, '$class'})):getInstanceColRow(CellPositionFactory, ((get({TouchButtonLocationHelper, '$class'})):getTotalColumns(TouchButtonLocationHelper) - 1), ((get({TouchButtonLocationHelper, '$class'})):getTotalRows(TouchButtonLocationHelper) - 2))),
-        put({This, 'SECOND_FROM_BOTTOM_SECOND_FROM_RIGHT'}, (get({CellPositionFactory, '$class'})):getInstanceColRow(CellPositionFactory, ((get({TouchButtonLocationHelper, '$class'})):getTotalColumns(TouchButtonLocationHelper) - 2), ((get({TouchButtonLocationHelper, '$class'})):getTotalRows(TouchButtonLocationHelper) - 2))),
-        put({This, 'BOTTOM_SECOND_FROM_LEFT'}, (get({CellPositionFactory, '$class'})):getInstanceColRow(CellPositionFactory, 1, ((get({TouchButtonLocationHelper, '$class'})):getTotalRows(TouchButtonLocationHelper) - 1))),
-        put({This, 'SECOND_FROM_BOTTOM_LEFT'}, (get({CellPositionFactory, '$class'})):getInstanceColRow(CellPositionFactory, 0, ((get({TouchButtonLocationHelper, '$class'})):getTotalRows(TouchButtonLocationHelper) - 2))),
-        put({This, 'SECOND_FROM_BOTTOM_SECOND_FROM_LEFT'}, (get({CellPositionFactory, '$class'})):getInstanceColRow(CellPositionFactory, 1, ((get({TouchButtonLocationHelper, '$class'})):getTotalRows(TouchButtonLocationHelper) - 2))),
-        case ((get({TouchButtonLocationHelper, '$class'})):getTotalRows(TouchButtonLocationHelper) > 2) of
-            true ->
-            put({This, 'SECOND_FROM_TOP_LEFT'}, (get({CellPositionFactory, '$class'})):getInstanceColRow(CellPositionFactory, 0, 1)),
-            put({This, 'SECOND_FROM_TOP_RIGHT'}, (get({CellPositionFactory, '$class'})):getInstanceColRow(CellPositionFactory, ((get({TouchButtonLocationHelper, '$class'})):getTotalColumns(TouchButtonLocationHelper) - 1), 1));
-            false ->
-            put({This, 'SECOND_FROM_TOP_LEFT'}, get({CellPositionFactory, 'NONE'})),
-            put({This, 'SECOND_FROM_TOP_RIGHT'}, get({CellPositionFactory, 'NONE'}))
-        end,
-        case ((get({TouchButtonLocationHelper, '$class'})):getTotalRows(TouchButtonLocationHelper) >= 4) of
-            true ->
-            put({This, 'THIRD_FROM_BOTTOM_RIGHT'}, (get({CellPositionFactory, '$class'})):getInstanceColRow(CellPositionFactory, ((get({TouchButtonLocationHelper, '$class'})):getTotalColumns(TouchButtonLocationHelper) - 1), ((get({TouchButtonLocationHelper, '$class'})):getTotalRows(TouchButtonLocationHelper) - 3))),
-            put({This, 'FOURTH_FROM_BOTTOM_RIGHT'}, (get({CellPositionFactory, '$class'})):getInstanceColRow(CellPositionFactory, ((get({TouchButtonLocationHelper, '$class'})):getTotalColumns(TouchButtonLocationHelper) - 1), ((get({TouchButtonLocationHelper, '$class'})):getTotalRows(TouchButtonLocationHelper) - 4))),
-            put({This, 'THIRD_FROM_BOTTOM_LEFT'}, (get({CellPositionFactory, '$class'})):getInstanceColRow(CellPositionFactory, 0, ((get({TouchButtonLocationHelper, '$class'})):getTotalRows(TouchButtonLocationHelper) - 3)));
-            false ->
-            put({This, 'THIRD_FROM_BOTTOM_RIGHT'}, get({CellPositionFactory, 'NONE'})),
-            put({This, 'FOURTH_FROM_BOTTOM_RIGHT'}, get({CellPositionFactory, 'NONE'})),
-            put({This, 'THIRD_FROM_BOTTOM_LEFT'}, get({CellPositionFactory, 'NONE'}))
-        end,
-        case ((get({TouchButtonLocationHelper, '$class'})):getTotalColumns(TouchButtonLocationHelper) >= 4) of
-            true ->
-            put({This, 'SECOND_FROM_BOTTOM_THIRD_FROM_RIGHT'}, (get({CellPositionFactory, '$class'})):getInstanceColRow(CellPositionFactory, ((get({TouchButtonLocationHelper, '$class'})):getTotalColumns(TouchButtonLocationHelper) - 3), ((get({TouchButtonLocationHelper, '$class'})):getTotalRows(TouchButtonLocationHelper) - 2))),
-            put({This, 'SECOND_FROM_BOTTOM_FOURTH_FROM_RIGHT'}, (get({CellPositionFactory, '$class'})):getInstanceColRow(CellPositionFactory, ((get({TouchButtonLocationHelper, '$class'})):getTotalColumns(TouchButtonLocationHelper) - 4), ((get({TouchButtonLocationHelper, '$class'})):getTotalRows(TouchButtonLocationHelper) - 2))),
-            put({This, 'BOTTOM_THIRD_FROM_RIGHT'}, (get({CellPositionFactory, '$class'})):getInstanceColRow(CellPositionFactory, ((get({TouchButtonLocationHelper, '$class'})):getTotalColumns(TouchButtonLocationHelper) - 3), ((get({TouchButtonLocationHelper, '$class'})):getTotalRows(TouchButtonLocationHelper) - 1))),
-            put({This, 'BOTTOM_FOURTH_FROM_RIGHT'}, (get({CellPositionFactory, '$class'})):getInstanceColRow(CellPositionFactory, ((get({TouchButtonLocationHelper, '$class'})):getTotalColumns(TouchButtonLocationHelper) - 4), ((get({TouchButtonLocationHelper, '$class'})):getTotalRows(TouchButtonLocationHelper) - 1))),
-            put({This, 'TOP_SECOND_FROM_LEFT'}, (get({CellPositionFactory, '$class'})):getInstanceColRow(CellPositionFactory, 1, 0)),
-            put({This, 'TOP_SECOND_FROM_RIGHT'}, (get({CellPositionFactory, '$class'})):getInstanceColRow(CellPositionFactory, ((get({TouchButtonLocationHelper, '$class'})):getTotalColumns(TouchButtonLocationHelper) - 2), 0));
-            false ->
-            put({This, 'SECOND_FROM_BOTTOM_THIRD_FROM_RIGHT'}, get({CellPositionFactory, 'NONE'})),
-            put({This, 'SECOND_FROM_BOTTOM_FOURTH_FROM_RIGHT'}, get({CellPositionFactory, 'NONE'})),
-            put({This, 'BOTTOM_THIRD_FROM_RIGHT'}, get({CellPositionFactory, 'NONE'})),
-            put({This, 'BOTTOM_FOURTH_FROM_RIGHT'}, get({CellPositionFactory, 'NONE'})),
-            put({This, 'TOP_SECOND_FROM_LEFT'}, get({CellPositionFactory, 'NONE'})),
-            put({This, 'TOP_SECOND_FROM_RIGHT'}, get({CellPositionFactory, 'NONE'}))
-        end.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+end
+
 

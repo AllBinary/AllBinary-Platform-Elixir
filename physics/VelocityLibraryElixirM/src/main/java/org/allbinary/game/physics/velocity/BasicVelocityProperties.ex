@@ -1,131 +1,273 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.physics.velocity
-% import org.allbinary.direction.Direction
-% import org.allbinary.direction.DirectionUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.math.BasicDecimal
-% import org.allbinary.logic.math.vector.AxisMathVectorUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.math.Angle
-% import org.allbinary.math.PositionStrings
-% import org.allbinary.string.CommonSeps
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.physics.velocity
 
--module('BasicVelocityProperties').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements BasicVelocityInterface
+defmodule BasicVelocityProperties do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, velocityXBasicDecimal}, undefined),
-    put({This, velocityYBasicDecimal}, undefined),
-    put({This, velocityZBasicDecimal}, undefined),
-    put({This, axisMathVectorUtil}, 'AxisMathVectorUtil':getInstance()),
-    put({This, directionUtil}, 'DirectionUtil':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :velocityXBasicDecimal, nil)
+    JR.put(this, :velocityYBasicDecimal, nil)
+    JR.put(this, :velocityZBasicDecimal, nil)
+    JR.put(this, :axisMathVectorUtil, nil)
+    JR.put(this, :directionUtil, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        
+        
+        
+        JR.put(this, :axisMathVectorUtil, AxisMathVectorUtil.jm_getInstance())
+        JR.put(this, :directionUtil, DirectionUtil.jm_getInstance())
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :velocityXBasicDecimal, BasicDecimal.jnew(0))
+        JR.put(this, :velocityYBasicDecimal, BasicDecimal.jnew(0))
+        JR.put(this, :velocityZBasicDecimal, BasicDecimal.jnew(0))
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        put({This, velocityXBasicDecimal}, 'BasicDecimal':new(0)),
-        put({This, velocityYBasicDecimal}, 'BasicDecimal':new(0)),
-        put({This, velocityZBasicDecimal}, 'BasicDecimal':new(0)).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-zero(This) ->
-        (get({get({This, velocityXBasicDecimal}), '$class'})):setint(get({This, velocityXBasicDecimal}), 0),
-        (get({get({This, velocityYBasicDecimal}), '$class'})):setint(get({This, velocityYBasicDecimal}), 0),
-        (get({get({This, velocityZBasicDecimal}), '$class'})):setint(get({This, velocityZBasicDecimal}), 0).
 
-getVelocityXBasicDecimalP(This) ->
-        get({This, velocityXBasicDecimal}).
+  def jm_zero(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :velocityXBasicDecimal), :jm_setint, [0])
+        JR.call(JR.get(this, :velocityYBasicDecimal), :jm_setint, [0])
+        JR.call(JR.get(this, :velocityZBasicDecimal), :jm_setint, [0])
+    end)
+  end
 
-getVelocityYBasicDecimalP(This) ->
-        get({This, velocityYBasicDecimal}).
 
-getVelocityZBasicDecimalP(This) ->
-        get({This, velocityZBasicDecimal}).
+  def jm_getVelocityXBasicDecimalP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :velocityXBasicDecimal)})
+    end)
+  end
 
-setVelocityWithBigDecimalAndDirection(This, MagnitudeBasicDecimal, Direction, OtherDirection) ->
-        Angle = (get({get({This, directionUtil}), '$class'})):getAngle(get({This, directionUtil}), Direction),
-        OtherAngle = (get({get({This, directionUtil}), '$class'})):getAngle(get({This, directionUtil}), OtherDirection),
-        (get({This, '$class'})):setVelocityWithBigDecimal(This, MagnitudeBasicDecimal, Angle, OtherAngle).
 
-setVelocityWithDirection(This, Magnitude, Direction, OtherDirection) when is_integer(Magnitude) ->
-        Angle = (get({get({This, directionUtil}), '$class'})):getAngle(get({This, directionUtil}), Direction),
-        OtherAngle = (get({get({This, directionUtil}), '$class'})):getAngle(get({This, directionUtil}), OtherDirection),
-        (get({This, '$class'})):setVelocity(This, Magnitude, Angle, OtherAngle).
+  def jm_getVelocityYBasicDecimalP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :velocityYBasicDecimal)})
+    end)
+  end
 
-addVelocityWithBigDecimalAndDirection(This, MagnitudeBasicDecimal, Direction, OtherDirection) ->
-        Angle = (get({get({This, directionUtil}), '$class'})):getAngle(get({This, directionUtil}), Direction),
-        OtherAngle = (get({get({This, directionUtil}), '$class'})):getAngle(get({This, directionUtil}), OtherDirection),
-        (get({This, '$class'})):addVelocityWithBigDecimal(This, MagnitudeBasicDecimal, Angle, OtherAngle).
 
-addVelocityWithDirection(This, Magnitude, Direction, OtherDirection) when is_integer(Magnitude) ->
-        Angle = (get({get({This, directionUtil}), '$class'})):getAngle(get({This, directionUtil}), Direction),
-        OtherAngle = (get({get({This, directionUtil}), '$class'})):getAngle(get({This, directionUtil}), OtherDirection),
-        (get({This, '$class'})):addVelocity(This, Magnitude, Angle, OtherAngle).
+  def jm_getVelocityZBasicDecimalP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :velocityZBasicDecimal)})
+    end)
+  end
 
-setVelocityWithBigDecimal(This, MagnitudeBasicDecimal, Angle, OtherAngle) ->
-        Magnitude = (get({MagnitudeBasicDecimal, '$class'})):getUnscaled(MagnitudeBasicDecimal),
-        (get({This, '$class'})):setVelocity(This, Magnitude, Angle, OtherAngle).
 
-addVelocityWithBigDecimal(This, MagnitudeBasicDecimal, Angle, OtherAngle) ->
-        Magnitude = (get({MagnitudeBasicDecimal, '$class'})):getUnscaled(MagnitudeBasicDecimal),
-        (get({This, '$class'})):addVelocity(This, Magnitude, Angle, OtherAngle).
+  def jm_setVelocityWithBigDecimalAndDirection(this, p_magnitudeBasicDecimal, p_direction, p_otherDirection) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :magnitudeBasicDecimal, p_magnitudeBasicDecimal)
+      JR.lset(f, :direction, p_direction)
+      JR.lset(f, :otherDirection, p_otherDirection)
+        JR.lset(f, :angle, JR.call(JR.get(this, :directionUtil), :jm_getAngle, [JR.lget(f, :direction)]))
+        JR.lset(f, :otherAngle, JR.call(JR.get(this, :directionUtil), :jm_getAngle, [JR.lget(f, :otherDirection)]))
+        JR.call(this, :jm_setVelocityWithBigDecimal, [JR.lget(f, :magnitudeBasicDecimal), JR.lget(f, :angle), JR.lget(f, :otherAngle)])
+    end)
+  end
 
-setVelocity(This, Magnitude, Angle, OtherAngle) when is_integer(Magnitude) ->
-        (get({This, '$class'})):setVelocityi(This, Magnitude, trunc((get({Angle, '$class'})):getValue(Angle)), trunc((get({OtherAngle, '$class'})):getValue(OtherAngle))).
 
-addVelocity(This, Magnitude, Angle, OtherAngle) when is_integer(Magnitude) ->
-        (get({This, '$class'})):addVelocityi(This, Magnitude, trunc((get({Angle, '$class'})):getValue(Angle)), trunc((get({OtherAngle, '$class'})):getValue(OtherAngle))).
+  def jm_setVelocityWithDirection(this, p_magnitude, p_direction, p_otherDirection) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :magnitude, p_magnitude)
+      JR.lset(f, :direction, p_direction)
+      JR.lset(f, :otherDirection, p_otherDirection)
+        JR.lset(f, :angle, JR.call(JR.get(this, :directionUtil), :jm_getAngle, [JR.lget(f, :direction)]))
+        JR.lset(f, :otherAngle, JR.call(JR.get(this, :directionUtil), :jm_getAngle, [JR.lget(f, :otherDirection)]))
+        JR.call(this, :jm_setVelocity, [JR.lget(f, :magnitude), JR.lget(f, :angle), JR.lget(f, :otherAngle)])
+    end)
+  end
 
-setVelocityi(This, Magnitude, Angle, OtherAngle) when is_integer(Magnitude), is_integer(Angle), is_integer(OtherAngle) ->
-        XVector = (((get({get({This, axisMathVectorUtil}), '$class'})):calculateX(get({This, axisMathVectorUtil}), Magnitude, Angle) / (get({get({This, velocityXBasicDecimal}), '$class'})):getScaledFactorValue(get({This, velocityXBasicDecimal})))),
-        YVector = (((get({get({This, axisMathVectorUtil}), '$class'})):calculateY(get({This, axisMathVectorUtil}), Magnitude, Angle) / (get({get({This, velocityYBasicDecimal}), '$class'})):getScaledFactorValue(get({This, velocityYBasicDecimal})))),
-        ZVector = (((get({get({This, axisMathVectorUtil}), '$class'})):calculateZ(get({This, axisMathVectorUtil}), Magnitude, OtherAngle) / (get({get({This, velocityZBasicDecimal}), '$class'})):getScaledFactorValue(get({This, velocityZBasicDecimal})))),
-        (get({get({This, velocityXBasicDecimal}), '$class'})):setlong(get({This, velocityXBasicDecimal}), XVector),
-        (get({get({This, velocityYBasicDecimal}), '$class'})):setlong(get({This, velocityYBasicDecimal}), YVector),
-        (get({get({This, velocityZBasicDecimal}), '$class'})):setlong(get({This, velocityZBasicDecimal}), ZVector).
 
-addVelocityi(This, Magnitude, Angle, OtherAngle) when is_integer(Magnitude), is_integer(Angle), is_integer(OtherAngle) ->
-        XVector = (((get({get({This, axisMathVectorUtil}), '$class'})):calculateX(get({This, axisMathVectorUtil}), Magnitude, Angle) / (get({get({This, velocityXBasicDecimal}), '$class'})):getScaledFactorValue(get({This, velocityXBasicDecimal})))),
-        YVector = (((get({get({This, axisMathVectorUtil}), '$class'})):calculateY(get({This, axisMathVectorUtil}), Magnitude, Angle) / (get({get({This, velocityYBasicDecimal}), '$class'})):getScaledFactorValue(get({This, velocityYBasicDecimal})))),
-        ZVector = (((get({get({This, axisMathVectorUtil}), '$class'})):calculateZ(get({This, axisMathVectorUtil}), Magnitude, OtherAngle) / (get({get({This, velocityZBasicDecimal}), '$class'})):getScaledFactorValue(get({This, velocityZBasicDecimal})))),
-        (get({get({This, velocityXBasicDecimal}), '$class'})):addlong(get({This, velocityXBasicDecimal}), XVector),
-        (get({get({This, velocityYBasicDecimal}), '$class'})):addlong(get({This, velocityYBasicDecimal}), YVector),
-        (get({get({This, velocityZBasicDecimal}), '$class'})):addlong(get({This, velocityZBasicDecimal}), ZVector).
+  def jm_addVelocityWithBigDecimalAndDirection(this, p_magnitudeBasicDecimal, p_direction, p_otherDirection) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :magnitudeBasicDecimal, p_magnitudeBasicDecimal)
+      JR.lset(f, :direction, p_direction)
+      JR.lset(f, :otherDirection, p_otherDirection)
+        JR.lset(f, :angle, JR.call(JR.get(this, :directionUtil), :jm_getAngle, [JR.lget(f, :direction)]))
+        JR.lset(f, :otherAngle, JR.call(JR.get(this, :directionUtil), :jm_getAngle, [JR.lget(f, :otherDirection)]))
+        JR.call(this, :jm_addVelocityWithBigDecimal, [JR.lget(f, :magnitudeBasicDecimal), JR.lget(f, :angle), JR.lget(f, :otherAngle)])
+    end)
+  end
 
-toString(This) ->
-        CommonSeps = 'CommonSeps':getInstance(),
-        PositionStrings = 'PositionStrings':getInstance(),
-        StringBuffer = 'StringMaker':new(),
-        StringUtil = 'StringUtil':getInstance(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "Velocity "),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({PositionStrings, 'X_LABEL'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({StringUtil, '$class'})):toString(StringUtil, get({This, velocityXBasicDecimal}))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'SPACE'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({PositionStrings, 'Y_LABEL'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({StringUtil, '$class'})):toString(StringUtil, get({This, velocityYBasicDecimal}))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({CommonSeps, 'SPACE'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({PositionStrings, 'Z_LABEL'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({StringUtil, '$class'})):toString(StringUtil, get({This, velocityZBasicDecimal}))),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+
+  def jm_addVelocityWithDirection(this, p_magnitude, p_direction, p_otherDirection) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :magnitude, p_magnitude)
+      JR.lset(f, :direction, p_direction)
+      JR.lset(f, :otherDirection, p_otherDirection)
+        JR.lset(f, :angle, JR.call(JR.get(this, :directionUtil), :jm_getAngle, [JR.lget(f, :direction)]))
+        JR.lset(f, :otherAngle, JR.call(JR.get(this, :directionUtil), :jm_getAngle, [JR.lget(f, :otherDirection)]))
+        JR.call(this, :jm_addVelocity, [JR.lget(f, :magnitude), JR.lget(f, :angle), JR.lget(f, :otherAngle)])
+    end)
+  end
+
+
+  def jm_setVelocityWithBigDecimal(this, p_magnitudeBasicDecimal, p_angle, p_otherAngle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :magnitudeBasicDecimal, p_magnitudeBasicDecimal)
+      JR.lset(f, :angle, p_angle)
+      JR.lset(f, :otherAngle, p_otherAngle)
+        JR.lset(f, :magnitude, JR.call(JR.lget(f, :magnitudeBasicDecimal), :jm_getUnscaled, []))
+        JR.call(this, :jm_setVelocity, [JR.lget(f, :magnitude), JR.lget(f, :angle), JR.lget(f, :otherAngle)])
+    end)
+  end
+
+
+  def jm_addVelocityWithBigDecimal(this, p_magnitudeBasicDecimal, p_angle, p_otherAngle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :magnitudeBasicDecimal, p_magnitudeBasicDecimal)
+      JR.lset(f, :angle, p_angle)
+      JR.lset(f, :otherAngle, p_otherAngle)
+        JR.lset(f, :magnitude, JR.call(JR.lget(f, :magnitudeBasicDecimal), :jm_getUnscaled, []))
+        JR.call(this, :jm_addVelocity, [JR.lget(f, :magnitude), JR.lget(f, :angle), JR.lget(f, :otherAngle)])
+    end)
+  end
+
+
+  def jm_setVelocity(this, p_magnitude, p_angle, p_otherAngle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :magnitude, p_magnitude)
+      JR.lset(f, :angle, p_angle)
+      JR.lset(f, :otherAngle, p_otherAngle)
+        JR.call(this, :jm_setVelocityi, [JR.lget(f, :magnitude), JR.int32(JR.call(JR.lget(f, :angle), :jm_getValue, [])), JR.int32(JR.call(JR.lget(f, :otherAngle), :jm_getValue, []))])
+    end)
+  end
+
+
+  def jm_addVelocity(this, p_magnitude, p_angle, p_otherAngle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :magnitude, p_magnitude)
+      JR.lset(f, :angle, p_angle)
+      JR.lset(f, :otherAngle, p_otherAngle)
+        JR.call(this, :jm_addVelocityi, [JR.lget(f, :magnitude), JR.int32(JR.call(JR.lget(f, :angle), :jm_getValue, [])), JR.int32(JR.call(JR.lget(f, :otherAngle), :jm_getValue, []))])
+    end)
+  end
+
+
+  def jm_setVelocityi(this, p_magnitude, p_angle, p_otherAngle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :magnitude, p_magnitude)
+      JR.lset(f, :angle, p_angle)
+      JR.lset(f, :otherAngle, p_otherAngle)
+        JR.lset(f, :xVector, ((JR.call(JR.get(this, :axisMathVectorUtil), :jm_calculateX, [JR.lget(f, :magnitude), JR.lget(f, :angle)]) / JR.call(JR.get(this, :velocityXBasicDecimal), :jm_getScaledFactorValue, []))))
+        JR.lset(f, :yVector, ((JR.call(JR.get(this, :axisMathVectorUtil), :jm_calculateY, [JR.lget(f, :magnitude), JR.lget(f, :angle)]) / JR.call(JR.get(this, :velocityYBasicDecimal), :jm_getScaledFactorValue, []))))
+        JR.lset(f, :zVector, ((JR.call(JR.get(this, :axisMathVectorUtil), :jm_calculateZ, [JR.lget(f, :magnitude), JR.lget(f, :otherAngle)]) / JR.call(JR.get(this, :velocityZBasicDecimal), :jm_getScaledFactorValue, []))))
+        JR.call(JR.get(this, :velocityXBasicDecimal), :jm_setlong, [JR.lget(f, :xVector)])
+        JR.call(JR.get(this, :velocityYBasicDecimal), :jm_setlong, [JR.lget(f, :yVector)])
+        JR.call(JR.get(this, :velocityZBasicDecimal), :jm_setlong, [JR.lget(f, :zVector)])
+    end)
+  end
+
+
+  def jm_addVelocityi(this, p_magnitude, p_angle, p_otherAngle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :magnitude, p_magnitude)
+      JR.lset(f, :angle, p_angle)
+      JR.lset(f, :otherAngle, p_otherAngle)
+        JR.lset(f, :xVector, ((JR.call(JR.get(this, :axisMathVectorUtil), :jm_calculateX, [JR.lget(f, :magnitude), JR.lget(f, :angle)]) / JR.call(JR.get(this, :velocityXBasicDecimal), :jm_getScaledFactorValue, []))))
+        JR.lset(f, :yVector, ((JR.call(JR.get(this, :axisMathVectorUtil), :jm_calculateY, [JR.lget(f, :magnitude), JR.lget(f, :angle)]) / JR.call(JR.get(this, :velocityYBasicDecimal), :jm_getScaledFactorValue, []))))
+        JR.lset(f, :zVector, ((JR.call(JR.get(this, :axisMathVectorUtil), :jm_calculateZ, [JR.lget(f, :magnitude), JR.lget(f, :otherAngle)]) / JR.call(JR.get(this, :velocityZBasicDecimal), :jm_getScaledFactorValue, []))))
+        JR.call(JR.get(this, :velocityXBasicDecimal), :jm_addlong, [JR.lget(f, :xVector)])
+        JR.call(JR.get(this, :velocityYBasicDecimal), :jm_addlong, [JR.lget(f, :yVector)])
+        JR.call(JR.get(this, :velocityZBasicDecimal), :jm_addlong, [JR.lget(f, :zVector)])
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :commonSeps, CommonSeps.jm_getInstance())
+        JR.lset(f, :positionStrings, PositionStrings.jm_getInstance())
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.lset(f, :stringUtil, StringUtil.jm_getInstance())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["Velocity "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :positionStrings), :X_LABEL)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.lget(f, :stringUtil), :jm_toString, [JR.get(this, :velocityXBasicDecimal)])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :SPACE)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :positionStrings), :Y_LABEL)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.lget(f, :stringUtil), :jm_toString, [JR.get(this, :velocityYBasicDecimal)])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :commonSeps), :SPACE)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(JR.lget(f, :positionStrings), :Z_LABEL)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.lget(f, :stringUtil), :jm_toString, [JR.get(this, :velocityZBasicDecimal)])])
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+end
+
 

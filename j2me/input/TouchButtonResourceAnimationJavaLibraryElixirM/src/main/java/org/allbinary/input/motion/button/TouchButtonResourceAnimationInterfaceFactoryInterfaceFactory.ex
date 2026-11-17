@@ -1,162 +1,179 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2011 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion.button
-% import javax.microedition.lcdui.Image
-% import org.allbinary.animation.AnimationBehaviorFactory
-% import org.allbinary.animation.NullAnimationFactory
-% import org.allbinary.animation.image.sprite.OneRowSpriteIndexedAnimationFactory
-% import org.allbinary.animation.resource.BaseResourceAnimationInterfaceFactoryInterfaceFactory
-% import org.allbinary.game.configuration.feature.Features
-% import org.allbinary.game.resource.ResourceLoadingLevelFactory
-% import org.allbinary.graphics.canvas.transition.progress.ProgressCanvas
-% import org.allbinary.graphics.canvas.transition.progress.ProgressCanvasFactory
-% import org.allbinary.graphics.opengles.OpenGLFeatureFactory
-% import org.allbinary.image.ImageCache
-% import org.allbinary.image.ImageCacheFactory
-% import org.allbinary.logic.StdUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.system.os.OperatingSystemFactory
-% import org.allbinary.media.image.ImageCompleteUtil
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2011 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
--module('TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory do
+  def jsuper(), do: BaseResourceAnimationInterfaceFactoryInterfaceFactory
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BaseResourceAnimationInterfaceFactoryInterfaceFactory', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-createFactory() ->
-        'TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory':new("TouchButton Animations").
+  def jm_createFactory() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory.jnew("TouchButton Animations")})
+    end)
+  end
 
-new(Name) when (is_list(Name) orelse Name =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Name),
-    This.
 
-'$init'(This, Name) when (is_list(Name) orelse Name =:= undefined) ->
-        'BaseResourceAnimationInterfaceFactoryInterfaceFactory':'$init'(This, Name, (fun(Target_N66163) -> (get({Target_N66163, '$class'})):createHashtable(Target_N66163) end)('StdUtil':getInstance()), (fun(Target_N66187) -> (get({Target_N66187, '$class'})):createHashtable(Target_N66187) end)('StdUtil':getInstance()), (fun(Target_N66211) -> (get({Target_N66211, '$class'})):createHashtable(Target_N66211) end)('StdUtil':getInstance())).
+  def jinit(this, p_name) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+        BaseResourceAnimationInterfaceFactoryInterfaceFactory.jinit(this, JR.lget(f, :name), JR.call(StdUtil.jm_getInstance(), :jm_createHashtable, []), JR.call(StdUtil.jm_getInstance(), :jm_createHashtable, []), JR.call(StdUtil.jm_getInstance(), :jm_createHashtable, []))
+        TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory.jinitfields(this)
+    end)
+  end
 
-% throws Exception
-init(This, Level) when is_integer(Level) ->
-        (get({This, '$class'})):initImageCache(This, 'ImageCacheFactory':getInstance(), Level).
+  def jnew(p_name) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_name)
+    this
+  end
 
-% throws Exception
-initImageCache(This, ImageCache, Level) when is_integer(Level) ->
-        try
-        case (get({This, '$class'})):isInitialized(This) of
-            true ->
-            throw({'$return', ok});
-            false -> ok
-        end,
-        Portion = 140,
-        LoadingString = (fun(Target_N66479) -> (get({Target_N66479, '$class'})):toString(Target_N66479) end)((fun(Target_N66486) -> (get({Target_N66486, '$class'})):append(Target_N66486, " Loading: ") end)((fun(Target_N66493) -> (get({Target_N66493, '$class'})):append(Target_N66493, (get({This, '$class'})):toString(This)) end)('StringMaker':new()))),
-        put({local, index}, 0),
-        ProgressCanvas = 'ProgressCanvasFactory':getInstance(),
-        (get({ProgressCanvas, '$class'})):addPortion(ProgressCanvas, Portion, LoadingString, allbinary_java:first(get({local, index}), put({local, index}, get({local, index}) + 1))),
-        TouchButtonBlankResource = 'TouchButtonBlankResource':getInstance(),
-        TouchButtonGenericActionResource = 'TouchButtonGenericActionResource':getInstance(),
-        TouchButtonStartResource = 'TouchButtonStartResource':getInstance(),
-        TouchButtonUpResource = 'TouchButtonUpResource':getInstance(),
-        TouchButtonDownResource = 'TouchButtonDownResource':getInstance(),
-        TouchButtonTurnLeftResource = 'TouchButtonTurnLeftResource':getInstance(),
-        TouchButtonTurnRightResource = 'TouchButtonTurnRightResource':getInstance(),
-        TouchButtonStrafeLeftResource = 'TouchButtonStrafeLeftResource':getInstance(),
-        TouchButtonStrafeRightResource = 'TouchButtonStrafeRightResource':getInstance(),
-        TouchButtonBlankResourceImage = (get({ImageCache, '$class'})):getWithKey(ImageCache, get({TouchButtonBlankResource, 'RESOURCE'})),
-        TouchButtonGenericActionResourceImage = (get({ImageCache, '$class'})):getWithKey(ImageCache, get({TouchButtonGenericActionResource, 'RESOURCE'})),
-        TouchButtonStartResourceImage = (get({ImageCache, '$class'})):getWithKey(ImageCache, get({TouchButtonStartResource, 'RESOURCE'})),
-        TouchButtonUpResourceImage = (get({ImageCache, '$class'})):getWithKey(ImageCache, get({TouchButtonUpResource, 'RESOURCE'})),
-        TouchButtonDownResourceImage = (get({ImageCache, '$class'})):getWithKey(ImageCache, get({TouchButtonDownResource, 'RESOURCE'})),
-        TouchButtonTurnLeftResourceImage = (get({ImageCache, '$class'})):getWithKey(ImageCache, get({TouchButtonTurnLeftResource, 'RESOURCE'})),
-        TouchButtonTurnRightResourceImage = (get({ImageCache, '$class'})):getWithKey(ImageCache, get({TouchButtonTurnRightResource, 'RESOURCE'})),
-        TouchButtonStrafeLeftResourceImage = (get({ImageCache, '$class'})):getWithKey(ImageCache, get({TouchButtonStrafeLeftResource, 'RESOURCE'})),
-        TouchButtonStrafeRightResourceImage = (get({ImageCache, '$class'})):getWithKey(ImageCache, get({TouchButtonStrafeRightResource, 'RESOURCE'})),
-        NullAnimationFactory = 'NullAnimationFactory':getFactoryInstance(),
-        case (fun(Target_N67809) -> (get({Target_N67809, '$class'})):isOverScan(Target_N67809) end)((fun(Target_N67816) -> (get({Target_N67816, '$class'})):getOperatingSystemInstance(Target_N67816) end)('OperatingSystemFactory':getInstance())) of
-            true ->
-            (get({ImageCache, '$class'})):getWithKey(ImageCache, get({'TouchButtonStartResource':getInstance(), 'HINT'}));
-            false -> ok
-        end,
-        (get({ProgressCanvas, '$class'})):addPortion(ProgressCanvas, Portion, LoadingString, allbinary_java:first(get({local, index}), put({local, index}, get({local, index}) + 1))),
-        ImageCompleteUtil = 'ImageCompleteUtil':getInstance(),
-        (get({ProgressCanvas, '$class'})):addPortion(ProgressCanvas, Portion, LoadingString, allbinary_java:first(get({local, index}), put({local, index}, get({local, index}) + 1))),
-        (get({ImageCompleteUtil, '$class'})):waitForImage(ImageCompleteUtil, TouchButtonBlankResourceImage, get({TouchButtonBlankResource, 'RESOURCE'})),
-        (get({This, '$class'})):add(This, get({TouchButtonBlankResource, 'RESOURCE'}), 'OneRowSpriteIndexedAnimationFactory':createFactory(TouchButtonBlankResourceImage, 'AnimationBehaviorFactory':getInstance())),
-        (get({This, '$class'})):add(This, get({TouchButtonBlankResource, 'HINT'}), NullAnimationFactory),
-        (get({ProgressCanvas, '$class'})):addPortion(ProgressCanvas, Portion, LoadingString, allbinary_java:first(get({local, index}), put({local, index}, get({local, index}) + 1))),
-        (get({ImageCompleteUtil, '$class'})):waitForImage(ImageCompleteUtil, TouchButtonGenericActionResourceImage, get({TouchButtonGenericActionResource, 'RESOURCE'})),
-        (get({This, '$class'})):add(This, get({TouchButtonGenericActionResource, 'RESOURCE'}), 'OneRowSpriteIndexedAnimationFactory':createFactory(TouchButtonGenericActionResourceImage, 'AnimationBehaviorFactory':getInstance())),
-        (get({This, '$class'})):add(This, get({TouchButtonGenericActionResource, 'HINT'}), NullAnimationFactory),
-        (get({ProgressCanvas, '$class'})):addPortion(ProgressCanvas, Portion, LoadingString, allbinary_java:first(get({local, index}), put({local, index}, get({local, index}) + 1))),
-        (get({ImageCompleteUtil, '$class'})):waitForImage(ImageCompleteUtil, TouchButtonStartResourceImage, get({TouchButtonStartResource, 'RESOURCE'})),
-        (get({This, '$class'})):add(This, get({TouchButtonStartResource, 'RESOURCE'}), 'OneRowSpriteIndexedAnimationFactory':createFactory(TouchButtonStartResourceImage, 'AnimationBehaviorFactory':getInstance())),
-        (get({ProgressCanvas, '$class'})):addPortion(ProgressCanvas, Portion, LoadingString, allbinary_java:first(get({local, index}), put({local, index}, get({local, index}) + 1))),
-        (get({ImageCompleteUtil, '$class'})):waitForImage(ImageCompleteUtil, TouchButtonUpResourceImage, get({TouchButtonUpResource, 'RESOURCE'})),
-        (get({This, '$class'})):add(This, get({TouchButtonUpResource, 'RESOURCE'}), 'OneRowSpriteIndexedAnimationFactory':createFactory(TouchButtonUpResourceImage, 'AnimationBehaviorFactory':getInstance())),
-        (get({This, '$class'})):add(This, get({TouchButtonUpResource, 'HINT'}), NullAnimationFactory),
-        (get({ProgressCanvas, '$class'})):addPortion(ProgressCanvas, Portion, LoadingString, allbinary_java:first(get({local, index}), put({local, index}, get({local, index}) + 1))),
-        (get({ImageCompleteUtil, '$class'})):waitForImage(ImageCompleteUtil, TouchButtonDownResourceImage, get({TouchButtonDownResource, 'RESOURCE'})),
-        (get({This, '$class'})):add(This, get({TouchButtonDownResource, 'RESOURCE'}), 'OneRowSpriteIndexedAnimationFactory':createFactory(TouchButtonDownResourceImage, 'AnimationBehaviorFactory':getInstance())),
-        (get({This, '$class'})):add(This, get({TouchButtonDownResource, 'HINT'}), NullAnimationFactory),
-        (get({ProgressCanvas, '$class'})):addPortion(ProgressCanvas, Portion, LoadingString, allbinary_java:first(get({local, index}), put({local, index}, get({local, index}) + 1))),
-        (get({ImageCompleteUtil, '$class'})):waitForImage(ImageCompleteUtil, TouchButtonTurnLeftResourceImage, get({TouchButtonTurnLeftResource, 'RESOURCE'})),
-        (get({This, '$class'})):add(This, get({TouchButtonTurnLeftResource, 'RESOURCE'}), 'OneRowSpriteIndexedAnimationFactory':createFactory(TouchButtonTurnLeftResourceImage, 'AnimationBehaviorFactory':getInstance())),
-        (get({This, '$class'})):add(This, get({TouchButtonTurnLeftResource, 'HINT'}), NullAnimationFactory),
-        (get({ProgressCanvas, '$class'})):addPortion(ProgressCanvas, Portion, LoadingString, allbinary_java:first(get({local, index}), put({local, index}, get({local, index}) + 1))),
-        (get({ImageCompleteUtil, '$class'})):waitForImage(ImageCompleteUtil, TouchButtonTurnRightResourceImage, get({TouchButtonTurnRightResource, 'RESOURCE'})),
-        (get({This, '$class'})):add(This, get({TouchButtonTurnRightResource, 'RESOURCE'}), 'OneRowSpriteIndexedAnimationFactory':createFactory(TouchButtonTurnRightResourceImage, 'AnimationBehaviorFactory':getInstance())),
-        (get({This, '$class'})):add(This, get({TouchButtonTurnRightResource, 'HINT'}), NullAnimationFactory),
-        (get({ProgressCanvas, '$class'})):addPortion(ProgressCanvas, Portion, LoadingString, allbinary_java:first(get({local, index}), put({local, index}, get({local, index}) + 1))),
-        (get({ImageCompleteUtil, '$class'})):waitForImage(ImageCompleteUtil, TouchButtonStrafeLeftResourceImage, get({TouchButtonStrafeLeftResource, 'RESOURCE'})),
-        (get({This, '$class'})):add(This, get({TouchButtonStrafeLeftResource, 'RESOURCE'}), 'OneRowSpriteIndexedAnimationFactory':createFactory(TouchButtonStrafeLeftResourceImage, 'AnimationBehaviorFactory':getInstance())),
-        (get({This, '$class'})):add(This, get({TouchButtonStrafeLeftResource, 'HINT'}), NullAnimationFactory),
-        (get({ProgressCanvas, '$class'})):addPortion(ProgressCanvas, Portion, LoadingString, allbinary_java:first(get({local, index}), put({local, index}, get({local, index}) + 1))),
-        (get({ImageCompleteUtil, '$class'})):waitForImage(ImageCompleteUtil, TouchButtonStrafeRightResourceImage, get({TouchButtonStrafeRightResource, 'RESOURCE'})),
-        (get({This, '$class'})):add(This, get({TouchButtonStrafeRightResource, 'RESOURCE'}), 'OneRowSpriteIndexedAnimationFactory':createFactory(TouchButtonStrafeRightResourceImage, 'AnimationBehaviorFactory':getInstance())),
-        (get({This, '$class'})):add(This, get({TouchButtonStrafeRightResource, 'HINT'}), NullAnimationFactory),
-        case (fun(Target_N69921) -> (get({Target_N69921, '$class'})):isOverScan(Target_N69921) end)((fun(Target_N69928) -> (get({Target_N69928, '$class'})):getOperatingSystemInstance(Target_N69928) end)('OperatingSystemFactory':getInstance())) of
-            true ->
-            TouchButtonStartHintResource = (get({ImageCache, '$class'})):getWithKey(ImageCache, get({'TouchButtonStartResource':getInstance(), 'HINT'})),
-            (get({This, '$class'})):add(This, get({TouchButtonStartResource, 'HINT'}), 'OneRowSpriteIndexedAnimationFactory':createFactory(TouchButtonStartHintResource, 'AnimationBehaviorFactory':getInstance()));
-            false ->
-            (get({This, '$class'})):add(This, get({TouchButtonStartResource, 'HINT'}), NullAnimationFactory)
-        end,
-        'BaseResourceAnimationInterfaceFactoryInterfaceFactory':init(This, Level)
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
 
-isLoadingLevel(This, Level) when is_integer(Level) ->
-        try
-        ResourceLoadingLevelFactory = 'ResourceLoadingLevelFactory':getInstance(),
-        case (Level =:= (get({get({ResourceLoadingLevelFactory, 'LOAD_TOUCH'}), '$class'})):getLevel(get({ResourceLoadingLevelFactory, 'LOAD_TOUCH'}))) of
-            true ->
-            throw({'$return', true});
-            false ->
-            throw({'$return', 'BaseResourceAnimationInterfaceFactoryInterfaceFactory':isLoadingLevel(This, Level)})
+  def jm_init(this, p_level) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :level, p_level)
+        JR.call(this, :jm_initImageCache, [ImageCacheFactory.jm_getInstance(), JR.lget(f, :level)])
+    end)
+  end
+
+
+  def jm_initImageCache(this, p_imageCache, p_level) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :imageCache, p_imageCache)
+      JR.lset(f, :level, p_level)
+        if JR.call(this, :jm_isInitialized, []) do
+            throw({:jreturn, nil})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
-
-isFeature(This) ->
-        try
-        case (not (fun(Target_N70490) -> (get({Target_N70490, '$class'})):isDefault(Target_N70490, get({'OpenGLFeatureFactory':getInstance(), 'OPENGL'})) end)('Features':getInstance())) of
-            true ->
-            throw({'$return', true});
-            false ->
-            throw({'$return', false})
+        JR.lset(f, :portion, 140)
+        JR.lset(f, :loadingString, JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.call(this, :jm_toString, [])]), :jm_append, [" Loading: "]), :jm_toString, []))
+        JR.lset(f, :index, 0)
+        JR.lset(f, :progressCanvas, ProgressCanvasFactory.jm_getInstance())
+        JR.call(JR.lget(f, :progressCanvas), :jm_addPortion, [JR.lget(f, :portion), JR.lget(f, :loadingString), JR.lpostinc(f, :index, 1)])
+        JR.lset(f, :touchButtonBlankResource, TouchButtonBlankResource.jm_getInstance())
+        JR.lset(f, :touchButtonGenericActionResource, TouchButtonGenericActionResource.jm_getInstance())
+        JR.lset(f, :touchButtonStartResource, TouchButtonStartResource.jm_getInstance())
+        JR.lset(f, :touchButtonUpResource, TouchButtonUpResource.jm_getInstance())
+        JR.lset(f, :touchButtonDownResource, TouchButtonDownResource.jm_getInstance())
+        JR.lset(f, :touchButtonTurnLeftResource, TouchButtonTurnLeftResource.jm_getInstance())
+        JR.lset(f, :touchButtonTurnRightResource, TouchButtonTurnRightResource.jm_getInstance())
+        JR.lset(f, :touchButtonStrafeLeftResource, TouchButtonStrafeLeftResource.jm_getInstance())
+        JR.lset(f, :touchButtonStrafeRightResource, TouchButtonStrafeRightResource.jm_getInstance())
+        JR.lset(f, :touchButtonBlankResourceImage, JR.call(JR.lget(f, :imageCache), :jm_getWithKey, [JR.get(JR.lget(f, :touchButtonBlankResource), :RESOURCE)]))
+        JR.lset(f, :touchButtonGenericActionResourceImage, JR.call(JR.lget(f, :imageCache), :jm_getWithKey, [JR.get(JR.lget(f, :touchButtonGenericActionResource), :RESOURCE)]))
+        JR.lset(f, :touchButtonStartResourceImage, JR.call(JR.lget(f, :imageCache), :jm_getWithKey, [JR.get(JR.lget(f, :touchButtonStartResource), :RESOURCE)]))
+        JR.lset(f, :touchButtonUpResourceImage, JR.call(JR.lget(f, :imageCache), :jm_getWithKey, [JR.get(JR.lget(f, :touchButtonUpResource), :RESOURCE)]))
+        JR.lset(f, :touchButtonDownResourceImage, JR.call(JR.lget(f, :imageCache), :jm_getWithKey, [JR.get(JR.lget(f, :touchButtonDownResource), :RESOURCE)]))
+        JR.lset(f, :touchButtonTurnLeftResourceImage, JR.call(JR.lget(f, :imageCache), :jm_getWithKey, [JR.get(JR.lget(f, :touchButtonTurnLeftResource), :RESOURCE)]))
+        JR.lset(f, :touchButtonTurnRightResourceImage, JR.call(JR.lget(f, :imageCache), :jm_getWithKey, [JR.get(JR.lget(f, :touchButtonTurnRightResource), :RESOURCE)]))
+        JR.lset(f, :touchButtonStrafeLeftResourceImage, JR.call(JR.lget(f, :imageCache), :jm_getWithKey, [JR.get(JR.lget(f, :touchButtonStrafeLeftResource), :RESOURCE)]))
+        JR.lset(f, :touchButtonStrafeRightResourceImage, JR.call(JR.lget(f, :imageCache), :jm_getWithKey, [JR.get(JR.lget(f, :touchButtonStrafeRightResource), :RESOURCE)]))
+        JR.lset(f, :nullAnimationFactory, NullAnimationFactory.jm_getFactoryInstance())
+        if JR.call(JR.call(OperatingSystemFactory.jm_getInstance(), :jm_getOperatingSystemInstance, []), :jm_isOverScan, []) do
+            JR.call(JR.lget(f, :imageCache), :jm_getWithKey, [JR.get(TouchButtonStartResource.jm_getInstance(), :HINT)])
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        JR.call(JR.lget(f, :progressCanvas), :jm_addPortion, [JR.lget(f, :portion), JR.lget(f, :loadingString), JR.lpostinc(f, :index, 1)])
+        JR.lset(f, :imageCompleteUtil, ImageCompleteUtil.jm_getInstance())
+        JR.call(JR.lget(f, :progressCanvas), :jm_addPortion, [JR.lget(f, :portion), JR.lget(f, :loadingString), JR.lpostinc(f, :index, 1)])
+        JR.call(JR.lget(f, :imageCompleteUtil), :jm_waitForImage, [JR.lget(f, :touchButtonBlankResourceImage), JR.get(JR.lget(f, :touchButtonBlankResource), :RESOURCE)])
+        JR.call(this, :jm_add, [JR.get(JR.lget(f, :touchButtonBlankResource), :RESOURCE), OneRowSpriteIndexedAnimationFactory.jm_createFactory(JR.lget(f, :touchButtonBlankResourceImage), AnimationBehaviorFactory.jm_getInstance())])
+        JR.call(this, :jm_add, [JR.get(JR.lget(f, :touchButtonBlankResource), :HINT), JR.lget(f, :nullAnimationFactory)])
+        JR.call(JR.lget(f, :progressCanvas), :jm_addPortion, [JR.lget(f, :portion), JR.lget(f, :loadingString), JR.lpostinc(f, :index, 1)])
+        JR.call(JR.lget(f, :imageCompleteUtil), :jm_waitForImage, [JR.lget(f, :touchButtonGenericActionResourceImage), JR.get(JR.lget(f, :touchButtonGenericActionResource), :RESOURCE)])
+        JR.call(this, :jm_add, [JR.get(JR.lget(f, :touchButtonGenericActionResource), :RESOURCE), OneRowSpriteIndexedAnimationFactory.jm_createFactory(JR.lget(f, :touchButtonGenericActionResourceImage), AnimationBehaviorFactory.jm_getInstance())])
+        JR.call(this, :jm_add, [JR.get(JR.lget(f, :touchButtonGenericActionResource), :HINT), JR.lget(f, :nullAnimationFactory)])
+        JR.call(JR.lget(f, :progressCanvas), :jm_addPortion, [JR.lget(f, :portion), JR.lget(f, :loadingString), JR.lpostinc(f, :index, 1)])
+        JR.call(JR.lget(f, :imageCompleteUtil), :jm_waitForImage, [JR.lget(f, :touchButtonStartResourceImage), JR.get(JR.lget(f, :touchButtonStartResource), :RESOURCE)])
+        JR.call(this, :jm_add, [JR.get(JR.lget(f, :touchButtonStartResource), :RESOURCE), OneRowSpriteIndexedAnimationFactory.jm_createFactory(JR.lget(f, :touchButtonStartResourceImage), AnimationBehaviorFactory.jm_getInstance())])
+        JR.call(JR.lget(f, :progressCanvas), :jm_addPortion, [JR.lget(f, :portion), JR.lget(f, :loadingString), JR.lpostinc(f, :index, 1)])
+        JR.call(JR.lget(f, :imageCompleteUtil), :jm_waitForImage, [JR.lget(f, :touchButtonUpResourceImage), JR.get(JR.lget(f, :touchButtonUpResource), :RESOURCE)])
+        JR.call(this, :jm_add, [JR.get(JR.lget(f, :touchButtonUpResource), :RESOURCE), OneRowSpriteIndexedAnimationFactory.jm_createFactory(JR.lget(f, :touchButtonUpResourceImage), AnimationBehaviorFactory.jm_getInstance())])
+        JR.call(this, :jm_add, [JR.get(JR.lget(f, :touchButtonUpResource), :HINT), JR.lget(f, :nullAnimationFactory)])
+        JR.call(JR.lget(f, :progressCanvas), :jm_addPortion, [JR.lget(f, :portion), JR.lget(f, :loadingString), JR.lpostinc(f, :index, 1)])
+        JR.call(JR.lget(f, :imageCompleteUtil), :jm_waitForImage, [JR.lget(f, :touchButtonDownResourceImage), JR.get(JR.lget(f, :touchButtonDownResource), :RESOURCE)])
+        JR.call(this, :jm_add, [JR.get(JR.lget(f, :touchButtonDownResource), :RESOURCE), OneRowSpriteIndexedAnimationFactory.jm_createFactory(JR.lget(f, :touchButtonDownResourceImage), AnimationBehaviorFactory.jm_getInstance())])
+        JR.call(this, :jm_add, [JR.get(JR.lget(f, :touchButtonDownResource), :HINT), JR.lget(f, :nullAnimationFactory)])
+        JR.call(JR.lget(f, :progressCanvas), :jm_addPortion, [JR.lget(f, :portion), JR.lget(f, :loadingString), JR.lpostinc(f, :index, 1)])
+        JR.call(JR.lget(f, :imageCompleteUtil), :jm_waitForImage, [JR.lget(f, :touchButtonTurnLeftResourceImage), JR.get(JR.lget(f, :touchButtonTurnLeftResource), :RESOURCE)])
+        JR.call(this, :jm_add, [JR.get(JR.lget(f, :touchButtonTurnLeftResource), :RESOURCE), OneRowSpriteIndexedAnimationFactory.jm_createFactory(JR.lget(f, :touchButtonTurnLeftResourceImage), AnimationBehaviorFactory.jm_getInstance())])
+        JR.call(this, :jm_add, [JR.get(JR.lget(f, :touchButtonTurnLeftResource), :HINT), JR.lget(f, :nullAnimationFactory)])
+        JR.call(JR.lget(f, :progressCanvas), :jm_addPortion, [JR.lget(f, :portion), JR.lget(f, :loadingString), JR.lpostinc(f, :index, 1)])
+        JR.call(JR.lget(f, :imageCompleteUtil), :jm_waitForImage, [JR.lget(f, :touchButtonTurnRightResourceImage), JR.get(JR.lget(f, :touchButtonTurnRightResource), :RESOURCE)])
+        JR.call(this, :jm_add, [JR.get(JR.lget(f, :touchButtonTurnRightResource), :RESOURCE), OneRowSpriteIndexedAnimationFactory.jm_createFactory(JR.lget(f, :touchButtonTurnRightResourceImage), AnimationBehaviorFactory.jm_getInstance())])
+        JR.call(this, :jm_add, [JR.get(JR.lget(f, :touchButtonTurnRightResource), :HINT), JR.lget(f, :nullAnimationFactory)])
+        JR.call(JR.lget(f, :progressCanvas), :jm_addPortion, [JR.lget(f, :portion), JR.lget(f, :loadingString), JR.lpostinc(f, :index, 1)])
+        JR.call(JR.lget(f, :imageCompleteUtil), :jm_waitForImage, [JR.lget(f, :touchButtonStrafeLeftResourceImage), JR.get(JR.lget(f, :touchButtonStrafeLeftResource), :RESOURCE)])
+        JR.call(this, :jm_add, [JR.get(JR.lget(f, :touchButtonStrafeLeftResource), :RESOURCE), OneRowSpriteIndexedAnimationFactory.jm_createFactory(JR.lget(f, :touchButtonStrafeLeftResourceImage), AnimationBehaviorFactory.jm_getInstance())])
+        JR.call(this, :jm_add, [JR.get(JR.lget(f, :touchButtonStrafeLeftResource), :HINT), JR.lget(f, :nullAnimationFactory)])
+        JR.call(JR.lget(f, :progressCanvas), :jm_addPortion, [JR.lget(f, :portion), JR.lget(f, :loadingString), JR.lpostinc(f, :index, 1)])
+        JR.call(JR.lget(f, :imageCompleteUtil), :jm_waitForImage, [JR.lget(f, :touchButtonStrafeRightResourceImage), JR.get(JR.lget(f, :touchButtonStrafeRightResource), :RESOURCE)])
+        JR.call(this, :jm_add, [JR.get(JR.lget(f, :touchButtonStrafeRightResource), :RESOURCE), OneRowSpriteIndexedAnimationFactory.jm_createFactory(JR.lget(f, :touchButtonStrafeRightResourceImage), AnimationBehaviorFactory.jm_getInstance())])
+        JR.call(this, :jm_add, [JR.get(JR.lget(f, :touchButtonStrafeRightResource), :HINT), JR.lget(f, :nullAnimationFactory)])
+        if JR.call(JR.call(OperatingSystemFactory.jm_getInstance(), :jm_getOperatingSystemInstance, []), :jm_isOverScan, []) do
+            JR.lset(f, :touchButtonStartHintResource, JR.call(JR.lget(f, :imageCache), :jm_getWithKey, [JR.get(TouchButtonStartResource.jm_getInstance(), :HINT)]))
+            JR.call(this, :jm_add, [JR.get(JR.lget(f, :touchButtonStartResource), :HINT), OneRowSpriteIndexedAnimationFactory.jm_createFactory(JR.lget(f, :touchButtonStartHintResource), AnimationBehaviorFactory.jm_getInstance())])
+        else
+            JR.call(this, :jm_add, [JR.get(JR.lget(f, :touchButtonStartResource), :HINT), JR.lget(f, :nullAnimationFactory)])
+        end
+        BaseResourceAnimationInterfaceFactoryInterfaceFactory.jm_init(this, JR.lget(f, :level))
+    end)
+  end
+
+
+  def jm_isLoadingLevel(this, p_level) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :level, p_level)
+        JR.lset(f, :resourceLoadingLevelFactory, ResourceLoadingLevelFactory.jm_getInstance())
+        if (JR.lget(f, :level) == JR.call(JR.get(JR.lget(f, :resourceLoadingLevelFactory), :LOAD_TOUCH), :jm_getLevel, [])) do
+            throw({:jreturn, true})
+        else
+            throw({:jreturn, BaseResourceAnimationInterfaceFactoryInterfaceFactory.jm_isLoadingLevel(this, JR.lget(f, :level))})
+        end
+    end)
+  end
+
+
+  def jm_isFeature(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if !JR.call(Features.jm_getInstance(), :jm_isDefault, [JR.get(OpenGLFeatureFactory.jm_getInstance(), :OPENGL)]) do
+            throw({:jreturn, true})
+        else
+            throw({:jreturn, false})
+        end
+    end)
+  end
+end
+
 

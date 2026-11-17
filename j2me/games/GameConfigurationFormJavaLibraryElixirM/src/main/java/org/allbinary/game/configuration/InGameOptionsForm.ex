@@ -1,61 +1,72 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.configuration
-% import javax.microedition.lcdui.Choice
-% import javax.microedition.lcdui.Command
-% import javax.microedition.lcdui.CommandListener
-% import org.allbinary.game.commands.GameCommandsFactory
-% import org.allbinary.game.configuration.feature.GameFeatureFormUtil
-% import org.allbinary.game.configuration.feature.InGameFeatureChoiceGroups
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.displayable.screen.CommandForm
-% import org.allbinary.logic.string.StringUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.configuration
 
--module('InGameOptionsForm').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule InGameOptionsForm do
+  def jsuper(), do: CommandForm
+def jstatic_DISPLAY(), do: JR.static_get(__MODULE__, :DISPLAY, fn -> Command.jnew("Options In Game", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 1) end)
+  def jstatic_set_DISPLAY(value), do: JR.static_put(__MODULE__, :DISPLAY, value)
+def jstatic_SAVE(), do: JR.static_get(__MODULE__, :SAVE, fn -> Command.jnew("Save", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 1) end)
+  def jstatic_set_SAVE(value), do: JR.static_put(__MODULE__, :SAVE, value)
+def jstatic_DEFAULT(), do: JR.static_get(__MODULE__, :DEFAULT, fn -> Command.jnew("Default", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 1) end)
+  def jstatic_set_DEFAULT(value), do: JR.static_put(__MODULE__, :DEFAULT, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('CommandForm', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'DISPLAY'}, 'Command':new("Options In Game", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 1)),
-    put({?MODULE, 'SAVE'}, 'Command':new("Save", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 1)),
-    put({?MODULE, 'DEFAULT'}, 'Command':new("Default", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 1)),
-    ok.
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new(CommandListener, Title, BackgrounBasicColor, ForegroundBasicColor) when (is_list(Title) orelse Title =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, CommandListener, Title, BackgrounBasicColor, ForegroundBasicColor),
-    This.
+  def jinit(this, p_commandListener, p_title, p_backgrounBasicColor, p_foregroundBasicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :commandListener, p_commandListener)
+      JR.lset(f, :title, p_title)
+      JR.lset(f, :backgrounBasicColor, p_backgrounBasicColor)
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+        CommandForm.jinit(this, JR.lget(f, :commandListener), JR.lget(f, :title), JR.lget(f, :backgrounBasicColor), JR.lget(f, :foregroundBasicColor))
+        InGameOptionsForm.jinitfields(this)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, JR.get(JR.get(this, :commonStrings), :CONSTRUCTOR)])
+        JR.lset(f, :gameFeatureFormUtil, GameFeatureFormUtil.jm_getInstance())
+        JR.call(JR.lget(f, :gameFeatureFormUtil), :jm_addChoiceGroup, [this, JR.call(InGameFeatureChoiceGroups.jm_getExclusiveInstance(), :jm_get, []), Choice.jstatic_EXCLUSIVE()])
+        JR.call(JR.lget(f, :gameFeatureFormUtil), :jm_addChoiceGroup, [this, JR.call(InGameFeatureChoiceGroups.jm_getMultipleInstance(), :jm_get, []), Choice.jstatic_MULTIPLE()])
+        JR.call(this, :jm_initCommands, [JR.lget(f, :commandListener)])
+    end)
+  end
 
-'$init'(This, CommandListener, Title, BackgrounBasicColor, ForegroundBasicColor) when (is_list(Title) orelse Title =:= undefined) ->
-        'CommandForm':'$init'(This, CommandListener, Title, BackgrounBasicColor, ForegroundBasicColor),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, get({get({This, commonStrings}), 'CONSTRUCTOR'})),
-        GameFeatureFormUtil = 'GameFeatureFormUtil':getInstance(),
-        (get({GameFeatureFormUtil, '$class'})):addChoiceGroup(GameFeatureFormUtil, This, (fun(Target_N66355) -> (get({Target_N66355, '$class'})):get(Target_N66355) end)('InGameFeatureChoiceGroups':getExclusiveInstance()), get({'Choice', 'EXCLUSIVE'})),
-        (get({GameFeatureFormUtil, '$class'})):addChoiceGroup(GameFeatureFormUtil, This, (fun(Target_N66421) -> (get({Target_N66421, '$class'})):get(Target_N66421) end)('InGameFeatureChoiceGroups':getMultipleInstance()), get({'Choice', 'MULTIPLE'})),
-        (get({This, '$class'})):initCommands(This, CommandListener).
+  def jnew(p_commandListener, p_title, p_backgrounBasicColor, p_foregroundBasicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_commandListener, p_title, p_backgrounBasicColor, p_foregroundBasicColor)
+    this
+  end
 
-initCommands(This, CmdListener) ->
-        (get({This, '$class'})):removeAllCommands(This),
-        (get({This, '$class'})):addCommand(This, get({'GameCommandsFactory':getInstance(), 'CLOSE_AND_SHOW_GAME_CANVAS'})),
-        (get({This, '$class'})):addCommand(This, get({'InGameOptionsForm', 'DEFAULT'})),
-        (get({This, '$class'})):setCommandListener(This, CmdListener).
+
+  def jm_initCommands(this, p_cmdListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cmdListener, p_cmdListener)
+        JR.call(this, :jm_removeAllCommands, [])
+        JR.call(this, :jm_addCommand, [JR.get(GameCommandsFactory.jm_getInstance(), :CLOSE_AND_SHOW_GAME_CANVAS)])
+        JR.call(this, :jm_addCommand, [InGameOptionsForm.jstatic_DEFAULT()])
+        JR.call(this, :jm_setCommandListener, [JR.lget(f, :cmdListener)])
+    end)
+  end
+end
+
 

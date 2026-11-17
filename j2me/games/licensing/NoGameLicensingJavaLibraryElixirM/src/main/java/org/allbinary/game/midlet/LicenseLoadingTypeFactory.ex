@@ -1,43 +1,57 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.midlet
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
--module('LicenseLoadingTypeFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule LicenseLoadingTypeFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> LicenseLoadingTypeFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'LicenseLoadingTypeFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :INITIAL_LOADING, nil)
+    JR.put(this, :GAME_START, nil)
+    JR.put(this, :LOGIN, nil)
+    JR.put(this, :OTHER, nil)
+        JR.put(this, :INITIAL_LOADING, LicenseLoadingType.jnew("Initial Loading"))
+        JR.put(this, :GAME_START, LicenseLoadingType.jnew("Game Start"))
+        JR.put(this, :LOGIN, LicenseLoadingType.jnew("Login"))
+        JR.put(this, :OTHER, LicenseLoadingType.jnew("Other/Usually The First Non Demo Level"))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'INITIAL_LOADING'}, 'LicenseLoadingType':new("Initial Loading")),
-    put({This, 'GAME_START'}, 'LicenseLoadingType':new("Game Start")),
-    put({This, 'LOGIN'}, 'LicenseLoadingType':new("Login")),
-    put({This, 'OTHER'}, 'LicenseLoadingType':new("Other/Usually The First Non Demo Level")),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getIntance() ->
-        get({'LicenseLoadingTypeFactory', instance}).
+  def jm_getIntance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, LicenseLoadingTypeFactory.jstatic_instance()})
+    end)
+  end
+end
+
 

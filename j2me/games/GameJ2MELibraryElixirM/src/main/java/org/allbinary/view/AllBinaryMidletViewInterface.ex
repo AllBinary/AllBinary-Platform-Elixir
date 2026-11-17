@@ -1,23 +1,38 @@
-% Generated Code Do Not Modify
-% package org.allbinary.view
-% import org.allbinary.game.configuration.event.GameInitializedListenerInterface
-% import org.allbinary.game.midlet.DemoGameMidletEventListener
-% import org.allbinary.midlet.MidletCompositeInterface
+# Generated Code Do Not Modify
+# package org.allbinary.view
 
--module('AllBinaryMidletViewInterface').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
-
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('MidletCompositeInterface', Function, Arguments).
+defmodule AllBinaryMidletViewInterface do
+  def jsuper(), do: JObject
 
 
-onResume(This) ->
-    erlang:error({abstract_method, onResume}).
+  def jm_onResume(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "onResume")})
+    end)
+  end
 
-onPause(This) ->
-    erlang:error({abstract_method, onPause}).
 
-onDestroy(This) ->
-    erlang:error({abstract_method, onDestroy}).
+  def jm_onPause(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "onPause")})
+    end)
+  end
+
+
+  def jm_onDestroy(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "onDestroy")})
+    end)
+  end
+end
+
 

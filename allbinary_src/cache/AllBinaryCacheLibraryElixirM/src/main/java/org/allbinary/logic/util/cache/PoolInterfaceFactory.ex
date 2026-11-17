@@ -1,36 +1,56 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2007 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.logic.util.cache
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2007 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
--module('PoolInterfaceFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule PoolInterfaceFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-% throws Exception
-getInstance(CacheableInterfaceFactoryInterface, PoolType, CachePolicy) ->
-        erlang:error({'Exception', lists:concat(["No Such PoolType: ", (get({PoolType, '$class'})):toString(PoolType)])}).
+
+  def jm_getInstance(p_cacheableInterfaceFactoryInterface, p_poolType, p_cachePolicy) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cacheableInterfaceFactoryInterface, p_cacheableInterfaceFactoryInterface)
+      JR.lset(f, :poolType, p_poolType)
+      JR.lset(f, :cachePolicy, p_cachePolicy)
+        throw({:jexception, JR.exception("Exception", "No Such PoolType: " <> JR.call(JR.lget(f, :poolType), :jm_toString, []))})
+    end)
+  end
+end
+
 

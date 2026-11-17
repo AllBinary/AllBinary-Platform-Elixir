@@ -1,126 +1,202 @@
-% Generated Code Do Not Modify
-% package org.allbinary.layer
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.TsUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.thread.SynchObject
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
-% import org.allbinary.logic.ABSystemWrapper
+# Generated Code Do Not Modify
+# package org.allbinary.layer
 
--module('LayerManager').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule LayerManager do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, systemWrapper}, 'ABSystemWrapper':getInstance()),
-    put({This, tsUtil}, 'TsUtil':getInstance()),
-    put({This, layerManagerLogging}, undefined),
-    put({This, list}, 'BasicArrayListD':new()),
-    put({This, anyType}, 'SynchObject':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :systemWrapper, nil)
+    JR.put(this, :tsUtil, nil)
+    JR.put(this, :layerManagerLogging, nil)
+    JR.put(this, :list, nil)
+    JR.put(this, :anyType, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        JR.put(this, :systemWrapper, ABSystemWrapper.jm_getInstance())
+        JR.put(this, :tsUtil, TsUtil.jm_getInstance())
+        
+        JR.put(this, :list, BasicArrayListD.jnew())
+        JR.put(this, :anyType, SynchObject.jnew())
+    nil
+  end
 
 
-new(LayerManagerLogging) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, LayerManagerLogging),
-    This.
+  def jinit(this, p_layerManagerLogging) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerManagerLogging, p_layerManagerLogging)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, JR.get(JR.get(this, :commonStrings), :CONSTRUCTOR)])
+        JR.put(this, :layerManagerLogging, JR.lget(f, :layerManagerLogging))
+    end)
+  end
 
-'$init'(This, LayerManagerLogging) ->
-    init_fields(This),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, get({get({This, commonStrings}), 'CONSTRUCTOR'})),
-        put({This, layerManagerLogging}, LayerManagerLogging).
+  def jnew(p_layerManagerLogging) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_layerManagerLogging)
+    this
+  end
 
-contains(This, LayerInterface) ->
-        (get({get({This, list}), '$class'})):contains(get({This, list}), LayerInterface).
 
-% throws Exception
-update(This, LayerInterface) ->
-        try
-        Had = (get({get({This, list}), '$class'})):remove(get({This, list}), LayerInterface),
-        case Had of
-            true ->
-            put({local, nextLayerInterface}, undefined),
-            Size = (get({get({This, list}), '$class'})):size(get({This, list})),
-            lists:foreach(fun(Index) ->
-                put({local, nextLayerInterface}, (get({get({This, list}), '$class'})):get(get({This, list}), Index)),
-                case ((get({LayerInterface, '$class'})):getZP(LayerInterface) > (get({get({local, nextLayerInterface}), '$class'})):getZP(get({local, nextLayerInterface}))) of
-                    true ->
-                    (get({get({This, list}), '$class'})):addAt(get({This, list}), Index, LayerInterface),
-                    throw({'$return', ok});
-                    false -> ok
+  def jm_contains(this, p_layerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+        throw({:jreturn, JR.call(JR.get(this, :list), :jm_contains, [JR.lget(f, :layerInterface)])})
+    end)
+  end
+
+
+  def jm_update(this, p_layerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+        JR.lset(f, :had, JR.call(JR.get(this, :list), :jm_remove, [JR.lget(f, :layerInterface)]))
+        if JR.lget(f, :had) do
+            JR.lset(f, :nextLayerInterface, nil)
+            JR.lset(f, :size, JR.call(JR.get(this, :list), :jm_size, []))
+            JR.lset(f, :index, 0)
+            JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+                JR.lset(f, :nextLayerInterface, JR.call(JR.get(this, :list), :jm_get, [JR.lget(f, :index)]))
+                if (JR.call(JR.lget(f, :layerInterface), :jm_getZP, []) > JR.call(JR.lget(f, :nextLayerInterface), :jm_getZP, [])) do
+                    JR.call(JR.get(this, :list), :jm_addAt, [JR.lget(f, :index), JR.lget(f, :layerInterface)])
+                    throw({:jreturn, nil})
                 end
-            end, lists:seq(0, Size - 1)),
-            (get({get({This, list}), '$class'})):add(get({This, list}), LayerInterface);
-            false -> ok
+            end)
+            JR.call(JR.get(this, :list), :jm_add, [JR.lget(f, :layerInterface)])
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-% throws Exception
-insert(This, LayerInterface) ->
-        try
-        put({local, nextLayerInterface}, undefined),
-        Size = (get({get({This, list}), '$class'})):size(get({This, list})),
-        lists:foreach(fun(Index) ->
-            put({local, nextLayerInterface}, (get({get({This, list}), '$class'})):get(get({This, list}), Index)),
-            case ((get({LayerInterface, '$class'})):getZP(LayerInterface) > (get({get({local, nextLayerInterface}), '$class'})):getZP(get({local, nextLayerInterface}))) of
-                true ->
-                (get({This, '$class'})):appendAt(This, LayerInterface, Index),
-                throw({'$return', ok});
-                false -> ok
+
+  def jm_insert(this, p_layerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+        JR.lset(f, :nextLayerInterface, nil)
+        JR.lset(f, :size, JR.call(JR.get(this, :list), :jm_size, []))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :nextLayerInterface, JR.call(JR.get(this, :list), :jm_get, [JR.lget(f, :index)]))
+            if (JR.call(JR.lget(f, :layerInterface), :jm_getZP, []) > JR.call(JR.lget(f, :nextLayerInterface), :jm_getZP, [])) do
+                JR.call(this, :jm_appendAt, [JR.lget(f, :layerInterface), JR.lget(f, :index)])
+                throw({:jreturn, nil})
             end
-        end, lists:seq(0, Size - 1)),
-        (get({This, '$class'})):append(This, LayerInterface)
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        end)
+        JR.call(this, :jm_append, [JR.lget(f, :layerInterface)])
+    end)
+  end
 
-% throws Exception
-append(This, LayerInterface) ->
-        (get({get({This, layerManagerLogging}), '$class'})):append(get({This, layerManagerLogging}), LayerInterface),
-        (get({get({This, list}), '$class'})):add(get({This, list}), LayerInterface).
 
-% throws Exception
-appendAt(This, LayerInterface, Index) when is_integer(Index) ->
-        (get({get({This, layerManagerLogging}), '$class'})):appendAt(get({This, layerManagerLogging}), LayerInterface, Index),
-        (get({get({This, list}), '$class'})):addAt(get({This, list}), Index, LayerInterface).
+  def jm_append(this, p_layerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+        JR.call(JR.get(this, :layerManagerLogging), :jm_append, [JR.lget(f, :layerInterface)])
+        JR.call(JR.get(this, :list), :jm_add, [JR.lget(f, :layerInterface)])
+    end)
+  end
 
-% throws Exception
-remove(This, LayerInterface) ->
-        begin % synchronized
-            (get({get({This, layerManagerLogging}), '$class'})):remove(get({This, layerManagerLogging}), LayerInterface),
-            Result = (get({get({This, list}), '$class'})):remove(get({This, list}), LayerInterface),
-            (get({get({This, layerManagerLogging}), '$class'})):removeResult(get({This, layerManagerLogging}), This, LayerInterface, Result)
-        end.
 
-getLayerAt(This, Index) when is_integer(Index) ->
-        array:get(Index, get({get({This, list}), objectArray})).
+  def jm_appendAt(this, p_layerInterface, p_index) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+      JR.lset(f, :index, p_index)
+        JR.call(JR.get(this, :layerManagerLogging), :jm_appendAt, [JR.lget(f, :layerInterface), JR.lget(f, :index)])
+        JR.call(JR.get(this, :list), :jm_addAt, [JR.lget(f, :index), JR.lget(f, :layerInterface)])
+    end)
+  end
 
-getSize(This) ->
-        (get({get({This, list}), '$class'})):size(get({This, list})).
 
-% throws Exception
-cleanup(This) ->
-        begin % synchronized
-            (get({get({This, list}), '$class'})):clear(get({This, list})),
-            (get({get({This, layerManagerLogging}), '$class'})):clear(get({This, layerManagerLogging})),
-            (get({get({This, tsUtil}), '$class'})):gc(get({This, tsUtil})),
-            (get({get({This, tsUtil}), '$class'})):gc(get({This, tsUtil}))
-        end.
+  def jm_remove(this, p_layerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :layerInterface, p_layerInterface)
+        (
+            JR.call(JR.get(this, :layerManagerLogging), :jm_remove, [JR.lget(f, :layerInterface)])
+            JR.lset(f, :result, JR.call(JR.get(this, :list), :jm_remove, [JR.lget(f, :layerInterface)]))
+            JR.call(JR.get(this, :layerManagerLogging), :jm_removeResult, [this, JR.lget(f, :layerInterface), JR.lget(f, :result)])
+        )
+    end)
+  end
 
-paint(This, G, X, Y) when is_integer(X), is_integer(Y) ->
-        begin % synchronized
-            put({local, comp}, undefined),
-            put({local, index}, (get({get({This, list}), '$class'})):size(get({This, list}))),
-            (fun Loop() -> case (begin put({local, index}, get({local, index}) - 1), get({local, index}) end >= 0) of true ->
-                put({local, comp}, array:get(get({local, index}), get({get({This, list}), objectArray}))),
-                case ((get({local, comp}) =/= undefined) andalso (get({get({local, comp}), '$class'})):isVisible(get({local, comp}))) of
-                    true ->
-                    (get({get({local, comp}), '$class'})):paint(get({local, comp}), G);
-                    false -> ok
-                end,
-                Loop();
-            false -> ok end end)()
-        end.
+
+  def jm_getLayerAt(this, p_index) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :index, p_index)
+        throw({:jreturn, JR.aget(JR.get(JR.get(this, :list), :objectArray), JR.lget(f, :index))})
+    end)
+  end
+
+
+  def jm_getSize(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.get(this, :list), :jm_size, [])})
+    end)
+  end
+
+
+  def jm_cleanup(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        (
+            JR.call(JR.get(this, :list), :jm_clear, [])
+            JR.call(JR.get(this, :layerManagerLogging), :jm_clear, [])
+            JR.call(JR.get(this, :tsUtil), :jm_gc, [])
+            JR.call(JR.get(this, :tsUtil), :jm_gc, [])
+        )
+    end)
+  end
+
+
+  def jm_paint(this, p_g, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :g, p_g)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        (
+            JR.lset(f, :comp, nil)
+            JR.lset(f, :index, JR.call(JR.get(this, :list), :jm_size, []))
+            JR.jfor(fn -> (JR.lpreinc(f, :index, -1) >= 0) end, fn -> nil end, fn ->
+                JR.lset(f, :comp, JR.aget(JR.get(JR.get(this, :list), :objectArray), JR.lget(f, :index)))
+                if ((JR.lget(f, :comp) != nil) && JR.call(JR.lget(f, :comp), :jm_isVisible, [])) do
+                    JR.call(JR.lget(f, :comp), :jm_paint, [JR.lget(f, :g)])
+                end
+            end)
+        )
+    end)
+  end
+end
+
 

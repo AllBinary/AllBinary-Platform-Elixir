@@ -1,41 +1,93 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.life
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.life
 
--module('LifeInterface').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
+defmodule LifeInterface do
+  def jsuper(), do: JObject
 
 
-get(This) ->
-    erlang:error({abstract_method, get}).
+  def jm_get(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "get")})
+    end)
+  end
 
-set(This, Lives) when is_integer(Lives) ->
-    erlang:error({abstract_method, set}).
 
-reset(This) ->
-    erlang:error({abstract_method, reset}).
+  def jm_set(this, p_lives) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :lives, p_lives)
+      throw({:jexception, JR.exception("AbstractMethodError", "set")})
+    end)
+  end
 
-add(This, Lives) when is_integer(Lives) ->
-    erlang:error({abstract_method, add}).
 
-deaths(This, Lives) when is_integer(Lives) ->
-    erlang:error({abstract_method, deaths}).
+  def jm_reset(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "reset")})
+    end)
+  end
 
-getMaxlives(This) ->
-    erlang:error({abstract_method, getMaxlives}).
 
-isAlive(This) ->
-    erlang:error({abstract_method, isAlive}).
+  def jm_add(this, p_lives) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :lives, p_lives)
+      throw({:jexception, JR.exception("AbstractMethodError", "add")})
+    end)
+  end
+
+
+  def jm_deaths(this, p_lives) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :lives, p_lives)
+      throw({:jexception, JR.exception("AbstractMethodError", "deaths")})
+    end)
+  end
+
+
+  def jm_getMaxlives(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "getMaxlives")})
+    end)
+  end
+
+
+  def jm_isAlive(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "isAlive")})
+    end)
+  end
+end
+
 

@@ -1,137 +1,316 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation.compound
-% import javax.microedition.khronos.opengles.GL
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.animation.AnimationBehavior
-% import org.allbinary.animation.IndexedAnimation
-% import org.allbinary.animation.RotationAnimation
-% import org.allbinary.direction.Direction
-% import org.allbinary.logic.math.PrimitiveIntUtil
-% import org.allbinary.math.Angle
-% import org.allbinary.math.AngleFactory
-% import org.allbinary.math.AngleInfo
-% import org.allbinary.util.CircularIndexUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation.compound
 
--module('AutoCompoundRotationAnimation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements CompoundAnimationInterface
+defmodule AutoCompoundRotationAnimation do
+  def jsuper(), do: RotationAnimation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('RotationAnimation', Function, Arguments).
-
-init_fields(This) ->
-    put({This, animationInterfaceArray}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :animationInterfaceArray, nil)
+        
+    nil
+  end
 
 
-new(AnimationInterfaceArray, AnimationBehavior) when (is_tuple(AnimationInterfaceArray) orelse AnimationInterfaceArray =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, AnimationInterfaceArray, AnimationBehavior),
-    This.
+  def jinit(this, p_animationInterfaceArray, p_animationBehavior) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :animationInterfaceArray, p_animationInterfaceArray)
+      JR.lset(f, :animationBehavior, p_animationBehavior)
+        RotationAnimation.jinit(this, AngleInfo.jm_getInstance(JR.get(AngleFactory.jm_getInstance(), :QUARTER_TOTAL_ANGLE)), CircularIndexUtil.jm_createInstance(4), JR.lget(f, :animationBehavior))
+        AutoCompoundRotationAnimation.jinitfields(this)
+        JR.put(this, :animationInterfaceArray, JR.lget(f, :animationInterfaceArray))
+        JR.put(this, :circularIndexUtil, CircularIndexUtil.jm_createInstance(JR.alength(JR.get(this, :animationInterfaceArray))))
+    end)
+  end
 
-'$init'(This, AnimationInterfaceArray, AnimationBehavior) when (is_tuple(AnimationInterfaceArray) orelse AnimationInterfaceArray =:= undefined) ->
-        'RotationAnimation':'$init'(This, 'AngleInfo':getInstance(get({'AngleFactory':getInstance(), 'QUARTER_TOTAL_ANGLE'})), 'CircularIndexUtil':createInstance(4), AnimationBehavior),
-        init_fields(This),
-        put({This, animationInterfaceArray}, AnimationInterfaceArray),
-        put({This, circularIndexUtil}, 'CircularIndexUtil':createInstance(array:size(get({This, animationInterfaceArray})))).
+  def jnew(p_animationInterfaceArray, p_animationBehavior) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_animationInterfaceArray, p_animationBehavior)
+    this
+  end
 
-setFrame(This, Index) when is_integer(Index) ->
-        (fun(Target_N66186) -> (get({Target_N66186, '$class'})):setFrame(Target_N66186, Index) end)(array:get((get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})), get({This, animationInterfaceArray}))).
 
-getFrame(This) ->
-        (fun(Target_N66302) -> (get({Target_N66302, '$class'})):getFrame(Target_N66302) end)(array:get((get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})), get({This, animationInterfaceArray}))).
+  def jm_setFrame(this, p_index) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :index, p_index)
+        JR.call(JR.aget(JR.get(this, :animationInterfaceArray), JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, [])), :jm_setFrame, [JR.lget(f, :index)])
+    end)
+  end
 
-% throws Exception
-getAnimationSize(This) ->
-        (fun(Target_N66385) -> (get({Target_N66385, '$class'})):getAnimationSize(Target_N66385) end)(array:get((get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})), get({This, animationInterfaceArray}))).
 
-getSize(This) ->
-        (fun(Target_N66479) -> (get({Target_N66479, '$class'})):getSize(Target_N66479) end)(array:get((get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})), get({This, animationInterfaceArray}))).
+  def jm_getFrame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.aget(JR.get(this, :animationInterfaceArray), JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, [])), :jm_getFrame, [])})
+    end)
+  end
 
-previousFrame(This) ->
-        (get({get({This, circularIndexUtil}), '$class'})):previous(get({This, circularIndexUtil})),
-        (fun(Target_N66585) -> (get({Target_N66585, '$class'})):previousFrame(Target_N66585) end)(array:get((get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})), get({This, animationInterfaceArray}))).
 
-% throws Exception
-nextFrame(This) ->
-        (get({get({This, circularIndexUtil}), '$class'})):next(get({This, circularIndexUtil})),
-        (fun(Target_N66690) -> (get({Target_N66690, '$class'})):nextFrame(Target_N66690) end)(array:get((get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})), get({This, animationInterfaceArray}))).
+  def jm_getAnimationSize(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.aget(JR.get(this, :animationInterfaceArray), JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, [])), :jm_getAnimationSize, [])})
+    end)
+  end
 
-previousRotation(This) ->
-        (fun(Target_N66783) -> (get({Target_N66783, '$class'})):previousRotation(Target_N66783) end)(array:get((get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})), get({This, animationInterfaceArray}))).
 
-nextRotation(This) ->
-        (fun(Target_N66865) -> (get({Target_N66865, '$class'})):nextRotation(Target_N66865) end)(array:get((get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})), get({This, animationInterfaceArray}))).
+  def jm_getSize(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.aget(JR.get(this, :animationInterfaceArray), JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, [])), :jm_getSize, [])})
+    end)
+  end
 
-setSequence(This, Sequence) when (is_tuple(Sequence) orelse Sequence =:= undefined) ->
-        ok.
 
-getSequence(This) ->
-        'PrimitiveIntUtil':getArrayInstance().
+  def jm_previousFrame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :circularIndexUtil), :jm_previous, [])
+        JR.call(JR.aget(JR.get(this, :animationInterfaceArray), JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, [])), :jm_previousFrame, [])
+    end)
+  end
 
-paintXY(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-        (fun(Target_N67062) -> (get({Target_N67062, '$class'})):paintXY(Target_N67062, Graphics, X, Y) end)(array:get((get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})), get({This, animationInterfaceArray}))).
 
-paintThreedXYZ(This, Graphics, X, Y, Z) when is_integer(X), is_integer(Y), is_integer(Z) ->
-        (fun(Target_N67238) -> (get({Target_N67238, '$class'})):paintThreedXYZ(Target_N67238, Graphics, X, Y, Z) end)(array:get((get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})), get({This, animationInterfaceArray}))).
+  def jm_nextFrame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :circularIndexUtil), :jm_next, [])
+        JR.call(JR.aget(JR.get(this, :animationInterfaceArray), JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, [])), :jm_nextFrame, [])
+    end)
+  end
 
-getCurrentAnimation(This) ->
-        array:get((get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})), get({This, animationInterfaceArray})).
 
-nextAnimation(This) ->
-        Frame = (get({This, '$class'})):getFrame(This),
-        (get({get({This, circularIndexUtil}), '$class'})):next(get({This, circularIndexUtil})),
-        (get({This, '$class'})):setFrame(This, Frame).
+  def jm_previousRotation(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.aget(JR.get(this, :animationInterfaceArray), JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, [])), :jm_previousRotation, [])
+    end)
+  end
 
-previousAnimation(This) ->
-        Frame = (get({This, '$class'})):getFrame(This),
-        (get({get({This, circularIndexUtil}), '$class'})):previous(get({This, circularIndexUtil})),
-        (get({This, '$class'})):setFrame(This, Frame).
 
-setAnimation(This, Index) when is_integer(Index) ->
-        Frame = (get({This, '$class'})):getFrame(This),
-        (get({get({This, circularIndexUtil}), '$class'})):setIndex(get({This, circularIndexUtil}), Index),
-        (get({This, '$class'})):setFrame(This, Frame).
+  def jm_nextRotation(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.aget(JR.get(this, :animationInterfaceArray), JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, [])), :jm_nextRotation, [])
+    end)
+  end
 
-setFrameByDirection(This, Direction) ->
-        (fun(Target_N67919) -> (get({Target_N67919, '$class'})):setFrameByDirection(Target_N67919, Direction) end)(array:get((get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})), get({This, animationInterfaceArray}))).
 
-setFrameToAngle(This, Angle) ->
-        (fun(Target_N68039) -> (get({Target_N68039, '$class'})):setFrameToAngle(Target_N68039, Angle) end)(array:get((get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})), get({This, animationInterfaceArray}))).
+  def jm_setSequence(this, p_sequence) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :sequence, p_sequence)
+        nil
+    end)
+  end
 
-adjustFrameToAngle(This, NewAngle) ->
-        (get({This, '$class'})):adjustFrame(This, (get({NewAngle, '$class'})):getValue(NewAngle)).
 
-adjustFrame(This, Angle) when is_integer(Angle) ->
-        (fun(Target_N68256) -> (get({Target_N68256, '$class'})):adjustFrame(Target_N68256, Angle) end)(array:get((get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})), get({This, animationInterfaceArray}))).
+  def jm_getSequence(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, PrimitiveIntUtil.jm_getArrayInstance()})
+    end)
+  end
 
-getAngleInfoP(This) ->
-        (fun(Target_N68372) -> (get({Target_N68372, '$class'})):getAngleInfoP(Target_N68372) end)(array:get((get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})), get({This, animationInterfaceArray}))).
 
-getAnimationInterfaceArray(This) ->
-        get({This, animationInterfaceArray}).
+  def jm_paintXY(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        JR.call(JR.aget(JR.get(this, :animationInterfaceArray), JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, [])), :jm_paintXY, [JR.lget(f, :graphics), JR.lget(f, :x), JR.lget(f, :y)])
+    end)
+  end
 
-setAnimationInterfaceArray(This, AnimationInterfaceArray) when (is_tuple(AnimationInterfaceArray) orelse AnimationInterfaceArray =:= undefined) ->
-        put({This, animationInterfaceArray}, AnimationInterfaceArray).
 
-% throws Exception
-set(This, Gl) ->
-        put({local, index}, array:size(get({This, animationInterfaceArray}))),
-        (fun Loop() -> case (begin put({local, index}, get({local, index}) - 1), get({local, index}) end >= 0) of true ->
-            (fun(Target_N68610) -> (get({Target_N68610, '$class'})):set(Target_N68610, Gl) end)(array:get(get({local, index}), get({This, animationInterfaceArray}))),
-            Loop();
-        false -> ok end end)().
+  def jm_paintThreedXYZ(this, p_graphics, p_x, p_y, p_z) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :z, p_z)
+        JR.call(JR.aget(JR.get(this, :animationInterfaceArray), JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, [])), :jm_paintThreedXYZ, [JR.lget(f, :graphics), JR.lget(f, :x), JR.lget(f, :y), JR.lget(f, :z)])
+    end)
+  end
+
+
+  def jm_getCurrentAnimation(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.aget(JR.get(this, :animationInterfaceArray), JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, []))})
+    end)
+  end
+
+
+  def jm_nextAnimation(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :frame, JR.call(this, :jm_getFrame, []))
+        JR.call(JR.get(this, :circularIndexUtil), :jm_next, [])
+        JR.call(this, :jm_setFrame, [JR.lget(f, :frame)])
+    end)
+  end
+
+
+  def jm_previousAnimation(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :frame, JR.call(this, :jm_getFrame, []))
+        JR.call(JR.get(this, :circularIndexUtil), :jm_previous, [])
+        JR.call(this, :jm_setFrame, [JR.lget(f, :frame)])
+    end)
+  end
+
+
+  def jm_setAnimation(this, p_index) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :index, p_index)
+        JR.lset(f, :frame, JR.call(this, :jm_getFrame, []))
+        JR.call(JR.get(this, :circularIndexUtil), :jm_setIndex, [JR.lget(f, :index)])
+        JR.call(this, :jm_setFrame, [JR.lget(f, :frame)])
+    end)
+  end
+
+
+  def jm_setFrameByDirection(this, p_direction) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :direction, p_direction)
+        JR.call(JR.aget(JR.get(this, :animationInterfaceArray), JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, [])), :jm_setFrameByDirection, [JR.lget(f, :direction)])
+    end)
+  end
+
+
+  def jm_setFrameToAngle(this, p_angle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :angle, p_angle)
+        JR.call(JR.aget(JR.get(this, :animationInterfaceArray), JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, [])), :jm_setFrameToAngle, [JR.lget(f, :angle)])
+    end)
+  end
+
+
+  def jm_adjustFrameToAngle(this, p_newAngle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :newAngle, p_newAngle)
+        JR.call(this, :jm_adjustFrame, [JR.call(JR.lget(f, :newAngle), :jm_getValue, [])])
+    end)
+  end
+
+
+  def jm_adjustFrame(this, p_angle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :angle, p_angle)
+        JR.call(JR.aget(JR.get(this, :animationInterfaceArray), JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, [])), :jm_adjustFrame, [JR.lget(f, :angle)])
+    end)
+  end
+
+
+  def jm_getAngleInfoP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.aget(JR.get(this, :animationInterfaceArray), JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, [])), :jm_getAngleInfoP, [])})
+    end)
+  end
+
+
+  def jm_getAnimationInterfaceArray(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :animationInterfaceArray)})
+    end)
+  end
+
+
+  def jm_setAnimationInterfaceArray(this, p_animationInterfaceArray) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :animationInterfaceArray, p_animationInterfaceArray)
+        JR.put(this, :animationInterfaceArray, JR.lget(f, :animationInterfaceArray))
+    end)
+  end
+
+
+  def jm_set(this, p_gl) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+        JR.lset(f, :index, JR.alength(JR.get(this, :animationInterfaceArray)))
+        JR.jfor(fn -> (JR.lpreinc(f, :index, -1) >= 0) end, fn -> nil end, fn ->
+            JR.call(JR.aget(JR.get(this, :animationInterfaceArray), JR.lget(f, :index)), :jm_set, [JR.lget(f, :gl)])
+        end)
+    end)
+  end
+end
+
 

@@ -1,34 +1,47 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2025 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.opengles.shader
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2025 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles.shader
 
--module('SimpleCompositeShaderUpdater').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule SimpleCompositeShaderUpdater do
+  def jsuper(), do: CompositeShaderUpdater
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('CompositeShaderUpdater', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
 
+  def jinit(this, p_uniformBlockArray, p_uniformArray, p_attributeArray, p_attributeHandleArray) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :uniformBlockArray, p_uniformBlockArray)
+      JR.lset(f, :uniformArray, p_uniformArray)
+      JR.lset(f, :attributeArray, p_attributeArray)
+      JR.lset(f, :attributeHandleArray, p_attributeHandleArray)
+        CompositeShaderUpdater.jinit(this, JR.lget(f, :uniformBlockArray), JR.lget(f, :uniformArray), JR.lget(f, :attributeArray), JR.lget(f, :attributeHandleArray))
+        SimpleCompositeShaderUpdater.jinitfields(this)
+    end)
+  end
 
-new(UniformBlockArray, UniformArray, AttributeArray, AttributeHandleArray) when (is_tuple(UniformBlockArray) orelse UniformBlockArray =:= undefined), (is_tuple(UniformArray) orelse UniformArray =:= undefined), (is_tuple(AttributeArray) orelse AttributeArray =:= undefined), (is_tuple(AttributeHandleArray) orelse AttributeHandleArray =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, UniformBlockArray, UniformArray, AttributeArray, AttributeHandleArray),
-    This.
+  def jnew(p_uniformBlockArray, p_uniformArray, p_attributeArray, p_attributeHandleArray) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_uniformBlockArray, p_uniformArray, p_attributeArray, p_attributeHandleArray)
+    this
+  end
+end
 
-'$init'(This, UniformBlockArray, UniformArray, AttributeArray, AttributeHandleArray) when (is_tuple(UniformBlockArray) orelse UniformBlockArray =:= undefined), (is_tuple(UniformArray) orelse UniformArray =:= undefined), (is_tuple(AttributeArray) orelse AttributeArray =:= undefined), (is_tuple(AttributeHandleArray) orelse AttributeHandleArray =:= undefined) ->
-        'CompositeShaderUpdater':'$init'(This, UniformBlockArray, UniformArray, AttributeArray, AttributeHandleArray).
 

@@ -1,43 +1,56 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.input
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.input
 
--module('GameInputProcessorUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule GameInputProcessorUtil do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-init(InputProcessorArray) when (is_tuple(InputProcessorArray) orelse InputProcessorArray =:= undefined) ->
-        NoInputProcessor = 'GameInputProcessor':getInstance(),
-        Total = get({'InputFactory':getInstance(), 'MAX'}),
-        lists:foreach(fun(Index) ->
-            InputProcessorCanBeNull = array:get(Index, InputProcessorArray),
-            case (InputProcessorCanBeNull =:= undefined) of
-                true ->
-                array:set(Index, NoInputProcessor, InputProcessorArray);
-                false -> ok
+  def jm_init(p_inputProcessorArray) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :inputProcessorArray, p_inputProcessorArray)
+        JR.lset(f, :noInputProcessor, GameInputProcessor.jm_getInstance())
+        JR.lset(f, :total, JR.get(InputFactory.jm_getInstance(), :MAX))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :total)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :inputProcessorCanBeNull, JR.aget(JR.lget(f, :inputProcessorArray), JR.lget(f, :index)))
+            if (JR.lget(f, :inputProcessorCanBeNull) == nil) do
+                JR.aset(JR.lget(f, :inputProcessorArray), JR.lget(f, :index), JR.lget(f, :noInputProcessor))
             end
-        end, lists:seq(0, Total - 1)).
+        end)
+    end)
+  end
+end
+
 

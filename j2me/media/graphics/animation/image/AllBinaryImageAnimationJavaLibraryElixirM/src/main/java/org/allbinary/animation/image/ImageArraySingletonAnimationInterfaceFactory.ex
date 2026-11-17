@@ -1,40 +1,44 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation.image
-% import javax.microedition.lcdui.Image
-% import org.allbinary.animation.Animation
-% import org.allbinary.animation.AnimationBehavior
-% import org.allbinary.animation.IndexedAnimation
-% import org.allbinary.animation.SingletonAnimationInterfaceFactory
-% import org.allbinary.image.IndexedAnimationToImageArrayUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
--module('ImageArraySingletonAnimationInterfaceFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule ImageArraySingletonAnimationInterfaceFactory do
+  def jsuper(), do: SingletonAnimationInterfaceFactory
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('SingletonAnimationInterfaceFactory', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new(ImageArray) when (is_tuple(ImageArray) orelse ImageArray =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, ImageArray),
-    This.
+  def jinit(this, p_imageArray) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :imageArray, p_imageArray)
+        SingletonAnimationInterfaceFactory.jinit(this, ImageArrayAnimation.jnew(JR.lget(f, :imageArray), AnimationBehavior.jm_getInstance()))
+        ImageArraySingletonAnimationInterfaceFactory.jinitfields(this)
+    end)
+  end
 
-'$init'(This, ImageArray) when (is_tuple(ImageArray) orelse ImageArray =:= undefined) ->
-        'SingletonAnimationInterfaceFactory':'$init'(This, 'ImageArrayAnimation':new(ImageArray, 'AnimationBehavior':getInstance())).
+  def jnew(p_imageArray) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_imageArray)
+    this
+  end
+end
+
 

@@ -1,70 +1,99 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion
-% import org.allbinary.input.motion.button.TouchButtonRecognizer
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion
 
--module('OnlyTouchButtonRecognizer').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule OnlyTouchButtonRecognizer do
+  def jsuper(), do: MotionRecognizer
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('MotionRecognizer', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :touchButtonRecognizer, nil)
+    JR.put(this, :touchButtonProcessing, false)
+        
+        JR.put(this, :touchButtonProcessing, false)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, touchButtonRecognizer}, undefined),
-    put({This, touchButtonProcessing}, false),
-    ok.
+
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      MotionRecognizer.jinit(this)
+      jinitfields(this)
+        JR.put(this, :touchButtonRecognizer, TouchButtonRecognizer.jnew())
+    end)
+  end
+
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    'MotionRecognizer':'$init'(This),
-    init_fields(This),
-        put({This, touchButtonRecognizer}, 'TouchButtonRecognizer':new()).
-
-% throws Exception
-processStartMotionEvent(This, X, Y, DeviceId, Modifiers) when is_integer(X), is_integer(Y), is_integer(DeviceId), is_integer(Modifiers) ->
-        case (get({get({This, touchButtonRecognizer}), '$class'})):pressTouchButtonInput(get({This, touchButtonRecognizer}), X, Y, DeviceId) of
-            true ->
-            put({This, touchButtonProcessing}, true);
-            false -> ok
-        end.
-
-% throws Exception
-processEndMotionEvent(This, X, Y, DeviceId, Modifiers) when is_integer(X), is_integer(Y), is_integer(DeviceId), is_integer(Modifiers) ->
-        try
-        case get({This, touchButtonProcessing}) of
-            true ->
-            put({This, touchButtonProcessing}, false);
-            false -> ok
-        end,
-        case (get({get({This, touchButtonRecognizer}), '$class'})):releaseTouchButtonInput(get({This, touchButtonRecognizer}), X, Y, DeviceId) of
-            true ->
-            throw({'$return', ok});
-            false -> ok
+  def jm_processStartMotionEvent(this, p_x, p_y, p_deviceId, p_modifiers) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :deviceId, p_deviceId)
+      JR.lset(f, :modifiers, p_modifiers)
+        if JR.call(JR.get(this, :touchButtonRecognizer), :jm_pressTouchButtonInput, [JR.lget(f, :x), JR.lget(f, :y), JR.lget(f, :deviceId)]) do
+            JR.put(this, :touchButtonProcessing, true)
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-% throws Exception
-processDraggedMotionEvent(This, X, Y, DeviceId, Modifiers) when is_integer(X), is_integer(Y), is_integer(DeviceId), is_integer(Modifiers) ->
-        case get({This, touchButtonProcessing}) of
-            true ->
-            (get({get({This, touchButtonRecognizer}), '$class'})):pressTouchButtonInput(get({This, touchButtonRecognizer}), X, Y, DeviceId);
-            false -> ok
-        end.
+
+  def jm_processEndMotionEvent(this, p_x, p_y, p_deviceId, p_modifiers) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :deviceId, p_deviceId)
+      JR.lset(f, :modifiers, p_modifiers)
+        if JR.get(this, :touchButtonProcessing) do
+            JR.put(this, :touchButtonProcessing, false)
+        end
+        if JR.call(JR.get(this, :touchButtonRecognizer), :jm_releaseTouchButtonInput, [JR.lget(f, :x), JR.lget(f, :y), JR.lget(f, :deviceId)]) do
+            throw({:jreturn, nil})
+        end
+    end)
+  end
+
+
+  def jm_processDraggedMotionEvent(this, p_x, p_y, p_deviceId, p_modifiers) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :deviceId, p_deviceId)
+      JR.lset(f, :modifiers, p_modifiers)
+        if JR.get(this, :touchButtonProcessing) do
+            JR.call(JR.get(this, :touchButtonRecognizer), :jm_pressTouchButtonInput, [JR.lget(f, :x), JR.lget(f, :y), JR.lget(f, :deviceId)])
+        end
+    end)
+  end
+end
+
 

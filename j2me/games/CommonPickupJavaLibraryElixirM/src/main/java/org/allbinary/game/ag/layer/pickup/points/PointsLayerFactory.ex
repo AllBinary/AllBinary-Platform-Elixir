@@ -1,40 +1,57 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.layer.pickup.points
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.AllBinaryLayerFactoryInterface
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.pickup.points
 
--module('PointsLayerFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements AllBinaryLayerFactoryInterface
+defmodule PointsLayerFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, points}, 0),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :points, 0)
+        
+    nil
+  end
 
 
-new(Points) when is_integer(Points) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Points),
-    This.
+  def jinit(this, p_points) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :points, p_points)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :points, JR.lget(f, :points))
+    end)
+  end
 
-'$init'(This, Points) when is_integer(Points) ->
-    init_fields(This),
-        put({This, points}, Points).
+  def jnew(p_points) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_points)
+    this
+  end
 
-% throws Exception
-getInstance(This) ->
-        'PointsLayer':new(get({This, points})).
+
+  def jm_getInstance(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, PointsLayer.jnew(JR.get(this, :points))})
+    end)
+  end
+end
+
 

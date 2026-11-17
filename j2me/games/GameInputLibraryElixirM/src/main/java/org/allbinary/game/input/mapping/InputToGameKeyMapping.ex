@@ -1,224 +1,314 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.input.mapping
-% import javax.microedition.lcdui.Canvas
-% import org.allbinary.game.input.GameKey
-% import org.allbinary.game.input.GameKeyFactory
-% import org.allbinary.game.input.Input
-% import org.allbinary.game.input.InputFactory
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.communication.log.PreLogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.string.CommonLabels
-% import org.allbinary.string.CommonSeps
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.input.mapping
 
--module('InputToGameKeyMapping').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule InputToGameKeyMapping do
+  def jsuper(), do: InputMapping
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT) end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('InputMapping', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, instance}, get({'NullUtil':getInstance(), 'NULL_OBJECT'})),
-    ok.
-
-init_fields(This) ->
-    put({This, gameKeyFactory}, 'GameKeyFactory':getInstance()),
-    put({This, mappedGameKeys}, array:from_list([get({get({This, gameKeyFactory}), 'UP'}), get({get({This, gameKeyFactory}), 'DOWN'}), get({get({This, gameKeyFactory}), 'LEFT'}), get({get({This, gameKeyFactory}), 'RIGHT'})])),
-    put({This, platformToGameKeyMapping}, array:new(get({'InputFactory':getInstance(), 'MAX'}), {default, undefined})),
-    put({This, negativePlatformToGameKeyMapping}, array:new(0, {default, undefined})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :gameKeyFactory, nil)
+    JR.put(this, :mappedGameKeys, nil)
+    JR.put(this, :platformToGameKeyMapping, nil)
+    JR.put(this, :negativePlatformToGameKeyMapping, nil)
+        JR.put(this, :gameKeyFactory, GameKeyFactory.jm_getInstance())
+        JR.put(this, :mappedGameKeys, JR.afrom([JR.get(JR.get(this, :gameKeyFactory), :UP), JR.get(JR.get(this, :gameKeyFactory), :DOWN), JR.get(JR.get(this, :gameKeyFactory), :LEFT), JR.get(JR.get(this, :gameKeyFactory), :RIGHT)]))
+        JR.put(this, :platformToGameKeyMapping, JR.anew(JR.get(InputFactory.jm_getInstance(), :MAX), nil))
+        JR.put(this, :negativePlatformToGameKeyMapping, JR.anew(0, nil))
+    nil
+  end
 
 
-getNullInstance() ->
-        case (get({'InputToGameKeyMapping', instance}) =:= get({'NullUtil':getInstance(), 'NULL_OBJECT'})) of
-            true ->
-            put({'InputToGameKeyMapping', instance}, 'InputToGameKeyMapping':new());
-            false -> ok
-        end,
-        get({'InputToGameKeyMapping', instance}).
+  def jm_getNullInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        if (InputToGameKeyMapping.jstatic_instance() == JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)) do
+            InputToGameKeyMapping.jstatic_set_instance(InputToGameKeyMapping.jnew())
+        end
+        throw({:jreturn, InputToGameKeyMapping.jstatic_instance()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-    'InputMapping':'$init'(This),
-    init_fields(This),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, get({get({This, commonStrings}), 'CONSTRUCTOR'})),
-        (get({This, '$class'})):clear(This).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      InputMapping.jinit(this)
+      jinitfields(this)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, JR.get(JR.get(this, :commonStrings), :CONSTRUCTOR)])
+        JR.call(this, :jm_clear, [])
+    end)
+  end
 
-clear(This) ->
-        lists:foreach(fun(Index) ->
-            put({This, platformToGameKeyMapping}, array:set(Index, get({get({This, gameKeyFactory}), 'NONE'}), get({This, platformToGameKeyMapping})))
-        end, lists:seq((array:size(get({This, platformToGameKeyMapping})) - 1), 0, -1)).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-removeAll(This) ->
-        'InputMapping':removeAll(This),
-        (get({This, '$class'})):clear(This).
 
-addMapping(This, InputToGameKeyMapping) ->
-        lists:foreach(fun(Index) ->
-            Input = (get({InputToGameKeyMapping, '$class'})):getInstance(InputToGameKeyMapping, Index),
-            case (Input =/= get({get({This, gameKeyFactory}), 'NONE'})) of
-                true ->
-                (get({This, '$class'})):addAll(This, Input, (get({InputToGameKeyMapping, '$class'})):getMappedInput(InputToGameKeyMapping, Input));
-                false -> ok
+  def jm_clear(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :index, JR.int32(JR.alength(JR.get(this, :platformToGameKeyMapping)) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.aset(JR.get(this, :platformToGameKeyMapping), JR.lget(f, :index), JR.get(JR.get(this, :gameKeyFactory), :NONE))
+        end)
+    end)
+  end
+
+
+  def jm_removeAll(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        InputMapping.jm_removeAll(this)
+        JR.call(this, :jm_clear, [])
+    end)
+  end
+
+
+  def jm_addMapping(this, p_inputToGameKeyMapping) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :inputToGameKeyMapping, p_inputToGameKeyMapping)
+        JR.lset(f, :index, JR.int32(JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_getMaxMappable, []) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.lset(f, :input, JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_getInstance, [JR.lget(f, :index)]))
+            if (JR.lget(f, :input) != JR.get(JR.get(this, :gameKeyFactory), :NONE)) do
+                JR.call(this, :jm_addAll, [JR.lget(f, :input), JR.call(JR.lget(f, :inputToGameKeyMapping), :jm_getMappedInput, [JR.lget(f, :input)])])
             end
-        end, lists:seq(((get({InputToGameKeyMapping, '$class'})):getMaxMappable(InputToGameKeyMapping) - 1), 0, -1)).
+        end)
+    end)
+  end
 
-addAll(This, Input, List) ->
-        lists:foreach(fun(Index) ->
-            MappedToInput = array:get(Index, get({List, objectArray})),
-            (get({This, '$class'})):add(This, Input, MappedToInput)
-        end, lists:seq(((get({List, '$class'})):size(List) - 1), 0, -1)).
 
-add(This, Input, MappedToInput) ->
-        'InputMapping':add(This, Input, MappedToInput),
-        (get({This, '$class'})):set(This, Input, MappedToInput).
+  def jm_addAll(this, p_input, p_list) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :input, p_input)
+      JR.lset(f, :list, p_list)
+        JR.lset(f, :index, JR.int32(JR.call(JR.lget(f, :list), :jm_size, []) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.lset(f, :mappedToInput, JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index)))
+            JR.call(this, :jm_add, [JR.lget(f, :input), JR.lget(f, :mappedToInput)])
+        end)
+    end)
+  end
 
-remove(This, Input, MappedToInput) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N67594) -> (get({Target_N67594, '$class'})):toString(Target_N67594) end)((fun(Target_N67601) -> (get({Target_N67601, '$class'})):append(Target_N67601, (fun(Target_N67718) -> (get({Target_N67718, '$class'})):toString(Target_N67718, MappedToInput) end)('StringUtil':getInstance())) end)((fun(Target_N67608) -> (get({Target_N67608, '$class'})):append(Target_N67608, " == ") end)((fun(Target_N67615) -> (get({Target_N67615, '$class'})):append(Target_N67615, (fun(Target_N67671) -> (get({Target_N67671, '$class'})):toString(Target_N67671, Input) end)('StringUtil':getInstance())) end)((fun(Target_N67622) -> (get({Target_N67622, '$class'})):append(Target_N67622, get({'CommonLabels':getInstance(), 'START_LABEL'})) end)('StringMaker':new()))))), This, "InputToGameKeyMapping::remove"),
-        'InputMapping':remove(This, Input, MappedToInput),
-        (get({This, '$class'})):set(This, Input, get({get({This, gameKeyFactory}), 'NONE'})).
 
-set(This, Input, MappedToInput) ->
-        Id = (get({MappedToInput, '$class'})):getId(MappedToInput),
-        case ((Id >= 0) andalso (Id < array:size(get({This, platformToGameKeyMapping})))) of
-            true ->
-            put({This, platformToGameKeyMapping}, array:set(Id, Input, get({This, platformToGameKeyMapping})));
-            false -> ok
-        end.
+  def jm_add(this, p_input, p_mappedToInput) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :input, p_input)
+      JR.lset(f, :mappedToInput, p_mappedToInput)
+        InputMapping.jm_add(this, JR.lget(f, :input), JR.lget(f, :mappedToInput))
+        JR.call(this, :jm_set, [JR.lget(f, :input), JR.lget(f, :mappedToInput)])
+    end)
+  end
 
-getMaxMappable(This) ->
-        array:size(get({This, platformToGameKeyMapping})).
 
-getReverseInstance(This, Id) when is_integer(Id) ->
-        List = 'BasicArrayListD':new(),
-        InputFactory = 'InputFactory':getInstance(),
-        lists:foreach(fun(Index) ->
-            case ((fun(Target_N68293) -> (get({Target_N68293, '$class'})):getId(Target_N68293) end)(array:get(Index, get({This, platformToGameKeyMapping}))) =:= Id) of
-                true ->
-                Input = (get({InputFactory, '$class'})):getInstanceById(InputFactory, Index),
-                case (Input =/= undefined) of
-                    true ->
-                    (get({List, '$class'})):add(List, Input);
-                    false -> ok
-                end;
-                false -> ok
+  def jm_remove(this, p_input, p_mappedToInput) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :input, p_input)
+      JR.lset(f, :mappedToInput, p_mappedToInput)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(CommonLabels.jm_getInstance(), :START_LABEL)]), :jm_append, [JR.call(StringUtil.jm_getInstance(), :jm_toString, [JR.lget(f, :input)])]), :jm_append, [" == "]), :jm_append, [JR.call(StringUtil.jm_getInstance(), :jm_toString, [JR.lget(f, :mappedToInput)])]), :jm_toString, []), this, "InputToGameKeyMapping::remove"])
+        InputMapping.jm_remove(this, JR.lget(f, :input), JR.lget(f, :mappedToInput))
+        JR.call(this, :jm_set, [JR.lget(f, :input), JR.get(JR.get(this, :gameKeyFactory), :NONE)])
+    end)
+  end
+
+
+  def jm_set(this, p_input, p_mappedToInput) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :input, p_input)
+      JR.lset(f, :mappedToInput, p_mappedToInput)
+        JR.lset(f, :id, JR.call(JR.lget(f, :mappedToInput), :jm_getId, []))
+        if ((JR.lget(f, :id) >= 0) && (JR.lget(f, :id) < JR.alength(JR.get(this, :platformToGameKeyMapping)))) do
+            JR.aset(JR.get(this, :platformToGameKeyMapping), JR.lget(f, :id), JR.lget(f, :input))
+        end
+    end)
+  end
+
+
+  def jm_getMaxMappable(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.alength(JR.get(this, :platformToGameKeyMapping))})
+    end)
+  end
+
+
+  def jm_getReverseInstance(this, p_id) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :id, p_id)
+        JR.lset(f, :list, BasicArrayListD.jnew())
+        JR.lset(f, :inputFactory, InputFactory.jm_getInstance())
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.alength(JR.get(this, :platformToGameKeyMapping))) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            if (JR.call(JR.aget(JR.get(this, :platformToGameKeyMapping), JR.lget(f, :index)), :jm_getId, []) == JR.lget(f, :id)) do
+                JR.lset(f, :input, JR.call(JR.lget(f, :inputFactory), :jm_getInstanceById, [JR.lget(f, :index)]))
+                if (JR.lget(f, :input) != nil) do
+                    JR.call(JR.lget(f, :list), :jm_add, [JR.lget(f, :input)])
+                end
             end
-        end, lists:seq(0, array:size(get({This, platformToGameKeyMapping})) - 1)),
-        List.
+        end)
+        throw({:jreturn, JR.lget(f, :list)})
+    end)
+  end
 
-% throws Exception
-initGameKey(This, Canvas, GameKey) ->
-        Key = (get({Canvas, '$class'})):getKeyCode(Canvas, (get({GameKey, '$class'})):getId(GameKey)),
-        case ((Key < 0) andalso ((-Key) < array:size(get({This, negativePlatformToGameKeyMapping})))) of
-            true ->
-            put({This, negativePlatformToGameKeyMapping}, array:set((-Key), GameKey, get({This, negativePlatformToGameKeyMapping})));
-            false ->
-            case (Key > 0) of
-            true ->
-            case (array:get(Key, get({This, platformToGameKeyMapping})) =:= get({get({This, gameKeyFactory}), 'NONE'})) of
-                true ->
-                put({This, platformToGameKeyMapping}, array:set(Key, GameKey, get({This, platformToGameKeyMapping})));
-                false -> ok
-            end;
-            false ->
-            'PreLogUtil':putOE((fun(Target_N68757) -> (get({Target_N68757, '$class'})):toString(Target_N68757) end)((fun(Target_N68764) -> (get({Target_N68764, '$class'})):appendint(Target_N68764, Key) end)((fun(Target_N68771) -> (get({Target_N68771, '$class'})):append(Target_N68771, get({'CommonSeps':getInstance(), 'COLON_SEP'})) end)((fun(Target_N68778) -> (get({Target_N68778, '$class'})):append(Target_N68778, (get({GameKey, '$class'})):toString(GameKey)) end)('StringMaker':new())))), This, get({get({This, commonStrings}), 'INIT'}), {'Exception'})
-        end
-        end.
 
-% throws Exception
-getSmallestCanvasGameKeyCode(This, Canvas) ->
-        put({local, nextKey}, 0),
-        put({local, smallestKey}, 0),
-        put({local, index}, array:size(get({This, mappedGameKeys}))),
-        (fun Loop() -> case (begin put({local, index}, get({local, index}) - 1), get({local, index}) end >= 0) of true ->
-            put({local, nextKey}, (get({Canvas, '$class'})):getKeyCode(Canvas, (fun(Target_N69227) -> (get({Target_N69227, '$class'})):getId(Target_N69227) end)(array:get(get({local, index}), get({This, mappedGameKeys}))))),
-            case (get({local, nextKey}) < get({local, smallestKey})) of
-                true ->
-                put({local, smallestKey}, get({local, nextKey}));
-                false -> ok
-            end,
-            Loop();
-        false -> ok end end)(),
-        get({local, smallestKey}).
-
-init(This, Canvas) ->
-        try
-            put({local, negativePlatformToGameKeyMapping}, array:new(0, {default, undefined})),
-            put({local, smallestKey}, (get({This, '$class'})):getSmallestCanvasGameKeyCode(This, Canvas)),
-            case (get({local, smallestKey}) < 0) of
-                true ->
-                put({local, smallestKey}, get({local, smallestKey}) - 1),
-                case (get({local, smallestKey}) < (-256)) of
-                    true ->
-                    put({local, smallestKey}, (-256));
-                    false -> ok
-                end,
-                put({local, negativePlatformToGameKeyMapping}, array:new((-get({local, smallestKey})), {default, undefined})),
-                put({local, index}, array:size(get({local, negativePlatformToGameKeyMapping}))),
-                (fun Loop() -> case (begin put({local, index}, get({local, index}) - 1), get({local, index}) end >= 0) of true ->
-                    put({local, negativePlatformToGameKeyMapping}, array:set(get({local, index}), get({get({This, gameKeyFactory}), 'NONE'}), get({local, negativePlatformToGameKeyMapping}))),
-                    Loop();
-                false -> ok end end)(),
-                put({This, negativePlatformToGameKeyMapping}, get({local, negativePlatformToGameKeyMapping}));
-                false -> ok
-            end,
-            put({local, index}, array:size(get({This, mappedGameKeys}))),
-            (fun Loop() -> case (begin put({local, index}, get({local, index}) - 1), get({local, index}) end >= 0) of true ->
-                (get({This, '$class'})):initGameKey(This, Canvas, array:get(get({local, index}), get({This, mappedGameKeys}))),
-                Loop();
-            false -> ok end end)()
-        catch _:T when T =/= '$break', T =/= '$continue', (not is_tuple(T) orelse element(1, T) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'INIT'}), T)
-        end.
-
-getInstanceForCanvas(This, Canvas, Id) when is_integer(Id) ->
-        try
-        case ((Id >= 0) andalso (Id < array:size(get({This, platformToGameKeyMapping})))) of
-            true ->
-            throw({'$return', array:get(Id, get({This, platformToGameKeyMapping}))});
-            false ->
-            case ((Id < 0) andalso ((-Id) < array:size(get({This, negativePlatformToGameKeyMapping})))) of
-            true ->
-            throw({'$return', array:get((-Id), get({This, negativePlatformToGameKeyMapping}))});
-            false ->
-            throw({'$return', get({get({This, gameKeyFactory}), 'NONE'})})
+  def jm_initGameKey(this, p_canvas, p_gameKey) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :canvas, p_canvas)
+      JR.lset(f, :gameKey, p_gameKey)
+        JR.lset(f, :key, JR.call(JR.lget(f, :canvas), :jm_getKeyCode, [JR.call(JR.lget(f, :gameKey), :jm_getId, [])]))
+        if ((JR.lget(f, :key) < 0) && (-JR.lget(f, :key) < JR.alength(JR.get(this, :negativePlatformToGameKeyMapping)))) do
+            JR.aset(JR.get(this, :negativePlatformToGameKeyMapping), -JR.lget(f, :key), JR.lget(f, :gameKey))
+        else
+            if (JR.lget(f, :key) > 0) do
+            if (JR.aget(JR.get(this, :platformToGameKeyMapping), JR.lget(f, :key)) == JR.get(JR.get(this, :gameKeyFactory), :NONE)) do
+                JR.aset(JR.get(this, :platformToGameKeyMapping), JR.lget(f, :key), JR.lget(f, :gameKey))
+            end
+        else
+            PreLogUtil.jm_putOE(JR.call(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.call(JR.lget(f, :gameKey), :jm_toString, [])]), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :COLON_SEP)]), :jm_appendint, [JR.lget(f, :key)]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :INIT), JR.exception("Exception", ""))
         end
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-getInstance(This, Id) when is_integer(Id) ->
-        try
-        case ((Id >= 0) andalso (Id < array:size(get({This, platformToGameKeyMapping})))) of
-            true ->
-            throw({'$return', array:get(Id, get({This, platformToGameKeyMapping}))});
-            false ->
-            case ((Id < 0) andalso ((-Id) < array:size(get({This, negativePlatformToGameKeyMapping})))) of
-            true ->
-            throw({'$return', array:get((-Id), get({This, negativePlatformToGameKeyMapping}))});
-            false ->
-            throw({'$return', get({get({This, gameKeyFactory}), 'NONE'})})
+
+  def jm_getSmallestCanvasGameKeyCode(this, p_canvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :canvas, p_canvas)
+        JR.lset(f, :nextKey, 0)
+        JR.lset(f, :smallestKey, 0)
+        JR.lset(f, :index, JR.alength(JR.get(this, :mappedGameKeys)))
+        JR.jfor(fn -> (JR.lpreinc(f, :index, -1) >= 0) end, fn -> nil end, fn ->
+            JR.lset(f, :nextKey, JR.call(JR.lget(f, :canvas), :jm_getKeyCode, [JR.call(JR.aget(JR.get(this, :mappedGameKeys), JR.lget(f, :index)), :jm_getId, [])]))
+            if (JR.lget(f, :nextKey) < JR.lget(f, :smallestKey)) do
+                JR.lset(f, :smallestKey, JR.lget(f, :nextKey))
+            end
+        end)
+        throw({:jreturn, JR.lget(f, :smallestKey)})
+    end)
+  end
+
+
+  def jm_init(this, p_canvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :canvas, p_canvas)
+        try do
+            JR.lset(f, :negativePlatformToGameKeyMapping, JR.anew(0, nil))
+            JR.lset(f, :smallestKey, JR.call(this, :jm_getSmallestCanvasGameKeyCode, [JR.lget(f, :canvas)]))
+            if (JR.lget(f, :smallestKey) < 0) do
+                JR.lpostinc(f, :smallestKey, -1)
+                if (JR.lget(f, :smallestKey) < -256) do
+                    JR.lset(f, :smallestKey, -256)
+                end
+                JR.lset(f, :negativePlatformToGameKeyMapping, JR.anew(-JR.lget(f, :smallestKey), nil))
+                JR.lset(f, :index, JR.alength(JR.lget(f, :negativePlatformToGameKeyMapping)))
+                JR.jfor(fn -> (JR.lpreinc(f, :index, -1) >= 0) end, fn -> nil end, fn ->
+                    JR.aset(JR.lget(f, :negativePlatformToGameKeyMapping), JR.lget(f, :index), JR.get(JR.get(this, :gameKeyFactory), :NONE))
+                end)
+                JR.put(this, :negativePlatformToGameKeyMapping, JR.lget(f, :negativePlatformToGameKeyMapping))
+            end
+            JR.lset(f, :index, JR.alength(JR.get(this, :mappedGameKeys)))
+            JR.jfor(fn -> (JR.lpreinc(f, :index, -1) >= 0) end, fn -> nil end, fn ->
+                JR.call(this, :jm_initGameKey, [JR.lget(f, :canvas), JR.aget(JR.get(this, :mappedGameKeys), JR.lget(f, :index))])
+            end)
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :t, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :INIT), JR.lget(f, :t)])
+        end
+    end)
+  end
+
+
+  def jm_getInstanceForCanvas(this, p_canvas, p_id) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :canvas, p_canvas)
+      JR.lset(f, :id, p_id)
+        if ((JR.lget(f, :id) >= 0) && (JR.lget(f, :id) < JR.alength(JR.get(this, :platformToGameKeyMapping)))) do
+            throw({:jreturn, JR.aget(JR.get(this, :platformToGameKeyMapping), JR.lget(f, :id))})
+        else
+            if ((JR.lget(f, :id) < 0) && (-JR.lget(f, :id) < JR.alength(JR.get(this, :negativePlatformToGameKeyMapping)))) do
+            throw({:jreturn, JR.aget(JR.get(this, :negativePlatformToGameKeyMapping), -JR.lget(f, :id))})
+        else
+            throw({:jreturn, JR.get(JR.get(this, :gameKeyFactory), :NONE)})
         end
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
+
+
+  def jm_getInstance(this, p_id) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :id, p_id)
+        if ((JR.lget(f, :id) >= 0) && (JR.lget(f, :id) < JR.alength(JR.get(this, :platformToGameKeyMapping)))) do
+            throw({:jreturn, JR.aget(JR.get(this, :platformToGameKeyMapping), JR.lget(f, :id))})
+        else
+            if ((JR.lget(f, :id) < 0) && (-JR.lget(f, :id) < JR.alength(JR.get(this, :negativePlatformToGameKeyMapping)))) do
+            throw({:jreturn, JR.aget(JR.get(this, :negativePlatformToGameKeyMapping), -JR.lget(f, :id))})
+        else
+            throw({:jreturn, JR.get(JR.get(this, :gameKeyFactory), :NONE)})
+        end
+        end
+    end)
+  end
+end
+
 

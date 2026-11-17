@@ -1,52 +1,61 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.canvas.transition.progress
-% import org.allbinary.graphics.color.BasicColorFactory
-% import org.allbinary.graphics.paint.NullPaintable
-% import org.allbinary.graphics.paint.PaintableInterface
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.string.StringUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.canvas.transition.progress
 
--module('ProgressCanvasFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule ProgressCanvasFactory do
+  def jsuper(), do: JObject
+def jstatic_PROGRESS_FORM_SCREEN(), do: JR.static_get(__MODULE__, :PROGRESS_FORM_SCREEN, fn -> JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT) end)
+  def jstatic_set_PROGRESS_FORM_SCREEN(value), do: JR.static_put(__MODULE__, :PROGRESS_FORM_SCREEN, value)
 
-static_init() ->
-    put({?MODULE, 'PROGRESS_FORM_SCREEN'}, get({'NullUtil':getInstance(), 'NULL_OBJECT'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        case (get({'ProgressCanvasFactory', 'PROGRESS_FORM_SCREEN'}) =:= get({'NullUtil':getInstance(), 'NULL_OBJECT'})) of
-            true ->
-            put({'ProgressCanvasFactory', 'PROGRESS_FORM_SCREEN'}, 'ProgressCanvas':new(get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'BasicColorFactory':getInstance(), 'BLACK'}), get({'BasicColorFactory':getInstance(), 'WHITE'})));
-            false -> ok
-        end,
-        get({'ProgressCanvasFactory', 'PROGRESS_FORM_SCREEN'}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        if (ProgressCanvasFactory.jstatic_PROGRESS_FORM_SCREEN() == JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)) do
+            ProgressCanvasFactory.jstatic_set_PROGRESS_FORM_SCREEN(ProgressCanvas.jnew(JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), JR.get(BasicColorFactory.jm_getInstance(), :BLACK), JR.get(BasicColorFactory.jm_getInstance(), :WHITE)))
+        end
+        throw({:jreturn, ProgressCanvasFactory.jstatic_PROGRESS_FORM_SCREEN()})
+    end)
+  end
 
-getLazyInstance() ->
-        'NullPaintable':getInstance().
+
+  def jm_getLazyInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, NullPaintable.jm_getInstance()})
+    end)
+  end
+end
+
 

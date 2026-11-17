@@ -1,62 +1,112 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2022 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.displayable
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable
 
--module('GameTickDisplayInfoSingleton').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GameTickDisplayInfoSingleton do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> GameTickDisplayInfoSingleton.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'GameTickDisplayInfoSingleton':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :displayInfoSingleton, nil)
+    JR.put(this, :lastWidth, 0)
+    JR.put(this, :lastHeight, 0)
+    JR.put(this, :lastHalfWidth, 0)
+    JR.put(this, :lastHalfHeight, 0)
+        JR.put(this, :displayInfoSingleton, DisplayInfoSingleton.jm_getInstance())
+        JR.put(this, :lastWidth, JR.call(JR.get(this, :displayInfoSingleton), :jm_getLastWidth, []))
+        JR.put(this, :lastHeight, JR.call(JR.get(this, :displayInfoSingleton), :jm_getLastHeight, []))
+        JR.put(this, :lastHalfWidth, JR.call(JR.get(this, :displayInfoSingleton), :jm_getLastHalfWidth, []))
+        JR.put(this, :lastHalfHeight, JR.call(JR.get(this, :displayInfoSingleton), :jm_getLastHalfHeight, []))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, displayInfoSingleton}, 'DisplayInfoSingleton':getInstance()),
-    put({This, lastWidth}, (get({get({This, displayInfoSingleton}), '$class'})):getLastWidth(get({This, displayInfoSingleton}))),
-    put({This, lastHeight}, (get({get({This, displayInfoSingleton}), '$class'})):getLastHeight(get({This, displayInfoSingleton}))),
-    put({This, lastHalfWidth}, (get({get({This, displayInfoSingleton}), '$class'})):getLastHalfWidth(get({This, displayInfoSingleton}))),
-    put({This, lastHalfHeight}, (get({get({This, displayInfoSingleton}), '$class'})):getLastHalfHeight(get({This, displayInfoSingleton}))),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'GameTickDisplayInfoSingleton', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, GameTickDisplayInfoSingleton.jstatic_instance()})
+    end)
+  end
 
-update(This) ->
-        put({This, lastWidth}, (get({get({This, displayInfoSingleton}), '$class'})):getLastWidth(get({This, displayInfoSingleton}))),
-        put({This, lastHeight}, (get({get({This, displayInfoSingleton}), '$class'})):getLastHeight(get({This, displayInfoSingleton}))),
-        put({This, lastHalfWidth}, (get({get({This, displayInfoSingleton}), '$class'})):getLastHalfWidth(get({This, displayInfoSingleton}))),
-        put({This, lastHalfHeight}, (get({get({This, displayInfoSingleton}), '$class'})):getLastHalfHeight(get({This, displayInfoSingleton}))).
 
-getLastWidth(This) ->
-        get({This, lastWidth}).
+  def jm_update(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.put(this, :lastWidth, JR.call(JR.get(this, :displayInfoSingleton), :jm_getLastWidth, []))
+        JR.put(this, :lastHeight, JR.call(JR.get(this, :displayInfoSingleton), :jm_getLastHeight, []))
+        JR.put(this, :lastHalfWidth, JR.call(JR.get(this, :displayInfoSingleton), :jm_getLastHalfWidth, []))
+        JR.put(this, :lastHalfHeight, JR.call(JR.get(this, :displayInfoSingleton), :jm_getLastHalfHeight, []))
+    end)
+  end
 
-getLastHeight(This) ->
-        get({This, lastHeight}).
 
-getLastHalfWidth(This) ->
-        get({This, lastHalfWidth}).
+  def jm_getLastWidth(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :lastWidth)})
+    end)
+  end
 
-getLastHalfHeight(This) ->
-        get({This, lastHalfHeight}).
+
+  def jm_getLastHeight(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :lastHeight)})
+    end)
+  end
+
+
+  def jm_getLastHalfWidth(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :lastHalfWidth)})
+    end)
+  end
+
+
+  def jm_getLastHalfHeight(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :lastHalfHeight)})
+    end)
+  end
+end
+
 

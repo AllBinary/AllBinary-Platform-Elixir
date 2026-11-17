@@ -1,54 +1,98 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.animation
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.color.BasicColorFactory
-% import org.allbinary.media.ScaleProperties
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.animation
 
--module('VectorAnimationInterfaceFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements AnimationInterfaceFactoryInterface
+defmodule VectorAnimationInterfaceFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, currentPoints}, undefined),
-    put({This, basicColor}, get({'BasicColorFactory':getInstance(), 'WHITE'})),
-    put({This, animationBehaviorFactory}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :currentPoints, nil)
+    JR.put(this, :basicColor, nil)
+    JR.put(this, :animationBehaviorFactory, nil)
+        
+        JR.put(this, :basicColor, JR.get(BasicColorFactory.jm_getInstance(), :WHITE))
+        
+    nil
+  end
 
 
-new(CurrentPoints, BasicColor, AnimationBehaviorFactory) when (is_tuple(CurrentPoints) orelse CurrentPoints =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, CurrentPoints, BasicColor, AnimationBehaviorFactory),
-    This.
+  def jinit(this, p_currentPoints, p_basicColor, p_animationBehaviorFactory) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :currentPoints, p_currentPoints)
+      JR.lset(f, :basicColor, p_basicColor)
+      JR.lset(f, :animationBehaviorFactory, p_animationBehaviorFactory)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :currentPoints, JR.lget(f, :currentPoints))
+        JR.call(this, :jm_setBasicColorP, [JR.lget(f, :basicColor)])
+        JR.put(this, :animationBehaviorFactory, JR.lget(f, :animationBehaviorFactory))
+    end)
+  end
 
-'$init'(This, CurrentPoints, BasicColor, AnimationBehaviorFactory) when (is_tuple(CurrentPoints) orelse CurrentPoints =:= undefined) ->
-    init_fields(This),
-        put({This, currentPoints}, CurrentPoints),
-        (get({This, '$class'})):setBasicColorP(This, BasicColor),
-        put({This, animationBehaviorFactory}, AnimationBehaviorFactory).
+  def jnew(p_currentPoints, p_basicColor, p_animationBehaviorFactory) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_currentPoints, p_basicColor, p_animationBehaviorFactory)
+    this
+  end
 
-% throws Exception
-getInstance(This, InstanceId) when is_integer(InstanceId) ->
-        'VectorAnimation':new(get({This, currentPoints}), (get({This, '$class'})):getBasicColorP(This), (get({get({This, animationBehaviorFactory}), '$class'})):getOrCreateInstance(get({This, animationBehaviorFactory}))).
 
-setBasicColorP(This, BasicColor) ->
-        put({This, basicColor}, BasicColor).
+  def jm_getInstance(this, p_instanceId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :instanceId, p_instanceId)
+        throw({:jreturn, VectorAnimation.jnew(JR.get(this, :currentPoints), JR.call(this, :jm_getBasicColorP, []), JR.call(JR.get(this, :animationBehaviorFactory), :jm_getOrCreateInstance, []))})
+    end)
+  end
 
-getBasicColorP(This) ->
-        get({This, basicColor}).
 
-setInitialScale(This, ScaleProperties) ->
-        ok.
+  def jm_setBasicColorP(this, p_basicColor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicColor, p_basicColor)
+        JR.put(this, :basicColor, JR.lget(f, :basicColor))
+    end)
+  end
+
+
+  def jm_getBasicColorP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :basicColor)})
+    end)
+  end
+
+
+  def jm_setInitialScale(this, p_scaleProperties) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :scaleProperties, p_scaleProperties)
+        nil
+    end)
+  end
+end
+
 

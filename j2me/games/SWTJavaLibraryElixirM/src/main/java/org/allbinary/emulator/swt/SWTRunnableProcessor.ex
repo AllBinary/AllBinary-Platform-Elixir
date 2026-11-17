@@ -1,48 +1,66 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2022 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.emulator.swt
-% import org.eclipse.swt.widgets.Display
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.emulator.swt
 
--module('SWTRunnableProcessor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule SWTRunnableProcessor do
+  def jsuper(), do: SWTProcessor
+def jstatic_instanceR(), do: JR.static_get(__MODULE__, :instanceR, fn -> SWTRunnableProcessor.jnew() end)
+  def jstatic_set_instanceR(value), do: JR.static_put(__MODULE__, :instanceR, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('SWTProcessor', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, instanceR}, 'SWTRunnableProcessor':new()),
-    ok.
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-getInstance() ->
-        get({'SWTRunnableProcessor', instanceR}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, SWTRunnableProcessor.jstatic_instanceR()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-    'SWTProcessor':'$init'(This),
-    init_fields(This),
-        ok.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      SWTProcessor.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-process(This, Display) ->
-        (get({get({This, runnable}), '$class'})):run(get({This, runnable})).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+
+
+  def jm_process(this, p_display) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :display, p_display)
+        JR.call(JR.get(this, :runnable), :jm_run, [])
+    end)
+  end
+end
+
 

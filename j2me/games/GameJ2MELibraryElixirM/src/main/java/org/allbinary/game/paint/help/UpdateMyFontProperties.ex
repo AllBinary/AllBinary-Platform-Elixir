@@ -1,40 +1,52 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.paint.help
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.string.StringUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.paint.help
 
--module('UpdateMyFontProperties').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule UpdateMyFontProperties do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, actionStringArray}, (fun(Target_N65651) -> (get({Target_N65651, '$class'})):getArrayInstance(Target_N65651) end)('StringUtil':getInstance())),
-    put({This, keymappingBeginWidthArray}, get({'NullUtil':getInstance(), 'NULL_INT_ARRAY'})),
-    put({This, actionStringDeltaXArray}, get({'NullUtil':getInstance(), 'NULL_INT_ARRAY'})),
-    put({This, inputDeltaXArray}, get({'NullUtil':getInstance(), 'NULL_INT_ARRAY_ARRAY'})),
-    put({This, sepArray}, get({'StringUtil':getInstance(), 'ONE_EMPTY_STRING_ARRAY_OF_ARRAYS'})),
-    put({This, sepWidthArray}, get({'NullUtil':getInstance(), 'NULL_INT_ARRAY_ARRAY'})),
-    put({This, charHeight}, 0),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :actionStringArray, nil)
+    JR.put(this, :keymappingBeginWidthArray, nil)
+    JR.put(this, :actionStringDeltaXArray, nil)
+    JR.put(this, :inputDeltaXArray, nil)
+    JR.put(this, :sepArray, nil)
+    JR.put(this, :sepWidthArray, nil)
+    JR.put(this, :charHeight, 0)
+        JR.put(this, :actionStringArray, JR.call(StringUtil.jm_getInstance(), :jm_getArrayInstance, []))
+        JR.put(this, :keymappingBeginWidthArray, JR.get(NullUtil.jm_getInstance(), :NULL_INT_ARRAY))
+        JR.put(this, :actionStringDeltaXArray, JR.get(NullUtil.jm_getInstance(), :NULL_INT_ARRAY))
+        JR.put(this, :inputDeltaXArray, JR.get(NullUtil.jm_getInstance(), :NULL_INT_ARRAY_ARRAY))
+        JR.put(this, :sepArray, JR.get(StringUtil.jm_getInstance(), :ONE_EMPTY_STRING_ARRAY_OF_ARRAYS))
+        JR.put(this, :sepWidthArray, JR.get(NullUtil.jm_getInstance(), :NULL_INT_ARRAY_ARRAY))
+        JR.put(this, :charHeight, 0)
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+end
 
 

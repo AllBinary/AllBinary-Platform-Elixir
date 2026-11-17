@@ -1,56 +1,93 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2011 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.game.terrain
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.util.event.AllBinaryEventObject
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2011 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.game.terrain
 
--module('TerrainEvent').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule TerrainEvent do
+  def jsuper(), do: AllBinaryEventObject
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AllBinaryEventObject', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :basicTerrainInfo, nil)
+        JR.put(this, :basicTerrainInfo, BasicTerrainInfo.jstatic_NULL_BASIC_TERRAIN_INFO())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, basicTerrainInfo}, get({'BasicTerrainInfo', 'NULL_BASIC_TERRAIN_INFO'})),
-    ok.
+
+  def jinit(this, p_basicTerrainInfo) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicTerrainInfo, p_basicTerrainInfo)
+        AllBinaryEventObject.jinit(this, JR.lget(f, :basicTerrainInfo))
+        TerrainEvent.jinitfields(this)
+        JR.call(this, :jm_setBasicTerrainInfo, [JR.get(this, :basicTerrainInfo)])
+    end)
+  end
+
+  def jnew(p_basicTerrainInfo) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_basicTerrainInfo)
+    this
+  end
 
 
-new(BasicTerrainInfo) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, BasicTerrainInfo),
-    This.
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["TerrainEvent: \n"])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["LayerInterface: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(this, :basicTerrainInfo), :jm_toString, [])])
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
 
-'$init'(This, BasicTerrainInfo) ->
-        'AllBinaryEventObject':'$init'(This, BasicTerrainInfo),
-        init_fields(This),
-        (get({This, '$class'})):setBasicTerrainInfo(This, get({This, basicTerrainInfo})).
 
-toString(This) ->
-        StringBuffer = 'StringMaker':new(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "TerrainEvent: \n"),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "LayerInterface: "),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (get({get({This, basicTerrainInfo}), '$class'})):toString(get({This, basicTerrainInfo}))),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+  def jm_getBasicTerrainInfo(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :basicTerrainInfo)})
+    end)
+  end
 
-getBasicTerrainInfo(This) ->
-        get({This, basicTerrainInfo}).
 
-setBasicTerrainInfo(This, BasicTerrainInfo) ->
-        put({This, basicTerrainInfo}, BasicTerrainInfo).
+  def jm_setBasicTerrainInfo(this, p_basicTerrainInfo) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicTerrainInfo, p_basicTerrainInfo)
+        JR.put(this, :basicTerrainInfo, JR.lget(f, :basicTerrainInfo))
+    end)
+  end
 
-setBasicTerrainInfoForCircularStaticPool(This, BasicTerrainInfo) ->
-        put({This, basicTerrainInfo}, BasicTerrainInfo).
+
+  def jm_setBasicTerrainInfoForCircularStaticPool(this, p_basicTerrainInfo) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicTerrainInfo, p_basicTerrainInfo)
+        JR.put(this, :basicTerrainInfo, JR.lget(f, :basicTerrainInfo))
+    end)
+  end
+end
+
 

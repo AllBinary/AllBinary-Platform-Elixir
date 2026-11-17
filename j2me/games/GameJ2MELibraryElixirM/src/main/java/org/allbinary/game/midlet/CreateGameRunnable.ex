@@ -1,61 +1,82 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.midlet
-% import org.allbinary.graphics.canvas.transition.progress.ProgressCanvas
-% import org.allbinary.graphics.canvas.transition.progress.ProgressCanvasFactory
-% import org.allbinary.graphics.displayable.command.MyCommandsFactory
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.ABHashtable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
--module('CreateGameRunnable').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements Runnable
+defmodule CreateGameRunnable do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, demoGameMidlet}, undefined),
-    put({This, hashtable}, undefined),
-    put({This, startGameMidletEvent}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :demoGameMidlet, nil)
+    JR.put(this, :hashtable, nil)
+    JR.put(this, :startGameMidletEvent, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        
+        
+        
+    nil
+  end
 
 
-new(DemoGameMidlet, Hashtable) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, DemoGameMidlet, Hashtable),
-    This.
+  def jinit(this, p_demoGameMidlet, p_hashtable) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :demoGameMidlet, p_demoGameMidlet)
+      JR.lset(f, :hashtable, p_hashtable)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :demoGameMidlet, JR.lget(f, :demoGameMidlet))
+        JR.put(this, :hashtable, JR.lget(f, :hashtable))
+        JR.put(this, :startGameMidletEvent, DemoGameMidletEvent.jnew(this, JR.get(DemoGameMidletStateFactory.jm_getInstance(), :START_GAME)))
+    end)
+  end
 
-'$init'(This, DemoGameMidlet, Hashtable) ->
-    init_fields(This),
-        put({This, demoGameMidlet}, DemoGameMidlet),
-        put({This, hashtable}, Hashtable),
-        put({This, startGameMidletEvent}, 'DemoGameMidletEvent':new(This, get({'DemoGameMidletStateFactory':getInstance(), 'START_GAME'}))).
+  def jnew(p_demoGameMidlet, p_hashtable) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_demoGameMidlet, p_hashtable)
+    this
+  end
 
-run(This) ->
-        try
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START_RUNNABLE'}), This, get({get({This, commonStrings}), 'RUN'})),
-            ProgressCanvas = 'ProgressCanvasFactory':getInstance(),
-            (get({get({This, demoGameMidlet}), '$class'})):commandAction(get({This, demoGameMidlet}), get({'MyCommandsFactory':getInstance(), 'SET_DISPLAYABLE'}), ProgressCanvas),
-            (get({get({This, demoGameMidlet}), '$class'})):stopGameCanvasRunnableInterface(get({This, demoGameMidlet})),
-            (get({get({This, demoGameMidlet}), '$class'})):setGameCanvasRunnableInterface(get({This, demoGameMidlet}), (get({get({This, demoGameMidlet}), '$class'})):createGameCanvasRunnableInterface(get({This, demoGameMidlet}))),
-            (fun(Target_N66495) -> (get({Target_N66495, '$class'})):setLoadStateHashtable(Target_N66495, get({This, hashtable})) end)((get({get({This, demoGameMidlet}), '$class'})):getGameCanvasRunnableInterface(get({This, demoGameMidlet}))),
-            (get({get({This, demoGameMidlet}), '$class'})):startGameCanvasRunnableInterface(get({This, demoGameMidlet})),
-            (fun(Target_N66567) -> (get({Target_N66567, '$class'})):fireEvent(Target_N66567, get({This, startGameMidletEvent})) end)('DemoGameMidletEventHandler':getInstance()),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'END_RUNNABLE'}), This, get({get({This, commonStrings}), 'RUN'}))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'RUN'}), E)
-        end.
+
+  def jm_run(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START_RUNNABLE), this, JR.get(JR.get(this, :commonStrings), :RUN)])
+            JR.lset(f, :progressCanvas, ProgressCanvasFactory.jm_getInstance())
+            JR.call(JR.get(this, :demoGameMidlet), :jm_commandAction, [JR.get(MyCommandsFactory.jm_getInstance(), :SET_DISPLAYABLE), JR.lget(f, :progressCanvas)])
+            JR.call(JR.get(this, :demoGameMidlet), :jm_stopGameCanvasRunnableInterface, [])
+            JR.call(JR.get(this, :demoGameMidlet), :jm_setGameCanvasRunnableInterface, [JR.call(JR.get(this, :demoGameMidlet), :jm_createGameCanvasRunnableInterface, [])])
+            JR.call(JR.call(JR.get(this, :demoGameMidlet), :jm_getGameCanvasRunnableInterface, []), :jm_setLoadStateHashtable, [JR.get(this, :hashtable)])
+            JR.call(JR.get(this, :demoGameMidlet), :jm_startGameCanvasRunnableInterface, [])
+            JR.call(DemoGameMidletEventHandler.jm_getInstance(), :jm_fireEvent, [JR.get(this, :startGameMidletEvent)])
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :END_RUNNABLE), this, JR.get(JR.get(this, :commonStrings), :RUN)])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :RUN), JR.lget(f, :e)])
+        end
+    end)
+  end
+end
+
 

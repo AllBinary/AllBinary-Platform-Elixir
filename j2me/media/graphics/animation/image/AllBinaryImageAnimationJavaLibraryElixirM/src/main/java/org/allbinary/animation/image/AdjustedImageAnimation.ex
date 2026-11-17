@@ -1,61 +1,120 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2022 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.animation.image
-% import javax.microedition.lcdui.Graphics
-% import javax.microedition.lcdui.Image
-% import org.allbinary.animation.AnimationBehavior
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
--module('AdjustedImageAnimation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule AdjustedImageAnimation do
+  def jsuper(), do: ImageAnimation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ImageAnimation', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :dx, 0)
+    JR.put(this, :dy, 0)
+        JR.put(this, :dx, 0)
+        JR.put(this, :dy, 0)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, dx}, 0),
-    put({This, dy}, 0),
-    ok.
+
+  def jinit(this, p_image, p_dx, p_dy, p_animationBehavior) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :image, p_image)
+      JR.lset(f, :dx, p_dx)
+      JR.lset(f, :dy, p_dy)
+      JR.lset(f, :animationBehavior, p_animationBehavior)
+        ImageAnimation.jinit(this, JR.lget(f, :image), JR.lget(f, :animationBehavior))
+        AdjustedImageAnimation.jinitfields(this)
+        JR.call(this, :jm_init, [JR.lget(f, :dx), JR.lget(f, :dy)])
+    end)
+  end
+
+  def jnew(p_image, p_dx, p_dy, p_animationBehavior) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_image, p_dx, p_dy, p_animationBehavior)
+    this
+  end
 
 
-new(Image, Dx, Dy, AnimationBehavior) when is_integer(Dx), is_integer(Dy) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Image, Dx, Dy, AnimationBehavior),
-    This.
+  def jm_init(this, p_dx, p_dy) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :dx, p_dx)
+      JR.lset(f, :dy, p_dy)
+        JR.call(this, :jm_setDx, [JR.lget(f, :dx)])
+        JR.call(this, :jm_setDy, [JR.lget(f, :dy)])
+    end)
+  end
 
-'$init'(This, Image, Dx, Dy, AnimationBehavior) when is_integer(Dx), is_integer(Dy) ->
-        'ImageAnimation':'$init'(This, Image, AnimationBehavior),
-        init_fields(This),
-        (get({This, '$class'})):init(This, Dx, Dy).
 
-% throws Exception
-init(This, Dx, Dy) when is_integer(Dx), is_integer(Dy) ->
-        (get({This, '$class'})):setDx(This, Dx),
-        (get({This, '$class'})):setDy(This, Dy).
+  def jm_paintXY(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        ImageAnimation.jm_paintXY(this, JR.lget(f, :graphics), JR.int32(JR.lget(f, :x) + JR.get(this, :dx)), JR.int32(JR.lget(f, :y) + JR.get(this, :dy)))
+    end)
+  end
 
-paintXY(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-        'ImageAnimation':paintXY(This, Graphics, (X + get({This, dx})), (Y + get({This, dy}))).
 
-setDx(This, Dx) when is_integer(Dx) ->
-        put({This, dx}, Dx).
+  def jm_setDx(this, p_dx) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :dx, p_dx)
+        JR.put(this, :dx, JR.lget(f, :dx))
+    end)
+  end
 
-getDx(This) ->
-        get({This, dx}).
 
-setDy(This, Dy) when is_integer(Dy) ->
-        put({This, dy}, Dy).
+  def jm_getDx(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :dx)})
+    end)
+  end
 
-getDy(This) ->
-        get({This, dy}).
+
+  def jm_setDy(this, p_dy) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :dy, p_dy)
+        JR.put(this, :dy, JR.lget(f, :dy))
+    end)
+  end
+
+
+  def jm_getDy(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :dy)})
+    end)
+  end
+end
+
 

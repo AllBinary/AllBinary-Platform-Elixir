@@ -1,116 +1,228 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.game.part
-% import javax.microedition.lcdui.Font
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.animation.Animation
-% import org.allbinary.animation.NullAnimationFactory
-% import org.allbinary.game.layer.pickup.CountedPickedUpLayerInterfaceFactory
-% import org.allbinary.graphics.font.MyFontProcessor
-% import org.allbinary.graphics.font.UpdateMyFontInterface
-% import org.allbinary.graphics.font.UpdateMyFontProcessor
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.math.PrimitiveLongUtil
-% import org.allbinary.util.ABHashtable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.game.part
 
--module('CountedLayerInterfaceFactoryPart').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements PartInterface
-% implements UpdateMyFontInterface
+defmodule CountedLayerInterfaceFactoryPart do
+  def jsuper(), do: JObject
+def jstatic_NULL_COUNTED_LAYER_INTERFACE_FACTORY(), do: JR.static_get(__MODULE__, :NULL_COUNTED_LAYER_INTERFACE_FACTORY, fn -> CountedLayerInterfaceFactoryPart.jnew(0, CountedPickedUpLayerInterfaceFactory.jstatic_NULL_COUNTED_PICKUP_LAYER_FACTORY()) end)
+  def jstatic_set_NULL_COUNTED_LAYER_INTERFACE_FACTORY(value), do: JR.static_put(__MODULE__, :NULL_COUNTED_LAYER_INTERFACE_FACTORY, value)
 
-static_init() ->
-    put({?MODULE, 'NULL_COUNTED_LAYER_INTERFACE_FACTORY'}, 'CountedLayerInterfaceFactoryPart':new(0, get({'CountedPickedUpLayerInterfaceFactory', 'NULL_COUNTED_PICKUP_LAYER_FACTORY'}))),
-    ok.
-
-init_fields(This) ->
-    put({This, updateMyFontProcessor}, 'UpdateMyFontProcessor':new(This)),
-    put({This, myFontProcessor}, get({This, updateMyFontProcessor})),
-    put({This, animationInterface}, (fun(Target_N66113) -> (get({Target_N66113, '$class'})):getInstance(Target_N66113, 0) end)('NullAnimationFactory':getFactoryInstance())),
-    put({This, total}, 0),
-    put({This, totalString}, get({'NullUtil':getInstance(), 'NULL_CHAR_ARRAY'})),
-    put({This, xOffset}, 0),
-    put({This, countedPickedUpLayerInterfaceFactory}, get({'CountedPickedUpLayerInterfaceFactory', 'NULL_COUNTED_PICKUP_LAYER_FACTORY'})),
-    put({This, primitiveLongUtil}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :updateMyFontProcessor, nil)
+    JR.put(this, :myFontProcessor, nil)
+    JR.put(this, :animationInterface, nil)
+    JR.put(this, :total, 0)
+    JR.put(this, :totalString, nil)
+    JR.put(this, :xOffset, 0)
+    JR.put(this, :countedPickedUpLayerInterfaceFactory, nil)
+    JR.put(this, :primitiveLongUtil, nil)
+        JR.put(this, :updateMyFontProcessor, UpdateMyFontProcessor.jnew(this))
+        JR.put(this, :myFontProcessor, JR.get(this, :updateMyFontProcessor))
+        JR.put(this, :animationInterface, JR.call(NullAnimationFactory.jm_getFactoryInstance(), :jm_getInstance, [0]))
+        JR.put(this, :total, 0)
+        JR.put(this, :totalString, JR.get(NullUtil.jm_getInstance(), :NULL_CHAR_ARRAY))
+        JR.put(this, :xOffset, 0)
+        JR.put(this, :countedPickedUpLayerInterfaceFactory, CountedPickedUpLayerInterfaceFactory.jstatic_NULL_COUNTED_PICKUP_LAYER_FACTORY())
+        
+    nil
+  end
 
 
-new(Total, CountedPickedUpLayerInterfaceFactory) when is_integer(Total) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Total, CountedPickedUpLayerInterfaceFactory),
-    This.
+  def jinit(this, p_total, p_countedPickedUpLayerInterfaceFactory) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :total, p_total)
+      JR.lset(f, :countedPickedUpLayerInterfaceFactory, p_countedPickedUpLayerInterfaceFactory)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :primitiveLongUtil, PrimitiveLongUtil.jm_createPowerOfTen(1000))
+        JR.call(this, :jm_init, [JR.lget(f, :total), JR.lget(f, :countedPickedUpLayerInterfaceFactory)])
+    end)
+  end
 
-'$init'(This, Total, CountedPickedUpLayerInterfaceFactory) when is_integer(Total) ->
-    init_fields(This),
-        put({This, primitiveLongUtil}, 'PrimitiveLongUtil':createPowerOfTen(1000)),
-        (get({This, '$class'})):init(This, Total, CountedPickedUpLayerInterfaceFactory).
+  def jnew(p_total, p_countedPickedUpLayerInterfaceFactory) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_total, p_countedPickedUpLayerInterfaceFactory)
+    this
+  end
 
-updateMeasurement(This, Graphics) ->
-        Font = (get({Graphics, '$class'})):getFont(Graphics),
-        (get({This, '$class'})):setXOffset(This, ((get({Font, '$class'})):charsWidth(Font, get({This, totalString}), 0, (get({get({This, primitiveLongUtil}), '$class'})):getCurrentTotalDigits(get({This, primitiveLongUtil}))) + (((get({Font, '$class'})):getSize(Font) bsr 1)))),
-        put({This, myFontProcessor}, 'MyFontProcessor':getInstance()).
 
-init(This, Total, CountedPickedUpLayerInterfaceFactory) when is_integer(Total) ->
-        (get({This, '$class'})):setCountedPickedUpLayerInterfaceFactory(This, CountedPickedUpLayerInterfaceFactory),
-        put({This, total}, Total).
+  def jm_updateMeasurement(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.lset(f, :font, JR.call(JR.lget(f, :graphics), :jm_getFont, []))
+        JR.call(this, :jm_setXOffset, [(JR.call(JR.lget(f, :font), :jm_charsWidth, [JR.get(this, :totalString), 0, JR.call(JR.get(this, :primitiveLongUtil), :jm_getCurrentTotalDigits, [])]) + (Bitwise.bsr(JR.call(JR.lget(f, :font), :jm_getSize, []), 1)))])
+        JR.put(this, :myFontProcessor, MyFontProcessor.jm_getInstance())
+    end)
+  end
 
-% throws Exception
-getInstance(This, Hashtable, X, Y, Z) when is_integer(X), is_integer(Y), is_integer(Z) ->
-        try
-        case (get({This, total}) > 0) of
-            true ->
-            (get({This, '$class'})):setTotal(This, (get({This, total}) - 1)),
-            throw({'$return', (fun(Target_N66983) -> (get({Target_N66983, '$class'})):getNextInstance(Target_N66983, Hashtable, X, Y, Z) end)((get({This, '$class'})):getCountedPickedUpLayerInterfaceFactory(This))});
-            false ->
-            erlang:error({'Exception', "No more left. Could use a listener to automatically remove"})
+
+  def jm_init(this, p_total, p_countedPickedUpLayerInterfaceFactory) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :total, p_total)
+      JR.lset(f, :countedPickedUpLayerInterfaceFactory, p_countedPickedUpLayerInterfaceFactory)
+        JR.call(this, :jm_setCountedPickedUpLayerInterfaceFactory, [JR.lget(f, :countedPickedUpLayerInterfaceFactory)])
+        JR.put(this, :total, JR.lget(f, :total))
+    end)
+  end
+
+
+  def jm_getInstance(this, p_hashtable, p_x, p_y, p_z) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :hashtable, p_hashtable)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :z, p_z)
+        if (JR.get(this, :total) > 0) do
+            JR.call(this, :jm_setTotal, [JR.int32(JR.get(this, :total) - 1)])
+            throw({:jreturn, JR.call(JR.call(this, :jm_getCountedPickedUpLayerInterfaceFactory, []), :jm_getNextInstance, [JR.lget(f, :hashtable), JR.lget(f, :x), JR.lget(f, :y), JR.lget(f, :z)])})
+        else
+            throw({:jexception, JR.exception("Exception", "No more left. Could use a listener to automatically remove")})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-getTotal(This) ->
-        get({This, total}).
 
-setTotal(This, Total) when is_integer(Total) ->
-        put({This, total}, Total),
-        put({This, totalString}, (get({get({This, primitiveLongUtil}), '$class'})):getCharArray(get({This, primitiveLongUtil}), Total)),
-        put({This, myFontProcessor}, get({This, updateMyFontProcessor})).
+  def jm_getTotal(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :total)})
+    end)
+  end
 
-paint(This, Graphics) ->
-        (get({get({This, myFontProcessor}), '$class'})):process(get({This, myFontProcessor}), Graphics).
 
-paintThreed(This, Graphics) ->
-        ok.
+  def jm_setTotal(this, p_total) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :total, p_total)
+        JR.put(this, :total, JR.lget(f, :total))
+        JR.put(this, :totalString, JR.call(JR.get(this, :primitiveLongUtil), :jm_getCharArray, [JR.lget(f, :total)]))
+        JR.put(this, :myFontProcessor, JR.get(this, :updateMyFontProcessor))
+    end)
+  end
 
-getAnimationInterface(This) ->
-        get({This, animationInterface}).
 
-setAnimationInterface(This, AnimationInterface) ->
-        put({This, animationInterface}, AnimationInterface).
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.get(this, :myFontProcessor), :jm_process, [JR.lget(f, :graphics)])
+    end)
+  end
 
-getXOffset(This) ->
-        get({This, xOffset}).
 
-setXOffset(This, TotalStringWidth) when is_integer(TotalStringWidth) ->
-        put({This, xOffset}, TotalStringWidth).
+  def jm_paintThreed(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        nil
+    end)
+  end
 
-getTotalString(This) ->
-        get({This, totalString}).
 
-getCountedPickedUpLayerInterfaceFactory(This) ->
-        get({This, countedPickedUpLayerInterfaceFactory}).
+  def jm_getAnimationInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :animationInterface)})
+    end)
+  end
 
-setCountedPickedUpLayerInterfaceFactory(This, CountedPickedUpLayerInterfaceFactory) ->
-        put({This, countedPickedUpLayerInterfaceFactory}, CountedPickedUpLayerInterfaceFactory).
+
+  def jm_setAnimationInterface(this, p_animationInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :animationInterface, p_animationInterface)
+        JR.put(this, :animationInterface, JR.lget(f, :animationInterface))
+    end)
+  end
+
+
+  def jm_getXOffset(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :xOffset)})
+    end)
+  end
+
+
+  def jm_setXOffset(this, p_totalStringWidth) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :totalStringWidth, p_totalStringWidth)
+        JR.put(this, :xOffset, JR.lget(f, :totalStringWidth))
+    end)
+  end
+
+
+  def jm_getTotalString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :totalString)})
+    end)
+  end
+
+
+  def jm_getCountedPickedUpLayerInterfaceFactory(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :countedPickedUpLayerInterfaceFactory)})
+    end)
+  end
+
+
+  def jm_setCountedPickedUpLayerInterfaceFactory(this, p_countedPickedUpLayerInterfaceFactory) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :countedPickedUpLayerInterfaceFactory, p_countedPickedUpLayerInterfaceFactory)
+        JR.put(this, :countedPickedUpLayerInterfaceFactory, JR.lget(f, :countedPickedUpLayerInterfaceFactory))
+    end)
+  end
+end
+
 

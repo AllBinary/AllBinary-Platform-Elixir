@@ -1,63 +1,91 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.game.input.PlayerGameInput
-% import org.allbinary.game.input.PlayerGameInputCompositeInterface
-% import org.allbinary.graphics.PointFactory
-% import org.allbinary.graphics.Rectangle
-% import org.allbinary.graphics.displayable.CanvasStrings
-% import org.allbinary.layer.AllBinaryLayerManager
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.util.BasicArrayListD
-% import org.allbinary.view.StaticViewPosition
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer
 
--module('PlayerGameInputGameLayer').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements PlayerGameInputCompositeInterface
+defmodule PlayerGameInputGameLayer do
+  def jsuper(), do: AllBinaryGameLayer
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AllBinaryGameLayer', Function, Arguments).
-
-init_fields(This) ->
-    put({This, playerGameInput}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :playerGameInput, nil)
+        
+    nil
+  end
 
 
-new(PlayerInputId) when is_integer(PlayerInputId) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, PlayerInputId),
-    This.
+  def jinit(this, p_playerInputId) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :playerInputId, p_playerInputId)
+        AllBinaryGameLayer.jinit(this, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Rectangle.jnew(JR.get(PointFactory.jm_getInstance(), :ZERO_ZERO), 0, 0), StaticViewPosition.jnew(0, 0, 0))
+        PlayerGameInputGameLayer.jinitfields(this)
+        JR.put(this, :playerGameInput, PlayerGameInput.jnew(JR.call(this, :jm_getGameKeyEventList, []), BasicArrayListD.jnew(), JR.lget(f, :playerInputId)))
+        JR.lset(f, :canvasStrings, CanvasStrings.jm_getInstance())
+        JR.call(JR.get(this, :logUtil), :jm_putF, ["Danger Danger Danger: Should Not Be Called Except For Testing Input", this, JR.get(JR.lget(f, :canvasStrings), :PAINT)])
+    end)
+  end
 
-'$init'(This, PlayerInputId) when is_integer(PlayerInputId) ->
-        'AllBinaryGameLayer':'$init'(This, get({'StringUtil':getInstance(), 'EMPTY_STRING'}), 'Rectangle':new(get({'PointFactory':getInstance(), 'ZERO_ZERO'}), 0, 0), 'StaticViewPosition':new(0, 0, 0)),
-        init_fields(This),
-        put({This, playerGameInput}, 'PlayerGameInput':new((get({This, '$class'})):getGameKeyEventList(This), 'BasicArrayListD':new(), PlayerInputId)),
-        CanvasStrings = 'CanvasStrings':getInstance(),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), "Danger Danger Danger: Should Not Be Called Except For Testing Input", This, get({CanvasStrings, 'PAINT'})).
+  def jnew(p_playerInputId) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_playerInputId)
+    this
+  end
 
-getPlayerGameInput(This) ->
-        get({This, playerGameInput}).
 
-initInputProcessors(This) ->
-        ok.
+  def jm_getPlayerGameInput(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :playerGameInput)})
+    end)
+  end
 
-% throws Exception
-processInput(This, MyManager) ->
-        ok.
 
-paint(This, Graphics) ->
-        ok.
+  def jm_initInputProcessors(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_processInput(this, p_myManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :myManager, p_myManager)
+        nil
+    end)
+  end
+
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        nil
+    end)
+  end
+end
+
 

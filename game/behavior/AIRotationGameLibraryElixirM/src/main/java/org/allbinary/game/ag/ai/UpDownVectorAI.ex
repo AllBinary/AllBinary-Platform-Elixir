@@ -1,69 +1,79 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.ai
-% import org.allbinary.game.ai.BasicAI
-% import org.allbinary.game.input.GameInput
-% import org.allbinary.game.physics.velocity.BasicVelocityProperties
-% import org.allbinary.game.physics.velocity.VelocityInterfaceCompositeInterface
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.AllBinaryLayerManager
-% import org.allbinary.logic.math.BasicDecimal
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
--module('UpDownVectorAI').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule UpDownVectorAI do
+  def jsuper(), do: BasicAI
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicAI', Function, Arguments).
-
-init_fields(This) ->
-    put({This, velocityInterface}, undefined),
-    put({This, index}, 0),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :velocityInterface, nil)
+    JR.put(this, :index, 0)
+        
+        JR.put(this, :index, 0)
+    nil
+  end
 
 
-new(OwnerLayerInterface, GameInput) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, OwnerLayerInterface, GameInput),
-    This.
+  def jinit(this, p_ownerLayerInterface, p_gameInput) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownerLayerInterface, p_ownerLayerInterface)
+      JR.lset(f, :gameInput, p_gameInput)
+        BasicAI.jinit(this, JR.lget(f, :ownerLayerInterface), JR.lget(f, :gameInput))
+        UpDownVectorAI.jinitfields(this)
+        JR.lset(f, :velocityInterfaceCompositeInterface, JR.call(this, :jm_getOwnerLayerInterface, []))
+        JR.put(this, :velocityInterface, JR.call(JR.lget(f, :velocityInterfaceCompositeInterface), :jm_getVelocityProperties, []))
+        JR.call(JR.call(JR.get(this, :velocityInterface), :jm_getVelocityYBasicDecimalP, []), :jm_setint, [0])
+    end)
+  end
 
-'$init'(This, OwnerLayerInterface, GameInput) ->
-        'BasicAI':'$init'(This, OwnerLayerInterface, GameInput),
-        init_fields(This),
-        VelocityInterfaceCompositeInterface = (get({This, '$class'})):getOwnerLayerInterface(This),
-        put({This, velocityInterface}, (get({VelocityInterfaceCompositeInterface, '$class'})):getVelocityProperties(VelocityInterfaceCompositeInterface)),
-        (fun(Target_N66005) -> (get({Target_N66005, '$class'})):setint(Target_N66005, 0) end)((get({get({This, velocityInterface}), '$class'})):getVelocityYBasicDecimalP(get({This, velocityInterface}))).
+  def jnew(p_ownerLayerInterface, p_gameInput) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_ownerLayerInterface, p_gameInput)
+    this
+  end
 
-% throws Exception
-processAI(This, AllBinaryLayerManager) ->
-        Y = ((fun(Target_N66146) -> (get({Target_N66146, '$class'})):getHeight(Target_N66146) end)((get({This, '$class'})):getOwnerLayerInterface(This)) * 270),
-        case (get({This, index}) < 5) of
-            true ->
-            put({local, basicDecimal}, (get({get({This, velocityInterface}), '$class'})):getVelocityYBasicDecimalP(get({This, velocityInterface}))),
-            (get({get({local, basicDecimal}), '$class'})):setint(get({local, basicDecimal}), 0),
-            (get({get({local, basicDecimal}), '$class'})):addint(get({local, basicDecimal}), Y),
-            put({This, index}, get({This, index}) + 1);
-            false ->
-            case (get({This, index}) < 10) of
-            true ->
-            put({local, basicDecimal}, (get({get({This, velocityInterface}), '$class'})):getVelocityYBasicDecimalP(get({This, velocityInterface}))),
-            (get({get({local, basicDecimal}), '$class'})):setint(get({local, basicDecimal}), 0),
-            (get({get({local, basicDecimal}), '$class'})):subtractint(get({local, basicDecimal}), Y),
-            put({This, index}, get({This, index}) + 1);
-            false ->
-            put({This, index}, 0),
-            (get({This, '$class'})):processAI(This, AllBinaryLayerManager)
+
+  def jm_processAI(this, p_allBinaryLayerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerManager, p_allBinaryLayerManager)
+        JR.lset(f, :y, (JR.call(JR.call(this, :jm_getOwnerLayerInterface, []), :jm_getHeight, []) * 270))
+        if (JR.get(this, :index) < 5) do
+            JR.lset(f, :basicDecimal, JR.call(JR.get(this, :velocityInterface), :jm_getVelocityYBasicDecimalP, []))
+            JR.call(JR.lget(f, :basicDecimal), :jm_setint, [0])
+            JR.call(JR.lget(f, :basicDecimal), :jm_addint, [JR.lget(f, :y)])
+            JR.postinc(this, :index, 1)
+        else
+            if (JR.get(this, :index) < 10) do
+            JR.lset(f, :basicDecimal, JR.call(JR.get(this, :velocityInterface), :jm_getVelocityYBasicDecimalP, []))
+            JR.call(JR.lget(f, :basicDecimal), :jm_setint, [0])
+            JR.call(JR.lget(f, :basicDecimal), :jm_subtractint, [JR.lget(f, :y)])
+            JR.postinc(this, :index, 1)
+        else
+            JR.put(this, :index, 0)
+            JR.call(this, :jm_processAI, [JR.lget(f, :allBinaryLayerManager)])
         end
-        end.
+        end
+    end)
+  end
+end
+
 

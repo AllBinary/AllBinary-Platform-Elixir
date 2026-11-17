@@ -1,49 +1,61 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.form
-% import org.allbinary.game.configuration.feature.Features
-% import org.allbinary.game.configuration.feature.TouchFeatureFactory
-% import org.allbinary.graphics.Rectangle
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.form.item.ABCustomItem
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
--module('CommandCurrentSelectionFormFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule CommandCurrentSelectionFormFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-% throws Exception
-getInstance(Title, Items, Rectangle, FormType, Border, MoveForSmallScreen, BackgroundBasicColor, ForegroundBasicColor) when (is_list(Title) orelse Title =:= undefined), (is_tuple(Items) orelse Items =:= undefined), is_integer(Border), is_boolean(MoveForSmallScreen) ->
-        try
-        case (fun(Target_N65754) -> (get({Target_N65754, '$class'})):isFeature(Target_N65754, get({'TouchFeatureFactory':getInstance(), 'TOUCH_ENABLED'})) end)('Features':getInstance()) of
-            true ->
-            ScrollSelectionForm = 'CommandCurrentSelectionForm':new(Title, Items, Border, MoveForSmallScreen, BackgroundBasicColor, ForegroundBasicColor),
-            (get({ScrollSelectionForm, '$class'})):init(ScrollSelectionForm, Rectangle, FormType),
-            throw({'$return', ScrollSelectionForm});
-            false ->
-            throw({'$return', 'ScrollSelectionFormNoneFactory':getInstance()})
+  def jm_getInstance(p_title, p_items, p_rectangle, p_formType, p_border, p_moveForSmallScreen, p_backgroundBasicColor, p_foregroundBasicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :title, p_title)
+      JR.lset(f, :items, p_items)
+      JR.lset(f, :rectangle, p_rectangle)
+      JR.lset(f, :formType, p_formType)
+      JR.lset(f, :border, p_border)
+      JR.lset(f, :moveForSmallScreen, p_moveForSmallScreen)
+      JR.lset(f, :backgroundBasicColor, p_backgroundBasicColor)
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+        if JR.call(Features.jm_getInstance(), :jm_isFeature, [JR.get(TouchFeatureFactory.jm_getInstance(), :TOUCH_ENABLED)]) do
+            JR.lset(f, :scrollSelectionForm, CommandCurrentSelectionForm.jnew(JR.lget(f, :title), JR.lget(f, :items), JR.lget(f, :border), JR.lget(f, :moveForSmallScreen), JR.lget(f, :backgroundBasicColor), JR.lget(f, :foregroundBasicColor)))
+            JR.call(JR.lget(f, :scrollSelectionForm), :jm_init, [JR.lget(f, :rectangle), JR.lget(f, :formType)])
+            throw({:jreturn, JR.lget(f, :scrollSelectionForm)})
+        else
+            throw({:jreturn, ScrollSelectionFormNoneFactory.jm_getInstance()})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
+end
+
 

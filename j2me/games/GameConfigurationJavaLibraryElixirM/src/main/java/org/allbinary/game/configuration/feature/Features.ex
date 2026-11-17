@@ -1,143 +1,200 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.configuration.feature
-% import org.allbinary.game.configuration.event.GameFeatureEvent
-% import org.allbinary.game.configuration.event.GameFeatureEventHandler
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.communication.log.PreLogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.system.os.GenericOperatingSystem
-% import org.allbinary.logic.system.os.OperatingSystemFactory
-% import org.allbinary.string.CommonLabels
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.configuration.feature
 
--module('Features').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule Features do
+  def jsuper(), do: JObject
+def jstatic_SINGLETON(), do: JR.static_get(__MODULE__, :SINGLETON, fn -> JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT) end)
+  def jstatic_set_SINGLETON(value), do: JR.static_put(__MODULE__, :SINGLETON, value)
 
-static_init() ->
-    put({?MODULE, 'SINGLETON'}, get({'NullUtil':getInstance(), 'NULL_OBJECT'})),
-    ok.
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, list}, undefined),
-    put({This, defaultList}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :list, nil)
+    JR.put(this, :defaultList, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        
+        
+    nil
+  end
 
 
-getInstance() ->
-        case (get({'Features', 'SINGLETON'}) =:= get({'NullUtil':getInstance(), 'NULL_OBJECT'})) of
-            true ->
-            put({'Features', 'SINGLETON'}, 'Features':new());
-            false -> ok
-        end,
-        get({'Features', 'SINGLETON'}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        if (Features.jstatic_SINGLETON() == JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)) do
+            Features.jstatic_set_SINGLETON(Features.jnew())
+        end
+        throw({:jreturn, Features.jstatic_SINGLETON()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-    init_fields(This),
-        put({This, list}, 'BasicArrayListD':new()),
-        put({This, defaultList}, 'BasicArrayListD':new()),
-        (get({This, '$class'})):init(This).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :list, BasicArrayListD.jnew())
+        JR.put(this, :defaultList, BasicArrayListD.jnew())
+        JR.call(this, :jm_init, [])
+    end)
+  end
 
-% throws Exception
-addDefault(This, GameFeature) ->
-        (get({This, '$class'})):add(This, GameFeature),
-        case (not (get({get({This, defaultList}), '$class'})):contains(get({This, defaultList}), GameFeature)) of
-            true ->
-            (get({get({This, defaultList}), '$class'})):add(get({This, defaultList}), GameFeature);
-            false -> ok
-        end.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-% throws Exception
-add(This, GameFeature) ->
-        case (not (get({get({This, list}), '$class'})):contains(get({This, list}), GameFeature)) of
-            true ->
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N66690) -> (get({Target_N66690, '$class'})):toString(Target_N66690) end)((fun(Target_N66697) -> (get({Target_N66697, '$class'})):append(Target_N66697, (get({GameFeature, '$class'})):toString(GameFeature)) end)((fun(Target_N66704) -> (get({Target_N66704, '$class'})):append(Target_N66704, get({'CommonLabels':getInstance(), 'START_LABEL'})) end)('StringMaker':new()))), This, get({get({This, commonStrings}), 'ADD'})),
-            (get({get({This, list}), '$class'})):add(get({This, list}), GameFeature),
-            (fun(Target_N66838) -> (get({Target_N66838, '$class'})):fireEvent(Target_N66838, 'GameFeatureEvent':new(GameFeature, (get({GameFeature, '$class'})):toString(GameFeature))) end)('GameFeatureEventHandler':getInstance());
-            false -> ok
-        end.
 
-% throws Exception
-removeDefault(This, GameFeature) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N66994) -> (get({Target_N66994, '$class'})):toString(Target_N66994) end)((fun(Target_N67001) -> (get({Target_N67001, '$class'})):append(Target_N67001, (get({GameFeature, '$class'})):toString(GameFeature)) end)((fun(Target_N67008) -> (get({Target_N67008, '$class'})):append(Target_N67008, get({'CommonLabels':getInstance(), 'START_LABEL'})) end)('StringMaker':new()))), This, "removeDefault"),
-        (get({This, '$class'})):remove(This, GameFeature),
-        (get({get({This, defaultList}), '$class'})):remove(get({This, defaultList}), GameFeature).
+  def jm_addDefault(this, p_gameFeature) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameFeature, p_gameFeature)
+        JR.call(this, :jm_add, [JR.lget(f, :gameFeature)])
+        if !JR.call(JR.get(this, :defaultList), :jm_contains, [JR.lget(f, :gameFeature)]) do
+            JR.call(JR.get(this, :defaultList), :jm_add, [JR.lget(f, :gameFeature)])
+        end
+    end)
+  end
 
-% throws Exception
-remove(This, GameFeature) ->
-        case (get({get({This, list}), '$class'})):contains(get({This, list}), GameFeature) of
-            true ->
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), get({get({This, commonStrings}), 'START'}), This, get({get({This, commonStrings}), 'REMOVE'})),
-            (get({get({This, list}), '$class'})):remove(get({This, list}), GameFeature),
-            (fun(Target_N67355) -> (get({Target_N67355, '$class'})):fireEvent(Target_N67355, 'GameFeatureEvent':new(GameFeature, (get({GameFeature, '$class'})):toString(GameFeature))) end)('GameFeatureEventHandler':getInstance());
-            false -> ok
-        end.
 
-init(This) ->
-        try
-            GameFeatureFactory = 'GameFeatureFactory':getInstance(),
-            InputFeatureFactory = 'InputFeatureFactory':getInstance(),
-            SensorFeatureFactory = 'SensorFeatureFactory':getInstance(),
-            TouchFeatureFactory = 'TouchFeatureFactory':getInstance(),
-            (get({This, '$class'})):addDefault(This, get({GameFeatureFactory, 'ARTIFICIAL_INTELLEGENCE_PROCESSOR'})),
-            (get({This, '$class'})):addDefault(This, get({GameFeatureFactory, 'COLLIDABLE_INTERFACE_LAYER_PROCESSOR'})),
-            (get({This, '$class'})):addDefault(This, get({GameFeatureFactory, 'GAME_INPUT_LAYER_PROCESSOR'})),
-            (get({This, '$class'})):addDefault(This, get({GameFeatureFactory, 'TICKABLE_LAYER_PROCESSOR'})),
-            (get({This, '$class'})):addDefault(This, get({InputFeatureFactory, 'MULTI_KEY_PRESS'})),
-            (get({This, '$class'})):addDefault(This, get({InputFeatureFactory, 'REMOVE_DUPLICATE_KEY_PRESSES'})),
-            (get({This, '$class'})):addDefault(This, get({GameFeatureFactory, 'SCREEN_SHAKE'})),
-            (get({This, '$class'})):addDefault(This, get({GameFeatureFactory, 'POST_IMAGE_LOADING_MODIFICATION'})),
-            OperatingSystemInterface = (fun(Target_N67986) -> (get({Target_N67986, '$class'})):getOperatingSystemInstance(Target_N67986) end)('OperatingSystemFactory':getInstance()),
-            case (get({OperatingSystemInterface, '$class'})):isOverScan(OperatingSystemInterface) of
-                true ->
-                (get({This, '$class'})):addDefault(This, get({SensorFeatureFactory, 'NO_ORIENTATION'})),
-                (get({This, '$class'})):addDefault(This, get({TouchFeatureFactory, 'HIDE_SCREEN_BUTTONS'}));
-                false ->
-                (get({This, '$class'})):addDefault(This, get({SensorFeatureFactory, 'ORIENTATION_SENSORS'})),
-                (get({This, '$class'})):addDefault(This, get({TouchFeatureFactory, 'AUTO_HIDE_SHOW_SCREEN_BUTTONS'}))
-            end,
-            (get({This, '$class'})):addDefault(This, get({TouchFeatureFactory, 'TOUCH_ENABLED'})),
-            (get({This, '$class'})):addDefault(This, get({'MainFeatureFactory':getInstance(), 'FULL_SCREEN'})),
-            (get({This, '$class'})):addDefault(This, get({'MainFeatureFactory':getInstance(), 'LOAD_ONDEMAND'}))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            'PreLogUtil':putOE(get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'INIT'}), E)
-        end.
+  def jm_add(this, p_gameFeature) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameFeature, p_gameFeature)
+        if !JR.call(JR.get(this, :list), :jm_contains, [JR.lget(f, :gameFeature)]) do
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(CommonLabels.jm_getInstance(), :START_LABEL)]), :jm_append, [JR.call(JR.lget(f, :gameFeature), :jm_toString, [])]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :ADD)])
+            JR.call(JR.get(this, :list), :jm_add, [JR.lget(f, :gameFeature)])
+            JR.call(GameFeatureEventHandler.jm_getInstance(), :jm_fireEvent, [GameFeatureEvent.jnew(JR.lget(f, :gameFeature), JR.call(JR.lget(f, :gameFeature), :jm_toString, []))])
+        end
+    end)
+  end
 
-isDefault(This, GameFeature) ->
-        (get({get({This, defaultList}), '$class'})):contains(get({This, defaultList}), GameFeature).
 
-isFeature(This, GameFeature) ->
-        (get({get({This, list}), '$class'})):contains(get({This, list}), GameFeature).
+  def jm_removeDefault(this, p_gameFeature) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameFeature, p_gameFeature)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(CommonLabels.jm_getInstance(), :START_LABEL)]), :jm_append, [JR.call(JR.lget(f, :gameFeature), :jm_toString, [])]), :jm_toString, []), this, "removeDefault"])
+        JR.call(this, :jm_remove, [JR.lget(f, :gameFeature)])
+        JR.call(JR.get(this, :defaultList), :jm_remove, [JR.lget(f, :gameFeature)])
+    end)
+  end
 
-% throws Exception
-toggle(This, GameFeature) ->
-        case (get({This, '$class'})):isFeature(This, GameFeature) of
-            true ->
-            (get({This, '$class'})):remove(This, GameFeature);
-            false ->
-            (get({This, '$class'})):add(This, GameFeature)
-        end.
+
+  def jm_remove(this, p_gameFeature) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameFeature, p_gameFeature)
+        if JR.call(JR.get(this, :list), :jm_contains, [JR.lget(f, :gameFeature)]) do
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.get(JR.get(this, :commonStrings), :START), this, JR.get(JR.get(this, :commonStrings), :REMOVE)])
+            JR.call(JR.get(this, :list), :jm_remove, [JR.lget(f, :gameFeature)])
+            JR.call(GameFeatureEventHandler.jm_getInstance(), :jm_fireEvent, [GameFeatureEvent.jnew(JR.lget(f, :gameFeature), JR.call(JR.lget(f, :gameFeature), :jm_toString, []))])
+        end
+    end)
+  end
+
+
+  def jm_init(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            JR.lset(f, :gameFeatureFactory, GameFeatureFactory.jm_getInstance())
+            JR.lset(f, :inputFeatureFactory, InputFeatureFactory.jm_getInstance())
+            JR.lset(f, :sensorFeatureFactory, SensorFeatureFactory.jm_getInstance())
+            JR.lset(f, :touchFeatureFactory, TouchFeatureFactory.jm_getInstance())
+            JR.call(this, :jm_addDefault, [JR.get(JR.lget(f, :gameFeatureFactory), :ARTIFICIAL_INTELLEGENCE_PROCESSOR)])
+            JR.call(this, :jm_addDefault, [JR.get(JR.lget(f, :gameFeatureFactory), :COLLIDABLE_INTERFACE_LAYER_PROCESSOR)])
+            JR.call(this, :jm_addDefault, [JR.get(JR.lget(f, :gameFeatureFactory), :GAME_INPUT_LAYER_PROCESSOR)])
+            JR.call(this, :jm_addDefault, [JR.get(JR.lget(f, :gameFeatureFactory), :TICKABLE_LAYER_PROCESSOR)])
+            JR.call(this, :jm_addDefault, [JR.get(JR.lget(f, :inputFeatureFactory), :MULTI_KEY_PRESS)])
+            JR.call(this, :jm_addDefault, [JR.get(JR.lget(f, :inputFeatureFactory), :REMOVE_DUPLICATE_KEY_PRESSES)])
+            JR.call(this, :jm_addDefault, [JR.get(JR.lget(f, :gameFeatureFactory), :SCREEN_SHAKE)])
+            JR.call(this, :jm_addDefault, [JR.get(JR.lget(f, :gameFeatureFactory), :POST_IMAGE_LOADING_MODIFICATION)])
+            JR.lset(f, :operatingSystemInterface, JR.call(OperatingSystemFactory.jm_getInstance(), :jm_getOperatingSystemInstance, []))
+            if JR.call(JR.lget(f, :operatingSystemInterface), :jm_isOverScan, []) do
+                JR.call(this, :jm_addDefault, [JR.get(JR.lget(f, :sensorFeatureFactory), :NO_ORIENTATION)])
+                JR.call(this, :jm_addDefault, [JR.get(JR.lget(f, :touchFeatureFactory), :HIDE_SCREEN_BUTTONS)])
+            else
+                JR.call(this, :jm_addDefault, [JR.get(JR.lget(f, :sensorFeatureFactory), :ORIENTATION_SENSORS)])
+                JR.call(this, :jm_addDefault, [JR.get(JR.lget(f, :touchFeatureFactory), :AUTO_HIDE_SHOW_SCREEN_BUTTONS)])
+            end
+            JR.call(this, :jm_addDefault, [JR.get(JR.lget(f, :touchFeatureFactory), :TOUCH_ENABLED)])
+            JR.call(this, :jm_addDefault, [JR.get(MainFeatureFactory.jm_getInstance(), :FULL_SCREEN)])
+            JR.call(this, :jm_addDefault, [JR.get(MainFeatureFactory.jm_getInstance(), :LOAD_ONDEMAND)])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            PreLogUtil.jm_putOE(JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :INIT), JR.lget(f, :e))
+        end
+    end)
+  end
+
+
+  def jm_isDefault(this, p_gameFeature) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameFeature, p_gameFeature)
+        throw({:jreturn, JR.call(JR.get(this, :defaultList), :jm_contains, [JR.lget(f, :gameFeature)])})
+    end)
+  end
+
+
+  def jm_isFeature(this, p_gameFeature) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameFeature, p_gameFeature)
+        throw({:jreturn, JR.call(JR.get(this, :list), :jm_contains, [JR.lget(f, :gameFeature)])})
+    end)
+  end
+
+
+  def jm_toggle(this, p_gameFeature) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameFeature, p_gameFeature)
+        if JR.call(this, :jm_isFeature, [JR.lget(f, :gameFeature)]) do
+            JR.call(this, :jm_remove, [JR.lget(f, :gameFeature)])
+        else
+            JR.call(this, :jm_add, [JR.lget(f, :gameFeature)])
+        end
+    end)
+  end
+end
+
 

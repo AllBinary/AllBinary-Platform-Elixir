@@ -1,30 +1,38 @@
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.form.item
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.color.BasicColorFactory
-% import org.allbinary.logic.string.StringUtil
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item
 
--module('ABCustomGaugeItem').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule ABCustomGaugeItem do
+  def jsuper(), do: ABCustomItem
+def jstatic_NULL_GAUGE_ITEM(), do: JR.static_get(__MODULE__, :NULL_GAUGE_ITEM, fn -> ABCustomGaugeItem.jnew(JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), 1, 0, JR.get(BasicColorFactory.jm_getInstance(), :BLACK), JR.get(BasicColorFactory.jm_getInstance(), :WHITE)) end)
+  def jstatic_set_NULL_GAUGE_ITEM(value), do: JR.static_put(__MODULE__, :NULL_GAUGE_ITEM, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ABCustomItem', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'NULL_GAUGE_ITEM'}, 'ABCustomGaugeItem':new(get({'StringUtil':getInstance(), 'EMPTY_STRING'}), 1, 0, get({'BasicColorFactory':getInstance(), 'BLACK'}), get({'BasicColorFactory':getInstance(), 'WHITE'}))),
-    ok.
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new(Label, MaxValue, InitialValue, BackgroundBasicColor, ForegroundBasicColor) when (is_list(Label) orelse Label =:= undefined), is_integer(MaxValue), is_integer(InitialValue) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Label, MaxValue, InitialValue, BackgroundBasicColor, ForegroundBasicColor),
-    This.
+  def jinit(this, p_label, p_maxValue, p_initialValue, p_backgroundBasicColor, p_foregroundBasicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :label, p_label)
+      JR.lset(f, :maxValue, p_maxValue)
+      JR.lset(f, :initialValue, p_initialValue)
+      JR.lset(f, :backgroundBasicColor, p_backgroundBasicColor)
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+        ABCustomItem.jinit(this, JR.lget(f, :label), JR.lget(f, :backgroundBasicColor), JR.lget(f, :foregroundBasicColor))
+        ABCustomGaugeItem.jinitfields(this)
+    end)
+  end
 
-'$init'(This, Label, MaxValue, InitialValue, BackgroundBasicColor, ForegroundBasicColor) when (is_list(Label) orelse Label =:= undefined), is_integer(MaxValue), is_integer(InitialValue) ->
-        'ABCustomItem':'$init'(This, Label, BackgroundBasicColor, ForegroundBasicColor).
+  def jnew(p_label, p_maxValue, p_initialValue, p_backgroundBasicColor, p_foregroundBasicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_label, p_maxValue, p_initialValue, p_backgroundBasicColor, p_foregroundBasicColor)
+    this
+  end
+end
+
 

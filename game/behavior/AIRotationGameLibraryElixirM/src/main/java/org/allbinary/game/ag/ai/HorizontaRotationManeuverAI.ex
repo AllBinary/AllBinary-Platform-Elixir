@@ -1,153 +1,178 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.ai
-% import javax.microedition.lcdui.Canvas
-% import org.allbinary.ai.ArtificialIntelligence
-% import org.allbinary.ai.ArtificialIntelligenceTransitionInterface
-% import org.allbinary.animation.IndexedAnimation
-% import org.allbinary.animation.RotationAnimationInterface
-% import org.allbinary.animation.RotationAnimationInterfaceCompositeInterface
-% import org.allbinary.game.ai.BasicAI
-% import org.allbinary.game.input.GameInput
-% import org.allbinary.game.physics.velocity.BasicVelocityProperties
-% import org.allbinary.game.physics.velocity.VelocityInterface
-% import org.allbinary.game.physics.velocity.VelocityInterfaceCompositeInterface
-% import org.allbinary.graphics.displayable.DisplayInfoSingleton
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.AllBinaryLayerManager
-% import org.allbinary.math.AngleIncrementInfo
-% import org.allbinary.util.CircularIndexUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
--module('HorizontaRotationManeuverAI').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements ArtificialIntelligenceTransitionInterface
+defmodule HorizontaRotationManeuverAI do
+  def jsuper(), do: BasicAI
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicAI', Function, Arguments).
-
-init_fields(This) ->
-    put({This, circularIndexUtil}, 'CircularIndexUtil':createInstanceAt(10, get({'Integer', 'MAX_VALUE'}))),
-    put({This, currentSpeedDivisor}, 5),
-    put({This, rotationAnimationInterface}, undefined),
-    put({This, baseVelocityInterface}, undefined),
-    put({This, velocityInterface}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :circularIndexUtil, nil)
+    JR.put(this, :currentSpeedDivisor, 0)
+    JR.put(this, :rotationAnimationInterface, nil)
+    JR.put(this, :baseVelocityInterface, nil)
+    JR.put(this, :velocityInterface, nil)
+        JR.put(this, :circularIndexUtil, CircularIndexUtil.jm_createInstanceAt(10, J.Integer.jstatic_MAX_VALUE()))
+        JR.put(this, :currentSpeedDivisor, 5)
+        
+        
+        
+    nil
+  end
 
 
-new(OwnerLayerInterface, GameInput) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, OwnerLayerInterface, GameInput),
-    This.
+  def jinit(this, p_ownerLayerInterface, p_gameInput) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownerLayerInterface, p_ownerLayerInterface)
+      JR.lset(f, :gameInput, p_gameInput)
+        BasicAI.jinit(this, JR.lget(f, :ownerLayerInterface), JR.lget(f, :gameInput))
+        HorizontaRotationManeuverAI.jinitfields(this)
+        JR.lset(f, :rotationAnimationInterfaceCompositeInterface, JR.call(this, :jm_getOwnerLayerInterface, []))
+        JR.put(this, :rotationAnimationInterface, JR.call(JR.lget(f, :rotationAnimationInterfaceCompositeInterface), :jm_getRotationAnimationInterface, []))
+        JR.lset(f, :velocityInterfaceCompositeInterface, JR.call(this, :jm_getOwnerLayerInterface, []))
+        JR.put(this, :baseVelocityInterface, JR.call(JR.lget(f, :velocityInterfaceCompositeInterface), :jm_getVelocityProperties, []))
+        JR.put(this, :velocityInterface, JR.get(this, :baseVelocityInterface))
+        JR.lset(f, :rotationAnimationInterface, JR.get(this, :rotationAnimationInterface))
+        JR.lset(f, :angleIncrementInfo, JR.call(JR.call(JR.lget(f, :rotationAnimationInterface), :jm_getAngleInfoP, []), :jm_getAngleIncrementInfo, []))
+        JR.call(JR.lget(f, :rotationAnimationInterfaceCompositeInterface), :jm_setFrame, [JR.call(JR.get(JR.lget(f, :angleIncrementInfo), :RIGHT_FRAME), :jm_intValue, [])])
+    end)
+  end
 
-'$init'(This, OwnerLayerInterface, GameInput) ->
-        'BasicAI':'$init'(This, OwnerLayerInterface, GameInput),
-        init_fields(This),
-        RotationAnimationInterfaceCompositeInterface = (get({This, '$class'})):getOwnerLayerInterface(This),
-        put({This, rotationAnimationInterface}, (get({RotationAnimationInterfaceCompositeInterface, '$class'})):getRotationAnimationInterface(RotationAnimationInterfaceCompositeInterface)),
-        VelocityInterfaceCompositeInterface = (get({This, '$class'})):getOwnerLayerInterface(This),
-        put({This, baseVelocityInterface}, (get({VelocityInterfaceCompositeInterface, '$class'})):getVelocityProperties(VelocityInterfaceCompositeInterface)),
-        put({This, velocityInterface}, get({This, baseVelocityInterface})),
-        RotationAnimationInterface = get({This, rotationAnimationInterface}),
-        AngleIncrementInfo = (fun(Target_N66609) -> (get({Target_N66609, '$class'})):getAngleIncrementInfo(Target_N66609) end)((get({RotationAnimationInterface, '$class'})):getAngleInfoP(RotationAnimationInterface)),
-        (get({RotationAnimationInterfaceCompositeInterface, '$class'})):setFrame(RotationAnimationInterfaceCompositeInterface, (get({get({AngleIncrementInfo, 'RIGHT_FRAME'}), '$class'})):intValue(get({AngleIncrementInfo, 'RIGHT_FRAME'}))).
+  def jnew(p_ownerLayerInterface, p_gameInput) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_ownerLayerInterface, p_gameInput)
+    this
+  end
 
-transition(This) ->
-        RotationAnimationInterface = get({This, rotationAnimationInterface}),
-        AngleIncrementInfo = (fun(Target_N66834) -> (get({Target_N66834, '$class'})):getAngleIncrementInfo(Target_N66834) end)((get({RotationAnimationInterface, '$class'})):getAngleInfoP(RotationAnimationInterface)),
-        RotationAnimationInterfaceCompositeInterface = (get({This, '$class'})):getOwnerLayerInterface(This),
-        (get({RotationAnimationInterfaceCompositeInterface, '$class'})):setFrame(RotationAnimationInterfaceCompositeInterface, (get({get({AngleIncrementInfo, 'RIGHT_FRAME'}), '$class'})):intValue(get({AngleIncrementInfo, 'RIGHT_FRAME'}))),
-        AllbinaryLayer = (get({This, '$class'})):getOwnerLayerInterface(This),
-        (get({AllbinaryLayer, '$class'})):setPosition(AllbinaryLayer, (get({AllbinaryLayer, '$class'})):getXP(AllbinaryLayer), 1, (get({AllbinaryLayer, '$class'})):getZP(AllbinaryLayer)).
 
-% throws Exception
-processAI(This, AllBinaryLayerManager) ->
-        RotationAnimationInterface = (get({This, rotationAnimationInterface})),
-        AngleIncrementInfo = (fun(Target_N67206) -> (get({Target_N67206, '$class'})):getAngleIncrementInfo(Target_N67206) end)((get({RotationAnimationInterface, '$class'})):getAngleInfoP(RotationAnimationInterface)),
-        Frame = (get({get({This, rotationAnimationInterface}), '$class'})):getFrame(get({This, rotationAnimationInterface})),
-        OwnerLayerInterface = (get({This, '$class'})):getOwnerLayerInterface(This),
-        case ((((get({OwnerLayerInterface, '$class'})):getXP(OwnerLayerInterface) - (get({OwnerLayerInterface, '$class'})):getWidth(OwnerLayerInterface)) =< 0) andalso (Frame =:= (get({get({AngleIncrementInfo, 'LEFT_FRAME'}), '$class'})):intValue(get({AngleIncrementInfo, 'LEFT_FRAME'})))) of
-            true ->
-            (get({This, '$class'})):reverse(This),
-            (get({This, '$class'})):drop(This);
-            false -> ok
-        end,
-        DisplayInfo = 'DisplayInfoSingleton':getInstance(),
-        case ((((get({OwnerLayerInterface, '$class'})):getX2(OwnerLayerInterface) + (get({OwnerLayerInterface, '$class'})):getWidth(OwnerLayerInterface)) > (get({DisplayInfo, '$class'})):getLastWidth(DisplayInfo)) andalso (Frame =:= (get({get({AngleIncrementInfo, 'RIGHT_FRAME'}), '$class'})):intValue(get({AngleIncrementInfo, 'RIGHT_FRAME'})))) of
-            true ->
-            (get({This, '$class'})):reverse(This),
-            (get({This, '$class'})):accelerate(This),
-            (get({This, '$class'})):drop(This);
-            false -> ok
-        end,
-        Index = (get({get({This, circularIndexUtil}), '$class'})):getIndex(get({This, circularIndexUtil})),
-        case (((Index rem get({This, currentSpeedDivisor})) =:= 0) andalso ((Index rem 2) =:= 0)) of
-            true ->
-            'BasicAI':processKeyAI(This, get({'Canvas', 'UP'})),
-            (get({get({This, velocityInterface}), '$class'})):limitMaxXYVelocity(get({This, velocityInterface}), ((get({get({This, velocityInterface}), '$class'})):getMaxForwardVelocity(get({This, velocityInterface})) / get({This, currentSpeedDivisor})));
-            false -> ok
-        end,
-        (get({get({This, circularIndexUtil}), '$class'})):next(get({This, circularIndexUtil})),
-        case (Frame =:= (get({get({AngleIncrementInfo, 'LEFT_FRAME'}), '$class'})):intValue(get({AngleIncrementInfo, 'LEFT_FRAME'}))) of
-            true ->
-            'BasicAI':processKeyAI(This, get({'Canvas', 'KEY_NUM0'}));
-            false ->
-            case (Frame =:= (get({get({AngleIncrementInfo, 'RIGHT_FRAME'}), '$class'})):intValue(get({AngleIncrementInfo, 'RIGHT_FRAME'}))) of
-            true ->
-            'BasicAI':processKeyAI(This, get({'Canvas', 'KEY_POUND'}));
-            false -> ok
+  def jm_transition(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :rotationAnimationInterface, JR.get(this, :rotationAnimationInterface))
+        JR.lset(f, :angleIncrementInfo, JR.call(JR.call(JR.lget(f, :rotationAnimationInterface), :jm_getAngleInfoP, []), :jm_getAngleIncrementInfo, []))
+        JR.lset(f, :rotationAnimationInterfaceCompositeInterface, JR.call(this, :jm_getOwnerLayerInterface, []))
+        JR.call(JR.lget(f, :rotationAnimationInterfaceCompositeInterface), :jm_setFrame, [JR.call(JR.get(JR.lget(f, :angleIncrementInfo), :RIGHT_FRAME), :jm_intValue, [])])
+        JR.lset(f, :allbinaryLayer, JR.call(this, :jm_getOwnerLayerInterface, []))
+        JR.call(JR.lget(f, :allbinaryLayer), :jm_setPosition, [JR.call(JR.lget(f, :allbinaryLayer), :jm_getXP, []), 1, JR.call(JR.lget(f, :allbinaryLayer), :jm_getZP, [])])
+    end)
+  end
+
+
+  def jm_processAI(this, p_allBinaryLayerManager) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryLayerManager, p_allBinaryLayerManager)
+        JR.lset(f, :rotationAnimationInterface, (JR.get(this, :rotationAnimationInterface)))
+        JR.lset(f, :angleIncrementInfo, JR.call(JR.call(JR.lget(f, :rotationAnimationInterface), :jm_getAngleInfoP, []), :jm_getAngleIncrementInfo, []))
+        JR.lset(f, :frame, JR.call(JR.get(this, :rotationAnimationInterface), :jm_getFrame, []))
+        JR.lset(f, :ownerLayerInterface, JR.call(this, :jm_getOwnerLayerInterface, []))
+        if (((JR.call(JR.lget(f, :ownerLayerInterface), :jm_getXP, []) - JR.call(JR.lget(f, :ownerLayerInterface), :jm_getWidth, [])) <= 0) && (JR.lget(f, :frame) == JR.call(JR.get(JR.lget(f, :angleIncrementInfo), :LEFT_FRAME), :jm_intValue, []))) do
+            JR.call(this, :jm_reverse, [])
+            JR.call(this, :jm_drop, [])
         end
-        end.
-
-reverse(This) ->
-        RotationAnimationInterface = get({This, rotationAnimationInterface}),
-        AngleIncrementInfo = (fun(Target_N68234) -> (get({Target_N68234, '$class'})):getAngleIncrementInfo(Target_N68234) end)((get({RotationAnimationInterface, '$class'})):getAngleInfoP(RotationAnimationInterface)),
-        Frame = (get({get({This, rotationAnimationInterface}), '$class'})):getFrame(get({This, rotationAnimationInterface})),
-        case (Frame =:= (get({get({AngleIncrementInfo, 'LEFT_FRAME'}), '$class'})):intValue(get({AngleIncrementInfo, 'LEFT_FRAME'}))) of
-            true ->
-            put({local, rotationAnimationInterfaceCompositeInterface}, (get({This, '$class'})):getOwnerLayerInterface(This)),
-            (get({get({local, rotationAnimationInterfaceCompositeInterface}), '$class'})):setFrame(get({local, rotationAnimationInterfaceCompositeInterface}), (get({get({AngleIncrementInfo, 'RIGHT_FRAME'}), '$class'})):intValue(get({AngleIncrementInfo, 'RIGHT_FRAME'}))),
-            (get({get({This, baseVelocityInterface}), '$class'})):zero(get({This, baseVelocityInterface}));
-            false ->
-            case (Frame =:= (get({get({AngleIncrementInfo, 'RIGHT_FRAME'}), '$class'})):intValue(get({AngleIncrementInfo, 'RIGHT_FRAME'}))) of
-            true ->
-            put({local, rotationAnimationInterfaceCompositeInterface}, (get({This, '$class'})):getOwnerLayerInterface(This)),
-            (get({get({local, rotationAnimationInterfaceCompositeInterface}), '$class'})):setFrame(get({local, rotationAnimationInterfaceCompositeInterface}), (get({get({AngleIncrementInfo, 'LEFT_FRAME'}), '$class'})):intValue(get({AngleIncrementInfo, 'LEFT_FRAME'}))),
-            (get({get({This, baseVelocityInterface}), '$class'})):zero(get({This, baseVelocityInterface}));
-            false -> ok
+        JR.lset(f, :displayInfo, DisplayInfoSingleton.jm_getInstance())
+        if (((JR.call(JR.lget(f, :ownerLayerInterface), :jm_getX2, []) + JR.call(JR.lget(f, :ownerLayerInterface), :jm_getWidth, [])) > JR.call(JR.lget(f, :displayInfo), :jm_getLastWidth, [])) && (JR.lget(f, :frame) == JR.call(JR.get(JR.lget(f, :angleIncrementInfo), :RIGHT_FRAME), :jm_intValue, []))) do
+            JR.call(this, :jm_reverse, [])
+            JR.call(this, :jm_accelerate, [])
+            JR.call(this, :jm_drop, [])
         end
-        end.
+        JR.lset(f, :index, JR.call(JR.get(this, :circularIndexUtil), :jm_getIndex, []))
+        if ((rem(JR.lget(f, :index), JR.get(this, :currentSpeedDivisor)) == 0) && (rem(JR.lget(f, :index), 2) == 0)) do
+            BasicAI.jm_processKeyAI(this, Canvas.jstatic_UP())
+            JR.call(JR.get(this, :velocityInterface), :jm_limitMaxXYVelocity, [(JR.call(JR.get(this, :velocityInterface), :jm_getMaxForwardVelocity, []) / JR.get(this, :currentSpeedDivisor))])
+        end
+        JR.call(JR.get(this, :circularIndexUtil), :jm_next, [])
+        if (JR.lget(f, :frame) == JR.call(JR.get(JR.lget(f, :angleIncrementInfo), :LEFT_FRAME), :jm_intValue, [])) do
+            BasicAI.jm_processKeyAI(this, Canvas.jstatic_KEY_NUM0())
+        else
+            if (JR.lget(f, :frame) == JR.call(JR.get(JR.lget(f, :angleIncrementInfo), :RIGHT_FRAME), :jm_intValue, [])) do
+            BasicAI.jm_processKeyAI(this, Canvas.jstatic_KEY_POUND())
+        end
+        end
+    end)
+  end
 
-accelerate(This) ->
-        case (get({This, currentSpeedDivisor}) > 1) of
-            true ->
-            put({This, currentSpeedDivisor}, get({This, currentSpeedDivisor}) - 1);
-            false -> ok
-        end.
 
-drop(This) ->
-        DisplayInfo = 'DisplayInfoSingleton':getInstance(),
-        OwnerLayerInterface = (get({This, '$class'})):getOwnerLayerInterface(This),
-        put({local, y}, (get({OwnerLayerInterface, '$class'})):getYP(OwnerLayerInterface)),
-        case (((get({OwnerLayerInterface, '$class'})):getY2(OwnerLayerInterface) + (get({OwnerLayerInterface, '$class'})):getHeight(OwnerLayerInterface)) > (get({DisplayInfo, '$class'})):getLastHeight(DisplayInfo)) of
-            true ->
-            put({local, y}, 0);
-            false ->
-            put({local, y}, (get({local, y}) + ((get({OwnerLayerInterface, '$class'})):getHeight(OwnerLayerInterface) + 1)))
-        end,
-        (get({OwnerLayerInterface, '$class'})):setPosition(OwnerLayerInterface, (get({OwnerLayerInterface, '$class'})):getXP(OwnerLayerInterface), get({local, y}), (get({OwnerLayerInterface, '$class'})):getZP(OwnerLayerInterface)).
+  def jm_reverse(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :rotationAnimationInterface, JR.get(this, :rotationAnimationInterface))
+        JR.lset(f, :angleIncrementInfo, JR.call(JR.call(JR.lget(f, :rotationAnimationInterface), :jm_getAngleInfoP, []), :jm_getAngleIncrementInfo, []))
+        JR.lset(f, :frame, JR.call(JR.get(this, :rotationAnimationInterface), :jm_getFrame, []))
+        if (JR.lget(f, :frame) == JR.call(JR.get(JR.lget(f, :angleIncrementInfo), :LEFT_FRAME), :jm_intValue, [])) do
+            JR.lset(f, :rotationAnimationInterfaceCompositeInterface, JR.call(this, :jm_getOwnerLayerInterface, []))
+            JR.call(JR.lget(f, :rotationAnimationInterfaceCompositeInterface), :jm_setFrame, [JR.call(JR.get(JR.lget(f, :angleIncrementInfo), :RIGHT_FRAME), :jm_intValue, [])])
+            JR.call(JR.get(this, :baseVelocityInterface), :jm_zero, [])
+        else
+            if (JR.lget(f, :frame) == JR.call(JR.get(JR.lget(f, :angleIncrementInfo), :RIGHT_FRAME), :jm_intValue, [])) do
+            JR.lset(f, :rotationAnimationInterfaceCompositeInterface, JR.call(this, :jm_getOwnerLayerInterface, []))
+            JR.call(JR.lget(f, :rotationAnimationInterfaceCompositeInterface), :jm_setFrame, [JR.call(JR.get(JR.lget(f, :angleIncrementInfo), :LEFT_FRAME), :jm_intValue, [])])
+            JR.call(JR.get(this, :baseVelocityInterface), :jm_zero, [])
+        end
+        end
+    end)
+  end
 
-getId(This) ->
-        get({'ArtificialIntelligence', 'AI_ID'}).
+
+  def jm_accelerate(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.get(this, :currentSpeedDivisor) > 1) do
+            JR.postinc(this, :currentSpeedDivisor, -1)
+        end
+    end)
+  end
+
+
+  def jm_drop(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :displayInfo, DisplayInfoSingleton.jm_getInstance())
+        JR.lset(f, :ownerLayerInterface, JR.call(this, :jm_getOwnerLayerInterface, []))
+        JR.lset(f, :y, JR.call(JR.lget(f, :ownerLayerInterface), :jm_getYP, []))
+        if ((JR.call(JR.lget(f, :ownerLayerInterface), :jm_getY2, []) + JR.call(JR.lget(f, :ownerLayerInterface), :jm_getHeight, [])) > JR.call(JR.lget(f, :displayInfo), :jm_getLastHeight, [])) do
+            JR.lset(f, :y, 0)
+        else
+            JR.lset(f, :y, JR.int32(JR.lget(f, :y) + (JR.call(JR.lget(f, :ownerLayerInterface), :jm_getHeight, []) + 1)))
+        end
+        JR.call(JR.lget(f, :ownerLayerInterface), :jm_setPosition, [JR.call(JR.lget(f, :ownerLayerInterface), :jm_getXP, []), JR.lget(f, :y), JR.call(JR.lget(f, :ownerLayerInterface), :jm_getZP, [])])
+    end)
+  end
+
+
+  def jm_getId(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, ArtificialIntelligence.jstatic_AI_ID()})
+    end)
+  end
+end
+
 

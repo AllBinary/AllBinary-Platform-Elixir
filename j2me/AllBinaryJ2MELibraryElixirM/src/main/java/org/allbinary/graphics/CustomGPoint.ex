@@ -1,67 +1,138 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics
 
--module('CustomGPoint').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule CustomGPoint do
+  def jsuper(), do: GPoint
+def jstatic_NULL_CUSTOM_POINT(), do: JR.static_get(__MODULE__, :NULL_CUSTOM_POINT, fn -> CustomGPoint.jnew(0, 0, 0) end)
+  def jstatic_set_NULL_CUSTOM_POINT(value), do: JR.static_put(__MODULE__, :NULL_CUSTOM_POINT, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('GPoint', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :cx, 0)
+    JR.put(this, :cy, 0)
+    JR.put(this, :cz, 0)
+        JR.put(this, :cx, 0)
+        JR.put(this, :cy, 0)
+        JR.put(this, :cz, 0)
+    nil
+  end
 
-static_init() ->
-    put({?MODULE, 'NULL_CUSTOM_POINT'}, 'CustomGPoint':new(0, 0, 0)),
-    ok.
 
-init_fields(This) ->
-    put({This, cx}, 0),
-    put({This, cy}, 0),
-    put({This, cz}, 0),
-    ok.
+  def jm_getInstance(p_point) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :point, p_point)
+        throw({:jreturn, CustomGPoint.jnew(JR.call(JR.lget(f, :point), :jm_getX, []), JR.call(JR.lget(f, :point), :jm_getY, []), JR.call(JR.lget(f, :point), :jm_getZ, []))})
+    end)
+  end
 
 
-getInstance(Point) ->
-        'CustomGPoint':new((get({Point, '$class'})):getX(Point), (get({Point, '$class'})):getY(Point), (get({Point, '$class'})):getZ(Point)).
+  def jm_getInstance3(p_x, p_y) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        throw({:jreturn, CustomGPoint.jnew(JR.lget(f, :x), JR.lget(f, :y), 3)})
+    end)
+  end
 
-getInstance3(X, Y) when is_integer(X), is_integer(Y) ->
-        'CustomGPoint':new(X, Y, 3).
 
-new(X, Y, Z) when is_integer(X), is_integer(Y), is_integer(Z) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, X, Y, Z),
-    This.
+  def jinit(this, p_x, p_y, p_z) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :z, p_z)
+        GPoint.jinit(this, JR.lget(f, :x), JR.lget(f, :y), JR.lget(f, :z))
+        CustomGPoint.jinitfields(this)
+    end)
+  end
 
-'$init'(This, X, Y, Z) when is_integer(X), is_integer(Y), is_integer(Z) ->
-        'GPoint':'$init'(This, X, Y, Z),
-        init_fields(This).
+  def jnew(p_x, p_y, p_z) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_x, p_y, p_z)
+    this
+  end
 
-setX(This, X) when is_integer(X) ->
-        put({This, cx}, X).
 
-getX(This) ->
-        get({This, cx}).
+  def jm_setX(this, p_x) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+        JR.put(this, :cx, JR.lget(f, :x))
+    end)
+  end
 
-setY(This, Y) when is_integer(Y) ->
-        put({This, cy}, Y).
 
-getY(This) ->
-        get({This, cy}).
+  def jm_getX(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :cx)})
+    end)
+  end
 
-setZ(This, Z) when is_integer(Z) ->
-        put({This, cz}, Z).
 
-getZ(This) ->
-        get({This, cz}).
+  def jm_setY(this, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :y, p_y)
+        JR.put(this, :cy, JR.lget(f, :y))
+    end)
+  end
+
+
+  def jm_getY(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :cy)})
+    end)
+  end
+
+
+  def jm_setZ(this, p_z) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :z, p_z)
+        JR.put(this, :cz, JR.lget(f, :z))
+    end)
+  end
+
+
+  def jm_getZ(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :cz)})
+    end)
+  end
+end
+
 

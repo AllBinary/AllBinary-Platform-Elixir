@@ -1,114 +1,142 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.game.part
-% import javax.microedition.lcdui.Font
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.game.layer.pickup.PickedUpLayerInterfaceFactoryInterface
-% import org.allbinary.graphics.displayable.DisplayInfoSingleton
-% import org.allbinary.graphics.font.MyFontProcessor
-% import org.allbinary.graphics.font.UpdateMyFontInterface
-% import org.allbinary.graphics.font.UpdateMyFontProcessor
-% import org.allbinary.graphics.paint.PaintableInterface
-% import org.allbinary.layer.AllBinaryLayer
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.game.part
 
--module('CountedLayersHudPaintable').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements PaintableInterface
-% implements UpdateMyFontInterface
+defmodule CountedLayersHudPaintable do
+  def jsuper(), do: JObject
+def jstatic_XXStringWidth(), do: JR.static_get(__MODULE__, :XXStringWidth, fn -> 0 end)
+  def jstatic_set_XXStringWidth(value), do: JR.static_put(__MODULE__, :XXStringWidth, value)
 
-static_init() ->
-    put({?MODULE, 'XXStringWidth'}, 0),
-    ok.
-
-init_fields(This) ->
-    put({This, displayInfoSingleton}, 'DisplayInfoSingleton':getInstance()),
-    put({This, partInterfaceArray}, undefined),
-    put({This, countedTotalStringColor}, 0),
-    put({This, countedPartsBorder}, 0),
-    put({This, startIndex}, 0),
-    put({This, dropSize}, 0),
-    put({This, myFontProcessor}, 'UpdateMyFontProcessor':new(This)),
-    put({This, height}, 0),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :displayInfoSingleton, nil)
+    JR.put(this, :partInterfaceArray, nil)
+    JR.put(this, :countedTotalStringColor, 0)
+    JR.put(this, :countedPartsBorder, 0)
+    JR.put(this, :startIndex, 0)
+    JR.put(this, :dropSize, 0)
+    JR.put(this, :myFontProcessor, nil)
+    JR.put(this, :height, 0)
+        JR.put(this, :displayInfoSingleton, DisplayInfoSingleton.jm_getInstance())
+        
+        
+        
+        
+        
+        JR.put(this, :myFontProcessor, UpdateMyFontProcessor.jnew(this))
+        JR.put(this, :height, 0)
+    nil
+  end
 
 
-new(PartInterfaceArray, DropSize, StartIndex, CountedTotalStringColor, CountedPartsBorder) when (is_tuple(PartInterfaceArray) orelse PartInterfaceArray =:= undefined), is_integer(DropSize), is_integer(StartIndex), is_integer(CountedTotalStringColor), is_integer(CountedPartsBorder) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, PartInterfaceArray, DropSize, StartIndex, CountedTotalStringColor, CountedPartsBorder),
-    This.
+  def jinit(this, p_partInterfaceArray, p_dropSize, p_startIndex, p_countedTotalStringColor, p_countedPartsBorder) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :partInterfaceArray, p_partInterfaceArray)
+      JR.lset(f, :dropSize, p_dropSize)
+      JR.lset(f, :startIndex, p_startIndex)
+      JR.lset(f, :countedTotalStringColor, p_countedTotalStringColor)
+      JR.lset(f, :countedPartsBorder, p_countedPartsBorder)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :partInterfaceArray, JR.lget(f, :partInterfaceArray))
+        JR.put(this, :startIndex, JR.lget(f, :startIndex))
+        JR.put(this, :countedTotalStringColor, JR.lget(f, :countedTotalStringColor))
+        JR.put(this, :countedPartsBorder, JR.lget(f, :countedPartsBorder))
+        JR.put(this, :dropSize, JR.lget(f, :dropSize))
+    end)
+  end
 
-'$init'(This, PartInterfaceArray, DropSize, StartIndex, CountedTotalStringColor, CountedPartsBorder) when (is_tuple(PartInterfaceArray) orelse PartInterfaceArray =:= undefined), is_integer(DropSize), is_integer(StartIndex), is_integer(CountedTotalStringColor), is_integer(CountedPartsBorder) ->
-    init_fields(This),
-        put({This, partInterfaceArray}, PartInterfaceArray),
-        put({This, startIndex}, StartIndex),
-        put({This, countedTotalStringColor}, CountedTotalStringColor),
-        put({This, countedPartsBorder}, CountedPartsBorder),
-        put({This, dropSize}, DropSize).
+  def jnew(p_partInterfaceArray, p_dropSize, p_startIndex, p_countedTotalStringColor, p_countedPartsBorder) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_partInterfaceArray, p_dropSize, p_startIndex, p_countedTotalStringColor, p_countedPartsBorder)
+    this
+  end
 
-updateMeasurement(This, Graphics) ->
-        Font = (get({Graphics, '$class'})):getFont(Graphics),
-        put({This, height}, (get({Font, '$class'})):getHeight(Font)),
-        case (get({This, dropSize}) > (get({Font, '$class'})):getHeight(Font)) of
-            true ->
-            put({This, height}, get({This, dropSize}));
-            false -> ok
-        end,
-        case (get({'CountedLayersHudPaintable', 'XXStringWidth'}) =:= 0) of
-            true ->
-            XXString = "XX",
-            put({'CountedLayersHudPaintable', 'XXStringWidth'}, (get({Font, '$class'})):stringWidth(Font, XXString));
-            false -> ok
-        end,
-        put({This, myFontProcessor}, 'MyFontProcessor':getInstance()).
 
-paint(This, Graphics) ->
-        (get({get({This, myFontProcessor}), '$class'})):process(get({This, myFontProcessor}), Graphics),
-        LastWidth = (get({get({This, displayInfoSingleton}), '$class'})):getLastWidth(get({This, displayInfoSingleton})),
-        WidthEdge = (LastWidth - get({This, dropSize})),
-        Size = array:size(get({This, partInterfaceArray})),
-        put({local, count}, 0),
-        put({local, y}, 0),
-        put({local, countedLayerInterfaceFactory}, undefined),
-        put({local, pickedUpLayerInterfaceFactoryInterface}, undefined),
-        put({local, layerInterface}, undefined),
-        put({local, charArray}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, countedLayerInterfaceFactory}, array:get(Index, get({This, partInterfaceArray}))),
-            case ((get({get({local, countedLayerInterfaceFactory}), '$class'})):getTotal(get({local, countedLayerInterfaceFactory})) > 0) of
-                true ->
-                put({local, pickedUpLayerInterfaceFactoryInterface}, (get({get({local, countedLayerInterfaceFactory}), '$class'})):getCountedPickedUpLayerInterfaceFactory(get({local, countedLayerInterfaceFactory}))),
-                put({local, layerInterface}, (get({get({local, pickedUpLayerInterfaceFactoryInterface}), '$class'})):getIconLayer(get({local, pickedUpLayerInterfaceFactoryInterface}))),
-                put({local, y}, (40 + ((get({local, count}) * get({This, height}))))),
-                (get({get({local, layerInterface}), '$class'})):setPosition(get({local, layerInterface}), WidthEdge, get({local, y}), (get({get({local, layerInterface}), '$class'})):getZP(get({local, layerInterface}))),
-                (get({get({local, layerInterface}), '$class'})):paint(get({local, layerInterface}), Graphics),
-                (get({Graphics, '$class'})):setColor(Graphics, get({This, countedTotalStringColor})),
-                (get({get({local, countedLayerInterfaceFactory}), '$class'})):paint(get({local, countedLayerInterfaceFactory}), Graphics),
-                put({local, charArray}, (get({get({local, countedLayerInterfaceFactory}), '$class'})):getTotalString(get({local, countedLayerInterfaceFactory}))),
-                (get({Graphics, '$class'})):drawChars(Graphics, get({local, charArray}), 0, array:size(get({local, charArray})), (WidthEdge - (get({get({local, countedLayerInterfaceFactory}), '$class'})):getXOffset(get({local, countedLayerInterfaceFactory}))), get({local, y}), 0),
-                put({local, count}, get({local, count}) + 1);
-                false -> ok
+  def jm_updateMeasurement(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.lset(f, :font, JR.call(JR.lget(f, :graphics), :jm_getFont, []))
+        JR.put(this, :height, JR.call(JR.lget(f, :font), :jm_getHeight, []))
+        if (JR.get(this, :dropSize) > JR.call(JR.lget(f, :font), :jm_getHeight, [])) do
+            JR.put(this, :height, JR.get(this, :dropSize))
+        end
+        if (CountedLayersHudPaintable.jstatic_XXStringWidth() == 0) do
+            JR.lset(f, :XXString, "XX")
+            CountedLayersHudPaintable.jstatic_set_XXStringWidth(JR.call(JR.lget(f, :font), :jm_stringWidth, [JR.lget(f, :XXString)]))
+        end
+        JR.put(this, :myFontProcessor, MyFontProcessor.jm_getInstance())
+    end)
+  end
+
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.get(this, :myFontProcessor), :jm_process, [JR.lget(f, :graphics)])
+        JR.lset(f, :lastWidth, JR.call(JR.get(this, :displayInfoSingleton), :jm_getLastWidth, []))
+        JR.lset(f, :widthEdge, JR.int32(JR.lget(f, :lastWidth) - JR.get(this, :dropSize)))
+        JR.lset(f, :size, JR.alength(JR.get(this, :partInterfaceArray)))
+        JR.lset(f, :count, 0)
+        JR.lset(f, :y, 0)
+        JR.lset(f, :countedLayerInterfaceFactory, nil)
+        JR.lset(f, :pickedUpLayerInterfaceFactoryInterface, nil)
+        JR.lset(f, :layerInterface, nil)
+        JR.lset(f, :charArray, nil)
+        JR.lset(f, :index, JR.get(this, :startIndex))
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :countedLayerInterfaceFactory, JR.aget(JR.get(this, :partInterfaceArray), JR.lget(f, :index)))
+            if (JR.call(JR.lget(f, :countedLayerInterfaceFactory), :jm_getTotal, []) > 0) do
+                JR.lset(f, :pickedUpLayerInterfaceFactoryInterface, JR.call(JR.lget(f, :countedLayerInterfaceFactory), :jm_getCountedPickedUpLayerInterfaceFactory, []))
+                JR.lset(f, :layerInterface, JR.call(JR.lget(f, :pickedUpLayerInterfaceFactoryInterface), :jm_getIconLayer, []))
+                JR.lset(f, :y, JR.int32(40 + (JR.int32(JR.lget(f, :count) * JR.get(this, :height)))))
+                JR.call(JR.lget(f, :layerInterface), :jm_setPosition, [JR.lget(f, :widthEdge), JR.lget(f, :y), JR.call(JR.lget(f, :layerInterface), :jm_getZP, [])])
+                JR.call(JR.lget(f, :layerInterface), :jm_paint, [JR.lget(f, :graphics)])
+                JR.call(JR.lget(f, :graphics), :jm_setColor, [JR.get(this, :countedTotalStringColor)])
+                JR.call(JR.lget(f, :countedLayerInterfaceFactory), :jm_paint, [JR.lget(f, :graphics)])
+                JR.lset(f, :charArray, JR.call(JR.lget(f, :countedLayerInterfaceFactory), :jm_getTotalString, []))
+                JR.call(JR.lget(f, :graphics), :jm_drawChars, [JR.lget(f, :charArray), 0, JR.alength(JR.lget(f, :charArray)), (JR.lget(f, :widthEdge) - JR.call(JR.lget(f, :countedLayerInterfaceFactory), :jm_getXOffset, [])), JR.lget(f, :y), 0])
+                JR.lpostinc(f, :count, 1)
             end
-        end, lists:seq(get({This, startIndex}), Size - 1)),
-        case (get({local, count}) > 0) of
-            true ->
-            (get({Graphics, '$class'})):setColor(Graphics, get({This, countedPartsBorder})),
-            (get({Graphics, '$class'})):drawRect(Graphics, (LastWidth - ((get({'CountedLayersHudPaintable', 'XXStringWidth'}) + get({This, dropSize})))), 40, (get({'CountedLayersHudPaintable', 'XXStringWidth'}) + get({This, dropSize})), (((get({local, count}) * get({This, height}))) + 3));
-            false -> ok
-        end.
+        end)
+        if (JR.lget(f, :count) > 0) do
+            JR.call(JR.lget(f, :graphics), :jm_setColor, [JR.get(this, :countedPartsBorder)])
+            JR.call(JR.lget(f, :graphics), :jm_drawRect, [JR.int32(JR.lget(f, :lastWidth) - (JR.int32(CountedLayersHudPaintable.jstatic_XXStringWidth() + JR.get(this, :dropSize)))), 40, JR.int32(CountedLayersHudPaintable.jstatic_XXStringWidth() + JR.get(this, :dropSize)), JR.int32((JR.int32(JR.lget(f, :count) * JR.get(this, :height))) + 3)])
+        end
+    end)
+  end
 
-paintThreed(This, Graphics) ->
-        ok.
+
+  def jm_paintThreed(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        nil
+    end)
+  end
+end
+
 

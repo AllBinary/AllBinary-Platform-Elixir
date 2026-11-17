@@ -1,44 +1,67 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.input.mapping.event
-% import org.allbinary.game.input.mapping.InputToGameKeyMapping
-% import org.allbinary.logic.util.event.AllBinaryEventObject
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.input.mapping.event
 
--module('InputMappingEvent').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule InputMappingEvent do
+  def jsuper(), do: AllBinaryEventObject
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AllBinaryEventObject', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :inputToGameKeyMapping, nil)
+        JR.put(this, :inputToGameKeyMapping, InputToGameKeyMapping.jm_getNullInstance())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, inputToGameKeyMapping}, 'InputToGameKeyMapping':getNullInstance()),
-    ok.
+
+  def jinit(this, p_anyType) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+        AllBinaryEventObject.jinit(this, JR.lget(f, :anyType))
+        InputMappingEvent.jinitfields(this)
+    end)
+  end
+
+  def jnew(p_anyType) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_anyType)
+    this
+  end
 
 
-new(AnyType) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, AnyType),
-    This.
+  def jm_setInputToGameKeyMapping(this, p_inputToGameKeyMapping) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :inputToGameKeyMapping, p_inputToGameKeyMapping)
+        JR.put(this, :inputToGameKeyMapping, JR.lget(f, :inputToGameKeyMapping))
+    end)
+  end
 
-'$init'(This, AnyType) ->
-        'AllBinaryEventObject':'$init'(This, AnyType),
-        init_fields(This).
 
-setInputToGameKeyMapping(This, InputToGameKeyMapping) ->
-        put({This, inputToGameKeyMapping}, InputToGameKeyMapping).
+  def jm_getInputToGameKeyMapping(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :inputToGameKeyMapping)})
+    end)
+  end
+end
 
-getInputToGameKeyMapping(This) ->
-        get({This, inputToGameKeyMapping}).
 

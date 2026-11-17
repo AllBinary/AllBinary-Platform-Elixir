@@ -1,42 +1,67 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.midlet
-% import org.allbinary.logic.system.security.licensing.ClientInformationFactory
-% import org.allbinary.logic.system.security.licensing.LicenseServerInitFileUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
--module('SpecialDemoGameMidlet').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule SpecialDemoGameMidlet do
+  def jsuper(), do: DemoGameMidlet
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('DemoGameMidlet', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+
+  def jinit(this, p_clientInformationFactory, p_licenseLoadingType, p_demoSetupFactory, p_licenseCheckRunnableFactory) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :clientInformationFactory, p_clientInformationFactory)
+      JR.lset(f, :licenseLoadingType, p_licenseLoadingType)
+      JR.lset(f, :demoSetupFactory, p_demoSetupFactory)
+      JR.lset(f, :licenseCheckRunnableFactory, p_licenseCheckRunnableFactory)
+        DemoGameMidlet.jinit(this, JR.lget(f, :clientInformationFactory))
+        SpecialDemoGameMidlet.jinitfields(this)
+    end)
+  end
+
+  def jnew(p_clientInformationFactory, p_licenseLoadingType, p_demoSetupFactory, p_licenseCheckRunnableFactory) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_clientInformationFactory, p_licenseLoadingType, p_demoSetupFactory, p_licenseCheckRunnableFactory)
+    this
+  end
 
 
-new(ClientInformationFactory, LicenseLoadingType, DemoSetupFactory, LicenseCheckRunnableFactory) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, ClientInformationFactory, LicenseLoadingType, DemoSetupFactory, LicenseCheckRunnableFactory),
-    This.
+  def jm_initView(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-'$init'(This, ClientInformationFactory, LicenseLoadingType, DemoSetupFactory, LicenseCheckRunnableFactory) ->
-        'DemoGameMidlet':'$init'(This, ClientInformationFactory).
 
-initView(This) ->
-        ok.
+  def jm_preInit(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(LicenseServerInitFileUtil.jnew(), :jm_init, [])
+    end)
+  end
+end
 
-preInit(This) ->
-        (fun(Target_N65843) -> (get({Target_N65843, '$class'})):init(Target_N65843) end)('LicenseServerInitFileUtil':new()).
 

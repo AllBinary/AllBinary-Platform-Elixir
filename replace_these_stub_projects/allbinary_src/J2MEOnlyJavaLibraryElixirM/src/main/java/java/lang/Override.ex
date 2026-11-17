@@ -1,7 +1,6 @@
-% Generated Code Do Not Modify
-% package java.lang
+# Generated Code Do Not Modify
+# package java.lang
 
--module('Override').
--compile([export_all, nowarn_export_all]).
-% Java annotation
+# Java annotation Override: annotations have no Elixir form
+
 

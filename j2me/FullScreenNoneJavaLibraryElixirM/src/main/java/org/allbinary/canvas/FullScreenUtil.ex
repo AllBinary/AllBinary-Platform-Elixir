@@ -1,69 +1,101 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.canvas
-% import javax.microedition.lcdui.Canvas
-% import javax.microedition.lcdui.CommandListener
-% import org.allbinary.game.configuration.feature.Features
-% import org.allbinary.game.configuration.feature.MainFeatureFactory
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.canvas
 
--module('FullScreenUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule FullScreenUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> FullScreenUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'FullScreenUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'FullScreenUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, FullScreenUtil.jstatic_instance()})
+    end)
+  end
 
-% throws Exception
-initOnRun(This, FullScreenInterface, CommandListener) ->
-        case (CommandListener =/= undefined) of
-            true ->
-            (get({This, '$class'})):init(This, FullScreenInterface);
-            false -> ok
-        end.
 
-init(This, FullScreenInterface) ->
-        ok.
+  def jm_initOnRun(this, p_fullScreenInterface, p_commandListener) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :fullScreenInterface, p_fullScreenInterface)
+      JR.lset(f, :commandListener, p_commandListener)
+        if (JR.lget(f, :commandListener) != nil) do
+            JR.call(this, :jm_init, [JR.lget(f, :fullScreenInterface)])
+        end
+    end)
+  end
 
-isScreenChange(This, IsFullScreen) when is_boolean(IsFullScreen) ->
-        try
-        MainFeatureFactory = 'MainFeatureFactory':getInstance(),
-        Features = 'Features':getInstance(),
-        case ((get({Features, '$class'})):isFeature(Features, get({MainFeatureFactory, 'FULL_SCREEN'})) =/= IsFullScreen) of
-            true ->
-            throw({'$return', true});
-            false -> ok
-        end,
-        false
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
 
-isScreenChangeCanvas(This, FullScreenInterface) ->
-        (get({This, '$class'})):isScreenChange(This, false).
+  def jm_init(this, p_fullScreenInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :fullScreenInterface, p_fullScreenInterface)
+        nil
+    end)
+  end
+
+
+  def jm_isScreenChange(this, p_isFullScreen) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :isFullScreen, p_isFullScreen)
+        JR.lset(f, :mainFeatureFactory, MainFeatureFactory.jm_getInstance())
+        JR.lset(f, :features, Features.jm_getInstance())
+        if (JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.lget(f, :mainFeatureFactory), :FULL_SCREEN)]) != JR.lget(f, :isFullScreen)) do
+            throw({:jreturn, true})
+        end
+        throw({:jreturn, false})
+    end)
+  end
+
+
+  def jm_isScreenChangeCanvas(this, p_fullScreenInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :fullScreenInterface, p_fullScreenInterface)
+        throw({:jreturn, JR.call(this, :jm_isScreenChange, [false])})
+    end)
+  end
+end
+
 

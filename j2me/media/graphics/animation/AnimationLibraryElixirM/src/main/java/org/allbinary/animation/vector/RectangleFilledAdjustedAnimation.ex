@@ -1,63 +1,122 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation.vector
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.color.ColorCompositeInterface
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation.vector
 
--module('RectangleFilledAdjustedAnimation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements ColorCompositeInterface
+defmodule RectangleFilledAdjustedAnimation do
+  def jsuper(), do: RectangleFilledAnimation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('RectangleFilledAnimation', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :offsetX, 0)
+    JR.put(this, :offsetY, 0)
+        
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, offsetX}, 0),
-    put({This, offsetY}, 0),
-    ok.
+
+  def jinit(this, p_width, p_height, p_offsetX, p_offsetY, p_basicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+      JR.lset(f, :offsetX, p_offsetX)
+      JR.lset(f, :offsetY, p_offsetY)
+      JR.lset(f, :basicColor, p_basicColor)
+        RectangleFilledAnimation.jinit(this, JR.lget(f, :width), JR.lget(f, :height), JR.lget(f, :basicColor))
+        RectangleFilledAdjustedAnimation.jinitfields(this)
+        JR.put(this, :offsetX, JR.lget(f, :offsetX))
+        JR.put(this, :offsetY, JR.lget(f, :offsetY))
+        JR.call(this, :jm_setBasicColorP, [JR.lget(f, :basicColor)])
+    end)
+  end
+
+  def jnew(p_width, p_height, p_offsetX, p_offsetY, p_basicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_width, p_height, p_offsetX, p_offsetY, p_basicColor)
+    this
+  end
 
 
-new(Width, Height, OffsetX, OffsetY, BasicColor) when is_integer(Width), is_integer(Height), is_integer(OffsetX), is_integer(OffsetY) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Width, Height, OffsetX, OffsetY, BasicColor),
-    This.
+  def jm_nextFrame(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-'$init'(This, Width, Height, OffsetX, OffsetY, BasicColor) when is_integer(Width), is_integer(Height), is_integer(OffsetX), is_integer(OffsetY) ->
-        'RectangleFilledAnimation':'$init'(This, Width, Height, BasicColor),
-        init_fields(This),
-        put({This, offsetX}, OffsetX),
-        put({This, offsetY}, OffsetY),
-        (get({This, '$class'})):setBasicColorP(This, BasicColor).
 
-nextFrame(This) ->
-        ok.
+  def jm_paintXY(this, p_graphics, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        JR.call(JR.get(this, :basicSetColorUtil), :jm_setBasicColorP3, [JR.lget(f, :graphics), JR.call(this, :jm_getBasicColorP, []), JR.call(this, :jm_getColor, [])])
+        RectangleFilledAnimation.jm_paintXY(this, JR.lget(f, :graphics), JR.int32(JR.lget(f, :x) + JR.get(this, :offsetX)), JR.int32(JR.lget(f, :y) + JR.get(this, :offsetY)))
+    end)
+  end
 
-paintXY(This, Graphics, X, Y) when is_integer(X), is_integer(Y) ->
-        (get({get({This, basicSetColorUtil}), '$class'})):setBasicColorP3(get({This, basicSetColorUtil}), Graphics, (get({This, '$class'})):getBasicColorP(This), (get({This, '$class'})):getColor(This)),
-        'RectangleFilledAnimation':paintXY(This, Graphics, (X + get({This, offsetX})), (Y + get({This, offsetY}))).
 
-setOffsetX(This, OffsetX) when is_integer(OffsetX) ->
-        put({This, offsetX}, OffsetX).
+  def jm_setOffsetX(this, p_offsetX) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :offsetX, p_offsetX)
+        JR.put(this, :offsetX, JR.lget(f, :offsetX))
+    end)
+  end
 
-setOffsetY(This, OffsetY) when is_integer(OffsetY) ->
-        put({This, offsetY}, OffsetY).
 
-getBasicColorP(This) ->
-        'RectangleFilledAnimation':getBasicColorP(This).
+  def jm_setOffsetY(this, p_offsetY) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :offsetY, p_offsetY)
+        JR.put(this, :offsetY, JR.lget(f, :offsetY))
+    end)
+  end
 
-setBasicColorP(This, BasicColor) ->
-        'RectangleFilledAnimation':setBasicColorP(This, BasicColor).
+
+  def jm_getBasicColorP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, RectangleFilledAnimation.jm_getBasicColorP(this)})
+    end)
+  end
+
+
+  def jm_setBasicColorP(this, p_basicColor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicColor, p_basicColor)
+        RectangleFilledAnimation.jm_setBasicColorP(this, JR.lget(f, :basicColor))
+    end)
+  end
+end
+
 

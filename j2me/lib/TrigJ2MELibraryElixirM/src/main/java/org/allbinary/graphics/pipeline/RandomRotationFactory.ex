@@ -1,54 +1,79 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.pipeline
-% import org.allbinary.game.rand.MyRandomFactory
-% import org.allbinary.math.AngleFactory
-% import org.allbinary.util.BasicArrayList
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.pipeline
 
--module('RandomRotationFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule RandomRotationFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> RandomRotationFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'RandomRotationFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :myRandomFactory, nil)
+    JR.put(this, :angleFactory, nil)
+        JR.put(this, :myRandomFactory, MyRandomFactory.jm_getInstance())
+        JR.put(this, :angleFactory, AngleFactory.jm_getInstance())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, myRandomFactory}, 'MyRandomFactory':getInstance()),
-    put({This, angleFactory}, 'AngleFactory':getInstance()),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'RandomRotationFactory', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, RandomRotationFactory.jstatic_instance()})
+    end)
+  end
 
-% throws Exception
-getInstanceList(This, Vector, HowMuch) when is_integer(HowMuch) ->
-        GraphicsPipe = 'BasicGraphicsPipeline':new(Vector),
-        (get({GraphicsPipe, '$class'})):createMatrix(GraphicsPipe),
-        (get({GraphicsPipe, '$class'})):rotateToAngle(GraphicsPipe, (get({get({This, angleFactory}), '$class'})):getAt(get({This, angleFactory}), (get({This, '$class'})):getNextRandomAngle(This, HowMuch))),
-        (get({GraphicsPipe, '$class'})):getMatrix(GraphicsPipe).
 
-getNextRandomAngle(This, HowMuch) when is_integer(HowMuch) ->
-        (get({get({This, myRandomFactory}), '$class'})):getNextInt(get({This, myRandomFactory}), (HowMuch * 10)).
+  def jm_getInstanceList(this, p_vector, p_howMuch) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :vector, p_vector)
+      JR.lset(f, :howMuch, p_howMuch)
+        JR.lset(f, :graphicsPipe, BasicGraphicsPipeline.jnew(JR.lget(f, :vector)))
+        JR.call(JR.lget(f, :graphicsPipe), :jm_createMatrix, [])
+        JR.call(JR.lget(f, :graphicsPipe), :jm_rotateToAngle, [JR.call(JR.get(this, :angleFactory), :jm_getAt, [JR.call(this, :jm_getNextRandomAngle, [JR.lget(f, :howMuch)])])])
+        throw({:jreturn, JR.call(JR.lget(f, :graphicsPipe), :jm_getMatrix, [])})
+    end)
+  end
+
+
+  def jm_getNextRandomAngle(this, p_howMuch) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :howMuch, p_howMuch)
+        throw({:jreturn, JR.call(JR.get(this, :myRandomFactory), :jm_getNextInt, [JR.int32(JR.lget(f, :howMuch) * 10)])})
+    end)
+  end
+end
+
 

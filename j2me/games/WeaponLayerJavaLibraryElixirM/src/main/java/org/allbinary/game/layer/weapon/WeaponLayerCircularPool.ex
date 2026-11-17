@@ -1,47 +1,65 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer.weapon
-% import org.allbinary.game.combat.weapon.WeaponProperties
-% import org.allbinary.game.score.ScoreableInterface
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.layer.AllBinaryLayerCircularPool
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer.weapon
 
--module('WeaponLayerCircularPool').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule WeaponLayerCircularPool do
+  def jsuper(), do: AllBinaryLayerCircularPool
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AllBinaryLayerCircularPool', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      AllBinaryLayerCircularPool.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    'AllBinaryLayerCircularPool':'$init'(This),
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-% throws Exception
-getInstanceWeaponLayer(This, SourceLayerInterface, X, Y, Z, Angle, OtherAngle, WeaponProperties, Scoreable) when is_integer(X), is_integer(Y), is_integer(Z), is_integer(Angle), is_integer(OtherAngle) ->
-        WeaponLayer = 'AllBinaryLayerCircularPool':getNextInstance(This),
-        (get({WeaponLayer, '$class'})):initXYZ(WeaponLayer, X, Y, Z),
-        (get({WeaponLayer, '$class'})):init(WeaponLayer, SourceLayerInterface, Angle, OtherAngle, WeaponProperties, Scoreable),
-        WeaponLayer.
+
+  def jm_getInstanceWeaponLayer(this, p_sourceLayerInterface, p_x, p_y, p_z, p_angle, p_otherAngle, p_weaponProperties, p_scoreable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :sourceLayerInterface, p_sourceLayerInterface)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :z, p_z)
+      JR.lset(f, :angle, p_angle)
+      JR.lset(f, :otherAngle, p_otherAngle)
+      JR.lset(f, :weaponProperties, p_weaponProperties)
+      JR.lset(f, :scoreable, p_scoreable)
+        JR.lset(f, :weaponLayer, AllBinaryLayerCircularPool.jm_getNextInstance(this))
+        JR.call(JR.lget(f, :weaponLayer), :jm_initXYZ, [JR.lget(f, :x), JR.lget(f, :y), JR.lget(f, :z)])
+        JR.call(JR.lget(f, :weaponLayer), :jm_init, [JR.lget(f, :sourceLayerInterface), JR.lget(f, :angle), JR.lget(f, :otherAngle), JR.lget(f, :weaponProperties), JR.lget(f, :scoreable)])
+        throw({:jreturn, JR.lget(f, :weaponLayer)})
+    end)
+  end
+end
+
 

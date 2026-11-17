@@ -1,31 +1,50 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer.pickup
-% import org.allbinary.animation.Animation
-% import org.allbinary.layer.AllBinaryLayer
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer.pickup
 
--module('PickedUpLayerInterfaceFactoryInterface').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
+defmodule PickedUpLayerInterfaceFactoryInterface do
+  def jsuper(), do: JObject
 
 
-getPickedUpLayerType(This) ->
-    erlang:error({abstract_method, getPickedUpLayerType}).
+  def jm_getPickedUpLayerType(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "getPickedUpLayerType")})
+    end)
+  end
 
-getIconLayer(This) ->
-    erlang:error({abstract_method, getIconLayer}).
 
-getAnimationInterface(This) ->
-    erlang:error({abstract_method, getAnimationInterface}).
+  def jm_getIconLayer(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "getIconLayer")})
+    end)
+  end
+
+
+  def jm_getAnimationInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "getAnimationInterface")})
+    end)
+  end
+end
+
 

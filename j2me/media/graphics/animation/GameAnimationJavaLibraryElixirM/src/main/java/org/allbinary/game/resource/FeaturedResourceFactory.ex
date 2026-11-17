@@ -1,102 +1,141 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.resource
-% import org.allbinary.game.configuration.feature.Features
-% import org.allbinary.game.configuration.feature.GameFeatureControlledInterface
-% import org.allbinary.game.configuration.feature.GraphicsFeatureFactory
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.string.CommonLabels
-% import org.allbinary.string.CommonSeps
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.resource
 
--module('FeaturedResourceFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule FeaturedResourceFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, list}, 'BasicArrayListD':new()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, 'ANIMATION_FEATURES'}, "Animation Features: Vector: "),
-    put({This, 'IMAGE_LABEL'}, " Image: "),
-    put({This, 'IMAGE_GRAPHICS_ARRAY'}, "Image Array: "),
-    put({This, 'IMAGE_GRAPHICS_ROTATION'}, "Image Rotate: "),
-    put({This, 'SPRITE_QUARTER'}, " Sprite Quarter: "),
-    put({This, 'SPRITE_FULL'}, " Sprite Full: "),
-    put({This, 'IS_LOADING_LEVEL_LABEL'}, " isLoadingLevel "),
-    put({This, 'IS_FEATURE'}, " isFeature: "),
-    put({This, 'GAME_FEATURE_CONTROLLED'}, "GameFeatureControlledInterface: "),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :list, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :ANIMATION_FEATURES, nil)
+    JR.put(this, :IMAGE_LABEL, nil)
+    JR.put(this, :IMAGE_GRAPHICS_ARRAY, nil)
+    JR.put(this, :IMAGE_GRAPHICS_ROTATION, nil)
+    JR.put(this, :SPRITE_QUARTER, nil)
+    JR.put(this, :SPRITE_FULL, nil)
+    JR.put(this, :IS_LOADING_LEVEL_LABEL, nil)
+    JR.put(this, :IS_FEATURE, nil)
+    JR.put(this, :GAME_FEATURE_CONTROLLED, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :list, BasicArrayListD.jnew())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        JR.put(this, :ANIMATION_FEATURES, "Animation Features: Vector: ")
+        JR.put(this, :IMAGE_LABEL, " Image: ")
+        JR.put(this, :IMAGE_GRAPHICS_ARRAY, "Image Array: ")
+        JR.put(this, :IMAGE_GRAPHICS_ROTATION, "Image Rotate: ")
+        JR.put(this, :SPRITE_QUARTER, " Sprite Quarter: ")
+        JR.put(this, :SPRITE_FULL, " Sprite Full: ")
+        JR.put(this, :IS_LOADING_LEVEL_LABEL, " isLoadingLevel ")
+        JR.put(this, :IS_FEATURE, " isFeature: ")
+        JR.put(this, :GAME_FEATURE_CONTROLLED, "GameFeatureControlledInterface: ")
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-% throws Exception
-init(This, Level) when is_integer(Level) ->
-        Size = (get({get({This, list}), '$class'})):size(get({This, list})),
-        lists:foreach(fun(Index) ->
-            FeatureInterface = array:get(Index, get({get({This, list}), objectArray})),
-            IsLoadingLevel = (get({FeatureInterface, '$class'})):isLoadingLevel(FeatureInterface, Level),
-            IsFeature = (get({FeatureInterface, '$class'})):isFeature(FeatureInterface),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N66658) -> (get({Target_N66658, '$class'})):toString(Target_N66658) end)((fun(Target_N66665) -> (get({Target_N66665, '$class'})):appendboolean(Target_N66665, IsFeature) end)((fun(Target_N66672) -> (get({Target_N66672, '$class'})):append(Target_N66672, get({This, 'IS_FEATURE'})) end)((fun(Target_N66679) -> (get({Target_N66679, '$class'})):appendboolean(Target_N66679, IsLoadingLevel) end)((fun(Target_N66686) -> (get({Target_N66686, '$class'})):append(Target_N66686, get({'CommonSeps':getInstance(), 'COLON_SEP'})) end)((fun(Target_N66693) -> (get({Target_N66693, '$class'})):append(Target_N66693, (fun(Target_N66785) -> (get({Target_N66785, '$class'})):getLevelString(Target_N66785, Level) end)('ResourceLoadingLevelFactory':getInstance())) end)((fun(Target_N66700) -> (get({Target_N66700, '$class'})):append(Target_N66700, get({This, 'IS_LOADING_LEVEL_LABEL'})) end)((fun(Target_N66707) -> (get({Target_N66707, '$class'})):append(Target_N66707, (get({FeatureInterface, '$class'})):toString(FeatureInterface)) end)((fun(Target_N66714) -> (get({Target_N66714, '$class'})):append(Target_N66714, get({This, 'GAME_FEATURE_CONTROLLED'})) end)('StringMaker':new()))))))))), This, get({get({This, commonStrings}), 'INIT'})),
-            case (IsLoadingLevel andalso IsFeature) of
-                true ->
-                (get({FeatureInterface, '$class'})):init(FeatureInterface, Level);
-                false -> ok
+
+  def jm_init(this, p_level) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :level, p_level)
+        JR.lset(f, :size, JR.call(JR.get(this, :list), :jm_size, []))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :featureInterface, JR.aget(JR.get(JR.get(this, :list), :objectArray), JR.lget(f, :index)))
+            JR.lset(f, :isLoadingLevel, JR.call(JR.lget(f, :featureInterface), :jm_isLoadingLevel, [JR.lget(f, :level)]))
+            JR.lset(f, :isFeature, JR.call(JR.lget(f, :featureInterface), :jm_isFeature, []))
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(JR.call(JR.call(JR.call(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(this, :GAME_FEATURE_CONTROLLED)]), :jm_append, [JR.call(JR.lget(f, :featureInterface), :jm_toString, [])]), :jm_append, [JR.get(this, :IS_LOADING_LEVEL_LABEL)]), :jm_append, [JR.call(ResourceLoadingLevelFactory.jm_getInstance(), :jm_getLevelString, [JR.lget(f, :level)])]), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :COLON_SEP)]), :jm_appendboolean, [JR.lget(f, :isLoadingLevel)]), :jm_append, [JR.get(this, :IS_FEATURE)]), :jm_appendboolean, [JR.lget(f, :isFeature)]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :INIT)])
+            if (JR.lget(f, :isLoadingLevel) && JR.lget(f, :isFeature)) do
+                JR.call(JR.lget(f, :featureInterface), :jm_init, [JR.lget(f, :level)])
             end
-        end, lists:seq(0, Size - 1)),
-        Features = 'Features':getInstance(),
-        GraphicsFeatureFactory = 'GraphicsFeatureFactory':getInstance(),
-        StringBuffer = 'StringMaker':new(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({This, 'ANIMATION_FEATURES'})),
-        (get({StringBuffer, '$class'})):appendboolean(StringBuffer, (get({Features, '$class'})):isFeature(Features, get({GraphicsFeatureFactory, 'VECTOR_GRAPHICS'}))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({This, 'IMAGE_LABEL'})),
-        (get({StringBuffer, '$class'})):appendboolean(StringBuffer, (get({Features, '$class'})):isFeature(Features, get({GraphicsFeatureFactory, 'IMAGE_GRAPHICS'}))),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({StringBuffer, '$class'})):toString(StringBuffer), This, get({get({This, commonStrings}), 'INIT'})),
-        case (get({Features, '$class'})):isFeature(Features, get({GraphicsFeatureFactory, 'IMAGE_GRAPHICS'})) of
-            true ->
-            (get({StringBuffer, '$class'})):delete(StringBuffer, 0, (get({StringBuffer, '$class'})):length(StringBuffer)),
-            (get({StringBuffer, '$class'})):append(StringBuffer, get({This, 'IMAGE_GRAPHICS_ARRAY'})),
-            (get({StringBuffer, '$class'})):appendboolean(StringBuffer, (get({Features, '$class'})):isFeature(Features, get({GraphicsFeatureFactory, 'IMAGE_TO_ARRAY_GRAPHICS'}))),
-            (get({StringBuffer, '$class'})):append(StringBuffer, get({This, 'IMAGE_GRAPHICS_ROTATION'})),
-            (get({StringBuffer, '$class'})):appendboolean(StringBuffer, (get({Features, '$class'})):isFeature(Features, get({GraphicsFeatureFactory, 'IMAGE_TO_ARRAY_GRAPHICS'}))),
-            (get({StringBuffer, '$class'})):append(StringBuffer, get({This, 'SPRITE_QUARTER'})),
-            (get({StringBuffer, '$class'})):appendboolean(StringBuffer, (get({Features, '$class'})):isFeature(Features, get({GraphicsFeatureFactory, 'SPRITE_QUARTER_ROTATION_GRAPHICS'}))),
-            (get({StringBuffer, '$class'})):append(StringBuffer, get({This, 'SPRITE_FULL'})),
-            (get({StringBuffer, '$class'})):appendboolean(StringBuffer, (get({Features, '$class'})):isFeature(Features, get({GraphicsFeatureFactory, 'SPRITE_FULL_GRAPHICS'}))),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (get({StringBuffer, '$class'})):toString(StringBuffer), This, get({get({This, commonStrings}), 'INIT'}));
-            false -> ok
-        end.
+        end)
+        JR.lset(f, :features, Features.jm_getInstance())
+        JR.lset(f, :graphicsFeatureFactory, GraphicsFeatureFactory.jm_getInstance())
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(this, :ANIMATION_FEATURES)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendboolean, [JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.lget(f, :graphicsFeatureFactory), :VECTOR_GRAPHICS)])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(this, :IMAGE_LABEL)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendboolean, [JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.lget(f, :graphicsFeatureFactory), :IMAGE_GRAPHICS)])])
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :stringBuffer), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :INIT)])
+        if JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.lget(f, :graphicsFeatureFactory), :IMAGE_GRAPHICS)]) do
+            JR.call(JR.lget(f, :stringBuffer), :jm_delete, [0, JR.call(JR.lget(f, :stringBuffer), :jm_length, [])])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(this, :IMAGE_GRAPHICS_ARRAY)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_appendboolean, [JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.lget(f, :graphicsFeatureFactory), :IMAGE_TO_ARRAY_GRAPHICS)])])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(this, :IMAGE_GRAPHICS_ROTATION)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_appendboolean, [JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.lget(f, :graphicsFeatureFactory), :IMAGE_TO_ARRAY_GRAPHICS)])])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(this, :SPRITE_QUARTER)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_appendboolean, [JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.lget(f, :graphicsFeatureFactory), :SPRITE_QUARTER_ROTATION_GRAPHICS)])])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(this, :SPRITE_FULL)])
+            JR.call(JR.lget(f, :stringBuffer), :jm_appendboolean, [JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.lget(f, :graphicsFeatureFactory), :SPRITE_FULL_GRAPHICS)])])
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.lget(f, :stringBuffer), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :INIT)])
+        end
+    end)
+  end
 
-clear(This) ->
-        (get({get({This, list}), '$class'})):clear(get({This, list})).
 
-add(This, FeatureInterface) ->
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N68065) -> (get({Target_N68065, '$class'})):toString(Target_N68065) end)((fun(Target_N68072) -> (get({Target_N68072, '$class'})):append(Target_N68072, (fun(Target_N68128) -> (get({Target_N68128, '$class'})):toString(Target_N68128, FeatureInterface) end)('StringUtil':getInstance())) end)((fun(Target_N68079) -> (get({Target_N68079, '$class'})):append(Target_N68079, get({'CommonLabels':getInstance(), 'START_LABEL'})) end)('StringMaker':new()))), This, get({get({This, commonStrings}), 'ADD'})),
-        (get({get({This, list}), '$class'})):add(get({This, list}), FeatureInterface).
+  def jm_clear(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :list), :jm_clear, [])
+    end)
+  end
 
-getList(This) ->
-        get({This, list}).
+
+  def jm_add(this, p_featureInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :featureInterface, p_featureInterface)
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(CommonLabels.jm_getInstance(), :START_LABEL)]), :jm_append, [JR.call(StringUtil.jm_getInstance(), :jm_toString, [JR.lget(f, :featureInterface)])]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :ADD)])
+        JR.call(JR.get(this, :list), :jm_add, [JR.lget(f, :featureInterface)])
+    end)
+  end
+
+
+  def jm_getList(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :list)})
+    end)
+  end
+end
+
 

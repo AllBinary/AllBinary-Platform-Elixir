@@ -1,80 +1,111 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.game.identification
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.game.identification
 
--module('GroupFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GroupFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> GroupFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'GroupFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :NULL_GROUP_ARRAY, nil)
+    JR.put(this, :list, nil)
+    JR.put(this, :index, 0)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :NULL_GROUP_ARRAY, JR.anew(0, nil))
+        JR.put(this, :list, BasicArrayListD.jnew())
+        JR.put(this, :index, 0)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, 'NULL_GROUP_ARRAY'}, array:new(0, {default, undefined})),
-    put({This, list}, 'BasicArrayListD':new()),
-    put({This, index}, 0),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'GroupFactory', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, GroupFactory.jstatic_instance()})
+    end)
+  end
 
-getNextGroup(This) ->
-        Group = array:get(get({This, index}), get({get({This, list}), objectArray})),
-        put({This, index}, get({This, index}) + 1),
-        Group.
 
-getNextGroupByName(This, Name) when (is_list(Name) orelse Name =:= undefined) ->
-        Group = (get({This, '$class'})):getNextGroup(This),
-        (get({Group, '$class'})):setName(Group, Name),
-        Group.
+  def jm_getNextGroup(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :group, JR.aget(JR.get(JR.get(this, :list), :objectArray), JR.get(this, :index)))
+        JR.postinc(this, :index, 1)
+        throw({:jreturn, JR.lget(f, :group)})
+    end)
+  end
 
-init(This, Groups, NameArray) when is_integer(Groups), (is_tuple(NameArray) orelse NameArray =:= undefined) ->
-        StringMaker = 'StringMaker':new(),
-        StringUtil = 'StringUtil':getInstance(),
-        TEAM = "Team ",
-        (get({get({This, list}), '$class'})):clear(get({This, list})),
-        put({This, index}, 0),
-        put({local, size}, (get({get({This, list}), '$class'})):size(get({This, list}))),
-        put({local, name}, undefined),
-        (fun Loop() -> case (get({local, size}) < Groups) of true ->
-            put({local, name}, get({StringUtil, 'EMPTY_STRING'})),
-            case (get({local, size}) < array:size(NameArray)) of
-                true ->
-                put({local, name}, array:get(get({local, size}), NameArray));
-                false ->
-                (get({StringMaker, '$class'})):delete(StringMaker, 0, (get({StringMaker, '$class'})):length(StringMaker)),
-                put({local, name}, (fun(Target_N66713) -> (get({Target_N66713, '$class'})):toString(Target_N66713) end)((fun(Target_N66720) -> (get({Target_N66720, '$class'})):appendint(Target_N66720, get({local, size})) end)((get({StringMaker, '$class'})):append(StringMaker, TEAM))))
-            end,
-            (get({get({This, list}), '$class'})):add(get({This, list}), 'Group':new(get({local, name}), ((get({local, size}) + 3)))),
-            put({local, size}, get({local, size}) + 1),
-            Loop();
-        false -> ok end end)().
+
+  def jm_getNextGroupByName(this, p_name) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+        JR.lset(f, :group, JR.call(this, :jm_getNextGroup, []))
+        JR.call(JR.lget(f, :group), :jm_setName, [JR.lget(f, :name)])
+        throw({:jreturn, JR.lget(f, :group)})
+    end)
+  end
+
+
+  def jm_init(this, p_groups, p_nameArray) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :groups, p_groups)
+      JR.lset(f, :nameArray, p_nameArray)
+        JR.lset(f, :stringMaker, StringMaker.jnew())
+        JR.lset(f, :stringUtil, StringUtil.jm_getInstance())
+        JR.lset(f, :TEAM, "Team ")
+        JR.call(JR.get(this, :list), :jm_clear, [])
+        JR.put(this, :index, 0)
+        JR.lset(f, :size, JR.call(JR.get(this, :list), :jm_size, []))
+        JR.lset(f, :name, nil)
+        JR.jwhile(fn -> (JR.lget(f, :size) < JR.int32(JR.lget(f, :groups))) end, fn ->
+            JR.lset(f, :name, JR.get(JR.lget(f, :stringUtil), :EMPTY_STRING))
+            if (JR.lget(f, :size) < JR.alength(JR.lget(f, :nameArray))) do
+                JR.lset(f, :name, JR.aget(JR.lget(f, :nameArray), JR.lget(f, :size)))
+            else
+                JR.call(JR.lget(f, :stringMaker), :jm_delete, [0, JR.call(JR.lget(f, :stringMaker), :jm_length, [])])
+                JR.lset(f, :name, JR.call(JR.call(JR.call(JR.lget(f, :stringMaker), :jm_append, [JR.lget(f, :TEAM)]), :jm_appendint, [JR.lget(f, :size)]), :jm_toString, []))
+            end
+            JR.call(JR.get(this, :list), :jm_add, [Group.jnew(JR.lget(f, :name), JR.int16((JR.int32(JR.lget(f, :size) + 3))))])
+            JR.lpostinc(f, :size, 1)
+        end)
+    end)
+  end
+end
+
 

@@ -1,69 +1,116 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2025 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.opengles.shader
-% import javax.microedition.khronos.opengles.GL10
-% import org.allbinary.graphics.opengles.NullOpenGLProcessorFactory
-% import org.allbinary.graphics.opengles.OpenGLProcessor
-% import org.allbinary.logic.string.StringUtil
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2025 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles.shader
 
--module('ShaderComposite').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule ShaderComposite do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, disableProgramShaderOpenGLProcessor}, undefined),
-    put({This, requiresOpenGLVersion}, undefined),
-    put({This, shaderArray}, undefined),
-    put({This, shaderInitializer}, undefined),
-    put({This, compositeShaderUpdater}, undefined),
-    put({This, modelViewProjection}, undefined),
-    put({This, colorOpenGLProcessor}, undefined),
-    put({This, vertexOpenGLProcessor}, undefined),
-    put({This, useProgramShaderOpenGLProcessor}, 'NullOpenGLProcessorFactory':getInstance()),
-    put({This, shaderMatrixOpenGLProcessor}, 'NullOpenGLProcessorFactory':getInstance()),
-    put({This, colorEnableVertexAttribArrayOpenGLProcessor}, 'NullOpenGLProcessorFactory':getInstance()),
-    put({This, normalEnableVertexAttribArrayOpenGLProcessor}, 'NullOpenGLProcessorFactory':getInstance()),
-    put({This, vertexEnableVertexAttribArrayOpenGLProcessor}, 'NullOpenGLProcessorFactory':getInstance()),
-    put({This, textureEnableVertexAttribArrayOpenGLProcessor}, 'NullOpenGLProcessorFactory':getInstance()),
-    put({This, colorDisableVertexAttribArrayOpenGLProcessor}, 'NullOpenGLProcessorFactory':getInstance()),
-    put({This, normalDisableVertexAttribArrayOpenGLProcessor}, 'NullOpenGLProcessorFactory':getInstance()),
-    put({This, vertexDisableVertexAttribArrayOpenGLProcessor}, 'NullOpenGLProcessorFactory':getInstance()),
-    put({This, textureDisableVertexAttribArrayOpenGLProcessor}, 'NullOpenGLProcessorFactory':getInstance()),
-    put({This, uniformLightPositionOpenGLProcessor}, 'NullOpenGLTextureProcessor':getInstance()),
-    put({This, uniformLightColorOpenGLProcessor}, 'NullOpenGLTextureProcessor':getInstance()),
-    put({This, uniformCameraPositionOpenGLProcessor}, 'NullOpenGLTextureProcessor':getInstance()),
-    put({This, uniformTextureUnitOpenGLProcessor}, 'NullOpenGLTextureProcessor':getInstance()),
-    put({This, programHandle}, 0),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :disableProgramShaderOpenGLProcessor, nil)
+    JR.put(this, :requiresOpenGLVersion, nil)
+    JR.put(this, :shaderArray, nil)
+    JR.put(this, :shaderInitializer, nil)
+    JR.put(this, :compositeShaderUpdater, nil)
+    JR.put(this, :modelViewProjection, nil)
+    JR.put(this, :colorOpenGLProcessor, nil)
+    JR.put(this, :vertexOpenGLProcessor, nil)
+    JR.put(this, :useProgramShaderOpenGLProcessor, nil)
+    JR.put(this, :shaderMatrixOpenGLProcessor, nil)
+    JR.put(this, :colorEnableVertexAttribArrayOpenGLProcessor, nil)
+    JR.put(this, :normalEnableVertexAttribArrayOpenGLProcessor, nil)
+    JR.put(this, :vertexEnableVertexAttribArrayOpenGLProcessor, nil)
+    JR.put(this, :textureEnableVertexAttribArrayOpenGLProcessor, nil)
+    JR.put(this, :colorDisableVertexAttribArrayOpenGLProcessor, nil)
+    JR.put(this, :normalDisableVertexAttribArrayOpenGLProcessor, nil)
+    JR.put(this, :vertexDisableVertexAttribArrayOpenGLProcessor, nil)
+    JR.put(this, :textureDisableVertexAttribArrayOpenGLProcessor, nil)
+    JR.put(this, :uniformLightPositionOpenGLProcessor, nil)
+    JR.put(this, :uniformLightColorOpenGLProcessor, nil)
+    JR.put(this, :uniformCameraPositionOpenGLProcessor, nil)
+    JR.put(this, :uniformTextureUnitOpenGLProcessor, nil)
+    JR.put(this, :programHandle, 0)
+        
+        
+        
+        
+        
+        
+        
+        
+        JR.put(this, :useProgramShaderOpenGLProcessor, NullOpenGLProcessorFactory.jm_getInstance())
+        JR.put(this, :shaderMatrixOpenGLProcessor, NullOpenGLProcessorFactory.jm_getInstance())
+        JR.put(this, :colorEnableVertexAttribArrayOpenGLProcessor, NullOpenGLProcessorFactory.jm_getInstance())
+        JR.put(this, :normalEnableVertexAttribArrayOpenGLProcessor, NullOpenGLProcessorFactory.jm_getInstance())
+        JR.put(this, :vertexEnableVertexAttribArrayOpenGLProcessor, NullOpenGLProcessorFactory.jm_getInstance())
+        JR.put(this, :textureEnableVertexAttribArrayOpenGLProcessor, NullOpenGLProcessorFactory.jm_getInstance())
+        JR.put(this, :colorDisableVertexAttribArrayOpenGLProcessor, NullOpenGLProcessorFactory.jm_getInstance())
+        JR.put(this, :normalDisableVertexAttribArrayOpenGLProcessor, NullOpenGLProcessorFactory.jm_getInstance())
+        JR.put(this, :vertexDisableVertexAttribArrayOpenGLProcessor, NullOpenGLProcessorFactory.jm_getInstance())
+        JR.put(this, :textureDisableVertexAttribArrayOpenGLProcessor, NullOpenGLProcessorFactory.jm_getInstance())
+        JR.put(this, :uniformLightPositionOpenGLProcessor, NullOpenGLTextureProcessor.jm_getInstance())
+        JR.put(this, :uniformLightColorOpenGLProcessor, NullOpenGLTextureProcessor.jm_getInstance())
+        JR.put(this, :uniformCameraPositionOpenGLProcessor, NullOpenGLTextureProcessor.jm_getInstance())
+        JR.put(this, :uniformTextureUnitOpenGLProcessor, NullOpenGLTextureProcessor.jm_getInstance())
+        JR.put(this, :programHandle, 0)
+    nil
+  end
 
 
-new(RequiresOpenGLVersion, ShaderArray, CompositeShaderUpdater, ShaderInitializer, ModelViewProjection, ColorOpenGLProcessor, VertexOpenGLProcessor, DisableProgramShaderOpenGLProcessor) when (is_list(RequiresOpenGLVersion) orelse RequiresOpenGLVersion =:= undefined), (is_tuple(ShaderArray) orelse ShaderArray =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, RequiresOpenGLVersion, ShaderArray, CompositeShaderUpdater, ShaderInitializer, ModelViewProjection, ColorOpenGLProcessor, VertexOpenGLProcessor, DisableProgramShaderOpenGLProcessor),
-    This.
+  def jinit(this, p_requiresOpenGLVersion, p_shaderArray, p_compositeShaderUpdater, p_shaderInitializer, p_modelViewProjection, p_colorOpenGLProcessor, p_vertexOpenGLProcessor, p_disableProgramShaderOpenGLProcessor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :requiresOpenGLVersion, p_requiresOpenGLVersion)
+      JR.lset(f, :shaderArray, p_shaderArray)
+      JR.lset(f, :compositeShaderUpdater, p_compositeShaderUpdater)
+      JR.lset(f, :shaderInitializer, p_shaderInitializer)
+      JR.lset(f, :modelViewProjection, p_modelViewProjection)
+      JR.lset(f, :colorOpenGLProcessor, p_colorOpenGLProcessor)
+      JR.lset(f, :vertexOpenGLProcessor, p_vertexOpenGLProcessor)
+      JR.lset(f, :disableProgramShaderOpenGLProcessor, p_disableProgramShaderOpenGLProcessor)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :requiresOpenGLVersion, JR.lget(f, :requiresOpenGLVersion))
+        JR.put(this, :shaderArray, JR.lget(f, :shaderArray))
+        JR.put(this, :shaderInitializer, JR.lget(f, :shaderInitializer))
+        JR.put(this, :compositeShaderUpdater, JR.lget(f, :compositeShaderUpdater))
+        JR.put(this, :modelViewProjection, JR.lget(f, :modelViewProjection))
+        JR.put(this, :colorOpenGLProcessor, JR.lget(f, :colorOpenGLProcessor))
+        JR.put(this, :vertexOpenGLProcessor, JR.lget(f, :vertexOpenGLProcessor))
+        JR.put(this, :disableProgramShaderOpenGLProcessor, JR.lget(f, :disableProgramShaderOpenGLProcessor))
+    end)
+  end
 
-'$init'(This, RequiresOpenGLVersion, ShaderArray, CompositeShaderUpdater, ShaderInitializer, ModelViewProjection, ColorOpenGLProcessor, VertexOpenGLProcessor, DisableProgramShaderOpenGLProcessor) when (is_list(RequiresOpenGLVersion) orelse RequiresOpenGLVersion =:= undefined), (is_tuple(ShaderArray) orelse ShaderArray =:= undefined) ->
-    init_fields(This),
-        put({This, requiresOpenGLVersion}, RequiresOpenGLVersion),
-        put({This, shaderArray}, ShaderArray),
-        put({This, shaderInitializer}, ShaderInitializer),
-        put({This, compositeShaderUpdater}, CompositeShaderUpdater),
-        put({This, modelViewProjection}, ModelViewProjection),
-        put({This, colorOpenGLProcessor}, ColorOpenGLProcessor),
-        put({This, vertexOpenGLProcessor}, VertexOpenGLProcessor),
-        put({This, disableProgramShaderOpenGLProcessor}, DisableProgramShaderOpenGLProcessor).
+  def jnew(p_requiresOpenGLVersion, p_shaderArray, p_compositeShaderUpdater, p_shaderInitializer, p_modelViewProjection, p_colorOpenGLProcessor, p_vertexOpenGLProcessor, p_disableProgramShaderOpenGLProcessor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_requiresOpenGLVersion, p_shaderArray, p_compositeShaderUpdater, p_shaderInitializer, p_modelViewProjection, p_colorOpenGLProcessor, p_vertexOpenGLProcessor, p_disableProgramShaderOpenGLProcessor)
+    this
+  end
 
-init(This, Gl) ->
-        put({This, programHandle}, (get({get({This, shaderInitializer}), '$class'})):init(get({This, shaderInitializer}), Gl, get({This, shaderArray}), (fun(Target_N67170) -> (get({Target_N67170, '$class'})):getArrayInstance(Target_N67170) end)('StringUtil':getInstance()))).
+
+  def jm_init(this, p_gl) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+        JR.put(this, :programHandle, JR.call(JR.get(this, :shaderInitializer), :jm_init, [JR.lget(f, :gl), JR.get(this, :shaderArray), JR.call(StringUtil.jm_getInstance(), :jm_getArrayInstance, [])]))
+    end)
+  end
+end
+
 

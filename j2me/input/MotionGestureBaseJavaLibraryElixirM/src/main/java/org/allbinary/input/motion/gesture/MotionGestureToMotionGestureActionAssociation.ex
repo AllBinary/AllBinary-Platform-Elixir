@@ -1,67 +1,114 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion.gesture
-% import org.allbinary.game.input.CompleteMotionGestureInputEvent
-% import org.allbinary.util.BasicArrayList
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture
 
--module('MotionGestureToMotionGestureActionAssociation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule MotionGestureToMotionGestureActionAssociation do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, list}, undefined),
-    put({This, motionGestureAction}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :list, nil)
+    JR.put(this, :motionGestureAction, nil)
+        
+        
+    nil
+  end
 
 
-new(List, CommandAction) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, List, CommandAction),
-    This.
+  def jinit(this, p_list, p_commandAction) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :list, p_list)
+      JR.lset(f, :commandAction, p_commandAction)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :list, JR.lget(f, :list))
+        JR.put(this, :motionGestureAction, JR.lget(f, :commandAction))
+    end)
+  end
 
-'$init'(This, List, CommandAction) ->
-    init_fields(This),
-        put({This, list}, List),
-        put({This, motionGestureAction}, CommandAction).
+  def jnew(p_list, p_commandAction) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_list, p_commandAction)
+    this
+  end
 
-getMotionGesture(This) ->
-        get({This, list}).
 
-setMotionGestures(This, List) ->
-        put({This, list}, List).
+  def jm_getMotionGesture(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :list)})
+    end)
+  end
 
-getCommandAction(This) ->
-        get({This, motionGestureAction}).
 
-setMotionGestureAction(This, CommandAction) ->
-        put({This, motionGestureAction}, CommandAction).
+  def jm_setMotionGestures(this, p_list) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :list, p_list)
+        JR.put(this, :list, JR.lget(f, :list))
+    end)
+  end
 
-isMotionGestureArrayEquals(This, AList) ->
-        try
-        Size = (get({AList, '$class'})):size(AList),
-        case ((get({get({This, list}), '$class'})):size(get({This, list})) =/= Size) of
-            true ->
-            throw({'$return', false});
-            false -> ok
-        end,
-        lists:foreach(fun(I) ->
-            case (array:get(I, get({AList, objectArray})) =/= array:get(I, get({get({This, list}), objectArray}))) of
-                true ->
-                throw({'$return', false});
-                false -> ok
+
+  def jm_getCommandAction(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :motionGestureAction)})
+    end)
+  end
+
+
+  def jm_setMotionGestureAction(this, p_commandAction) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :commandAction, p_commandAction)
+        JR.put(this, :motionGestureAction, JR.lget(f, :commandAction))
+    end)
+  end
+
+
+  def jm_isMotionGestureArrayEquals(this, p_aList) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :aList, p_aList)
+        JR.lset(f, :size, JR.call(JR.lget(f, :aList), :jm_size, []))
+        if (JR.call(JR.get(this, :list), :jm_size, []) != JR.lget(f, :size)) do
+            throw({:jreturn, false})
+        end
+        JR.lset(f, :i, JR.int32(JR.lget(f, :size) - 1))
+        JR.jfor(fn -> (JR.lget(f, :i) >= 0) end, fn -> JR.lpostinc(f, :i, -1) end, fn ->
+            if (JR.aget(JR.get(JR.lget(f, :aList), :objectArray), JR.lget(f, :i)) != JR.aget(JR.get(JR.get(this, :list), :objectArray), JR.lget(f, :i))) do
+                throw({:jreturn, false})
             end
-        end, lists:seq((Size - 1), 0, -1)),
-        true
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        end)
+        throw({:jreturn, true})
+    end)
+  end
+end
+
 

@@ -1,46 +1,72 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2025 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.image.opengles
-% import javax.microedition.khronos.opengles.GL10
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2025 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.image.opengles
 
--module('OpenGLESDeviceImageTranslate').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule OpenGLESDeviceImageTranslate do
+  def jsuper(), do: OpenGLESImageTranslate
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('OpenGLESImageTranslate', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :translateX, 0.0)
+    JR.put(this, :translateY, 0.0)
+    JR.put(this, :translateX2, 0.0)
+    JR.put(this, :translateY2, 0.0)
+        JR.put(this, :translateX, 0.0)
+        JR.put(this, :translateY, 0.0)
+        JR.put(this, :translateX2, 0.0)
+        JR.put(this, :translateY2, 0.0)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, translateX}, 0.0),
-    put({This, translateY}, 0.0),
-    put({This, translateX2}, 0.0),
-    put({This, translateY2}, 0.0),
-    ok.
+  def jinit(this) do
+    OpenGLESImageTranslate.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    'OpenGLESImageTranslate':'$init'(This),
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-translate(This, Gl, OpenGLESImage, X, Y) when is_number(X), is_number(Y) ->
-        (get({get({OpenGLESImage, imageProcessor}), '$class'})):translate(get({OpenGLESImage, imageProcessor}), Gl, (get({This, translateX}) + ((get({get({OpenGLESImage, openGLESImageProperties}), scaleX}) * X))), (get({This, translateY}) + ((get({get({OpenGLESImage, openGLESImageProperties}), scaleY}) * Y)))).
+  def jm_translate(this, p_gl, p_openGLESImage, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+      JR.lset(f, :openGLESImage, p_openGLESImage)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        JR.call(JR.get(JR.lget(f, :openGLESImage), :imageProcessor), :jm_translate, [JR.lget(f, :gl), (JR.get(this, :translateX) + ((JR.get(JR.get(JR.lget(f, :openGLESImage), :openGLESImageProperties), :scaleX) * JR.lget(f, :x)))), (JR.get(this, :translateY) + ((JR.get(JR.get(JR.lget(f, :openGLESImage), :openGLESImageProperties), :scaleY) * JR.lget(f, :y))))])
+    end)
+  end
 
-translate2(This, Gl, OpenGLESImage) ->
-        (get({get({OpenGLESImage, imageProcessor}), '$class'})):translate(get({OpenGLESImage, imageProcessor}), Gl, get({This, translateX2}), get({This, translateY2})).
+
+  def jm_translate2(this, p_gl, p_openGLESImage) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+      JR.lset(f, :openGLESImage, p_openGLESImage)
+        JR.call(JR.get(JR.lget(f, :openGLESImage), :imageProcessor), :jm_translate, [JR.lget(f, :gl), JR.get(this, :translateX2), JR.get(this, :translateY2)])
+    end)
+  end
+end
+
 

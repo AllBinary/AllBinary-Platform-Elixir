@@ -1,79 +1,110 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer.resources
-% import org.allbinary.game.configuration.GameConfigurationCentral
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer.resources
 
--module('BasicGameResources').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule BasicGameResources do
+  def jsuper(), do: JObject
+def jstatic_stringBuffer(), do: JR.static_get(__MODULE__, :stringBuffer, fn -> StringMaker.jnew() end)
+  def jstatic_set_stringBuffer(value), do: JR.static_put(__MODULE__, :stringBuffer, value)
 
-static_init() ->
-    put({?MODULE, stringBuffer}, 'StringMaker':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :RESOURCE, nil)
+    JR.put(this, :RESOURCE_DESTROY, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :RESOURCE, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+        JR.put(this, :RESOURCE_DESTROY, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, 'RESOURCE'}, get({'StringUtil':getInstance(), 'EMPTY_STRING'})),
-    put({This, 'RESOURCE_DESTROY'}, get({'StringUtil':getInstance(), 'EMPTY_STRING'})),
-    ok.
+
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
+
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This),
-        ok.
-
-init(This, ROOT, SIZE) when (is_list(ROOT) orelse ROOT =:= undefined), (is_tuple(SIZE) orelse SIZE =:= undefined) ->
-        try
-            Scale = (fun(Target_N65991) -> (get({Target_N65991, '$class'})):intValue(Target_N65991) end)((fun(Target_N65998) -> (get({Target_N65998, '$class'})):getValue(Target_N65998) end)(get({'GameConfigurationCentral':getInstance(), 'SCALE'}))),
-            case ((Scale > 1) andalso ((Scale - 1) < array:size(SIZE))) of
-                true ->
-                (get({This, '$class'})):append(This, ROOT, array:get((Scale - 1), SIZE));
-                false ->
-                erlang:error({'Exception', (fun(Target_N66127) -> (get({Target_N66127, '$class'})):toString(Target_N66127) end)((fun(Target_N66134) -> (get({Target_N66134, '$class'})):appendint(Target_N66134, Scale) end)((fun(Target_N66141) -> (get({Target_N66141, '$class'})):append(Target_N66141, "Invalid Value: ") end)('StringMaker':new())))})
+  def jm_init(this, p_ROOT, p_SIZE) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ROOT, p_ROOT)
+      JR.lset(f, :SIZE, p_SIZE)
+        try do
+            JR.lset(f, :scale, JR.call(JR.call(JR.get(GameConfigurationCentral.jm_getInstance(), :SCALE), :jm_getValue, []), :jm_intValue, []))
+            if ((JR.lget(f, :scale) > 1) && (JR.int32(JR.lget(f, :scale) - 1) < JR.alength(JR.lget(f, :SIZE)))) do
+                JR.call(this, :jm_append, [JR.lget(f, :ROOT), JR.aget(JR.lget(f, :SIZE), JR.int32(JR.lget(f, :scale) - 1))])
+            else
+                throw({:jexception, JR.exception("Exception", JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["Invalid Value: "]), :jm_appendint, [JR.lget(f, :scale)]), :jm_toString, []))})
             end
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), This, get({CommonStrings, 'INIT'}), E)
-        end.
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, JR.get(JR.lget(f, :commonStrings), :INIT), JR.lget(f, :e)])
+        end
+    end)
+  end
 
-% throws Exception
-append(This, ROOT, SizeString) when (is_list(ROOT) orelse ROOT =:= undefined), (is_list(SizeString) orelse SizeString =:= undefined) ->
-        DESTROY = "_destroy",
-        String = (get({This, '$class'})):getString(This),
-        (get({get({'BasicGameResources', stringBuffer}), '$class'})):delete(get({'BasicGameResources', stringBuffer}), 0, (get({get({'BasicGameResources', stringBuffer}), '$class'})):length(get({'BasicGameResources', stringBuffer}))),
-        (get({get({'BasicGameResources', stringBuffer}), '$class'})):append(get({'BasicGameResources', stringBuffer}), ROOT),
-        (get({get({'BasicGameResources', stringBuffer}), '$class'})):append(get({'BasicGameResources', stringBuffer}), String),
-        (get({get({'BasicGameResources', stringBuffer}), '$class'})):append(get({'BasicGameResources', stringBuffer}), SizeString),
-        put({This, 'RESOURCE'}, (get({get({'BasicGameResources', stringBuffer}), '$class'})):toString(get({'BasicGameResources', stringBuffer}))),
-        (get({get({'BasicGameResources', stringBuffer}), '$class'})):delete(get({'BasicGameResources', stringBuffer}), 0, (get({get({'BasicGameResources', stringBuffer}), '$class'})):length(get({'BasicGameResources', stringBuffer}))),
-        (get({get({'BasicGameResources', stringBuffer}), '$class'})):append(get({'BasicGameResources', stringBuffer}), ROOT),
-        (get({get({'BasicGameResources', stringBuffer}), '$class'})):append(get({'BasicGameResources', stringBuffer}), DESTROY),
-        (get({get({'BasicGameResources', stringBuffer}), '$class'})):append(get({'BasicGameResources', stringBuffer}), String),
-        (get({get({'BasicGameResources', stringBuffer}), '$class'})):append(get({'BasicGameResources', stringBuffer}), SizeString),
-        put({This, 'RESOURCE_DESTROY'}, (get({get({'BasicGameResources', stringBuffer}), '$class'})):toString(get({'BasicGameResources', stringBuffer}))).
 
-% throws Exception
-getString(This) ->
-        (fun(Target_N67107) -> (get({Target_N67107, '$class'})):getName(Target_N67107) end)('GameGraphicsResourceUtil':getInstance()).
+  def jm_append(this, p_ROOT, p_sizeString) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ROOT, p_ROOT)
+      JR.lset(f, :sizeString, p_sizeString)
+        JR.lset(f, :DESTROY, "_destroy")
+        JR.lset(f, :string, JR.call(this, :jm_getString, []))
+        JR.call(BasicGameResources.jstatic_stringBuffer(), :jm_delete, [0, JR.call(BasicGameResources.jstatic_stringBuffer(), :jm_length, [])])
+        JR.call(BasicGameResources.jstatic_stringBuffer(), :jm_append, [JR.lget(f, :ROOT)])
+        JR.call(BasicGameResources.jstatic_stringBuffer(), :jm_append, [JR.lget(f, :string)])
+        JR.call(BasicGameResources.jstatic_stringBuffer(), :jm_append, [JR.lget(f, :sizeString)])
+        JR.put(this, :RESOURCE, JR.call(BasicGameResources.jstatic_stringBuffer(), :jm_toString, []))
+        JR.call(BasicGameResources.jstatic_stringBuffer(), :jm_delete, [0, JR.call(BasicGameResources.jstatic_stringBuffer(), :jm_length, [])])
+        JR.call(BasicGameResources.jstatic_stringBuffer(), :jm_append, [JR.lget(f, :ROOT)])
+        JR.call(BasicGameResources.jstatic_stringBuffer(), :jm_append, [JR.lget(f, :DESTROY)])
+        JR.call(BasicGameResources.jstatic_stringBuffer(), :jm_append, [JR.lget(f, :string)])
+        JR.call(BasicGameResources.jstatic_stringBuffer(), :jm_append, [JR.lget(f, :sizeString)])
+        JR.put(this, :RESOURCE_DESTROY, JR.call(BasicGameResources.jstatic_stringBuffer(), :jm_toString, []))
+    end)
+  end
+
+
+  def jm_getString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(GameGraphicsResourceUtil.jm_getInstance(), :jm_getName, [])})
+    end)
+  end
+end
+
 

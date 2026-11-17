@@ -1,71 +1,90 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.system.security.crypt.jcehelper
-% import java.security.spec.KeySpec
-% import javax.crypto.spec.DESKeySpec
-% import javax.crypto.spec.DESedeKeySpec
-% import org.allbinary.TsUtil
-% import org.allbinary.logic.communication.log.PreLogUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.crypt.jcehelper
 
--module('KeySpecFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule KeySpecFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> KeySpecFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'KeySpecFactory':new()),
-    ok.
-
-init_fields(This) ->
-    put({This, 'DES'}, "DES"),
-    put({This, 'DESEDE'}, "DESede"),
-    put({This, 'BLOWFISH'}, "Blowfish"),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :DES, nil)
+    JR.put(this, :DESEDE, nil)
+    JR.put(this, :BLOWFISH, nil)
+        JR.put(this, :DES, "DES")
+        JR.put(this, :DESEDE, "DESede")
+        JR.put(this, :BLOWFISH, "Blowfish")
+    nil
+  end
 
 
-getInstance() ->
-        get({'KeySpecFactory', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, KeySpecFactory.jstatic_instance()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-getInstance(This, Algorithm, KeyData) when (is_list(Algorithm) orelse Algorithm =:= undefined), (is_tuple(KeyData) orelse KeyData =:= undefined) ->
-        try
-        try
-            TsUtil = 'TsUtil':getInstance(),
-            case ((get({TsUtil, '$class'})):compareTo(TsUtil, Algorithm, get({This, 'DES'})) =:= 0) of
-                true ->
-                throw({'$return', 'DESKeySpec':new(KeyData)});
-                false ->
-                case ((get({TsUtil, '$class'})):compareTo(TsUtil, Algorithm, get({This, 'DESEDE'})) =:= 0) of
-                true ->
-                throw({'$return', 'DESedeKeySpec':new(KeyData)});
-                false ->
-                erlang:error({'RuntimeException'})
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+
+
+  def jm_getInstance(this, p_algorithm, p_keyData) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :algorithm, p_algorithm)
+      JR.lset(f, :keyData, p_keyData)
+        try do
+            JR.lset(f, :tsUtil, TsUtil.jm_getInstance())
+            if (JR.call(JR.lget(f, :tsUtil), :jm_compareTo, [JR.lget(f, :algorithm), JR.get(this, :DES)]) == 0) do
+                throw({:jreturn, DESKeySpec.jnew(JR.lget(f, :keyData))})
+            else
+                if (JR.call(JR.lget(f, :tsUtil), :jm_compareTo, [JR.lget(f, :algorithm), JR.get(this, :DESEDE)]) == 0) do
+                throw({:jreturn, DESedeKeySpec.jnew(JR.lget(f, :keyData))})
+            else
+                throw({:jexception, JR.exception("RuntimeException", "")})
             end
             end
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            'PreLogUtil':putOE(get({CommonStrings, 'EXCEPTION'}), This, get({CommonStrings, 'GET_INSTANCE'}), E),
-            erlang:error({'RuntimeException'})
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            PreLogUtil.jm_putOE(JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, JR.get(JR.lget(f, :commonStrings), :GET_INSTANCE), JR.lget(f, :e))
+            throw({:jexception, JR.exception("RuntimeException", "")})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
+end
+
 

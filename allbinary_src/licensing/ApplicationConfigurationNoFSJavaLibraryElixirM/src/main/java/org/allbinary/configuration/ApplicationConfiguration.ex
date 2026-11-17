@@ -1,112 +1,188 @@
-% Generated Code Do Not Modify
-% package org.allbinary.configuration
-% import org.allbinary.game.configuration.feature.Feature
-% import org.allbinary.game.configuration.feature.Features
-% import org.allbinary.game.configuration.feature.MainFeatureFactory
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonStrings
+# Generated Code Do Not Modify
+# package org.allbinary.configuration
 
--module('ApplicationConfiguration').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule ApplicationConfiguration do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT) end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, get({'NullUtil':getInstance(), 'NULL_OBJECT'})),
-    ok.
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, fullscreen}, true),
-    put({This, showTitleBar}, false),
-    put({This, progressBarView}, false),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :fullscreen, false)
+    JR.put(this, :showTitleBar, false)
+    JR.put(this, :progressBarView, false)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :fullscreen, true)
+        JR.put(this, :showTitleBar, false)
+        JR.put(this, :progressBarView, false)
+    nil
+  end
 
 
-getInstance() ->
-        case (get({'ApplicationConfiguration', instance}) =:= get({'NullUtil':getInstance(), 'NULL_OBJECT'})) of
-            true ->
-            put({'ApplicationConfiguration', instance}, 'ApplicationConfiguration':new());
-            false -> ok
-        end,
-        get({'ApplicationConfiguration', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        if (ApplicationConfiguration.jstatic_instance() == JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)) do
+            ApplicationConfiguration.jstatic_set_instance(ApplicationConfiguration.jnew())
+        end
+        throw({:jreturn, ApplicationConfiguration.jstatic_instance()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-    init_fields(This),
-        try
-            (get({This, '$class'})):read(This)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), This, get({CommonStrings, 'CONSTRUCTOR'}), E)
-        end.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        try do
+            JR.call(this, :jm_read, [])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, JR.get(JR.lget(f, :commonStrings), :CONSTRUCTOR), JR.lget(f, :e)])
+        end
+    end)
+  end
 
-% throws Exception
-read(This) ->
-        (get({This, '$class'})):setFullscreen(This, true),
-        (get({This, '$class'})):setProgressBarView(This, false),
-        (get({This, '$class'})):setShowTitleBar(This, false),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), lists:concat(["Read Configuration: ", (get({This, '$class'})):toString(This)]), This, "read").
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-% throws Exception
-write(This) ->
-        ok.
 
-% throws Exception
-update(This, GameFeature) ->
-        case (GameFeature =:= get({'MainFeatureFactory':getInstance(), 'FULL_SCREEN'})) of
-            true ->
-            Features = 'Features':getInstance(),
-            case (get({Features, '$class'})):isFeature(Features, GameFeature) of
-                true ->
-                case (not (get({This, '$class'})):isFullscreen(This)) of
-                    true ->
-                    (get({This, '$class'})):setFullscreen(This, true),
-                    (get({This, '$class'})):write(This);
-                    false -> ok
-                end;
-                false ->
-                case (get({This, '$class'})):isFullscreen(This) of
-                    true ->
-                    (get({This, '$class'})):setFullscreen(This, false),
-                    (get({This, '$class'})):write(This);
-                    false -> ok
+  def jm_read(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_setFullscreen, [true])
+        JR.call(this, :jm_setProgressBarView, [false])
+        JR.call(this, :jm_setShowTitleBar, [false])
+        JR.call(JR.get(this, :logUtil), :jm_putF, ["Read Configuration: " <> JR.call(this, :jm_toString, []), this, "read"])
+    end)
+  end
+
+
+  def jm_write(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_update(this, p_gameFeature) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameFeature, p_gameFeature)
+        if (JR.lget(f, :gameFeature) == JR.get(MainFeatureFactory.jm_getInstance(), :FULL_SCREEN)) do
+            JR.lset(f, :features, Features.jm_getInstance())
+            if JR.call(JR.lget(f, :features), :jm_isFeature, [JR.lget(f, :gameFeature)]) do
+                if !JR.call(this, :jm_isFullscreen, []) do
+                    JR.call(this, :jm_setFullscreen, [true])
+                    JR.call(this, :jm_write, [])
                 end
-            end;
-            false -> ok
-        end.
+            else
+                if JR.call(this, :jm_isFullscreen, []) do
+                    JR.call(this, :jm_setFullscreen, [false])
+                    JR.call(this, :jm_write, [])
+                end
+            end
+        end
+    end)
+  end
 
-setFullscreen(This, Fullscreen) when is_boolean(Fullscreen) ->
-        put({This, fullscreen}, Fullscreen).
 
-isFullscreen(This) ->
-        get({This, fullscreen}).
+  def jm_setFullscreen(this, p_fullscreen) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :fullscreen, p_fullscreen)
+        JR.put(this, :fullscreen, JR.lget(f, :fullscreen))
+    end)
+  end
 
-setShowTitleBar(This, ShowTitleBar) when is_boolean(ShowTitleBar) ->
-        put({This, showTitleBar}, ShowTitleBar).
 
-isShowTitleBar(This) ->
-        get({This, showTitleBar}).
+  def jm_isFullscreen(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :fullscreen)})
+    end)
+  end
 
-setProgressBarView(This, ProgressBarView) when is_boolean(ProgressBarView) ->
-        put({This, progressBarView}, ProgressBarView).
 
-isProgressBarView(This) ->
-        get({This, progressBarView}).
+  def jm_setShowTitleBar(this, p_showTitleBar) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :showTitleBar, p_showTitleBar)
+        JR.put(this, :showTitleBar, JR.lget(f, :showTitleBar))
+    end)
+  end
 
-toString(This) ->
-        StringBuffer = 'StringMaker':new(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, "isFullscreen: "),
-        (get({StringBuffer, '$class'})):appendboolean(StringBuffer, (get({This, '$class'})):isFullscreen(This)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, " isProgressBarView: "),
-        (get({StringBuffer, '$class'})):appendboolean(StringBuffer, (get({This, '$class'})):isProgressBarView(This)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, " isShowTitleBar: "),
-        (get({StringBuffer, '$class'})):appendboolean(StringBuffer, (get({This, '$class'})):isShowTitleBar(This)),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+
+  def jm_isShowTitleBar(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :showTitleBar)})
+    end)
+  end
+
+
+  def jm_setProgressBarView(this, p_progressBarView) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :progressBarView, p_progressBarView)
+        JR.put(this, :progressBarView, JR.lget(f, :progressBarView))
+    end)
+  end
+
+
+  def jm_isProgressBarView(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :progressBarView)})
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, ["isFullscreen: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendboolean, [JR.call(this, :jm_isFullscreen, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [" isProgressBarView: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendboolean, [JR.call(this, :jm_isProgressBarView, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [" isShowTitleBar: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendboolean, [JR.call(this, :jm_isShowTitleBar, [])])
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+end
+
 

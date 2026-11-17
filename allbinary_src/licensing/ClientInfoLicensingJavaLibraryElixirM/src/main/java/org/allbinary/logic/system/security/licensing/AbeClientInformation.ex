@@ -1,65 +1,78 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.system.security.licensing
-% import org.allbinary.business.init.LicenseInitInfo
-% import org.allbinary.business.init.LicenseInitInfoUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.communication.log.PreLogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringValidationUtil
-% import org.allbinary.logic.system.os.OperatingSystemFactory
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.licensing
 
--module('AbeClientInformation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+# This is the information sent to the license server
+defmodule AbeClientInformation do
+  def jsuper(), do: ClientInformation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ClientInformation', Function, Arguments).
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+    nil
+  end
 
 
-new(Name, Version, SpecialName, ShortName) when (is_list(Name) orelse Name =:= undefined), (is_list(Version) orelse Version =:= undefined), (is_list(SpecialName) orelse SpecialName =:= undefined), (is_list(ShortName) orelse ShortName =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Name, Version, SpecialName, ShortName),
-    This.
+  def jinit(this, p_name, p_version, p_specialName, p_shortName) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :version, p_version)
+      JR.lset(f, :specialName, p_specialName)
+      JR.lset(f, :shortName, p_shortName)
+        ClientInformation.jinit(this, JR.lget(f, :name), JR.lget(f, :version), JR.lget(f, :specialName), JR.lget(f, :shortName))
+        AbeClientInformation.jinitfields(this)
+    end)
+  end
 
-'$init'(This, Name, Version, SpecialName, ShortName) when (is_list(Name) orelse Name =:= undefined), (is_list(Version) orelse Version =:= undefined), (is_list(SpecialName) orelse SpecialName =:= undefined), (is_list(ShortName) orelse ShortName =:= undefined) ->
-        'ClientInformation':'$init'(This, Name, Version, SpecialName, ShortName),
-        init_fields(This).
+  def jnew(p_name, p_version, p_specialName, p_shortName) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_name, p_version, p_specialName, p_shortName)
+    this
+  end
 
-init(This) ->
-        try
-            (get({This, '$class'})):setOperatingSystemInterface(This, (fun(Target_N66100) -> (get({Target_N66100, '$class'})):getOperatingSystemInstance(Target_N66100) end)('OperatingSystemFactory':getInstance())),
-            LicenseInitInfo = (fun(Target_N66145) -> (get({Target_N66145, '$class'})):read(Target_N66145) end)('LicenseInitInfoUtil':getInstance()),
-            (get({This, '$class'})):setLicenseId(This, (get({LicenseInitInfo, '$class'})):getLicenseId(LicenseInitInfo)),
-            (get({This, '$class'})):setLicenseServers(This, (get({LicenseInitInfo, '$class'})):getServerList(LicenseInitInfo)),
-            StringValidationUtil = 'StringValidationUtil':getInstance(),
-            case (get({StringValidationUtil, '$class'})):isEmpty(StringValidationUtil, (get({This, '$class'})):getLicenseId(This)) of
-                true ->
-                NONE = "No License Id",
-                (get({This, '$class'})):setLicenseId(This, NONE);
-                false -> ok
-            end,
-            put({local, commonStrings}, 'CommonStrings':getInstance()),
-            'PreLogUtil':put((fun(Target_N66478) -> (get({Target_N66478, '$class'})):toString(Target_N66478) end)((fun(Target_N66485) -> (get({Target_N66485, '$class'})):append(Target_N66485, (get({This, '$class'})):getSpecialName(This)) end)((fun(Target_N66492) -> (get({Target_N66492, '$class'})):append(Target_N66492, "Special Name: ") end)('StringMaker':new()))), This, get({get({local, commonStrings}), 'CONSTRUCTOR'}))
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            LogUtil = 'LogUtil':getInstance(),
-            put({local, commonStrings}, 'CommonStrings':getInstance()),
-            (get({LogUtil, '$class'})):put(LogUtil, get({get({local, commonStrings}), 'EXCEPTION'}), This, get({get({local, commonStrings}), 'CONSTRUCTOR'}), E)
-        end.
+
+  def jm_init(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        try do
+            JR.call(this, :jm_setOperatingSystemInterface, [JR.call(OperatingSystemFactory.jm_getInstance(), :jm_getOperatingSystemInstance, [])])
+            JR.lset(f, :licenseInitInfo, JR.call(LicenseInitInfoUtil.jm_getInstance(), :jm_read, []))
+            JR.call(this, :jm_setLicenseId, [JR.call(JR.lget(f, :licenseInitInfo), :jm_getLicenseId, [])])
+            JR.call(this, :jm_setLicenseServers, [JR.call(JR.lget(f, :licenseInitInfo), :jm_getServerList, [])])
+            JR.lset(f, :stringValidationUtil, StringValidationUtil.jm_getInstance())
+            if JR.call(JR.lget(f, :stringValidationUtil), :jm_isEmpty, [JR.call(this, :jm_getLicenseId, [])]) do
+                JR.lset(f, :NONE, "No License Id")
+                JR.call(this, :jm_setLicenseId, [JR.lget(f, :NONE)])
+            end
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            PreLogUtil.jm_put(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["Special Name: "]), :jm_append, [JR.call(this, :jm_getSpecialName, [])]), :jm_toString, []), this, JR.get(JR.lget(f, :commonStrings), :CONSTRUCTOR))
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :logUtil, LogUtil.jm_getInstance())
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.lget(f, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, JR.get(JR.lget(f, :commonStrings), :CONSTRUCTOR), JR.lget(f, :e)])
+        end
+    end)
+  end
+end
+
 

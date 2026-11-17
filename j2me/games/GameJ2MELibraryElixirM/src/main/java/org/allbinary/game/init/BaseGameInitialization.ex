@@ -1,173 +1,236 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.init
-% import javax.microedition.lcdui.CommandListener
-% import org.allbinary.animation.FeaturedAnimationInterfaceFactoryInterfaceFactory
-% import org.allbinary.game.configuration.GameConfigurationCentral
-% import org.allbinary.game.configuration.event.ChangedGameFeatureListener
-% import org.allbinary.game.configuration.feature.InputFeatureFactory
-% import org.allbinary.game.configuration.feature.MainFeatureFactory
-% import org.allbinary.game.input.PlatformInputMappingFactory
-% import org.allbinary.game.input.event.GameKeyEventFactory
-% import org.allbinary.game.resource.FeaturedResourceRelativeRelationshipFactory
-% import org.allbinary.game.resource.ResourceInitialization
-% import org.allbinary.game.resource.ResourceLoadingLevelFactory
-% import org.allbinary.graphics.canvas.transition.progress.ProgressCanvas
-% import org.allbinary.graphics.canvas.transition.progress.ProgressCanvasFactory
-% import org.allbinary.image.GameFeatureImageCacheFactory
-% import org.allbinary.input.motion.CompleteMotionGestureInputToGameMotionGestureInput
-% import org.allbinary.input.motion.button.BasicTouchInputFactory
-% import org.allbinary.input.motion.button.CancelTouchButtonInputFactory
-% import org.allbinary.logic.system.security.licensing.AbeClientInformationInterface
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.init
 
--module('BaseGameInitialization').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements GameInitializationInterface
+defmodule BaseGameInitialization do
+  def jsuper(), do: JObject
+def jstatic_NULL_BASE_GAME_INITIALIZATION(), do: JR.static_get(__MODULE__, :NULL_BASE_GAME_INITIALIZATION, fn -> BaseGameInitialization.jnew(JR.anew(0, nil), 0) end)
+  def jstatic_set_NULL_BASE_GAME_INITIALIZATION(value), do: JR.static_put(__MODULE__, :NULL_BASE_GAME_INITIALIZATION, value)
 
-static_init() ->
-    put({?MODULE, 'NULL_BASE_GAME_INITIALIZATION'}, 'BaseGameInitialization':new(array:new(0, {default, undefined}), 0)),
-    ok.
-
-init_fields(This) ->
-    put({This, resourceInitializationArray}, undefined),
-    put({This, portion}, 0),
-    put({This, initialized}, false),
-    put({This, 'EARLY_RESOURCES'}, 0),
-    put({This, 'GAME_RESOURCES'}, 1),
-    put({This, 'EARLY_CHANGABLE_RESOURCES'}, 2),
-    put({This, 'GAME_CHANGABLE_RESOURCES'}, 3),
-    put({This, gameInitialized}, false),
-    put({This, allLoaded}, false),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :resourceInitializationArray, nil)
+    JR.put(this, :portion, 0)
+    JR.put(this, :initialized, false)
+    JR.put(this, :EARLY_RESOURCES, 0)
+    JR.put(this, :GAME_RESOURCES, 0)
+    JR.put(this, :EARLY_CHANGABLE_RESOURCES, 0)
+    JR.put(this, :GAME_CHANGABLE_RESOURCES, 0)
+    JR.put(this, :gameInitialized, false)
+    JR.put(this, :allLoaded, false)
+        
+        
+        JR.put(this, :initialized, false)
+        JR.put(this, :EARLY_RESOURCES, 0)
+        JR.put(this, :GAME_RESOURCES, 1)
+        JR.put(this, :EARLY_CHANGABLE_RESOURCES, 2)
+        JR.put(this, :GAME_CHANGABLE_RESOURCES, 3)
+        JR.put(this, :gameInitialized, false)
+        JR.put(this, :allLoaded, false)
+    nil
+  end
 
 
-new(ResourceInitializationArray, Portion) when (is_tuple(ResourceInitializationArray) orelse ResourceInitializationArray =:= undefined), is_integer(Portion) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, ResourceInitializationArray, Portion),
-    This.
+  def jinit(this, p_resourceInitializationArray, p_portion) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :resourceInitializationArray, p_resourceInitializationArray)
+      JR.lset(f, :portion, p_portion)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :resourceInitializationArray, JR.lget(f, :resourceInitializationArray))
+        JR.put(this, :portion, JR.lget(f, :portion))
+    end)
+  end
 
-'$init'(This, ResourceInitializationArray, Portion) when (is_tuple(ResourceInitializationArray) orelse ResourceInitializationArray =:= undefined), is_integer(Portion) ->
-    init_fields(This),
-        put({This, resourceInitializationArray}, ResourceInitializationArray),
-        put({This, portion}, Portion).
+  def jnew(p_resourceInitializationArray, p_portion) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_resourceInitializationArray, p_portion)
+    this
+  end
 
-% throws Exception
-initKey(This, Portion) when is_integer(Portion) ->
-        ok.
 
-% throws Exception
-initKeyMapping(This, AbeClientInformation, Portion) when is_integer(Portion) ->
-        case (fun(Target_N66683) -> (get({Target_N66683, '$class'})):isChangedFeature(Target_N66683, get({'InputFeatureFactory':getInstance(), 'INPUT_MAPPING'})) end)('ChangedGameFeatureListener':getInstance()) of
-            true ->
-            (fun(Target_N66742) -> (get({Target_N66742, '$class'})):init(Target_N66742, AbeClientInformation) end)((fun(Target_N66749) -> (get({Target_N66749, '$class'})):getPersistentInputMappingInstance(Target_N66749) end)('PlatformInputMappingFactory':getInstance())),
-            (fun(Target_N66789) -> (get({Target_N66789, '$class'})):addNormalPortion(Target_N66789, 50, "Game Keys") end)('ProgressCanvasFactory':getInstance()),
-            (fun(Target_N66828) -> (get({Target_N66828, '$class'})):remove(Target_N66828, get({'InputFeatureFactory':getInstance(), 'INPUT_MAPPING'})) end)('ChangedGameFeatureListener':getInstance());
-            false -> ok
-        end.
+  def jm_initKey(this, p_portion) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :portion, p_portion)
+        nil
+    end)
+  end
 
-% throws Exception
-init(This, AbeClientInformation, CommandListener, Level) when is_integer(Level) ->
-        ResourceLoadingLevelFactory = 'ResourceLoadingLevelFactory':getInstance(),
-        case ((not (get({This, '$class'})):isInitialized(This)) andalso (((Level =:= (get({get({ResourceLoadingLevelFactory, 'LOAD_ALL'}), '$class'})):getLevel(get({ResourceLoadingLevelFactory, 'LOAD_ALL'}))) orelse (Level =:= (get({get({ResourceLoadingLevelFactory, 'LOAD_EARLY'}), '$class'})):getLevel(get({ResourceLoadingLevelFactory, 'LOAD_EARLY'})))))) of
-            true ->
-            put({local, localPortion}, 40),
-            case (Level =:= (get({get({ResourceLoadingLevelFactory, 'LOAD_EARLY'}), '$class'})):getLevel(get({ResourceLoadingLevelFactory, 'LOAD_EARLY'}))) of
-                true ->
-                put({local, localPortion}, 8);
-                false -> ok
-            end,
-            (get({This, '$class'})):setInitialized(This, true),
-            (get({This, '$class'})):initKey(This, (get({This, '$class'})):getPortion(This)),
-            (get({This, '$class'})):initKeyMapping(This, AbeClientInformation, (get({This, '$class'})):getPortion(This)),
-            (fun(Target_N67312) -> (get({Target_N67312, '$class'})):init(Target_N67312) end)('GameKeyEventFactory':getInstance()),
-            ProgressCanvas = 'ProgressCanvasFactory':getInstance(),
-            (get({ProgressCanvas, '$class'})):addNormalPortion(ProgressCanvas, get({local, localPortion}), "Game Key Events"),
-            (fun(Target_N67425) -> (get({Target_N67425, '$class'})):init(Target_N67425, (fun(Target_N67450) -> (get({Target_N67450, '$class'})):getInputMapping(Target_N67450) end)((fun(Target_N67457) -> (get({Target_N67457, '$class'})):getPersistentInputMappingInstance(Target_N67457) end)('PlatformInputMappingFactory':getInstance()))) end)('BasicTouchInputFactory':getInstance()),
-            'CancelTouchButtonInputFactory':getInstance(),
-            (get({ProgressCanvas, '$class'})):addNormalPortion(ProgressCanvas, get({local, localPortion}), "Touch Input"),
-            (fun(Target_N67551) -> (get({Target_N67551, '$class'})):init(Target_N67551) end)('CompleteMotionGestureInputToGameMotionGestureInput':getInstance()),
-            (get({ProgressCanvas, '$class'})):addNormalPortion(ProgressCanvas, get({local, localPortion}), "Motion Input"),
-            'GameFeatureImageCacheFactory':init(),
-            (get({ProgressCanvas, '$class'})):addNormalPortion(ProgressCanvas, get({local, localPortion}), "Image Cache"),
-            (fun(Target_N67669) -> (get({Target_N67669, '$class'})):init(Target_N67669) end)(array:get(get({This, 'EARLY_RESOURCES'}), get({This, resourceInitializationArray})));
-            false -> ok
-        end.
 
-% throws Exception
-resourceInitialization(This, Level) when is_integer(Level) ->
-        ResourceLoadingLevelFactory = 'ResourceLoadingLevelFactory':getInstance(),
-        case ((get({This, '$class'})):resourceAnimationChange(This) andalso (Level =:= (get({get({ResourceLoadingLevelFactory, 'LOAD_EARLY'}), '$class'})):getLevel(get({ResourceLoadingLevelFactory, 'LOAD_EARLY'})))) of
-            true ->
-            (get({This, '$class'})):clearResources(This),
-            (fun(Target_N68007) -> (get({Target_N68007, '$class'})):init(Target_N68007) end)(array:get(get({This, 'EARLY_CHANGABLE_RESOURCES'}), get({This, resourceInitializationArray})));
-            false -> ok
-        end,
-        case ((get({This, '$class'})):resourceAnimationChange(This) andalso (Level =:= (get({get({ResourceLoadingLevelFactory, 'LOAD_ALL'}), '$class'})):getLevel(get({ResourceLoadingLevelFactory, 'LOAD_ALL'})))) of
-            true ->
-            case get({This, allLoaded}) of
-                true ->
-                (get({This, '$class'})):clearResources(This);
-                false -> ok
-            end,
-            case ((fun(Target_N68150) -> (get({Target_N68150, '$class'})):size(Target_N68150) end)((fun(Target_N68157) -> (get({Target_N68157, '$class'})):getList(Target_N68157) end)('FeaturedAnimationInterfaceFactoryInterfaceFactory':getInstance())) =:= 0) of
-                true ->
-                (fun(Target_N68195) -> (get({Target_N68195, '$class'})):init(Target_N68195) end)(array:get(get({This, 'EARLY_CHANGABLE_RESOURCES'}), get({This, resourceInitializationArray})));
-                false -> ok
-            end,
-            (fun(Target_N68240) -> (get({Target_N68240, '$class'})):init(Target_N68240) end)(array:get(get({This, 'GAME_CHANGABLE_RESOURCES'}), get({This, resourceInitializationArray}))),
-            put({This, allLoaded}, true);
-            false -> ok
-        end.
+  def jm_initKeyMapping(this, p_abeClientInformation, p_portion) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+      JR.lset(f, :portion, p_portion)
+        if JR.call(ChangedGameFeatureListener.jm_getInstance(), :jm_isChangedFeature, [JR.get(InputFeatureFactory.jm_getInstance(), :INPUT_MAPPING)]) do
+            JR.call(JR.call(PlatformInputMappingFactory.jm_getInstance(), :jm_getPersistentInputMappingInstance, []), :jm_init, [JR.lget(f, :abeClientInformation)])
+            JR.call(ProgressCanvasFactory.jm_getInstance(), :jm_addNormalPortion, [50, "Game Keys"])
+            JR.call(ChangedGameFeatureListener.jm_getInstance(), :jm_remove, [JR.get(InputFeatureFactory.jm_getInstance(), :INPUT_MAPPING)])
+        end
+    end)
+  end
 
-resourceAnimationChange(This) ->
-        try
-        ChangedGameFeatureListener = 'ChangedGameFeatureListener':getInstance(),
-        GameConfigurationCentral = 'GameConfigurationCentral':getInstance(),
-        case (get({ChangedGameFeatureListener, '$class'})):isChangedGameConfiguration(ChangedGameFeatureListener, get({GameConfigurationCentral, 'SCALE'})) of
-            true ->
-            throw({'$return', true});
-            false -> ok
-        end,
-        case (fun(Target_N68497) -> (get({Target_N68497, '$class'})):isChangedFeature(Target_N68497, get({'MainFeatureFactory':getInstance(), 'STATIC'})) end)('ChangedGameFeatureListener':getInstance()) of
-            true ->
-            throw({'$return', true});
-            false -> ok
-        end,
-        false
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
 
-clearResources(This) ->
-        put({This, allLoaded}, false),
-        'GameFeatureImageCacheFactory':releaseAll(),
-        FeaturedAnimationInterfaceFactoryInterfaceFactory = 'FeaturedAnimationInterfaceFactoryInterfaceFactory':getInstance(),
-        (get({FeaturedAnimationInterfaceFactoryInterfaceFactory, '$class'})):clear(FeaturedAnimationInterfaceFactoryInterfaceFactory),
-        (fun(Target_N68712) -> (get({Target_N68712, '$class'})):clear(Target_N68712) end)('FeaturedResourceRelativeRelationshipFactory':getInstance()).
+  def jm_init(this, p_abeClientInformation, p_commandListener, p_level) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+      JR.lset(f, :commandListener, p_commandListener)
+      JR.lset(f, :level, p_level)
+        JR.lset(f, :resourceLoadingLevelFactory, ResourceLoadingLevelFactory.jm_getInstance())
+        if (!JR.call(this, :jm_isInitialized, []) && (((JR.lget(f, :level) == JR.call(JR.get(JR.lget(f, :resourceLoadingLevelFactory), :LOAD_ALL), :jm_getLevel, [])) || (JR.lget(f, :level) == JR.call(JR.get(JR.lget(f, :resourceLoadingLevelFactory), :LOAD_EARLY), :jm_getLevel, []))))) do
+            JR.lset(f, :localPortion, 40)
+            if (JR.lget(f, :level) == JR.call(JR.get(JR.lget(f, :resourceLoadingLevelFactory), :LOAD_EARLY), :jm_getLevel, [])) do
+                JR.lset(f, :localPortion, 8)
+            end
+            JR.call(this, :jm_setInitialized, [true])
+            JR.call(this, :jm_initKey, [JR.call(this, :jm_getPortion, [])])
+            JR.call(this, :jm_initKeyMapping, [JR.lget(f, :abeClientInformation), JR.call(this, :jm_getPortion, [])])
+            JR.call(GameKeyEventFactory.jm_getInstance(), :jm_init, [])
+            JR.lset(f, :progressCanvas, ProgressCanvasFactory.jm_getInstance())
+            JR.call(JR.lget(f, :progressCanvas), :jm_addNormalPortion, [JR.lget(f, :localPortion), "Game Key Events"])
+            JR.call(BasicTouchInputFactory.jm_getInstance(), :jm_init, [JR.call(JR.call(PlatformInputMappingFactory.jm_getInstance(), :jm_getPersistentInputMappingInstance, []), :jm_getInputMapping, [])])
+            CancelTouchButtonInputFactory.jm_getInstance()
+            JR.call(JR.lget(f, :progressCanvas), :jm_addNormalPortion, [JR.lget(f, :localPortion), "Touch Input"])
+            JR.call(CompleteMotionGestureInputToGameMotionGestureInput.jm_getInstance(), :jm_init, [])
+            JR.call(JR.lget(f, :progressCanvas), :jm_addNormalPortion, [JR.lget(f, :localPortion), "Motion Input"])
+            GameFeatureImageCacheFactory.jm_init()
+            JR.call(JR.lget(f, :progressCanvas), :jm_addNormalPortion, [JR.lget(f, :localPortion), "Image Cache"])
+            JR.call(JR.aget(JR.get(this, :resourceInitializationArray), JR.get(this, :EARLY_RESOURCES)), :jm_init, [])
+        end
+    end)
+  end
 
-setGameInitialized(This, GameInitialized) when is_boolean(GameInitialized) ->
-        put({This, gameInitialized}, GameInitialized).
 
-isGameInitialized(This) ->
-        get({This, gameInitialized}).
+  def jm_resourceInitialization(this, p_level) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :level, p_level)
+        JR.lset(f, :resourceLoadingLevelFactory, ResourceLoadingLevelFactory.jm_getInstance())
+        if (JR.call(this, :jm_resourceAnimationChange, []) && (JR.lget(f, :level) == JR.call(JR.get(JR.lget(f, :resourceLoadingLevelFactory), :LOAD_EARLY), :jm_getLevel, []))) do
+            JR.call(this, :jm_clearResources, [])
+            JR.call(JR.aget(JR.get(this, :resourceInitializationArray), JR.get(this, :EARLY_CHANGABLE_RESOURCES)), :jm_init, [])
+        end
+        if (JR.call(this, :jm_resourceAnimationChange, []) && (JR.lget(f, :level) == JR.call(JR.get(JR.lget(f, :resourceLoadingLevelFactory), :LOAD_ALL), :jm_getLevel, []))) do
+            if JR.get(this, :allLoaded) do
+                JR.call(this, :jm_clearResources, [])
+            end
+            if (JR.call(JR.call(FeaturedAnimationInterfaceFactoryInterfaceFactory.jm_getInstance(), :jm_getList, []), :jm_size, []) == 0) do
+                JR.call(JR.aget(JR.get(this, :resourceInitializationArray), JR.get(this, :EARLY_CHANGABLE_RESOURCES)), :jm_init, [])
+            end
+            JR.call(JR.aget(JR.get(this, :resourceInitializationArray), JR.get(this, :GAME_CHANGABLE_RESOURCES)), :jm_init, [])
+            JR.put(this, :allLoaded, true)
+        end
+    end)
+  end
 
-getPortion(This) ->
-        get({This, portion}).
 
-setInitialized(This, Initialized) when is_boolean(Initialized) ->
-        put({This, initialized}, Initialized).
+  def jm_resourceAnimationChange(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :changedGameFeatureListener, ChangedGameFeatureListener.jm_getInstance())
+        JR.lset(f, :gameConfigurationCentral, GameConfigurationCentral.jm_getInstance())
+        if JR.call(JR.lget(f, :changedGameFeatureListener), :jm_isChangedGameConfiguration, [JR.get(JR.lget(f, :gameConfigurationCentral), :SCALE)]) do
+            throw({:jreturn, true})
+        end
+        if JR.call(ChangedGameFeatureListener.jm_getInstance(), :jm_isChangedFeature, [JR.get(MainFeatureFactory.jm_getInstance(), :STATIC)]) do
+            throw({:jreturn, true})
+        end
+        throw({:jreturn, false})
+    end)
+  end
 
-isInitialized(This) ->
-        get({This, initialized}).
+
+  def jm_clearResources(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.put(this, :allLoaded, false)
+        GameFeatureImageCacheFactory.jm_releaseAll()
+        JR.lset(f, :featuredAnimationInterfaceFactoryInterfaceFactory, FeaturedAnimationInterfaceFactoryInterfaceFactory.jm_getInstance())
+        JR.call(JR.lget(f, :featuredAnimationInterfaceFactoryInterfaceFactory), :jm_clear, [])
+        JR.call(FeaturedResourceRelativeRelationshipFactory.jm_getInstance(), :jm_clear, [])
+    end)
+  end
+
+
+  def jm_setGameInitialized(this, p_gameInitialized) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameInitialized, p_gameInitialized)
+        JR.put(this, :gameInitialized, JR.lget(f, :gameInitialized))
+    end)
+  end
+
+
+  def jm_isGameInitialized(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :gameInitialized)})
+    end)
+  end
+
+
+  def jm_getPortion(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :portion)})
+    end)
+  end
+
+
+  def jm_setInitialized(this, p_initialized) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :initialized, p_initialized)
+        JR.put(this, :initialized, JR.lget(f, :initialized))
+    end)
+  end
+
+
+  def jm_isInitialized(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :initialized)})
+    end)
+  end
+end
+
 

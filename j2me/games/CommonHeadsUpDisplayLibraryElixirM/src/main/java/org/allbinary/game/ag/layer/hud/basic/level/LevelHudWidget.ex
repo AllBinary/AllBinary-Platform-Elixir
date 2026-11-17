@@ -1,104 +1,177 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.layer.hud.basic.level
-% import javax.microedition.lcdui.Font
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.game.graphics.hud.BasicHud
-% import org.allbinary.graphics.color.BasicColorFactory
-% import org.allbinary.graphics.paint.PaintableInterface
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.math.PrimitiveLongUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.hud.basic.level
 
--module('LevelHudWidget').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements PaintableInterface
+defmodule LevelHudWidget do
+  def jsuper(), do: BasicHud
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicHud', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :level, 0)
+    JR.put(this, :maxlevel, 0)
+    JR.put(this, :levelString, nil)
+    JR.put(this, :levelNumberCharArray, nil)
+    JR.put(this, :levelNumberTotalDigits, 0)
+    JR.put(this, :offset, 0)
+    JR.put(this, :primitiveLongUtil, nil)
+        
+        
+        
+        JR.put(this, :levelNumberCharArray, JR.get(NullUtil.jm_getInstance(), :NULL_CHAR_ARRAY))
+        JR.put(this, :levelNumberTotalDigits, 0)
+        JR.put(this, :offset, 0)
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, level}, 0),
-    put({This, maxlevel}, 0),
-    put({This, levelString}, undefined),
-    put({This, levelNumberCharArray}, get({'NullUtil':getInstance(), 'NULL_CHAR_ARRAY'})),
-    put({This, levelNumberTotalDigits}, 0),
-    put({This, offset}, 0),
-    put({This, primitiveLongUtil}, undefined),
-    ok.
+
+  def jm_createHud(p_maxlevel, p_location, p_direction) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :maxlevel, p_maxlevel)
+      JR.lset(f, :location, p_location)
+      JR.lset(f, :direction, p_direction)
+        throw({:jreturn, LevelHudWidget.jnew(JR.lget(f, :maxlevel), JR.lget(f, :location), JR.lget(f, :direction))})
+    end)
+  end
 
 
-% throws Exception
-createHud(Maxlevel, Location, Direction) when is_integer(Maxlevel), is_integer(Location), is_integer(Direction) ->
-        'LevelHudWidget':new(Maxlevel, Location, Direction).
+  def jinit(this, p_maxlevel, p_location, p_direction) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :maxlevel, p_maxlevel)
+      JR.lset(f, :location, p_location)
+      JR.lset(f, :direction, p_direction)
+        BasicHud.jinit(this, JR.lget(f, :location), JR.lget(f, :direction), 2, JR.get(BasicColorFactory.jm_getInstance(), :GREY))
+        LevelHudWidget.jinitfields(this)
+        JR.put(this, :primitiveLongUtil, PrimitiveLongUtil.jm_createPowerOfTen(1000))
+        JR.lset(f, :LEVEL, "Lv ")
+        JR.put(this, :levelString, JR.call(JR.lget(f, :LEVEL), :jm_toCharArray, []))
+        JR.put(this, :maxlevel, JR.lget(f, :maxlevel))
+        JR.put(this, :level, JR.lget(f, :maxlevel))
+        JR.call(this, :jm_update, [])
+        JR.put(this, :updateMaxHeight, 14)
+    end)
+  end
 
-new(Maxlevel, Location, Direction) when is_integer(Maxlevel), is_integer(Location), is_integer(Direction) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Maxlevel, Location, Direction),
-    This.
+  def jnew(p_maxlevel, p_location, p_direction) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_maxlevel, p_location, p_direction)
+    this
+  end
 
-'$init'(This, Maxlevel, Location, Direction) when is_integer(Maxlevel), is_integer(Location), is_integer(Direction) ->
-        'BasicHud':'$init'(This, Location, Direction, 2, get({'BasicColorFactory':getInstance(), 'GREY'})),
-        init_fields(This),
-        put({This, primitiveLongUtil}, 'PrimitiveLongUtil':createPowerOfTen(1000)),
-        LEVEL = "Lv ",
-        put({This, levelString}, (get({LEVEL, '$class'})):toCharArray(LEVEL)),
-        put({This, maxlevel}, Maxlevel),
-        put({This, level}, Maxlevel),
-        (get({This, '$class'})):update(This),
-        put({This, updateMaxHeight}, 14).
 
-updateMeasurement(This, Graphics) ->
-        Font = (get({Graphics, '$class'})):getFont(Graphics),
-        put({This, updateMaxWidth}, ((get({Font, '$class'})):getSize(Font) * 4)),
-        put({This, offset}, ((get({Font, '$class'})):charsWidth(Font, get({This, levelString}), 0, array:size(get({This, levelString}))) + (get({Font, '$class'})):getSize(Font))),
-        'BasicHud':updateMeasurement(This, Graphics).
+  def jm_updateMeasurement(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.lset(f, :font, JR.call(JR.lget(f, :graphics), :jm_getFont, []))
+        JR.put(this, :updateMaxWidth, (JR.call(JR.lget(f, :font), :jm_getSize, []) * 4))
+        JR.put(this, :offset, (JR.call(JR.lget(f, :font), :jm_charsWidth, [JR.get(this, :levelString), 0, JR.alength(JR.get(this, :levelString))]) + JR.call(JR.lget(f, :font), :jm_getSize, [])))
+        BasicHud.jm_updateMeasurement(this, JR.lget(f, :graphics))
+    end)
+  end
 
-update(This) ->
-        put({This, levelNumberCharArray}, (get({get({This, primitiveLongUtil}), '$class'})):getCharArray(get({This, primitiveLongUtil}), get({This, level}))),
-        put({This, levelNumberTotalDigits}, (get({get({This, primitiveLongUtil}), '$class'})):getCurrentTotalDigits(get({This, primitiveLongUtil}))).
 
-setLevel(This, Level) when is_integer(Level) ->
-        put({This, level}, Level),
-        (get({This, '$class'})):update(This).
+  def jm_update(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.put(this, :levelNumberCharArray, JR.call(JR.get(this, :primitiveLongUtil), :jm_getCharArray, [JR.get(this, :level)]))
+        JR.put(this, :levelNumberTotalDigits, JR.call(JR.get(this, :primitiveLongUtil), :jm_getCurrentTotalDigits, []))
+    end)
+  end
 
-nextLevel(This) ->
-        put({This, level}, get({This, level}) + 1),
-        (get({This, '$class'})):update(This).
 
-previousLevel(This) ->
-        put({This, level}, get({This, level}) - 1),
-        case (get({This, level}) < 0) of
-            true ->
-            put({This, level}, 0);
-            false -> ok
-        end,
-        (get({This, '$class'})):update(This).
+  def jm_setLevel(this, p_level) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :level, p_level)
+        JR.put(this, :level, JR.lget(f, :level))
+        JR.call(this, :jm_update, [])
+    end)
+  end
 
-isComplete(This) ->
-        try
-        case (get({This, level}) =< get({This, maxlevel})) of
-            true ->
-            throw({'$return', false});
-            false ->
-            throw({'$return', true})
+
+  def jm_nextLevel(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.postinc(this, :level, 1)
+        JR.call(this, :jm_update, [])
+    end)
+  end
+
+
+  def jm_previousLevel(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.postinc(this, :level, -1)
+        if (JR.get(this, :level) < 0) do
+            JR.put(this, :level, 0)
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        JR.call(this, :jm_update, [])
+    end)
+  end
 
-paint(This, Graphics) ->
-        'BasicHud':paintDX(This, Graphics, get({This, levelString}), 0, array:size(get({This, levelString})), get({This, levelNumberCharArray}), 0, get({This, levelNumberTotalDigits}), get({This, offset})).
 
-paintThreed(This, Graphics) ->
-        ok.
+  def jm_isComplete(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.get(this, :level) <= JR.get(this, :maxlevel)) do
+            throw({:jreturn, false})
+        else
+            throw({:jreturn, true})
+        end
+    end)
+  end
+
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        BasicHud.jm_paintDX(this, JR.lget(f, :graphics), JR.get(this, :levelString), 0, JR.alength(JR.get(this, :levelString)), JR.get(this, :levelNumberCharArray), 0, JR.get(this, :levelNumberTotalDigits), JR.get(this, :offset))
+    end)
+  end
+
+
+  def jm_paintThreed(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        nil
+    end)
+  end
+end
+
 

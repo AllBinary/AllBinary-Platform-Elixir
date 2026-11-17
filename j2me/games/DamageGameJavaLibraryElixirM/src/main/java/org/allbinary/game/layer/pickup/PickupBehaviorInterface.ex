@@ -1,27 +1,42 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer.pickup
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer.pickup
 
--module('PickupBehaviorInterface').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% Java interface
+defmodule PickupBehaviorInterface do
+  def jsuper(), do: JObject
 
 
-% throws Exception
-doPickup(This, PickupProcessorInterface) ->
-    erlang:error({abstract_method, doPickup}).
+  def jm_doPickup(this, p_pickupProcessorInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :pickupProcessorInterface, p_pickupProcessorInterface)
+      throw({:jexception, JR.exception("AbstractMethodError", "doPickup")})
+    end)
+  end
 
-doPickupLayer(This, PickupLayerInterface) ->
-    erlang:error({abstract_method, doPickupLayer}).
+
+  def jm_doPickupLayer(this, p_pickupLayerInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :pickupLayerInterface, p_pickupLayerInterface)
+      throw({:jexception, JR.exception("AbstractMethodError", "doPickupLayer")})
+    end)
+  end
+end
+
 

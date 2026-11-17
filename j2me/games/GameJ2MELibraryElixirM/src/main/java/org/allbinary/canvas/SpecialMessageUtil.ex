@@ -1,59 +1,70 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.canvas
-% import org.allbinary.game.configuration.feature.Features
-% import org.allbinary.graphics.opengles.OpenGLFeatureFactory
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonSeps
-% import org.allbinary.system.Memory
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.canvas
 
--module('SpecialMessageUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule SpecialMessageUtil do
+  def jsuper(), do: JObject
+def jstatic_SINGLETON(), do: JR.static_get(__MODULE__, :SINGLETON, fn -> SpecialMessageUtil.jnew() end)
+  def jstatic_set_SINGLETON(value), do: JR.static_put(__MODULE__, :SINGLETON, value)
 
-static_init() ->
-    put({?MODULE, 'SINGLETON'}, 'SpecialMessageUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'SpecialMessageUtil', 'SINGLETON'}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, SpecialMessageUtil.jstatic_SINGLETON()})
+    end)
+  end
 
-get(This) ->
-        StringBuffer = 'StringMaker':new(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, 'Memory':getInfo()),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({'CommonSeps':getInstance(), 'SPACE'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (fun(Target_N65995) -> (get({Target_N65995, '$class'})):toString(Target_N65995) end)('GameStatisticsFactory':getInstance())),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({'CommonSeps':getInstance(), 'SPACE'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, " Option: "),
-        case (fun(Target_N66107) -> (get({Target_N66107, '$class'})):isDefault(Target_N66107, get({'OpenGLFeatureFactory':getInstance(), 'OPENGL_AUTO_SELECT'})) end)('Features':getInstance()) of
-            true ->
-            (get({StringBuffer, '$class'})):append(StringBuffer, (fun(Target_N66245) -> (get({Target_N66245, '$class'})):getName(Target_N66245) end)(get({'OpenGLFeatureFactory':getInstance(), 'OPENGL_AUTO_SELECT'})));
-            false ->
-            (get({StringBuffer, '$class'})):append(StringBuffer, (fun(Target_N66183) -> (get({Target_N66183, '$class'})):getName(Target_N66183) end)(get({'OpenGLFeatureFactory':getInstance(), 'OPENGL_MINIMUM'})))
-        end,
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+
+  def jm_get(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [Memory.jm_getInfo()])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :SPACE)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(GameStatisticsFactory.jm_getInstance(), :jm_toString, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :SPACE)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [" Option: "])
+        if JR.call(Features.jm_getInstance(), :jm_isDefault, [JR.get(OpenGLFeatureFactory.jm_getInstance(), :OPENGL_AUTO_SELECT)]) do
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(OpenGLFeatureFactory.jm_getInstance(), :OPENGL_AUTO_SELECT), :jm_getName, [])])
+        else
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.get(OpenGLFeatureFactory.jm_getInstance(), :OPENGL_MINIMUM), :jm_getName, [])])
+        end
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+end
+
 

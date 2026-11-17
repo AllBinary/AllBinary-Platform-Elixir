@@ -1,49 +1,86 @@
-% Generated Code Do Not Modify
-% package org.allbinary.game
+# Generated Code Do Not Modify
+# package org.allbinary.game
 
--module('BasicGameInfoFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule BasicGameInfoFactory do
+  def jsuper(), do: JObject
+def jstatic_SINGLETON(), do: JR.static_get(__MODULE__, :SINGLETON, fn -> BasicGameInfoFactory.jnew() end)
+  def jstatic_set_SINGLETON(value), do: JR.static_put(__MODULE__, :SINGLETON, value)
 
-static_init() ->
-    put({?MODULE, 'SINGLETON'}, 'BasicGameInfoFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :currentReleaseIndex, 0)
+    JR.put(this, :currentDestroyIndex, 0)
+    JR.put(this, :total, 0)
+        JR.put(this, :currentReleaseIndex, 0)
+        JR.put(this, :currentDestroyIndex, 0)
+        JR.put(this, :total, 0)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, currentReleaseIndex}, 0),
-    put({This, currentDestroyIndex}, 0),
-    put({This, total}, 0),
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, BasicGameInfoFactory.jstatic_SINGLETON()})
+    end)
+  end
 
 
-getInstance() ->
-        get({'BasicGameInfoFactory', 'SINGLETON'}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
 
-init(This, Total) when is_integer(Total) ->
-        put({This, currentReleaseIndex}, 0),
-        put({This, currentDestroyIndex}, 0),
-        put({This, total}, Total).
+  def jm_init(this, p_total) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :total, p_total)
+        JR.put(this, :currentReleaseIndex, 0)
+        JR.put(this, :currentDestroyIndex, 0)
+        JR.put(this, :total, JR.lget(f, :total))
+    end)
+  end
 
-isPeaked(This) ->
-        try
-        case (get({This, currentDestroyIndex}) >= get({This, total})) of
-            true ->
-            throw({'$return', true});
-            false ->
-            throw({'$return', false})
+
+  def jm_isPeaked(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if (JR.get(this, :currentDestroyIndex) >= JR.get(this, :total)) do
+            throw({:jreturn, true})
+        else
+            throw({:jreturn, false})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-howManyLeft(This) ->
-        (get({This, total}) - get({This, currentDestroyIndex})).
+
+  def jm_howManyLeft(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.int32(JR.get(this, :total) - JR.get(this, :currentDestroyIndex))})
+    end)
+  end
+end
+
 

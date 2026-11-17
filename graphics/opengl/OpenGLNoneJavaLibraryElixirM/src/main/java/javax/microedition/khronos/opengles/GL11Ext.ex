@@ -1,98 +1,305 @@
-% Generated Code Do Not Modify
-% package javax.microedition.khronos.opengles
-% import java.nio.Buffer
-% import java.nio.FloatBuffer
-% import java.nio.IntBuffer
-% import java.nio.ShortBuffer
+# Generated Code Do Not Modify
+# package javax.microedition.khronos.opengles
 
--module('GL11Ext').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% Java interface
-
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('GL', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'GL_MATRIX_INDEX_ARRAY_BUFFER_BINDING_OES'}, 35742),
-    put({?MODULE, 'GL_MATRIX_INDEX_ARRAY_OES'}, 34884),
-    put({?MODULE, 'GL_MATRIX_INDEX_ARRAY_POINTER_OES'}, 34889),
-    put({?MODULE, 'GL_MATRIX_INDEX_ARRAY_SIZE_OES'}, 34886),
-    put({?MODULE, 'GL_MATRIX_INDEX_ARRAY_STRIDE_OES'}, 34888),
-    put({?MODULE, 'GL_MATRIX_INDEX_ARRAY_TYPE_OES'}, 34887),
-    put({?MODULE, 'GL_MATRIX_PALETTE_OES'}, 34880),
-    put({?MODULE, 'GL_MAX_PALETTE_MATRICES_OES'}, 34882),
-    put({?MODULE, 'GL_MAX_VERTEX_UNITS_OES'}, 34468),
-    put({?MODULE, 'GL_TEXTURE_CROP_RECT_OES'}, 35741),
-    put({?MODULE, 'GL_WEIGHT_ARRAY_BUFFER_BINDING_OES'}, 34974),
-    put({?MODULE, 'GL_WEIGHT_ARRAY_OES'}, 34477),
-    put({?MODULE, 'GL_WEIGHT_ARRAY_POINTER_OES'}, 34476),
-    put({?MODULE, 'GL_WEIGHT_ARRAY_SIZE_OES'}, 34475),
-    put({?MODULE, 'GL_WEIGHT_ARRAY_STRIDE_OES'}, 34474),
-    put({?MODULE, 'GL_WEIGHT_ARRAY_TYPE_OES'}, 34473),
-    ok.
-
-
-glTexParameterfv(This, Target, Pname, Param, Offset) when is_integer(Target), is_integer(Pname), (is_tuple(Param) orelse Param =:= undefined), is_integer(Offset) ->
-    erlang:error({abstract_method, glTexParameterfv}).
-
-glCurrentPaletteMatrixOES(This, Matrixpaletteindex) when is_integer(Matrixpaletteindex) ->
-    erlang:error({abstract_method, glCurrentPaletteMatrixOES}).
-
-glDrawTexfOES(This, X, Y, Z, Width, Height) when is_number(X), is_number(Y), is_number(Z), is_number(Width), is_number(Height) ->
-    erlang:error({abstract_method, glDrawTexfOES}).
-
-glDrawTexfvOES(This, Coords, Offset) when (is_tuple(Coords) orelse Coords =:= undefined), is_integer(Offset) ->
-    erlang:error({abstract_method, glDrawTexfvOES}).
-
-glDrawTexfvOES(This, Coords) ->
-    erlang:error({abstract_method, glDrawTexfvOES}).
-
-glDrawTexiOES(This, X, Y, Z, Width, Height) when is_integer(X), is_integer(Y), is_integer(Z), is_integer(Width), is_integer(Height) ->
-    erlang:error({abstract_method, glDrawTexiOES}).
-
-glDrawTexivOES(This, Coords, Offset) when (is_tuple(Coords) orelse Coords =:= undefined), is_integer(Offset) ->
-    erlang:error({abstract_method, glDrawTexivOES}).
-
-glDrawTexivOES(This, Coords) ->
-    erlang:error({abstract_method, glDrawTexivOES}).
-
-glDrawTexsOES(This, X, Y, Z, Width, Height) when is_integer(X), is_integer(Y), is_integer(Z), is_integer(Width), is_integer(Height) ->
-    erlang:error({abstract_method, glDrawTexsOES}).
-
-glDrawTexsvOES(This, Coords, Offset) when (is_tuple(Coords) orelse Coords =:= undefined), is_integer(Offset) ->
-    erlang:error({abstract_method, glDrawTexsvOES}).
-
-glDrawTexsvOES(This, Coords) ->
-    erlang:error({abstract_method, glDrawTexsvOES}).
-
-glDrawTexxOES(This, X, Y, Z, Width, Height) when is_integer(X), is_integer(Y), is_integer(Z), is_integer(Width), is_integer(Height) ->
-    erlang:error({abstract_method, glDrawTexxOES}).
-
-glDrawTexxvOES(This, Coords, Offset) when (is_tuple(Coords) orelse Coords =:= undefined), is_integer(Offset) ->
-    erlang:error({abstract_method, glDrawTexxvOES}).
-
-glDrawTexxvOES(This, Coords) ->
-    erlang:error({abstract_method, glDrawTexxvOES}).
-
-glEnable(This, Cap) when is_integer(Cap) ->
-    erlang:error({abstract_method, glEnable}).
-
-glEnableClientState(This, Array) when is_integer(Array) ->
-    erlang:error({abstract_method, glEnableClientState}).
-
-glLoadPaletteFromModelViewMatrixOES(This) ->
-    erlang:error({abstract_method, glLoadPaletteFromModelViewMatrixOES}).
-
-glMatrixIndexPointerOES(This, Size, Type, Stride, Offset) when is_integer(Size), is_integer(Type), is_integer(Stride), is_integer(Offset) ->
-    erlang:error({abstract_method, glMatrixIndexPointerOES});
-glMatrixIndexPointerOES(This, Size, Type, Stride, Pointer) when is_integer(Size), is_integer(Type), is_integer(Stride) ->
-    erlang:error({abstract_method, glMatrixIndexPointerOES}).
+defmodule GL11Ext do
+  def jsuper(), do: JObject
+def jstatic_GL_MATRIX_INDEX_ARRAY_BUFFER_BINDING_OES(), do: JR.static_get(__MODULE__, :GL_MATRIX_INDEX_ARRAY_BUFFER_BINDING_OES, fn -> 35742 end)
+  def jstatic_set_GL_MATRIX_INDEX_ARRAY_BUFFER_BINDING_OES(value), do: JR.static_put(__MODULE__, :GL_MATRIX_INDEX_ARRAY_BUFFER_BINDING_OES, value)
+def jstatic_GL_MATRIX_INDEX_ARRAY_OES(), do: JR.static_get(__MODULE__, :GL_MATRIX_INDEX_ARRAY_OES, fn -> 34884 end)
+  def jstatic_set_GL_MATRIX_INDEX_ARRAY_OES(value), do: JR.static_put(__MODULE__, :GL_MATRIX_INDEX_ARRAY_OES, value)
+def jstatic_GL_MATRIX_INDEX_ARRAY_POINTER_OES(), do: JR.static_get(__MODULE__, :GL_MATRIX_INDEX_ARRAY_POINTER_OES, fn -> 34889 end)
+  def jstatic_set_GL_MATRIX_INDEX_ARRAY_POINTER_OES(value), do: JR.static_put(__MODULE__, :GL_MATRIX_INDEX_ARRAY_POINTER_OES, value)
+def jstatic_GL_MATRIX_INDEX_ARRAY_SIZE_OES(), do: JR.static_get(__MODULE__, :GL_MATRIX_INDEX_ARRAY_SIZE_OES, fn -> 34886 end)
+  def jstatic_set_GL_MATRIX_INDEX_ARRAY_SIZE_OES(value), do: JR.static_put(__MODULE__, :GL_MATRIX_INDEX_ARRAY_SIZE_OES, value)
+def jstatic_GL_MATRIX_INDEX_ARRAY_STRIDE_OES(), do: JR.static_get(__MODULE__, :GL_MATRIX_INDEX_ARRAY_STRIDE_OES, fn -> 34888 end)
+  def jstatic_set_GL_MATRIX_INDEX_ARRAY_STRIDE_OES(value), do: JR.static_put(__MODULE__, :GL_MATRIX_INDEX_ARRAY_STRIDE_OES, value)
+def jstatic_GL_MATRIX_INDEX_ARRAY_TYPE_OES(), do: JR.static_get(__MODULE__, :GL_MATRIX_INDEX_ARRAY_TYPE_OES, fn -> 34887 end)
+  def jstatic_set_GL_MATRIX_INDEX_ARRAY_TYPE_OES(value), do: JR.static_put(__MODULE__, :GL_MATRIX_INDEX_ARRAY_TYPE_OES, value)
+def jstatic_GL_MATRIX_PALETTE_OES(), do: JR.static_get(__MODULE__, :GL_MATRIX_PALETTE_OES, fn -> 34880 end)
+  def jstatic_set_GL_MATRIX_PALETTE_OES(value), do: JR.static_put(__MODULE__, :GL_MATRIX_PALETTE_OES, value)
+def jstatic_GL_MAX_PALETTE_MATRICES_OES(), do: JR.static_get(__MODULE__, :GL_MAX_PALETTE_MATRICES_OES, fn -> 34882 end)
+  def jstatic_set_GL_MAX_PALETTE_MATRICES_OES(value), do: JR.static_put(__MODULE__, :GL_MAX_PALETTE_MATRICES_OES, value)
+def jstatic_GL_MAX_VERTEX_UNITS_OES(), do: JR.static_get(__MODULE__, :GL_MAX_VERTEX_UNITS_OES, fn -> 34468 end)
+  def jstatic_set_GL_MAX_VERTEX_UNITS_OES(value), do: JR.static_put(__MODULE__, :GL_MAX_VERTEX_UNITS_OES, value)
+def jstatic_GL_TEXTURE_CROP_RECT_OES(), do: JR.static_get(__MODULE__, :GL_TEXTURE_CROP_RECT_OES, fn -> 35741 end)
+  def jstatic_set_GL_TEXTURE_CROP_RECT_OES(value), do: JR.static_put(__MODULE__, :GL_TEXTURE_CROP_RECT_OES, value)
+def jstatic_GL_WEIGHT_ARRAY_BUFFER_BINDING_OES(), do: JR.static_get(__MODULE__, :GL_WEIGHT_ARRAY_BUFFER_BINDING_OES, fn -> 34974 end)
+  def jstatic_set_GL_WEIGHT_ARRAY_BUFFER_BINDING_OES(value), do: JR.static_put(__MODULE__, :GL_WEIGHT_ARRAY_BUFFER_BINDING_OES, value)
+def jstatic_GL_WEIGHT_ARRAY_OES(), do: JR.static_get(__MODULE__, :GL_WEIGHT_ARRAY_OES, fn -> 34477 end)
+  def jstatic_set_GL_WEIGHT_ARRAY_OES(value), do: JR.static_put(__MODULE__, :GL_WEIGHT_ARRAY_OES, value)
+def jstatic_GL_WEIGHT_ARRAY_POINTER_OES(), do: JR.static_get(__MODULE__, :GL_WEIGHT_ARRAY_POINTER_OES, fn -> 34476 end)
+  def jstatic_set_GL_WEIGHT_ARRAY_POINTER_OES(value), do: JR.static_put(__MODULE__, :GL_WEIGHT_ARRAY_POINTER_OES, value)
+def jstatic_GL_WEIGHT_ARRAY_SIZE_OES(), do: JR.static_get(__MODULE__, :GL_WEIGHT_ARRAY_SIZE_OES, fn -> 34475 end)
+  def jstatic_set_GL_WEIGHT_ARRAY_SIZE_OES(value), do: JR.static_put(__MODULE__, :GL_WEIGHT_ARRAY_SIZE_OES, value)
+def jstatic_GL_WEIGHT_ARRAY_STRIDE_OES(), do: JR.static_get(__MODULE__, :GL_WEIGHT_ARRAY_STRIDE_OES, fn -> 34474 end)
+  def jstatic_set_GL_WEIGHT_ARRAY_STRIDE_OES(value), do: JR.static_put(__MODULE__, :GL_WEIGHT_ARRAY_STRIDE_OES, value)
+def jstatic_GL_WEIGHT_ARRAY_TYPE_OES(), do: JR.static_get(__MODULE__, :GL_WEIGHT_ARRAY_TYPE_OES, fn -> 34473 end)
+  def jstatic_set_GL_WEIGHT_ARRAY_TYPE_OES(value), do: JR.static_put(__MODULE__, :GL_WEIGHT_ARRAY_TYPE_OES, value)
 
 
-glWeightPointerOES(This, Size, Type, Stride, Offset) when is_integer(Size), is_integer(Type), is_integer(Stride), is_integer(Offset) ->
-    erlang:error({abstract_method, glWeightPointerOES});
-glWeightPointerOES(This, Size, Type, Stride, Pointer) when is_integer(Size), is_integer(Type), is_integer(Stride) ->
-    erlang:error({abstract_method, glWeightPointerOES}).
+  def jm_glTexParameterfv(this, p_target, p_pname, p_param, p_offset) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :target, p_target)
+      JR.lset(f, :pname, p_pname)
+      JR.lset(f, :param, p_param)
+      JR.lset(f, :offset, p_offset)
+      throw({:jexception, JR.exception("AbstractMethodError", "glTexParameterfv")})
+    end)
+  end
+
+
+  def jm_glCurrentPaletteMatrixOES(this, p_matrixpaletteindex) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :matrixpaletteindex, p_matrixpaletteindex)
+      throw({:jexception, JR.exception("AbstractMethodError", "glCurrentPaletteMatrixOES")})
+    end)
+  end
+
+
+  def jm_glDrawTexfOES(this, p_x, p_y, p_z, p_width, p_height) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :z, p_z)
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+      throw({:jexception, JR.exception("AbstractMethodError", "glDrawTexfOES")})
+    end)
+  end
+
+
+  def jm_glDrawTexfvOES(this, p_coords, p_offset) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :coords, p_coords)
+      JR.lset(f, :offset, p_offset)
+      throw({:jexception, JR.exception("AbstractMethodError", "glDrawTexfvOES")})
+    end)
+  end
+
+
+  def jm_glDrawTexfvOES(this, p_coords) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :coords, p_coords)
+      throw({:jexception, JR.exception("AbstractMethodError", "glDrawTexfvOES")})
+    end)
+  end
+
+
+  def jm_glDrawTexiOES(this, p_x, p_y, p_z, p_width, p_height) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :z, p_z)
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+      throw({:jexception, JR.exception("AbstractMethodError", "glDrawTexiOES")})
+    end)
+  end
+
+
+  def jm_glDrawTexivOES(this, p_coords, p_offset) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :coords, p_coords)
+      JR.lset(f, :offset, p_offset)
+      throw({:jexception, JR.exception("AbstractMethodError", "glDrawTexivOES")})
+    end)
+  end
+
+
+  def jm_glDrawTexivOES(this, p_coords) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :coords, p_coords)
+      throw({:jexception, JR.exception("AbstractMethodError", "glDrawTexivOES")})
+    end)
+  end
+
+
+  def jm_glDrawTexsOES(this, p_x, p_y, p_z, p_width, p_height) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :z, p_z)
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+      throw({:jexception, JR.exception("AbstractMethodError", "glDrawTexsOES")})
+    end)
+  end
+
+
+  def jm_glDrawTexsvOES(this, p_coords, p_offset) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :coords, p_coords)
+      JR.lset(f, :offset, p_offset)
+      throw({:jexception, JR.exception("AbstractMethodError", "glDrawTexsvOES")})
+    end)
+  end
+
+
+  def jm_glDrawTexsvOES(this, p_coords) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :coords, p_coords)
+      throw({:jexception, JR.exception("AbstractMethodError", "glDrawTexsvOES")})
+    end)
+  end
+
+
+  def jm_glDrawTexxOES(this, p_x, p_y, p_z, p_width, p_height) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+      JR.lset(f, :z, p_z)
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+      throw({:jexception, JR.exception("AbstractMethodError", "glDrawTexxOES")})
+    end)
+  end
+
+
+  def jm_glDrawTexxvOES(this, p_coords, p_offset) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :coords, p_coords)
+      JR.lset(f, :offset, p_offset)
+      throw({:jexception, JR.exception("AbstractMethodError", "glDrawTexxvOES")})
+    end)
+  end
+
+
+  def jm_glDrawTexxvOES(this, p_coords) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :coords, p_coords)
+      throw({:jexception, JR.exception("AbstractMethodError", "glDrawTexxvOES")})
+    end)
+  end
+
+
+  def jm_glEnable(this, p_cap) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cap, p_cap)
+      throw({:jexception, JR.exception("AbstractMethodError", "glEnable")})
+    end)
+  end
+
+
+  def jm_glEnableClientState(this, p_array) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :array, p_array)
+      throw({:jexception, JR.exception("AbstractMethodError", "glEnableClientState")})
+    end)
+  end
+
+
+  def jm_glLoadPaletteFromModelViewMatrixOES(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      throw({:jexception, JR.exception("AbstractMethodError", "glLoadPaletteFromModelViewMatrixOES")})
+    end)
+  end
+
+
+  def jm_glMatrixIndexPointerOES(this, p_size, p_type, p_stride, p_pointer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :size, p_size)
+      JR.lset(f, :type, p_type)
+      JR.lset(f, :stride, p_stride)
+      JR.lset(f, :pointer, p_pointer)
+      throw({:jexception, JR.exception("AbstractMethodError", "glMatrixIndexPointerOES")})
+    end)
+  end
+
+
+  def jm_glMatrixIndexPointerOES(this, p_size, p_type, p_stride, p_offset) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :size, p_size)
+      JR.lset(f, :type, p_type)
+      JR.lset(f, :stride, p_stride)
+      JR.lset(f, :offset, p_offset)
+      throw({:jexception, JR.exception("AbstractMethodError", "glMatrixIndexPointerOES")})
+    end)
+  end
+
+
+  def jm_glWeightPointerOES(this, p_size, p_type, p_stride, p_pointer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :size, p_size)
+      JR.lset(f, :type, p_type)
+      JR.lset(f, :stride, p_stride)
+      JR.lset(f, :pointer, p_pointer)
+      throw({:jexception, JR.exception("AbstractMethodError", "glWeightPointerOES")})
+    end)
+  end
+
+
+  def jm_glWeightPointerOES(this, p_size, p_type, p_stride, p_offset) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :size, p_size)
+      JR.lset(f, :type, p_type)
+      JR.lset(f, :stride, p_stride)
+      JR.lset(f, :offset, p_offset)
+      throw({:jexception, JR.exception("AbstractMethodError", "glWeightPointerOES")})
+    end)
+  end
+end
 
 

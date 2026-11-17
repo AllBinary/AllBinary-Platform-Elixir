@@ -1,52 +1,102 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2022 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.image.opengles
-% import javax.microedition.khronos.opengles.GL10
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.image.opengles
 
--module('OpenGLESImageProcessor').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule OpenGLESImageProcessor do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> OpenGLESImageProcessor.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'OpenGLESImageProcessor':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'OpenGLESImageProcessor', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, OpenGLESImageProcessor.jstatic_instance()})
+    end)
+  end
 
-translate(This, Gl, TranslateX, TranslateY) when is_number(TranslateX), is_number(TranslateY) ->
-        ok.
 
-rotate(This, Gl, Angle) when is_number(Angle) ->
-        ok.
+  def jm_translate(this, p_gl, p_translateX, p_translateY) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+      JR.lset(f, :translateX, p_translateX)
+      JR.lset(f, :translateY, p_translateY)
+        nil
+    end)
+  end
 
-scale(This, Gl, ScaleX, ScaleY) when is_number(ScaleX), is_number(ScaleY) ->
-        ok.
 
-colorMask(This, Gl, Red, Green, Blue, Alpha) when is_number(Red), is_number(Green), is_number(Blue), is_number(Alpha) ->
-        ok.
+  def jm_rotate(this, p_gl, p_angle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+      JR.lset(f, :angle, p_angle)
+        nil
+    end)
+  end
+
+
+  def jm_scale(this, p_gl, p_scaleX, p_scaleY) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+      JR.lset(f, :scaleX, p_scaleX)
+      JR.lset(f, :scaleY, p_scaleY)
+        nil
+    end)
+  end
+
+
+  def jm_colorMask(this, p_gl, p_red, p_green, p_blue, p_alpha) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gl, p_gl)
+      JR.lset(f, :red, p_red)
+      JR.lset(f, :green, p_green)
+      JR.lset(f, :blue, p_blue)
+      JR.lset(f, :alpha, p_alpha)
+        nil
+    end)
+  end
+end
+
 

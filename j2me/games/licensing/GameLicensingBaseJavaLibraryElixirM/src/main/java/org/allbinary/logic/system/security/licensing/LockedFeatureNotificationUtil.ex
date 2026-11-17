@@ -1,59 +1,75 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.system.security.licensing
-% import org.allbinary.game.layer.hud.event.GameNotificationEvent
-% import org.allbinary.game.layer.hud.event.GameNotificationEventHandler
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.color.BasicColorFactory
-% import org.allbinary.logic.java.bool.BooleanFactory
-% import org.allbinary.logic.math.SmallIntegerSingletonFactory
-% import org.allbinary.media.audio.ErrorSound
-% import org.allbinary.media.audio.PrimaryPlayerQueueFactory
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.licensing
 
--module('LockedFeatureNotificationUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule LockedFeatureNotificationUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> LockedFeatureNotificationUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'LockedFeatureNotificationUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :gameNotificationEvent, nil)
+        JR.put(this, :gameNotificationEvent, GameNotificationEvent.jnew(this, JR.get(LicenseStrings.jm_getInstance(), :LOCKED), JR.call(SmallIntegerSingletonFactory.jm_getInstance(), :jm_getAt, [3]), JR.get(BasicColorFactory.jm_getInstance(), :RED), JR.get(BooleanFactory.jm_getInstance(), :FALSE)))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, gameNotificationEvent}, 'GameNotificationEvent':new(This, get({'LicenseStrings':getInstance(), 'LOCKED'}), (fun(Target_N66021) -> (get({Target_N66021, '$class'})):getAt(Target_N66021, 3) end)('SmallIntegerSingletonFactory':getInstance()), get({'BasicColorFactory':getInstance(), 'RED'}), get({'BooleanFactory':getInstance(), 'FALSE'}))),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'LockedFeatureNotificationUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, LockedFeatureNotificationUtil.jstatic_instance()})
+    end)
+  end
 
-% throws Exception
-fire(This) ->
-        (fun(Target_N66128) -> (get({Target_N66128, '$class'})):add(Target_N66128, 'ErrorSound':getInstance()) end)('PrimaryPlayerQueueFactory':getInstance()),
-        (fun(Target_N66175) -> (get({Target_N66175, '$class'})):fireEvent(Target_N66175, get({This, gameNotificationEvent})) end)('GameNotificationEventHandler':getInstance()).
 
-% throws Exception
-fireWithColor(This, BasicColor) ->
-        (fun(Target_N66253) -> (get({Target_N66253, '$class'})):add(Target_N66253, 'ErrorSound':getInstance()) end)('PrimaryPlayerQueueFactory':getInstance()),
-        (get({get({This, gameNotificationEvent}), '$class'})):setBasicColorP(get({This, gameNotificationEvent}), BasicColor),
-        (fun(Target_N66334) -> (get({Target_N66334, '$class'})):fireEvent(Target_N66334, get({This, gameNotificationEvent})) end)('GameNotificationEventHandler':getInstance()).
+  def jm_fire(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(PrimaryPlayerQueueFactory.jm_getInstance(), :jm_add, [ErrorSound.jm_getInstance()])
+        JR.call(GameNotificationEventHandler.jm_getInstance(), :jm_fireEvent, [JR.get(this, :gameNotificationEvent)])
+    end)
+  end
+
+
+  def jm_fireWithColor(this, p_basicColor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicColor, p_basicColor)
+        JR.call(PrimaryPlayerQueueFactory.jm_getInstance(), :jm_add, [ErrorSound.jm_getInstance()])
+        JR.call(JR.get(this, :gameNotificationEvent), :jm_setBasicColorP, [JR.lget(f, :basicColor)])
+        JR.call(GameNotificationEventHandler.jm_getInstance(), :jm_fireEvent, [JR.get(this, :gameNotificationEvent)])
+    end)
+  end
+end
+
 

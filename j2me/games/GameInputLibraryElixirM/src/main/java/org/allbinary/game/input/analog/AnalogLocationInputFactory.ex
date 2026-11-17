@@ -1,51 +1,84 @@
-% Generated Code Do Not Modify
-% package org.allbinary.game.input.analog
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+# Generated Code Do Not Modify
+# package org.allbinary.game.input.analog
 
--module('AnalogLocationInputFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule AnalogLocationInputFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> AnalogLocationInputFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'AnalogLocationInputFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :list, nil)
+        JR.put(this, :list, BasicArrayListD.jnew())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, list}, 'BasicArrayListD':new()),
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, AnalogLocationInputFactory.jstatic_instance()})
+    end)
+  end
 
 
-getInstance() ->
-        get({'AnalogLocationInputFactory', instance}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
 
-addPlayer(This, PlayerInputId) when is_integer(PlayerInputId) ->
-        put({local, analogLocationInput}, get({'AnalogLocationInput', 'NULL_ANALOG_LOCATION_INPUT'})),
-        case (PlayerInputId < (get({get({This, list}), '$class'})):size(get({This, list}))) of
-            true ->
-            put({local, analogLocationInput}, (get({get({This, list}), '$class'})):get(get({This, list}), PlayerInputId));
-            false -> ok
-        end,
-        case (get({local, analogLocationInput}) =:= get({'AnalogLocationInput', 'NULL_ANALOG_LOCATION_INPUT'})) of
-            true ->
-            put({local, analogLocationInput}, 'AnalogLocationInput':new(PlayerInputId)),
-            (get({get({This, list}), '$class'})):add(get({This, list}), get({local, analogLocationInput}));
-            false -> ok
-        end.
+  def jm_addPlayer(this, p_playerInputId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :playerInputId, p_playerInputId)
+        JR.lset(f, :analogLocationInput, AnalogLocationInput.jstatic_NULL_ANALOG_LOCATION_INPUT())
+        if (JR.lget(f, :playerInputId) < JR.call(JR.get(this, :list), :jm_size, [])) do
+            JR.lset(f, :analogLocationInput, JR.call(JR.get(this, :list), :jm_get, [JR.lget(f, :playerInputId)]))
+        end
+        if (JR.lget(f, :analogLocationInput) == AnalogLocationInput.jstatic_NULL_ANALOG_LOCATION_INPUT()) do
+            JR.lset(f, :analogLocationInput, AnalogLocationInput.jnew(JR.lget(f, :playerInputId)))
+            JR.call(JR.get(this, :list), :jm_add, [JR.lget(f, :analogLocationInput)])
+        end
+    end)
+  end
 
-getInstanceForPlayer(This, PlayerInputId) when is_integer(PlayerInputId) ->
-        (get({get({This, list}), '$class'})):get(get({This, list}), PlayerInputId).
 
-getList(This) ->
-        get({This, list}).
+  def jm_getInstanceForPlayer(this, p_playerInputId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :playerInputId, p_playerInputId)
+        throw({:jreturn, JR.call(JR.get(this, :list), :jm_get, [JR.lget(f, :playerInputId)])})
+    end)
+  end
+
+
+  def jm_getList(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :list)})
+    end)
+  end
+end
+
 

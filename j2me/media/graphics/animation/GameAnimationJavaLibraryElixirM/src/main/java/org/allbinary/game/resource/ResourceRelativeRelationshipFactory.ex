@@ -1,80 +1,129 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.resource
-% import org.allbinary.graphics.RelativeRelationship
-% import org.allbinary.logic.StdUtil
-% import org.allbinary.util.ABHashtable
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
-% import org.allbinary.util.BasicArrayListUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.resource
 
--module('ResourceRelativeRelationshipFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements ResourceRelativeRelationshipFactoryInterface
+defmodule ResourceRelativeRelationshipFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, basicArrayListUtil}, 'BasicArrayListUtil':getInstance()),
-    put({This, hashtable}, (fun(Target_N65813) -> (get({Target_N65813, '$class'})):createHashtable(Target_N65813) end)('StdUtil':getInstance())),
-    put({This, initialized}, false),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :basicArrayListUtil, nil)
+    JR.put(this, :hashtable, nil)
+    JR.put(this, :initialized, false)
+        JR.put(this, :basicArrayListUtil, BasicArrayListUtil.jm_getInstance())
+        JR.put(this, :hashtable, JR.call(StdUtil.jm_getInstance(), :jm_createHashtable, []))
+        JR.put(this, :initialized, false)
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-% throws Exception
-init(This, Level) when is_integer(Level) ->
-        (get({This, '$class'})):setInitialized(This, true).
+  def jm_init(this, p_level) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :level, p_level)
+        JR.call(this, :jm_setInitialized, [true])
+    end)
+  end
 
-% throws Exception
-getResourceRelativeRelationshipList(This, Resource) when (is_list(Resource) orelse Resource =:= undefined) ->
-        try
-        ListCanBeNull = (get({get({This, hashtable}), '$class'})):get(get({This, hashtable}), Resource),
-        case (ListCanBeNull =:= undefined) of
-            true ->
-            throw({'$return', (get({get({This, basicArrayListUtil}), '$class'})):getImmutableInstance(get({This, basicArrayListUtil}))});
-            false -> ok
-        end,
-        ListCanBeNull
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
 
-% throws Exception
-addResourceRelativeRelationship(This, Resource, HardPoint) when (is_list(Resource) orelse Resource =:= undefined) ->
-        put({local, list}, (get({This, '$class'})):getResourceRelativeRelationshipList(This, Resource)),
-        case (get({local, list}) =:= (get({get({This, basicArrayListUtil}), '$class'})):getImmutableInstance(get({This, basicArrayListUtil}))) of
-            true ->
-            put({local, list}, 'BasicArrayListD':new());
-            false -> ok
-        end,
-        (get({get({local, list}), '$class'})):add(get({local, list}), HardPoint),
-        (get({get({This, hashtable}), '$class'})):put(get({This, hashtable}), Resource, get({local, list})).
+  def jm_getResourceRelativeRelationshipList(this, p_resource) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :resource, p_resource)
+        JR.lset(f, :listCanBeNull, JR.call(JR.get(this, :hashtable), :jm_get, [JR.lget(f, :resource)]))
+        if (JR.lget(f, :listCanBeNull) == nil) do
+            throw({:jreturn, JR.call(JR.get(this, :basicArrayListUtil), :jm_getImmutableInstance, [])})
+        end
+        throw({:jreturn, JR.lget(f, :listCanBeNull)})
+    end)
+  end
 
-isLoadingLevel(This, Level) when is_integer(Level) ->
-        false.
 
-isFeature(This) ->
-        false.
+  def jm_addResourceRelativeRelationship(this, p_resource, p_hardPoint) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :resource, p_resource)
+      JR.lset(f, :hardPoint, p_hardPoint)
+        JR.lset(f, :list, JR.call(this, :jm_getResourceRelativeRelationshipList, [JR.lget(f, :resource)]))
+        if (JR.lget(f, :list) == JR.call(JR.get(this, :basicArrayListUtil), :jm_getImmutableInstance, [])) do
+            JR.lset(f, :list, BasicArrayListD.jnew())
+        end
+        JR.call(JR.lget(f, :list), :jm_add, [JR.lget(f, :hardPoint)])
+        JR.call(JR.get(this, :hashtable), :jm_put, [JR.lget(f, :resource), JR.lget(f, :list)])
+    end)
+  end
 
-setInitialized(This, Initialized) when is_boolean(Initialized) ->
-        put({This, initialized}, Initialized).
 
-isInitialized(This) ->
-        get({This, initialized}).
+  def jm_isLoadingLevel(this, p_level) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :level, p_level)
+        throw({:jreturn, false})
+    end)
+  end
+
+
+  def jm_isFeature(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
+
+
+  def jm_setInitialized(this, p_initialized) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :initialized, p_initialized)
+        JR.put(this, :initialized, JR.lget(f, :initialized))
+    end)
+  end
+
+
+  def jm_isInitialized(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :initialized)})
+    end)
+  end
+end
+
 

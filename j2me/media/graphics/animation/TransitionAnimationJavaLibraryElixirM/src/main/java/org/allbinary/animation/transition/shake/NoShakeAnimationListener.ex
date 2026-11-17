@@ -1,40 +1,40 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation.transition.shake
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation.transition.shake
 
--module('NoShakeAnimationListener').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule NoShakeAnimationListener do
+  def jsuper(), do: ShakeAnimationListener
+def jstatic_NO_SHAKE_ANIMATION_LISTENER(), do: JR.static_get(__MODULE__, :NO_SHAKE_ANIMATION_LISTENER, fn -> NoShakeAnimationListener.jnew() end)
+  def jstatic_set_NO_SHAKE_ANIMATION_LISTENER(value), do: JR.static_put(__MODULE__, :NO_SHAKE_ANIMATION_LISTENER, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ShakeAnimationListener', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-static_init() ->
-    put({?MODULE, 'NO_SHAKE_ANIMATION_LISTENER'}, 'NoShakeAnimationListener':new()),
-    ok.
+  def jinit(this) do
+    ShakeAnimationListener.jinit(this)
+    jinitfields(this)
+  end
 
-init_fields(This) ->
-    ok.
-
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    'ShakeAnimationListener':'$init'(This),
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+end
 
 

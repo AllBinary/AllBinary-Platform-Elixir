@@ -1,94 +1,110 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.form.item.validation
-% import org.allbinary.graphics.form.item.ABTextFieldItem
-% import org.allbinary.logic.control.validate.ValidatorBase
-% import org.allbinary.logic.java.bool.BooleanFactory
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item.validation
 
--module('TextFieldItemValidator').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule TextFieldItemValidator do
+  def jsuper(), do: ValidatorBase
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ValidatorBase', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :textFieldItem, nil)
+    JR.put(this, :min, 0)
+    JR.put(this, :max, 0)
+    JR.put(this, :allowOnEmpty, false)
+        
+        
+        
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, textFieldItem}, undefined),
-    put({This, min}, 0),
-    put({This, max}, 0),
-    put({This, allowOnEmpty}, false),
-    ok.
+
+  def jinit(this, p_textFieldItem, p_min, p_max, p_allowOnEmpty) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :textFieldItem, p_textFieldItem)
+      JR.lset(f, :min, p_min)
+      JR.lset(f, :max, p_max)
+      JR.lset(f, :allowOnEmpty, p_allowOnEmpty)
+      ValidatorBase.jinit(this)
+      jinitfields(this)
+        JR.put(this, :textFieldItem, JR.lget(f, :textFieldItem))
+        JR.put(this, :min, JR.lget(f, :min))
+        JR.put(this, :max, JR.lget(f, :max))
+        JR.put(this, :allowOnEmpty, JR.lget(f, :allowOnEmpty))
+    end)
+  end
+
+  def jnew(p_textFieldItem, p_min, p_max, p_allowOnEmpty) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_textFieldItem, p_min, p_max, p_allowOnEmpty)
+    this
+  end
 
 
-new(TextFieldItem, Min, Max, AllowOnEmpty) when is_integer(Min), is_integer(Max), is_boolean(AllowOnEmpty) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, TextFieldItem, Min, Max, AllowOnEmpty),
-    This.
-
-'$init'(This, TextFieldItem, Min, Max, AllowOnEmpty) when is_integer(Min), is_integer(Max), is_boolean(AllowOnEmpty) ->
-    'ValidatorBase':'$init'(This),
-    init_fields(This),
-        put({This, textFieldItem}, TextFieldItem),
-        put({This, min}, Min),
-        put({This, max}, Max),
-        put({This, allowOnEmpty}, AllowOnEmpty).
-
-isValid(This) ->
-        BooleanFactory = 'BooleanFactory':getInstance(),
-        put({local, result}, get({BooleanFactory, 'TRUE'})),
-        String = (get({get({This, textFieldItem}), '$class'})):getString(get({This, textFieldItem})),
-        TextLength = string:length(String),
-        case ((((TextLength =:= 0) andalso get({This, allowOnEmpty}))) orelse ((TextLength > get({This, min})) andalso (TextLength < get({This, max})))) of
-            true ->
-            ok;
-            false ->
-            case (TextLength < get({This, min})) of
-                true ->
-                put({local, result}, get({BooleanFactory, 'FALSE'}));
-                false ->
-                case (TextLength > get({This, max})) of
-                true ->
-                put({local, result}, get({BooleanFactory, 'FALSE'}));
-                false -> ok
+  def jm_isValid(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :booleanFactory, BooleanFactory.jm_getInstance())
+        JR.lset(f, :result, JR.get(JR.lget(f, :booleanFactory), :TRUE))
+        JR.lset(f, :string, JR.call(JR.get(this, :textFieldItem), :jm_getString, []))
+        JR.lset(f, :textLength, byte_size(JR.lget(f, :string)))
+        if ((((JR.lget(f, :textLength) == 0) && JR.get(this, :allowOnEmpty))) || ((JR.lget(f, :textLength) > JR.get(this, :min)) && (JR.lget(f, :textLength) < JR.get(this, :max)))) do
+            nil
+        else
+            if (JR.lget(f, :textLength) < JR.get(this, :min)) do
+                JR.lset(f, :result, JR.get(JR.lget(f, :booleanFactory), :FALSE))
+            else
+                if (JR.lget(f, :textLength) > JR.get(this, :max)) do
+                JR.lset(f, :result, JR.get(JR.lget(f, :booleanFactory), :FALSE))
             end
             end
-        end,
-        get({local, result}).
+        end
+        throw({:jreturn, JR.lget(f, :result)})
+    end)
+  end
 
-toList(This) ->
-        List = 'BasicArrayListD':new(),
-        String = (get({get({This, textFieldItem}), '$class'})):getString(get({This, textFieldItem})),
-        TextLength = string:length(String),
-        case ((TextLength > get({This, min})) andalso (TextLength < get({This, max}))) of
-            true ->
-            ok;
-            false ->
-            Label = (get({get({This, textFieldItem}), '$class'})):getLabel(get({This, textFieldItem})),
-            Name = string:slice(Label, 0, ((string:length(Label) - 2)) - (0)),
-            case (TextLength < get({This, min})) of
-                true ->
-                (get({List, '$class'})):add(List, (fun(Target_N67080) -> (get({Target_N67080, '$class'})):toString(Target_N67080) end)((fun(Target_N67087) -> (get({Target_N67087, '$class'})):append(Target_N67087, " is to short") end)((fun(Target_N67094) -> (get({Target_N67094, '$class'})):append(Target_N67094, Name) end)('StringMaker':new()))));
-                false ->
-                case (TextLength > get({This, max})) of
-                true ->
-                (get({List, '$class'})):add(List, (fun(Target_N66995) -> (get({Target_N66995, '$class'})):toString(Target_N66995) end)((fun(Target_N67002) -> (get({Target_N67002, '$class'})):append(Target_N67002, " is to long") end)((fun(Target_N67009) -> (get({Target_N67009, '$class'})):append(Target_N67009, Name) end)('StringMaker':new()))));
-                false -> ok
+
+  def jm_toList(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :list, BasicArrayListD.jnew())
+        JR.lset(f, :string, JR.call(JR.get(this, :textFieldItem), :jm_getString, []))
+        JR.lset(f, :textLength, byte_size(JR.lget(f, :string)))
+        if ((JR.lget(f, :textLength) > JR.get(this, :min)) && (JR.lget(f, :textLength) < JR.get(this, :max))) do
+            nil
+        else
+            JR.lset(f, :label, JR.call(JR.get(this, :textFieldItem), :jm_getLabel, []))
+            JR.lset(f, :name, JR.substring(JR.lget(f, :label), 0, JR.int32(byte_size(JR.lget(f, :label)) - 2)))
+            if (JR.lget(f, :textLength) < JR.get(this, :min)) do
+                JR.call(JR.lget(f, :list), :jm_add, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.lget(f, :name)]), :jm_append, [" is to short"]), :jm_toString, [])])
+            else
+                if (JR.lget(f, :textLength) > JR.get(this, :max)) do
+                JR.call(JR.lget(f, :list), :jm_add, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.lget(f, :name)]), :jm_append, [" is to long"]), :jm_toString, [])])
             end
             end
-        end,
-        List.
+        end
+        throw({:jreturn, JR.lget(f, :list)})
+    end)
+  end
+end
+
 

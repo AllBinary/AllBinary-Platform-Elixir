@@ -1,44 +1,52 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion.gesture.observer
-% import org.allbinary.input.motion.gesture.configuration.MotionGestureConfiguration
-% import org.allbinary.input.motion.gesture.configuration.MotionGestureConfigurationFactory
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture.observer
 
--module('MotionGestureReceiveInterfaceFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule MotionGestureReceiveInterfaceFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        try
-        Configuration = 'MotionGestureConfigurationFactory':getInstance(),
-        case (not (get({Configuration, '$class'})):isExecutingActionsAllowed(Configuration)) of
-            true ->
-            throw({'$return', 'NullCompleteMotionGestureReceiver':new()});
-            false ->
-            throw({'$return', 'ResolveCompleteMotionGestureListener':new()})
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :configuration, MotionGestureConfigurationFactory.jm_getInstance())
+        if !JR.call(JR.lget(f, :configuration), :jm_isExecutingActionsAllowed, []) do
+            throw({:jreturn, NullCompleteMotionGestureReceiver.jnew()})
+        else
+            throw({:jreturn, ResolveCompleteMotionGestureListener.jnew()})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
+end
+
 

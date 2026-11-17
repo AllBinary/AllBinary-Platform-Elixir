@@ -1,85 +1,126 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation
-% import org.allbinary.graphics.GPoint
-% import org.allbinary.util.BasicArrayList
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation
 
--module('VectorAnimationUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule VectorAnimationUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> VectorAnimationUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'VectorAnimationUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, VectorAnimationUtil.jstatic_instance()})
+    end)
+  end
 
 
-getInstance() ->
-        get({'VectorAnimationUtil', instance}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
 
-toAnimationArrayFromListOfPointListWithPointsPerFrame(This, Vector, PointsPerFrame) when is_integer(PointsPerFrame) ->
-        Size = (get({Vector, '$class'})):size(Vector),
-        Points = ok % Otherwise - newArray - 3
-,
-        put({local, nextBasicArrayList}, undefined),
-        put({local, framePoints}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, nextBasicArrayList}, array:get(Index, get({Vector, objectArray}))),
-            put({local, framePoints}, (get({This, '$class'})):toFrameArrayFromPointBasicArrayList(This, get({local, nextBasicArrayList}))),
-            lists:foreach(fun(PointIndex) ->
-                array:set(Index, array:set(PointIndex, array:set(0, array:get(0, array:get(PointIndex, get({local, framePoints}))), array:get(PointIndex, array:get(Index, Points))), array:get(Index, Points)), Points),
-                array:set(Index, array:set(PointIndex, array:set(1, array:get(1, array:get(PointIndex, get({local, framePoints}))), array:get(PointIndex, array:get(Index, Points))), array:get(Index, Points)), Points)
-            end, lists:seq(0, array:size(get({local, framePoints})) - 1))
-        end, lists:seq(0, Size - 1)),
-        Points.
+  def jm_toAnimationArrayFromListOfPointListWithPointsPerFrame(this, p_vector, p_pointsPerFrame) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :vector, p_vector)
+      JR.lset(f, :pointsPerFrame, p_pointsPerFrame)
+        JR.lset(f, :size, JR.call(JR.lget(f, :vector), :jm_size, []))
+        JR.lset(f, :points, JR.anew_of(JR.lget(f, :size), fn -> JR.anew_of(JR.lget(f, :pointsPerFrame), fn -> JR.anew(2, 0) end) end))
+        JR.lset(f, :nextBasicArrayList, nil)
+        JR.lset(f, :framePoints, nil)
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :nextBasicArrayList, JR.aget(JR.get(JR.lget(f, :vector), :objectArray), JR.lget(f, :index)))
+            JR.lset(f, :framePoints, JR.call(this, :jm_toFrameArrayFromPointBasicArrayList, [JR.lget(f, :nextBasicArrayList)]))
+            JR.lset(f, :pointIndex, 0)
+            JR.jfor(fn -> (JR.lget(f, :pointIndex) < JR.alength(JR.lget(f, :framePoints))) end, fn -> JR.lpostinc(f, :pointIndex, 1) end, fn ->
+                JR.aset(JR.aget(JR.aget(JR.lget(f, :points), JR.lget(f, :index)), JR.lget(f, :pointIndex)), 0, JR.aget(JR.aget(JR.lget(f, :framePoints), JR.lget(f, :pointIndex)), 0))
+                JR.aset(JR.aget(JR.aget(JR.lget(f, :points), JR.lget(f, :index)), JR.lget(f, :pointIndex)), 1, JR.aget(JR.aget(JR.lget(f, :framePoints), JR.lget(f, :pointIndex)), 1))
+            end)
+        end)
+        throw({:jreturn, JR.lget(f, :points)})
+    end)
+  end
 
-toAnimationArrayFromListOfPointList(This, Vector) ->
-        Size = (get({Vector, '$class'})):size(Vector),
-        Points = ok % Otherwise - newArray - 3
-,
-        put({local, nextBasicArrayList}, undefined),
-        put({local, framePoints}, undefined),
-        lists:foreach(fun(Index) ->
-            put({local, nextBasicArrayList}, array:get(Index, get({Vector, objectArray}))),
-            put({local, framePoints}, (get({This, '$class'})):toFrameArrayFromPointBasicArrayList(This, get({local, nextBasicArrayList}))),
-            array:set(Index, array:new(array:size(get({local, framePoints})), {default, array:new(2, {default, 0})}), Points),
-            lists:foreach(fun(PointIndex) ->
-                array:set(Index, array:set(PointIndex, array:set(0, array:get(0, array:get(PointIndex, get({local, framePoints}))), array:get(PointIndex, array:get(Index, Points))), array:get(Index, Points)), Points),
-                array:set(Index, array:set(PointIndex, array:set(1, array:get(1, array:get(PointIndex, get({local, framePoints}))), array:get(PointIndex, array:get(Index, Points))), array:get(Index, Points)), Points)
-            end, lists:seq(0, array:size(get({local, framePoints})) - 1))
-        end, lists:seq(0, Size - 1)),
-        Points.
 
-toFrameArrayFromPointBasicArrayList(This, List) ->
-        Points = array:new((get({List, '$class'})):size(List), {default, array:new(2, {default, 0})}),
-        Size = (get({List, '$class'})):size(List),
-        lists:foreach(fun(Index) ->
-            NextPoint = array:get(Index, get({List, objectArray})),
-            array:set(Index, array:set(0, (get({NextPoint, '$class'})):getX(NextPoint), array:get(Index, Points)), Points),
-            array:set(Index, array:set(1, (get({NextPoint, '$class'})):getY(NextPoint), array:get(Index, Points)), Points)
-        end, lists:seq(0, Size - 1)),
-        Points.
+  def jm_toAnimationArrayFromListOfPointList(this, p_vector) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :vector, p_vector)
+        JR.lset(f, :size, JR.call(JR.lget(f, :vector), :jm_size, []))
+        JR.lset(f, :points, JR.anew_of(JR.lget(f, :size), fn -> JR.anew_of(0, fn -> JR.anew(0, 0) end) end))
+        JR.lset(f, :nextBasicArrayList, nil)
+        JR.lset(f, :framePoints, nil)
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :nextBasicArrayList, JR.aget(JR.get(JR.lget(f, :vector), :objectArray), JR.lget(f, :index)))
+            JR.lset(f, :framePoints, JR.call(this, :jm_toFrameArrayFromPointBasicArrayList, [JR.lget(f, :nextBasicArrayList)]))
+            JR.aset(JR.lget(f, :points), JR.lget(f, :index), JR.anew_of(JR.alength(JR.lget(f, :framePoints)), fn -> JR.anew(2, 0) end))
+            JR.lset(f, :pointIndex, 0)
+            JR.jfor(fn -> (JR.lget(f, :pointIndex) < JR.alength(JR.lget(f, :framePoints))) end, fn -> JR.lpostinc(f, :pointIndex, 1) end, fn ->
+                JR.aset(JR.aget(JR.aget(JR.lget(f, :points), JR.lget(f, :index)), JR.lget(f, :pointIndex)), 0, JR.aget(JR.aget(JR.lget(f, :framePoints), JR.lget(f, :pointIndex)), 0))
+                JR.aset(JR.aget(JR.aget(JR.lget(f, :points), JR.lget(f, :index)), JR.lget(f, :pointIndex)), 1, JR.aget(JR.aget(JR.lget(f, :framePoints), JR.lget(f, :pointIndex)), 1))
+            end)
+        end)
+        throw({:jreturn, JR.lget(f, :points)})
+    end)
+  end
+
+
+  def jm_toFrameArrayFromPointBasicArrayList(this, p_list) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :list, p_list)
+        JR.lset(f, :points, JR.anew_of(JR.call(JR.lget(f, :list), :jm_size, []), fn -> JR.anew(2, 0) end))
+        JR.lset(f, :size, JR.call(JR.lget(f, :list), :jm_size, []))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :nextPoint, JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index)))
+            JR.aset(JR.aget(JR.lget(f, :points), JR.lget(f, :index)), 0, JR.call(JR.lget(f, :nextPoint), :jm_getX, []))
+            JR.aset(JR.aget(JR.lget(f, :points), JR.lget(f, :index)), 1, JR.call(JR.lget(f, :nextPoint), :jm_getY, []))
+        end)
+        throw({:jreturn, JR.lget(f, :points)})
+    end)
+  end
+end
+
 

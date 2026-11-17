@@ -1,77 +1,112 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.commands
-% import javax.microedition.lcdui.Command
-% import org.allbinary.graphics.displayable.CanvasStrings
-% import org.allbinary.logic.NullUtil
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.commands
 
--module('GameCommandsFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GameCommandsFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT) end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, get({'NullUtil':getInstance(), 'NULL_OBJECT'})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :TOGGLE_FULLSCREEN, nil)
+    JR.put(this, :TOGGLE_KEYBOARD, nil)
+    JR.put(this, :SET_MENU_DISPLAYABLE, nil)
+    JR.put(this, :APPLICATION_UPDATE, nil)
+    JR.put(this, :DISPLAY_ABOUT, nil)
+    JR.put(this, :OPEN_WEB_URL, nil)
+    JR.put(this, :CLOSE_OPTIONS, nil)
+    JR.put(this, :DISPLAY_OPTIONS, nil)
+    JR.put(this, :START_TRACE, nil)
+    JR.put(this, :STOP_TRACE, nil)
+    JR.put(this, :DEFAULT_OPTIONS, nil)
+    JR.put(this, :SHOW_GAME_CANVAS, nil)
+    JR.put(this, :CLOSE_AND_SHOW_GAME_CANVAS, nil)
+    JR.put(this, :QUIT_COMMAND, nil)
+    JR.put(this, :RESTART_COMMAND, nil)
+    JR.put(this, :DISPLAY_SAVE_FORM, nil)
+    JR.put(this, :SAVE, nil)
+    JR.put(this, :DISPLAY_LOAD_FORM, nil)
+    JR.put(this, :LOAD_FILE, nil)
+    JR.put(this, :DELETE_FILE, nil)
+    JR.put(this, :EXIT_COMMAND, nil)
+    JR.put(this, :EXIT_WITHOUT_PROGRESS_COMMAND, nil)
+    JR.put(this, :START_COMMAND, nil)
+    JR.put(this, :CONTINUE_COMMAND, nil)
+    JR.put(this, :SELECT_COMMAND, nil)
+    JR.put(this, :FEATURE_UPDATE, nil)
+    JR.put(this, :BUY_COMMAND, nil)
+        JR.put(this, :TOGGLE_FULLSCREEN, Command.jnew("Toggle FullScreen", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 1))
+        JR.put(this, :TOGGLE_KEYBOARD, Command.jnew("Keyboard", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 1))
+        JR.put(this, :SET_MENU_DISPLAYABLE, Command.jnew("Set Menu Displayable", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 1))
+        JR.put(this, :APPLICATION_UPDATE, Command.jnew(JR.get(CommonStrings.jm_getInstance(), :UPDATE), JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 1))
+        JR.put(this, :DISPLAY_ABOUT, Command.jnew(JR.get(CanvasStrings.jm_getInstance(), :ABOUT), JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 2))
+        JR.put(this, :OPEN_WEB_URL, Command.jnew("Open Web URL", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 2))
+        JR.put(this, :CLOSE_OPTIONS, Command.jnew("Back", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 1))
+        JR.put(this, :DISPLAY_OPTIONS, Command.jnew(JR.get(CanvasStrings.jm_getInstance(), :OPTIONS), JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 2))
+        JR.put(this, :START_TRACE, Command.jnew("Start Trace", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 1))
+        JR.put(this, :STOP_TRACE, Command.jnew("Stop Trace", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 1))
+        JR.put(this, :DEFAULT_OPTIONS, Command.jnew("Default", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 1))
+        JR.put(this, :SHOW_GAME_CANVAS, Command.jnew("Back to Game", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 1))
+        JR.put(this, :CLOSE_AND_SHOW_GAME_CANVAS, Command.jnew("Back", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 1))
+        JR.put(this, :QUIT_COMMAND, Command.jnew("Quit", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_STOP(), 1))
+        JR.put(this, :RESTART_COMMAND, Command.jnew("Restart", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 0))
+        JR.put(this, :DISPLAY_SAVE_FORM, Command.jnew("Save To", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 3))
+        JR.put(this, :SAVE, Command.jnew("Save", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 3))
+        JR.put(this, :DISPLAY_LOAD_FORM, Command.jnew("Load", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 3))
+        JR.put(this, :LOAD_FILE, Command.jnew("Load File", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 3))
+        JR.put(this, :DELETE_FILE, Command.jnew("Delete File", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 1))
+        JR.put(this, :EXIT_COMMAND, Command.jnew("Exit", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_EXIT(), 2))
+        JR.put(this, :EXIT_WITHOUT_PROGRESS_COMMAND, Command.jnew("Exit Without Progress", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_EXIT(), 2))
+        JR.put(this, :START_COMMAND, Command.jnew(JR.get(CommonStrings.jm_getInstance(), :START), JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 1))
+        JR.put(this, :CONTINUE_COMMAND, Command.jnew("Continue", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 1))
+        JR.put(this, :SELECT_COMMAND, Command.jnew("Select", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 1))
+        JR.put(this, :FEATURE_UPDATE, Command.jnew("Feature Update", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 1))
+        JR.put(this, :BUY_COMMAND, Command.jnew("BUY", JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING), Command.jstatic_SCREEN(), 1))
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'TOGGLE_FULLSCREEN'}, 'Command':new("Toggle FullScreen", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 1)),
-    put({This, 'TOGGLE_KEYBOARD'}, 'Command':new("Keyboard", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 1)),
-    put({This, 'SET_MENU_DISPLAYABLE'}, 'Command':new("Set Menu Displayable", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 1)),
-    put({This, 'APPLICATION_UPDATE'}, 'Command':new(get({'CommonStrings':getInstance(), 'UPDATE'}), get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 1)),
-    put({This, 'DISPLAY_ABOUT'}, 'Command':new(get({'CanvasStrings':getInstance(), 'ABOUT'}), get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 2)),
-    put({This, 'OPEN_WEB_URL'}, 'Command':new("Open Web URL", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 2)),
-    put({This, 'CLOSE_OPTIONS'}, 'Command':new("Back", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 1)),
-    put({This, 'DISPLAY_OPTIONS'}, 'Command':new(get({'CanvasStrings':getInstance(), 'OPTIONS'}), get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 2)),
-    put({This, 'START_TRACE'}, 'Command':new("Start Trace", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 1)),
-    put({This, 'STOP_TRACE'}, 'Command':new("Stop Trace", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 1)),
-    put({This, 'DEFAULT_OPTIONS'}, 'Command':new("Default", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 1)),
-    put({This, 'SHOW_GAME_CANVAS'}, 'Command':new("Back to Game", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 1)),
-    put({This, 'CLOSE_AND_SHOW_GAME_CANVAS'}, 'Command':new("Back", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 1)),
-    put({This, 'QUIT_COMMAND'}, 'Command':new("Quit", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'STOP'}), 1)),
-    put({This, 'RESTART_COMMAND'}, 'Command':new("Restart", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 0)),
-    put({This, 'DISPLAY_SAVE_FORM'}, 'Command':new("Save To", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 3)),
-    put({This, 'SAVE'}, 'Command':new("Save", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 3)),
-    put({This, 'DISPLAY_LOAD_FORM'}, 'Command':new("Load", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 3)),
-    put({This, 'LOAD_FILE'}, 'Command':new("Load File", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 3)),
-    put({This, 'DELETE_FILE'}, 'Command':new("Delete File", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 1)),
-    put({This, 'EXIT_COMMAND'}, 'Command':new("Exit", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'EXIT'}), 2)),
-    put({This, 'EXIT_WITHOUT_PROGRESS_COMMAND'}, 'Command':new("Exit Without Progress", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'EXIT'}), 2)),
-    put({This, 'START_COMMAND'}, 'Command':new(get({'CommonStrings':getInstance(), 'START'}), get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 1)),
-    put({This, 'CONTINUE_COMMAND'}, 'Command':new("Continue", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 1)),
-    put({This, 'SELECT_COMMAND'}, 'Command':new("Select", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 1)),
-    put({This, 'FEATURE_UPDATE'}, 'Command':new("Feature Update", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 1)),
-    put({This, 'BUY_COMMAND'}, 'Command':new("BUY", get({'StringUtil':getInstance(), 'EMPTY_STRING'}), get({'Command', 'SCREEN'}), 1)),
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        if (GameCommandsFactory.jstatic_instance() == JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)) do
+            GameCommandsFactory.jstatic_set_instance(GameCommandsFactory.jnew())
+        end
+        throw({:jreturn, GameCommandsFactory.jstatic_instance()})
+    end)
+  end
 
 
-getInstance() ->
-        case (get({'GameCommandsFactory', instance}) =:= get({'NullUtil':getInstance(), 'NULL_OBJECT'})) of
-            true ->
-            put({'GameCommandsFactory', instance}, 'GameCommandsFactory':new());
-            false -> ok
-        end,
-        get({'GameCommandsFactory', instance}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
 

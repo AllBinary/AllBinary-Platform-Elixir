@@ -1,79 +1,160 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonLabels
-% import org.allbinary.string.CommonSeps
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics
 
--module('Rectangle').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule Rectangle do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, point}, undefined),
-    put({This, width}, 0),
-    put({This, height}, 0),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :point, nil)
+    JR.put(this, :width, 0)
+    JR.put(this, :height, 0)
+        
+        
+        
+    nil
+  end
 
 
-new(Point, Width, Height) when is_integer(Width), is_integer(Height) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Point, Width, Height),
-    This.
+  def jinit(this, p_point, p_width, p_height) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :point, p_point)
+      JR.lset(f, :width, p_width)
+      JR.lset(f, :height, p_height)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :point, JR.lget(f, :point))
+        JR.put(this, :width, JR.lget(f, :width))
+        JR.put(this, :height, JR.lget(f, :height))
+    end)
+  end
 
-'$init'(This, Point, Width, Height) when is_integer(Width), is_integer(Height) ->
-    init_fields(This),
-        put({This, point}, Point),
-        put({This, width}, Width),
-        put({This, height}, Height).
+  def jnew(p_point, p_width, p_height) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_point, p_width, p_height)
+    this
+  end
 
-getPoint(This) ->
-        get({This, point}).
 
-setPoint(This, Point) ->
-        put({This, point}, Point).
+  def jm_getPoint(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :point)})
+    end)
+  end
 
-getMaxX(This) ->
-        ((get({get({This, point}), '$class'})):getX(get({This, point})) + get({This, width})).
 
-getMaxY(This) ->
-        ((get({get({This, point}), '$class'})):getY(get({This, point})) + get({This, height})).
+  def jm_setPoint(this, p_point) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :point, p_point)
+        JR.put(this, :point, JR.lget(f, :point))
+    end)
+  end
 
-getWidth(This) ->
-        get({This, width}).
 
-setWidth(This, Width) when is_integer(Width) ->
-        put({This, width}, Width).
+  def jm_getMaxX(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, (JR.call(JR.get(this, :point), :jm_getX, []) + JR.get(this, :width))})
+    end)
+  end
 
-getHeight(This) ->
-        get({This, height}).
 
-setHeight(This, Height) when is_integer(Height) ->
-        put({This, height}, Height).
+  def jm_getMaxY(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, (JR.call(JR.get(this, :point), :jm_getY, []) + JR.get(this, :height))})
+    end)
+  end
 
-toString(This) ->
-        StringBuffer = 'StringMaker':new(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, (fun(Target_N66449) -> (get({Target_N66449, '$class'})):toString(Target_N66449) end)((get({This, '$class'})):getPoint(This))),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({'CommonSeps':getInstance(), 'SPACE'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({'CommonLabels':getInstance(), 'WIDTH_LABEL'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, (get({This, '$class'})):getWidth(This)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({'CommonSeps':getInstance(), 'SPACE'})),
-        (get({StringBuffer, '$class'})):append(StringBuffer, get({'CommonLabels':getInstance(), 'HEIGHT_LABEL'})),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, (get({This, '$class'})):getHeight(This)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, " MaxX: "),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, (get({This, '$class'})):getMaxX(This)),
-        (get({StringBuffer, '$class'})):append(StringBuffer, " MaxY: "),
-        (get({StringBuffer, '$class'})):appendint(StringBuffer, (get({This, '$class'})):getMaxY(This)),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+
+  def jm_getWidth(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :width)})
+    end)
+  end
+
+
+  def jm_setWidth(this, p_width) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :width, p_width)
+        JR.put(this, :width, JR.lget(f, :width))
+    end)
+  end
+
+
+  def jm_getHeight(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :height)})
+    end)
+  end
+
+
+  def jm_setHeight(this, p_height) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :height, p_height)
+        JR.put(this, :height, JR.lget(f, :height))
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.call(this, :jm_getPoint, []), :jm_toString, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :SPACE)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(CommonLabels.jm_getInstance(), :WIDTH_LABEL)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.call(this, :jm_getWidth, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :SPACE)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(CommonLabels.jm_getInstance(), :HEIGHT_LABEL)])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.call(this, :jm_getHeight, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [" MaxX: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.call(this, :jm_getMaxX, [])])
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [" MaxY: "])
+        JR.call(JR.lget(f, :stringBuffer), :jm_appendint, [JR.call(this, :jm_getMaxY, [])])
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+end
+
 

@@ -1,65 +1,74 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import javax.microedition.lcdui.Canvas
-% import org.allbinary.string.CommonPhoneStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('CanvasUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule CanvasUtil do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-getKeyName(Key) when is_integer(Key) ->
-        try
-        CommonPhoneStrings = 'CommonPhoneStrings':getInstance(),
-        case (Key =:= get({'Canvas', 'UP'})) of
-            true ->
-            throw({'$return', get({CommonPhoneStrings, 'UP'})});
-            false ->
-            case (Key =:= get({'Canvas', 'DOWN'})) of
-            true ->
-            throw({'$return', get({CommonPhoneStrings, 'DOWN'})});
-            false ->
-            case (Key =:= get({'Canvas', 'RIGHT'})) of
-            true ->
-            throw({'$return', get({CommonPhoneStrings, 'RIGHT'})});
-            false ->
-            case (Key =:= get({'Canvas', 'LEFT'})) of
-            true ->
-            throw({'$return', get({CommonPhoneStrings, 'LEFT'})});
-            false ->
-            case (Key =:= get({'Canvas', 'FIRE'})) of
-            true ->
-            throw({'$return', get({CommonPhoneStrings, 'FIRE'})});
-            false -> ok
+
+  def jm_getKeyName(p_key) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :key, p_key)
+        JR.lset(f, :commonPhoneStrings, CommonPhoneStrings.jm_getInstance())
+        if (JR.lget(f, :key) == Canvas.jstatic_UP()) do
+            throw({:jreturn, JR.get(JR.lget(f, :commonPhoneStrings), :UP)})
+        else
+            if (JR.lget(f, :key) == Canvas.jstatic_DOWN()) do
+            throw({:jreturn, JR.get(JR.lget(f, :commonPhoneStrings), :DOWN)})
+        else
+            if (JR.lget(f, :key) == Canvas.jstatic_RIGHT()) do
+            throw({:jreturn, JR.get(JR.lget(f, :commonPhoneStrings), :RIGHT)})
+        else
+            if (JR.lget(f, :key) == Canvas.jstatic_LEFT()) do
+            throw({:jreturn, JR.get(JR.lget(f, :commonPhoneStrings), :LEFT)})
+        else
+            if (JR.lget(f, :key) == Canvas.jstatic_FIRE()) do
+            throw({:jreturn, JR.get(JR.lget(f, :commonPhoneStrings), :FIRE)})
         end
         end
         end
         end
-        end,
-        "UNKNOWN KEY"
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        end
+        throw({:jreturn, "UNKNOWN KEY"})
+    end)
+  end
+end
+
 

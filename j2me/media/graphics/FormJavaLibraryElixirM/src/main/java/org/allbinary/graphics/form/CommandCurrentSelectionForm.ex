@@ -1,189 +1,312 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.form
-% import javax.microedition.lcdui.Command
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.J2MEUtil
-% import org.allbinary.animation.Animation
-% import org.allbinary.animation.NullAnimationFactory
-% import org.allbinary.animation.vector.RectangleAdjustedAnimation
-% import org.allbinary.animation.vector.RectangleFilledAdjustedAnimation
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.color.BasicColorFactory
-% import org.allbinary.graphics.font.UpdateMyFontInterface
-% import org.allbinary.graphics.form.item.CommandTextItem
-% import org.allbinary.graphics.form.item.ABCustomItem
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
--module('CommandCurrentSelectionForm').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements UpdateMyFontInterface
+defmodule CommandCurrentSelectionForm do
+  def jsuper(), do: ScrollCurrentSelectionForm
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ScrollCurrentSelectionForm', Function, Arguments).
-
-init_fields(This) ->
-    put({This, selectedAnimationArray}, array:new(16, {default, undefined})),
-    put({This, unSelectedAnimationArray}, array:new(16, {default, undefined})),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :selectedAnimationArray, nil)
+    JR.put(this, :unSelectedAnimationArray, nil)
+        JR.put(this, :selectedAnimationArray, JR.anew(16, nil))
+        JR.put(this, :unSelectedAnimationArray, JR.anew(16, nil))
+    nil
+  end
 
 
-new(Title, Items, Border, MoveForSmallScreen, BackgroundBasicColor, ForegroundBasicColor) when (is_list(Title) orelse Title =:= undefined), (is_tuple(Items) orelse Items =:= undefined), is_integer(Border), is_boolean(MoveForSmallScreen) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Title, Items, Border, MoveForSmallScreen, BackgroundBasicColor, ForegroundBasicColor),
-    This.
+  def jinit(this, p_title, p_items, p_border, p_moveForSmallScreen, p_backgroundBasicColor, p_foregroundBasicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :title, p_title)
+      JR.lset(f, :items, p_items)
+      JR.lset(f, :border, p_border)
+      JR.lset(f, :moveForSmallScreen, p_moveForSmallScreen)
+      JR.lset(f, :backgroundBasicColor, p_backgroundBasicColor)
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+        ScrollCurrentSelectionForm.jinit(this, JR.lget(f, :title), JR.lget(f, :items), ItemPaintableFactory.jm_getInstance(), JR.lget(f, :border), -3, JR.lget(f, :moveForSmallScreen), JR.lget(f, :backgroundBasicColor), JR.lget(f, :foregroundBasicColor))
+        CommandCurrentSelectionForm.jinitfields(this)
+        JR.call(this, :jm_initAnimations, [])
+        JR.call(this, :jm_addAll, [JR.lget(f, :items)])
+    end)
+  end
 
-'$init'(This, Title, Items, Border, MoveForSmallScreen, BackgroundBasicColor, ForegroundBasicColor) when (is_list(Title) orelse Title =:= undefined), (is_tuple(Items) orelse Items =:= undefined), is_integer(Border), is_boolean(MoveForSmallScreen) ->
-        'ScrollCurrentSelectionForm':'$init'(This, Title, Items, 'ItemPaintableFactory':getInstance(), Border, (-3), MoveForSmallScreen, BackgroundBasicColor, ForegroundBasicColor),
-        init_fields(This),
-        (get({This, '$class'})):initAnimations(This),
-        (get({This, '$class'})):addAll(This, Items).
+  def jnew(p_title, p_items, p_border, p_moveForSmallScreen, p_backgroundBasicColor, p_foregroundBasicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_title, p_items, p_border, p_moveForSmallScreen, p_backgroundBasicColor, p_foregroundBasicColor)
+    this
+  end
 
-updateMeasurement(This, Graphics) ->
-        (get({This, '$class'})):updateAll(This, Graphics, (get({This, '$class'})):getAllitems(This)),
-        'ScrollCurrentSelectionForm':updateMeasurement(This, Graphics).
 
-initAnimations(This) ->
-        NullAnimation = (fun(Target_N66520) -> (get({Target_N66520, '$class'})):getInstance(Target_N66520, 0) end)('NullAnimationFactory':getFactoryInstance()),
-        put({local, index}, array:size(get({This, selectedAnimationArray}))),
-        (fun Loop() -> case (begin put({local, index}, get({local, index}) - 1), get({local, index}) end >= 0) of true ->
-            put({This, selectedAnimationArray}, array:set(get({local, index}), NullAnimation, get({This, selectedAnimationArray}))),
-            Loop();
-        false -> ok end end)(),
-        put({local, index}, array:size(get({This, unSelectedAnimationArray}))),
-        (fun Loop() -> case (begin put({local, index}, get({local, index}) - 1), get({local, index}) end >= 0) of true ->
-            put({This, unSelectedAnimationArray}, array:set(get({local, index}), NullAnimation, get({This, unSelectedAnimationArray}))),
-            Loop();
-        false -> ok end end)().
+  def jm_updateMeasurement(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(this, :jm_updateAll, [JR.lget(f, :graphics), JR.call(this, :jm_getAllitems, [])])
+        ScrollCurrentSelectionForm.jm_updateMeasurement(this, JR.lget(f, :graphics))
+    end)
+  end
 
-addAll(This, Items) when (is_tuple(Items) orelse Items =:= undefined) ->
-        put({local, index}, array:size(Items)),
-        (fun Loop() -> case (begin put({local, index}, get({local, index}) - 1), get({local, index}) end >= 0) of true ->
-            (get({This, '$class'})):addAt(This, get({local, index}), array:get(get({local, index}), Items)),
-            Loop();
-        false -> ok end end)().
 
-addAt(This, Index, Item) when is_integer(Index) ->
-        BasicColorFactory = 'BasicColorFactory':getInstance(),
-        ButtonColor = get({BasicColorFactory, 'TRANSPARENT_GREY'}),
-        SelectedButtonColor = get({BasicColorFactory, 'TRANSPARENT_RED'}),
-        Width = (get({Item, '$class'})):getMinimumWidth(Item),
-        Height = (get({Item, '$class'})):getMinimumHeight(Item),
-        put({local, adjustedBorder}, 3),
-        Offset = (-((get({This, halfBorder}) + get({local, adjustedBorder})))),
-        RectWidth = ((Width + get({This, border})) - get({local, adjustedBorder})),
-        RectHeight = ((Height + get({This, border})) - get({local, adjustedBorder})),
-        case ('J2MEUtil':isJ2ME() orelse 'J2MEUtil':isHTML()) of
-            true ->
-            put({This, selectedAnimationArray}, array:set(Index, 'RectangleAdjustedAnimation':new(RectWidth, RectHeight, Offset, Offset, SelectedButtonColor), get({This, selectedAnimationArray})));
-            false ->
-            put({This, selectedAnimationArray}, array:set(Index, 'RectangleFilledAdjustedAnimation':new(RectWidth, RectHeight, Offset, Offset, SelectedButtonColor), get({This, selectedAnimationArray})))
-        end,
-        put({local, adjustedBorder}, 4),
-        case ('J2MEUtil':isJ2ME() orelse 'J2MEUtil':isHTML()) of
-            true ->
-            put({This, unSelectedAnimationArray}, array:set(Index, 'RectangleAdjustedAnimation':new(RectWidth, RectHeight, Offset, Offset, ButtonColor), get({This, unSelectedAnimationArray})));
-            false ->
-            put({This, unSelectedAnimationArray}, array:set(Index, 'RectangleFilledAdjustedAnimation':new(RectWidth, RectHeight, Offset, Offset, ButtonColor), get({This, unSelectedAnimationArray})))
-        end.
+  def jm_initAnimations(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :nullAnimation, JR.call(NullAnimationFactory.jm_getFactoryInstance(), :jm_getInstance, [0]))
+        JR.lset(f, :index, JR.alength(JR.get(this, :selectedAnimationArray)))
+        JR.jfor(fn -> (JR.lpreinc(f, :index, -1) >= 0) end, fn -> nil end, fn ->
+            JR.aset(JR.get(this, :selectedAnimationArray), JR.lget(f, :index), JR.lget(f, :nullAnimation))
+        end)
+        JR.lset(f, :index, JR.alength(JR.get(this, :unSelectedAnimationArray)))
+        JR.jfor(fn -> (JR.lpreinc(f, :index, -1) >= 0) end, fn -> nil end, fn ->
+            JR.aset(JR.get(this, :unSelectedAnimationArray), JR.lget(f, :index), JR.lget(f, :nullAnimation))
+        end)
+    end)
+  end
 
-updateAll(This, Graphics, Items) when (is_tuple(Items) orelse Items =:= undefined) ->
-        put({local, index}, array:size(Items)),
-        (fun Loop() -> case (begin put({local, index}, get({local, index}) - 1), get({local, index}) end >= 0) of true ->
-            (fun(Target_N68016) -> (get({Target_N68016, '$class'})):preMeasurement(Target_N68016, Graphics) end)(array:get(get({local, index}), Items)),
-            (get({This, '$class'})):updateAt(This, get({local, index}), array:get(get({local, index}), Items)),
-            Loop();
-        false -> ok end end)().
 
-updateAt(This, Index, Item) when is_integer(Index) ->
-        BasicColorFactory = 'BasicColorFactory':getInstance(),
-        ButtonColor = get({BasicColorFactory, 'TRANSPARENT_GREY'}),
-        SelectedButtonColor = get({BasicColorFactory, 'TRANSPARENT_RED'}),
-        Width = (get({Item, '$class'})):getMinimumWidth(Item),
-        Height = (get({Item, '$class'})):getMinimumHeight(Item),
-        put({local, adjustedBorder}, 3),
-        Offset = (-((get({This, halfBorder}) + get({local, adjustedBorder})))),
-        RectWidth = ((Width + get({This, border})) - get({local, adjustedBorder})),
-        RectHeight = ((Height + get({This, border})) - get({local, adjustedBorder})),
-        case ('J2MEUtil':isJ2ME() orelse 'J2MEUtil':isHTML()) of
-            true ->
-            put({local, rectangleAdjustedAnimation}, array:get(Index, get({This, selectedAnimationArray}))),
-            (get({get({local, rectangleAdjustedAnimation}), '$class'})):setWidth(get({local, rectangleAdjustedAnimation}), RectWidth),
-            (get({get({local, rectangleAdjustedAnimation}), '$class'})):setHeight(get({local, rectangleAdjustedAnimation}), RectHeight),
-            (get({get({local, rectangleAdjustedAnimation}), '$class'})):setOffsetX(get({local, rectangleAdjustedAnimation}), Offset),
-            (get({get({local, rectangleAdjustedAnimation}), '$class'})):setOffsetY(get({local, rectangleAdjustedAnimation}), Offset),
-            (get({get({local, rectangleAdjustedAnimation}), '$class'})):setBasicColorP(get({local, rectangleAdjustedAnimation}), SelectedButtonColor);
-            false ->
-            put({local, rectangleAdjustedAnimation}, array:get(Index, get({This, selectedAnimationArray}))),
-            (get({get({local, rectangleAdjustedAnimation}), '$class'})):setWidth(get({local, rectangleAdjustedAnimation}), RectWidth),
-            (get({get({local, rectangleAdjustedAnimation}), '$class'})):setHeight(get({local, rectangleAdjustedAnimation}), RectHeight),
-            (get({get({local, rectangleAdjustedAnimation}), '$class'})):setOffsetX(get({local, rectangleAdjustedAnimation}), Offset),
-            (get({get({local, rectangleAdjustedAnimation}), '$class'})):setOffsetY(get({local, rectangleAdjustedAnimation}), Offset),
-            (get({get({local, rectangleAdjustedAnimation}), '$class'})):setBasicColorP(get({local, rectangleAdjustedAnimation}), SelectedButtonColor)
-        end,
-        put({local, adjustedBorder}, 4),
-        case ('J2MEUtil':isJ2ME() orelse 'J2MEUtil':isHTML()) of
-            true ->
-            put({local, rectangleAdjustedAnimation}, array:get(Index, get({This, unSelectedAnimationArray}))),
-            (get({get({local, rectangleAdjustedAnimation}), '$class'})):setWidth(get({local, rectangleAdjustedAnimation}), RectWidth),
-            (get({get({local, rectangleAdjustedAnimation}), '$class'})):setHeight(get({local, rectangleAdjustedAnimation}), RectHeight),
-            (get({get({local, rectangleAdjustedAnimation}), '$class'})):setOffsetX(get({local, rectangleAdjustedAnimation}), Offset),
-            (get({get({local, rectangleAdjustedAnimation}), '$class'})):setOffsetY(get({local, rectangleAdjustedAnimation}), Offset),
-            (get({get({local, rectangleAdjustedAnimation}), '$class'})):setBasicColorP(get({local, rectangleAdjustedAnimation}), ButtonColor);
-            false ->
-            put({local, rectangleAdjustedAnimation}, array:get(Index, get({This, unSelectedAnimationArray}))),
-            (get({get({local, rectangleAdjustedAnimation}), '$class'})):setWidth(get({local, rectangleAdjustedAnimation}), RectWidth),
-            (get({get({local, rectangleAdjustedAnimation}), '$class'})):setHeight(get({local, rectangleAdjustedAnimation}), RectHeight),
-            (get({get({local, rectangleAdjustedAnimation}), '$class'})):setOffsetX(get({local, rectangleAdjustedAnimation}), Offset),
-            (get({get({local, rectangleAdjustedAnimation}), '$class'})):setOffsetY(get({local, rectangleAdjustedAnimation}), Offset),
-            (get({get({local, rectangleAdjustedAnimation}), '$class'})):setBasicColorP(get({local, rectangleAdjustedAnimation}), ButtonColor)
-        end.
+  def jm_addAll(this, p_items) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :items, p_items)
+        JR.lset(f, :index, JR.alength(JR.lget(f, :items)))
+        JR.jfor(fn -> (JR.lpreinc(f, :index, -1) >= 0) end, fn -> nil end, fn ->
+            JR.call(this, :jm_addAt, [JR.lget(f, :index), JR.aget(JR.lget(f, :items), JR.lget(f, :index))])
+        end)
+    end)
+  end
 
-getSelectedCommand(This) ->
-        Index = 'ScrollCurrentSelectionForm':getSelectedIndex(This),
-        CommandTextItem = (get({This, '$class'})):get(This, Index),
-        (get({CommandTextItem, '$class'})):getCommand(CommandTextItem).
 
-append(This, Item) ->
-        Result = 'ScrollCurrentSelectionForm':append(This, Item),
-        (get({This, '$class'})):addAt(This, Result, Item),
-        Result.
+  def jm_addAt(this, p_index, p_item) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :index, p_index)
+      JR.lset(f, :item, p_item)
+        JR.lset(f, :basicColorFactory, BasicColorFactory.jm_getInstance())
+        JR.lset(f, :buttonColor, JR.get(JR.lget(f, :basicColorFactory), :TRANSPARENT_GREY))
+        JR.lset(f, :selectedButtonColor, JR.get(JR.lget(f, :basicColorFactory), :TRANSPARENT_RED))
+        JR.lset(f, :width, JR.call(JR.lget(f, :item), :jm_getMinimumWidth, []))
+        JR.lset(f, :height, JR.call(JR.lget(f, :item), :jm_getMinimumHeight, []))
+        JR.lset(f, :adjustedBorder, 3)
+        JR.lset(f, :offset, -((JR.get(this, :halfBorder) + JR.lget(f, :adjustedBorder))))
+        JR.lset(f, :rectWidth, ((JR.lget(f, :width) + JR.get(this, :border)) - JR.lget(f, :adjustedBorder)))
+        JR.lset(f, :rectHeight, ((JR.lget(f, :height) + JR.get(this, :border)) - JR.lget(f, :adjustedBorder)))
+        if (J2MEUtil.jm_isJ2ME() || J2MEUtil.jm_isHTML()) do
+            JR.aset(JR.get(this, :selectedAnimationArray), JR.lget(f, :index), RectangleAdjustedAnimation.jnew(JR.lget(f, :rectWidth), JR.lget(f, :rectHeight), JR.lget(f, :offset), JR.lget(f, :offset), JR.lget(f, :selectedButtonColor)))
+        else
+            JR.aset(JR.get(this, :selectedAnimationArray), JR.lget(f, :index), RectangleFilledAdjustedAnimation.jnew(JR.lget(f, :rectWidth), JR.lget(f, :rectHeight), JR.lget(f, :offset), JR.lget(f, :offset), JR.lget(f, :selectedButtonColor)))
+        end
+        JR.lset(f, :adjustedBorder, 4)
+        if (J2MEUtil.jm_isJ2ME() || J2MEUtil.jm_isHTML()) do
+            JR.aset(JR.get(this, :unSelectedAnimationArray), JR.lget(f, :index), RectangleAdjustedAnimation.jnew(JR.lget(f, :rectWidth), JR.lget(f, :rectHeight), JR.lget(f, :offset), JR.lget(f, :offset), JR.lget(f, :buttonColor)))
+        else
+            JR.aset(JR.get(this, :unSelectedAnimationArray), JR.lget(f, :index), RectangleFilledAdjustedAnimation.jnew(JR.lget(f, :rectWidth), JR.lget(f, :rectHeight), JR.lget(f, :offset), JR.lget(f, :offset), JR.lget(f, :buttonColor)))
+        end
+    end)
+  end
 
-delete(This, ItemNum) when is_integer(ItemNum) ->
-        'ScrollCurrentSelectionForm':delete(This, ItemNum).
 
-deleteAll(This) ->
-        (get({This, '$class'})):initAnimations(This),
-        'ScrollCurrentSelectionForm':deleteAll(This).
+  def jm_updateAll(this, p_graphics, p_items) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :items, p_items)
+        JR.lset(f, :index, JR.alength(JR.lget(f, :items)))
+        JR.jfor(fn -> (JR.lpreinc(f, :index, -1) >= 0) end, fn -> nil end, fn ->
+            JR.call(JR.aget(JR.lget(f, :items), JR.lget(f, :index)), :jm_preMeasurement, [JR.lget(f, :graphics)])
+            JR.call(this, :jm_updateAt, [JR.lget(f, :index), JR.aget(JR.lget(f, :items), JR.lget(f, :index))])
+        end)
+    end)
+  end
 
-insert(This, ItemNum, Item) when is_integer(ItemNum) ->
-        'ScrollCurrentSelectionForm':insert(This, ItemNum, Item).
 
-set(This, ItemNum, Item) when is_integer(ItemNum) ->
-        'ScrollCurrentSelectionForm':set(This, ItemNum, Item).
+  def jm_updateAt(this, p_index, p_item) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :index, p_index)
+      JR.lset(f, :item, p_item)
+        JR.lset(f, :basicColorFactory, BasicColorFactory.jm_getInstance())
+        JR.lset(f, :buttonColor, JR.get(JR.lget(f, :basicColorFactory), :TRANSPARENT_GREY))
+        JR.lset(f, :selectedButtonColor, JR.get(JR.lget(f, :basicColorFactory), :TRANSPARENT_RED))
+        JR.lset(f, :width, JR.call(JR.lget(f, :item), :jm_getMinimumWidth, []))
+        JR.lset(f, :height, JR.call(JR.lget(f, :item), :jm_getMinimumHeight, []))
+        JR.lset(f, :adjustedBorder, 3)
+        JR.lset(f, :offset, -((JR.get(this, :halfBorder) + JR.lget(f, :adjustedBorder))))
+        JR.lset(f, :rectWidth, ((JR.lget(f, :width) + JR.get(this, :border)) - JR.lget(f, :adjustedBorder)))
+        JR.lset(f, :rectHeight, ((JR.lget(f, :height) + JR.get(this, :border)) - JR.lget(f, :adjustedBorder)))
+        if (J2MEUtil.jm_isJ2ME() || J2MEUtil.jm_isHTML()) do
+            JR.lset(f, :rectangleAdjustedAnimation, JR.aget(JR.get(this, :selectedAnimationArray), JR.lget(f, :index)))
+            JR.call(JR.lget(f, :rectangleAdjustedAnimation), :jm_setWidth, [JR.lget(f, :rectWidth)])
+            JR.call(JR.lget(f, :rectangleAdjustedAnimation), :jm_setHeight, [JR.lget(f, :rectHeight)])
+            JR.call(JR.lget(f, :rectangleAdjustedAnimation), :jm_setOffsetX, [JR.lget(f, :offset)])
+            JR.call(JR.lget(f, :rectangleAdjustedAnimation), :jm_setOffsetY, [JR.lget(f, :offset)])
+            JR.call(JR.lget(f, :rectangleAdjustedAnimation), :jm_setBasicColorP, [JR.lget(f, :selectedButtonColor)])
+        else
+            JR.lset(f, :rectangleAdjustedAnimation, JR.aget(JR.get(this, :selectedAnimationArray), JR.lget(f, :index)))
+            JR.call(JR.lget(f, :rectangleAdjustedAnimation), :jm_setWidth, [JR.lget(f, :rectWidth)])
+            JR.call(JR.lget(f, :rectangleAdjustedAnimation), :jm_setHeight, [JR.lget(f, :rectHeight)])
+            JR.call(JR.lget(f, :rectangleAdjustedAnimation), :jm_setOffsetX, [JR.lget(f, :offset)])
+            JR.call(JR.lget(f, :rectangleAdjustedAnimation), :jm_setOffsetY, [JR.lget(f, :offset)])
+            JR.call(JR.lget(f, :rectangleAdjustedAnimation), :jm_setBasicColorP, [JR.lget(f, :selectedButtonColor)])
+        end
+        JR.lset(f, :adjustedBorder, 4)
+        if (J2MEUtil.jm_isJ2ME() || J2MEUtil.jm_isHTML()) do
+            JR.lset(f, :rectangleAdjustedAnimation, JR.aget(JR.get(this, :unSelectedAnimationArray), JR.lget(f, :index)))
+            JR.call(JR.lget(f, :rectangleAdjustedAnimation), :jm_setWidth, [JR.lget(f, :rectWidth)])
+            JR.call(JR.lget(f, :rectangleAdjustedAnimation), :jm_setHeight, [JR.lget(f, :rectHeight)])
+            JR.call(JR.lget(f, :rectangleAdjustedAnimation), :jm_setOffsetX, [JR.lget(f, :offset)])
+            JR.call(JR.lget(f, :rectangleAdjustedAnimation), :jm_setOffsetY, [JR.lget(f, :offset)])
+            JR.call(JR.lget(f, :rectangleAdjustedAnimation), :jm_setBasicColorP, [JR.lget(f, :buttonColor)])
+        else
+            JR.lset(f, :rectangleAdjustedAnimation, JR.aget(JR.get(this, :unSelectedAnimationArray), JR.lget(f, :index)))
+            JR.call(JR.lget(f, :rectangleAdjustedAnimation), :jm_setWidth, [JR.lget(f, :rectWidth)])
+            JR.call(JR.lget(f, :rectangleAdjustedAnimation), :jm_setHeight, [JR.lget(f, :rectHeight)])
+            JR.call(JR.lget(f, :rectangleAdjustedAnimation), :jm_setOffsetX, [JR.lget(f, :offset)])
+            JR.call(JR.lget(f, :rectangleAdjustedAnimation), :jm_setOffsetY, [JR.lget(f, :offset)])
+            JR.call(JR.lget(f, :rectangleAdjustedAnimation), :jm_setBasicColorP, [JR.lget(f, :buttonColor)])
+        end
+    end)
+  end
 
-paint(This, Graphics) ->
-        (get({get({This, myFontProcessor}), '$class'})):process(get({This, myFontProcessor}), Graphics),
-        'ScrollCurrentSelectionForm':paint(This, Graphics).
 
-% throws Exception
-paintItem(This, Graphics, Index, Item, X, Y) when is_integer(Index), is_integer(X), is_integer(Y) ->
-        (fun(Target_N70648) -> (get({Target_N70648, '$class'})):paintXY(Target_N70648, Graphics, X, Y) end)(array:get(Index, get({This, selectedAnimationArray}))),
-        'ScrollCurrentSelectionForm':paintItem(This, Graphics, Index, Item, X, Y).
+  def jm_getSelectedCommand(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :index, ScrollCurrentSelectionForm.jm_getSelectedIndex(this))
+        JR.lset(f, :commandTextItem, JR.call(this, :jm_get, [JR.lget(f, :index)]))
+        throw({:jreturn, JR.call(JR.lget(f, :commandTextItem), :jm_getCommand, [])})
+    end)
+  end
 
-% throws Exception
-paintUnselectedItem(This, Graphics, Index, Item, X, Y) when is_integer(Index), is_integer(X), is_integer(Y) ->
-        (fun(Target_N70927) -> (get({Target_N70927, '$class'})):paintXY(Target_N70927, Graphics, X, Y) end)(array:get(Index, get({This, unSelectedAnimationArray}))),
-        'ScrollCurrentSelectionForm':paintUnselectedItem(This, Graphics, Index, Item, X, Y).
+
+  def jm_append(this, p_item) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :item, p_item)
+        JR.lset(f, :result, ScrollCurrentSelectionForm.jm_append(this, JR.lget(f, :item)))
+        JR.call(this, :jm_addAt, [JR.lget(f, :result), JR.lget(f, :item)])
+        throw({:jreturn, JR.lget(f, :result)})
+    end)
+  end
+
+
+  def jm_delete(this, p_itemNum) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :itemNum, p_itemNum)
+        ScrollCurrentSelectionForm.jm_delete(this, JR.lget(f, :itemNum))
+    end)
+  end
+
+
+  def jm_deleteAll(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(this, :jm_initAnimations, [])
+        ScrollCurrentSelectionForm.jm_deleteAll(this)
+    end)
+  end
+
+
+  def jm_insert(this, p_itemNum, p_item) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :itemNum, p_itemNum)
+      JR.lset(f, :item, p_item)
+        ScrollCurrentSelectionForm.jm_insert(this, JR.lget(f, :itemNum), JR.lget(f, :item))
+    end)
+  end
+
+
+  def jm_set(this, p_itemNum, p_item) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :itemNum, p_itemNum)
+      JR.lset(f, :item, p_item)
+        ScrollCurrentSelectionForm.jm_set(this, JR.lget(f, :itemNum), JR.lget(f, :item))
+    end)
+  end
+
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.get(this, :myFontProcessor), :jm_process, [JR.lget(f, :graphics)])
+        ScrollCurrentSelectionForm.jm_paint(this, JR.lget(f, :graphics))
+    end)
+  end
+
+
+  def jm_paintItem(this, p_graphics, p_index, p_item, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :index, p_index)
+      JR.lset(f, :item, p_item)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        JR.call(JR.aget(JR.get(this, :selectedAnimationArray), JR.lget(f, :index)), :jm_paintXY, [JR.lget(f, :graphics), JR.lget(f, :x), JR.lget(f, :y)])
+        throw({:jreturn, ScrollCurrentSelectionForm.jm_paintItem(this, JR.lget(f, :graphics), JR.lget(f, :index), JR.lget(f, :item), JR.lget(f, :x), JR.lget(f, :y))})
+    end)
+  end
+
+
+  def jm_paintUnselectedItem(this, p_graphics, p_index, p_item, p_x, p_y) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+      JR.lset(f, :index, p_index)
+      JR.lset(f, :item, p_item)
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :y, p_y)
+        JR.call(JR.aget(JR.get(this, :unSelectedAnimationArray), JR.lget(f, :index)), :jm_paintXY, [JR.lget(f, :graphics), JR.lget(f, :x), JR.lget(f, :y)])
+        throw({:jreturn, ScrollCurrentSelectionForm.jm_paintUnselectedItem(this, JR.lget(f, :graphics), JR.lget(f, :index), JR.lget(f, :item), JR.lget(f, :x), JR.lget(f, :y))})
+    end)
+  end
+end
+
 

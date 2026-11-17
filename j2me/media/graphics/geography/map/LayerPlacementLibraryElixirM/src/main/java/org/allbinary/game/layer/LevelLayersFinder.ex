@@ -1,67 +1,76 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer
-% import java.util.Enumeration
-% import org.allbinary.layer.Layer
-% import org.allbinary.logic.math.SmallIntegerSingletonFactory
-% import org.allbinary.util.ABHashtable
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
-% import org.allbinary.util.EnumerationUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer
 
--module('LevelLayersFinder').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule LevelLayersFinder do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> LevelLayersFinder.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'LevelLayersFinder':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :enumerationUtil, nil)
+        JR.put(this, :enumerationUtil, EnumerationUtil.jm_getInstance())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, enumerationUtil}, 'EnumerationUtil':getInstance()),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'LevelLayersFinder', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, LevelLayersFinder.jstatic_instance()})
+    end)
+  end
 
-get(This, Hashtable) ->
-        SmallIntegerSingletonFactory = 'SmallIntegerSingletonFactory':getInstance(),
-        List = 'BasicArrayListD':new(),
-        Enumeration = (get({Hashtable, '$class'})):keys(Hashtable),
-        put({local, layerHashtableCanBeNull}, undefined),
-        put({local, integerCanBeNull}, undefined),
-        put({local, cachedIntegerCanBeNull}, undefined),
-        (fun Loop() -> case (get({get({This, enumerationUtil}), '$class'})):hasMoreElements(get({This, enumerationUtil}), Enumeration) of true ->
-            put({local, layerHashtableCanBeNull}, (get({Hashtable, '$class'})):get(Hashtable, (get({get({This, enumerationUtil}), '$class'})):nextElement(get({This, enumerationUtil}), Enumeration))),
-            put({local, integerCanBeNull}, (get({get({local, layerHashtableCanBeNull}), '$class'})):get(get({local, layerHashtableCanBeNull}), get({'Layer', 'ID'}))),
-            put({local, cachedIntegerCanBeNull}, (get({SmallIntegerSingletonFactory, '$class'})):getAt(SmallIntegerSingletonFactory, (get({get({local, integerCanBeNull}), '$class'})):intValue(get({local, integerCanBeNull})))),
-            case (not (get({List, '$class'})):contains(List, get({local, cachedIntegerCanBeNull}))) of
-                true ->
-                (get({List, '$class'})):add(List, get({local, cachedIntegerCanBeNull}));
-                false -> ok
-            end,
-            Loop();
-        false -> ok end end)(),
-        List.
+
+  def jm_get(this, p_hashtable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :hashtable, p_hashtable)
+        JR.lset(f, :smallIntegerSingletonFactory, SmallIntegerSingletonFactory.jm_getInstance())
+        JR.lset(f, :list, BasicArrayListD.jnew())
+        JR.lset(f, :enumeration, JR.call(JR.lget(f, :hashtable), :jm_keys, []))
+        JR.lset(f, :layerHashtableCanBeNull, nil)
+        JR.lset(f, :integerCanBeNull, nil)
+        JR.lset(f, :cachedIntegerCanBeNull, nil)
+        JR.jwhile(fn -> JR.call(JR.get(this, :enumerationUtil), :jm_hasMoreElements, [JR.lget(f, :enumeration)]) end, fn ->
+            JR.lset(f, :layerHashtableCanBeNull, JR.call(JR.lget(f, :hashtable), :jm_get, [JR.call(JR.get(this, :enumerationUtil), :jm_nextElement, [JR.lget(f, :enumeration)])]))
+            JR.lset(f, :integerCanBeNull, JR.call(JR.lget(f, :layerHashtableCanBeNull), :jm_get, [Layer.jstatic_ID()]))
+            JR.lset(f, :cachedIntegerCanBeNull, JR.call(JR.lget(f, :smallIntegerSingletonFactory), :jm_getAt, [JR.call(JR.lget(f, :integerCanBeNull), :jm_intValue, [])]))
+            if !JR.call(JR.lget(f, :list), :jm_contains, [JR.lget(f, :cachedIntegerCanBeNull)]) do
+                JR.call(JR.lget(f, :list), :jm_add, [JR.lget(f, :cachedIntegerCanBeNull)])
+            end
+        end)
+        throw({:jreturn, JR.lget(f, :list)})
+    end)
+  end
+end
+
 

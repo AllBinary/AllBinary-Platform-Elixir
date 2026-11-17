@@ -1,62 +1,83 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.score
-% import javax.microedition.lcdui.Command
-% import org.allbinary.J2MEUtil
-% import org.allbinary.logic.communication.log.LogUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.score
 
--module('HighScoreCommandsBaseFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule HighScoreCommandsBaseFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, 'HIGH_SCORE_COMMANDS'}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :HIGH_SCORE_COMMANDS, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        
+    nil
+  end
 
 
-new(HIGH_SCORE_COMMANDS) when (is_tuple(HIGH_SCORE_COMMANDS) orelse HIGH_SCORE_COMMANDS =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, HIGH_SCORE_COMMANDS),
-    This.
+  def jinit(this, p_HIGH_SCORE_COMMANDS) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :HIGH_SCORE_COMMANDS, p_HIGH_SCORE_COMMANDS)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :HIGH_SCORE_COMMANDS, JR.lget(f, :HIGH_SCORE_COMMANDS))
+    end)
+  end
 
-'$init'(This, HIGH_SCORE_COMMANDS) when (is_tuple(HIGH_SCORE_COMMANDS) orelse HIGH_SCORE_COMMANDS =:= undefined) ->
-    init_fields(This),
-        put({This, 'HIGH_SCORE_COMMANDS'}, HIGH_SCORE_COMMANDS).
+  def jnew(p_HIGH_SCORE_COMMANDS) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_HIGH_SCORE_COMMANDS)
+    this
+  end
 
-isHighScoreCommand(This, Command) ->
-        try
-        lists:foreach(fun(Index) ->
-            case (Command =:= array:get(Index, get({This, 'HIGH_SCORE_COMMANDS'}))) of
-                true ->
-                throw({'$return', true});
-                false -> ok
+
+  def jm_isHighScoreCommand(this, p_command) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :command, p_command)
+        JR.lset(f, :index, JR.int32(JR.alength(JR.get(this, :HIGH_SCORE_COMMANDS)) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            if (JR.lget(f, :command) == JR.aget(JR.get(this, :HIGH_SCORE_COMMANDS), JR.lget(f, :index))) do
+                throw({:jreturn, true})
             end
-        end, lists:seq((array:size(get({This, 'HIGH_SCORE_COMMANDS'})) - 1), 0, -1)),
-        false
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        end)
+        throw({:jreturn, false})
+    end)
+  end
 
-% throws Exception
-getIndex(This, Command) ->
-        try
-        lists:foreach(fun(Index) ->
-            case (Command =:= array:get(Index, get({This, 'HIGH_SCORE_COMMANDS'}))) of
-                true ->
-                throw({'$return', Index});
-                false -> ok
+
+  def jm_getIndex(this, p_command) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :command, p_command)
+        JR.lset(f, :index, JR.int32(JR.alength(JR.get(this, :HIGH_SCORE_COMMANDS)) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            if (JR.lget(f, :command) == JR.aget(JR.get(this, :HIGH_SCORE_COMMANDS), JR.lget(f, :index))) do
+                throw({:jreturn, JR.lget(f, :index)})
             end
-        end, lists:seq((array:size(get({This, 'HIGH_SCORE_COMMANDS'})) - 1), 0, -1)),
-        erlang:error({'Exception', "No Such Command"})
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        end)
+        throw({:jexception, JR.exception("Exception", "No Such Command")})
+    end)
+  end
+end
+
 

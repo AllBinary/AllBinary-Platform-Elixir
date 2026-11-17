@@ -1,47 +1,80 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.midlet
-% import org.allbinary.logic.util.event.AllBinaryEventObject
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
--module('DemoGameMidletEvent').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule DemoGameMidletEvent do
+  def jsuper(), do: AllBinaryEventObject
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('AllBinaryEventObject', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :demoGameMidletState, nil)
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, demoGameMidletState}, undefined),
-    ok.
+
+  def jinit(this, p_anyType, p_demoGameMidletState) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+      JR.lset(f, :demoGameMidletState, p_demoGameMidletState)
+        AllBinaryEventObject.jinit(this, JR.lget(f, :anyType))
+        DemoGameMidletEvent.jinitfields(this)
+        JR.put(this, :demoGameMidletState, JR.lget(f, :demoGameMidletState))
+    end)
+  end
+
+  def jnew(p_anyType, p_demoGameMidletState) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_anyType, p_demoGameMidletState)
+    this
+  end
 
 
-new(AnyType, DemoGameMidletState) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, AnyType, DemoGameMidletState),
-    This.
+  def jm_init(this, p_anyType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+        JR.call(this, :jm_setSource, [JR.lget(f, :anyType)])
+    end)
+  end
 
-'$init'(This, AnyType, DemoGameMidletState) ->
-        'AllBinaryEventObject':'$init'(This, AnyType),
-        init_fields(This),
-        put({This, demoGameMidletState}, DemoGameMidletState).
 
-init(This, AnyType) ->
-        (get({This, '$class'})):setSource(This, AnyType).
+  def jm_setDemoGameMidletState(this, p_demoGameMidletState) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :demoGameMidletState, p_demoGameMidletState)
+        JR.put(this, :demoGameMidletState, JR.lget(f, :demoGameMidletState))
+    end)
+  end
 
-setDemoGameMidletState(This, DemoGameMidletState) ->
-        put({This, demoGameMidletState}, DemoGameMidletState).
 
-getDemoGameMidletState(This) ->
-        get({This, demoGameMidletState}).
+  def jm_getDemoGameMidletState(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :demoGameMidletState)})
+    end)
+  end
+end
+
 

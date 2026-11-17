@@ -1,67 +1,126 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.animation.image.sprite
-% import javax.microedition.lcdui.Image
-% import javax.microedition.lcdui.game.Sprite
-% import org.allbinary.animation.AnimationBehavior
-% import org.allbinary.direction.Direction
-% import org.allbinary.math.Angle
-% import org.allbinary.math.AngleFactory
-% import org.allbinary.math.AngleInfo
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.animation.image.sprite
 
--module('AllBinarySpriteRotationAnimation').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule AllBinarySpriteRotationAnimation do
+  def jsuper(), do: HackRotationSpriteIndexedAnimation
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('HackRotationSpriteIndexedAnimation', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new(Sprite, Image, AnimationBehavior) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Sprite, Image, AnimationBehavior),
-    This.
+  def jinit(this, p_sprite, p_image, p_animationBehavior) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :sprite, p_sprite)
+      JR.lset(f, :image, p_image)
+      JR.lset(f, :animationBehavior, p_animationBehavior)
+        HackRotationSpriteIndexedAnimation.jinit(this, JR.lget(f, :sprite), JR.lget(f, :image), AngleInfo.jm_getInstance(JR.int16(((JR.get(AngleFactory.jm_getInstance(), :TOTAL_ANGLE) / JR.call(JR.lget(f, :sprite), :jm_getRawFrameCount, []))))), JR.lget(f, :animationBehavior))
+        AllBinarySpriteRotationAnimation.jinitfields(this)
+        JR.call(JR.get(this, :angleInfo), :jm_adjustAngle, [JR.call(JR.get(this, :sprite), :jm_getFrame, [])])
+    end)
+  end
 
-'$init'(This, Sprite, Image, AnimationBehavior) ->
-        'HackRotationSpriteIndexedAnimation':'$init'(This, Sprite, Image, 'AngleInfo':getInstance(trunc(((get({'AngleFactory':getInstance(), 'TOTAL_ANGLE'}) / (get({Sprite, '$class'})):getRawFrameCount(Sprite))))), AnimationBehavior),
-        (get({get({This, angleInfo}), '$class'})):adjustAngle(get({This, angleInfo}), (get({get({This, sprite}), '$class'})):getFrame(get({This, sprite}))).
+  def jnew(p_sprite, p_image, p_animationBehavior) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_sprite, p_image, p_animationBehavior)
+    this
+  end
 
-nextRotation(This) ->
-        (get({get({This, sprite}), '$class'})):nextFrame(get({This, sprite})),
-        (get({get({This, angleInfo}), '$class'})):adjustAngle(get({This, angleInfo}), (get({get({This, sprite}), '$class'})):getFrame(get({This, sprite}))).
 
-previousRotation(This) ->
-        (get({get({This, sprite}), '$class'})):prevFrame(get({This, sprite})),
-        (get({get({This, angleInfo}), '$class'})):adjustAngle(get({This, angleInfo}), (get({get({This, sprite}), '$class'})):getFrame(get({This, sprite}))).
+  def jm_nextRotation(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :sprite), :jm_nextFrame, [])
+        JR.call(JR.get(this, :angleInfo), :jm_adjustAngle, [JR.call(JR.get(this, :sprite), :jm_getFrame, [])])
+    end)
+  end
 
-setFrameByDirection(This, Direction) ->
-        Angle = (get({get({This, directionUtil}), '$class'})):getFrameAngle(get({This, directionUtil}), Direction),
-        (get({This, '$class'})):adjustFrameToAngle(This, Angle).
 
-setFrameToAngle(This, Angle) ->
-        (get({This, '$class'})):adjustFrameToAngle(This, Angle).
+  def jm_previousRotation(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.call(JR.get(this, :sprite), :jm_prevFrame, [])
+        JR.call(JR.get(this, :angleInfo), :jm_adjustAngle, [JR.call(JR.get(this, :sprite), :jm_getFrame, [])])
+    end)
+  end
 
-setFrame(This, Index) when is_integer(Index) ->
-        (get({get({This, sprite}), '$class'})):setFrame(get({This, sprite}), Index),
-        (get({get({This, angleInfo}), '$class'})):adjustAngle(get({This, angleInfo}), (get({This, '$class'})):getFrame(This)).
 
-adjustFrameToAngle(This, Angle) ->
-        (get({This, '$class'})):adjustFrame(This, (get({Angle, '$class'})):getValue(Angle)).
+  def jm_setFrameByDirection(this, p_direction) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :direction, p_direction)
+        JR.lset(f, :angle, JR.call(JR.get(this, :directionUtil), :jm_getFrameAngle, [JR.lget(f, :direction)]))
+        JR.call(this, :jm_adjustFrameToAngle, [JR.lget(f, :angle)])
+    end)
+  end
 
-adjustFrame(This, Angle) when is_integer(Angle) ->
-        (get({This, '$class'})):setFrame(This, (get({get({This, frameUtil}), '$class'})):getFrameForAngle(get({This, frameUtil}), Angle, trunc((fun(Target_N66749) -> (get({Target_N66749, '$class'})):getAngleIncrement(Target_N66749) end)((get({get({This, angleInfo}), '$class'})):getAngleIncrementInfo(get({This, angleInfo})))))).
+
+  def jm_setFrameToAngle(this, p_angle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :angle, p_angle)
+        JR.call(this, :jm_adjustFrameToAngle, [JR.lget(f, :angle)])
+    end)
+  end
+
+
+  def jm_setFrame(this, p_index) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :index, p_index)
+        JR.call(JR.get(this, :sprite), :jm_setFrame, [JR.lget(f, :index)])
+        JR.call(JR.get(this, :angleInfo), :jm_adjustAngle, [JR.call(this, :jm_getFrame, [])])
+    end)
+  end
+
+
+  def jm_adjustFrameToAngle(this, p_angle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :angle, p_angle)
+        JR.call(this, :jm_adjustFrame, [JR.call(JR.lget(f, :angle), :jm_getValue, [])])
+    end)
+  end
+
+
+  def jm_adjustFrame(this, p_angle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :angle, p_angle)
+        JR.call(this, :jm_setFrame, [JR.call(JR.get(this, :frameUtil), :jm_getFrameForAngle, [JR.lget(f, :angle), JR.int32(JR.call(JR.call(JR.get(this, :angleInfo), :jm_getAngleIncrementInfo, []), :jm_getAngleIncrement, []))])])
+    end)
+  end
+end
+
 

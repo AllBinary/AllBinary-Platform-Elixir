@@ -1,98 +1,197 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2025 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary
-% import javax.microedition.lcdui.Displayable
-% import javax.microedition.lcdui.Form
-% import javax.microedition.rms.InvalidRecordIDException
-% import javax.microedition.rms.RecordStore
-% import javax.microedition.rms.RecordStoreException
-% import javax.microedition.rms.RecordStoreNotOpenException
-% import org.allbinary.logic.NullUtil
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2025 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary
 
--module('TsUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+#J2ME
+defmodule TsUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> TsUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'TsUtil':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'TsUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, TsUtil.jstatic_instance()})
+    end)
+  end
 
-hashCode(This, AnyType) ->
-        (get({AnyType, '$class'})):hashCode(AnyType).
 
-% throws InterruptedException
-waitFor(This, Any, TimeoutMillis) when is_integer(TimeoutMillis) ->
-        AnyType = Any,
-        (get({AnyType, '$class'})):wait(AnyType, TimeoutMillis).
+  def jm_hashCode(this, p_anyType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+        throw({:jreturn, JR.call(JR.lget(f, :anyType), :jm_hashCode, [])})
+    end)
+  end
 
-% throws RecordStoreNotOpenException, InvalidRecordIDException, RecordStoreException
-getRecord(This, AnyType, RecordId) when is_integer(RecordId) ->
-        RecordStore = AnyType,
-        put({local, data}, undefined),
-        begin % synchronized
-            put({local, data}, array:new((get({RecordStore, '$class'})):getRecordSize(RecordStore, RecordId), {default, 0})),
-            (get({RecordStore, '$class'})):getRecord(RecordStore, RecordId, get({local, data}), 0)
-        end,
-        case (array:size(get({local, data})) < 1) of true -> get({'NullUtil':getInstance(), 'NULL_BYTE_ARRAY'}); false -> get({local, data}) end.
 
-compareTo(This, A, B) when (is_list(A) orelse A =:= undefined), (is_list(B) orelse B =:= undefined) ->
-        (get({A, '$class'})):compareTo(A, B).
+  def jm_waitFor(this, p_any, p_timeoutMillis) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :any, p_any)
+      JR.lset(f, :timeoutMillis, p_timeoutMillis)
+        JR.lset(f, :anyType, JR.lget(f, :any))
+        JR.call(JR.lget(f, :anyType), :jm_wait, [JR.lget(f, :timeoutMillis)])
+    end)
+  end
 
-equalIgnoreCase(This, A, B) when (is_list(A) orelse A =:= undefined), (is_list(B) orelse B =:= undefined) ->
-        string:equal(A, B, true).
 
-equalsNotstring(This, AnyType, Object2) ->
-        (get({AnyType, '$class'})):equals(AnyType, Object2).
+  def jm_getRecord(this, p_anyType, p_recordId) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+      JR.lset(f, :recordId, p_recordId)
+        JR.lset(f, :recordStore, JR.lget(f, :anyType))
+        JR.lset(f, :data, nil)
+        (
+            JR.lset(f, :data, JR.anew(JR.call(JR.lget(f, :recordStore), :jm_getRecordSize, [JR.lget(f, :recordId)]), 0))
+            JR.call(JR.lget(f, :recordStore), :jm_getRecord, [JR.lget(f, :recordId), JR.lget(f, :data), 0])
+        )
+        throw({:jreturn, (if (JR.alength(JR.lget(f, :data)) < 1), do: JR.get(NullUtil.jm_getInstance(), :NULL_BYTE_ARRAY), else: JR.lget(f, :data))})
+    end)
+  end
 
-toNumberFromChar(This, Value) when is_integer(Value) ->
-        Value.
 
-toNumber(This, Value) when is_integer(Value) ->
-        Value.
+  def jm_compareTo(this, p_a, p_b) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :a, p_a)
+      JR.lset(f, :b, p_b)
+        throw({:jreturn, JR.call(JR.lget(f, :a), :jm_compareTo, [JR.lget(f, :b)])})
+    end)
+  end
 
-getByteArray(This, String) when (is_list(String) orelse String =:= undefined) ->
-        (get({String, '$class'})):getBytes(String).
 
-isItemListener(This, Owner) ->
-        try
-        case allbinary_java:instance_of(Owner, 'Form') of
-            true ->
-            throw({'$return', true});
-            false ->
-            throw({'$return', false})
+  def jm_equalIgnoreCase(this, p_a, p_b) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :a, p_a)
+      JR.lset(f, :b, p_b)
+        throw({:jreturn, JR.call(JR.lget(f, :a), :jm_equalsIgnoreCase, [JR.lget(f, :b)])})
+    end)
+  end
+
+
+  def jm_equalsNotstring(this, p_anyType, p_object2) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+      JR.lset(f, :object2, p_object2)
+        throw({:jreturn, JR.call(JR.lget(f, :anyType), :jm_equals, [JR.lget(f, :object2)])})
+    end)
+  end
+
+
+  def jm_toNumberFromChar(this, p_value) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :value, p_value)
+        throw({:jreturn, JR.int32(JR.lget(f, :value))})
+    end)
+  end
+
+
+  def jm_toNumber(this, p_value) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :value, p_value)
+        throw({:jreturn, JR.lget(f, :value)})
+    end)
+  end
+
+
+  def jm_getByteArray(this, p_string) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :string, p_string)
+        throw({:jreturn, JR.call(JR.lget(f, :string), :jm_getBytes, [])})
+    end)
+  end
+
+
+  def jm_isItemListener(this, p_owner) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :owner, p_owner)
+        if JR.instance_of(JR.lget(f, :owner), Form) do
+            throw({:jreturn, true})
+        else
+            throw({:jreturn, false})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-printAvailableMethods(This, AnyType) ->
-        ok.
 
-gc(This) ->
-        erlang:garbage_collect().
+  def jm_printAvailableMethods(this, p_anyType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+        nil
+    end)
+  end
+
+
+  def jm_gc(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        J.System.jm_gc()
+    end)
+  end
+end
+
 

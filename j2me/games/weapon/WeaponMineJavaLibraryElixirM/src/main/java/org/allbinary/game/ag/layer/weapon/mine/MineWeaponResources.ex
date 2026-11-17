@@ -1,61 +1,71 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.layer.weapon.mine
-% import org.allbinary.game.layer.resources.BasicGameResources
-% import org.allbinary.logic.NullUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.weapon.mine
 
--module('MineWeaponResources').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule MineWeaponResources do
+  def jsuper(), do: BasicGameResources
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT) end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicGameResources', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :DROP_TEXT_RESOURCE, nil)
+    JR.put(this, :DROP_RESOURCE, nil)
+    JR.put(this, :DROP_ICON_RESOURCE, nil)
+        JR.put(this, :DROP_TEXT_RESOURCE, "/mine_drop_text_20_by_20.png")
+        JR.put(this, :DROP_RESOURCE, "/mine_drop_20_by_20.png")
+        JR.put(this, :DROP_ICON_RESOURCE, "/mine_drop_icon_20_by_20.png")
+    nil
+  end
 
-static_init() ->
-    put({?MODULE, instance}, get({'NullUtil':getInstance(), 'NULL_OBJECT'})),
-    ok.
 
-init_fields(This) ->
-    put({This, 'DROP_TEXT_RESOURCE'}, "/mine_drop_text_20_by_20.png"),
-    put({This, 'DROP_RESOURCE'}, "/mine_drop_20_by_20.png"),
-    put({This, 'DROP_ICON_RESOURCE'}, "/mine_drop_icon_20_by_20.png"),
-    ok.
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        if (MineWeaponResources.jstatic_instance() == JR.get(NullUtil.jm_getInstance(), :NULL_OBJECT)) do
+            MineWeaponResources.jstatic_set_instance(MineWeaponResources.jnew())
+        end
+        throw({:jreturn, MineWeaponResources.jstatic_instance()})
+    end)
+  end
 
 
-getInstance() ->
-        case (get({'MineWeaponResources', instance}) =:= get({'NullUtil':getInstance(), 'NULL_OBJECT'})) of
-            true ->
-            put({'MineWeaponResources', instance}, 'MineWeaponResources':new());
-            false -> ok
-        end,
-        get({'MineWeaponResources', instance}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      BasicGameResources.jinit(this)
+      jinitfields(this)
+        JR.lset(f, :ROOT, "/mine")
+        JR.lset(f, :SMALL, "_20_by_20.png")
+        JR.lset(f, :MEDIUM, JR.lget(f, :SMALL))
+        JR.lset(f, :SIZE_FOUR, JR.lget(f, :SMALL))
+        JR.lset(f, :SIZE_FIVE, JR.lget(f, :SMALL))
+        JR.lset(f, :SIZE_SIX, JR.lget(f, :SMALL))
+        JR.lset(f, :SIZE, JR.afrom([JR.lget(f, :SMALL), JR.lget(f, :MEDIUM), JR.lget(f, :SIZE_FOUR), JR.lget(f, :SIZE_FIVE), JR.lget(f, :SIZE_SIX)]))
+        BasicGameResources.jm_init(this, JR.lget(f, :ROOT), JR.lget(f, :SIZE))
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
+end
 
-'$init'(This) ->
-    'BasicGameResources':'$init'(This),
-    init_fields(This),
-        ROOT = "/mine",
-        SMALL = "_20_by_20.png",
-        MEDIUM = SMALL,
-        SIZE_FOUR = SMALL,
-        SIZE_FIVE = SMALL,
-        SIZE_SIX = SMALL,
-        SIZE = array:from_list([SMALL, MEDIUM, SIZE_FOUR, SIZE_FIVE, SIZE_SIX]),
-        'BasicGameResources':init(This, ROOT, SIZE).
 

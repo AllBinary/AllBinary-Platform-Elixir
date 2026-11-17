@@ -1,89 +1,125 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.logic.io
-% import java.io.ByteArrayOutputStream
-% import java.io.Closeable
-% import java.io.InputStream
-% import java.io.OutputStream
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.string.CommonStrings
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
--module('StreamUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule StreamUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> StreamUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'StreamUtil':new()),
-    ok.
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+    nil
+  end
 
 
-getInstance() ->
-        get({'StreamUtil', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, StreamUtil.jstatic_instance()})
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-% throws Exception
-get(This, InputStream, OutputStream, Buffer) when (is_tuple(Buffer) orelse Buffer =:= undefined) ->
-        put({local, len}, 0),
-        (fun Loop() -> case true of true ->
-            put({local, len}, (get({InputStream, '$class'})):read(InputStream, Buffer, 0, array:size(Buffer))),
-            case (get({local, len}) =/= (-1)) of
-                true ->
-                ok;
-                false ->
-                throw('$break')
-            end,
-            (get({OutputStream, '$class'})):write(OutputStream, Buffer, 0, get({local, len})),
-            Loop();
-        false -> ok end end)(),
-        OutputStream.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-% throws Exception
-getByteArray(This, InputStream, OutputStream2, ByteArray) when (is_tuple(ByteArray) orelse ByteArray =:= undefined) ->
-        OutputStream = OutputStream2,
-        try
-            (get({This, '$class'})):get(This, InputStream, OutputStream, ByteArray),
-            (get({OutputStream, '$class'})):toByteArray(OutputStream)
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            erlang:error(E)
+
+  def jm_get(this, p_inputStream, p_outputStream, p_buffer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :inputStream, p_inputStream)
+      JR.lset(f, :outputStream, p_outputStream)
+      JR.lset(f, :buffer, p_buffer)
+        JR.lset(f, :len, 0)
+        JR.jwhile(fn -> true end, fn ->
+            JR.lset(f, :len, JR.call(JR.lget(f, :inputStream), :jm_read, [JR.lget(f, :buffer), 0, JR.alength(JR.lget(f, :buffer))]))
+            if (JR.lget(f, :len) != -1) do
+                nil
+            else
+                throw(:jbreak)
+            end
+            JR.call(JR.lget(f, :outputStream), :jm_write, [JR.lget(f, :buffer), 0, JR.lget(f, :len)])
+        end)
+        throw({:jreturn, JR.lget(f, :outputStream)})
+    end)
+  end
+
+
+  def jm_getByteArray(this, p_inputStream, p_outputStream2, p_byteArray) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :inputStream, p_inputStream)
+      JR.lset(f, :outputStream2, p_outputStream2)
+      JR.lset(f, :byteArray, p_byteArray)
+        JR.lset(f, :outputStream, JR.lget(f, :outputStream2))
+        try do
+            JR.call(this, :jm_get, [JR.lget(f, :inputStream), JR.lget(f, :outputStream), JR.lget(f, :byteArray)])
+            throw({:jreturn, JR.call(JR.lget(f, :outputStream), :jm_toByteArray, [])})
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            throw({:jexception, JR.lget(f, :e)})
         after
-            (get({This, '$class'})):close(This, OutputStream)
-        end.
+            JR.call(this, :jm_close, [JR.lget(f, :outputStream)])
+        end
+    end)
+  end
 
-close(This, Closeable) ->
-        try
-            case (Closeable =/= undefined) of
-                true ->
-                (get({Closeable, '$class'})):close(Closeable);
-                false -> ok
-            end,
-            true
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), This, get({CommonStrings, 'CLOSE'}), E),
-            false
-        end.
+
+  def jm_close(this, p_closeable) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :closeable, p_closeable)
+        try do
+            if (JR.lget(f, :closeable) != nil) do
+                JR.call(JR.lget(f, :closeable), :jm_close, [])
+            end
+            throw({:jreturn, true})
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, JR.get(JR.lget(f, :commonStrings), :CLOSE), JR.lget(f, :e)])
+            throw({:jreturn, false})
+        end
+    end)
+  end
+end
+
 

@@ -1,93 +1,103 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.configuration.feature
-% import javax.microedition.lcdui.ChoiceGroup
-% import javax.microedition.lcdui.Item
-% import javax.microedition.lcdui.ItemStateListener
-% import org.allbinary.game.configuration.GameConfigurationGauge
-% import org.allbinary.game.configuration.GameConfigurationUtil
-% import org.allbinary.game.configuration.GameOptionsForm
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonLabels
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.configuration.feature
 
--module('GameFeatureItemStateListener').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements ItemStateListener
+defmodule GameFeatureItemStateListener do
+  def jsuper(), do: JObject
+def jstatic_toggleList(), do: JR.static_get(__MODULE__, :toggleList, fn -> BasicArrayListD.jnew() end)
+  def jstatic_set_toggleList(value), do: JR.static_put(__MODULE__, :toggleList, value)
 
-static_init() ->
-    put({?MODULE, toggleList}, 'BasicArrayListD':new()),
-    ok.
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, gameOptionsForm}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :gameOptionsForm, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        
+    nil
+  end
 
 
-new(GameOptionsForm) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, GameOptionsForm),
-    This.
+  def jinit(this, p_gameOptionsForm) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameOptionsForm, p_gameOptionsForm)
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :gameOptionsForm, JR.lget(f, :gameOptionsForm))
+        JR.lset(f, :gameFeatureFactory, GameFeatureFactory.jm_getInstance())
+        GameFeatureItemStateListener.jm_add(JR.get(JR.lget(f, :gameFeatureFactory), :ARTIFICIAL_INTELLEGENCE_PROCESSOR))
+        GameFeatureItemStateListener.jm_add(JR.get(JR.lget(f, :gameFeatureFactory), :COLLIDABLE_INTERFACE_LAYER_PROCESSOR))
+        GameFeatureItemStateListener.jm_add(JR.get(JR.lget(f, :gameFeatureFactory), :DAMAGE_FLOATERS))
+        GameFeatureItemStateListener.jm_add(JR.get(JR.lget(f, :gameFeatureFactory), :DROPPED_ITEMS))
+        GameFeatureItemStateListener.jm_add(JR.get(JR.lget(f, :gameFeatureFactory), :GAME_INPUT_LAYER_PROCESSOR))
+        GameFeatureItemStateListener.jm_add(JR.get(JR.lget(f, :gameFeatureFactory), :HEALTH_BARS))
+        GameFeatureItemStateListener.jm_add(JR.get(JR.lget(f, :gameFeatureFactory), :SOUND))
+        GameFeatureItemStateListener.jm_add(JR.get(JR.lget(f, :gameFeatureFactory), :TICKABLE_LAYER_PROCESSOR))
+    end)
+  end
 
-'$init'(This, GameOptionsForm) ->
-    init_fields(This),
-        put({This, gameOptionsForm}, GameOptionsForm),
-        GameFeatureFactory = 'GameFeatureFactory':getInstance(),
-        'GameFeatureItemStateListener':add(get({GameFeatureFactory, 'ARTIFICIAL_INTELLEGENCE_PROCESSOR'})),
-        'GameFeatureItemStateListener':add(get({GameFeatureFactory, 'COLLIDABLE_INTERFACE_LAYER_PROCESSOR'})),
-        'GameFeatureItemStateListener':add(get({GameFeatureFactory, 'DAMAGE_FLOATERS'})),
-        'GameFeatureItemStateListener':add(get({GameFeatureFactory, 'DROPPED_ITEMS'})),
-        'GameFeatureItemStateListener':add(get({GameFeatureFactory, 'GAME_INPUT_LAYER_PROCESSOR'})),
-        'GameFeatureItemStateListener':add(get({GameFeatureFactory, 'HEALTH_BARS'})),
-        'GameFeatureItemStateListener':add(get({GameFeatureFactory, 'SOUND'})),
-        'GameFeatureItemStateListener':add(get({GameFeatureFactory, 'TICKABLE_LAYER_PROCESSOR'})).
+  def jnew(p_gameOptionsForm) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_gameOptionsForm)
+    this
+  end
 
-add(GameFeature) ->
-        case (not (get({get({'GameFeatureItemStateListener', toggleList}), '$class'})):contains(get({'GameFeatureItemStateListener', toggleList}), GameFeature)) of
-            true ->
-            (get({get({'GameFeatureItemStateListener', toggleList}), '$class'})):add(get({'GameFeatureItemStateListener', toggleList}), GameFeature);
-            false -> ok
-        end.
 
-itemStateChanged(This, Item) ->
-        try
-            ItemLabel = (get({Item, '$class'})):getLabel(Item),
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N66713) -> (get({Target_N66713, '$class'})):toString(Target_N66713) end)((fun(Target_N66720) -> (get({Target_N66720, '$class'})):append(Target_N66720, ItemLabel) end)((fun(Target_N66727) -> (get({Target_N66727, '$class'})):append(Target_N66727, get({'CommonLabels':getInstance(), 'ITEM_LABEL'})) end)('StringMaker':new()))), This, "itemStateChanged"),
-            case allbinary_java:instance_of(Item, 'GameConfigurationGauge') of
-                true ->
-                (fun(Target_N67033) -> (get({Target_N67033, '$class'})):change(Target_N67033, get({This, gameOptionsForm}), Item) end)('GameConfigurationUtil':getInstance());
-                false ->
-                case allbinary_java:instance_of(Item, 'ChoiceGroup') of
-                true ->
-                GameFeatureUtil = 'GameFeatureUtil':getInstance(),
-                case (get({GameFeatureUtil, '$class'})):isExclusive(GameFeatureUtil, ItemLabel) of
-                    true ->
-                    (get({GameFeatureUtil, '$class'})):updateExclusiveForChoiceGroup(GameFeatureUtil, Item);
-                    false ->
-                    (get({GameFeatureUtil, '$class'})):updateMultiple(GameFeatureUtil, Item)
-                end;
-                false -> ok
+  def jm_add(p_gameFeature) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :gameFeature, p_gameFeature)
+        if !JR.call(GameFeatureItemStateListener.jstatic_toggleList(), :jm_contains, [JR.lget(f, :gameFeature)]) do
+            JR.call(GameFeatureItemStateListener.jstatic_toggleList(), :jm_add, [JR.lget(f, :gameFeature)])
+        end
+    end)
+  end
+
+
+  def jm_itemStateChanged(this, p_item) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :item, p_item)
+        try do
+            JR.lset(f, :itemLabel, JR.call(JR.lget(f, :item), :jm_getLabel, []))
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(CommonLabels.jm_getInstance(), :ITEM_LABEL)]), :jm_append, [JR.lget(f, :itemLabel)]), :jm_toString, []), this, "itemStateChanged"])
+            if JR.instance_of(JR.lget(f, :item), GameConfigurationGauge) do
+                JR.call(GameConfigurationUtil.jm_getInstance(), :jm_change, [JR.get(this, :gameOptionsForm), JR.lget(f, :item)])
+            else
+                if JR.instance_of(JR.lget(f, :item), ChoiceGroup) do
+                JR.lset(f, :gameFeatureUtil, GameFeatureUtil.jm_getInstance())
+                if JR.call(JR.lget(f, :gameFeatureUtil), :jm_isExclusive, [JR.lget(f, :itemLabel)]) do
+                    JR.call(JR.lget(f, :gameFeatureUtil), :jm_updateExclusiveForChoiceGroup, [JR.lget(f, :item)])
+                else
+                    JR.call(JR.lget(f, :gameFeatureUtil), :jm_updateMultiple, [JR.lget(f, :item)])
+                end
             end
             end
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            CommonStrings = 'CommonStrings':getInstance(),
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({CommonStrings, 'EXCEPTION'}), This, "itemStateChanged", E)
-        end.
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.lget(f, :commonStrings), :EXCEPTION), this, "itemStateChanged", JR.lget(f, :e)])
+        end
+    end)
+  end
+end
+
 

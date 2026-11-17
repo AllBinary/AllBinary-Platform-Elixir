@@ -1,79 +1,134 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.graphics.paint
-% import javax.microedition.lcdui.Font
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.graphics.Anchor
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.displayable.DisplayInfoSingleton
-% import org.allbinary.graphics.font.MyFontProcessor
-% import org.allbinary.graphics.font.UpdateMyFontInterface
-% import org.allbinary.graphics.font.UpdateMyFontProcessor
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.graphics.paint
 
--module('SimpleTextPaintable').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements UpdateMyFontInterface
+defmodule SimpleTextPaintable do
+  def jsuper(), do: Paintable
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Paintable', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :displayInfoSingleton, nil)
+    JR.put(this, :updateMyFontProcessor, nil)
+    JR.put(this, :myFontProcessor, nil)
+    JR.put(this, :text, nil)
+    JR.put(this, :basicColor, nil)
+    JR.put(this, :topScoresWidth, 0)
+    JR.put(this, :fontHeight, 0)
+    JR.put(this, :anchor, 0)
+        JR.put(this, :displayInfoSingleton, DisplayInfoSingleton.jm_getInstance())
+        JR.put(this, :updateMyFontProcessor, UpdateMyFontProcessor.jnew(this))
+        JR.put(this, :myFontProcessor, JR.get(this, :updateMyFontProcessor))
+        
+        
+        JR.put(this, :topScoresWidth, 0)
+        JR.put(this, :fontHeight, 0)
+        JR.put(this, :anchor, Anchor.jstatic_TOP_LEFT())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, displayInfoSingleton}, 'DisplayInfoSingleton':getInstance()),
-    put({This, updateMyFontProcessor}, 'UpdateMyFontProcessor':new(This)),
-    put({This, myFontProcessor}, get({This, updateMyFontProcessor})),
-    put({This, text}, undefined),
-    put({This, basicColor}, undefined),
-    put({This, topScoresWidth}, 0),
-    put({This, fontHeight}, 0),
-    put({This, anchor}, get({'Anchor', 'TOP_LEFT'})),
-    ok.
+
+  def jinit(this, p_text, p_basicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :text, p_text)
+      JR.lset(f, :basicColor, p_basicColor)
+      Paintable.jinit(this)
+      jinitfields(this)
+        JR.put(this, :text, JR.lget(f, :text))
+        JR.put(this, :basicColor, JR.lget(f, :basicColor))
+    end)
+  end
+
+  def jnew(p_text, p_basicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_text, p_basicColor)
+    this
+  end
 
 
-new(Text, BasicColor) when (is_list(Text) orelse Text =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Text, BasicColor),
-    This.
+  def jm_updateMeasurement(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.lset(f, :font, JR.call(JR.lget(f, :graphics), :jm_getFont, []))
+        JR.put(this, :topScoresWidth, (Bitwise.bsr(JR.call(JR.lget(f, :font), :jm_stringWidth, [JR.get(this, :text)]), 1)))
+        JR.put(this, :fontHeight, JR.call(JR.lget(f, :font), :jm_getHeight, []))
+        JR.put(this, :myFontProcessor, MyFontProcessor.jm_getInstance())
+    end)
+  end
 
-'$init'(This, Text, BasicColor) when (is_list(Text) orelse Text =:= undefined) ->
-    'Paintable':'$init'(This),
-    init_fields(This),
-        put({This, text}, Text),
-        put({This, basicColor}, BasicColor).
 
-updateMeasurement(This, Graphics) ->
-        Font = (get({Graphics, '$class'})):getFont(Graphics),
-        put({This, topScoresWidth}, (((get({Font, '$class'})):stringWidth(Font, get({This, text})) bsr 1))),
-        put({This, fontHeight}, (get({Font, '$class'})):getHeight(Font)),
-        put({This, myFontProcessor}, 'MyFontProcessor':getInstance()).
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.get(this, :myFontProcessor), :jm_process, [JR.lget(f, :graphics)])
+        JR.lset(f, :width, JR.aget(JR.call(JR.get(this, :displayInfoSingleton), :jm_getLast, []), JR.get(JR.get(this, :displayInfoSingleton), :WIDTH)))
+        JR.call(JR.lget(f, :graphics), :jm_setColor, [JR.call(JR.call(this, :jm_getBasicColorP, []), :jm_intValue, [])])
+        JR.call(JR.lget(f, :graphics), :jm_drawString, [JR.get(this, :text), JR.int32((Bitwise.bsr(JR.lget(f, :width), 1)) - JR.get(this, :topScoresWidth)), JR.get(this, :fontHeight), JR.get(this, :anchor)])
+    end)
+  end
 
-paint(This, Graphics) ->
-        (get({get({This, myFontProcessor}), '$class'})):process(get({This, myFontProcessor}), Graphics),
-        Width = array:get(get({get({This, displayInfoSingleton}), 'WIDTH'}), (get({get({This, displayInfoSingleton}), '$class'})):getLast(get({This, displayInfoSingleton}))),
-        (get({Graphics, '$class'})):setColor(Graphics, (fun(Target_N66650) -> (get({Target_N66650, '$class'})):intValue(Target_N66650) end)((get({This, '$class'})):getBasicColorP(This))),
-        (get({Graphics, '$class'})):drawString(Graphics, get({This, text}), (((Width bsr 1)) - get({This, topScoresWidth})), get({This, fontHeight}), get({This, anchor})).
 
-setBasicColorP(This, BasicColor) ->
-        put({This, basicColor}, BasicColor).
+  def jm_setBasicColorP(this, p_basicColor) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :basicColor, p_basicColor)
+        JR.put(this, :basicColor, JR.lget(f, :basicColor))
+    end)
+  end
 
-getBasicColorP(This) ->
-        get({This, basicColor}).
 
-setText(This, Text) when (is_list(Text) orelse Text =:= undefined) ->
-        put({This, text}, Text),
-        put({This, myFontProcessor}, get({This, updateMyFontProcessor})).
+  def jm_getBasicColorP(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :basicColor)})
+    end)
+  end
 
-getText(This) ->
-        get({This, text}).
+
+  def jm_setText(this, p_text) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :text, p_text)
+        JR.put(this, :text, JR.lget(f, :text))
+        JR.put(this, :myFontProcessor, JR.get(this, :updateMyFontProcessor))
+    end)
+  end
+
+
+  def jm_getText(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :text)})
+    end)
+  end
+end
+
 

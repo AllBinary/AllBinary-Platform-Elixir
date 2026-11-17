@@ -1,56 +1,75 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.layer.special
-% import org.allbinary.game.collision.CollidableInterfaceCompositeInterface
-% import org.allbinary.game.collision.CollisionType
-% import org.allbinary.game.collision.CollisionTypeFactory
-% import org.allbinary.game.layer.CollidableCompositeLayer
-% import org.allbinary.game.layer.pickup.PickedUpLayerInterface
-% import org.allbinary.logic.communication.log.ForcedLogUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.layer.special
 
--module('CollidableCharacterNoDamageBehavior').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule CollidableCharacterNoDamageBehavior do
+  def jsuper(), do: CollidableDestroyableDamageableBehavior
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('CollidableDestroyableDamageableBehavior', Function, Arguments).
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new(Collidable) when is_boolean(Collidable) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Collidable),
-    This.
+  def jinit(this, p_collidable) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :collidable, p_collidable)
+        CollidableDestroyableDamageableBehavior.jinit(this, JR.lget(f, :collidable))
+        CollidableCharacterNoDamageBehavior.jinitfields(this)
+    end)
+  end
 
-'$init'(This, Collidable) when is_boolean(Collidable) ->
-        'CollidableDestroyableDamageableBehavior':'$init'(This, Collidable).
+  def jnew(p_collidable) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_collidable)
+    this
+  end
 
-% throws Exception
-collide(This, OwnerLayer, CollidableInterfaceCompositeInterface) ->
-        CollisionTypeFactory = 'CollisionTypeFactory':getInstance(),
-        CollisionType = (fun(Target_N65927) -> (get({Target_N65927, '$class'})):getCollisionTypeWith(Target_N65927, OwnerLayer) end)((get({CollidableInterfaceCompositeInterface, '$class'})):getCollidableInferface(CollidableInterfaceCompositeInterface)),
-        case (CollisionType =:= get({CollisionTypeFactory, 'PICKUP'})) of
-            true ->
-            CollidableDestroyableDamageableLayer = OwnerLayer,
-            (fun(Target_N66075) -> (get({Target_N66075, '$class'})):doPickupLayer(Target_N66075, CollidableInterfaceCompositeInterface) end)((get({CollidableDestroyableDamageableLayer, '$class'})):getPickupBehavior(CollidableDestroyableDamageableLayer));
-            false ->
-            ok
-        end.
 
-% throws Exception
-collideInterface(This, OwnerLayer, CollidableInterfaceCompositeInterface) ->
-        'ForcedLogUtil':log(get({get({This, commonStrings}), 'NOT_IMPLEMENTED'}), This).
+  def jm_collide(this, p_ownerLayer, p_collidableInterfaceCompositeInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownerLayer, p_ownerLayer)
+      JR.lset(f, :collidableInterfaceCompositeInterface, p_collidableInterfaceCompositeInterface)
+        JR.lset(f, :collisionTypeFactory, CollisionTypeFactory.jm_getInstance())
+        JR.lset(f, :collisionType, JR.call(JR.call(JR.lget(f, :collidableInterfaceCompositeInterface), :jm_getCollidableInferface, []), :jm_getCollisionTypeWith, [JR.lget(f, :ownerLayer)]))
+        if (JR.lget(f, :collisionType) == JR.get(JR.lget(f, :collisionTypeFactory), :PICKUP)) do
+            JR.lset(f, :collidableDestroyableDamageableLayer, JR.lget(f, :ownerLayer))
+            JR.call(JR.call(JR.lget(f, :collidableDestroyableDamageableLayer), :jm_getPickupBehavior, []), :jm_doPickupLayer, [JR.lget(f, :collidableInterfaceCompositeInterface)])
+        else
+            nil
+        end
+    end)
+  end
+
+
+  def jm_collideInterface(this, p_ownerLayer, p_collidableInterfaceCompositeInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownerLayer, p_ownerLayer)
+      JR.lset(f, :collidableInterfaceCompositeInterface, p_collidableInterfaceCompositeInterface)
+        ForcedLogUtil.jm_log(JR.get(JR.get(this, :commonStrings), :NOT_IMPLEMENTED), this)
+    end)
+  end
+end
+
 

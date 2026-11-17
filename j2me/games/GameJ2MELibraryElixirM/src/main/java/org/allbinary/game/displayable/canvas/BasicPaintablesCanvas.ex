@@ -1,53 +1,70 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import javax.microedition.lcdui.CommandListener
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.game.layer.AllBinaryGameLayerManager
-% import org.allbinary.game.paint.ColorFillBasePaintable
-% import org.allbinary.game.paint.ColorFillPaintableFactory
-% import org.allbinary.graphics.paint.Paintable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('BasicPaintablesCanvas').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule BasicPaintablesCanvas do
+  def jsuper(), do: GameCommandCanvas
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('GameCommandCanvas', Function, Arguments).
-
-init_fields(This) ->
-    put({This, paintableArray}, undefined),
-    put({This, colorFillPaintable}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :paintableArray, nil)
+    JR.put(this, :colorFillPaintable, nil)
+        
+        
+    nil
+  end
 
 
-new(CmdListener, Name, AllBinaryGameLayerManager, PaintableArray) when (is_list(Name) orelse Name =:= undefined), (is_tuple(PaintableArray) orelse PaintableArray =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, CmdListener, Name, AllBinaryGameLayerManager, PaintableArray),
-    This.
+  def jinit(this, p_cmdListener, p_name, p_allBinaryGameLayerManager, p_paintableArray) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :cmdListener, p_cmdListener)
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :allBinaryGameLayerManager, p_allBinaryGameLayerManager)
+      JR.lset(f, :paintableArray, p_paintableArray)
+        GameCommandCanvas.jinit(this, JR.lget(f, :cmdListener), JR.lget(f, :name), JR.call(JR.lget(f, :allBinaryGameLayerManager), :jm_getBackgroundBasicColor, []), JR.call(JR.lget(f, :allBinaryGameLayerManager), :jm_getForegroundBasicColor, []))
+        BasicPaintablesCanvas.jinitfields(this)
+        JR.put(this, :paintableArray, JR.lget(f, :paintableArray))
+        JR.put(this, :colorFillPaintable, JR.call(ColorFillPaintableFactory.jm_getInstance(), :jm_getInstance, [JR.call(JR.lget(f, :allBinaryGameLayerManager), :jm_getBackgroundBasicColor, []), false]))
+    end)
+  end
 
-'$init'(This, CmdListener, Name, AllBinaryGameLayerManager, PaintableArray) when (is_list(Name) orelse Name =:= undefined), (is_tuple(PaintableArray) orelse PaintableArray =:= undefined) ->
-        'GameCommandCanvas':'$init'(This, CmdListener, Name, (get({AllBinaryGameLayerManager, '$class'})):getBackgroundBasicColor(AllBinaryGameLayerManager), (get({AllBinaryGameLayerManager, '$class'})):getForegroundBasicColor(AllBinaryGameLayerManager)),
-        init_fields(This),
-        put({This, paintableArray}, PaintableArray),
-        put({This, colorFillPaintable}, (fun(Target_N65952) -> (get({Target_N65952, '$class'})):getInstance(Target_N65952, (get({AllBinaryGameLayerManager, '$class'})):getBackgroundBasicColor(AllBinaryGameLayerManager), false) end)('ColorFillPaintableFactory':getInstance())).
+  def jnew(p_cmdListener, p_name, p_allBinaryGameLayerManager, p_paintableArray) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_cmdListener, p_name, p_allBinaryGameLayerManager, p_paintableArray)
+    this
+  end
 
-paint(This, Graphics) ->
-        (get({get({This, colorFillPaintable}), '$class'})):paint(get({This, colorFillPaintable}), Graphics),
-        (get({Graphics, '$class'})):setColor(Graphics, get({This, foregroundColor})),
-        lists:foreach(fun(Index) ->
-            (fun(Target_N66217) -> (get({Target_N66217, '$class'})):paint(Target_N66217, Graphics) end)(array:get(Index, get({This, paintableArray})))
-        end, lists:seq((array:size(get({This, paintableArray})) - 1), 0, -1)),
-        'GameCommandCanvas':paint(This, Graphics).
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.get(this, :colorFillPaintable), :jm_paint, [JR.lget(f, :graphics)])
+        JR.call(JR.lget(f, :graphics), :jm_setColor, [JR.get(this, :foregroundColor)])
+        JR.lset(f, :index, JR.int32(JR.alength(JR.get(this, :paintableArray)) - 1))
+        JR.jfor(fn -> (JR.lget(f, :index) >= 0) end, fn -> JR.lpostinc(f, :index, -1) end, fn ->
+            JR.call(JR.aget(JR.get(this, :paintableArray), JR.lget(f, :index)), :jm_paint, [JR.lget(f, :graphics)])
+        end)
+        GameCommandCanvas.jm_paint(this, JR.lget(f, :graphics))
+    end)
+  end
+end
+
 

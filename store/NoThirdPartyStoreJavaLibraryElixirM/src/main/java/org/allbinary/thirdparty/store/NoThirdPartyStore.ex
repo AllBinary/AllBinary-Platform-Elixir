@@ -1,39 +1,54 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.thirdparty.store
-% import org.allbinary.logic.string.StringUtil
-% import org.allbinary.logic.system.security.licensing.AbeClientInformationInterface
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.thirdparty.store
 
--module('NoThirdPartyStore').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule NoThirdPartyStore do
+  def jsuper(), do: ThirdPartyStore
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('ThirdPartyStore', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        ThirdPartyStore.jinit(this, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING))
+        NoThirdPartyStore.jinitfields(this)
+    end)
+  end
+
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jm_authorize(this, p_clientInformationInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :clientInformationInterface, p_clientInformationInterface)
+        JR.call(this, :jm_setAuthorized, [true])
+    end)
+  end
+end
 
-'$init'(This) ->
-        'ThirdPartyStore':'$init'(This, get({'StringUtil':getInstance(), 'EMPTY_STRING'})).
-
-authorize(This, ClientInformationInterface) ->
-        (get({This, '$class'})):setAuthorized(This, true).
 

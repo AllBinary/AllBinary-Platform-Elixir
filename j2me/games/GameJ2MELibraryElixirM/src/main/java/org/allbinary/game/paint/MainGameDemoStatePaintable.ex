@@ -1,51 +1,83 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.paint
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.graphics.paint.Paintable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.paint
 
--module('MainGameDemoStatePaintable').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule MainGameDemoStatePaintable do
+  def jsuper(), do: Paintable
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Paintable', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :ownershipPaintableInterface, nil)
+    JR.put(this, :menuPaintableInterface, nil)
+        
+        
+    nil
+  end
 
-init_fields(This) ->
-    put({This, ownershipPaintableInterface}, undefined),
-    put({This, menuPaintableInterface}, undefined),
-    ok.
+
+  def jinit(this, p_ownershipPaintableInterface, p_menuPaintableInterface) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownershipPaintableInterface, p_ownershipPaintableInterface)
+      JR.lset(f, :menuPaintableInterface, p_menuPaintableInterface)
+      Paintable.jinit(this)
+      jinitfields(this)
+        JR.put(this, :ownershipPaintableInterface, JR.lget(f, :ownershipPaintableInterface))
+        JR.put(this, :menuPaintableInterface, JR.lget(f, :menuPaintableInterface))
+    end)
+  end
+
+  def jnew(p_ownershipPaintableInterface, p_menuPaintableInterface) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_ownershipPaintableInterface, p_menuPaintableInterface)
+    this
+  end
 
 
-new(OwnershipPaintableInterface, MenuPaintableInterface) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, OwnershipPaintableInterface, MenuPaintableInterface),
-    This.
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.get(this, :menuPaintableInterface), :jm_paint, [JR.lget(f, :graphics)])
+        JR.call(JR.get(this, :ownershipPaintableInterface), :jm_paint, [JR.lget(f, :graphics)])
+    end)
+  end
 
-'$init'(This, OwnershipPaintableInterface, MenuPaintableInterface) ->
-    'Paintable':'$init'(This),
-    init_fields(This),
-        put({This, ownershipPaintableInterface}, OwnershipPaintableInterface),
-        put({This, menuPaintableInterface}, MenuPaintableInterface).
 
-paint(This, Graphics) ->
-        (get({get({This, menuPaintableInterface}), '$class'})):paint(get({This, menuPaintableInterface}), Graphics),
-        (get({get({This, ownershipPaintableInterface}), '$class'})):paint(get({This, ownershipPaintableInterface}), Graphics).
+  def jm_getOwnershipPaintableInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :ownershipPaintableInterface)})
+    end)
+  end
 
-getOwnershipPaintableInterface(This) ->
-        get({This, ownershipPaintableInterface}).
 
-getMenuPaintableInterface(This) ->
-        get({This, menuPaintableInterface}).
+  def jm_getMenuPaintableInterface(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :menuPaintableInterface)})
+    end)
+  end
+end
+
 

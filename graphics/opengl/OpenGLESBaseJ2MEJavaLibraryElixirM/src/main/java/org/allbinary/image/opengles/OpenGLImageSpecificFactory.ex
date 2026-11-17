@@ -1,51 +1,75 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.image.opengles
-% import org.allbinary.logic.communication.log.PreLogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.string.StringUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.image.opengles
 
--module('OpenGLImageSpecificFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule OpenGLImageSpecificFactory do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> OpenGLImageSpecificFactory.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'OpenGLImageSpecificFactory':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :imageFactory, nil)
+    JR.put(this, :updating, false)
+        JR.put(this, :imageFactory, OpenGLImageFactory.jstatic_NULL_OPENGL_IMAGE_FACTORY())
+        JR.put(this, :updating, false)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, imageFactory}, get({'OpenGLImageFactory', 'NULL_OPENGL_IMAGE_FACTORY'})),
-    put({This, updating}, false),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'OpenGLImageSpecificFactory', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, OpenGLImageSpecificFactory.jstatic_instance()})
+    end)
+  end
 
-setImageFactory(This, ImageFactory) ->
-        put({This, imageFactory}, ImageFactory),
-        'PreLogUtil':put((fun(Target_N65918) -> (get({Target_N65918, '$class'})):toString(Target_N65918) end)((fun(Target_N65925) -> (get({Target_N65925, '$class'})):append(Target_N65925, (fun(Target_N65961) -> (get({Target_N65961, '$class'})):toString(Target_N65961, get({This, imageFactory})) end)('StringUtil':getInstance())) end)((fun(Target_N65932) -> (get({Target_N65932, '$class'})):append(Target_N65932, "Selected Image Factory: ") end)('StringMaker':new()))), This, "setImageFactory").
 
-getImageFactory(This) ->
-        get({This, imageFactory}).
+  def jm_setImageFactory(this, p_imageFactory) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :imageFactory, p_imageFactory)
+        JR.put(this, :imageFactory, JR.lget(f, :imageFactory))
+        PreLogUtil.jm_put(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["Selected Image Factory: "]), :jm_append, [JR.call(StringUtil.jm_getInstance(), :jm_toString, [JR.get(this, :imageFactory)])]), :jm_toString, []), this, "setImageFactory")
+    end)
+  end
+
+
+  def jm_getImageFactory(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :imageFactory)})
+    end)
+  end
+end
+
 

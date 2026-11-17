@@ -1,48 +1,92 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.collision
-% import org.allbinary.game.layer.CollidableCompositeLayer
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.collision
 
--module('CollidableNeverCollideBehavior').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule CollidableNeverCollideBehavior do
+  def jsuper(), do: CollidableBaseBehavior
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('CollidableBaseBehavior', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+
+  def jinit(this, p_isCollidable) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :isCollidable, p_isCollidable)
+        CollidableBaseBehavior.jinit(this, JR.lget(f, :isCollidable))
+        CollidableNeverCollideBehavior.jinitfields(this)
+    end)
+  end
+
+  def jnew(p_isCollidable) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_isCollidable)
+    this
+  end
 
 
-new(IsCollidable) when is_boolean(IsCollidable) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, IsCollidable),
-    This.
+  def jm_isCollision(this, p_ownerLayer, p_allbinaryCollidableLayer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownerLayer, p_ownerLayer)
+      JR.lset(f, :allbinaryCollidableLayer, p_allbinaryCollidableLayer)
+        throw({:jreturn, false})
+    end)
+  end
 
-'$init'(This, IsCollidable) when is_boolean(IsCollidable) ->
-        'CollidableBaseBehavior':'$init'(This, IsCollidable).
 
-isCollision(This, OwnerLayer, AllbinaryCollidableLayer) ->
-        false.
+  def jm_collide(this, p_ownerLayer, p_allbinaryCollidableLayer) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownerLayer, p_ownerLayer)
+      JR.lset(f, :allbinaryCollidableLayer, p_allbinaryCollidableLayer)
+        nil
+    end)
+  end
 
-% throws Exception
-collide(This, OwnerLayer, AllbinaryCollidableLayer) ->
-        ok.
 
-collideInterface(This, OwnerLayer, CollidableInterfaceCompositeInterface) ->
-        ok.
+  def jm_collideInterface(this, p_ownerLayer, p_collidableInterfaceCompositeInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownerLayer, p_ownerLayer)
+      JR.lset(f, :collidableInterfaceCompositeInterface, p_collidableInterfaceCompositeInterface)
+        nil
+    end)
+  end
 
-isCollisionInterface(This, OwnerLayer, CollidableInterfaceCompositeInterface) ->
-        false.
+
+  def jm_isCollisionInterface(this, p_ownerLayer, p_collidableInterfaceCompositeInterface) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :ownerLayer, p_ownerLayer)
+      JR.lset(f, :collidableInterfaceCompositeInterface, p_collidableInterfaceCompositeInterface)
+        throw({:jreturn, false})
+    end)
+  end
+end
+
 

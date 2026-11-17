@@ -1,55 +1,87 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.media.audio
-% import javax.microedition.media.Control
-% import org.allbinary.logic.string.StringUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
--module('NoPlayer').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule NoPlayer do
+  def jsuper(), do: BasicPlayer
+def jstatic_NO_PLAYER(), do: JR.static_get(__MODULE__, :NO_PLAYER, fn -> NoPlayer.jnew() end)
+  def jstatic_set_NO_PLAYER(value), do: JR.static_put(__MODULE__, :NO_PLAYER, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('BasicPlayer', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'NO_PLAYER'}, 'NoPlayer':new()),
-    ok.
-
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      BasicPlayer.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-'$init'(This) ->
-    'BasicPlayer':'$init'(This),
-    init_fields(This),
-        ok.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-close(This) ->
-        ok.
 
-getContentType(This) ->
-        get({'StringUtil':getInstance(), 'NULL_STRING'}).
+  def jm_close(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-getControl(This, ControlType) when (is_list(ControlType) orelse ControlType =:= undefined) ->
-        'NullControl':new().
 
-getControls(This) ->
-        array:new(0, {default, undefined}).
+  def jm_getContentType(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(StringUtil.jm_getInstance(), :NULL_STRING)})
+    end)
+  end
+
+
+  def jm_getControl(this, p_controlType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :controlType, p_controlType)
+        throw({:jreturn, NullControl.jnew()})
+    end)
+  end
+
+
+  def jm_getControls(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.anew(0, nil)})
+    end)
+  end
+end
+
 

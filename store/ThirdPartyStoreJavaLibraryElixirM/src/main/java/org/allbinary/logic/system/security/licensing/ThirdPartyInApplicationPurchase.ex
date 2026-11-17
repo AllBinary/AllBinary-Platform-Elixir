@@ -1,72 +1,177 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.logic.system.security.licensing
-% import org.allbinary.logic.string.StringUtil
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.licensing
 
--module('ThirdPartyInApplicationPurchase').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements ThirdPartyInApplicationPurchaseInterface
+defmodule ThirdPartyInApplicationPurchase do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-isPurchased(This, LockableFeature) ->
-        false.
+  def jm_isPurchased(this, p_lockableFeature) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :lockableFeature, p_lockableFeature)
+        throw({:jreturn, false})
+    end)
+  end
 
-onCreate(This, AnyType, StateObject) ->
-        ok.
 
-onDestroy(This) ->
-        ok.
+  def jm_onCreate(this, p_anyType, p_stateObject) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+      JR.lset(f, :stateObject, p_stateObject)
+        nil
+    end)
+  end
 
-onStart(This) ->
-        ok.
 
-onActivityResult(This, RequestCode, ResultCode, DataObject) when is_integer(RequestCode), is_integer(ResultCode) ->
-        ok.
+  def jm_onDestroy(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-onSaveInstanceState(This, AnyType) ->
-        ok.
 
-onStop(This) ->
-        ok.
+  def jm_onStart(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-requestPurchase(This, LockableFeature) ->
-        ok.
 
-requestReceipts(This) ->
-        ok.
+  def jm_onActivityResult(this, p_requestCode, p_resultCode, p_dataObject) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :requestCode, p_requestCode)
+      JR.lset(f, :resultCode, p_resultCode)
+      JR.lset(f, :dataObject, p_dataObject)
+        nil
+    end)
+  end
 
-add(This, LockableFeature) ->
-        ok.
 
-getUserName(This) ->
-        get({'StringUtil':getInstance(), 'EMPTY_STRING'}).
+  def jm_onSaveInstanceState(this, p_anyType) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :anyType, p_anyType)
+        nil
+    end)
+  end
 
-isEnabled(This) ->
-        false.
 
-requestProducts(This) ->
-        ok.
+  def jm_onStop(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_requestPurchase(this, p_lockableFeature) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :lockableFeature, p_lockableFeature)
+        nil
+    end)
+  end
+
+
+  def jm_requestReceipts(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+
+
+  def jm_add(this, p_lockableFeature) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :lockableFeature, p_lockableFeature)
+        nil
+    end)
+  end
+
+
+  def jm_getUserName(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(StringUtil.jm_getInstance(), :EMPTY_STRING)})
+    end)
+  end
+
+
+  def jm_isEnabled(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, false})
+    end)
+  end
+
+
+  def jm_requestProducts(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
+end
+
 

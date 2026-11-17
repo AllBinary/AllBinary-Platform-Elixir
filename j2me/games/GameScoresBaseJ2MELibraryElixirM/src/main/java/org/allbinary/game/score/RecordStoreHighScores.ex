@@ -1,281 +1,326 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.score
-% import java.io.ByteArrayInputStream
-% import java.io.DataInputStream
-% import java.io.EOFException
-% import java.io.IOException
-% import javax.microedition.rms.RecordComparator
-% import javax.microedition.rms.RecordEnumeration
-% import javax.microedition.rms.RecordStore
-% import javax.microedition.rms.RecordStoreException
-% import javax.microedition.rms.RecordStoreNotFoundException
-% import org.allbinary.TsUtil
-% import org.allbinary.game.GameInfo
-% import org.allbinary.game.configuration.persistance.NullRecordComparator
-% import org.allbinary.game.configuration.persistance.NullRecordFilter
-% import org.allbinary.game.configuration.persistance.NullRecordStore
-% import org.allbinary.logic.StdUtil
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.communication.log.PreLogUtil
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.logic.system.security.licensing.AbeClientInformationInterface
-% import org.allbinary.persistance.PlatformRecordIdUtil
-% import org.allbinary.string.CommonSeps
-% import org.allbinary.string.CommonStrings
-% import org.allbinary.util.ABHashtable
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.score
 
--module('RecordStoreHighScores').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule RecordStoreHighScores do
+  def jsuper(), do: HighScores
+def jstatic_hashTable(), do: JR.static_get(__MODULE__, :hashTable, fn -> JR.call(StdUtil.jm_getInstance(), :jm_createHashtable, []) end)
+  def jstatic_set_hashTable(value), do: JR.static_put(__MODULE__, :hashTable, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('HighScores', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, hashTable}, (fun(Target_N66287) -> (get({Target_N66287, '$class'})):createHashtable(Target_N66287) end)('StdUtil':getInstance())),
-    ok.
-
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    put({This, commonStrings}, 'CommonStrings':getInstance()),
-    put({This, platformRecordIdUtil}, 'PlatformRecordIdUtil':getInstance()),
-    put({This, tsUtil}, 'TsUtil':getInstance()),
-    put({This, 'RECORD_ID'}, "_HS"),
-    put({This, 'MAXHIGHSCORES'}, 100),
-    put({This, gameInfo}, undefined),
-    put({This, abeClientInformation}, undefined),
-    put({This, recordComparatorInterface}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+    JR.put(this, :commonStrings, nil)
+    JR.put(this, :platformRecordIdUtil, nil)
+    JR.put(this, :tsUtil, nil)
+    JR.put(this, :RECORD_ID, nil)
+    JR.put(this, :MAXHIGHSCORES, 0)
+    JR.put(this, :gameInfo, nil)
+    JR.put(this, :abeClientInformation, nil)
+    JR.put(this, :recordComparatorInterface, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+        JR.put(this, :commonStrings, CommonStrings.jm_getInstance())
+        JR.put(this, :platformRecordIdUtil, PlatformRecordIdUtil.jm_getInstance())
+        JR.put(this, :tsUtil, TsUtil.jm_getInstance())
+        JR.put(this, :RECORD_ID, "_HS")
+        JR.put(this, :MAXHIGHSCORES, 100)
+        
+        
+        
+    nil
+  end
 
 
-new(AbeClientInformation, GameInfo, Name, Heading, ColumnTwoHeading, RecordComparatorInterface) when (is_list(Name) orelse Name =:= undefined), (is_list(Heading) orelse Heading =:= undefined), (is_list(ColumnTwoHeading) orelse ColumnTwoHeading =:= undefined) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, AbeClientInformation, GameInfo, Name, Heading, ColumnTwoHeading, RecordComparatorInterface),
-    This.
+  def jinit(this, p_abeClientInformation, p_gameInfo, p_name, p_heading, p_columnTwoHeading, p_recordComparatorInterface) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+      JR.lset(f, :gameInfo, p_gameInfo)
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :heading, p_heading)
+      JR.lset(f, :columnTwoHeading, p_columnTwoHeading)
+      JR.lset(f, :recordComparatorInterface, p_recordComparatorInterface)
+        HighScores.jinit(this, JR.lget(f, :name), JR.lget(f, :heading), JR.lget(f, :columnTwoHeading))
+        RecordStoreHighScores.jinitfields(this)
+        JR.put(this, :abeClientInformation, JR.lget(f, :abeClientInformation))
+        JR.put(this, :gameInfo, JR.lget(f, :gameInfo))
+        JR.put(this, :recordComparatorInterface, JR.lget(f, :recordComparatorInterface))
+        JR.call(this, :jm_load, [])
+    end)
+  end
 
-'$init'(This, AbeClientInformation, GameInfo, Name, Heading, ColumnTwoHeading, RecordComparatorInterface) when (is_list(Name) orelse Name =:= undefined), (is_list(Heading) orelse Heading =:= undefined), (is_list(ColumnTwoHeading) orelse ColumnTwoHeading =:= undefined) ->
-        'HighScores':'$init'(This, Name, Heading, ColumnTwoHeading),
-        init_fields(This),
-        put({This, abeClientInformation}, AbeClientInformation),
-        put({This, gameInfo}, GameInfo),
-        put({This, recordComparatorInterface}, RecordComparatorInterface),
-        (get({This, '$class'})):load(This).
+  def jnew(p_abeClientInformation, p_gameInfo, p_name, p_heading, p_columnTwoHeading, p_recordComparatorInterface) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_abeClientInformation, p_gameInfo, p_name, p_heading, p_columnTwoHeading, p_recordComparatorInterface)
+    this
+  end
 
-getInstance(AbeClientInformation, GameInfo, HighScoreName, Heading, ColumnTwoHeading, RecordComparatorInterface) when (is_list(HighScoreName) orelse HighScoreName =:= undefined), (is_list(Heading) orelse Heading =:= undefined), (is_list(ColumnTwoHeading) orelse ColumnTwoHeading =:= undefined) ->
-        try
-        HighScoresCanBeNull = (get({get({'RecordStoreHighScores', hashTable}), '$class'})):get(get({'RecordStoreHighScores', hashTable}), HighScoreName),
-        case (HighScoresCanBeNull =:= undefined) of
-            true ->
-            HighScores = 'RecordStoreHighScores':new(AbeClientInformation, GameInfo, HighScoreName, Heading, ColumnTwoHeading, RecordComparatorInterface),
-            (get({get({'RecordStoreHighScores', hashTable}), '$class'})):put(get({'RecordStoreHighScores', hashTable}), (get({HighScores, '$class'})):getName(HighScores), HighScores),
-            throw({'$return', HighScores});
-            false -> ok
-        end,
-        HighScoresCanBeNull
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
 
-getRecordId(This, AbeClientInformation) ->
-        (get({get({This, platformRecordIdUtil}), '$class'})):getRecordId(get({This, platformRecordIdUtil}), AbeClientInformation, (fun(Target_N67555) -> (get({Target_N67555, '$class'})):toString(Target_N67555) end)((fun(Target_N67562) -> (get({Target_N67562, '$class'})):append(Target_N67562, get({This, 'RECORD_ID'})) end)((fun(Target_N67569) -> (get({Target_N67569, '$class'})):append(Target_N67569, (get({This, '$class'})):getName(This)) end)((fun(Target_N67576) -> (get({Target_N67576, '$class'})):append(Target_N67576, get({'CommonSeps':getInstance(), 'UNDERSCORE'})) end)('StringMaker':new()))))).
-
-addHighScore(This, NewHighScore) ->
-        put({local, recordStore}, get({'NullRecordStore', 'NULL_RECORD_STORE'})),
-        try
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N68008) -> (get({Target_N68008, '$class'})):toString(Target_N68008) end)((fun(Target_N68015) -> (get({Target_N68015, '$class'})):appendlong(Target_N68015, trunc((get({NewHighScore, '$class'})):getScore(NewHighScore))) end)((fun(Target_N68022) -> (get({Target_N68022, '$class'})):append(Target_N68022, "Adding HighScore: ") end)('StringMaker':new()))), This, get({get({This, commonStrings}), 'ADD'})),
-            case (get({This, '$class'})):isTooManyHighScores(This) of
-                true ->
-                (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), "Removing Lowest Score", This, get({get({This, commonStrings}), 'ADD'})),
-                (get({This, '$class'})):removeLowestHighScore(This);
-                false -> ok
-            end,
-            put({local, recordStore}, 'RecordStore':openRecordStore((get({This, '$class'})):getRecordId(This, get({This, abeClientInformation})), true)),
-            HighScoreBytes = (get({NewHighScore, '$class'})):getAsBytes(NewHighScore),
-            RecordId = (get({get({local, recordStore}), '$class'})):addRecord(get({local, recordStore}), HighScoreBytes, 0, array:size(HighScoreBytes)),
-            (get({This, '$class'})):load(This)
-        catch _:E_N68404 when E_N68404 =/= '$break', E_N68404 =/= '$continue', (not is_tuple(E_N68404) orelse element(1, E_N68404) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'ADD'}), E_N68404)
-        after
-            try
-                case (get({local, recordStore}) =/= undefined) of
-                    true ->
-                    'PreLogUtil':put("Closing RecordStore", This, get({get({This, commonStrings}), 'ADD'})),
-                    (get({get({local, recordStore}), '$class'})):closeRecordStore(get({local, recordStore}));
-                    false -> ok
-                end
-            catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-                (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'ADD'}), E)
-            end
-        end.
-
-removeLowestHighScore(This) ->
-        put({local, recordStore}, get({'NullRecordStore', 'NULL_RECORD_STORE'})),
-        try
-            put({local, recordStore}, 'RecordStore':openRecordStore((get({This, '$class'})):getRecordId(This, get({This, abeClientInformation})), true)),
-            RecordEnum = (get({get({local, recordStore}), '$class'})):enumerateRecords(get({local, recordStore}), get({'NullRecordFilter', 'NULL_RECORD_FILTER'}), get({'NullRecordComparator', 'NULL_RECORD_COMPARATOR'}), true),
-            ScoreComparator = (get({This, recordComparatorInterface})),
-            put({local, bestHighScore}, 'HighScore':new((-1), "none", get({'GameInfo', 'NONE'}), (get({ScoreComparator, '$class'})):getBestScore(ScoreComparator))),
-            put({local, recordAsBytes}, undefined),
-            put({local, byteArrayInputStream}, undefined),
-            put({local, inputStream}, undefined),
-            (fun Loop() -> case (get({RecordEnum, '$class'})):hasNextElement(RecordEnum) of true ->
-                Id = (get({RecordEnum, '$class'})):nextRecordId(RecordEnum),
-                put({local, recordAsBytes}, (get({get({This, tsUtil}), '$class'})):getRecord(get({This, tsUtil}), get({local, recordStore}), Id)),
-                case (get({local, recordAsBytes}) =/= undefined) of
-                    true ->
-                    put({local, byteArrayInputStream}, 'ByteArrayInputStream':new(get({local, recordAsBytes}))),
-                    put({local, inputStream}, 'DataInputStream':new(get({local, byteArrayInputStream}))),
-                    Name = (get({get({local, inputStream}), '$class'})):readUTF(get({local, inputStream})),
-                    NextScore = (get({get({local, inputStream}), '$class'})):readLong(get({local, inputStream})),
-                    NextCurrentHighScore = 'HighScore':new(Id, Name, get({'GameInfo', 'NONE'}), NextScore),
-                    case ((get({get({This, recordComparatorInterface}), '$class'})):compare(get({This, recordComparatorInterface}), (get({NextCurrentHighScore, '$class'})):getAsBytes(NextCurrentHighScore), (get({get({local, bestHighScore}), '$class'})):getAsBytes(get({local, bestHighScore}))) =:= get({'RecordComparator', 'FOLLOWS'})) of
-                        true ->
-                        put({local, bestHighScore}, NextCurrentHighScore);
-                        false -> ok
-                    end;
-                    false -> ok
-                end,
-                Loop();
-            false -> ok end end)(),
-            case ((get({get({local, bestHighScore}), '$class'})):getId(get({local, bestHighScore})) =/= (-1)) of
-                true ->
-                (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N70013) -> (get({Target_N70013, '$class'})):toString(Target_N70013) end)((fun(Target_N70020) -> (get({Target_N70020, '$class'})):appendlong(Target_N70020, trunc((get({get({local, bestHighScore}), '$class'})):getScore(get({local, bestHighScore})))) end)((fun(Target_N70027) -> (get({Target_N70027, '$class'})):append(Target_N70027, "Removing Lowest HighScore: ") end)('StringMaker':new()))), This, get({get({This, commonStrings}), 'LOAD'})),
-                (get({get({local, recordStore}), '$class'})):deleteRecord(get({local, recordStore}), (get({get({local, bestHighScore}), '$class'})):getId(get({local, bestHighScore})));
-                false -> ok
-            end
-        catch _:E_N70146 when E_N70146 =/= '$break', E_N70146 =/= '$continue', (not is_tuple(E_N70146) orelse element(1, E_N70146) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, "removeLowestHighScore", E_N70146)
-        after
-            try
-                case (get({local, recordStore}) =/= undefined) of
-                    true ->
-                    'PreLogUtil':put("Closing RecordStore", This, "removeLowestHighScore"),
-                    (get({get({local, recordStore}), '$class'})):closeRecordStore(get({local, recordStore}));
-                    false -> ok
-                end
-            catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-                (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, "removeLowestHighScore", E)
-            end
-        end.
-
-load(This) ->
-        put({local, recordStore}, get({'NullRecordStore', 'NULL_RECORD_STORE'})),
-        try
-            put({local, recordStore}, 'RecordStore':openRecordStore((get({This, '$class'})):getRecordId(This, get({This, abeClientInformation})), true)),
-            (get({This, '$class'})):setList(This, 'BasicArrayListD':new()),
-            RecordEnum = (get({get({local, recordStore}), '$class'})):enumerateRecords(get({local, recordStore}), get({'NullRecordFilter', 'NULL_RECORD_FILTER'}), get({'NullRecordComparator', 'NULL_RECORD_COMPARATOR'}), true),
-            put({local, recordAsBytes}, undefined),
-            put({local, byteArrayInputStream}, undefined),
-            put({local, inputStream}, undefined),
-            (fun Loop() -> case (get({RecordEnum, '$class'})):hasNextElement(RecordEnum) of true ->
-                Id = (get({RecordEnum, '$class'})):nextRecordId(RecordEnum),
-                put({local, recordAsBytes}, (get({get({This, tsUtil}), '$class'})):getRecord(get({This, tsUtil}), get({local, recordStore}), Id)),
-                case (get({local, recordAsBytes}) =/= undefined) of
-                    true ->
-                    put({local, byteArrayInputStream}, 'ByteArrayInputStream':new(get({local, recordAsBytes}))),
-                    put({local, inputStream}, 'DataInputStream':new(get({local, byteArrayInputStream}))),
-                    try
-                        Name = (get({get({local, inputStream}), '$class'})):readUTF(get({local, inputStream})),
-                        Score = (get({get({local, inputStream}), '$class'})):readLong(get({local, inputStream})),
-                        NewHighScore = 'HighScore':new(Id, Name, get({'GameInfo', 'NONE'}), Score),
-                        List = (get({This, '$class'})):getList(This),
-                        Size = (get({List, '$class'})):size(List),
-                        put({local, lastIndex}, Size),
-                        lists:foreach(fun(Index) ->
-                            HighScore = array:get(Index, get({List, objectArray})),
-                            case ((get({get({This, recordComparatorInterface}), '$class'})):compare(get({This, recordComparatorInterface}), (get({NewHighScore, '$class'})):getAsBytes(NewHighScore), (get({HighScore, '$class'})):getAsBytes(HighScore)) =:= get({'RecordComparator', 'PRECEDES'})) of
-                                true ->
-                                put({local, lastIndex}, Index),
-                                throw('$break');
-                                false -> ok
-                            end
-                        end, lists:seq(0, Size - 1)),
-                        (get({List, '$class'})):addAt(List, get({local, lastIndex}), NewHighScore)
-                    catch _:E_N71746 when E_N71746 =/= '$break', E_N71746 =/= '$continue', (not is_tuple(E_N71746) orelse element(1, E_N71746) =/= '$return') ->
-                        (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), "EOF", This, get({get({This, commonStrings}), 'LOAD'}), E_N71746),
-                        erlang:error(E_N71746)
-                    end;
-                    false -> ok
-                end,
-                Loop();
-            false -> ok end end)()
-        catch _:E_N71878 when E_N71878 =/= '$break', E_N71878 =/= '$continue', (not is_tuple(E_N71878) orelse element(1, E_N71878) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), "No High Scores", This, get({get({This, commonStrings}), 'LOAD'}), E_N71878)
-        after
-            try
-                case (get({local, recordStore}) =/= undefined) of
-                    true ->
-                    'PreLogUtil':put("Closing RecordStore", This, get({get({This, commonStrings}), 'LOAD'})),
-                    (get({get({local, recordStore}), '$class'})):closeRecordStore(get({local, recordStore}));
-                    false -> ok
-                end
-            catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-                (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'LOAD'}), E)
-            end
-        end.
-
-isTooManyHighScores(This) ->
-        try
-        case (((get({This, '$class'})):getList(This) =/= undefined) andalso ((fun(Target_N72346) -> (get({Target_N72346, '$class'})):size(Target_N72346) end)((get({This, '$class'})):getList(This)) < get({This, 'MAXHIGHSCORES'}))) of
-            true ->
-            throw({'$return', false});
-            false ->
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N72406) -> (get({Target_N72406, '$class'})):toString(Target_N72406) end)((fun(Target_N72413) -> (get({Target_N72413, '$class'})):appendint(Target_N72413, get({This, 'MAXHIGHSCORES'})) end)((fun(Target_N72420) -> (get({Target_N72420, '$class'})):append(Target_N72420, "HighScores RecordStore Max Reached: ") end)('StringMaker':new()))), This, "isTooManyHighScores"),
-            throw({'$return', true})
+  def jm_getInstance(p_abeClientInformation, p_gameInfo, p_highScoreName, p_heading, p_columnTwoHeading, p_recordComparatorInterface) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+      JR.lset(f, :gameInfo, p_gameInfo)
+      JR.lset(f, :highScoreName, p_highScoreName)
+      JR.lset(f, :heading, p_heading)
+      JR.lset(f, :columnTwoHeading, p_columnTwoHeading)
+      JR.lset(f, :recordComparatorInterface, p_recordComparatorInterface)
+        JR.lset(f, :highScoresCanBeNull, JR.call(RecordStoreHighScores.jstatic_hashTable(), :jm_get, [JR.lget(f, :highScoreName)]))
+        if (JR.lget(f, :highScoresCanBeNull) == nil) do
+            JR.lset(f, :highScores, RecordStoreHighScores.jnew(JR.lget(f, :abeClientInformation), JR.lget(f, :gameInfo), JR.lget(f, :highScoreName), JR.lget(f, :heading), JR.lget(f, :columnTwoHeading), JR.lget(f, :recordComparatorInterface)))
+            JR.call(RecordStoreHighScores.jstatic_hashTable(), :jm_put, [JR.call(JR.lget(f, :highScores), :jm_getName, []), JR.lget(f, :highScores)])
+            throw({:jreturn, JR.lget(f, :highScores)})
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+        throw({:jreturn, JR.lget(f, :highScoresCanBeNull)})
+    end)
+  end
 
-% throws Exception
-isBestScore(This, NewHighScore) ->
-        try
-        try
-            case (not (get({This, '$class'})):isTooManyHighScores(This)) of
-                true ->
-                (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), "Slot Available for a High Score", This, "isBestScore"),
-                throw({'$return', true});
-                false ->
-                List = (get({This, '$class'})):getList(This),
-                Size = (get({List, '$class'})):size(List),
-                lists:foreach(fun(Index) ->
-                    HighScore = array:get(Index, get({List, objectArray})),
-                    case ((get({get({This, recordComparatorInterface}), '$class'})):compare(get({This, recordComparatorInterface}), (get({NewHighScore, '$class'})):getAsBytes(NewHighScore), (get({HighScore, '$class'})):getAsBytes(HighScore)) =:= get({'RecordComparator', 'FOLLOWS'})) of
-                        true ->
-                        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), "Obtained a High Score", This, "isBestScore"),
-                        throw({'$return', true});
-                        false -> ok
+
+  def jm_getRecordId(this, p_abeClientInformation) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+        throw({:jreturn, JR.call(JR.get(this, :platformRecordIdUtil), :jm_getRecordId, [JR.lget(f, :abeClientInformation), JR.call(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :UNDERSCORE)]), :jm_append, [JR.call(this, :jm_getName, [])]), :jm_append, [JR.get(this, :RECORD_ID)]), :jm_toString, [])])})
+    end)
+  end
+
+
+  def jm_addHighScore(this, p_newHighScore) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :newHighScore, p_newHighScore)
+        JR.lset(f, :recordStore, NullRecordStore.jstatic_NULL_RECORD_STORE())
+        try do
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["Adding HighScore: "]), :jm_appendlong, [JR.call(JR.lget(f, :newHighScore), :jm_getScore, [])]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :ADD)])
+            if JR.call(this, :jm_isTooManyHighScores, []) do
+                JR.call(JR.get(this, :logUtil), :jm_putF, ["Removing Lowest Score", this, JR.get(JR.get(this, :commonStrings), :ADD)])
+                JR.call(this, :jm_removeLowestHighScore, [])
+            end
+            JR.lset(f, :recordStore, RecordStore.jm_openRecordStore(JR.call(this, :jm_getRecordId, [JR.get(this, :abeClientInformation)]), true))
+            JR.lset(f, :highScoreBytes, JR.call(JR.lget(f, :newHighScore), :jm_getAsBytes, []))
+            JR.lset(f, :recordId, JR.call(JR.lget(f, :recordStore), :jm_addRecord, [JR.lget(f, :highScoreBytes), 0, JR.alength(JR.lget(f, :highScoreBytes))]))
+            JR.call(this, :jm_load, [])
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :ADD), JR.lget(f, :e)])
+        after
+            try do
+                if (JR.lget(f, :recordStore) != nil) do
+                    PreLogUtil.jm_put("Closing RecordStore", this, JR.get(JR.get(this, :commonStrings), :ADD))
+                    JR.call(JR.lget(f, :recordStore), :jm_closeRecordStore, [])
+                end
+            catch
+                {:jexception, jexception} ->
+                    JR.lset(f, :e, jexception)
+                JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :ADD), JR.lget(f, :e)])
+            end
+        end
+    end)
+  end
+
+
+  def jm_removeLowestHighScore(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :recordStore, NullRecordStore.jstatic_NULL_RECORD_STORE())
+        try do
+            JR.lset(f, :recordStore, RecordStore.jm_openRecordStore(JR.call(this, :jm_getRecordId, [JR.get(this, :abeClientInformation)]), true))
+            JR.lset(f, :recordEnum, JR.call(JR.lget(f, :recordStore), :jm_enumerateRecords, [NullRecordFilter.jstatic_NULL_RECORD_FILTER(), NullRecordComparator.jstatic_NULL_RECORD_COMPARATOR(), true]))
+            JR.lset(f, :scoreComparator, (JR.get(this, :recordComparatorInterface)))
+            JR.lset(f, :bestHighScore, HighScore.jnew(-1, "none", GameInfo.jstatic_NONE(), JR.call(JR.lget(f, :scoreComparator), :jm_getBestScore, [])))
+            JR.lset(f, :recordAsBytes, nil)
+            JR.lset(f, :byteArrayInputStream, nil)
+            JR.lset(f, :inputStream, nil)
+            JR.jwhile(fn -> JR.call(JR.lget(f, :recordEnum), :jm_hasNextElement, []) end, fn ->
+                JR.lset(f, :id, JR.call(JR.lget(f, :recordEnum), :jm_nextRecordId, []))
+                JR.lset(f, :recordAsBytes, JR.call(JR.get(this, :tsUtil), :jm_getRecord, [JR.lget(f, :recordStore), JR.lget(f, :id)]))
+                if (JR.lget(f, :recordAsBytes) != nil) do
+                    JR.lset(f, :byteArrayInputStream, ByteArrayInputStream.jnew(JR.lget(f, :recordAsBytes)))
+                    JR.lset(f, :inputStream, DataInputStream.jnew(JR.lget(f, :byteArrayInputStream)))
+                    JR.lset(f, :name, JR.call(JR.lget(f, :inputStream), :jm_readUTF, []))
+                    JR.lset(f, :nextScore, JR.call(JR.lget(f, :inputStream), :jm_readLong, []))
+                    JR.lset(f, :nextCurrentHighScore, HighScore.jnew(JR.lget(f, :id), JR.lget(f, :name), GameInfo.jstatic_NONE(), JR.lget(f, :nextScore)))
+                    if (JR.call(JR.get(this, :recordComparatorInterface), :jm_compare, [JR.call(JR.lget(f, :nextCurrentHighScore), :jm_getAsBytes, []), JR.call(JR.lget(f, :bestHighScore), :jm_getAsBytes, [])]) == RecordComparator.jstatic_FOLLOWS()) do
+                        JR.lset(f, :bestHighScore, JR.lget(f, :nextCurrentHighScore))
                     end
-                end, lists:seq(0, Size - 1))
-            end,
-            (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), "Not a High Score", This, "isBestScore"),
-            false
-        catch _:E when E =/= '$break', E =/= '$continue', (not is_tuple(E) orelse element(1, E) =/= '$return') ->
-            (get({get({This, logUtil}), '$class'})):put(get({This, logUtil}), get({get({This, commonStrings}), 'EXCEPTION'}), This, get({get({This, commonStrings}), 'ADD'}), E),
-            erlang:error(E)
+                end
+            end)
+            if (JR.call(JR.lget(f, :bestHighScore), :jm_getId, []) != -1) do
+                JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["Removing Lowest HighScore: "]), :jm_appendlong, [JR.call(JR.lget(f, :bestHighScore), :jm_getScore, [])]), :jm_toString, []), this, JR.get(JR.get(this, :commonStrings), :LOAD)])
+                JR.call(JR.lget(f, :recordStore), :jm_deleteRecord, [JR.call(JR.lget(f, :bestHighScore), :jm_getId, [])])
+            end
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, "removeLowestHighScore", JR.lget(f, :e)])
+        after
+            try do
+                if (JR.lget(f, :recordStore) != nil) do
+                    PreLogUtil.jm_put("Closing RecordStore", this, "removeLowestHighScore")
+                    JR.call(JR.lget(f, :recordStore), :jm_closeRecordStore, [])
+                end
+            catch
+                {:jexception, jexception} ->
+                    JR.lset(f, :e, jexception)
+                JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, "removeLowestHighScore", JR.lget(f, :e)])
+            end
         end
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+    end)
+  end
 
-toString(This) ->
-        StringBuffer = 'StringMaker':new(),
-        (get({StringBuffer, '$class'})):append(StringBuffer, 'HighScores':toString(This)),
-        List = (get({This, '$class'})):getList(This),
-        Size = (get({List, '$class'})):size(List),
-        lists:foreach(fun(Index) ->
-            HighScore = array:get(Index, get({List, objectArray})),
-            (get({StringBuffer, '$class'})):append(StringBuffer, (get({HighScore, '$class'})):getScoreString(HighScore)),
-            (get({StringBuffer, '$class'})):append(StringBuffer, get({'CommonSeps':getInstance(), 'COMMA_SEP'}))
-        end, lists:seq(0, Size - 1)),
-        (get({StringBuffer, '$class'})):toString(StringBuffer).
+
+  def jm_load(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :recordStore, NullRecordStore.jstatic_NULL_RECORD_STORE())
+        try do
+            JR.lset(f, :recordStore, RecordStore.jm_openRecordStore(JR.call(this, :jm_getRecordId, [JR.get(this, :abeClientInformation)]), true))
+            JR.call(this, :jm_setList, [BasicArrayListD.jnew()])
+            JR.lset(f, :recordEnum, JR.call(JR.lget(f, :recordStore), :jm_enumerateRecords, [NullRecordFilter.jstatic_NULL_RECORD_FILTER(), NullRecordComparator.jstatic_NULL_RECORD_COMPARATOR(), true]))
+            JR.lset(f, :recordAsBytes, nil)
+            JR.lset(f, :byteArrayInputStream, nil)
+            JR.lset(f, :inputStream, nil)
+            JR.jwhile(fn -> JR.call(JR.lget(f, :recordEnum), :jm_hasNextElement, []) end, fn ->
+                JR.lset(f, :id, JR.call(JR.lget(f, :recordEnum), :jm_nextRecordId, []))
+                JR.lset(f, :recordAsBytes, JR.call(JR.get(this, :tsUtil), :jm_getRecord, [JR.lget(f, :recordStore), JR.lget(f, :id)]))
+                if (JR.lget(f, :recordAsBytes) != nil) do
+                    JR.lset(f, :byteArrayInputStream, ByteArrayInputStream.jnew(JR.lget(f, :recordAsBytes)))
+                    JR.lset(f, :inputStream, DataInputStream.jnew(JR.lget(f, :byteArrayInputStream)))
+                    try do
+                        JR.lset(f, :name, JR.call(JR.lget(f, :inputStream), :jm_readUTF, []))
+                        JR.lset(f, :score, JR.call(JR.lget(f, :inputStream), :jm_readLong, []))
+                        JR.lset(f, :newHighScore, HighScore.jnew(JR.lget(f, :id), JR.lget(f, :name), GameInfo.jstatic_NONE(), JR.lget(f, :score)))
+                        JR.lset(f, :list, JR.call(this, :jm_getList, []))
+                        JR.lset(f, :size, JR.call(JR.lget(f, :list), :jm_size, []))
+                        JR.lset(f, :lastIndex, JR.lget(f, :size))
+                        JR.lset(f, :index, 0)
+                        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+                            JR.lset(f, :highScore, JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index)))
+                            if (JR.call(JR.get(this, :recordComparatorInterface), :jm_compare, [JR.call(JR.lget(f, :newHighScore), :jm_getAsBytes, []), JR.call(JR.lget(f, :highScore), :jm_getAsBytes, [])]) == RecordComparator.jstatic_PRECEDES()) do
+                                JR.lset(f, :lastIndex, JR.lget(f, :index))
+                                throw(:jbreak)
+                            end
+                        end)
+                        JR.call(JR.lget(f, :list), :jm_addAt, [JR.lget(f, :lastIndex), JR.lget(f, :newHighScore)])
+                    catch
+                        {:jexception, jexception} ->
+                            JR.lset(f, :e, jexception)
+                        JR.call(JR.get(this, :logUtil), :jm_put, ["EOF", this, JR.get(JR.get(this, :commonStrings), :LOAD), JR.lget(f, :e)])
+                        throw({:jexception, JR.lget(f, :e)})
+                    end
+                end
+            end)
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, ["No High Scores", this, JR.get(JR.get(this, :commonStrings), :LOAD), JR.lget(f, :e)])
+        after
+            try do
+                if (JR.lget(f, :recordStore) != nil) do
+                    PreLogUtil.jm_put("Closing RecordStore", this, JR.get(JR.get(this, :commonStrings), :LOAD))
+                    JR.call(JR.lget(f, :recordStore), :jm_closeRecordStore, [])
+                end
+            catch
+                {:jexception, jexception} ->
+                    JR.lset(f, :e, jexception)
+                JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :LOAD), JR.lget(f, :e)])
+            end
+        end
+    end)
+  end
+
+
+  def jm_isTooManyHighScores(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        if ((JR.call(this, :jm_getList, []) != nil) && (JR.call(JR.call(this, :jm_getList, []), :jm_size, []) < JR.get(this, :MAXHIGHSCORES))) do
+            throw({:jreturn, false})
+        else
+            JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, ["HighScores RecordStore Max Reached: "]), :jm_appendint, [JR.get(this, :MAXHIGHSCORES)]), :jm_toString, []), this, "isTooManyHighScores"])
+            throw({:jreturn, true})
+        end
+    end)
+  end
+
+
+  def jm_isBestScore(this, p_newHighScore) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :newHighScore, p_newHighScore)
+        try do
+            if !JR.call(this, :jm_isTooManyHighScores, []) do
+                JR.call(JR.get(this, :logUtil), :jm_putF, ["Slot Available for a High Score", this, "isBestScore"])
+                throw({:jreturn, true})
+            else
+                JR.lset(f, :list, JR.call(this, :jm_getList, []))
+                JR.lset(f, :size, JR.call(JR.lget(f, :list), :jm_size, []))
+                JR.lset(f, :index, 0)
+                JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+                    JR.lset(f, :highScore, JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index)))
+                    if (JR.call(JR.get(this, :recordComparatorInterface), :jm_compare, [JR.call(JR.lget(f, :newHighScore), :jm_getAsBytes, []), JR.call(JR.lget(f, :highScore), :jm_getAsBytes, [])]) == RecordComparator.jstatic_FOLLOWS()) do
+                        JR.call(JR.get(this, :logUtil), :jm_putF, ["Obtained a High Score", this, "isBestScore"])
+                        throw({:jreturn, true})
+                    end
+                end)
+            end
+            JR.call(JR.get(this, :logUtil), :jm_putF, ["Not a High Score", this, "isBestScore"])
+            throw({:jreturn, false})
+        catch
+            {:jexception, jexception} ->
+                JR.lset(f, :e, jexception)
+            JR.call(JR.get(this, :logUtil), :jm_put, [JR.get(JR.get(this, :commonStrings), :EXCEPTION), this, JR.get(JR.get(this, :commonStrings), :ADD), JR.lget(f, :e)])
+            throw({:jexception, JR.lget(f, :e)})
+        end
+    end)
+  end
+
+
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :stringBuffer, StringMaker.jnew())
+        JR.call(JR.lget(f, :stringBuffer), :jm_append, [HighScores.jm_toString(this)])
+        JR.lset(f, :list, JR.call(this, :jm_getList, []))
+        JR.lset(f, :size, JR.call(JR.lget(f, :list), :jm_size, []))
+        JR.lset(f, :index, 0)
+        JR.jfor(fn -> (JR.lget(f, :index) < JR.lget(f, :size)) end, fn -> JR.lpostinc(f, :index, 1) end, fn ->
+            JR.lset(f, :highScore, JR.aget(JR.get(JR.lget(f, :list), :objectArray), JR.lget(f, :index)))
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.call(JR.lget(f, :highScore), :jm_getScoreString, [])])
+            JR.call(JR.lget(f, :stringBuffer), :jm_append, [JR.get(CommonSeps.jm_getInstance(), :COMMA_SEP)])
+        end)
+        throw({:jreturn, JR.call(JR.lget(f, :stringBuffer), :jm_toString, [])})
+    end)
+  end
+end
+
 

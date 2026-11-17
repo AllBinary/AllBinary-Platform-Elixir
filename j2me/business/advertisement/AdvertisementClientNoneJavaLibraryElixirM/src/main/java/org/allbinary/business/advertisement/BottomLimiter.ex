@@ -1,67 +1,113 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.business.advertisement
-% import org.allbinary.game.GameAdState
-% import org.allbinary.graphics.displayable.DisplayInfoSingleton
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.business.advertisement
 
--module('BottomLimiter').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule BottomLimiter do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> BottomLimiter.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'BottomLimiter':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :bottom, 0)
+    JR.put(this, :deltaY, 0)
+    JR.put(this, :lower, 0)
+    JR.put(this, :higher, 0)
+        JR.put(this, :bottom, 0)
+        JR.put(this, :deltaY, 0)
+        JR.put(this, :lower, 0)
+        JR.put(this, :higher, 0)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, bottom}, 0),
-    put({This, deltaY}, 0),
-    put({This, lower}, 0),
-    put({This, higher}, 0),
-    ok.
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, BottomLimiter.jstatic_instance()})
+    end)
+  end
 
 
-getInstance() ->
-        get({'BottomLimiter', instance}).
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        nil
+    end)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        ok.
 
-init(This, Lower, Higher) when is_integer(Lower), is_integer(Higher) ->
-        put({This, lower}, Lower),
-        put({This, higher}, Higher).
+  def jm_init(this, p_lower, p_higher) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :lower, p_lower)
+      JR.lset(f, :higher, p_higher)
+        JR.put(this, :lower, JR.lget(f, :lower))
+        JR.put(this, :higher, JR.lget(f, :higher))
+    end)
+  end
 
-update(This) ->
-        DisplayInfo = 'DisplayInfoSingleton':getInstance(),
-        GameAdState = (fun(Target_N66040) -> (get({Target_N66040, '$class'})):getCurrentInstance(Target_N66040) end)('GameAdStateFactory':getInstance()),
-        case (get({GameAdState, '$class'})):isShowingAt(GameAdState) of
-            true ->
-            put({This, deltaY}, get({This, higher}));
-            false ->
-            put({This, deltaY}, get({This, lower}))
-        end,
-        put({This, bottom}, ((get({DisplayInfo, '$class'})):getLastHeight(DisplayInfo) - get({This, deltaY}))).
 
-getDeltaY(This) ->
-        get({This, deltaY}).
+  def jm_update(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :displayInfo, DisplayInfoSingleton.jm_getInstance())
+        JR.lset(f, :gameAdState, JR.call(GameAdStateFactory.jm_getInstance(), :jm_getCurrentInstance, []))
+        if JR.call(JR.lget(f, :gameAdState), :jm_isShowingAt, []) do
+            JR.put(this, :deltaY, JR.get(this, :higher))
+        else
+            JR.put(this, :deltaY, JR.get(this, :lower))
+        end
+        JR.put(this, :bottom, (JR.call(JR.lget(f, :displayInfo), :jm_getLastHeight, []) - JR.get(this, :deltaY)))
+    end)
+  end
 
-getBottom(This) ->
-        get({This, bottom}).
+
+  def jm_getDeltaY(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :deltaY)})
+    end)
+  end
+
+
+  def jm_getBottom(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.get(this, :bottom)})
+    end)
+  end
+end
+
 

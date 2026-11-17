@@ -1,87 +1,177 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2022 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import org.allbinary.game.GameTypeFactory
-% import org.allbinary.graphics.paint.NullPaintable
-% import org.allbinary.logic.communication.log.LogUtil
-% import org.allbinary.logic.system.security.licensing.AbeClientInformationInterface
-% import org.allbinary.string.CommonStrings
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('DemoGameBehavior').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule DemoGameBehavior do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> DemoGameBehavior.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'DemoGameBehavior':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :logUtil, nil)
+        JR.put(this, :logUtil, LogUtil.jm_getInstance())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, logUtil}, 'LogUtil':getInstance()),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'DemoGameBehavior', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, DemoGameBehavior.jstatic_instance()})
+    end)
+  end
 
-% throws Exception
-init(This) ->
-        ok.
 
-pause(This, AllBinaryGameCanvas) ->
-        ok.
+  def jm_init(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        nil
+    end)
+  end
 
-unPause(This, AllBinaryGameCanvas) ->
-        ok.
 
-% throws Exception
-updateTouch(This, AllBinaryGameCanvas) ->
-        ok.
+  def jm_pause(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        nil
+    end)
+  end
 
-% throws Exception
-updateScreenButtonPaintable(This, AllBinaryGameCanvas) ->
-        (get({AllBinaryGameCanvas, '$class'})):setTouchPaintableP(AllBinaryGameCanvas, 'NullPaintable':getInstance()).
 
-% throws Exception
-setGameState(This, AllBinaryGameCanvas) ->
-        ok.
+  def jm_unPause(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        nil
+    end)
+  end
 
-removeAllGameKeyInputListeners(This, AllBinaryGameCanvas) ->
-        ok.
 
-% throws Exception
-updateEndGameProcessor(This, AllBinaryGameCanvas) ->
-        ok.
+  def jm_updateTouch(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        nil
+    end)
+  end
 
-% throws Exception
-buildGame(This, AllBinaryGameCanvas) ->
-        ok.
 
-% throws Exception
-run(This, AllBinaryGameCanvas) ->
-        CommonStrings = 'CommonStrings':getInstance(),
-        (get({get({This, logUtil}), '$class'})):putF(get({This, logUtil}), (fun(Target_N66504) -> (get({Target_N66504, '$class'})):toString(Target_N66504) end)(get({'GameTypeFactory':getInstance(), 'BOT'})), This, get({CommonStrings, 'RUN'})).
+  def jm_updateScreenButtonPaintable(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        JR.call(JR.lget(f, :allBinaryGameCanvas), :jm_setTouchPaintableP, [NullPaintable.jm_getInstance()])
+    end)
+  end
 
-% throws Exception
-setHighScore(This, AbeClientInformation, AllBinaryGameCanvas, Name, Score, AutoSubmit, IsLast) when (is_list(Name) orelse Name =:= undefined), is_integer(Score), is_boolean(AutoSubmit), is_boolean(IsLast) ->
-        ok.
+
+  def jm_setGameState(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        nil
+    end)
+  end
+
+
+  def jm_removeAllGameKeyInputListeners(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        nil
+    end)
+  end
+
+
+  def jm_updateEndGameProcessor(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        nil
+    end)
+  end
+
+
+  def jm_buildGame(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        nil
+    end)
+  end
+
+
+  def jm_run(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        JR.lset(f, :commonStrings, CommonStrings.jm_getInstance())
+        JR.call(JR.get(this, :logUtil), :jm_putF, [JR.call(JR.get(GameTypeFactory.jm_getInstance(), :BOT), :jm_toString, []), this, JR.get(JR.lget(f, :commonStrings), :RUN)])
+    end)
+  end
+
+
+  def jm_setHighScore(this, p_abeClientInformation, p_allBinaryGameCanvas, p_name, p_score, p_autoSubmit, p_isLast) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :score, p_score)
+      JR.lset(f, :autoSubmit, p_autoSubmit)
+      JR.lset(f, :isLast, p_isLast)
+        nil
+    end)
+  end
+end
+
 

@@ -1,103 +1,183 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2022 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import org.allbinary.business.advertisement.GameAdStateFactory
-% import org.allbinary.game.GameAdState
-% import org.allbinary.game.configuration.feature.Features
-% import org.allbinary.graphics.opengles.CurrentDisplayableFactory
-% import org.allbinary.graphics.opengles.OpenGLFeatureFactory
-% import org.allbinary.logic.system.security.licensing.AbeClientInformationInterface
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('BaseGameBehavior').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule BaseGameBehavior do
+  def jsuper(), do: DemoGameBehavior
+def jstatic_instanceC(), do: JR.static_get(__MODULE__, :instanceC, fn -> BaseGameBehavior.jnew() end)
+  def jstatic_set_instanceC(value), do: JR.static_put(__MODULE__, :instanceC, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('DemoGameBehavior', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-static_init() ->
-    put({?MODULE, instanceC}, 'BaseGameBehavior':new()),
-    ok.
+  def jinit(this) do
+    DemoGameBehavior.jinit(this)
+    jinitfields(this)
+  end
 
-init_fields(This) ->
-    ok.
-
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    'DemoGameBehavior':'$init'(This),
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'BaseGameBehavior', instanceC}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, BaseGameBehavior.jstatic_instanceC()})
+    end)
+  end
 
-% throws Exception
-init(This) ->
-        GameAdState = (fun(Target_N65931) -> (get({Target_N65931, '$class'})):getCurrentInstance(Target_N65931) end)('GameAdStateFactory':getInstance()),
-        (get({GameAdState, '$class'})):playingAdState(GameAdState).
 
-pause(This, AllBinaryGameCanvas) ->
-        Features = 'Features':getInstance(),
-        case (get({Features, '$class'})):isDefault(Features, get({'OpenGLFeatureFactory':getInstance(), 'OPENGL_AS_GAME_THREAD'})) of
-            true ->
-            CurrentDisplayableFactory = 'CurrentDisplayableFactory':getInstance(),
-            (get({CurrentDisplayableFactory, '$class'})):setRunnable(CurrentDisplayableFactory, get({AllBinaryGameCanvas, gamePauseRunnable}));
-            false -> ok
-        end.
+  def jm_init(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :gameAdState, JR.call(GameAdStateFactory.jm_getInstance(), :jm_getCurrentInstance, []))
+        JR.call(JR.lget(f, :gameAdState), :jm_playingAdState, [])
+    end)
+  end
 
-unPause(This, AllBinaryGameCanvas) ->
-        case (fun(Target_N66309) -> (get({Target_N66309, '$class'})):isDefault(Target_N66309, get({'OpenGLFeatureFactory':getInstance(), 'OPENGL_AS_GAME_THREAD'})) end)('Features':getInstance()) of
-            true ->
-            CurrentDisplayableFactory = 'CurrentDisplayableFactory':getInstance(),
-            (get({CurrentDisplayableFactory, '$class'})):setRunnable(CurrentDisplayableFactory, get({AllBinaryGameCanvas, gameRunnable})),
-            (get({CurrentDisplayableFactory, '$class'})):setDisplayable(CurrentDisplayableFactory, AllBinaryGameCanvas);
-            false -> ok
-        end.
 
-% throws Exception
-updateTouch(This, AllBinaryGameCanvas) ->
-        (get({AllBinaryGameCanvas, '$class'})):updateTouch2(AllBinaryGameCanvas).
+  def jm_pause(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        JR.lset(f, :features, Features.jm_getInstance())
+        if JR.call(JR.lget(f, :features), :jm_isDefault, [JR.get(OpenGLFeatureFactory.jm_getInstance(), :OPENGL_AS_GAME_THREAD)]) do
+            JR.lset(f, :currentDisplayableFactory, CurrentDisplayableFactory.jm_getInstance())
+            JR.call(JR.lget(f, :currentDisplayableFactory), :jm_setRunnable, [JR.get(JR.lget(f, :allBinaryGameCanvas), :gamePauseRunnable)])
+        end
+    end)
+  end
 
-% throws Exception
-updateScreenButtonPaintable(This, AllBinaryGameCanvas) ->
-        (get({AllBinaryGameCanvas, '$class'})):updateScreenButtonPaintable2(AllBinaryGameCanvas).
 
-% throws Exception
-setGameState(This, AllBinaryGameCanvas) ->
-        (get({AllBinaryGameCanvas, '$class'})):updateGameState(AllBinaryGameCanvas).
+  def jm_unPause(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        if JR.call(Features.jm_getInstance(), :jm_isDefault, [JR.get(OpenGLFeatureFactory.jm_getInstance(), :OPENGL_AS_GAME_THREAD)]) do
+            JR.lset(f, :currentDisplayableFactory, CurrentDisplayableFactory.jm_getInstance())
+            JR.call(JR.lget(f, :currentDisplayableFactory), :jm_setRunnable, [JR.get(JR.lget(f, :allBinaryGameCanvas), :gameRunnable)])
+            JR.call(JR.lget(f, :currentDisplayableFactory), :jm_setDisplayable, [JR.lget(f, :allBinaryGameCanvas)])
+        end
+    end)
+  end
 
-removeAllGameKeyInputListeners(This, AllBinaryGameCanvas) ->
-        (get({AllBinaryGameCanvas, '$class'})):removeAllGameKeyInputListeners2(AllBinaryGameCanvas).
 
-% throws Exception
-updateEndGameProcessor(This, AllBinaryGameCanvas) ->
-        (get({AllBinaryGameCanvas, '$class'})):updateEndGameProcessor2(AllBinaryGameCanvas).
+  def jm_updateTouch(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        JR.call(JR.lget(f, :allBinaryGameCanvas), :jm_updateTouch2, [])
+    end)
+  end
 
-% throws Exception
-buildGame(This, AllBinaryGameCanvas) ->
-        (get({AllBinaryGameCanvas, '$class'})):buildGame2(AllBinaryGameCanvas).
 
-% throws Exception
-run(This, AllBinaryGameCanvas) ->
-        (get({AllBinaryGameCanvas, '$class'})):run2(AllBinaryGameCanvas).
+  def jm_updateScreenButtonPaintable(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        JR.call(JR.lget(f, :allBinaryGameCanvas), :jm_updateScreenButtonPaintable2, [])
+    end)
+  end
 
-% throws Exception
-setHighScore(This, AbeClientInformation, AllBinaryGameCanvas, Name, Score, AutoSubmit, IsLast) when (is_list(Name) orelse Name =:= undefined), is_integer(Score), is_boolean(AutoSubmit), is_boolean(IsLast) ->
-        (get({AllBinaryGameCanvas, '$class'})):setHighScore2(AllBinaryGameCanvas, AbeClientInformation, Name, Score, AutoSubmit, IsLast).
+
+  def jm_setGameState(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        JR.call(JR.lget(f, :allBinaryGameCanvas), :jm_updateGameState, [])
+    end)
+  end
+
+
+  def jm_removeAllGameKeyInputListeners(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        JR.call(JR.lget(f, :allBinaryGameCanvas), :jm_removeAllGameKeyInputListeners2, [])
+    end)
+  end
+
+
+  def jm_updateEndGameProcessor(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        JR.call(JR.lget(f, :allBinaryGameCanvas), :jm_updateEndGameProcessor2, [])
+    end)
+  end
+
+
+  def jm_buildGame(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        JR.call(JR.lget(f, :allBinaryGameCanvas), :jm_buildGame2, [])
+    end)
+  end
+
+
+  def jm_run(this, p_allBinaryGameCanvas) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+        JR.call(JR.lget(f, :allBinaryGameCanvas), :jm_run2, [])
+    end)
+  end
+
+
+  def jm_setHighScore(this, p_abeClientInformation, p_allBinaryGameCanvas, p_name, p_score, p_autoSubmit, p_isLast) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :abeClientInformation, p_abeClientInformation)
+      JR.lset(f, :allBinaryGameCanvas, p_allBinaryGameCanvas)
+      JR.lset(f, :name, p_name)
+      JR.lset(f, :score, p_score)
+      JR.lset(f, :autoSubmit, p_autoSubmit)
+      JR.lset(f, :isLast, p_isLast)
+        JR.call(JR.lget(f, :allBinaryGameCanvas), :jm_setHighScore2, [JR.lget(f, :abeClientInformation), JR.lget(f, :name), JR.lget(f, :score), JR.lget(f, :autoSubmit), JR.lget(f, :isLast)])
+    end)
+  end
+end
+
 

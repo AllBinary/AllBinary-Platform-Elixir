@@ -1,67 +1,95 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.motion.gesture
-% import org.allbinary.graphics.GPoint
-% import org.allbinary.graphics.PointFactory
-% import org.allbinary.input.motion.gesture.observer.MotionEventCircularPool
-% import org.allbinary.input.motion.gesture.observer.MotionGestureEvent
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture
 
--module('MirrorMotionGestureEventUtil').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule MirrorMotionGestureEventUtil do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> MirrorMotionGestureEventUtil.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'MirrorMotionGestureEventUtil':new()),
-    ok.
-
-init_fields(This) ->
-    put({This, motionEventCircularPool}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :motionEventCircularPool, nil)
+        
+    nil
+  end
 
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JObject.jinit(this)
+      jinitfields(this)
+        JR.put(this, :motionEventCircularPool, MotionEventCircularPool.jm_createPool(J.Integer.jstatic_MAX_VALUE()))
+    end)
+  end
 
-'$init'(This) ->
-    init_fields(This),
-        put({This, motionEventCircularPool}, 'MotionEventCircularPool':createPool(get({'Integer', 'MAX_VALUE'}))).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
-% throws Exception
-mirrorVerticle(This, MotionGestureEvent, HalfWidth) when is_integer(HalfWidth) ->
-        Event = (get({get({This, motionEventCircularPool}), '$class'})):getInstance(get({This, motionEventCircularPool}), (get({MotionGestureEvent, '$class'})):getMotionGesture(MotionGestureEvent)),
-        PreviousNewX = (get({This, '$class'})):getNewX(This, (fun(Target_N65989) -> (get({Target_N65989, '$class'})):getX(Target_N65989) end)((get({MotionGestureEvent, '$class'})):getPreviousPoint(MotionGestureEvent)), HalfWidth),
-        CurrentNewX = (get({This, '$class'})):getNewX(This, (fun(Target_N66065) -> (get({Target_N66065, '$class'})):getX(Target_N66065) end)((get({MotionGestureEvent, '$class'})):getCurrentPoint(MotionGestureEvent)), HalfWidth),
-        PointFactory = 'PointFactory':getInstance(),
-        MirroredPreviousPoint = (get({PointFactory, '$class'})):createXY(PointFactory, PreviousNewX, (fun(Target_N66204) -> (get({Target_N66204, '$class'})):getY(Target_N66204) end)((get({MotionGestureEvent, '$class'})):getPreviousPoint(MotionGestureEvent))),
-        MirroredCurrentPoint = (get({PointFactory, '$class'})):createXY(PointFactory, CurrentNewX, (fun(Target_N66289) -> (get({Target_N66289, '$class'})):getY(Target_N66289) end)((get({MotionGestureEvent, '$class'})):getCurrentPoint(MotionGestureEvent))),
-        (get({Event, '$class'})):setPreviousPoint(Event, MirroredPreviousPoint),
-        (get({Event, '$class'})):setCurrentPoint(Event, MirroredCurrentPoint),
-        Event.
 
-getNewX(This, X, HalfWidth) when is_integer(X), is_integer(HalfWidth) ->
-        put({local, newX}, 0),
-        case (X > HalfWidth) of
-            true ->
-            put({local, newX}, (HalfWidth - ((X - HalfWidth))));
-            false ->
-            put({local, newX}, (HalfWidth + ((HalfWidth - X))))
-        end,
-        get({local, newX}).
+  def jm_mirrorVerticle(this, p_motionGestureEvent, p_halfWidth) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :motionGestureEvent, p_motionGestureEvent)
+      JR.lset(f, :halfWidth, p_halfWidth)
+        JR.lset(f, :event, JR.call(JR.get(this, :motionEventCircularPool), :jm_getInstance, [JR.call(JR.lget(f, :motionGestureEvent), :jm_getMotionGesture, [])]))
+        JR.lset(f, :previousNewX, JR.call(this, :jm_getNewX, [JR.call(JR.call(JR.lget(f, :motionGestureEvent), :jm_getPreviousPoint, []), :jm_getX, []), JR.lget(f, :halfWidth)]))
+        JR.lset(f, :currentNewX, JR.call(this, :jm_getNewX, [JR.call(JR.call(JR.lget(f, :motionGestureEvent), :jm_getCurrentPoint, []), :jm_getX, []), JR.lget(f, :halfWidth)]))
+        JR.lset(f, :pointFactory, PointFactory.jm_getInstance())
+        JR.lset(f, :mirroredPreviousPoint, JR.call(JR.lget(f, :pointFactory), :jm_createXY, [JR.lget(f, :previousNewX), JR.call(JR.call(JR.lget(f, :motionGestureEvent), :jm_getPreviousPoint, []), :jm_getY, [])]))
+        JR.lset(f, :mirroredCurrentPoint, JR.call(JR.lget(f, :pointFactory), :jm_createXY, [JR.lget(f, :currentNewX), JR.call(JR.call(JR.lget(f, :motionGestureEvent), :jm_getCurrentPoint, []), :jm_getY, [])]))
+        JR.call(JR.lget(f, :event), :jm_setPreviousPoint, [JR.lget(f, :mirroredPreviousPoint)])
+        JR.call(JR.lget(f, :event), :jm_setCurrentPoint, [JR.lget(f, :mirroredCurrentPoint)])
+        throw({:jreturn, JR.lget(f, :event)})
+    end)
+  end
 
-getInstance() ->
-        get({'MirrorMotionGestureEventUtil', instance}).
+
+  def jm_getNewX(this, p_x, p_halfWidth) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :x, p_x)
+      JR.lset(f, :halfWidth, p_halfWidth)
+        JR.lset(f, :newX, 0)
+        if (JR.lget(f, :x) > JR.lget(f, :halfWidth)) do
+            JR.lset(f, :newX, JR.int32(JR.lget(f, :halfWidth) - (JR.int32(JR.lget(f, :x) - JR.lget(f, :halfWidth)))))
+        else
+            JR.lset(f, :newX, JR.int32(JR.lget(f, :halfWidth) + (JR.int32(JR.lget(f, :halfWidth) - JR.lget(f, :x)))))
+        end
+        throw({:jreturn, JR.lget(f, :newX)})
+    end)
+  end
+
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, MirrorMotionGestureEventUtil.jstatic_instance()})
+    end)
+  end
+end
+
 

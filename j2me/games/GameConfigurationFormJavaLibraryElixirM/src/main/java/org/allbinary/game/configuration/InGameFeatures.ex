@@ -1,102 +1,104 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.configuration
-% import org.allbinary.game.configuration.feature.Features
-% import org.allbinary.game.configuration.feature.GameFeatureChoiceGroups
-% import org.allbinary.game.configuration.feature.InGameFeatureChoiceGroups
-% import org.allbinary.game.configuration.feature.SensorFeatureFactory
-% import org.allbinary.game.configuration.feature.TouchFeatureFactory
-% import org.allbinary.init.Init
-% import org.allbinary.input.gyro.OrientationData
-% import org.allbinary.util.BasicArrayList
-% import org.allbinary.util.BasicArrayListD
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.configuration
 
--module('InGameFeatures').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
+defmodule InGameFeatures do
+  def jsuper(), do: Init
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Init', Function, Arguments).
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    Init.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    'Init':'$init'(This),
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-init(This) ->
-        LABEL = "Screen Buttons",
-        OrientationData = 'OrientationData':getInstance(),
-        ExclusiveOrientationSensorVector = (fun(Target_N65991) -> (get({Target_N65991, '$class'})):get(Target_N65991, get({OrientationData, 'ORIENTATION_SENSOR_INPUT'})) end)((fun(Target_N65998) -> (get({Target_N65998, '$class'})):get(Target_N65998) end)('GameFeatureChoiceGroups':getExclusiveInstance())),
-        InGameFeatureChoiceGroups = 'InGameFeatureChoiceGroups':getExclusiveInstance(),
-        case (ExclusiveOrientationSensorVector =/= undefined) of
-            true ->
-            InGameExclusiveOrientationSensorVectorCanBeNull = (fun(Target_N66171) -> (get({Target_N66171, '$class'})):get(Target_N66171, get({OrientationData, 'ORIENTATION_SENSOR_INPUT'})) end)((get({InGameFeatureChoiceGroups, '$class'})):get(InGameFeatureChoiceGroups)),
-            case (InGameExclusiveOrientationSensorVectorCanBeNull =:= undefined) of
-                true ->
-                (get({This, '$class'})):addToInGameMenu(This);
-                false ->
-                InGameExclusiveOrientationSensorVector = InGameExclusiveOrientationSensorVectorCanBeNull,
-                case ((get({InGameExclusiveOrientationSensorVector, '$class'})):size(InGameExclusiveOrientationSensorVector) =:= 0) of
-                    true ->
-                    (get({This, '$class'})):addToInGameMenu(This);
-                    false -> ok
+  def jm_init(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :LABEL, "Screen Buttons")
+        JR.lset(f, :orientationData, OrientationData.jm_getInstance())
+        JR.lset(f, :exclusiveOrientationSensorVector, JR.call(JR.call(GameFeatureChoiceGroups.jm_getExclusiveInstance(), :jm_get, []), :jm_get, [JR.get(JR.lget(f, :orientationData), :ORIENTATION_SENSOR_INPUT)]))
+        JR.lset(f, :inGameFeatureChoiceGroups, InGameFeatureChoiceGroups.jm_getExclusiveInstance())
+        if (JR.lget(f, :exclusiveOrientationSensorVector) != nil) do
+            JR.lset(f, :inGameExclusiveOrientationSensorVectorCanBeNull, JR.call(JR.call(JR.lget(f, :inGameFeatureChoiceGroups), :jm_get, []), :jm_get, [JR.get(JR.lget(f, :orientationData), :ORIENTATION_SENSOR_INPUT)]))
+            if (JR.lget(f, :inGameExclusiveOrientationSensorVectorCanBeNull) == nil) do
+                JR.call(this, :jm_addToInGameMenu, [])
+            else
+                JR.lset(f, :inGameExclusiveOrientationSensorVector, JR.lget(f, :inGameExclusiveOrientationSensorVectorCanBeNull))
+                if (JR.call(JR.lget(f, :inGameExclusiveOrientationSensorVector), :jm_size, []) == 0) do
+                    JR.call(this, :jm_addToInGameMenu, [])
                 end
-            end;
-            false -> ok
-        end,
-        Features = 'Features':getInstance(),
-        case (((get({Features, '$class'})):isFeature(Features, get({'TouchFeatureFactory':getInstance(), 'SHOW_SCREEN_BUTTONS'})) orelse (get({Features, '$class'})):isFeature(Features, get({'TouchFeatureFactory':getInstance(), 'AUTO_HIDE_SHOW_SCREEN_BUTTONS'}))) orelse (get({Features, '$class'})):isFeature(Features, get({'TouchFeatureFactory':getInstance(), 'HIDE_SCREEN_BUTTONS'}))) of
-            true ->
-            ExclusiveScreenButtonsVector = 'BasicArrayListD':new(),
-            TouchFeatureFactory = 'TouchFeatureFactory':getInstance(),
-            (get({ExclusiveScreenButtonsVector, '$class'})):add(ExclusiveScreenButtonsVector, get({TouchFeatureFactory, 'AUTO_HIDE_SHOW_SCREEN_BUTTONS'})),
-            (get({ExclusiveScreenButtonsVector, '$class'})):add(ExclusiveScreenButtonsVector, get({TouchFeatureFactory, 'SHOW_SCREEN_BUTTONS'})),
-            (get({ExclusiveScreenButtonsVector, '$class'})):add(ExclusiveScreenButtonsVector, get({TouchFeatureFactory, 'HIDE_SCREEN_BUTTONS'})),
-            (get({InGameFeatureChoiceGroups, '$class'})):add(InGameFeatureChoiceGroups, LABEL, ExclusiveScreenButtonsVector);
-            false -> ok
-        end.
+            end
+        end
+        JR.lset(f, :features, Features.jm_getInstance())
+        if ((JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(TouchFeatureFactory.jm_getInstance(), :SHOW_SCREEN_BUTTONS)]) || JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(TouchFeatureFactory.jm_getInstance(), :AUTO_HIDE_SHOW_SCREEN_BUTTONS)])) || JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(TouchFeatureFactory.jm_getInstance(), :HIDE_SCREEN_BUTTONS)])) do
+            JR.lset(f, :exclusiveScreenButtonsVector, BasicArrayListD.jnew())
+            JR.lset(f, :touchFeatureFactory, TouchFeatureFactory.jm_getInstance())
+            JR.call(JR.lget(f, :exclusiveScreenButtonsVector), :jm_add, [JR.get(JR.lget(f, :touchFeatureFactory), :AUTO_HIDE_SHOW_SCREEN_BUTTONS)])
+            JR.call(JR.lget(f, :exclusiveScreenButtonsVector), :jm_add, [JR.get(JR.lget(f, :touchFeatureFactory), :SHOW_SCREEN_BUTTONS)])
+            JR.call(JR.lget(f, :exclusiveScreenButtonsVector), :jm_add, [JR.get(JR.lget(f, :touchFeatureFactory), :HIDE_SCREEN_BUTTONS)])
+            JR.call(JR.lget(f, :inGameFeatureChoiceGroups), :jm_add, [JR.lget(f, :LABEL), JR.lget(f, :exclusiveScreenButtonsVector)])
+        end
+    end)
+  end
 
-addToInGameMenu(This) ->
-        OrientationData = 'OrientationData':getInstance(),
-        InGameExclusiveOrientationSensorVector = 'BasicArrayListD':new(),
-        (get({InGameExclusiveOrientationSensorVector, '$class'})):add(InGameExclusiveOrientationSensorVector, get({'SensorFeatureFactory':getInstance(), 'ORIENTATION_SENSORS'})),
-        (get({InGameExclusiveOrientationSensorVector, '$class'})):add(InGameExclusiveOrientationSensorVector, get({'SensorFeatureFactory':getInstance(), 'NO_ORIENTATION'})),
-        (fun(Target_N67080) -> (get({Target_N67080, '$class'})):add(Target_N67080, get({OrientationData, 'ORIENTATION_SENSOR_INPUT'}), InGameExclusiveOrientationSensorVector) end)('InGameFeatureChoiceGroups':getExclusiveInstance()).
 
-isAny(This) ->
-        try
-        Features = 'Features':getInstance(),
-        TouchFeatureFactory = 'TouchFeatureFactory':getInstance(),
-        case (((get({Features, '$class'})):isFeature(Features, get({TouchFeatureFactory, 'SHOW_SCREEN_BUTTONS'})) orelse (get({Features, '$class'})):isFeature(Features, get({TouchFeatureFactory, 'AUTO_HIDE_SHOW_SCREEN_BUTTONS'}))) orelse (get({Features, '$class'})):isFeature(Features, get({TouchFeatureFactory, 'HIDE_SCREEN_BUTTONS'}))) of
-            true ->
-            throw({'$return', true});
-            false -> ok
-        end,
-        ExclusiveOrientationSensorVector = (fun(Target_N67412) -> (get({Target_N67412, '$class'})):get(Target_N67412, get({'OrientationData':getInstance(), 'ORIENTATION_SENSOR_INPUT'})) end)((fun(Target_N67419) -> (get({Target_N67419, '$class'})):get(Target_N67419) end)('GameFeatureChoiceGroups':getExclusiveInstance())),
-        case (ExclusiveOrientationSensorVector =/= undefined) of
-            true ->
-            throw({'$return', true});
-            false -> ok
-        end,
-        false
-        catch throw:{'$return', ReturnValue} -> ReturnValue end.
+  def jm_addToInGameMenu(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :orientationData, OrientationData.jm_getInstance())
+        JR.lset(f, :inGameExclusiveOrientationSensorVector, BasicArrayListD.jnew())
+        JR.call(JR.lget(f, :inGameExclusiveOrientationSensorVector), :jm_add, [JR.get(SensorFeatureFactory.jm_getInstance(), :ORIENTATION_SENSORS)])
+        JR.call(JR.lget(f, :inGameExclusiveOrientationSensorVector), :jm_add, [JR.get(SensorFeatureFactory.jm_getInstance(), :NO_ORIENTATION)])
+        JR.call(InGameFeatureChoiceGroups.jm_getExclusiveInstance(), :jm_add, [JR.get(JR.lget(f, :orientationData), :ORIENTATION_SENSOR_INPUT), JR.lget(f, :inGameExclusiveOrientationSensorVector)])
+    end)
+  end
+
+
+  def jm_isAny(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :features, Features.jm_getInstance())
+        JR.lset(f, :touchFeatureFactory, TouchFeatureFactory.jm_getInstance())
+        if ((JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.lget(f, :touchFeatureFactory), :SHOW_SCREEN_BUTTONS)]) || JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.lget(f, :touchFeatureFactory), :AUTO_HIDE_SHOW_SCREEN_BUTTONS)])) || JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.lget(f, :touchFeatureFactory), :HIDE_SCREEN_BUTTONS)])) do
+            throw({:jreturn, true})
+        end
+        JR.lset(f, :exclusiveOrientationSensorVector, JR.call(JR.call(GameFeatureChoiceGroups.jm_getExclusiveInstance(), :jm_get, []), :jm_get, [JR.get(OrientationData.jm_getInstance(), :ORIENTATION_SENSOR_INPUT)]))
+        if (JR.lget(f, :exclusiveOrientationSensorVector) != nil) do
+            throw({:jreturn, true})
+        end
+        throw({:jreturn, false})
+    end)
+  end
+end
+
 

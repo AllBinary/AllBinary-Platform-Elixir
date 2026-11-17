@@ -1,49 +1,69 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game
 
--module('GameStrings').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule GameStrings do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> GameStrings.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'GameStrings':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :PROCESS_TICK, nil)
+    JR.put(this, :ON_GAME_INITIALIZED, nil)
+    JR.put(this, :UPDATESURFACE, nil)
+    JR.put(this, :ON_SET_DISPLAYABLE, nil)
+    JR.put(this, :UNPAUSE, nil)
+    JR.put(this, :TOGGLE_MENU, nil)
+    JR.put(this, :SET_GAME_OVER, nil)
+    JR.put(this, :GAME_STATE, nil)
+    JR.put(this, :SET_GAME_STATE, nil)
+    JR.put(this, :STOP_GAME_CANVAS_RUNNABLE_INTERFACE, nil)
+        JR.put(this, :PROCESS_TICK, "processTick")
+        JR.put(this, :ON_GAME_INITIALIZED, "onGameInitialized")
+        JR.put(this, :UPDATESURFACE, "updateSurface")
+        JR.put(this, :ON_SET_DISPLAYABLE, "onSetDisplayable")
+        JR.put(this, :UNPAUSE, "unPause")
+        JR.put(this, :TOGGLE_MENU, "toggleMenu")
+        JR.put(this, :SET_GAME_OVER, "setGameOver")
+        JR.put(this, :GAME_STATE, "Game State: ")
+        JR.put(this, :SET_GAME_STATE, "setGameState")
+        JR.put(this, :STOP_GAME_CANVAS_RUNNABLE_INTERFACE, "stopGameCanvasRunnableInterface")
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'PROCESS_TICK'}, "processTick"),
-    put({This, 'ON_GAME_INITIALIZED'}, "onGameInitialized"),
-    put({This, 'UPDATESURFACE'}, "updateSurface"),
-    put({This, 'ON_SET_DISPLAYABLE'}, "onSetDisplayable"),
-    put({This, 'UNPAUSE'}, "unPause"),
-    put({This, 'TOGGLE_MENU'}, "toggleMenu"),
-    put({This, 'SET_GAME_OVER'}, "setGameOver"),
-    put({This, 'GAME_STATE'}, "Game State: "),
-    put({This, 'SET_GAME_STATE'}, "setGameState"),
-    put({This, 'STOP_GAME_CANVAS_RUNNABLE_INTERFACE'}, "stopGameCanvasRunnableInterface"),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'GameStrings', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, GameStrings.jstatic_instance()})
+    end)
+  end
+end
+
 

@@ -1,230 +1,427 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2026 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.game.input
-% import java.awt.event.KeyEvent
-% import jsinterop.annotations.JsType
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2026 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.game.input
 
--module('ABKeyEventWrapper').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule ABKeyEventWrapper do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> ABKeyEventWrapper.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'ABKeyEventWrapper':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :VK_ENTER, 0)
+    JR.put(this, :VK_BACK_SPACE, 0)
+    JR.put(this, :VK_TAB, 0)
+    JR.put(this, :VK_CANCEL, 0)
+    JR.put(this, :VK_CLEAR, 0)
+    JR.put(this, :VK_SHIFT, 0)
+    JR.put(this, :VK_CONTROL, 0)
+    JR.put(this, :VK_ALT, 0)
+    JR.put(this, :VK_PAUSE, 0)
+    JR.put(this, :VK_CAPS_LOCK, 0)
+    JR.put(this, :VK_ESCAPE, 0)
+    JR.put(this, :VK_SPACE, 0)
+    JR.put(this, :VK_PAGE_UP, 0)
+    JR.put(this, :VK_PAGE_DOWN, 0)
+    JR.put(this, :VK_END, 0)
+    JR.put(this, :VK_HOME, 0)
+    JR.put(this, :VK_LEFT, 0)
+    JR.put(this, :VK_UP, 0)
+    JR.put(this, :VK_RIGHT, 0)
+    JR.put(this, :VK_DOWN, 0)
+    JR.put(this, :VK_COMMA, 0)
+    JR.put(this, :VK_MINUS, 0)
+    JR.put(this, :VK_PERIOD, 0)
+    JR.put(this, :VK_SLASH, 0)
+    JR.put(this, :VK_0, 0)
+    JR.put(this, :VK_1, 0)
+    JR.put(this, :VK_2, 0)
+    JR.put(this, :VK_3, 0)
+    JR.put(this, :VK_4, 0)
+    JR.put(this, :VK_5, 0)
+    JR.put(this, :VK_6, 0)
+    JR.put(this, :VK_7, 0)
+    JR.put(this, :VK_8, 0)
+    JR.put(this, :VK_9, 0)
+    JR.put(this, :VK_SEMICOLON, 0)
+    JR.put(this, :VK_EQUALS, 0)
+    JR.put(this, :VK_A, 0)
+    JR.put(this, :VK_B, 0)
+    JR.put(this, :VK_C, 0)
+    JR.put(this, :VK_D, 0)
+    JR.put(this, :VK_E, 0)
+    JR.put(this, :VK_F, 0)
+    JR.put(this, :VK_G, 0)
+    JR.put(this, :VK_H, 0)
+    JR.put(this, :VK_I, 0)
+    JR.put(this, :VK_J, 0)
+    JR.put(this, :VK_K, 0)
+    JR.put(this, :VK_L, 0)
+    JR.put(this, :VK_M, 0)
+    JR.put(this, :VK_N, 0)
+    JR.put(this, :VK_O, 0)
+    JR.put(this, :VK_P, 0)
+    JR.put(this, :VK_Q, 0)
+    JR.put(this, :VK_R, 0)
+    JR.put(this, :VK_S, 0)
+    JR.put(this, :VK_T, 0)
+    JR.put(this, :VK_U, 0)
+    JR.put(this, :VK_V, 0)
+    JR.put(this, :VK_W, 0)
+    JR.put(this, :VK_X, 0)
+    JR.put(this, :VK_Y, 0)
+    JR.put(this, :VK_Z, 0)
+    JR.put(this, :VK_OPEN_BRACKET, 0)
+    JR.put(this, :VK_BACK_SLASH, 0)
+    JR.put(this, :VK_CLOSE_BRACKET, 0)
+    JR.put(this, :VK_NUMPAD0, 0)
+    JR.put(this, :VK_NUMPAD1, 0)
+    JR.put(this, :VK_NUMPAD2, 0)
+    JR.put(this, :VK_NUMPAD3, 0)
+    JR.put(this, :VK_NUMPAD4, 0)
+    JR.put(this, :VK_NUMPAD5, 0)
+    JR.put(this, :VK_NUMPAD6, 0)
+    JR.put(this, :VK_NUMPAD7, 0)
+    JR.put(this, :VK_NUMPAD8, 0)
+    JR.put(this, :VK_NUMPAD9, 0)
+    JR.put(this, :VK_MULTIPLY, 0)
+    JR.put(this, :VK_ADD, 0)
+    JR.put(this, :VK_SEPARATER, 0)
+    JR.put(this, :VK_SEPARATOR, 0)
+    JR.put(this, :VK_SUBTRACT, 0)
+    JR.put(this, :VK_DECIMAL, 0)
+    JR.put(this, :VK_DIVIDE, 0)
+    JR.put(this, :VK_DELETE, 0)
+    JR.put(this, :VK_NUM_LOCK, 0)
+    JR.put(this, :VK_SCROLL_LOCK, 0)
+    JR.put(this, :VK_F1, 0)
+    JR.put(this, :VK_F2, 0)
+    JR.put(this, :VK_F3, 0)
+    JR.put(this, :VK_F4, 0)
+    JR.put(this, :VK_F5, 0)
+    JR.put(this, :VK_F6, 0)
+    JR.put(this, :VK_F7, 0)
+    JR.put(this, :VK_F8, 0)
+    JR.put(this, :VK_F9, 0)
+    JR.put(this, :VK_F10, 0)
+    JR.put(this, :VK_F11, 0)
+    JR.put(this, :VK_F12, 0)
+    JR.put(this, :VK_F13, 0)
+    JR.put(this, :VK_F14, 0)
+    JR.put(this, :VK_F15, 0)
+    JR.put(this, :VK_F16, 0)
+    JR.put(this, :VK_F17, 0)
+    JR.put(this, :VK_F18, 0)
+    JR.put(this, :VK_F19, 0)
+    JR.put(this, :VK_F20, 0)
+    JR.put(this, :VK_F21, 0)
+    JR.put(this, :VK_F22, 0)
+    JR.put(this, :VK_F23, 0)
+    JR.put(this, :VK_F24, 0)
+    JR.put(this, :VK_PRINTSCREEN, 0)
+    JR.put(this, :VK_INSERT, 0)
+    JR.put(this, :VK_HELP, 0)
+    JR.put(this, :VK_META, 0)
+    JR.put(this, :VK_BACK_QUOTE, 0)
+    JR.put(this, :VK_QUOTE, 0)
+    JR.put(this, :VK_KP_UP, 0)
+    JR.put(this, :VK_KP_DOWN, 0)
+    JR.put(this, :VK_KP_LEFT, 0)
+    JR.put(this, :VK_KP_RIGHT, 0)
+    JR.put(this, :VK_DEAD_GRAVE, 0)
+    JR.put(this, :VK_DEAD_ACUTE, 0)
+    JR.put(this, :VK_DEAD_CIRCUMFLEX, 0)
+    JR.put(this, :VK_DEAD_TILDE, 0)
+    JR.put(this, :VK_DEAD_MACRON, 0)
+    JR.put(this, :VK_DEAD_BREVE, 0)
+    JR.put(this, :VK_DEAD_ABOVEDOT, 0)
+    JR.put(this, :VK_DEAD_DIAERESIS, 0)
+    JR.put(this, :VK_DEAD_ABOVERING, 0)
+    JR.put(this, :VK_DEAD_DOUBLEACUTE, 0)
+    JR.put(this, :VK_DEAD_CARON, 0)
+    JR.put(this, :VK_DEAD_CEDILLA, 0)
+    JR.put(this, :VK_DEAD_OGONEK, 0)
+    JR.put(this, :VK_DEAD_IOTA, 0)
+    JR.put(this, :VK_DEAD_VOICED_SOUND, 0)
+    JR.put(this, :VK_DEAD_SEMIVOICED_SOUND, 0)
+    JR.put(this, :VK_AMPERSAND, 0)
+    JR.put(this, :VK_ASTERISK, 0)
+    JR.put(this, :VK_QUOTEDBL, 0)
+    JR.put(this, :VK_LESS, 0)
+    JR.put(this, :VK_GREATER, 0)
+    JR.put(this, :VK_BRACELEFT, 0)
+    JR.put(this, :VK_BRACERIGHT, 0)
+    JR.put(this, :VK_AT, 0)
+    JR.put(this, :VK_COLON, 0)
+    JR.put(this, :VK_CIRCUMFLEX, 0)
+    JR.put(this, :VK_DOLLAR, 0)
+    JR.put(this, :VK_EURO_SIGN, 0)
+    JR.put(this, :VK_EXCLAMATION_MARK, 0)
+    JR.put(this, :VK_INVERTED_EXCLAMATION_MARK, 0)
+    JR.put(this, :VK_LEFT_PARENTHESIS, 0)
+    JR.put(this, :VK_NUMBER_SIGN, 0)
+    JR.put(this, :VK_PLUS, 0)
+    JR.put(this, :VK_RIGHT_PARENTHESIS, 0)
+    JR.put(this, :VK_UNDERSCORE, 0)
+    JR.put(this, :VK_WINDOWS, 0)
+    JR.put(this, :VK_CONTEXT_MENU, 0)
+    JR.put(this, :VK_FINAL, 0)
+    JR.put(this, :VK_CONVERT, 0)
+    JR.put(this, :VK_NONCONVERT, 0)
+    JR.put(this, :VK_ACCEPT, 0)
+    JR.put(this, :VK_MODECHANGE, 0)
+    JR.put(this, :VK_KANA, 0)
+    JR.put(this, :VK_KANJI, 0)
+    JR.put(this, :VK_ALPHANUMERIC, 0)
+    JR.put(this, :VK_KATAKANA, 0)
+    JR.put(this, :VK_HIRAGANA, 0)
+    JR.put(this, :VK_FULL_WIDTH, 0)
+    JR.put(this, :VK_HALF_WIDTH, 0)
+    JR.put(this, :VK_ROMAN_CHARACTERS, 0)
+    JR.put(this, :VK_ALL_CANDIDATES, 0)
+    JR.put(this, :VK_PREVIOUS_CANDIDATE, 0)
+    JR.put(this, :VK_CODE_INPUT, 0)
+    JR.put(this, :VK_JAPANESE_KATAKANA, 0)
+    JR.put(this, :VK_JAPANESE_HIRAGANA, 0)
+    JR.put(this, :VK_JAPANESE_ROMAN, 0)
+    JR.put(this, :VK_KANA_LOCK, 0)
+    JR.put(this, :VK_INPUT_METHOD_ON_OFF, 0)
+    JR.put(this, :VK_CUT, 0)
+    JR.put(this, :VK_COPY, 0)
+    JR.put(this, :VK_PASTE, 0)
+    JR.put(this, :VK_UNDO, 0)
+    JR.put(this, :VK_AGAIN, 0)
+    JR.put(this, :VK_FIND, 0)
+    JR.put(this, :VK_PROPS, 0)
+    JR.put(this, :VK_STOP, 0)
+    JR.put(this, :VK_COMPOSE, 0)
+    JR.put(this, :VK_ALT_GRAPH, 0)
+    JR.put(this, :VK_BEGIN, 0)
+    JR.put(this, :VK_UNDEFINED, 0)
+        JR.put(this, :VK_ENTER, KeyEvent.jstatic_VK_ENTER())
+        JR.put(this, :VK_BACK_SPACE, KeyEvent.jstatic_VK_BACK_SPACE())
+        JR.put(this, :VK_TAB, KeyEvent.jstatic_VK_TAB())
+        JR.put(this, :VK_CANCEL, KeyEvent.jstatic_VK_CANCEL())
+        JR.put(this, :VK_CLEAR, KeyEvent.jstatic_VK_CLEAR())
+        JR.put(this, :VK_SHIFT, KeyEvent.jstatic_VK_SHIFT())
+        JR.put(this, :VK_CONTROL, KeyEvent.jstatic_VK_CONTROL())
+        JR.put(this, :VK_ALT, KeyEvent.jstatic_VK_ALT())
+        JR.put(this, :VK_PAUSE, KeyEvent.jstatic_VK_PAUSE())
+        JR.put(this, :VK_CAPS_LOCK, KeyEvent.jstatic_VK_CAPS_LOCK())
+        JR.put(this, :VK_ESCAPE, KeyEvent.jstatic_VK_ESCAPE())
+        JR.put(this, :VK_SPACE, KeyEvent.jstatic_VK_SPACE())
+        JR.put(this, :VK_PAGE_UP, KeyEvent.jstatic_VK_PAGE_UP())
+        JR.put(this, :VK_PAGE_DOWN, KeyEvent.jstatic_VK_PAGE_DOWN())
+        JR.put(this, :VK_END, KeyEvent.jstatic_VK_END())
+        JR.put(this, :VK_HOME, KeyEvent.jstatic_VK_HOME())
+        JR.put(this, :VK_LEFT, KeyEvent.jstatic_VK_LEFT())
+        JR.put(this, :VK_UP, KeyEvent.jstatic_VK_UP())
+        JR.put(this, :VK_RIGHT, KeyEvent.jstatic_VK_RIGHT())
+        JR.put(this, :VK_DOWN, KeyEvent.jstatic_VK_DOWN())
+        JR.put(this, :VK_COMMA, KeyEvent.jstatic_VK_COMMA())
+        JR.put(this, :VK_MINUS, KeyEvent.jstatic_VK_MINUS())
+        JR.put(this, :VK_PERIOD, KeyEvent.jstatic_VK_PERIOD())
+        JR.put(this, :VK_SLASH, KeyEvent.jstatic_VK_SLASH())
+        JR.put(this, :VK_0, KeyEvent.jstatic_VK_0())
+        JR.put(this, :VK_1, KeyEvent.jstatic_VK_1())
+        JR.put(this, :VK_2, KeyEvent.jstatic_VK_2())
+        JR.put(this, :VK_3, KeyEvent.jstatic_VK_3())
+        JR.put(this, :VK_4, KeyEvent.jstatic_VK_4())
+        JR.put(this, :VK_5, KeyEvent.jstatic_VK_5())
+        JR.put(this, :VK_6, KeyEvent.jstatic_VK_6())
+        JR.put(this, :VK_7, KeyEvent.jstatic_VK_7())
+        JR.put(this, :VK_8, KeyEvent.jstatic_VK_8())
+        JR.put(this, :VK_9, KeyEvent.jstatic_VK_9())
+        JR.put(this, :VK_SEMICOLON, KeyEvent.jstatic_VK_SEMICOLON())
+        JR.put(this, :VK_EQUALS, KeyEvent.jstatic_VK_EQUALS())
+        JR.put(this, :VK_A, KeyEvent.jstatic_VK_A())
+        JR.put(this, :VK_B, KeyEvent.jstatic_VK_B())
+        JR.put(this, :VK_C, KeyEvent.jstatic_VK_C())
+        JR.put(this, :VK_D, KeyEvent.jstatic_VK_D())
+        JR.put(this, :VK_E, KeyEvent.jstatic_VK_E())
+        JR.put(this, :VK_F, KeyEvent.jstatic_VK_F())
+        JR.put(this, :VK_G, KeyEvent.jstatic_VK_G())
+        JR.put(this, :VK_H, KeyEvent.jstatic_VK_H())
+        JR.put(this, :VK_I, KeyEvent.jstatic_VK_I())
+        JR.put(this, :VK_J, KeyEvent.jstatic_VK_J())
+        JR.put(this, :VK_K, KeyEvent.jstatic_VK_K())
+        JR.put(this, :VK_L, KeyEvent.jstatic_VK_L())
+        JR.put(this, :VK_M, KeyEvent.jstatic_VK_M())
+        JR.put(this, :VK_N, KeyEvent.jstatic_VK_N())
+        JR.put(this, :VK_O, KeyEvent.jstatic_VK_O())
+        JR.put(this, :VK_P, KeyEvent.jstatic_VK_P())
+        JR.put(this, :VK_Q, KeyEvent.jstatic_VK_Q())
+        JR.put(this, :VK_R, KeyEvent.jstatic_VK_R())
+        JR.put(this, :VK_S, KeyEvent.jstatic_VK_S())
+        JR.put(this, :VK_T, KeyEvent.jstatic_VK_T())
+        JR.put(this, :VK_U, KeyEvent.jstatic_VK_U())
+        JR.put(this, :VK_V, KeyEvent.jstatic_VK_V())
+        JR.put(this, :VK_W, KeyEvent.jstatic_VK_W())
+        JR.put(this, :VK_X, KeyEvent.jstatic_VK_X())
+        JR.put(this, :VK_Y, KeyEvent.jstatic_VK_Y())
+        JR.put(this, :VK_Z, KeyEvent.jstatic_VK_Z())
+        JR.put(this, :VK_OPEN_BRACKET, KeyEvent.jstatic_VK_OPEN_BRACKET())
+        JR.put(this, :VK_BACK_SLASH, KeyEvent.jstatic_VK_BACK_SLASH())
+        JR.put(this, :VK_CLOSE_BRACKET, KeyEvent.jstatic_VK_CLOSE_BRACKET())
+        JR.put(this, :VK_NUMPAD0, KeyEvent.jstatic_VK_NUMPAD0())
+        JR.put(this, :VK_NUMPAD1, KeyEvent.jstatic_VK_NUMPAD1())
+        JR.put(this, :VK_NUMPAD2, KeyEvent.jstatic_VK_NUMPAD2())
+        JR.put(this, :VK_NUMPAD3, KeyEvent.jstatic_VK_NUMPAD3())
+        JR.put(this, :VK_NUMPAD4, KeyEvent.jstatic_VK_NUMPAD4())
+        JR.put(this, :VK_NUMPAD5, KeyEvent.jstatic_VK_NUMPAD5())
+        JR.put(this, :VK_NUMPAD6, KeyEvent.jstatic_VK_NUMPAD6())
+        JR.put(this, :VK_NUMPAD7, KeyEvent.jstatic_VK_NUMPAD7())
+        JR.put(this, :VK_NUMPAD8, KeyEvent.jstatic_VK_NUMPAD8())
+        JR.put(this, :VK_NUMPAD9, KeyEvent.jstatic_VK_NUMPAD9())
+        JR.put(this, :VK_MULTIPLY, KeyEvent.jstatic_VK_MULTIPLY())
+        JR.put(this, :VK_ADD, KeyEvent.jstatic_VK_ADD())
+        JR.put(this, :VK_SEPARATER, KeyEvent.jstatic_VK_SEPARATER())
+        JR.put(this, :VK_SEPARATOR, KeyEvent.jstatic_VK_SEPARATOR())
+        JR.put(this, :VK_SUBTRACT, KeyEvent.jstatic_VK_SUBTRACT())
+        JR.put(this, :VK_DECIMAL, KeyEvent.jstatic_VK_DECIMAL())
+        JR.put(this, :VK_DIVIDE, KeyEvent.jstatic_VK_DIVIDE())
+        JR.put(this, :VK_DELETE, KeyEvent.jstatic_VK_DELETE())
+        JR.put(this, :VK_NUM_LOCK, KeyEvent.jstatic_VK_NUM_LOCK())
+        JR.put(this, :VK_SCROLL_LOCK, KeyEvent.jstatic_VK_SCROLL_LOCK())
+        JR.put(this, :VK_F1, KeyEvent.jstatic_VK_F1())
+        JR.put(this, :VK_F2, KeyEvent.jstatic_VK_F2())
+        JR.put(this, :VK_F3, KeyEvent.jstatic_VK_F3())
+        JR.put(this, :VK_F4, KeyEvent.jstatic_VK_F4())
+        JR.put(this, :VK_F5, KeyEvent.jstatic_VK_F5())
+        JR.put(this, :VK_F6, KeyEvent.jstatic_VK_F6())
+        JR.put(this, :VK_F7, KeyEvent.jstatic_VK_F7())
+        JR.put(this, :VK_F8, KeyEvent.jstatic_VK_F8())
+        JR.put(this, :VK_F9, KeyEvent.jstatic_VK_F9())
+        JR.put(this, :VK_F10, KeyEvent.jstatic_VK_F10())
+        JR.put(this, :VK_F11, KeyEvent.jstatic_VK_F11())
+        JR.put(this, :VK_F12, KeyEvent.jstatic_VK_F12())
+        JR.put(this, :VK_F13, KeyEvent.jstatic_VK_F13())
+        JR.put(this, :VK_F14, KeyEvent.jstatic_VK_F14())
+        JR.put(this, :VK_F15, KeyEvent.jstatic_VK_F15())
+        JR.put(this, :VK_F16, KeyEvent.jstatic_VK_F16())
+        JR.put(this, :VK_F17, KeyEvent.jstatic_VK_F17())
+        JR.put(this, :VK_F18, KeyEvent.jstatic_VK_F18())
+        JR.put(this, :VK_F19, KeyEvent.jstatic_VK_F19())
+        JR.put(this, :VK_F20, KeyEvent.jstatic_VK_F20())
+        JR.put(this, :VK_F21, KeyEvent.jstatic_VK_F21())
+        JR.put(this, :VK_F22, KeyEvent.jstatic_VK_F22())
+        JR.put(this, :VK_F23, KeyEvent.jstatic_VK_F23())
+        JR.put(this, :VK_F24, KeyEvent.jstatic_VK_F24())
+        JR.put(this, :VK_PRINTSCREEN, KeyEvent.jstatic_VK_PRINTSCREEN())
+        JR.put(this, :VK_INSERT, KeyEvent.jstatic_VK_INSERT())
+        JR.put(this, :VK_HELP, KeyEvent.jstatic_VK_HELP())
+        JR.put(this, :VK_META, KeyEvent.jstatic_VK_META())
+        JR.put(this, :VK_BACK_QUOTE, KeyEvent.jstatic_VK_BACK_QUOTE())
+        JR.put(this, :VK_QUOTE, KeyEvent.jstatic_VK_QUOTE())
+        JR.put(this, :VK_KP_UP, KeyEvent.jstatic_VK_KP_UP())
+        JR.put(this, :VK_KP_DOWN, KeyEvent.jstatic_VK_KP_DOWN())
+        JR.put(this, :VK_KP_LEFT, KeyEvent.jstatic_VK_KP_LEFT())
+        JR.put(this, :VK_KP_RIGHT, KeyEvent.jstatic_VK_KP_RIGHT())
+        JR.put(this, :VK_DEAD_GRAVE, KeyEvent.jstatic_VK_DEAD_GRAVE())
+        JR.put(this, :VK_DEAD_ACUTE, KeyEvent.jstatic_VK_DEAD_ACUTE())
+        JR.put(this, :VK_DEAD_CIRCUMFLEX, KeyEvent.jstatic_VK_DEAD_CIRCUMFLEX())
+        JR.put(this, :VK_DEAD_TILDE, KeyEvent.jstatic_VK_DEAD_TILDE())
+        JR.put(this, :VK_DEAD_MACRON, KeyEvent.jstatic_VK_DEAD_MACRON())
+        JR.put(this, :VK_DEAD_BREVE, KeyEvent.jstatic_VK_DEAD_BREVE())
+        JR.put(this, :VK_DEAD_ABOVEDOT, KeyEvent.jstatic_VK_DEAD_ABOVEDOT())
+        JR.put(this, :VK_DEAD_DIAERESIS, KeyEvent.jstatic_VK_DEAD_DIAERESIS())
+        JR.put(this, :VK_DEAD_ABOVERING, KeyEvent.jstatic_VK_DEAD_ABOVERING())
+        JR.put(this, :VK_DEAD_DOUBLEACUTE, KeyEvent.jstatic_VK_DEAD_DOUBLEACUTE())
+        JR.put(this, :VK_DEAD_CARON, KeyEvent.jstatic_VK_DEAD_CARON())
+        JR.put(this, :VK_DEAD_CEDILLA, KeyEvent.jstatic_VK_DEAD_CEDILLA())
+        JR.put(this, :VK_DEAD_OGONEK, KeyEvent.jstatic_VK_DEAD_OGONEK())
+        JR.put(this, :VK_DEAD_IOTA, KeyEvent.jstatic_VK_DEAD_IOTA())
+        JR.put(this, :VK_DEAD_VOICED_SOUND, KeyEvent.jstatic_VK_DEAD_VOICED_SOUND())
+        JR.put(this, :VK_DEAD_SEMIVOICED_SOUND, KeyEvent.jstatic_VK_DEAD_SEMIVOICED_SOUND())
+        JR.put(this, :VK_AMPERSAND, KeyEvent.jstatic_VK_AMPERSAND())
+        JR.put(this, :VK_ASTERISK, KeyEvent.jstatic_VK_ASTERISK())
+        JR.put(this, :VK_QUOTEDBL, KeyEvent.jstatic_VK_QUOTEDBL())
+        JR.put(this, :VK_LESS, KeyEvent.jstatic_VK_LESS())
+        JR.put(this, :VK_GREATER, KeyEvent.jstatic_VK_GREATER())
+        JR.put(this, :VK_BRACELEFT, KeyEvent.jstatic_VK_BRACELEFT())
+        JR.put(this, :VK_BRACERIGHT, KeyEvent.jstatic_VK_BRACERIGHT())
+        JR.put(this, :VK_AT, KeyEvent.jstatic_VK_AT())
+        JR.put(this, :VK_COLON, KeyEvent.jstatic_VK_COLON())
+        JR.put(this, :VK_CIRCUMFLEX, KeyEvent.jstatic_VK_CIRCUMFLEX())
+        JR.put(this, :VK_DOLLAR, KeyEvent.jstatic_VK_DOLLAR())
+        JR.put(this, :VK_EURO_SIGN, KeyEvent.jstatic_VK_EURO_SIGN())
+        JR.put(this, :VK_EXCLAMATION_MARK, KeyEvent.jstatic_VK_EXCLAMATION_MARK())
+        JR.put(this, :VK_INVERTED_EXCLAMATION_MARK, KeyEvent.jstatic_VK_INVERTED_EXCLAMATION_MARK())
+        JR.put(this, :VK_LEFT_PARENTHESIS, KeyEvent.jstatic_VK_LEFT_PARENTHESIS())
+        JR.put(this, :VK_NUMBER_SIGN, KeyEvent.jstatic_VK_NUMBER_SIGN())
+        JR.put(this, :VK_PLUS, KeyEvent.jstatic_VK_PLUS())
+        JR.put(this, :VK_RIGHT_PARENTHESIS, KeyEvent.jstatic_VK_RIGHT_PARENTHESIS())
+        JR.put(this, :VK_UNDERSCORE, KeyEvent.jstatic_VK_UNDERSCORE())
+        JR.put(this, :VK_WINDOWS, KeyEvent.jstatic_VK_WINDOWS())
+        JR.put(this, :VK_CONTEXT_MENU, KeyEvent.jstatic_VK_CONTEXT_MENU())
+        JR.put(this, :VK_FINAL, KeyEvent.jstatic_VK_FINAL())
+        JR.put(this, :VK_CONVERT, KeyEvent.jstatic_VK_CONVERT())
+        JR.put(this, :VK_NONCONVERT, KeyEvent.jstatic_VK_NONCONVERT())
+        JR.put(this, :VK_ACCEPT, KeyEvent.jstatic_VK_ACCEPT())
+        JR.put(this, :VK_MODECHANGE, KeyEvent.jstatic_VK_MODECHANGE())
+        JR.put(this, :VK_KANA, KeyEvent.jstatic_VK_KANA())
+        JR.put(this, :VK_KANJI, KeyEvent.jstatic_VK_KANJI())
+        JR.put(this, :VK_ALPHANUMERIC, KeyEvent.jstatic_VK_ALPHANUMERIC())
+        JR.put(this, :VK_KATAKANA, KeyEvent.jstatic_VK_KATAKANA())
+        JR.put(this, :VK_HIRAGANA, KeyEvent.jstatic_VK_HIRAGANA())
+        JR.put(this, :VK_FULL_WIDTH, KeyEvent.jstatic_VK_FULL_WIDTH())
+        JR.put(this, :VK_HALF_WIDTH, KeyEvent.jstatic_VK_HALF_WIDTH())
+        JR.put(this, :VK_ROMAN_CHARACTERS, KeyEvent.jstatic_VK_ROMAN_CHARACTERS())
+        JR.put(this, :VK_ALL_CANDIDATES, KeyEvent.jstatic_VK_ALL_CANDIDATES())
+        JR.put(this, :VK_PREVIOUS_CANDIDATE, KeyEvent.jstatic_VK_PREVIOUS_CANDIDATE())
+        JR.put(this, :VK_CODE_INPUT, KeyEvent.jstatic_VK_CODE_INPUT())
+        JR.put(this, :VK_JAPANESE_KATAKANA, KeyEvent.jstatic_VK_JAPANESE_KATAKANA())
+        JR.put(this, :VK_JAPANESE_HIRAGANA, KeyEvent.jstatic_VK_JAPANESE_HIRAGANA())
+        JR.put(this, :VK_JAPANESE_ROMAN, KeyEvent.jstatic_VK_JAPANESE_ROMAN())
+        JR.put(this, :VK_KANA_LOCK, KeyEvent.jstatic_VK_KANA_LOCK())
+        JR.put(this, :VK_INPUT_METHOD_ON_OFF, KeyEvent.jstatic_VK_INPUT_METHOD_ON_OFF())
+        JR.put(this, :VK_CUT, KeyEvent.jstatic_VK_CUT())
+        JR.put(this, :VK_COPY, KeyEvent.jstatic_VK_COPY())
+        JR.put(this, :VK_PASTE, KeyEvent.jstatic_VK_PASTE())
+        JR.put(this, :VK_UNDO, KeyEvent.jstatic_VK_UNDO())
+        JR.put(this, :VK_AGAIN, KeyEvent.jstatic_VK_AGAIN())
+        JR.put(this, :VK_FIND, KeyEvent.jstatic_VK_FIND())
+        JR.put(this, :VK_PROPS, KeyEvent.jstatic_VK_PROPS())
+        JR.put(this, :VK_STOP, KeyEvent.jstatic_VK_STOP())
+        JR.put(this, :VK_COMPOSE, KeyEvent.jstatic_VK_COMPOSE())
+        JR.put(this, :VK_ALT_GRAPH, KeyEvent.jstatic_VK_ALT_GRAPH())
+        JR.put(this, :VK_BEGIN, KeyEvent.jstatic_VK_BEGIN())
+        JR.put(this, :VK_UNDEFINED, KeyEvent.jstatic_VK_UNDEFINED())
+    nil
+  end
 
-init_fields(This) ->
-    put({This, 'VK_ENTER'}, get({'KeyEvent', 'VK_ENTER'})),
-    put({This, 'VK_BACK_SPACE'}, get({'KeyEvent', 'VK_BACK_SPACE'})),
-    put({This, 'VK_TAB'}, get({'KeyEvent', 'VK_TAB'})),
-    put({This, 'VK_CANCEL'}, get({'KeyEvent', 'VK_CANCEL'})),
-    put({This, 'VK_CLEAR'}, get({'KeyEvent', 'VK_CLEAR'})),
-    put({This, 'VK_SHIFT'}, get({'KeyEvent', 'VK_SHIFT'})),
-    put({This, 'VK_CONTROL'}, get({'KeyEvent', 'VK_CONTROL'})),
-    put({This, 'VK_ALT'}, get({'KeyEvent', 'VK_ALT'})),
-    put({This, 'VK_PAUSE'}, get({'KeyEvent', 'VK_PAUSE'})),
-    put({This, 'VK_CAPS_LOCK'}, get({'KeyEvent', 'VK_CAPS_LOCK'})),
-    put({This, 'VK_ESCAPE'}, get({'KeyEvent', 'VK_ESCAPE'})),
-    put({This, 'VK_SPACE'}, get({'KeyEvent', 'VK_SPACE'})),
-    put({This, 'VK_PAGE_UP'}, get({'KeyEvent', 'VK_PAGE_UP'})),
-    put({This, 'VK_PAGE_DOWN'}, get({'KeyEvent', 'VK_PAGE_DOWN'})),
-    put({This, 'VK_END'}, get({'KeyEvent', 'VK_END'})),
-    put({This, 'VK_HOME'}, get({'KeyEvent', 'VK_HOME'})),
-    put({This, 'VK_LEFT'}, get({'KeyEvent', 'VK_LEFT'})),
-    put({This, 'VK_UP'}, get({'KeyEvent', 'VK_UP'})),
-    put({This, 'VK_RIGHT'}, get({'KeyEvent', 'VK_RIGHT'})),
-    put({This, 'VK_DOWN'}, get({'KeyEvent', 'VK_DOWN'})),
-    put({This, 'VK_COMMA'}, get({'KeyEvent', 'VK_COMMA'})),
-    put({This, 'VK_MINUS'}, get({'KeyEvent', 'VK_MINUS'})),
-    put({This, 'VK_PERIOD'}, get({'KeyEvent', 'VK_PERIOD'})),
-    put({This, 'VK_SLASH'}, get({'KeyEvent', 'VK_SLASH'})),
-    put({This, 'VK_0'}, get({'KeyEvent', 'VK_0'})),
-    put({This, 'VK_1'}, get({'KeyEvent', 'VK_1'})),
-    put({This, 'VK_2'}, get({'KeyEvent', 'VK_2'})),
-    put({This, 'VK_3'}, get({'KeyEvent', 'VK_3'})),
-    put({This, 'VK_4'}, get({'KeyEvent', 'VK_4'})),
-    put({This, 'VK_5'}, get({'KeyEvent', 'VK_5'})),
-    put({This, 'VK_6'}, get({'KeyEvent', 'VK_6'})),
-    put({This, 'VK_7'}, get({'KeyEvent', 'VK_7'})),
-    put({This, 'VK_8'}, get({'KeyEvent', 'VK_8'})),
-    put({This, 'VK_9'}, get({'KeyEvent', 'VK_9'})),
-    put({This, 'VK_SEMICOLON'}, get({'KeyEvent', 'VK_SEMICOLON'})),
-    put({This, 'VK_EQUALS'}, get({'KeyEvent', 'VK_EQUALS'})),
-    put({This, 'VK_A'}, get({'KeyEvent', 'VK_A'})),
-    put({This, 'VK_B'}, get({'KeyEvent', 'VK_B'})),
-    put({This, 'VK_C'}, get({'KeyEvent', 'VK_C'})),
-    put({This, 'VK_D'}, get({'KeyEvent', 'VK_D'})),
-    put({This, 'VK_E'}, get({'KeyEvent', 'VK_E'})),
-    put({This, 'VK_F'}, get({'KeyEvent', 'VK_F'})),
-    put({This, 'VK_G'}, get({'KeyEvent', 'VK_G'})),
-    put({This, 'VK_H'}, get({'KeyEvent', 'VK_H'})),
-    put({This, 'VK_I'}, get({'KeyEvent', 'VK_I'})),
-    put({This, 'VK_J'}, get({'KeyEvent', 'VK_J'})),
-    put({This, 'VK_K'}, get({'KeyEvent', 'VK_K'})),
-    put({This, 'VK_L'}, get({'KeyEvent', 'VK_L'})),
-    put({This, 'VK_M'}, get({'KeyEvent', 'VK_M'})),
-    put({This, 'VK_N'}, get({'KeyEvent', 'VK_N'})),
-    put({This, 'VK_O'}, get({'KeyEvent', 'VK_O'})),
-    put({This, 'VK_P'}, get({'KeyEvent', 'VK_P'})),
-    put({This, 'VK_Q'}, get({'KeyEvent', 'VK_Q'})),
-    put({This, 'VK_R'}, get({'KeyEvent', 'VK_R'})),
-    put({This, 'VK_S'}, get({'KeyEvent', 'VK_S'})),
-    put({This, 'VK_T'}, get({'KeyEvent', 'VK_T'})),
-    put({This, 'VK_U'}, get({'KeyEvent', 'VK_U'})),
-    put({This, 'VK_V'}, get({'KeyEvent', 'VK_V'})),
-    put({This, 'VK_W'}, get({'KeyEvent', 'VK_W'})),
-    put({This, 'VK_X'}, get({'KeyEvent', 'VK_X'})),
-    put({This, 'VK_Y'}, get({'KeyEvent', 'VK_Y'})),
-    put({This, 'VK_Z'}, get({'KeyEvent', 'VK_Z'})),
-    put({This, 'VK_OPEN_BRACKET'}, get({'KeyEvent', 'VK_OPEN_BRACKET'})),
-    put({This, 'VK_BACK_SLASH'}, get({'KeyEvent', 'VK_BACK_SLASH'})),
-    put({This, 'VK_CLOSE_BRACKET'}, get({'KeyEvent', 'VK_CLOSE_BRACKET'})),
-    put({This, 'VK_NUMPAD0'}, get({'KeyEvent', 'VK_NUMPAD0'})),
-    put({This, 'VK_NUMPAD1'}, get({'KeyEvent', 'VK_NUMPAD1'})),
-    put({This, 'VK_NUMPAD2'}, get({'KeyEvent', 'VK_NUMPAD2'})),
-    put({This, 'VK_NUMPAD3'}, get({'KeyEvent', 'VK_NUMPAD3'})),
-    put({This, 'VK_NUMPAD4'}, get({'KeyEvent', 'VK_NUMPAD4'})),
-    put({This, 'VK_NUMPAD5'}, get({'KeyEvent', 'VK_NUMPAD5'})),
-    put({This, 'VK_NUMPAD6'}, get({'KeyEvent', 'VK_NUMPAD6'})),
-    put({This, 'VK_NUMPAD7'}, get({'KeyEvent', 'VK_NUMPAD7'})),
-    put({This, 'VK_NUMPAD8'}, get({'KeyEvent', 'VK_NUMPAD8'})),
-    put({This, 'VK_NUMPAD9'}, get({'KeyEvent', 'VK_NUMPAD9'})),
-    put({This, 'VK_MULTIPLY'}, get({'KeyEvent', 'VK_MULTIPLY'})),
-    put({This, 'VK_ADD'}, get({'KeyEvent', 'VK_ADD'})),
-    put({This, 'VK_SEPARATER'}, get({'KeyEvent', 'VK_SEPARATER'})),
-    put({This, 'VK_SEPARATOR'}, get({'KeyEvent', 'VK_SEPARATOR'})),
-    put({This, 'VK_SUBTRACT'}, get({'KeyEvent', 'VK_SUBTRACT'})),
-    put({This, 'VK_DECIMAL'}, get({'KeyEvent', 'VK_DECIMAL'})),
-    put({This, 'VK_DIVIDE'}, get({'KeyEvent', 'VK_DIVIDE'})),
-    put({This, 'VK_DELETE'}, get({'KeyEvent', 'VK_DELETE'})),
-    put({This, 'VK_NUM_LOCK'}, get({'KeyEvent', 'VK_NUM_LOCK'})),
-    put({This, 'VK_SCROLL_LOCK'}, get({'KeyEvent', 'VK_SCROLL_LOCK'})),
-    put({This, 'VK_F1'}, get({'KeyEvent', 'VK_F1'})),
-    put({This, 'VK_F2'}, get({'KeyEvent', 'VK_F2'})),
-    put({This, 'VK_F3'}, get({'KeyEvent', 'VK_F3'})),
-    put({This, 'VK_F4'}, get({'KeyEvent', 'VK_F4'})),
-    put({This, 'VK_F5'}, get({'KeyEvent', 'VK_F5'})),
-    put({This, 'VK_F6'}, get({'KeyEvent', 'VK_F6'})),
-    put({This, 'VK_F7'}, get({'KeyEvent', 'VK_F7'})),
-    put({This, 'VK_F8'}, get({'KeyEvent', 'VK_F8'})),
-    put({This, 'VK_F9'}, get({'KeyEvent', 'VK_F9'})),
-    put({This, 'VK_F10'}, get({'KeyEvent', 'VK_F10'})),
-    put({This, 'VK_F11'}, get({'KeyEvent', 'VK_F11'})),
-    put({This, 'VK_F12'}, get({'KeyEvent', 'VK_F12'})),
-    put({This, 'VK_F13'}, get({'KeyEvent', 'VK_F13'})),
-    put({This, 'VK_F14'}, get({'KeyEvent', 'VK_F14'})),
-    put({This, 'VK_F15'}, get({'KeyEvent', 'VK_F15'})),
-    put({This, 'VK_F16'}, get({'KeyEvent', 'VK_F16'})),
-    put({This, 'VK_F17'}, get({'KeyEvent', 'VK_F17'})),
-    put({This, 'VK_F18'}, get({'KeyEvent', 'VK_F18'})),
-    put({This, 'VK_F19'}, get({'KeyEvent', 'VK_F19'})),
-    put({This, 'VK_F20'}, get({'KeyEvent', 'VK_F20'})),
-    put({This, 'VK_F21'}, get({'KeyEvent', 'VK_F21'})),
-    put({This, 'VK_F22'}, get({'KeyEvent', 'VK_F22'})),
-    put({This, 'VK_F23'}, get({'KeyEvent', 'VK_F23'})),
-    put({This, 'VK_F24'}, get({'KeyEvent', 'VK_F24'})),
-    put({This, 'VK_PRINTSCREEN'}, get({'KeyEvent', 'VK_PRINTSCREEN'})),
-    put({This, 'VK_INSERT'}, get({'KeyEvent', 'VK_INSERT'})),
-    put({This, 'VK_HELP'}, get({'KeyEvent', 'VK_HELP'})),
-    put({This, 'VK_META'}, get({'KeyEvent', 'VK_META'})),
-    put({This, 'VK_BACK_QUOTE'}, get({'KeyEvent', 'VK_BACK_QUOTE'})),
-    put({This, 'VK_QUOTE'}, get({'KeyEvent', 'VK_QUOTE'})),
-    put({This, 'VK_KP_UP'}, get({'KeyEvent', 'VK_KP_UP'})),
-    put({This, 'VK_KP_DOWN'}, get({'KeyEvent', 'VK_KP_DOWN'})),
-    put({This, 'VK_KP_LEFT'}, get({'KeyEvent', 'VK_KP_LEFT'})),
-    put({This, 'VK_KP_RIGHT'}, get({'KeyEvent', 'VK_KP_RIGHT'})),
-    put({This, 'VK_DEAD_GRAVE'}, get({'KeyEvent', 'VK_DEAD_GRAVE'})),
-    put({This, 'VK_DEAD_ACUTE'}, get({'KeyEvent', 'VK_DEAD_ACUTE'})),
-    put({This, 'VK_DEAD_CIRCUMFLEX'}, get({'KeyEvent', 'VK_DEAD_CIRCUMFLEX'})),
-    put({This, 'VK_DEAD_TILDE'}, get({'KeyEvent', 'VK_DEAD_TILDE'})),
-    put({This, 'VK_DEAD_MACRON'}, get({'KeyEvent', 'VK_DEAD_MACRON'})),
-    put({This, 'VK_DEAD_BREVE'}, get({'KeyEvent', 'VK_DEAD_BREVE'})),
-    put({This, 'VK_DEAD_ABOVEDOT'}, get({'KeyEvent', 'VK_DEAD_ABOVEDOT'})),
-    put({This, 'VK_DEAD_DIAERESIS'}, get({'KeyEvent', 'VK_DEAD_DIAERESIS'})),
-    put({This, 'VK_DEAD_ABOVERING'}, get({'KeyEvent', 'VK_DEAD_ABOVERING'})),
-    put({This, 'VK_DEAD_DOUBLEACUTE'}, get({'KeyEvent', 'VK_DEAD_DOUBLEACUTE'})),
-    put({This, 'VK_DEAD_CARON'}, get({'KeyEvent', 'VK_DEAD_CARON'})),
-    put({This, 'VK_DEAD_CEDILLA'}, get({'KeyEvent', 'VK_DEAD_CEDILLA'})),
-    put({This, 'VK_DEAD_OGONEK'}, get({'KeyEvent', 'VK_DEAD_OGONEK'})),
-    put({This, 'VK_DEAD_IOTA'}, get({'KeyEvent', 'VK_DEAD_IOTA'})),
-    put({This, 'VK_DEAD_VOICED_SOUND'}, get({'KeyEvent', 'VK_DEAD_VOICED_SOUND'})),
-    put({This, 'VK_DEAD_SEMIVOICED_SOUND'}, get({'KeyEvent', 'VK_DEAD_SEMIVOICED_SOUND'})),
-    put({This, 'VK_AMPERSAND'}, get({'KeyEvent', 'VK_AMPERSAND'})),
-    put({This, 'VK_ASTERISK'}, get({'KeyEvent', 'VK_ASTERISK'})),
-    put({This, 'VK_QUOTEDBL'}, get({'KeyEvent', 'VK_QUOTEDBL'})),
-    put({This, 'VK_LESS'}, get({'KeyEvent', 'VK_LESS'})),
-    put({This, 'VK_GREATER'}, get({'KeyEvent', 'VK_GREATER'})),
-    put({This, 'VK_BRACELEFT'}, get({'KeyEvent', 'VK_BRACELEFT'})),
-    put({This, 'VK_BRACERIGHT'}, get({'KeyEvent', 'VK_BRACERIGHT'})),
-    put({This, 'VK_AT'}, get({'KeyEvent', 'VK_AT'})),
-    put({This, 'VK_COLON'}, get({'KeyEvent', 'VK_COLON'})),
-    put({This, 'VK_CIRCUMFLEX'}, get({'KeyEvent', 'VK_CIRCUMFLEX'})),
-    put({This, 'VK_DOLLAR'}, get({'KeyEvent', 'VK_DOLLAR'})),
-    put({This, 'VK_EURO_SIGN'}, get({'KeyEvent', 'VK_EURO_SIGN'})),
-    put({This, 'VK_EXCLAMATION_MARK'}, get({'KeyEvent', 'VK_EXCLAMATION_MARK'})),
-    put({This, 'VK_INVERTED_EXCLAMATION_MARK'}, get({'KeyEvent', 'VK_INVERTED_EXCLAMATION_MARK'})),
-    put({This, 'VK_LEFT_PARENTHESIS'}, get({'KeyEvent', 'VK_LEFT_PARENTHESIS'})),
-    put({This, 'VK_NUMBER_SIGN'}, get({'KeyEvent', 'VK_NUMBER_SIGN'})),
-    put({This, 'VK_PLUS'}, get({'KeyEvent', 'VK_PLUS'})),
-    put({This, 'VK_RIGHT_PARENTHESIS'}, get({'KeyEvent', 'VK_RIGHT_PARENTHESIS'})),
-    put({This, 'VK_UNDERSCORE'}, get({'KeyEvent', 'VK_UNDERSCORE'})),
-    put({This, 'VK_WINDOWS'}, get({'KeyEvent', 'VK_WINDOWS'})),
-    put({This, 'VK_CONTEXT_MENU'}, get({'KeyEvent', 'VK_CONTEXT_MENU'})),
-    put({This, 'VK_FINAL'}, get({'KeyEvent', 'VK_FINAL'})),
-    put({This, 'VK_CONVERT'}, get({'KeyEvent', 'VK_CONVERT'})),
-    put({This, 'VK_NONCONVERT'}, get({'KeyEvent', 'VK_NONCONVERT'})),
-    put({This, 'VK_ACCEPT'}, get({'KeyEvent', 'VK_ACCEPT'})),
-    put({This, 'VK_MODECHANGE'}, get({'KeyEvent', 'VK_MODECHANGE'})),
-    put({This, 'VK_KANA'}, get({'KeyEvent', 'VK_KANA'})),
-    put({This, 'VK_KANJI'}, get({'KeyEvent', 'VK_KANJI'})),
-    put({This, 'VK_ALPHANUMERIC'}, get({'KeyEvent', 'VK_ALPHANUMERIC'})),
-    put({This, 'VK_KATAKANA'}, get({'KeyEvent', 'VK_KATAKANA'})),
-    put({This, 'VK_HIRAGANA'}, get({'KeyEvent', 'VK_HIRAGANA'})),
-    put({This, 'VK_FULL_WIDTH'}, get({'KeyEvent', 'VK_FULL_WIDTH'})),
-    put({This, 'VK_HALF_WIDTH'}, get({'KeyEvent', 'VK_HALF_WIDTH'})),
-    put({This, 'VK_ROMAN_CHARACTERS'}, get({'KeyEvent', 'VK_ROMAN_CHARACTERS'})),
-    put({This, 'VK_ALL_CANDIDATES'}, get({'KeyEvent', 'VK_ALL_CANDIDATES'})),
-    put({This, 'VK_PREVIOUS_CANDIDATE'}, get({'KeyEvent', 'VK_PREVIOUS_CANDIDATE'})),
-    put({This, 'VK_CODE_INPUT'}, get({'KeyEvent', 'VK_CODE_INPUT'})),
-    put({This, 'VK_JAPANESE_KATAKANA'}, get({'KeyEvent', 'VK_JAPANESE_KATAKANA'})),
-    put({This, 'VK_JAPANESE_HIRAGANA'}, get({'KeyEvent', 'VK_JAPANESE_HIRAGANA'})),
-    put({This, 'VK_JAPANESE_ROMAN'}, get({'KeyEvent', 'VK_JAPANESE_ROMAN'})),
-    put({This, 'VK_KANA_LOCK'}, get({'KeyEvent', 'VK_KANA_LOCK'})),
-    put({This, 'VK_INPUT_METHOD_ON_OFF'}, get({'KeyEvent', 'VK_INPUT_METHOD_ON_OFF'})),
-    put({This, 'VK_CUT'}, get({'KeyEvent', 'VK_CUT'})),
-    put({This, 'VK_COPY'}, get({'KeyEvent', 'VK_COPY'})),
-    put({This, 'VK_PASTE'}, get({'KeyEvent', 'VK_PASTE'})),
-    put({This, 'VK_UNDO'}, get({'KeyEvent', 'VK_UNDO'})),
-    put({This, 'VK_AGAIN'}, get({'KeyEvent', 'VK_AGAIN'})),
-    put({This, 'VK_FIND'}, get({'KeyEvent', 'VK_FIND'})),
-    put({This, 'VK_PROPS'}, get({'KeyEvent', 'VK_PROPS'})),
-    put({This, 'VK_STOP'}, get({'KeyEvent', 'VK_STOP'})),
-    put({This, 'VK_COMPOSE'}, get({'KeyEvent', 'VK_COMPOSE'})),
-    put({This, 'VK_ALT_GRAPH'}, get({'KeyEvent', 'VK_ALT_GRAPH'})),
-    put({This, 'VK_BEGIN'}, get({'KeyEvent', 'VK_BEGIN'})),
-    put({This, 'VK_UNDEFINED'}, get({'KeyEvent', 'VK_UNDEFINED'})),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-getInstance() ->
-        get({'ABKeyEventWrapper', instance}).
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, ABKeyEventWrapper.jstatic_instance()})
+    end)
+  end
+end
+
 

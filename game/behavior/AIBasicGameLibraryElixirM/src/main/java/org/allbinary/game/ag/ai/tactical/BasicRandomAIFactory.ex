@@ -1,51 +1,56 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.ag.ai.tactical
-% import org.allbinary.ai.ArtificialIntelligenceInterface
-% import org.allbinary.game.ai.ArtificialIntelligenceInterfaceFactoryInterface
-% import org.allbinary.game.ai.BasicAI
-% import org.allbinary.game.ag.ai.InputProbability
-% import org.allbinary.game.input.GameInput
-% import org.allbinary.layer.AllBinaryLayer
-% import org.allbinary.logic.util.visitor.Visitor
-% import org.allbinary.util.ABHashtable
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai.tactical
 
--module('BasicRandomAIFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
-% implements ArtificialIntelligenceInterfaceFactoryInterface
+defmodule BasicRandomAIFactory do
+  def jsuper(), do: JObject
 
-init_fields(This) ->
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-% throws Exception
-getInstance(This, Hashtable, OwnerLayerInterface, GameInput) ->
-        Visitor = (get({Hashtable, '$class'})):get(Hashtable, get({'BasicAI', 'AI_VISITOR'})),
-        case (Visitor =:= undefined) of
-            true ->
-            erlang:error({'Exception', "No Visitor Provided"});
-            false -> ok
-        end,
-        InputProbability = (get({Hashtable, '$class'})):get(Hashtable, get({'InputProbability', 'INPUT_PROBABILITY'})),
-        'BasicRandomAI':new(OwnerLayerInterface, GameInput, InputProbability, Visitor).
+  def jm_getInstance(this, p_hashtable, p_ownerLayerInterface, p_gameInput) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :hashtable, p_hashtable)
+      JR.lset(f, :ownerLayerInterface, p_ownerLayerInterface)
+      JR.lset(f, :gameInput, p_gameInput)
+        JR.lset(f, :visitor, JR.call(JR.lget(f, :hashtable), :jm_get, [BasicAI.jstatic_AI_VISITOR()]))
+        if (JR.lget(f, :visitor) == nil) do
+            throw({:jexception, JR.exception("Exception", "No Visitor Provided")})
+        end
+        JR.lset(f, :inputProbability, JR.call(JR.lget(f, :hashtable), :jm_get, [InputProbability.jstatic_INPUT_PROBABILITY()]))
+        throw({:jreturn, BasicRandomAI.jnew(JR.lget(f, :ownerLayerInterface), JR.lget(f, :gameInput), JR.lget(f, :inputProbability), JR.lget(f, :visitor))})
+    end)
+  end
+end
+
 

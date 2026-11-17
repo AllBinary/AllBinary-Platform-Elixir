@@ -1,63 +1,72 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.input.accelerometer
-% import org.allbinary.game.configuration.feature.Features
-% import org.allbinary.game.configuration.feature.SensorFeatureFactory
-% import org.allbinary.input.gyro.AllBinaryOrientationSensor
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.input.accelerometer
 
--module('AccelerometerSensorFactory').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule AccelerometerSensorFactory do
+  def jsuper(), do: JObject
+def jstatic_allBinaryAccelerometerSensor(), do: JR.static_get(__MODULE__, :allBinaryAccelerometerSensor, fn -> nil end)
+  def jstatic_set_allBinaryAccelerometerSensor(value), do: JR.static_put(__MODULE__, :allBinaryAccelerometerSensor, value)
 
-static_init() ->
-    put({?MODULE, allBinaryAccelerometerSensor}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    nil
+  end
 
-init_fields(This) ->
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-% throws Exception
-init() ->
-        Features = 'Features':getInstance(),
-        SensorFeatureFactory = 'SensorFeatureFactory':getInstance(),
-        case (get({Features, '$class'})):isFeature(Features, get({SensorFeatureFactory, 'ORIENTATION_SENSORS'})) of
-            true ->
-            erlang:error({'Exception', "No Orientation Sensors"});
-            false ->
-            case (get({Features, '$class'})):isFeature(Features, get({SensorFeatureFactory, 'SIMULATED_ORIENTATION_SENSORS'})) of
-            true ->
-            erlang:error({'Exception', "No Simulation Sensors"});
-            false ->
-            case (get({Features, '$class'})):isFeature(Features, get({SensorFeatureFactory, 'NO_ORIENTATION'})) of
-            true ->
-            put({'AccelerometerSensorFactory', allBinaryAccelerometerSensor}, 'NoAccelerometerSensor':new());
-            false ->
-            erlang:error({'Exception', "Not Such SensorFeature"})
+  def jm_init() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        JR.lset(f, :features, Features.jm_getInstance())
+        JR.lset(f, :sensorFeatureFactory, SensorFeatureFactory.jm_getInstance())
+        if JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.lget(f, :sensorFeatureFactory), :ORIENTATION_SENSORS)]) do
+            throw({:jexception, JR.exception("Exception", "No Orientation Sensors")})
+        else
+            if JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.lget(f, :sensorFeatureFactory), :SIMULATED_ORIENTATION_SENSORS)]) do
+            throw({:jexception, JR.exception("Exception", "No Simulation Sensors")})
+        else
+            if JR.call(JR.lget(f, :features), :jm_isFeature, [JR.get(JR.lget(f, :sensorFeatureFactory), :NO_ORIENTATION)]) do
+            AccelerometerSensorFactory.jstatic_set_allBinaryAccelerometerSensor(NoAccelerometerSensor.jnew())
+        else
+            throw({:jexception, JR.exception("Exception", "Not Such SensorFeature")})
         end
         end
-        end.
+        end
+    end)
+  end
 
-getInstance() ->
-        get({'AccelerometerSensorFactory', allBinaryAccelerometerSensor}).
+
+  def jm_getInstance() do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, AccelerometerSensorFactory.jstatic_allBinaryAccelerometerSensor()})
+    end)
+  end
+end
+
 

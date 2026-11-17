@@ -1,142 +1,153 @@
-%
-% AllBinary Open License Version 1
-% Copyright (c) 2011 AllBinary
-% 
-% By agreeing to this license you and any business entity you represent are
-% legally bound to the AllBinary Open License Version 1 legal agreement.
-% 
-% You may obtain the AllBinary Open License Version 1 legal agreement from
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository.
-% 
-% Created By: Travis Berthelot
-%  
-% Generated Code Do Not Modify
-% package org.allbinary.game.displayable.canvas
-% import javax.microedition.lcdui.Font
-% import javax.microedition.lcdui.Graphics
-% import org.allbinary.AndroidUtil
-% import org.allbinary.J2MEUtil
-% import org.allbinary.animation.Animation
-% import org.allbinary.animation.NullAnimationFactory
-% import org.allbinary.animation.vector.RectangleFilledAnimation
-% import org.allbinary.game.configuration.feature.Features
-% import org.allbinary.game.layer.SWTUtil
-% import org.allbinary.graphics.GPoint
-% import org.allbinary.graphics.Rectangle
-% import org.allbinary.graphics.color.BasicColor
-% import org.allbinary.graphics.color.BasicColorFactory
-% import org.allbinary.graphics.color.BasicColorSetUtil
-% import org.allbinary.graphics.draw.DrawVerticalStringUtil
-% import org.allbinary.graphics.font.MyFontProcessor
-% import org.allbinary.graphics.font.UpdateMyFontInterface
-% import org.allbinary.graphics.font.UpdateMyFontProcessor
-% import org.allbinary.graphics.opengles.OpenGLFeatureFactory
-% import org.allbinary.graphics.opengles.OpenGLFeatureUtil
-% import org.allbinary.graphics.paint.Paintable
-% import org.allbinary.graphics.threed.SWTJOGLProcessor
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
--module('BasicPopupMenuPaintable').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
-% implements UpdateMyFontInterface
+defmodule BasicPopupMenuPaintable do
+  def jsuper(), do: Paintable
+def jstatic_NAME(), do: JR.static_get(__MODULE__, :NAME, fn -> "MENU" end)
+  def jstatic_set_NAME(value), do: JR.static_put(__MODULE__, :NAME, value)
 
-'$handle_undefined_function'(Function, Arguments) ->
-    apply('Paintable', Function, Arguments).
-
-static_init() ->
-    put({?MODULE, 'NAME'}, "MENU"),
-    ok.
-
-init_fields(This) ->
-    put({This, basicSetColorUtil}, 'BasicColorSetUtil':getInstance()),
-    put({This, drawStringUtil}, 'DrawVerticalStringUtil':getInstance()),
-    put({This, label}, undefined),
-    put({This, foregroundBasicColor}, undefined),
-    put({This, myFontProcessor}, 'UpdateMyFontProcessor':new(This)),
-    put({This, rectangle}, undefined),
-    put({This, 'BORDER'}, 0),
-    put({This, heightOffset}, 0),
-    put({This, offset}, 0),
-    put({This, animationInterface}, undefined),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :basicSetColorUtil, nil)
+    JR.put(this, :drawStringUtil, nil)
+    JR.put(this, :label, nil)
+    JR.put(this, :foregroundBasicColor, nil)
+    JR.put(this, :myFontProcessor, nil)
+    JR.put(this, :rectangle, nil)
+    JR.put(this, :BORDER, 0)
+    JR.put(this, :heightOffset, 0)
+    JR.put(this, :offset, 0)
+    JR.put(this, :animationInterface, nil)
+        JR.put(this, :basicSetColorUtil, BasicColorSetUtil.jm_getInstance())
+        JR.put(this, :drawStringUtil, DrawVerticalStringUtil.jm_getInstance())
+        
+        
+        JR.put(this, :myFontProcessor, UpdateMyFontProcessor.jnew(this))
+        
+        JR.put(this, :BORDER, 0)
+        JR.put(this, :heightOffset, 0)
+        JR.put(this, :offset, 0)
+        JR.put(this, :animationInterface, nil)
+    nil
+  end
 
 
-new(Rectangle, BackgroundBasicColor, ForegroundBasicColor) ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This, Rectangle, BackgroundBasicColor, ForegroundBasicColor),
-    This.
-
-'$init'(This, Rectangle, BackgroundBasicColor, ForegroundBasicColor) ->
-    'Paintable':'$init'(This),
-    init_fields(This),
-        put({This, foregroundBasicColor}, ForegroundBasicColor),
-        put({This, label}, get({'BasicPopupMenuPaintable', 'NAME'})),
-        put({This, rectangle}, Rectangle),
-        case ('J2MEUtil':isJ2ME() orelse 'J2MEUtil':isHTML()) of
-            true ->
-            put({This, animationInterface}, (fun(Target_N66896) -> (get({Target_N66896, '$class'})):getInstance(Target_N66896, 0) end)('NullAnimationFactory':getFactoryInstance()));
-            false ->
-            put({This, animationInterface}, 'RectangleFilledAnimation':new((get({get({This, rectangle}), '$class'})):getWidth(get({This, rectangle})), (get({get({This, rectangle}), '$class'})):getHeight(get({This, rectangle})), get({'BasicColorFactory':getInstance(), 'TRANSPARENT_GREY'})))
-        end,
-        (get({This, '$class'})):init(This, Rectangle).
-
-updateMeasurement(This, Graphics) ->
-        Font = (get({Graphics, '$class'})):getFont(Graphics),
-        Features = 'Features':getInstance(),
-        IsOpenGL = (get({Features, '$class'})):isDefault(Features, get({'OpenGLFeatureFactory':getInstance(), 'OPENGL'})),
-        (get({get({This, drawStringUtil}), '$class'})):updateMeasurement(get({This, drawStringUtil}), Graphics, get({This, label})),
-        put({local, 'BORDER'}, 0),
-        case ('J2MEUtil':isHTML() orelse IsOpenGL) of
-            true ->
-            put({local, 'BORDER'}, ('MyFontProcessor':defaultCharWidth(Font) / 2));
-            false ->
-            case (('AndroidUtil':isAndroid() orelse 'J2MEUtil':isJ2SE()) orelse get({'SWTUtil', isSWT})) of
-            true ->
-            put({local, 'BORDER'}, 'MyFontProcessor':defaultCharWidth(Font));
-            false ->
-            put({local, 'BORDER'}, ('MyFontProcessor':defaultCharWidth(Font) * 2))
+  def jinit(this, p_rectangle, p_backgroundBasicColor, p_foregroundBasicColor) do
+    JR.method(fn ->
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :rectangle, p_rectangle)
+      JR.lset(f, :backgroundBasicColor, p_backgroundBasicColor)
+      JR.lset(f, :foregroundBasicColor, p_foregroundBasicColor)
+      Paintable.jinit(this)
+      jinitfields(this)
+        JR.put(this, :foregroundBasicColor, JR.lget(f, :foregroundBasicColor))
+        JR.put(this, :label, BasicPopupMenuPaintable.jstatic_NAME())
+        JR.put(this, :rectangle, JR.lget(f, :rectangle))
+        if (J2MEUtil.jm_isJ2ME() || J2MEUtil.jm_isHTML()) do
+            JR.put(this, :animationInterface, JR.call(NullAnimationFactory.jm_getFactoryInstance(), :jm_getInstance, [0]))
+        else
+            JR.put(this, :animationInterface, RectangleFilledAnimation.jnew(JR.call(JR.get(this, :rectangle), :jm_getWidth, []), JR.call(JR.get(this, :rectangle), :jm_getHeight, []), JR.get(BasicColorFactory.jm_getInstance(), :TRANSPARENT_GREY)))
         end
-        end,
-        put({This, 'BORDER'}, get({local, 'BORDER'})),
-        put({This, heightOffset}, ((get({get({This, rectangle}), '$class'})):getHeight(get({This, rectangle})) - (((get({Font, '$class'})):getHeight(Font) * (get({get({'BasicPopupMenuPaintable', 'NAME'}), '$class'})):length(get({'BasicPopupMenuPaintable', 'NAME'})))))),
-        case (fun(Target_N67709) -> (get({Target_N67709, '$class'})):isAnyThreed(Target_N67709) end)('OpenGLFeatureUtil':getInstance()) of
-            true ->
-            put({This, heightOffset}, (get({This, heightOffset}) - ((get({Font, '$class'})):getHeight(Font) + 2))),
-            case 'AndroidUtil':isAndroid() of
-                true ->
-                put({This, heightOffset}, (get({Font, '$class'})):getHeight(Font));
-                false ->
-                put({This, heightOffset}, (get({This, heightOffset}) - ((get({Font, '$class'})):getHeight(Font) + 2)))
-            end;
-            false -> ok
-        end,
-        put({This, offset}, (((get({This, heightOffset}) bsr 1)) + (case (fun(Target_N67953) -> (get({Target_N67953, '$class'})):isJOGL(Target_N67953) end)('SWTJOGLProcessor':getInstance()) of true -> 4; false -> 0 end))),
-        put({This, myFontProcessor}, 'MyFontProcessor':getInstance()).
+        JR.call(this, :jm_init, [JR.lget(f, :rectangle)])
+    end)
+  end
 
-% throws Exception
-init(This, Rectangle) ->
-        put({This, rectangle}, Rectangle),
-        Width = (get({get({This, rectangle}), '$class'})):getWidth(get({This, rectangle})),
-        Height = (get({get({This, rectangle}), '$class'})):getHeight(get({This, rectangle})),
-        case ('J2MEUtil':isJ2ME() orelse 'J2MEUtil':isHTML()) of
-            true ->
-            ok;
-            false ->
-            RectangleFilledAnimation = get({This, animationInterface}),
-            (get({RectangleFilledAnimation, '$class'})):setWidth(RectangleFilledAnimation, Width),
-            (get({RectangleFilledAnimation, '$class'})):setHeight(RectangleFilledAnimation, Height)
-        end.
+  def jnew(p_rectangle, p_backgroundBasicColor, p_foregroundBasicColor) do
+    this = JR.alloc(__MODULE__)
+    jinit(this, p_rectangle, p_backgroundBasicColor, p_foregroundBasicColor)
+    this
+  end
 
-paint(This, Graphics) ->
-        (get({get({This, myFontProcessor}), '$class'})):process(get({This, myFontProcessor}), Graphics),
-        Point = (get({get({This, rectangle}), '$class'})):getPoint(get({This, rectangle})),
-        X = (get({Point, '$class'})):getX(Point),
-        Y = (get({Point, '$class'})):getY(Point),
-        Width = (get({get({This, rectangle}), '$class'})):getWidth(get({This, rectangle})),
-        Height = (get({get({This, rectangle}), '$class'})):getHeight(get({This, rectangle})),
-        (get({get({This, animationInterface}), '$class'})):paintXY(get({This, animationInterface}), Graphics, X, Y),
-        (get({get({This, basicSetColorUtil}), '$class'})):setBasicColorP(get({This, basicSetColorUtil}), Graphics, get({This, foregroundBasicColor})),
-        (get({get({This, drawStringUtil}), '$class'})):paintVerticle(get({This, drawStringUtil}), Graphics, get({This, label}), (X + get({This, 'BORDER'})), (Y + get({This, offset})), 0),
-        (get({Graphics, '$class'})):drawRect(Graphics, X, Y, Width, Height).
+
+  def jm_updateMeasurement(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.lset(f, :font, JR.call(JR.lget(f, :graphics), :jm_getFont, []))
+        JR.lset(f, :features, Features.jm_getInstance())
+        JR.lset(f, :isOpenGL, JR.call(JR.lget(f, :features), :jm_isDefault, [JR.get(OpenGLFeatureFactory.jm_getInstance(), :OPENGL)]))
+        JR.call(JR.get(this, :drawStringUtil), :jm_updateMeasurement, [JR.lget(f, :graphics), JR.get(this, :label)])
+        JR.lset(f, :BORDER, 0)
+        if (J2MEUtil.jm_isHTML() || JR.lget(f, :isOpenGL)) do
+            JR.lset(f, :BORDER, (MyFontProcessor.jm_defaultCharWidth(JR.lget(f, :font)) / 2))
+        else
+            if ((AndroidUtil.jm_isAndroid() || J2MEUtil.jm_isJ2SE()) || SWTUtil.jstatic_isSWT()) do
+            JR.lset(f, :BORDER, MyFontProcessor.jm_defaultCharWidth(JR.lget(f, :font)))
+        else
+            JR.lset(f, :BORDER, (MyFontProcessor.jm_defaultCharWidth(JR.lget(f, :font)) * 2))
+        end
+        end
+        JR.put(this, :BORDER, JR.lget(f, :BORDER))
+        JR.put(this, :heightOffset, (JR.call(JR.get(this, :rectangle), :jm_getHeight, []) - ((JR.call(JR.lget(f, :font), :jm_getHeight, []) * JR.call(BasicPopupMenuPaintable.jstatic_NAME(), :jm_length, [])))))
+        if JR.call(OpenGLFeatureUtil.jm_getInstance(), :jm_isAnyThreed, []) do
+            JR.put(this, :heightOffset, JR.int32(JR.get(this, :heightOffset) - (JR.call(JR.lget(f, :font), :jm_getHeight, []) + 2)))
+            if AndroidUtil.jm_isAndroid() do
+                JR.put(this, :heightOffset, JR.call(JR.lget(f, :font), :jm_getHeight, []))
+            else
+                JR.put(this, :heightOffset, JR.int32(JR.get(this, :heightOffset) - (JR.call(JR.lget(f, :font), :jm_getHeight, []) + 2)))
+            end
+        end
+        JR.put(this, :offset, JR.int32((Bitwise.bsr(JR.get(this, :heightOffset), 1)) + ((if JR.call(SWTJOGLProcessor.jm_getInstance(), :jm_isJOGL, []), do: 4, else: 0))))
+        JR.put(this, :myFontProcessor, MyFontProcessor.jm_getInstance())
+    end)
+  end
+
+
+  def jm_init(this, p_rectangle) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :rectangle, p_rectangle)
+        JR.put(this, :rectangle, JR.lget(f, :rectangle))
+        JR.lset(f, :width, JR.call(JR.get(this, :rectangle), :jm_getWidth, []))
+        JR.lset(f, :height, JR.call(JR.get(this, :rectangle), :jm_getHeight, []))
+        if (J2MEUtil.jm_isJ2ME() || J2MEUtil.jm_isHTML()) do
+            nil
+        else
+            JR.lset(f, :rectangleFilledAnimation, JR.get(this, :animationInterface))
+            JR.call(JR.lget(f, :rectangleFilledAnimation), :jm_setWidth, [JR.lget(f, :width)])
+            JR.call(JR.lget(f, :rectangleFilledAnimation), :jm_setHeight, [JR.lget(f, :height)])
+        end
+    end)
+  end
+
+
+  def jm_paint(this, p_graphics) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+      JR.lset(f, :graphics, p_graphics)
+        JR.call(JR.get(this, :myFontProcessor), :jm_process, [JR.lget(f, :graphics)])
+        JR.lset(f, :point, JR.call(JR.get(this, :rectangle), :jm_getPoint, []))
+        JR.lset(f, :x, JR.call(JR.lget(f, :point), :jm_getX, []))
+        JR.lset(f, :y, JR.call(JR.lget(f, :point), :jm_getY, []))
+        JR.lset(f, :width, JR.call(JR.get(this, :rectangle), :jm_getWidth, []))
+        JR.lset(f, :height, JR.call(JR.get(this, :rectangle), :jm_getHeight, []))
+        JR.call(JR.get(this, :animationInterface), :jm_paintXY, [JR.lget(f, :graphics), JR.lget(f, :x), JR.lget(f, :y)])
+        JR.call(JR.get(this, :basicSetColorUtil), :jm_setBasicColorP, [JR.lget(f, :graphics), JR.get(this, :foregroundBasicColor)])
+        JR.call(JR.get(this, :drawStringUtil), :jm_paintVerticle, [JR.lget(f, :graphics), JR.get(this, :label), JR.int32(JR.lget(f, :x) + JR.get(this, :BORDER)), JR.int32(JR.lget(f, :y) + JR.get(this, :offset)), 0])
+        JR.call(JR.lget(f, :graphics), :jm_drawRect, [JR.lget(f, :x), JR.lget(f, :y), JR.lget(f, :width), JR.lget(f, :height)])
+    end)
+  end
+end
+
 

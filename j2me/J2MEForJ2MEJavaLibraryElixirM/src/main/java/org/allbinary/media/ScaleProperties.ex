@@ -1,46 +1,60 @@
-% 
-% AllBinary Open License Version 1 
-% Copyright (c) 2022 AllBinary 
-%  
-% By agreeing to this license you and any business entity you represent are 
-% legally bound to the AllBinary Open License Version 1 legal agreement. 
-%  
-% You may obtain the AllBinary Open License Version 1 legal agreement from 
-% AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
-%  
-% Created By: Travis Berthelot 
-%   
-% Generated Code Do Not Modify
-% package org.allbinary.media
-% import org.allbinary.logic.string.StringMaker
-% import org.allbinary.string.CommonLabels
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.media
 
--module('ScaleProperties').
--compile([export_all, nowarn_export_all, nowarn_unused_vars, nowarn_shadow_vars]).
--on_load(static_init/0).
+defmodule ScaleProperties do
+  def jsuper(), do: JObject
+def jstatic_instance(), do: JR.static_get(__MODULE__, :instance, fn -> ScaleProperties.jnew() end)
+  def jstatic_set_instance(value), do: JR.static_put(__MODULE__, :instance, value)
 
-static_init() ->
-    put({?MODULE, instance}, 'ScaleProperties':new()),
-    ok.
+  def jinitfields(this) do
+    f = JR.frame()
+    _ = f
+    _ = this
+    JR.put(this, :scaleX, 0.0)
+    JR.put(this, :scaleY, 0.0)
+    JR.put(this, :scaleWidth, 0)
+    JR.put(this, :scaleHeight, 0)
+    JR.put(this, :shouldScale, false)
+        JR.put(this, :scaleX, 1.0)
+        JR.put(this, :scaleY, 1.0)
+        JR.put(this, :scaleWidth, 0)
+        JR.put(this, :scaleHeight, 0)
+        JR.put(this, :shouldScale, false)
+    nil
+  end
 
-init_fields(This) ->
-    put({This, scaleX}, 1.0),
-    put({This, scaleY}, 1.0),
-    put({This, scaleWidth}, 0),
-    put({This, scaleHeight}, 0),
-    put({This, shouldScale}, false),
-    ok.
+  def jinit(this) do
+    JObject.jinit(this)
+    jinitfields(this)
+  end
 
-new() ->
-    This = make_ref(),
-    put({This, '$class'}, ?MODULE),
-    '$init'(This),
-    This.
-
-'$init'(This) ->
-    init_fields(This).
+  def jnew() do
+    this = JR.alloc(__MODULE__)
+    jinit(this)
+    this
+  end
 
 
-toString(This) ->
-        (fun(Target_N65844) -> (get({Target_N65844, '$class'})):toString(Target_N65844) end)((fun(Target_N65851) -> (get({Target_N65851, '$class'})):appendint(Target_N65851, get({This, scaleHeight})) end)((fun(Target_N65858) -> (get({Target_N65858, '$class'})):append(Target_N65858, "scaleHeight: ") end)((fun(Target_N65865) -> (get({Target_N65865, '$class'})):appendint(Target_N65865, get({This, scaleWidth})) end)((fun(Target_N65872) -> (get({Target_N65872, '$class'})):append(Target_N65872, "scaleWidth: ") end)((fun(Target_N65879) -> (get({Target_N65879, '$class'})):appendfloat(Target_N65879, get({This, scaleY})) end)((fun(Target_N65886) -> (get({Target_N65886, '$class'})):append(Target_N65886, "scaleY: ") end)((fun(Target_N65893) -> (get({Target_N65893, '$class'})):appendfloat(Target_N65893, get({This, scaleX})) end)((fun(Target_N65900) -> (get({Target_N65900, '$class'})):append(Target_N65900, "scaleX: ") end)((fun(Target_N65907) -> (get({Target_N65907, '$class'})):appendboolean(Target_N65907, get({This, shouldScale})) end)((fun(Target_N65914) -> (get({Target_N65914, '$class'})):append(Target_N65914, get({'CommonLabels':getInstance(), 'COLON_SEP'})) end)('StringMaker':new()))))))))))).
+  def jm_toString(this) do
+    JR.method(fn ->
+      _ = this
+      f = JR.frame()
+      _ = f
+        throw({:jreturn, JR.call(JR.call(JR.call(JR.call(JR.call(JR.call(JR.call(JR.call(JR.call(JR.call(JR.call(StringMaker.jnew(), :jm_append, [JR.get(CommonLabels.jm_getInstance(), :COLON_SEP)]), :jm_appendboolean, [JR.get(this, :shouldScale)]), :jm_append, ["scaleX: "]), :jm_appendfloat, [JR.get(this, :scaleX)]), :jm_append, ["scaleY: "]), :jm_appendfloat, [JR.get(this, :scaleY)]), :jm_append, ["scaleWidth: "]), :jm_appendint, [JR.get(this, :scaleWidth)]), :jm_append, ["scaleHeight: "]), :jm_appendint, [JR.get(this, :scaleHeight)]), :jm_toString, [])})
+    end)
+  end
+end
+
 
