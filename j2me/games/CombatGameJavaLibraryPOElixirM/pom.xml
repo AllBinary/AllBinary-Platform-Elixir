@@ -1,0 +1,142 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.allbinary</groupId>
+  <artifactId>CombatGameJavaLibraryPOMElixir</artifactId>
+  <packaging>pom</packaging>
+  <!-- AllBinary Platform Version Start -->
+  <version>1.0.0-SNAPSHOT</version>
+  <!-- AllBinary Platform Version End -->
+
+  <name>CombatGameJavaLibraryPOMElixir</name>
+  <url>http://www.allbinary.com/</url>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>AllBinary Snapshots Nexus</name>
+            <url>https://nexus-allbinary.rhcloud.com/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>nexus-releases</id>
+            <name>AllBinary Releases Nexus</name>
+            <url>https://nexus-allbinary.rhcloud.com/nexus/content/repositories/releases/</url>
+        </repository>
+    </distributionManagement>
+
+    <properties>
+        <buildLabel>${project.version}</buildLabel>
+        <assemblyPluginVersion>2.2-beta-1</assemblyPluginVersion>
+    </properties>
+
+    <modules>
+
+        <!--
+
+        -->
+
+        <module>../../games/TickableJavaLibraryElixirM</module>
+
+        <module>../../games/CommonHeadsUpDisplayLibraryElixirM</module>
+
+        <module>../../../physics/MovementJavaLibraryElixirM</module>
+        <!--        -->
+        <module>../../games/PartsJavaLibraryElixirM</module>
+        <module>../../games/PickupGameJavaLibraryElixirM</module>
+
+        <module>../../../allbinary_src/licensing/HardCodedLicenseInitInfoJavaLibraryElixirM</module>
+        <module>../../../allbinary_src/licensing/FileLicenseInitInfoJavaLibraryElixirM</module>
+        <module>../../../allbinary_src/licensing/ClientInfoLicensingJavaLibraryElixirM</module>
+
+        <module>../../games/licensing/PartnerJ2MEJavaLibraryElixirM</module>
+        <!--<module>../../games/licensing/PartnerHTMLJavaLibraryElixirM</module>-->
+        <!--<module>../../games/licensing/PartnerAndroidJavaLibraryElixirM</module>-->
+        <module>../../games/licensing/NoGameLicensingJavaLibraryElixirM</module>
+        <module>../../games/licensing/GameLicensingOnlyDemoJavaLibraryElixirM</module>
+        <!--<module>../../games/licensing/GameLicensingOnlyNormalJavaLibraryElixirM</module>-->
+        <module>../../games/licensing/GameLicensingBaseJavaLibraryElixirM</module>
+
+        <!--
+        <module>../../games/GameScoresBaseLibraryElixirM</module>
+        <module>../../games/GameScoresBaseHTMLLibraryElixirM</module>
+        <module>../../games/GameScoresBaseJ2MELibraryElixirM</module>
+        -->
+        <module>../../games/GameScoresLocalJavaLibraryElixirM</module>
+        <!--<module>../../games/GameScoresRemoteAndLocalJavaLibraryElixirM</module>-->
+
+        <module>../../../store/ThirdPartyStoreJavaLibraryElixirM</module>
+        <module>../../../store/NoThirdPartyStoreJavaLibraryElixirM</module>
+
+        <module>../../media/graphics/layer/CollisionLayerJavaLibraryElixirM</module>
+        <module>../../games/CollisionLibraryElixirM</module>
+
+        <module>../../games/multiplayer/AllBinaryGameClientBaseNullJavaLibraryElixirM</module>
+
+        <module>../../games/PickupLayerJavaLibraryElixirM</module>
+
+        <module>../../games/DamageGameJavaLibraryElixirM</module>
+        <module>../../games/DropJavaLibraryElixirM</module>
+        <module>../../games/WeaponLayerJavaLibraryElixirM</module>
+
+        <module>../../games/CombatGameJavaLibraryElixirM</module>
+        <module>../../games/LifeJavaLibraryElixirM</module>
+
+        <module>../../games/CommonHeadsUpDisplayCombatGameLibraryElixirM</module>
+        <module>../../games/LifeOrDeathDataJavaLibraryElixirM</module>
+
+        <module>../../games/BasicWeaponPartsJavaLibraryElixirM</module>
+        <module>../../games/weapon/WeaponPropertiesJavaLibraryElixirM</module>
+
+        <module>../../games/weapon/WeaponMineJavaLibraryElixirM</module>
+
+        <!--
+        <module>../../media/graphics/effects/fireworks/FireworksJavaLibraryElixirM</module>
+        -->
+
+        <module>../../media/graphics/geography/map/TerrainEventJavaLibraryElixirM</module>
+
+<!--
+        <module>../../media/graphics/geography/map/BasicPlatformGeographicMapJavaLibraryElixirM</module>
+        -->
+
+        <!--
+        <module>../../media/graphics/geography/map/RaceTrackElixirP</module>
+        -->
+
+        <!--
+        XmlRpcJavaLibrary
+        RemoteXmlRpcJavaLibrary
+
+        Since POMs are built before the other libs is it best to handle this differently
+        ../../
+        <module>../../../../workelixir/j2me/games/strategy/rts/RTSGameJavaLibraryElixirP</module>
+        -->
+
+        <module>../../media/graphics/OtherGraphicsMediaLibraryElixirP</module>
+
+        <module>../../input/NoTouchButtonResourceAnimationJavaLibraryElixirM</module>
+        <module>../../input/TouchButtonResourceAnimationJavaLibraryElixirM</module>
+        <module>../../input/TouchButtonResourceOpenGLESAnimationJavaLibraryElixirM</module>
+
+        <module>../../input/TrackingEventJavaLibraryElixirM</module>
+        <module>../../../game/behavior/BehaviorLibraryElixirP</module>
+
+        <module>../../media/sound/OtherSoundMediaLibraryElixirP</module>
+
+        <module>../../../allbinary_src/licensing/ApplicationConfigurationJavaLibraryElixirM</module>
+        <module>../../../allbinary_src/licensing/ApplicationConfigurationNoFSJavaLibraryElixirM</module>
+        <!--<module>../../input/AllBinaryMagneticFieldSensorJavaLibraryElixirM</module>-->
+        <!--<module>../../android/VirtualKeyboardJavaLibraryElixirM</module>-->
+
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>
+

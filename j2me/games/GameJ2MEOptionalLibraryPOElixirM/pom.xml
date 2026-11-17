@@ -1,0 +1,76 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.allbinary</groupId>
+    <artifactId>GameJ2MEOptionalLibraryPOMElixir</artifactId>
+    <packaging>pom</packaging>
+    <!-- AllBinary Platform Version Start -->
+    <version>1.0.0-SNAPSHOT</version>
+    <!-- AllBinary Platform Version End -->
+
+    <name>GameJ2MEOptionalLibraryPOMElixir</name>
+    <url>http://www.allbinary.com/</url>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>AllBinary Snapshots Nexus</name>
+            <url>https://nexus-allbinary.rhcloud.com/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>nexus-releases</id>
+            <name>AllBinary Releases Nexus</name>
+            <url>https://nexus-allbinary.rhcloud.com/nexus/content/repositories/releases/</url>
+        </repository>
+    </distributionManagement>
+
+
+
+    <modules>
+        
+        <!--<module>../../ProgressLazyJ2MEJavaLibraryElixirM</module>-->
+        <!--
+                <module>../../games/GameScoresBaseHTMLLibraryElixirM</module>
+                <module>../../games/GameScoresJ2MEJavaLibraryElixirM</module>
+                <module>../../../allbinary_src/licensing/RemoteXmlRpcJavaLibraryElixirM</module>
+                <module>../../games/GameScoresLocalLibraryElixirM</module>
+                <module>../../games/GameScoresRemoteAndLocalLibraryElixirM</module>
+        -->
+<!-- in GameJ2MELibraryPOM <module>../../media/graphics/ImageCacheJ2MEJavaLibraryElixirM</module>-->
+        <!--<module>../../media/graphics/ImageCacheLazyJ2MEJavaLibraryElixirM</module>-->
+        <!--        <module>../../media/graphics/ImageCacheOpenGLESJavaLibraryElixirM</module>-->
+        <module>../../media/graphics/LazyGameResourceNoneJavaLibraryElixirM</module>
+
+<!-- in GameJ2MELibraryPOM <module>../../../graphics/opengl/OpenGLNoneJavaLibraryElixirM</module>-->
+
+        <!--
+                <module>../../../graphics/opengl/OpenGLESJavaLibraryElixirM</module>
+        -->
+
+<!-- in GameJ2MELibraryPOM <module>../../input/JSEGyroSensorJavaLibraryElixirM</module>-->
+        <!--        
+                <module>../../ProgressJ2MEJavaLibraryElixirM</module>
+        -->
+        <!--        
+                //At some point the GameInput libraries were here
+        -->
+        
+        <!--
+        ../../
+        <module>../../../../workelixir/j2me/media/graphics/FormJMEJavaLibraryElixirM</module>
+        -->
+        <!--
+        ../../
+        <module>../../../../workelixir/j2me/media/graphics/FormJSEJavaLibraryElixirM</module>
+        -->
+
+        <!--<module>../../media/sound/J2SEMediaMIDPMinimalJavaLibraryElixirM</module>-->
+<!--        <module>../../media/sound/NotDeviceSpecificMIDP2JavaLibraryElixirM</module>-->
+        <!--<module>../../media/sound/MediaMIDP2ForHTMLJavaLibraryElixirM</module>-->
+
+        <!--
+                <module>../../../../workelixir/j2me/ScreenCaptureAndroidJavaLibraryElixirM</module>
+        -->
+    </modules>
+
+</project>
+

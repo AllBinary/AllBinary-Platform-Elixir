@@ -1,0 +1,147 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.allbinary.business</groupId>
+    <artifactId>BlisketJavaLibraryPElixir</artifactId>
+    <packaging>pom</packaging>
+    <!-- AllBinary Platform Version Start -->
+    <version>1.0.0-SNAPSHOT</version>
+    <!-- AllBinary Platform Version End -->
+
+    <name>BlisketJavaLibraryPElixir</name>
+    <url>http://www.allbinary.com/</url>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>AllBinary Snapshots Nexus</name>
+            <url>https://nexus-allbinary.rhcloud.com/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>nexus-releases</id>
+            <name>AllBinary Releases Nexus</name>
+            <url>https://nexus-allbinary.rhcloud.com/nexus/content/repositories/releases/</url>
+        </repository>
+    </distributionManagement>
+    
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    
+    <modules>
+
+        <!--
+        <module>../../j2me/AllBinaryJ2MELibraryElixirP</module>
+        -->
+        <!--
+        <module>../data/DataJavaLibraryElixirM</module>
+        -->
+
+        <module>../licensing/TestServiceClientInfoJavaLibraryElixirM</module>        
+
+        <module>../data/DataTableInterfacesElixirM</module>
+        
+        <module>../QueueJavaLibraryElixirM</module>
+        
+        <!--
+        <module>../TokenizerJavaLibraryElixirM</module>
+        -->
+
+        <module>../logging/LogConfigTypeFreeblisketJavaLibraryElixirM</module>
+
+        <module>../JavaUtilLibraryElixirM</module>
+        <module>../NullInitInfoJavaLibraryElixirM</module>        
+        <module>../InitInfoJavaLibraryElixirM</module>
+        <module>../PreLoaderHttpJavaLibraryElixirM</module>
+        
+        <module>../TagsBaseJavaLibraryElixirM</module>
+        <module>../CustomLoaderJavaLibraryElixirM</module>
+        
+        <!--
+        <module>../logic/data/file/FileJ2SEJavaLibraryElixirM</module>
+        <module>../logic/data/file/FileJavaLibraryElixirM</module>
+        -->
+
+        <module>../data/SQLAllBinaryJavaLibraryElixirM</module>
+
+        <!--
+        <module>../licensing/FileLicenseInitInfoJavaLibraryElixirM</module>
+        -->
+
+        <module>../DocumentObjectModelJavaLibraryElixirM</module>
+
+        <module>../VisualStyleJavaLibraryElixirM</module>
+
+        <module>../ConfigurationJavaLibraryElixirM</module>
+
+        <module>../VisualTransformBaseJavaLibraryElixirM</module>
+
+        <module>../CategoryBaseJavaLibraryElixirM</module>
+        <module>../CategoryJavaLibraryElixirM</module>
+
+        <module>../UserJavaLibraryElixirM</module>
+
+        <module>../PaymentGatewayBaseJavaLibraryElixirM</module>
+
+        <module>../data/vo/EntitiesBlisketVOJavaLibraryElixirM</module>
+        <module>../PaymentGatewayJavaLibraryElixirM</module>
+        <module>../data/vo/EntitiesOrderHistoryVOJavaLibraryElixirM</module>
+        <module>../data/vo/EntityPaymentGatewayVOJavaLibraryElixirM</module>
+        <module>../data/vo/EntityStoreFrontVOJavaLibraryElixirM</module>
+
+        <module>../data/EntitiesBlisketBaseInterfacesJavaLibraryElixirM</module>
+        <module>../data/EntitiesBlisketBaseJavaLibraryElixirM</module>
+        
+        <module>../data/EntitiesAdvertisementBaseJavaLibraryElixirM</module>
+        <module>../data/EntityOrderHistoryJavaLibraryElixirM</module>
+        <module>../data/EntityPaymentGatewayJavaLibraryElixirM</module>
+        <module>../data/EntityVisualTransformJavaLibraryElixirM</module>
+        <module>../data/EntityUserJavaLibraryElixirM</module>
+        <module>../data/EntityWorkflowJavaLibraryElixirM</module>
+
+        <module>../SMTPConfigurationJavaLibraryElixirM</module>
+        <module>../SMTPBaseJavaLibraryElixirM</module>
+
+        <module>../VisualTransformJavaLibraryElixirM</module>
+
+        <module>../../replace_these_stub_projects/allbinary_src/YourRuntimeEnvironmentJavaLibraryElixirM</module>
+        <module>../GatewayJavaLibraryElixirM</module>
+        
+        <module>../WorkflowBaseJavaLibraryElixirM</module>
+        <module>../WorkflowJavaLibraryElixirM</module>
+
+        <module>../IdGeneratorUsingFilesJavaLibraryElixirM</module>
+        <module>../BlisketPreVOJavaLibraryElixirM</module>
+
+        <!-- 
+        EntitiesOrderHistoryVOJavaLibrary
+        UserJavaLibrary
+        -->
+        
+        <module>../BlisketVOJavaLibraryElixirM</module>
+
+        <module>../UserCommerceJavaLibraryElixirM</module>
+
+        <module>../CustomizerValidatorsJavaLibraryElixirM</module>
+
+        <!-- 
+        AllBinaryCacheForShiftOneJavaLibrary
+        AllBinaryJSECacheJavaLibrary
+        ColorJavaLibrary
+        ImageJavaLibrary
+        -->
+        
+        <module>../logic/data/file/FileMediaJ2SEJavaLibraryElixirM</module>
+        <module>../BlisketBaseJavaLibraryElixirM</module>
+
+        <module>../logging/LoggingGAEAllElixirM</module>
+        <module>../BlisketJavaLibraryElixirM</module>
+        
+    </modules>
+
+</project>
+

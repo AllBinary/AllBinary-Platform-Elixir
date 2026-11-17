@@ -1,0 +1,59 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.allbinary</groupId>
+    <artifactId>AllBinaryPersistenceLibraryPElixir</artifactId>
+    <packaging>pom</packaging>
+    <!-- AllBinary Platform Version Start -->
+    <version>1.0.0-SNAPSHOT</version>
+    <!-- AllBinary Platform Version End -->
+
+    <name>AllBinaryPersistenceLibraryPElixir</name>
+    <url>http://www.allbinary.com/</url>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>AllBinary Snapshots Nexus</name>
+            <url>https://nexus-allbinary.rhcloud.com/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>nexus-releases</id>
+            <name>AllBinary Releases Nexus</name>
+            <url>https://nexus-allbinary.rhcloud.com/nexus/content/repositories/releases/</url>
+        </repository>
+    </distributionManagement>
+    
+    <properties>
+        <buildLabel>${project.version}</buildLabel>
+        <assemblyPluginVersion>2.2-beta-1</assemblyPluginVersion>
+    </properties>
+
+    <modules>
+        
+        <!--
+        -->
+        <module>../allbinary_src/cache/AllBinaryCacheLibraryElixirM</module>
+        <module>../allbinary_src/PermutationsJavaLibraryElixirM</module>
+        <module>../allbinary_src/logic/BasePreloaderFileJavaLibraryElixirM</module>
+        <module>../allbinary_src/logic/data/file/FileJavaLibraryElixirM</module>
+        <module>../allbinary_src/logic/data/file/FileJ2SEJavaLibraryElixirM</module>
+        <!--<module>../allbinary_src/data/DataJavaLibraryElixirM</module>-->
+        <!--<module>../allbinary_src/logic/data/file/FileUnamedJavaLibraryElixirM</module>-->
+        <!--<module>../allbinary_src/logic/data/file/FileAdvancedJavaLibraryElixirM</module>-->
+        <!--<module>../allbinary_src/PreLoaderJavaLibraryElixirM</module>-->
+        <!--<module>../allbinary_src/FileInitInfoJavaLibraryElixirM</module>-->
+        <!--<module>../allbinary_src/PreLoaderFileJavaLibraryElixirM</module>-->
+        <!--<module>../allbinary_src/PreLoaderLicenseJavaLibraryElixirM</module>-->
+        <module>../j2me/PCResourceLibraryElixirM</module>
+        <module>../j2me/ProgressJ2MEJavaLibraryElixirM</module>
+        <module>../allbinary_src/licensing/ClientInfoBaseJavaLibraryElixirM</module>
+        <!--<module>../allbinary_src/licensing/RemoteXmlRpcJavaLibraryElixirM</module>-->
+        <!--<module>../allbinary_src/licensing/LicenseClientJavaLibraryElixirM</module>-->
+
+        <!--
+        <module>../allbinary_src/PreLoaderLicenseJavaLibraryElixirM</module>
+        -->
+    </modules>
+
+</project>
+

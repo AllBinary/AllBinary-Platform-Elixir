@@ -1,0 +1,192 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.allbinary</groupId>
+  <artifactId>GameJ2MELibraryPOMElixir</artifactId>
+  <packaging>pom</packaging>
+  <!-- AllBinary Platform Version Start -->
+  <version>1.0.0-SNAPSHOT</version>
+  <!-- AllBinary Platform Version End -->
+
+  <name>GameJ2MELibraryPOMElixir</name>
+  <url>http://www.allbinary.com/</url>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>AllBinary Snapshots Nexus</name>
+            <url>https://nexus-allbinary.rhcloud.com/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>nexus-releases</id>
+            <name>AllBinary Releases Nexus</name>
+            <url>https://nexus-allbinary.rhcloud.com/nexus/content/repositories/releases/</url>
+        </repository>
+    </distributionManagement>
+
+
+
+    <modules>
+
+        <!--
+        NoGyroSensorLibrary
+
+        -->
+        <!--<module>../../android/AndroidUtilJavaLibraryElixirM</module>-->
+
+        <module>../../../allbinary_src/security/SimpleCryptLibraryElixirM</module>
+        <!--
+        <module>../../../../working_thirdpartyelixir/security/BouncyCastleDESJavaLibraryElixirM</module>
+        <module>../../../../working_thirdpartyelixir/communication/XmlRpc/XmlRpcJavaLibraryElixirM</module>
+        -->
+        <module>../../../allbinary_src/TokenizerJavaLibraryElixirM</module>
+        <module>../../../allbinary_src/security/BasicSecurityJavaLibraryElixirM</module>
+        <!--<module>../../../replace_these_stub_projects/security/YourCryptFileJavaLibraryElixirM</module>-->
+        <module>../../../replace_these_stub_projects/security/YourSecurityJavaLibraryElixirM</module>
+        <module>../../../replace_these_stub_projects/communication/YourXmlRpcJavaLibraryElixirM</module>
+        <module>../../../replace_these_stub_projects/allbinary_src/J2MEOnlyJavaLibraryElixirM</module>
+        <module>../../../replace_these_stub_projects/allbinary_src/J2MECompatibilityJavaLibraryElixirM</module>
+        <module>../../../replace_these_stub_projects/allbinary_src/J2MEJsInteropCompatibilityJavaLibraryElixirM</module>
+
+        <module>../../DebugJavaLibraryElixirM</module>             
+        <module>../../ResourceLibraryElixirM</module>
+        <module>../../ResourceJ2MEJavaLibraryElixirM</module>
+        <!--<module>../../AndroidResourceLibraryElixirM</module>-->
+        <!--<module>../../../allbinary_src/hardware/AndroidSystemJavaLibraryElixirM</module>-->
+
+        <module>../../../game/behavior/ArtificialIntelligenceLibraryElixirM</module>
+
+        <module>../../media/graphics/PlatformNullImageJavaLibraryElixirM</module>
+        <module>../../media/graphics/ImageCacheBaseJ2MEJavaLibraryElixirM</module>
+        <module>../../media/graphics/ImageCacheJ2MEJavaLibraryElixirM</module>
+        <module>../../../graphics/opengl/OpenGLJ2MENoneJavaLibraryElixirM</module>
+        <module>../../../graphics/opengl/OpenGLNoneJavaLibraryElixirM</module>
+        <module>../../../graphics/opengl/OpenGLNoneOtherJavaLibraryElixirM</module>
+        <module>../../../graphics/opengl/OpenGLNoneOther2JavaLibraryElixirM</module>
+        <module>../../../graphics/opengl/OpenGLESBaseJ2MEJavaLibraryElixirM</module>
+
+        <module>../../media/graphics/animation/AnimationLibraryElixirM</module>
+        <module>../../media/graphics/animation/RotationAnimationJavaLibraryElixirM</module>
+
+        <module>../../games/GameInputLibraryElixirM</module>
+
+        <module>../../games/GameScoresBaseJavaLibraryElixirM</module>
+        <module>../../games/GameScoresBaseJ2MELibraryElixirM</module>
+
+        <module>../../statistics/ApplicationStatisticsHTMLLibraryElixirM</module>
+        <!--
+        <module>../../games/GameConfigurationHTMLJavaLibraryElixirM</module>
+        -->
+        <module>../../games/GameConfigurationJ2MEJavaLibraryElixirM</module>   
+        <module>../../games/GameConfigurationJavaLibraryElixirM</module>
+
+        <module>../../games/GameIntermissionLibraryElixirM</module>
+
+        <module>../../GroupLibraryElixirM</module>
+
+        <module>../../input/NoSensorJavaLibraryElixirM</module>
+
+        <module>../../input/AllBinarySensorJavaLibraryElixirM</module>
+
+        <module>../../input/platform/me/GameInputMEJavaLibraryElixirM</module>
+        <module>../../input/platform/me/GameInputMEKeyOnlyJavaLibraryElixirM</module>
+        <module>../../input/platform/me/GameInputMEMotionJavaLibraryElixirM</module>
+        <module>../../input/platform/pc/GameInputPCBaseJavaLibraryElixirM</module>
+        <module>../../input/platform/pc/GameInputPCJavaLibraryElixirM</module>
+        <module>../../input/platform/pc/GameInputPCKeyOnlyJavaLibraryElixirM</module>
+        <module>../../input/platform/pc/GameInputPCMotionJavaLibraryElixirM</module>
+        <module>../../input/platform/pc/GameInputSwtJavaLibraryElixirM</module>
+
+        <module>../../input/AllBinaryGyroSensorJavaLibraryElixirM</module>
+        <module>../../input/MotionGestureJavaLibraryElixirM</module>
+        
+        <module>../../input/MotionGestureBaseJavaLibraryElixirM</module>
+
+        <module>../../games/GameInputPersistanceLibraryElixirM</module>
+        <module>../../games/GameInputNoPersistanceLibraryElixirM</module>
+        
+        <module>../../lib/VectorThreeDimensionalLibraryElixirM</module>
+        <module>../../input/AllBinaryAccelerometerSensorJavaLibraryElixirM</module>
+        <module>../../input/NoGyroSensorJavaLibraryElixirM</module>
+        <module>../../input/JSEGyroSensorJavaLibraryElixirM</module>
+        <!--
+        <module>../../input/android/</module>
+        <module>../../input/platform/android/GameInputAndroidBaseJavaLibraryElixirM</module>
+        -->
+
+        <module>../../media/sound/BasicPlayerJavaLibraryElixirM</module>
+        <module>../../media/sound/BasicPlayerMIDP2JavaLibraryElixirM</module>
+        <module>../../media/sound/NoPlayerJavaLibraryElixirM</module>
+        <module>../../media/sound/SoundJ2MELibraryElixirM</module>
+
+        <module>../../media/motion/AllBinaryVibrationJavaLibraryElixirM</module>
+        <module>../../media/motion/NoVibrateJavaLibraryElixirM</module>
+        <!--<module>../../media/motion/VibrateAndroidJavaLibraryElixirM</module>-->
+
+        <module>../../media/graphics/NullCustomUIJavaLibraryElixirM</module>
+        <module>../../media/graphics/NullCustomUIBaseJavaLibraryElixirM</module>
+
+        <module>../../media/graphics/FormValidationJavaLibraryElixirM</module>
+        
+        <module>../../media/graphics/FormJavaLibraryElixirM</module>
+        <module>../../media/graphics/FormBaseJavaLibraryElixirM</module>
+        <!--
+        <module>../../media/graphics/FormJMEJavaLibraryElixirM</module>
+        -->
+        <module>../../../j2me/media/graphics/FormJMEJavaLibraryElixirM</module>
+
+        <module>../../media/graphics/animation/AnimationResourceJavaLibraryElixirM</module>
+        <module>../../media/graphics/animation/TransitionAnimationJavaLibraryElixirM</module>
+        <module>../../media/graphics/animation/NoTransitionAnimationJavaLibraryElixirM</module>
+        <!--
+        AndroidTransitionAnimationJavaLibraryM
+        -->
+        <module>../../media/graphics/animation/GameAnimationJavaLibraryElixirM</module>
+        <module>../../games/GameResourceJavaLibraryElixirM</module>
+        <module>../../games/GameSoundsJavaLibraryElixirM</module>
+
+        <module>../../input/TouchInputLibraryElixirP</module>
+
+        <module>../../media/MediaDataElixirM</module>
+        <module>../../media/sound/NotDeviceSpecificNoMediaMIDP1LibraryElixirM</module>
+
+        <module>../../../allbinary_src/content/ContentNoneJavaLibraryElixirM</module>
+        <!--<module>../../../allbinary_src/content/ContentAndroidJavaLibraryElixirM</module>-->
+
+        <module>../../games/GameConfigurationFormJavaLibraryElixirM</module>
+
+        <module>../../FullScreenNoneJavaLibraryElixirM</module>
+        <!--
+        <module>../../FullScreenJavaLibraryElixirM</module>
+        -->
+
+        <module>../../../physics/VelocityLibraryElixirM</module>
+
+        <module>../../games/weapon/SoundsBasicWeaponsJavaLibraryElixirM</module>
+
+        <module>../../lib/TrigJ2MELibraryElixirM</module>
+
+        <module>../../media/graphics/geography/map/LayerPlacementLibraryElixirM</module>
+        <module>../../media/graphics/layer/AllBinaryLayerJavaLibraryElixirM</module>
+
+        <module>../../ScreenCaptureNoneJavaLibraryElixirM</module>
+        
+        <module>../licensing/GameLicensingNullJavaLibraryElixirM</module>
+        
+        <module>../../business/advertisement/AllBinaryAdvertisementClientJavaLibraryElixirM</module>
+        <module>../../business/advertisement/AdvertisementClientNoneJavaLibraryElixirM</module>
+
+        <module>../GameNotificationJavaLibraryElixirM</module>
+
+        <module>../../../graphics/opengl/NoSWTJavaLibraryElixirM</module>
+        <module>../../../graphics/opengl/SWTWithoutJOGLJavaLibraryElixirM</module>
+        <module>../SWTJavaLibraryElixirM</module>
+        <module>../GameJ2MELibraryElixirM</module>
+        
+        <!--
+        <module>../GameJ2MEOptionalLibraryPOElixirM</module>
+        -->
+    
+    </modules>
+
+</project>
+

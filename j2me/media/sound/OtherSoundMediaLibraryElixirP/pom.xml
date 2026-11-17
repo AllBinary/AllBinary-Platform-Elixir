@@ -1,0 +1,52 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.allbinary</groupId>
+    <artifactId>OtherSoundMediaLibraryPElixir</artifactId>
+    <packaging>pom</packaging>
+    <!-- AllBinary Platform Version Start -->
+    <version>1.0.0-SNAPSHOT</version>
+    <!-- AllBinary Platform Version End -->
+
+    <name>OtherSoundMediaLibraryPElixir</name>
+    <url>http://www.allbinary.com/</url>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>AllBinary Snapshots Nexus</name>
+            <url>https://nexus-allbinary.rhcloud.com/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>nexus-releases</id>
+            <name>AllBinary Releases Nexus</name>
+            <url>https://nexus-allbinary.rhcloud.com/nexus/content/repositories/releases/</url>
+        </repository>
+    </distributionManagement>
+
+
+    <properties>
+        <buildLabel>${project.version}</buildLabel>
+    </properties>
+
+    <modules>
+        <!--
+        Already in Game POM
+        <module>../../sound/NotDeviceSpecificNoMediaMIDP1LibraryElixirM</module>
+        
+        <module>../../sound/NullMusicAndroidJavaLibraryElixirM</module>
+        <module>../../sound/MusicAndroidJavaLibraryElixirM</module>
+        <module>../../sound/J2SEMediaMIDPJorbisJavaLibraryElixirM</module>        
+        -->
+
+        <module>../../sound/NotDeviceSpecificMIDP2JavaLibraryElixirM</module>
+<!--        <module>../../sound/J2SEMediaMIDPMinimalJavaLibraryElixirM</module>-->
+<!--        <module>../../sound/MediaMIDP2ForHTMLJavaLibraryElixirM</module>-->
+        <!--<module>../../sound/AndroidMediaMIDPLibraryElixirM</module>-->
+        
+        <module>../../../games/Resources/sounds/release/GameSoundsWavResourcesJavaLibraryElixirM</module>
+        <module>../../../games/Resources/sounds/release/GameSoundsOggResourcesJavaLibraryElixirM</module>
+        
+    </modules>
+
+</project>
+
